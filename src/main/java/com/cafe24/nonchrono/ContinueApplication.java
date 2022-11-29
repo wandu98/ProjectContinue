@@ -18,7 +18,7 @@ public class ContinueApplication {
 		SpringApplication.run(ContinueApplication.class, args);
 	} // main() end
 
-	/*
+/*
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 	    SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
@@ -32,6 +32,6 @@ public class ContinueApplication {
 	public SqlSessionTemplate sqlSession(SqlSessionFactory factory) {
 	    return new SqlSessionTemplate(factory);
 	} // sqlSession() end
-	*/
+*/
 
 }

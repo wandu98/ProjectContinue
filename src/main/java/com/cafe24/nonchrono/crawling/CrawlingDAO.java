@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CrawlingDAO {
-
+/*
     @Autowired
     private SqlSession sqlSession;
 
@@ -14,6 +14,6 @@ public class CrawlingDAO {
         int cnt = sqlSession.insert("crawling.autoCrawling", crawlingDTO);
         return cnt;
     } // AutoCrawling() end
-
+*/
 } // class end
 
