@@ -1,0 +1,1258 @@
+.category-list {
+    list-style-type: none;
+    padding: 5px 0 0 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #0dcaf0;
+    overflow: auto;
+    position: fixed;
+    border: solid 1px black;
+}
+
+#ord {
+    padding: 5px;
+}
+
+
+
+/* 벗츠 따옴 */
+.item-sort {
+    position: absolute;
+    top: 5px;
+    right: 125px;
+    font-size: 14px;
+    font-weight: 300;
+    color: #aaaaaa;
+}
+
+.item-sort .v-bar {
+    margin-right: 15px;
+}
+
+.item-sort .v-bar::after {
+    right: -9px;
+}
+
+.item-slide {
+    position: relative;
+}
+
+.item-slide.party {
+    margin-bottom: 20px;
+}
+
+.item-slide.party .item-list {
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    height: 452px;
+}
+
+.item-slide.party .item-list .item-row {
+    height: 200px;
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+}
+
+.item-slide.gift .item-list {
+    white-space: nowrap;
+}
+
+.item-boundary {
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-navi {
+    position: absolute;
+    top: 50%;
+    display: none;
+    width: 36px;
+    height: 100px;
+    margin-top: -50px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.slide-navi::before, .slide-navi::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 20px;
+    height: 1px;
+    background-color: #bbb;
+}
+
+.slide-navi.prev {
+    left: -60px;
+}
+
+.slide-navi.prev::before {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin: -7px 0 0 -10px;
+}
+
+.slide-navi.prev::after {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin: 7px 0 0 -10px;
+}
+
+.slide-navi.next {
+    right: -60px;
+}
+
+.slide-navi.next::before {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin: -7px 0 0 -10px;
+}
+
+.slide-navi.next::after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin: 7px 0 0 -10px;
+}
+
+.slide-navi:hover {
+    background-color: #7e69fe;
+}
+
+.slide-navi:hover::before, .slide-navi:hover::after {
+    background-color: #fff;
+}
+
+.item-list {
+    position: relative;
+    width: calc(100% + 26px);
+    margin-top: -13px;
+    margin-left: -13px;
+    font-size: 0;
+}
+
+.item-row {
+    position: relative;
+    display: inline-block;
+    width: calc(25% - 26px);
+    margin: 13px;
+    padding: 22px 30px;
+    font-size: 13px;
+    color: #666666;
+    vertical-align: top;
+    border-radius: 20px;
+    border: solid 1px #dddddd;
+    background-color: white;
+    overflow: hidden;
+}
+
+.item-row.item-row-my .item-members {
+    margin-top: 15px;
+}
+
+.item-row .item-state {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    height: 20px;
+    padding: 0 4px;
+    font-size: 11px;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+    line-height: 19px;
+    border-radius: 5px;
+    background-color: #fb4c16;
+}
+
+.item-row .item-tip {
+    position: relative;
+    height: 34px;
+}
+
+.item-row .item-tip .ttip {
+    width: auto;
+    margin-left: 0;
+}
+
+.item-row .item-tip .ttip:hover {
+    text-decoration: none;
+}
+
+.item-row .item-tip .ttip-text {
+    top: auto;
+    bottom: 15px;
+    left: -5px;
+    width: 236px;
+}
+
+.item-row .item-price {
+    bottom: 10px;
+    right: 24px;
+}
+
+.item-row .item-price.large {
+    font-size: 14px;
+}
+
+.item-row .item-price .Rajdhani {
+    font-size: 19px;
+    font-weight: 700;
+    color: #252525;
+    vertical-align: -2px;
+}
+
+.item-row .item-buttons {
+    position: relative;
+    z-index: 3;
+}
+
+.item-row .item-date {
+    margin-top: 7px;
+}
+
+.item-row .item-date.fixed {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    font-size: 12px;
+    color: #999999;
+}
+
+.item-row .button {
+    width: calc(50% - 2px);
+}
+
+.item-row .button.button-purple:hover {
+    color: white;
+    background-color: #7e69fe;
+    border: 1px solid #7e69fe;
+}
+
+.item-row .button.button-red:hover {
+    color: white;
+    background-color: #fb4c16;
+    border: 1px solid #fb4c16;
+}
+
+.item-row:not(.disabled):hover {
+    border: 1px solid #a89cf4;
+}
+
+.item-row:not(.disabled):hover .item-type {
+    color: #684adf;
+}
+
+.item-row:not(.disabled):hover .add {
+    border: 1px solid #7e69fe;
+}
+
+.item-row:not(.disabled):hover .add .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #7e69fe;
+}
+
+.item-row:not(.disabled):hover .add::before, .item-row:not(.disabled):hover .add:after {
+    background-color: white;
+}
+
+.item-row.disabled {
+    color: #aaa;
+}
+
+.item-row.disabled .item-type {
+    color: #aaa;
+}
+
+.item-row.disabled .item-member.plus .Rajdhani {
+    color: #aaa;
+}
+
+.item-row.disabled .item-price .Rajdhani {
+    color: #aaa;
+}
+
+.item-type {
+    font-size: 22px;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.item-title {
+    height: 36px;
+    line-height: 18px;
+    overflow: hidden;
+}
+
+.item-members {
+    position: relative;
+    margin: 14px 0;
+    font-size: 0;
+    white-space: nowrap;
+}
+
+.item-member {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-left: 8px;
+    border-radius: 8px;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.item-member:first-child {
+    margin-left: 0;
+}
+
+.item-member .plus {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 32px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #ececec;
+    background-color: white;
+}
+
+.item-member.add {
+    position: relative;
+    max-width: 32px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #ececec;
+}
+
+.item-member.add .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: #7e69fe;
+    line-height: 32px;
+    vertical-align: 1px;
+    background-color: white;
+}
+
+.item-member.add::before, .item-member.add:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    background-color: #7e69fe;
+    z-index: 1;
+}
+
+.item-member.add::before {
+    width: 10px;
+    height: 2px;
+    margin: -1px 0 0 -5px;
+}
+
+.item-member.add::after {
+    width: 2px;
+    height: 10px;
+    margin: -5px 0 0 -1px;
+}
+
+.item-finish {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.item-finish-my {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: #7e69fe;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.item-info {
+    position: relative;
+}
+
+.item-info .item-price {
+    bottom: -6px;
+    right: 0;
+}
+
+.item-price {
+    position: absolute;
+    bottom: 12px;
+    right: 26px;
+    color: #999;
+}
+
+.item-price.large {
+    font-size: 16px;
+}
+
+.item-price.large .Rajdhani {
+    font-size: 30px;
+}
+
+.item-price .Rajdhani {
+    font-size: 20px;
+    font-weight: 700;
+    color: #252525;
+    vertical-align: -2px;
+}
+
+.item-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.item-thumb {
+    position: relative;
+    width: 62px;
+    height: 62px;
+    margin-top: 14px;
+    border-radius: 9px;
+    background-color: #eaeaea;
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+}
+
+.item-thumb img {
+    width: 100%;
+    height: 100%;
+}
+
+.item-more {
+    margin-top: 20px;
+}
+
+.item-more a {
+    display: block;
+    width: 80px;
+    height: 40px;
+    margin: 0 auto;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    background-color: #7e69fe;
+    border-radius: 5px;
+}
+
+/* item view */
+.item-view-title {
+    position: relative;
+    padding: 40px 0;
+    padding-left: 90px;
+    border-bottom: 1px solid #efefef;
+}
+
+.item-view-title .symbol {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin-top: -35px;
+    background-color: #efefef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.item-view-title .enabled {
+    position: relative;
+    top: -2px;
+    height: 24px;
+    margin-right: 5px;
+    padding: 0 12px;
+    font-size: 13px;
+    line-height: 22px;
+    vertical-align: middle;
+}
+
+.item-view-title .text {
+    font-size: 18px;
+    font-weight: 300;
+    color: #666666;
+}
+
+.item-view-title .subject {
+    font-size: 30px;
+    color: #333333;
+    line-height: 40px;
+}
+
+.item-view-title .stay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 50px;
+    font-size: 20px;
+}
+
+.item-view-title .up {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -25px;
+}
+
+.item-view-row {
+    position: relative;
+    padding: 18px 0;
+    font-size: 15px;
+    color: #333333;
+    letter-spacing: 0;
+    border-bottom: 1px solid #efefef;
+}
+
+.item-view-row a.text-purple:hover {
+    text-decoration: underline;
+}
+
+.item-view-row .right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 18px 0;
+}
+
+.item-view-row .text-purple {
+    color: #7e69fe;
+}
+
+.item-view-row .lightgrey {
+    font-weight: 300;
+    color: #888888;
+}
+
+.item-view-row .Rajdhani {
+    position: relative;
+    top: 2px;
+    font-weight: 700;
+    line-height: 0;
+}
+
+.item-view-row .picture {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin: -6px 10px -5px 0;
+    vertical-align: middle;
+}
+
+.item-view-row .picture img {
+    vertical-align: top;
+}
+
+.item-view-row .credit-percent {
+    margin: 0 6px;
+}
+
+.item-view-row .icon-sns {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: -3px 8px -1px 8px;
+    vertical-align: middle;
+}
+
+.item-view-row .icon-sns img {
+    vertical-align: top;
+}
+
+.item-view-row .fw300 {
+    font-weight: 300;
+}
+
+.item-view-row .price {
+    margin-left: 0px;
+    font-size: 24px;
+    letter-spacing: -1px;
+}
+
+.item-view-row .price:hover {
+    text-decoration: none;
+}
+
+.item-use-code {
+    position: relative;
+    display: inline-block;
+    width: calc(100% - 140px);
+    padding-left: 10px;
+    vertical-align: top;
+}
+
+.item-use-code li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.item-view-grade {
+    font-size: 13px;
+}
+
+.item-view-grade .Rajdhani {
+    top: 0px;
+}
+
+.item-view-idpw {
+    margin: -6px 0 -5px 20px;
+    padding: 0 12px !important;
+    vertical-align: middle;
+}
+
+.item-view-user {
+    position: relative;
+    padding: 50px 0;
+    font-size: 0;
+}
+
+.item-view-user li {
+    position: relative;
+    display: inline-block;
+    width: 212px;
+    padding: 30px 0;
+    text-align: center;
+    vertical-align: top;
+}
+
+.item-view-user li:hover .item-view-menu {
+    display: block;
+}
+
+.item-view-user .picture {
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.item-view-user .name {
+    margin-top: 14px;
+    font-size: 18px;
+    color: #333333;
+}
+
+.item-view-user .date {
+    font-size: 13px;
+    font-weight: 300;
+    color: #999;
+}
+
+.item-view-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: none;
+    width: 120px;
+    padding: 10px 0;
+    margin: -20px 0 0 0px;
+    background-color: white;
+    border: solid 1px #cdccd6;
+    z-index: 1;
+}
+
+.item-view-menu a {
+    position: relative;
+    display: block;
+    padding: 3px 20px;
+    font-size: 14px;
+    text-align: left;
+    color: #555555;
+}
+
+.item-view-menu a:hover {
+    color: #7e69fe;
+}
+
+.item-view-caution {
+    position: relative;
+    padding: 40px;
+    border: solid 1px #eeeeee;
+    background-color: #fcfcfc;
+}
+
+.item-view-caution .tag {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.item-view-caution .tag img {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.item-view-caution .tag span {
+    display: inline-block;
+    min-width: 70px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    height: 36px;
+    padding: 0 15px;
+    font-size: 16px;
+    color: #666666;
+    text-align: center;
+    line-height: 34px;
+    vertical-align: top;
+    border-radius: 18px;
+    background-color: #f0f0f0;
+}
+
+.item-view-caution .text {
+    font-size: 16px;
+    font-weight: 300;
+    color: #333;
+}
+
+.item-view-caution .text li {
+    margin: 2px 0;
+}
+
+.item-view-check {
+    position: relative;
+    padding: 23px 50px;
+    text-align: center;
+    border: solid 1px #eeeeee;
+    background-color: #fcfcfc;
+    border-top: 0;
+}
+
+.item-gift-left {
+    position: relative;
+    display: inline-block;
+    width: 38%;
+    max-width: 480px;
+    vertical-align: top;
+}
+
+.item-gift-images {
+    margin-bottom: 20px;
+    background-color: #efefef;
+}
+
+.item-gift-right {
+    position: relative;
+    display: inline-block;
+    width: calc(62% - 60px);
+    margin-left: 57px;
+    margin-bottom: 80px;
+    border-top: 2px solid #7e69fe;
+}
+
+.item-view-button {
+    margin-top: 40px;
+}
+
+.item-view-button .button {
+    width: calc(50% - 2px);
+}
+
+.item-view-agree {
+    padding: 28px 0;
+}
+
+.item-view-total {
+    position: relative;
+    height: 80px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 30px;
+    font-size: 20px;
+    color: #333333;
+    border: solid 1px #cec8f1;
+    background-color: #f9f9f9;
+}
+
+.item-view-total .right {
+    margin-left: auto;
+    font-size: 20px;
+    font-weight: 300;
+    color: #999999;
+}
+
+.item-view-total .Rajdhani {
+    position: relative;
+    top: 2px;
+    font-size: 32px;
+}
+
+@media screen and (max-width: 1220px) {
+    .item-row {
+        width: calc(33.33% - 26px);
+        margin: 13px;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .item-sort {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin-top: -2px;
+        margin-bottom: 10px;
+        width: 100%;
+        margin-right: 0;
+        font-size: 11px;
+    }
+
+    .item-list {
+        width: calc(100% + 10px);
+        margin-top: -5px;
+        margin-left: -5px;
+    }
+
+    .item-row {
+        width: calc(50% - 10px);
+        margin: 5px;
+        padding: 11px 10px;
+        font-size: 10px;
+        border-radius: 10px;
+    }
+
+    .item-row.item-row-my .item-date {
+        margin-top: 10px;
+    }
+
+    .item-row.item-row-my .item-members {
+        margin-top: 10px;
+    }
+
+    .item-row .item-tip {
+        height: 26px;
+    }
+
+    .item-row .item-tip img {
+        width: 12px;
+        height: 11px;
+        margin-top: -1px;
+    }
+
+    .item-row .item-tip .ttip-text {
+        width: 150px;
+        font-size: 10px;
+    }
+
+    .item-row .item-state {
+        position: absolute;
+        top: 12px;
+        right: 10px;
+        height: 16px;
+        padding: 0 4px;
+        font-size: 10px;
+        font-weight: 300;
+        color: white;
+        text-align: center;
+        line-height: 15px;
+        border-radius: 5px;
+        background-color: #fb4c16;
+    }
+
+    .item-row .item-date.fixed {
+        top: 5px;
+        right: 10px;
+        font-size: 10px;
+    }
+
+    .item-row .item-price.large {
+        bottom: 0px;
+        right: 10px;
+        font-size: 11px;
+    }
+
+    .item-row .item-price .Rajdhani {
+        font-size: 17px !important;
+    }
+
+    .item-type {
+        font-size: 12px;
+    }
+
+    .item-title {
+        height: 28px;
+        margin-top: 4px;
+        line-height: 14px;
+    }
+
+    .item-thumb {
+        width: 40px;
+        height: 40px;
+        margin-top: 0px;
+        border-radius: 5px;
+    }
+
+    .item-members {
+        margin: 7px 0;
+    }
+
+    .item-member {
+        width: calc(16.6% - 3px);
+        height: auto;
+        margin-left: 3px;
+        border-radius: 4px;
+    }
+
+    .item-member:first-child {
+        margin-left: 0;
+    }
+
+    .item-member .plus {
+        font-size: 11px;
+        border-radius: 4px;
+    }
+
+    .item-finish {
+        font-size: 10px;
+    }
+
+    .item-slide.party {
+        margin-bottom: 30px;
+    }
+
+    .item-slide.party .item-list {
+        height: 284px;
+    }
+
+    .item-slide.party .item-list .item-row {
+        width: calc(50% - 10px);
+        height: 132px;
+    }
+
+    .item-slide.party .item-info {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .item-slide.party .item-info .item-price {
+        right: 10px;
+    }
+
+    .item-view-title {
+        padding: 15px 0;
+        padding-left: 54px;
+    }
+
+    .item-view-title .symbol {
+        width: 40px;
+        height: 40px;
+        margin-top: -20px;
+        border-radius: 10px;
+    }
+
+    .item-view-title .enabled {
+        position: relative;
+        height: 20px;
+        margin-right: 5px;
+        padding: 0 8px;
+        font-size: 11px;
+        line-height: 18px;
+        vertical-align: middle;
+    }
+
+    .item-view-title .text {
+        font-size: 12px;
+    }
+
+    .item-view-title .subject {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .item-view-title .stay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    .item-view-title .up {
+        margin-top: -17px;
+    }
+
+    .item-view-row {
+        padding: 10px 0;
+        font-size: 11px;
+    }
+
+    .item-view-row .picture {
+        width: 22px;
+        height: 22px;
+        margin-right: 6px;
+    }
+
+    .item-view-row .credit-percent {
+        width: 60px;
+    }
+
+    .item-view-row .icon-sns {
+        width: 16px;
+        height: 16px;
+        margin: 0 2px;
+    }
+
+    .item-view-row .price {
+        font-size: 18px;
+    }
+
+    .item-view-row .right {
+        padding: 10px 0;
+    }
+
+    .item-view-grade {
+        font-size: 11px;
+    }
+
+    .item-view-idpw {
+        margin-left: 10px;
+        line-height: 24px;
+    }
+
+    .item-view-user {
+        padding: 25px 0;
+    }
+
+    .item-view-user li {
+        width: 33.33%;
+        padding: 15px 0;
+    }
+
+    .item-view-user .picture {
+        width: 50px;
+        height: 50px;
+    }
+
+    .item-view-user .name {
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    .item-view-user .date {
+        font-size: 10px;
+    }
+
+    .item-view-caution {
+        padding: 10px;
+    }
+
+    .item-view-caution .tag {
+        margin-bottom: 5px;
+    }
+
+    .item-view-caution .tag img {
+        width: 22px;
+        height: 22px;
+        margin-right: 2px;
+        margin-bottom: 2px;
+    }
+
+    .item-view-caution .tag span {
+        min-width: 40px;
+        margin-right: 2px;
+        margin-bottom: 2px;
+        height: 22px;
+        padding: 0 8px;
+        font-size: 11px;
+        line-height: 20px;
+        border-radius: 10px;
+    }
+
+    .item-view-caution .text {
+        font-size: 11px;
+    }
+
+    .item-view-check {
+        padding: 12px;
+    }
+
+    .item-view-menu {
+        width: 80px;
+        margin: 10px 0 0 -40px;
+        padding: 6px 0;
+    }
+
+    .item-view-menu a {
+        padding: 3px 10px;
+        font-size: 11px;
+    }
+
+    .item-gift-left {
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 30px;
+        margin-bottom: 50px;
+    }
+
+    .item-gift-right {
+        display: block;
+        width: 100%;
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    .item-view-agree {
+        padding: 14px 0;
+    }
+
+    .item-view-total {
+        height: 50px;
+        padding: 0 15px;
+        font-size: 13px;
+    }
+
+    .item-view-total .right {
+        font-size: 12px;
+    }
+
+    .item-view-total .Rajdhani {
+        top: 2px;
+        font-size: 22px;
+    }
+
+    .item-view-button {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .item-view-button .button {
+        width: auto;
+    }
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: white;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-fluid {
+    height: 100%;
+}
+.ordleft {
+    padding-left: 30%;
+}
+.ordright {
+    padding-right: 20%;
+    padding-left: 10%;
+}
+.gametitle {
+    padding-left: 8px;
+}
+.ordno {
+    padding-right: 8px;
+}
+.about {
+    padding-top: 120px;
+}
