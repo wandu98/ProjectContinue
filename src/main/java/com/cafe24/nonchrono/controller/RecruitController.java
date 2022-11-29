@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class RecruitController {
 
+    /*
     @Autowired
     private RecruitDAO recruitDAO;
+*/
 
     public RecruitController() {
         System.out.println("-----RecruitController() 객체 생성됨");
