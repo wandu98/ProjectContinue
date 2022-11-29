@@ -3,10 +3,4 @@
 
 <mapper namespace="crawling">
 
-    <insert id="autoCrawling" parameterType="crawling.CrawlingDTO">
-        <![CDATA[
-            insert into crawling
-            values ()
-        ]]>
-    </insert>
 </mapper>

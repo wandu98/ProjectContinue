@@ -52,7 +52,7 @@
         <nav id="navbar" class="navbar">
             <ul>
                 <li><a class="nav-link scrollto" href="/">마켓</a></li>
-                <li><a class="nav-link scrollto" href="/">모집 게시판</a></li>
+                <li><a class="nav-link scrollto" href="/recruit">모집 게시판</a></li>
                 <li><a class="nav-link scrollto active" href="/minigame/">미니 게임</a></li>
                 <li><a class="nav-link scrollto" href="/mem/login">로그인</a></li>
                 <li><a class="nav-link scrollto" href="/mem/signup">회원가입</a></li>
