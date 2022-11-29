@@ -180,12 +180,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg">
-                    <div class="hero__text">
-                        <span>FRUIT FRESH</span>
-                        <h2>Vegetable <br/>100% Organic</h2>
-                        <p>Free Pickup and Delivery Available</p>
-                        <a href="#" class="primary-btn">SHOP NOW</a>
+                <div class="hero__item set-bg" data-setbg="images/banner.jpg">
+                    <div class="hero__text" style="text-align: center;">
+                        <h2>월간 <br/>타이틀 순위</h2>
+                        <a href="#" class="success-btn">SHOP NOW</a>
+                        <br><br>
+                        <button type="button" class="btn btn-outline-warning">판매순</button>
+                        <button type="button" class="btn btn-outline-warning">모집순</button>
+                        <button type="button" class="btn btn-outline-warning">검색순</button>
+                    </div>
+                    <div style="position: absolute; left: 50%">
+                        <ol>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ol>
                     </div>
                 </div>
             </div>
