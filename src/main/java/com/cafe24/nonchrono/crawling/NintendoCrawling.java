@@ -1,4 +1,4 @@
-package crawling;
+package com.cafe24.nonchrono.crawling;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
