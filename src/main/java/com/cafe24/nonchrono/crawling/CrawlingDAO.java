@@ -1,4 +1,4 @@
-package crawling;
+package com.cafe24.nonchrono.crawling;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ public class CrawlingDAO {
 
     @Autowired
     private SqlSession sqlSession;
-
 
     public int AutoCrawling(CrawlingDTO crawlingDTO) {
         int cnt = sqlSession.insert("crawling.autoCrawling", crawlingDTO);
