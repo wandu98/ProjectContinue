@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recruit">
+    <select id="list" resultType="com.cafe24.nonchrono.controller.RecruitDTO">
+        SELECT rcrbrd_num, mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_region,
+        FROM tb_rcrboard
+        ORDER BY rcrbrd_num
+    </select>
+</mapper>
