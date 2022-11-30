@@ -1,4 +1,4 @@
-package com.cafe24.nonchrono.controller;
+package com.cafe24.nonchrono.dto;
 
 import lombok.*;
 
