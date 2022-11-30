@@ -1222,10 +1222,16 @@
             </div><!-- End Right side columns -->
 
             <div style="text-align: right" onclick="location.href='redirect:/crawling/AutoCrawling'">
-                <button type="button" class="btn btn-outline-primary">품목 자동 등록</button>
+                <button type="button" class="btn btn-outline-primary" onclick="crawling()">품목 자동 등록</button>
+                <a href="/crawling">품목 자동 등록</a>
             </div>
         </div>
     </section>
+
+    <script>
+        function crawling() {
+            location.href= "redirect:/";
+        } </script>
 
 </main><!-- End #main -->
 

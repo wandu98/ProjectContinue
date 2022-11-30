@@ -54,7 +54,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li><a href="/">마켓 플레이스</a></li>
+            <li><a href="/sales">마켓 플레이스</a></li>
             <li><a href="/recruit">모집 게시판</a></li>
             <li><a href="/" class="active">미니 게임</a></li>
             <li><a href="#">고객센터</a>
@@ -64,7 +64,7 @@
                     <li><a href="/">1:1문의</a></li>
                 </ul>
             </li>
-            <li><a href="/">마이페이지</a>
+            <li><a href="/mypage">마이페이지</a>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -92,7 +92,7 @@
                             <a href="/mem/signup">회원가입</a>
                         </div>
                         <div class="header__top__right__auth">
-                            <a href="#"><i class="fa fa-user"></i> 마이페이지</a>
+                            <a href="/mypage"><i class="fa fa-user"></i> 마이페이지</a>
                         </div>
                     </div>
                 </div>
@@ -109,14 +109,14 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li><a href="/">마켓 플레이스</a></li>
+                        <li><a href="/sales">마켓 플레이스</a></li>
                         <li><a href="/recruit">모집 게시판</a></li>
                         <li class="active"><a href="/">미니게임</a></li>
                         <li><a href="#">고객센터</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="./shop-details.html">공지사항</a></li>
-                                <li><a href="./shoping-cart.html">이벤트</a></li>
-                                <li><a href="./checkout.html">1:1문의</a></li>
+                                <li><a href="/">공지사항</a></li>
+                                <li><a href="/">이벤트</a></li>
+                                <li><a href="/">1:1문의</a></li>
                             </ul>
                         </li>
                     </ul>
