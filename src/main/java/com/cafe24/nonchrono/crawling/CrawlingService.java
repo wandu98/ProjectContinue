@@ -1,4 +1,5 @@
-package com.cafe24.nonchrono.crawling;
+/*
+com.cafe24.nonchrono.crawling;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,13 +10,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-/*
+
 @Service
 public class CrawlingService {
 
     @Autowired
     private CrawlingDAO crawlingDAO;
 
+ */
+/*
     public int AutoCrawling() {
         CrawlingDTO crawlingDTO = new CrawlingDTO();
 
@@ -116,5 +119,4 @@ public class CrawlingService {
 
 
 
-} // class end
- */
+} // class end*/
