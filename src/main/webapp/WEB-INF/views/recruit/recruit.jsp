@@ -1,78 +1,298 @@
 <%--
   Created by IntelliJ IDEA.
   User: Admin
-  Date: 2022-11-29
-  Time: 오후 1:08
+  Date: 2022-11-30
+  Time: 오전 10:20
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="../header_before.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
 
-<main id="main">
-
-    <!-- ======= 모집 게시판 요약 ======= -->
-    <section class="breadcrumbs">
-        <div class="container">
-
-            <div class="d-flex justify-content-between align-items-center">
-                <h2></h2>
-                <ol>
-                    <li><a href="/">Home</a></li>
-                    <li>Recruit</li>
-                </ol>
-            </div>
-
-        </div>
-    </section><!-- End Breadcrumbs -->
-
-    <%-- 모집 내용 --%>
-    <section id="team" class="team section-bg">
-        <nav class="container" data-aos="fade-up">
-
-            <div class="section-title">
-                <h2>모집 게시판</h2>
-                <p>상세한 내용은 여기에</p>
-            </div>
-
-            <%-- 검색창 --%>
-            <div class="search-bar search-bar-show">
-                <form class="search-form d-flex align-items-center">
-                    <div class="search-bar search-bar-show">
-                        <select class="form-select">
-                            <option value="0" selected>제목 + 내용</option>
-                            <option value="1">제목</option>
-                            <option value="2">내용</option>
-                            <option value="3">작성자</option>
-                        </select>
-                        <input type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
+<!-- 모집 게시판 배너 시작 -->
+<section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>모집 게시판</h2>
+                    <div class="breadcrumb__option">
+                        <a href="/">Home</a>
+                        <span>모집</span>
                     </div>
-                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 모집 게시판 배너 끝 -->
+
+<!-- Blog Section Begin -->
+<section class="blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12" style="text-align: center; margin: 3%;">
+                <div class="dropdown" style="float: right; margin: 1%">
+                    <button type="button" class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown"> 타이틀 선택
+                    </button>
+                </div>
+                <div class="dropdown" style="float: right; margin: 1%">
+                    <button type="button" class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown"> 지역 선택
+                    </button>
+                </div>
             </div>
 
-            <div class="row">
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                    <div class="member">
-                        <div class="member-img">
-                            <img src="/images/001.jpg" class="img-fluid" alt="">
-                            <a href="/">
-                                <div class="social">
-                                    <div>게임명<br><br>게임 설명</div>
+            <div class="col-lg-4 col-md-5">
+                <div class="blog__sidebar">
+                    <div class="blog__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>정렬</h4>
+                        <ul>
+                            <li><a href="#">최신순</a></li>
+                            <li><a href="#">인기순</a></li>
+                            <li><a href="#">모집인원 많은 순</a></li>
+                            <li><a href="#"></a></li>
+                        </ul>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>이번달 모집왕</h4>
+                        <div class="blog__sidebar__recent">
+                            <div class="blog__sidebar__recent__item__text">
+                                <div style="margin: 5%">
+                                    <ol>
+                                        <li></li>
+                                        <br>
+                                        <li></li>
+                                        <br>
+                                        <li></li>
+                                        <br>
+                                        <li></li>
+                                        <br>
+                                        <li></li>
+                                        <br>
+                                    </ol>
                                 </div>
-                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>최근 검색어</h4>
+                        <div class="blog__sidebar__item__tags">
+                            <a href="#">포켓몬</a>
+                            <a href="#">스플래툰</a>
+                            <a href="#">1+1은귀요미</a>
+                            <a href="#">짱구</a>
+                            <a href="#">동물의숲</a>
+                            <a href="#">김tothe홍tothe승</a>
                         </div>
                     </div>
                 </div>
-
-
             </div>
+            <div class="col-lg-8 col-md-7">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/001.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
-    </section>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/002.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/003.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/004.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/001.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/002.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/003.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/001.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/002.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <a href="#">
+                            <div class="blog__item"
+                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                <div class="blog__item__pic">
+                                    <img src="/images/003.jpg" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> 종료일</li>
+                                        <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                    </ul>
+                                    <h5>방 제목</h5>
+                                    <p>게임 품목명 (N / M)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
 
-</main>
-<!-- End #main -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->
 
-<jsp:include page="../footer_before.jsp"></jsp:include>
+<jsp:include page="../footer.jsp"></jsp:include>

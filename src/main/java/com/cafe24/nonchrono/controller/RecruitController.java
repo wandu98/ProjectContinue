@@ -1,5 +1,6 @@
 package com.cafe24.nonchrono.controller;
 
+import com.cafe24.nonchrono.dao.RecruitDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +21,12 @@ public class RecruitController {
         System.out.println("-----RecruitController() 객체 생성됨");
     } // RecruitController() end
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String recruit() {
-        return "/recruit/recruit";
+        return "recruit/recruit";
     } // recruit() end
 
+    /*
     @RequestMapping("/list")
     @ResponseBody
     public ModelAndView recruitList() {
@@ -33,6 +35,6 @@ public class RecruitController {
         mav.setViewName("recruit/recruit");
         return mav;
     } // recruitList() end
-
+    */
 
 } // class end

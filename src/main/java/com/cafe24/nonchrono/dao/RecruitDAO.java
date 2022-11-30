@@ -1,5 +1,6 @@
-package com.cafe24.nonchrono.controller;
+package com.cafe24.nonchrono.dao;
 
+import com.cafe24.nonchrono.dto.RecruitDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
