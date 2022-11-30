@@ -1,4 +1,5 @@
-package com.cafe24.nonchrono.crawling;
+/*
+com.cafe24.nonchrono.crawling;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,6 +17,8 @@ public class CrawlingService {
     @Autowired
     private CrawlingDAO crawlingDAO;
 
+ */
+/*
     public int AutoCrawling() {
         CrawlingDTO crawlingDTO = new CrawlingDTO();
 
@@ -113,4 +116,7 @@ public class CrawlingService {
         return cnt;
     } // AutoCrawling() end
 
-} // class end
+
+
+
+} // class end*/

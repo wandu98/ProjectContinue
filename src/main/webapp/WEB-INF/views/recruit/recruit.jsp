@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="../header.jsp"></jsp:include>
+<jsp:include page="../header_before.jsp"></jsp:include>
 
 <main id="main">
 
@@ -63,10 +63,6 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="member-info">
-                            <h4>Walter White</h4>
-                            <span>Chief Executive Officer</span>
-                        </div>
                     </div>
                 </div>
 
@@ -79,4 +75,4 @@
 </main>
 <!-- End #main -->
 
-<jsp:include page="../footer.jsp"></jsp:include>
+<jsp:include page="../footer_before.jsp"></jsp:include>
