@@ -8,7 +8,12 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="noindex">
     <title>Continue? | 마켓 & 모집</title>
+
+    <!-- Favicons -->
+    <link href="/images/favicon.png" rel="icon">
+    <link href="/images/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
