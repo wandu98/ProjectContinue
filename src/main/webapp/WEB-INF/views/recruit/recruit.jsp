@@ -103,12 +103,22 @@
 
 
                     <c:forEach var="row" items="${list}" varStatus="vs">
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                            <a href="#">
-                                <div class="blog__item"
-                                     style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
-                                    <div class="blog__item__pic">
-                                        <img src="/images/001.jpg" alt="">
+                        <c:set var="idx" value="${gm_name}"/>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <a href="#">
+                                    <div class="blog__item"
+                                         style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                        <div class="blog__item__pic">
+                                            <img src="/images/001.jpg" alt="">
+                                        </div>
+                                        <div class="blog__item__text">
+                                            <ul>
+                                                <li><i class="fa fa-calendar-o"></i> ${row.rcrbrd_edate}</li>
+                                                <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                            </ul>
+                                            <h5>${row.rcrbrd_subject}</h5>
+                                            <p>${idx.gm_name} (N / ${row.rcrbrd_max})</p>
+                                        </div>
                                     </div>
                                     <div class="blog__item__text">
                                         <ul>

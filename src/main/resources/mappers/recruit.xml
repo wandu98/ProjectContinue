@@ -7,7 +7,7 @@
         FROM tb_rcrboard
         ORDER BY rcrbrd_num
     </select>
-
+    
     <select id="game" resultType="com.cafe24.nonchrono.dto.GameDTO">
         select gm.gm_name
         from tb_game as gm join tb_rcrboard as rb
