@@ -41,13 +41,13 @@
                             data-toggle="dropdown"> 지역 선택
                     </button>
                 </div>
-                <div style="float: right">
+                <div style="float: right; margin: 1%">
                     <button type="button" class="btn btn-warning"> 모집글 등록
                     </button>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-5">
+            <div class="col-lg-3 col-md-4">
                 <div class="blog__sidebar">
                     <div class="blog__sidebar__search">
                         <form action="#">
@@ -68,7 +68,7 @@
                         <h4>이번달 모집왕</h4>
                         <div class="blog__sidebar__recent">
                             <div class="blog__sidebar__recent__item__text">
-                                <div style="margin: 5%">
+                                <div style="margin: 7%">
                                     <ol>
                                         <li></li>
                                         <br>
@@ -103,29 +103,28 @@
 
 
                     <c:forEach var="row" items="${list}" varStatus="vs">
-                        <c:set var="idx" value="${gm_name}"/>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <a href="#">
-                                    <div class="blog__item"
-                                         style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
-                                        <div class="blog__item__pic">
-                                            <img src="/images/001.jpg" alt="">
-                                        </div>
-                                        <div class="blog__item__text">
-                                            <ul>
-                                                <li><i class="fa fa-calendar-o"></i> ${row.rcrbrd_edate}</li>
-                                                <li><i class="fa fa-comment-o"></i> 댓글 수</li>
-                                            </ul>
-                                            <h5>${row.rcrbrd_subject}</h5>
-                                            <p>${idx.gm_name} (N / ${row.rcrbrd_max})</p>
-                                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <a href="#">
+                                <div class="blog__item"
+                                     style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                    <div class="blog__item__pic">
+                                        <img src="/images/001.jpg" alt="">
                                     </div>
-                                </a>
-                            </div>
-                            <%-- 한줄에 3칸씩 --%>
-                            <c:if test="${vs.count mod 3==0}">
-                                <br>
-                            </c:if>
+                                    <div class="blog__item__text">
+                                        <ul>
+                                            <li><i class="fa fa-calendar-o"></i> ${row.rcrbrd_edate}</li>
+                                            <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                        </ul>
+                                        <h5>${row.rcrbrd_subject}</h5>
+                                        <p>${game[vs.index].gm_name} (N / ${row.rcrbrd_max})</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <%-- 한줄에 3칸씩 --%>
+                        <c:if test="${vs.count mod 3==0}">
+                            <br>
+                        </c:if>
                     </c:forEach>
 
                 </div>

@@ -1,6 +1,7 @@
 package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.RecruitDAO;
+import com.cafe24.nonchrono.dto.RecruitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +22,10 @@ public class RecruitController {
 
     @RequestMapping("")
     public ModelAndView recruitList() {
+        RecruitDTO dto = new RecruitDTO();
         ModelAndView mav = new ModelAndView();
         mav.addObject("list", recruitDAO.list());
-        mav.addObject("gm_name", recruitDAO.gm_name());
+        mav.addObject("game", recruitDAO.game());
         mav.setViewName("recruit/recruit");
         return mav;
     } // recruitList() end
