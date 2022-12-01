@@ -25,8 +25,6 @@ public class MemController {
         return mav;
     }
 
-
-
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String memsignup() {
         return "mem/signupForm";
