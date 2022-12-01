@@ -1,4 +1,6 @@
 -- 구천우
+select * from tb_game;
+
 
 -- 상품 테이블
 create table tb_sales
@@ -8,6 +10,8 @@ create table tb_sales
     gm_code        varchar(100)           not null       -- 품목 코드
     ,
     sl_id          varchar(20)            not null       -- 판매자 id
+    ,
+    ss_name        varchar(50)            not null       -- 상품이름
     ,
     ss_price       int      default 0     not null       -- 판매가
     ,

@@ -54,6 +54,7 @@
 
 		<!-- jsp -->
 		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
+
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
@@ -62,11 +63,7 @@
 
 		<!-- JSTL -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
+
 
 		<!-- json -->
 		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
@@ -100,6 +97,8 @@
 			<artifactId>mariadb-java-client</artifactId>
 			<version>3.0.6</version>
 		</dependency>
+
+
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
 		<!--<dependency>
