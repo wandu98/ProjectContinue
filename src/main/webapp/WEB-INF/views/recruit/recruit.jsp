@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../header.jsp"%>
+<%@ include file="../header.jsp" %>
 
 <!-- 모집 게시판 배너 시작 -->
 <section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
@@ -103,31 +103,30 @@
 
 
                     <c:forEach var="row" items="${list}" varStatus="vs">
-                        <div class="col-lg-4 col-md-4 col-sm-4">
-                            <a href="#">
-                                <div class="blog__item"
-                                     style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
-                                    <div class="blog__item__pic">
-                                        <img src="/images/001.jpg" alt="">
+                        <c:set var="idx" value="${gm_name}"/>
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <a href="#">
+                                    <div class="blog__item"
+                                         style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                        <div class="blog__item__pic">
+                                            <img src="/images/001.jpg" alt="">
+                                        </div>
+                                        <div class="blog__item__text">
+                                            <ul>
+                                                <li><i class="fa fa-calendar-o"></i> ${row.rcrbrd_edate}</li>
+                                                <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                            </ul>
+                                            <h5>${row.rcrbrd_subject}</h5>
+                                            <p>${idx.gm_name} (N / ${row.rcrbrd_max})</p>
+                                        </div>
                                     </div>
-                                    <div class="blog__item__text">
-                                        <ul>
-                                            <li><i class="fa fa-calendar-o"></i> ${row.rcrbrd_edate}</li>
-                                            <li><i class="fa fa-comment-o"></i> 댓글 수</li>
-                                        </ul>
-                                        <h5>${row.rcrbrd_subject}</h5>
-                                        <p>${gm_name} (N / ${row.rcrbrd_max})</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <%-- 한줄에 3칸씩 --%>
-                        <c:if test="${vs.count mod 3==0}">
-                            <br>
-                        </c:if>
-
+                                </a>
+                            </div>
+                            <%-- 한줄에 3칸씩 --%>
+                            <c:if test="${vs.count mod 3==0}">
+                                <br>
+                            </c:if>
                     </c:forEach>
-
 
                 </div>
             </div>
@@ -136,4 +135,4 @@
 </section>
 <!-- Blog Section End -->
 
-<%@ include file="../footer.jsp"%>
+<%@ include file="../footer.jsp" %>

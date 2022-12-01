@@ -9,9 +9,9 @@
     </select>
 
     <select id="gm_name" resultType="String">
-        select gm_name
-        from tb_game gm
-        left join tb_rcrboard rb on rb.gm_code = gm.gm_code
+        select gm.gm_name
+        from tb_game as gm join tb_rcrboard as rb
+        on rb.gm_code = gm.gm_code
         where rb.gm_code = #{gm_code}
     </select>
 </mapper>
