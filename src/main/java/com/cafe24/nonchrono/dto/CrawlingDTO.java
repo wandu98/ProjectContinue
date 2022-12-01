@@ -1,5 +1,4 @@
-/*
-package com.cafe24.nonchrono.crawling;
+package com.cafe24.nonchrono.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,4 +18,3 @@ public class CrawlingDTO {
     private String gm_category; // 카테고리
 
 } // class end
-*/

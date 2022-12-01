@@ -59,7 +59,7 @@
                     <li><a href="/">1:1문의</a></li>
                 </ul>
             </li>
-            <li><a href="/">마이페이지</a>
+            <li><a href="/mypage">마이페이지</a>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -88,7 +88,7 @@
                             <a href="/mem/signup">회원가입</a>
                         </div>
                         <div class="header__top__right__auth">
-                            <a href="#"><i class="fa fa-user"></i> 마이페이지</a>
+                            <a href="/mypage"><i class="fa fa-user"></i> 마이페이지</a>
                         </div>
                     </div>
                 </div>
@@ -110,9 +110,9 @@
                         <li class="active"><a href="/">미니게임</a></li>
                         <li><a href="#">고객센터</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="./shop-details.html">공지사항</a></li>
-                                <li><a href="./shoping-cart.html">이벤트</a></li>
-                                <li><a href="./checkout.html">1:1문의</a></li>
+                                <li><a href="/">공지사항</a></li>
+                                <li><a href="/">이벤트</a></li>
+                                <li><a href="/">1:1문의</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -121,7 +121,7 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="mypage/wishlist"><i class="fa fa-heart"></i> <span>1</span></a></li>
                         <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                     </ul>
                 </div>

@@ -10,8 +10,6 @@
 
 <jsp:include page="../header.jsp"></jsp:include>
 
-
-
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="images/002.jpg">
         <div class="container">
@@ -20,7 +18,7 @@
                     <div class="breadcrumb__text">
                         <h2>Organi Shop</h2>
                         <div class="breadcrumb__option">
-                            <a href="./">Home</a>
+                            <a href="">Home</a>
                             <span>Shop</span>
                         </div>
                     </div>
@@ -42,7 +40,6 @@
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
                         </div>
-
                         <div class="sidebar__item">
                             <h4>인기 급상승 상품</h4>
                             <ul>
