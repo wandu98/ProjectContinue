@@ -21,9 +21,9 @@ public class RecruitController {
         System.out.println("-----RecruitController() 객체 생성됨");
     } // RecruitController() end
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String recruit() {
-        return "/recruit/recruit";
+        return "recruit/recruit";
     } // recruit() end
 
     @RequestMapping("/list")
@@ -34,6 +34,5 @@ public class RecruitController {
         mav.setViewName("recruit/recruit");
         return mav;
     } // recruitList() end
-
 
 } // class end
