@@ -12,6 +12,7 @@ public class SalesDTO {
     private int ss_num;         //판매 상품 번호
     private String gm_code;     //품목코드
     private String sl_id;       //판매자ID
+    private String ss_name;     //상품이름
     private int ss_price;       //판매가
     private String ss_speriod;  //판매시작일
     private String ss_eperiod;  //판매종료일

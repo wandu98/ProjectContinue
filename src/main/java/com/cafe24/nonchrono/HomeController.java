@@ -11,17 +11,26 @@ public class HomeController {
     } // HomeController() end
 
 
-    @RequestMapping("/")
+    @RequestMapping("/") // 메인
     public String Index() {
         return "index";
     }
 
-    @RequestMapping("/admin")
+    @RequestMapping("/admin") // 관리자 메인
     public String AdminIndex() {
         return "admin/admin_index";
     }
 
-    @RequestMapping("/mypage")
+    @RequestMapping("/seller") //마켓 메인
+    public String Seller() {return "sales/seller";}
+
+    @RequestMapping("/write") // 마켓 등록
+    public String Write() {return "sales/write";}
+
+    @RequestMapping("/list") // 마켓 목록
+    public String List() {return "sales/list";}
+    
+    @RequestMapping("/mypage") // 마이페이지
     public String Mypage() { return "mypage/mypage"; }
 
 } // class end
