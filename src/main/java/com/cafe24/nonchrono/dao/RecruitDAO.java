@@ -22,4 +22,8 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.list");
     } // list() end
 
+    public String gm_name() {
+        return sqlSession.selectOne("recruit.gm_name");
+    } // gm_name() end
+
 } // class end

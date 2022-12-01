@@ -19,7 +19,7 @@
                     <div class="breadcrumb__text">
                         <h2>Organi Shop</h2>
                         <div class="breadcrumb__option">
-                            <a href="./">Home</a>
+                            <a href="">Home</a>
                             <span>Shop</span>
                         </div>
                     </div>
