@@ -8,10 +8,9 @@
         ORDER BY rcrbrd_num
     </select>
 
-    <select id="gm_name" resultType="String">
+    <select id="game" resultType="com.cafe24.nonchrono.dto.GameDTO">
         select gm.gm_name
         from tb_game as gm join tb_rcrboard as rb
         on rb.gm_code = gm.gm_code
-        where rb.gm_code = #{gm_code}
     </select>
 </mapper>
