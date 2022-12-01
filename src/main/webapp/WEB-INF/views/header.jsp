@@ -59,7 +59,7 @@
                     <li><a href="/">1:1문의</a></li>
                 </ul>
             </li>
-            <li><a href="/">마이페이지</a>
+            <li><a href="/mypage">마이페이지</a>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -87,7 +87,7 @@
                             <a href="/mem/signup">회원가입</a>
                         </div>
                         <div class="header__top__right__auth">
-                            <a href="#"><i class="fa fa-user"></i> 마이페이지</a>
+                            <a href="/mypage"><i class="fa fa-user"></i> 마이페이지</a>
                         </div>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
 <!-- 헤더 끝 -->
 
 <!-- 카테고리 & 배너 시작 -->
-<section class="hero">
+<section class="hero hero-normal">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
