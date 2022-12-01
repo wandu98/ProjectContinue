@@ -245,35 +245,39 @@ CREATE TABLE tb_delivery
 -- 회원
 CREATE TABLE tb_mem
 (
-    mem_id      varchar(20)  NOT NULL PRIMARY KEY -- 회원ID
+    mem_id      varchar(20)  NOT NULL PRIMARY KEY       -- 회원ID
     ,
-    mem_pw      varchar(20)  NOT NULL             -- 회원PW
+    mem_pw      varchar(20)  NOT NULL                   -- 회원PW
     ,
-    mem_nick    varchar(20)  NOT NULL             -- 닉네임
+    mem_nick    varchar(20)  NOT NULL                   -- 닉네임
     ,
-    mem_name    varchar(20)  NOT NULL             -- 이름
+    mem_name    varchar(20)  NOT NULL                   -- 이름
     ,
-    mem_zip     varchar(6)   NOT NULL             -- 우편번호
+    mem_zip     varchar(6)   NOT NULL                   -- 우편번호
     ,
-    mem_adr1    varchar(255) NOT NULL             -- 주소1
+    mem_adr1    varchar(255) NOT NULL                   -- 주소1
     ,
-    mem_adr2    varchar(255) NOT NULL             -- 주소2
+    mem_adr2    varchar(255) NOT NULL                   -- 주소2
     ,
-    mem_phone   varchar(20)  NOT NULL             -- 연락처
+    mem_phone   varchar(20)  NOT NULL                   -- 연락처
     ,
-    mem_birth   date         NOT NULL             -- 생년월일
+    mem_birth   date         NOT NULL                   -- 생년월일
     ,
-    mem_grade   varchar(20)  NOT NULL             -- 회원등급
+    mem_grade   varchar(20)  NOT NULL                   -- 회원등급
     ,
-    upoint      int          NOT NULL             -- 가용적립금
+    upoint      int          NOT NULL                   -- 가용적립금
     ,
-    apoint      int          NOT NULL             -- 누적적립금
+    apoint      int          NOT NULL                   -- 누적적립금
     ,
-    mem_receive char(1)      NOT NULL             -- 수신여부
+    mem_receive char(1)      NOT NULL                   -- 수신여부
     ,
-    good        int          NOT NULL default 0   -- 좋아요
+    good        int          NOT NULL default 0         -- 좋아요
     ,
-    buyer_bad   int          NOT NULL default 0   -- 누적신고횟수
+    buyer_bad   int          NOT NULL default 0         -- 누적신고횟수
+    ,
+    mem_pic    varchar      NOT NULL                    -- 프로필사진
+    ,
+    mem_joindate date       NOT NULL  default now()
 );
 
 
