@@ -128,7 +128,7 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="mypage/wishlist"><i class="fa fa-heart"></i> <span>1</span></a></li>
                         <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                     </ul>
                 </div>
@@ -237,6 +237,7 @@
                         </div>
 
                         <br><br>
+
 
                         <div class="checkout__input">
                             <p>온도</p>
@@ -409,28 +410,28 @@
                                     <div class="col-lg-12 mix vegetables fastfood">
                                         <div class="featured__item">
                                             <div class="featured__item__text">
-                                                <h5><a href="#">위시리스트<p>관심상품으로 등록하신 상품의 목록을 보여드립니다.</p></a></h5>
+                                                <h5><a href="mypage/wishlist">위시리스트<p>관심상품으로 등록하신 상품의 목록을 보여드립니다.</p></a></h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mix vegetables fresh-meat">
                                         <div class="featured__item">
                                             <div class="featured__item__text">
-                                                <h5><a href="#">쿠폰 및 적립금 내역<p>고객님이 보유하고 계신 쿠폰내역 및 적립금을 보여드립니다.</p></a></h5>
+                                                <h5><a href="mypage/coupon">쿠폰 및 적립금 내역<p>고객님이 보유하고 계신 쿠폰내역 및 적립금을 보여드립니다.</p></a></h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mix fastfood oranges">
                                         <div class="featured__item">
                                             <div class="featured__item__text">
-                                                <h5><a href="#">후기 관리<p>고객님께서 작성하신 상품 후기를 관리하는 공간입니다.</p></a></h5>
+                                                <h5><a href="mypage/review">후기 관리<p>고객님께서 작성하신 상품 후기를 관리하는 공간입니다.</p></a></h5>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 mix fresh-meat vegetables">
                                         <div class="featured__item">
                                             <div class="featured__item__text">
-                                                <h5><a href="#">배송 주소록<p>자주 사용하는 배송지를 등록하고 관리하실 수 있습니다.</p></a></h5>
+                                                <h5><a href="mypage/memdv">배송 주소록<p>자주 사용하는 배송지를 등록하고 관리하실 수 있습니다.</p></a></h5>
                                             </div>
                                         </div>
                                     </div>
