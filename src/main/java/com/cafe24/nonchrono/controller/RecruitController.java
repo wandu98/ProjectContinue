@@ -26,7 +26,6 @@ public class RecruitController {
         return "recruit/recruit";
     } // recruit() end
 
-    /*
     @RequestMapping("/list")
     @ResponseBody
     public ModelAndView recruitList() {
@@ -35,6 +34,5 @@ public class RecruitController {
         mav.setViewName("recruit/recruit");
         return mav;
     } // recruitList() end
-    */
 
 } // class end

@@ -21,4 +21,7 @@ public class HomeController {
         return "admin/admin_index";
     }
 
+    @RequestMapping("/mypage")
+    public String Mypage() { return "mypage/mypage"; }
+
 } // class end
