@@ -24,7 +24,7 @@ public class CrawlingController {
     } // CrawlingController() end
 
     @RequestMapping(value = "/crawling")
-    public void autoCrawling() {
+    public String autoCrawling() {
 
         CrawlingDTO crawlingDTO = null;
         int cnt = 0;
@@ -101,7 +101,7 @@ public class CrawlingController {
                         } // for end
 
                         crawlingDTO = CrawlingDTO.builder()
-                                .gm_code("dt"+i)
+                                .gm_code("dt"+(String.format("%04d", i)))
                                 .gm_name(s_title)
                                 .gm_price(s_price)
                                 .gm_category(s_genre)
@@ -131,6 +131,8 @@ public class CrawlingController {
         } else {
             System.out.println("-----크롤링 성공");
         } // if end
+
+        return "redirect:/admin";
     } // autoCrawling() end
 
 
