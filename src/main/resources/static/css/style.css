@@ -3466,3 +3466,10 @@ ol {
 		font-size: 24px;
 	}
 }
+
+
+/* 홍승 */
+/* Mypage */
+.Complete-payment:before {
+	background-image: url("/images/card-approve-icon.png");
+}
