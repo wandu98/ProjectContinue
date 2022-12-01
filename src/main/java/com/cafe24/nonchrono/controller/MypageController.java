@@ -51,4 +51,11 @@ public class MypageController {
         return mav;
     }
 
+    @RequestMapping("/memmodify")
+    public ModelAndView memmodify() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("mypage/memmodify");
+        return mav;
+    }
+
 }

@@ -279,9 +279,9 @@ CREATE TABLE tb_mem
     ,
     buyer_bad   int          NOT NULL default 0         -- 누적신고횟수
     ,
-    mem_pic    varchar      NOT NULL                    -- 프로필사진
+    mem_pic    varchar(255)      NOT NULL                    -- 프로필사진
     ,
-    mem_joindate date       NOT NULL  default now()
+    mem_joindate date       NOT NULL  default now()     -- 가입일
 );
 
 
@@ -379,7 +379,9 @@ create table tb_rcrboard
     ,
     rcrbrd_views   int                    not null     -- 조회수
     ,
-    rcrbrd_regdate datetime default now() not null     -- 등록일
+    rcrbrd_date datetime default now() not null     -- 등록일
+    ,
+    rcrbrd_edate datetime default now() not null
     ,
     rcrbrd_ip      varchar(50)            not null     -- IP
     ,
@@ -387,10 +389,16 @@ create table tb_rcrboard
     ,
     rcrbrd_status  varchar(20)            not null     -- 모집진행상태
     ,
+    rcrbrd_region  varchar(100)           not null
+    ,
+    rcrbrd_max      int                   not null
+    ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)    -- 회원ID
     ,
     FOREIGN KEY (gm_code) REFERENCES tb_game (gm_code) -- 품목코드
 );
+
+drop table tb_rcrboard;
 
 
 -- 이벤트신청자
@@ -453,5 +461,8 @@ create table tb_comment
     FOREIGN KEY (rcrbrd_num) REFERENCES tb_rcrboard (rcrbrd_num) -- 게시판글번호
 );
 
+
+SET foreign_key_checks = 0;  -- 외래키 해제
+SET foreign_key_checks = 1;  -- 외래키 설정
 
 commit;
