@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -44,50 +45,30 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="shoping__cart__product">
-                                <table>
-                                    <tr>
-                                        <td><img src="/images/1420a6b1f1729de557d0046252e27a5c.jpg" alt="" style="max-width: 80px"></td>
-                                        <td><h6>amiibo 잉클링[옐로]/옥토링[블루]/꼬마연어 아미보 3종 세트 [스플래툰 시리즈]</h6></td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td class="shoping__cart__price">
-                                60,000원
-                            </td>
-                            <td class="shoping__cart__price">
-                                2,500원
-                            </td>
-                            <td class="shoping__cart__total">
-                                62,500원
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="shoping__cart__product">
-                                <table>
-                                    <tr>
-                                        <td><img src="/images/001.jpg" alt="" style="max-width: 80px"></td>
-                                        <td><h5>SWITCH 본체 네온블루&네온레드(OLED 모델)</h5></td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td class="shoping__cart__price">
-                                415,000원
-                            </td>
-                            <td class="shoping__cart__price">
-                                무료
-                            </td>
-                            <td class="shoping__cart__total">
-                                415,000원
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
-                            </td>
-                        </tr>
+                        <c:forEach var="row" items="${list}" varStatus="vs">
+                            <tr>
+                                <td class="shoping__cart__product">
+                                    <table>
+                                        <tr>
+                                            <td><img src="/images/${row.ss_img}" alt="" style="max-width: 80px"></td>
+                                            <td><h6>${row.ss_name}</h6></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td class="shoping__cart__price">
+                                    ${row.ss_price}원
+                                </td>
+                                <td class="shoping__cart__price">
+                                    ${row.dv_fee}원
+                                </td>
+                                <td class="shoping__cart__total">
+                                    ${row.total}원
+                                </td>
+                                <td class="shoping__cart__item__close">
+                                    <span class="icon_close"></span>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

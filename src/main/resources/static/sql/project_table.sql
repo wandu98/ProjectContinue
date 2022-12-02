@@ -1,6 +1,5 @@
 -- 구천우
-select *
-from tb_game;
+select * from tb_game;
 
 
 -- 상품 테이블
@@ -164,7 +163,7 @@ CREATE table tb_er
 
 -- 쿠폰
 create table tb_coupon
-(
+( 
     cp_code    varchar(100) default 'A0000' not null PRIMARY KEY,
     cp_name    varchar(50)                  not null,
     cp_speriod datetime     default now()   not null,
@@ -175,7 +174,7 @@ create table tb_coupon
 
 -- 쿠폰리스트
 create table tb_couponlist
-(
+( 
     cl_num  int not null AUTO_INCREMENT PRIMARY KEY,
     cp_code varchar(100),
     mem_id  varchar(20),
@@ -280,9 +279,9 @@ CREATE TABLE tb_mem
     ,
     buyer_bad    int          NOT NULL default 0   -- 누적신고횟수
     ,
-    mem_pic      varchar      NOT NULL             -- 프로필사진
+    mem_pic    varchar(255)      NOT NULL                    -- 프로필사진
     ,
-    mem_joindate date         NOT NULL default now()
+    mem_joindate date       NOT NULL  default now()     -- 가입일
 );
 
 

@@ -210,7 +210,7 @@
                                 <table style="width: 100%; height: 100%">
                                     <tr>
                                         <td>닉네임(회원 ID)</td>
-                                        <td>루이지</td>
+                                        <td>루이지<a style="float: right" href="mypage/memmodify">회원 정보 수정</a></td>
                                     </tr>
                                     <tr>
                                         <td>회원등급</td>

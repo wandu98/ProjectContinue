@@ -1,6 +1,8 @@
 package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.MemDAO;
+import com.cafe24.nonchrono.dao.MemdvDAO;
+import com.cafe24.nonchrono.dao.WishDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,12 @@ public class MypageController {
     @Autowired
     MemDAO memDAO;
 
+    @Autowired
+    WishDAO wishDAO;
+
+    @Autowired
+    MemdvDAO memdvDAO;
+
     @RequestMapping("/mypage")
     public ModelAndView mypage() {
         ModelAndView mav = new ModelAndView();
@@ -27,6 +35,7 @@ public class MypageController {
     public ModelAndView wishlist() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("mypage/wishlist");
+        mav.addObject("list", wishDAO.list());
         return mav;
     }
 
@@ -48,7 +57,17 @@ public class MypageController {
     public ModelAndView memdv() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("mypage/memdv");
+        mav.addObject("list", memdvDAO.list());
         return mav;
     }
+
+    @RequestMapping("/memmodify")
+    public ModelAndView memmodify() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("mypage/memmodify");
+        return mav;
+    }
+
+
 
 }
