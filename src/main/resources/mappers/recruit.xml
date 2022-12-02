@@ -3,11 +3,11 @@
 
 <mapper namespace="recruit">
     <select id="list" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
-        SELECT rcrbrd_num, mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_region, rcrbrd_max
+        SELECT rcrbrd_num, mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max
         FROM tb_rcrboard
         ORDER BY rcrbrd_num
     </select>
-    
+
     <select id="game" resultType="com.cafe24.nonchrono.dto.GameDTO">
         select gm.gm_name
         from tb_game as gm join tb_rcrboard as rb

@@ -14,5 +14,6 @@ public class CrawlingDTO {
     private int gm_price; // 가격
     private String gm_level; // 이용등급
     private String gm_category; // 카테고리
+    private String gm_img; // 이미지
 
 } // class end
