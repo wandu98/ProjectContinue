@@ -3,7 +3,7 @@
 
 <mapper namespace="crawling">
     <insert id="autoCrawling" >
-        insert into tb_game(gm_code, gm_name, gm_price, gm_level, gm_category)
-        values (#{gm_code},#{gm_name},#{gm_price},#{gm_level},#{gm_category})
+        insert into tb_game(gm_code, gm_name, gm_price, gm_level, gm_category, gm_img)
+        values (#{gm_code},#{gm_name},#{gm_price},#{gm_level},#{gm_category}, #{gm_img})
     </insert>
 </mapper>

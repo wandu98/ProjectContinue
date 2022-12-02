@@ -32,17 +32,17 @@
         <div class="row">
             <div class="col-lg-12 col-md-12" style="text-align: center; margin: 3%;">
                 <div class="dropdown" style="float: left; margin: 1%">
-                    <button type="button" class="btn btn-warning dropdown-toggle"
+                    <button type="button" class="btn btn-danger dropdown-toggle"
                             data-toggle="dropdown"> 타이틀 선택
                     </button>
                 </div>
                 <div class="dropdown" style="float: left; margin: 1%">
-                    <button type="button" class="btn btn-warning dropdown-toggle"
+                    <button type="button" class="btn btn-danger dropdown-toggle"
                             data-toggle="dropdown"> 지역 선택
                     </button>
                 </div>
                 <div style="float: right; margin: 1%">
-                    <button type="button" class="btn btn-warning"> 모집글 등록
+                    <button type="button" class="btn btn-outline-danger" onclick="recruitForm()"> 모집글 등록
                     </button>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                                 <div class="blog__item"
                                      style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
                                     <div class="blog__item__pic">
-                                        <img src="/images/001.jpg" alt="">
+                                        <img src="/images/thumb/${row.gm_code}/thumb.jpg" alt="">
                                     </div>
                                     <div class="blog__item__text">
                                         <ul>
@@ -129,9 +129,17 @@
 
                 </div>
             </div>
+
+            <div style="margin: auto"><button id="more" class="btn btn-outline-danger">더보기 (more)</button></div>
         </div>
     </div>
 </section>
 <!-- Blog Section End -->
+
+<script>
+    function recruitForm() {
+        location.href = "/recruit/form";
+    }
+</script>
 
 <%@ include file="../footer.jsp" %>
