@@ -279,7 +279,7 @@ CREATE TABLE tb_mem
     ,
     buyer_bad   int          NOT NULL default 0         -- 누적신고횟수
     ,
-    mem_pic    varchar      NOT NULL                    -- 프로필사진
+    mem_pic    varchar(255)      NOT NULL               -- 프로필사진
     ,
     mem_joindate date       NOT NULL  default now()
 );
