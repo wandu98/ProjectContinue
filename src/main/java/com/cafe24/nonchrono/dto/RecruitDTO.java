@@ -20,6 +20,6 @@ public class RecruitDTO {
     private String rcrbrd_ip; // ip
     private String gm_code; // 품목 코드
     private String rcrbrd_status; // 모집 진행상태
-    private String rcrbrd_region; // 모집 지역
+    private String rcrbrd_adr; // 모집 지역
     private int rcrbrd_max; // 모집 인원
 }
