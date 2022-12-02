@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wishlist">
+
+    <select id="list" resultType="com.cafe24.nonchrono.dto.WishlistDTO">
+        select ss_price, ss_img, ss_name, dv_fee, ss_price+dv_fee as total
+        from tb_wish wi join tb_sales sa
+                             on wi.ss_num = sa.ss_num join tb_delivery de
+                                                           on sa.dv_num = de.dv_num
+        where mem_id = 'fjhdmj555'
+    </select>
+
+</mapper>
