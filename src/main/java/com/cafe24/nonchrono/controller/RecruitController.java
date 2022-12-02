@@ -19,13 +19,13 @@ public class RecruitController {
         System.out.println("-----RecruitController() 객체 생성됨");
     } // RecruitController() end
 
-    @RequestMapping("")
-    public ModelAndView recruitList() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("list", recruitDAO.list());
-        mav.addObject("gm_name", recruitDAO.gm_name());
-        mav.setViewName("recruit/recruit");
-        return mav;
-    } // recruitList() end
+//    @RequestMapping("")
+//    public ModelAndView recruitList() {
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("list", recruitDAO.list());
+//        mav.addObject("gm_name", recruitDAO.gm_name());
+//        mav.setViewName("recruit/recruit");
+//        return mav;
+//    } // recruitList() end
 
 } // class end
