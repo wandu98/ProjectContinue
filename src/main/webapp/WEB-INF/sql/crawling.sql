@@ -24,3 +24,6 @@ from tb_game;
 
 insert into tb_game(gm_code, gm_name, gm_price, gm_level, gm_category)
 values (${gm_code}, ${gm_name}, ${gm_price}, ${gm_level}, ${gm_category});
+
+select gm_name
+from tb_game;

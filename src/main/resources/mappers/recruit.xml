@@ -13,4 +13,15 @@
         from tb_game as gm join tb_rcrboard as rb
         on rb.gm_code = gm.gm_code
     </select>
+
+    <select id="gm_list" resultType="com.cafe24.nonchrono.dto.GameDTO">
+        SELECT gm_name, gm_code
+        FROM tb_game
+    </select>
+
+    <select id="gm_list2" parameterType="String" resultType="String">
+        SELECT gm_code
+        FROM tb_game
+        WHERE gm_name = #{gm_name}
+    </select>
 </mapper>

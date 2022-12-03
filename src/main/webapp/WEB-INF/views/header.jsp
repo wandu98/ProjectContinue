@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <script src="/js/jquery-3.6.1.min.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
