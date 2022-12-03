@@ -5,7 +5,7 @@
   Time: 오전 11:07
   To change this template use File | Settings | File Templates.
 --%>
-<head>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -18,12 +18,15 @@
 <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
+
+
+
+
 <!-- 본문 시작 signupForm.jsp-->
     <form class="container">
         <div class="checkout__form">
             <h4>회원가입</h4>
-            <form action="/mem/signup" method="post">
+            <form action="" method="post">
                 <form class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
