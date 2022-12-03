@@ -14,38 +14,39 @@
     <div class="container">
         <div class="checkout__form">
             <h4>배송지 등록</h4>
-            <form action="#">
+            <form action="insert">
+                <input type="hidden" id="mem_id" name="mem_id" value="">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>별칭<span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" id="mem_dvnick" name="mem_dvnick">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>수령인<span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" id="mem_dvinfo" name="mem_dvinfo">
                                 </div>
                             </div>
                         </div>
                         <div class="checkout__input">
                             <p>주소<span>*</span></p>
-                            <input type="text" id="sample4_postcode" placeholder="우편번호">
+                            <input type="text" id="mem_dvzip" name="mem_dvzip" placeholder="우편번호">
                             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                            <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+                            <input type="text" id="mem_dvadr1" name="mem_dvadr1" placeholder="도로명주소">
                             <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
                             <span id="guide" style="color:#999;display:none"></span>
-                            <input type="text" id="sample4_detailAddress" placeholder="상세주소">
+                            <input type="text" id="mem_dvadr2" name="mem_dvadr2" placeholder="상세주소">
                             <input type="text" id="sample4_extraAddress" placeholder="참고항목">
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Phone<span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" id="mem_dvphone" name="mem_dvphones">
                                 </div>
                             </div>
                         </div>
@@ -54,7 +55,7 @@
                     </div>
                 </div>
                 <div class="checkout__order">
-                    <button type="submit" class="site-btn">PLACE ORDER</button>
+                    <button type="submit" class="site-btn">등록</button>
                 </div>
             </form>
         </div>

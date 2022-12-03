@@ -1,41 +1,40 @@
 -- 구천우
 -- 상품
-INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status,
-                      ss_description,
-                      dv_num)
+INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_name,
+                      ss_description, dv_num)
 values ('DT0001', 'ekdm1234', 64800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 0, 'DT0001.png', '품절',
-          '마리오＋래비드 킹덤 배틀', 6);
+          '마리오＋래비드 킹덤 배틀', '마리오입니다.', 1);
 
-INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description,
+INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_name, ss_description,
                       dv_num)
 values ('MN0001', 'pogjj777', 360000, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 0, 'MN0001.png', '판매 중', '닌텐도 스위치',
-        7);
+        '스위치다.', 2);
 
-INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description,
+INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_name, ss_description,
                       dv_num)
 values ('AC0001', 'digj1908', 79800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 0, 'AC0001.png', '판매 중지',
-        'SWITCH Joy-Con(L/R) 네온레드/네온블루', 8);
+        'SWITCH Joy-Con(L/R) 네온레드/네온블루', '조이콘이에요', 3);
 
-INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description,
+INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_name, ss_description,
                       dv_num)
 values ('PT0001', 'itwill', 74800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 5, 'PT0001.jpg', '판매 중',
-        '젤다의 전설 브레스 오브 더 와일드', 9)
+        '젤다의 전설 브레스 오브 더 와일드', '젤다입니다.', 4)
      , ('DT0002', 'codingking', 64800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 2, 'DT0002.jpg', '판매 중',
-        '마리오 카트 8 디럭스', 10);
+        '마리오 카트 8 디럭스', '마리오카드입니다.', 5);
 
 -- 게임기 / 게임 타이틀
-INSERT INTO tb_game (gm_code, gm_name, gm_level, gm_category)
-values ('DT0001', '마리오＋래비드 킹덤 배틀', '전체이용가', '어드벤처, 시뮬레이션');
+INSERT INTO tb_game (gm_code, gm_name, gm_level, gm_category, gm_price, gm_img)
+values ('DT0001', '마리오＋래비드 킹덤 배틀', '전체이용가', '어드벤처, 시뮬레이션', 50000, '001.jpg');
 
-INSERT INTO tb_game (gm_code, gm_name, gm_level, gm_category)
-values ('MN0001', '닌텐도 스위치', '전체이용가', '본체');
+INSERT INTO tb_game (gm_code, gm_name, gm_level, gm_category, gm_price, gm_img)
+values ('MN0001', '닌텐도 스위치', '전체이용가', '본체', 100000, '002.jpg');
 
-INSERT INTO tb_game (gm_code, gm_name, gm_level, gm_category)
-values ('AC0001', 'SWITCH Joy-Con(L/R) 네온레드/네온블루', '전체이용가', '조이콘');
+INSERT INTO tb_game (gm_code, gm_name, gm_level, gm_category, gm_price, gm_img)
+values ('AC0001', 'SWITCH Joy-Con(L/R) 네온레드/네온블루', '전체이용가', '조이콘', 80000, '003.jpg');
 
-INSERT INTO tb_game (gm_code, gm_name, gm_level, gm_category)
-values ('PT0001', '젤다의 전설 브레스 오브 더 와일드', '12세 이용가', '액션, 어드벤처')
-     , ('DT0002', '마리오 카트 8 디럭스', '전체이용가', '액션, 레이싱');
+INSERT INTO tb_game (gm_code, gm_name, gm_level, gm_category, gm_price, gm_img)
+values ('PT0001', '젤다의 전설 브레스 오브 더 와일드', '12세 이용가', '액션, 어드벤처', 250000, '004.jpg')
+     , ('DT0002', '마리오 카트 8 디럭스', '전체이용가', '액션, 레이싱', 75000, '005.jpg');
 
 -- 포토 리뷰
 INSERT INTO tb_review (mem_id, rv_content, rv_star, rv_filename, ss_num)
@@ -176,12 +175,12 @@ VALUES ('gjdjj888', '김민경', '12345', '서울특별시 중구 세종대로',
 
 
 -- 위시리스트
-INSERT INTO tb_wish (mem_id, gm_code)
-VALUES ('gjdjj888', 'MN0001')
-     ,('oejdf9090', 'DT0002')
-     ,('fjhdmj555', 'PT0001')
-     ,('fjhdmj555', 'DT0001')
-     ,('fjhdmj555', 'AC0001');
+INSERT INTO tb_wish (mem_id, ss_num)
+VALUES ('gjdjj888', 4)
+     ,('oejdf9090', 5)
+     ,('fjhdmj555', 6)
+     ,('fjhdmj555', 7)
+     ,('fjhdmj555', 8);
 
 
 -- 회원평가

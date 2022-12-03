@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
-<!-- 본문 시작 signupForm.jsp-->
+<!-- 본문 시작 memmodify.jsp-->
     <form class="container">
         <div class="checkout__form">
             <h4>회원가입</h4>
