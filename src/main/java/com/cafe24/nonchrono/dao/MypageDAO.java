@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Repository
-@RequestMapping("/mypage")
 public class MypageDAO {
     public MypageDAO() {
         System.out.println("-----MypageDAO() 객체 생성됨");

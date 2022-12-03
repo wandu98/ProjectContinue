@@ -22,3 +22,10 @@ from tb_game as gm join tb_rcrboard as rb
 on rb.gm_code = gm.gm_code;
 
 truncate table tb_rcrboard;
+
+select * from tb_game;
+
+
+SELECT gm_code
+FROM tb_game
+WHERE gm_name = 'VOXEL PIRATES'
