@@ -56,16 +56,16 @@
                                                     <label for="inputEmail3"
                                                            class="col-sm-2 col-form-label">이름</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="이름을 입력해주세요">
                                                     </div>
                                                 </div>
-
-                                                <div class="row-md-3">
+                                                <div class="row md-3">
                                                     <label for="inputEmail3"
-                                                           class="col-sm-2 col-form-label">업체</label>
-                                                    <div class="col-sm-6">
+                                                           class="col-sm-2 col-form-label">택배사</label>
+                                                    <div class="col-sm-10">
                                                         <select id="inputState" class="form-select">
-                                                            <option selected>------</option>
+                                                            <option selected>택배회사를 선택해주세요</option>
                                                             <option>CJ택배</option>
                                                             <option>우체국</option>
                                                             <option>로젠</option>
@@ -78,12 +78,14 @@
                                                     <label for="inputEmail3"
                                                            class="col-sm-2 col-form-label">배송메모</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="배송 메모를 입력해주세요">
                                                     </div>
                                                 </div>
+
                                                 <fieldset class="row mb-3">
                                                     <legend class="col-form-label col-sm-2 pt-0">
-                                                        Radios
+                                                        배송방법
                                                     </legend>
                                                     <div class="col-sm-10">
                                                         <div class="form-check">
@@ -92,7 +94,7 @@
                                                                    value="option1" checked>
                                                             <label class="form-check-label"
                                                                    for="gridRadios1">
-                                                                First radio
+                                                                택배
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
@@ -101,38 +103,177 @@
                                                                    value="option2">
                                                             <label class="form-check-label"
                                                                    for="gridRadios2">
-                                                                Second radio
+                                                                화물
                                                             </label>
                                                         </div>
-                                                        <div class="form-check disabled">
-                                                            <input class="form-check-input" type="radio"
-                                                                   name="gridRadios" id="gridRadios3"
-                                                                   value="option3" disabled>
-                                                            <label class="form-check-label"
-                                                                   for="gridRadios3">
-                                                                Third disabled radio
-                                                            </label>
-                                                        </div>
-                                                    </div>
                                                 </fieldset>
+
                                                 <div class="row mb-3">
-                                                    <div class="col-sm-10 offset-sm-2">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input"
-                                                                   type="checkbox" id="gridCheck1">
-                                                            <label class="form-check-label"
-                                                                   for="gridCheck1">
-                                                                Example checkbox
-                                                            </label>
-                                                        </div>
+                                                    <label for="inputEmail3"
+                                                           class="col-sm-2 col-form-label">배송비용</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control">
                                                     </div>
                                                 </div>
+
+                                                <div class="row mb-3">
+                                                    <label for="inputEmail3"
+                                                           class="col-sm-2 col-form-label">반품교환</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" placeholder="편도 1회 가격">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label for="inputEmail3"
+                                                           class="col-sm-2 col-form-label">배송비</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <fieldset class="row mb-3">
+                                                    <legend class="col-form-label col-sm-2 pt-0">
+                                                        산간지역
+                                                    </legend>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                   name="gridRadios" id="gridRadios1"
+                                                                   value="option1" checked>
+                                                            <label class="form-check-label"
+                                                                   for="gridRadios1">
+                                                                사용
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                   name="gridRadios" id="gridRadios2"
+                                                                   value="option2">
+                                                            <label class="form-check-label"
+                                                                   for="gridRadios2">
+                                                                사용안함
+                                                            </label>
+                                                        </div>
+                                                </fieldset>
+
+                                                <div class="row mb-3">
+                                                    <label for="inputEmail3"
+                                                           class="col-sm-2 col-form-label">출고지역</label>
+                                                    <div class="col-sm-10">
+                                                        <div style="width: 100%">
+                                                            <div style="float: left">
+                                                                <input type="text" id="sample3_postcode"
+                                                                       class="form-control" placeholder="우편번호"
+                                                                       style="width: 50%">
+                                                            </div>
+                                                            <div style="float: right; margin-bottom: 10px">
+                                                                <input type="button"
+                                                                       onclick="sample3_execDaumPostcode()"
+                                                                       class="form-control" value="우편번호 찾기"
+                                                                       style="float: right"></div>
+                                                        </div>
+                                                        <input type="text" id="sample3_address" class="form-control"
+                                                               placeholder="주소" style="margin-bottom: 10px">
+                                                        <input type="text" id="sample3_detailAddress"
+                                                               class="form-control" style="margin-bottom: 10px" placeholder="상세주소">
+                                                        <input type="text" id="sample3_extraAddress"
+                                                               class="form-control" placeholder="참고항목">
+
+                                                        <div id="wrap"
+                                                             style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
+                                                            <img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+                                                                 id="btnFoldWrap"
+                                                                 style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1"
+                                                                 onclick="foldDaumPostcode()" alt="접기 버튼">
+                                                        </div>
+
+                                                        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                                                        <script>
+                                                            // 우편번호 찾기 찾기 화면을 넣을 element
+                                                            let element_wrap = document.getElementById('wrap');
+
+                                                            function foldDaumPostcode() {
+                                                                // iframe을 넣은 element를 안보이게 한다.
+                                                                element_wrap.style.display = 'none';
+                                                            }
+
+                                                            function sample3_execDaumPostcode() {
+                                                                // 현재 scroll 위치를 저장해놓는다.
+                                                                let currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+                                                                new daum.Postcode({
+                                                                    oncomplete: function (data) {
+                                                                        // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                                                                        // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                                                                        // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                                                        let addr = ''; // 주소 변수
+                                                                        let extraAddr = ''; // 참고항목 변수
+
+                                                                        //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                                                                        if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                                                                            addr = data.roadAddress;
+                                                                        } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                                                                            addr = data.jibunAddress;
+                                                                        }
+
+                                                                        // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                                                                        if (data.userSelectedType === 'R') {
+                                                                            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                                                            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                                                            if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                                                                                extraAddr += data.bname;
+                                                                            }
+                                                                            // 건물명이 있고, 공동주택일 경우 추가한다.
+                                                                            if (data.buildingName !== '' && data.apartment === 'Y') {
+                                                                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                                                            }
+                                                                            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                                                            if (extraAddr !== '') {
+                                                                                extraAddr = ' (' + extraAddr + ')';
+                                                                            }
+                                                                            // 조합된 참고항목을 해당 필드에 넣는다.
+                                                                            document.getElementById("sample3_extraAddress").value = extraAddr;
+
+                                                                        } else {
+                                                                            document.getElementById("sample3_extraAddress").value = '';
+                                                                        }
+
+                                                                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                                                        document.getElementById('sample3_postcode').value = data.zonecode;
+                                                                        document.getElementById("sample3_address").value = addr;
+                                                                        // 커서를 상세주소 필드로 이동한다.
+                                                                        document.getElementById("sample3_detailAddress").focus();
+
+                                                                        // iframe을 넣은 element를 안보이게 한다.
+                                                                        // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+                                                                        element_wrap.style.display = 'none';
+
+                                                                        // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
+                                                                        document.body.scrollTop = currentScroll;
+                                                                    },
+                                                                    // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
+                                                                    onresize: function (size) {
+                                                                        element_wrap.style.height = size.height + 'px';
+                                                                    },
+                                                                    width: '100%',
+                                                                    height: '100%'
+                                                                }).embed(element_wrap);
+
+                                                                // iframe을 넣은 element를 보이게 한다.
+                                                                element_wrap.style.display = 'block';
+                                                            }
+                                                        </script>
+
+                                                    </div>
+                                                </div>
+
                                                 <div class="text-center">
                                                     <button type="submit" class="btn btn-primary">
-                                                        Submit
+                                                        적용
                                                     </button>
                                                     <button type="reset" class="btn btn-secondary">
-                                                        Reset
+                                                        취소
                                                     </button>
                                                 </div>
                                             </form><!-- End Horizontal Form -->
