@@ -65,6 +65,7 @@ public class MypageController {
     public ModelAndView memmodify() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("mypage/memmodify");
+        mav.addObject("memmodify.list");
         return mav;
     }
 
