@@ -81,7 +81,6 @@
 </footer>
 <!-- 푸터 끝 -->
 
-<!-- 자바스크립트 플러그인 (footer에 있으니 안먹으서 header로 옮김)-->
 <!-- 자바스크립트 플러그인 -->
 
 <script src="/js/bootstrap.min.js"></script>
@@ -91,9 +90,6 @@
 <script src="/js/mixitup.min.js"></script>
 <script src="/js/owl.carousel.min.js"></script>
 <script src="/js/main.js"></script>
-
-
-
 
 </body>
 
