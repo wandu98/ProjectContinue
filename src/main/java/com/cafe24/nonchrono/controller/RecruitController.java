@@ -235,7 +235,8 @@ public class RecruitController {
     @RequestMapping("/detail/{rcrbrd_num}")
     public ModelAndView recruitDetail(@PathVariable int rcrbrd_num) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("recruitDetail", recruitDAO.detail(rcrbrd_num));
+        mav.addObject("detail", recruitDAO.detail(rcrbrd_num));
+        mav.addObject("detail2", recruitDAO.detail2(rcrbrd_num));
         mav.setViewName("recruit/recruitDetail");
         return mav;
     } // recruitDetail() end
