@@ -40,6 +40,11 @@
                     <button type="button" class="btn btn-danger dropdown-toggle"
                             data-toggle="dropdown"> 지역 선택
                     </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Link 1</a>
+                        <a class="dropdown-item" href="#">Link 2</a>
+                        <a class="dropdown-item" href="#">Link 3</a>
+                    </div>
                 </div>
                 <div style="float: right; margin: 1%">
                     <button type="button" class="btn btn-outline-danger" onclick="recruitForm()"> 모집글 등록
@@ -104,7 +109,7 @@
 
                     <c:forEach var="row" items="${list}" varStatus="vs">
                         <div class="col-lg-4 col-md-4 col-sm-4">
-                            <a href="#">
+                            <a href="/recruit/detail/${row.rcrbrd_num}">
                                 <div class="blog__item"
                                      style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
                                     <div class="blog__item__pic">
