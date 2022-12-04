@@ -1,11 +1,9 @@
 package com.cafe24.nonchrono.dao;
 
+import com.cafe24.nonchrono.dto.MemDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.lang.reflect.Member;
-import java.util.List;
 
 @Repository
 public class MemDAO { //Data Access Object
@@ -16,6 +14,14 @@ public class MemDAO { //Data Access Object
     public MemDAO() {
         System.out.println("-----memDAO() 객체 생성됨");
     } // end
+
+    public MemDTO modify_list() {
+        return sqlSession.selectOne("memmodify.list");
+    }
+
+    public void modify_update(MemDTO memDTO) {
+        sqlSession.update("memmodify.update", memDTO);
+    }
 
 
 

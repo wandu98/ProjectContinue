@@ -91,8 +91,8 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode;
-                document.getElementById("sample4_roadAddress").value = roadAddr;
+                document.getElementById('mem_dvzip').value = data.zonecode;
+                document.getElementById("mem_dvadr1").value = roadAddr;
                 document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.

@@ -37,7 +37,6 @@ public class MemdvController {
         memdvDTO.setMem_dvadr2(mem_dvadr2);
         memdvDTO.setMem_dvphone(mem_dvphone);
         memdvDAO.insert(memdvDTO);
-
-
+        return "redirect:/mypage/memdv";
     }
 }

@@ -31,6 +31,13 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+
+
+    <script src="/js/memmodify.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+
+
 </head>
 
 <body>

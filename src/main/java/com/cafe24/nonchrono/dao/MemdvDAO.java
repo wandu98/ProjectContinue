@@ -22,7 +22,7 @@ public class MemdvDAO {
     }
 
     public void insert(MemdvDTO memdvDTO) {
-        return sqlSession.insert("memdv.insert", memdvDTO);
+        sqlSession.insert("memdv.insert", memdvDTO);
     }
 
 }
