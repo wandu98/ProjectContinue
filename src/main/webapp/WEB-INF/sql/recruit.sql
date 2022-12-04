@@ -12,6 +12,8 @@ drop table tb_rcrboard;
 
 select * from tb_rcrboard;
 
+select * from tb_mem;
+
 select gm_name
 from tb_game gm
 left join tb_rcrboard rb on rb.gm_code = gm.gm_code

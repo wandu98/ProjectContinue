@@ -24,4 +24,10 @@
         FROM tb_game
         WHERE gm_name = #{gm_name}
     </select>
+
+    <select id="detail" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
+        SELECT rcrbrd_num, mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max
+        FROM tb_rcrboard
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
 </mapper>

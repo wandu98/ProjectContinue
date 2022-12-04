@@ -5,10 +5,7 @@ import com.cafe24.nonchrono.dto.RecruitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -233,6 +230,14 @@ public class RecruitController {
                 out.close();
             }
         }
-    }
+    } // ckSubmit() end
+
+    @RequestMapping("/detail/{rcrbrd_num}")
+    public ModelAndView recruitDetail(@PathVariable int rcrbrd_num) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("recruitDetail", recruitDAO.detail(rcrbrd_num));
+        mav.setViewName("recruit/recruitDetail");
+        return mav;
+    } // recruitDetail() end
 
 } // class end
