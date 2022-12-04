@@ -9,4 +9,9 @@
         where mem_id = 'fjhdmj555'
     </select>
 
+    <insert id="insert">
+        insert into tb_memdv(mem_id, mem_dvinfo, mem_dvzip, mem_dvadr1, mem_dvadr2, mem_dvphone, mem_dvnick)
+        values (#{mem_id}, #{mem_dvinfo}, #{mem_dvzip}, #{mem_dvadr1}, #{mem_dvadr2}, #{mem_dvphone}, #{mem_dvnick})
+    </insert>
+
 </mapper>

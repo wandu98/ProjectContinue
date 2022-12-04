@@ -19,9 +19,6 @@
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
 
-
-
-
 <!-- 본문 시작 signupForm.jsp-->
     <form class="container">
         <div class="checkout__form">

@@ -20,4 +20,9 @@ public class MemdvDAO {
     public List<MemdvDTO> list() {
         return sqlSession.selectList("memdv.list");
     }
+
+    public void insert(MemdvDTO memdvDTO) {
+        sqlSession.insert("memdv.insert", memdvDTO);
+    }
+
 }
