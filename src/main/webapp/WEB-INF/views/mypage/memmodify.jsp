@@ -55,9 +55,9 @@
                         <div class="row">
                             <div class="checkout__input">
                                 <p>주소<span>*</span></p>
-                                <input type="text" id="mem_zip" name="mem_zip" value="${mem.mem_zip}">
-                                <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                                <input type="text" id="mem_adr1" name="mem_adr1" value="${mem.mem_adr1}">
+                                <input type="text" id="mem_zip" name="mem_zip" value="${mem.mem_zip}" readonly>
+                                <input type="button" onclick="sample4_execDaumPostcode(); clearVal()" value="우편번호 찾기"><br>
+                                <input type="text" id="mem_adr1" name="mem_adr1" value="${mem.mem_adr1}" readonly>
                                 <span id="guide" style="color:#999;display:none"></span>
                                 <input type="text" id="mem_adr2" name="mem_adr2" value="${mem.mem_adr2}">
                             </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="checkout__input">
                         <p>생년월일<span>*</span> (-없이 숫자만 입력하세요)</p>
-                        <input type="text" value="${mem.mem_birth}" id="mem_birth" name="mem_birth">
+                        <input type="date" value="${mem.mem_birth}" id="mem_birth" name="mem_birth">
                     </div>
                 </div>
                 <button type="submit" class="site-btn">수정하기</button>
@@ -144,6 +144,12 @@
         }
         reader.readAsDataURL(file);
     });
+
+    function clearVal() {
+        $("#mem_zip").attr("value", null);
+        $("#mem_adr1").attr("value", null);
+        $("#mem_adr2").attr("value", null);
+    }
 </script>
 
 <jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>

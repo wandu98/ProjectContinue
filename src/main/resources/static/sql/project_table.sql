@@ -400,7 +400,7 @@ create table tb_rcrboard
     ,
     rcrbrd_max     int                    not null     -- 모집 최대인원
     ,
-    rcrbrd_region  varchar(255)           not null     -- 모집 장소
+    rcrbrd_adr  varchar(255)           not null     -- 모집 장소
     ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)    -- 회원ID
     ,
