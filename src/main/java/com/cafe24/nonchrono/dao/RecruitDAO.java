@@ -39,4 +39,8 @@ public class RecruitDAO {
         return sqlSession.selectOne("recruit.detail", rcrbrd_num);
     } // detail() end
 
+    public GameDTO detail2(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.detail2", rcrbrd_num);
+    } // detail2() end
+
 } // class end
