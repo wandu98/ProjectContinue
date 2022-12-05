@@ -4,26 +4,32 @@ import com.cafe24.nonchrono.dao.SalesDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/sales")
 public class SalesController {
 
-
+    public SalesController() {System.out.println("-----SalesController() 객체 생성"); }
 
     @Autowired
-    private SalesDAO salesDAO;
+    SalesDAO salesDAO;
 
-    public SalesController() {
-        System.out.println("-----SalesController() 객체 생성됨");
-    } // SalesController() end
-
-    @RequestMapping(value = "/sales", method = RequestMethod.GET)
-    public String sales() {return "/sales/sales";
+    @RequestMapping("/sales")
+    public ModelAndView sales() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("sales/sales");
+        return mav;
     } // sales() end
 
-    @RequestMapping(value = "/sales/detail", method = RequestMethod.GET)
-    public String detial() {return "/sales/detail";
+    @RequestMapping("/detail")
+    public ModelAndView detail() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("sales/detail");
+        return mav;
     }// detail() end
+
+
+
 
 }//class end

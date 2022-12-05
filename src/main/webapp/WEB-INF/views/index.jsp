@@ -108,8 +108,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <div class="header__logo">
-                    <a href="/"><img src="/images/logo.png" alt="" style="width: 70%"></a>
+                <div class="header__logo" style="padding: 10%; text-align: center">
+                    <a href="/"><img src="/images/logo.png" alt="" style="width: 100%"></a>
                 </div>
             </div>
             <div class="col-lg-6">

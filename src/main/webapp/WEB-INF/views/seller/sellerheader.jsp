@@ -1,11 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: wandu
-  Date: 2022/12/01
-  Time: 1:02 PM
+  Date: 2022/12/02
+  Time: 11:01 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -24,8 +24,8 @@
     <link href="/admin_assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="/https://fonts.gstatic.com" rel="preconnect">
+
 
     <!-- Vendor CSS Files -->
     <link href="/admin_assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -70,11 +70,18 @@
             </li><!-- End Search Icon-->
 
             <li class="nav-item dropdown">
+                <a class="nav-link nav-icon" href="/">
+                    <i class="bi-house"></i>
+                </a><!-- End Messages Icon -->
+            </li>
 
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="" data-bs-toggle="dropdown">
                     <i class="bi bi-bell"></i>
                     <span class="badge bg-primary badge-number">4</span>
                 </a><!-- End Notification Icon -->
+
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
@@ -144,6 +151,7 @@
 
             </li><!-- End Notification Nav -->
 
+
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -161,7 +169,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="/mypage/mypage">
                             <i class="bi bi-person"></i>
                             <span>마이페이지</span>
                         </a>
@@ -199,17 +207,17 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>상품등록/변경</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-menu-button-wide"></i><span>상품관리</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="/write">
+                    <a href="/seller/write">
                         <i class="bi bi-circle"></i><span>상품등록</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/list">
-                        <i class="bi bi-circle"></i><span>상품변경</span>
+                    <a href="/seller/list">
+                        <i class="bi bi-circle"></i><span>상품리스트</span>
                     </a>
                 </li>
             </ul>
@@ -221,23 +229,13 @@
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="forms-elements.html">
-                        <i class="bi bi-circle"></i><span>Form Elements</span>
+                    <a href="/seller/order">
+                        <i class="bi bi-circle"></i><span>전체주문목록</span>
                     </a>
                 </li>
                 <li>
-                    <a href="forms-layouts.html">
-                        <i class="bi bi-circle"></i><span>Form Layouts</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="forms-editors.html">
-                        <i class="bi bi-circle"></i><span>Form Editors</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="forms-validation.html">
-                        <i class="bi bi-circle"></i><span>Form Validation</span>
+                    <a href="/seller/delivery">
+                        <i class="bi bi-circle"></i><span>배송정책</span>
                     </a>
                 </li>
             </ul>
@@ -245,17 +243,18 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-layout-text-window-reverse"></i><span>문의관리</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="tables-general.html">
-                        <i class="bi bi-circle"></i><span>General Tables</span>
+                    <a href="/seller/one_sentence">
+                        <i class="bi bi-circle"></i><span>1:1문의</span>
                     </a>
                 </li>
                 <li>
-                    <a href="tables-data.html">
-                        <i class="bi bi-circle"></i><span>Data Tables</span>
+                    <a href="/seller/review">
+                        <i class="bi bi-circle"></i><span>Review</span>
                     </a>
                 </li>
             </ul>
@@ -361,162 +360,3 @@
     </ul>
 
 </aside><!-- End Sidebar-->
-
-
-<main id="main" class="main">
-
-    <div class="pagetitle">
-        <h1>상품등록</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/seller">홈</a></li>
-                <li class="breadcrumb-item">상품등록/변경</li>
-                <li class="breadcrumb-item active">상품등록</li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
-
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-6">
-
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">General Form Elements</h5>
-
-                        <!-- General Form Elements -->
-                        <form>
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">제목</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">가격</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" type="file" id="formFile">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-2 col-form-label">판매기간</label>
-                                <div class="col-sm-10">
-                                    <input type="date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-2 col-form-label">판매종료</label>
-                                <div class="col-sm-10">
-                                    <input type="date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Textarea</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" style="height: 100px"></textarea>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <legend class="col-form-label col-sm-2 pt-0">Checkboxes</legend>
-                                <div class="col-sm-10">
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                        <label class="form-check-label" for="gridCheck1">
-                                            Example checkbox
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-                                        <label class="form-check-label" for="gridCheck2">
-                                            Example checkbox 2
-                                        </label>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Disabled</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" value="Read only / Disabled" disabled>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Select</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Multi Select</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" multiple aria-label="multiple select example">
-                                        <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <button type="submit" class="btn btn-primary">상품 올리기</button>
-                            </div>
-
-                        </form><!-- End General Form Elements -->
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-</main><!-- End #main -->
-
-<!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
-    <div class="copyright">
-        &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-</footer><!-- End Footer -->
-
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-<!-- Vendor JS Files -->
-<script src="/admin_assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="/admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/admin_assets/vendor/chart.js/chart.min.js"></script>
-<script src="/admin_assets/vendor/echarts/echarts.min.js"></script>
-<script src="/admin_assets/vendor/quill/quill.min.js"></script>
-<script src="/admin_assets/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="/admin_assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="/admin_assets/vendor/php-email-form/validate.js"></script>
-
-<!-- Template Main JS File -->
-<script src="/admin_assets/js/main.js"></script>
-
-</body>
-
-</html>

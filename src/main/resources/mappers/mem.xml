@@ -18,5 +18,10 @@
         FROM tb_mem
     </select>
 
+    <select id="login" parameterType="com.cafe24.nonchrono.dto.MemDTO" resultType="String">
+        SELECT mem_grade
+        FROM tb_mem
+        WHERE mem_id = #{mem_id} AND mem_pw = #{mem_pw} AND mem_grade IN ('admin', 'Vip', 'Gold', 'Silver', 'Bronze', 'New');
+    </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.cafe24.nonchrono.dao;
 
 import com.cafe24.nonchrono.dto.GameDTO;
+import com.cafe24.nonchrono.dto.MemDTO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,25 @@ public class RecruitDAO {
     public RecruitDTO detail(int rcrbrd_num) {
         return sqlSession.selectOne("recruit.detail", rcrbrd_num);
     } // detail() end
+
+    public GameDTO gameDetail(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.gameDetail", rcrbrd_num);
+    } // detail2() end
+
+    public MemDTO memDetail(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.memDetail", rcrbrd_num);
+    } // detail2() end
+
+    public int recruitCount(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.recruitCount", rcrbrd_num);
+    } // recruitCount() end
+
+    public String nickname(String mem_id) {
+        return sqlSession.selectOne("recruit.nickname", mem_id);
+    } // nickname() end
+
+    public int insert(RecruitDTO recruitDTO) {
+        return sqlSession.insert("recruit.insert", recruitDTO);
+    } // insert() end
 
 } // class end

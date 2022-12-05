@@ -31,3 +31,23 @@ select * from tb_game;
 SELECT gm_code
 FROM tb_game
 WHERE gm_name = 'VOXEL PIRATES'
+
+SELECT rb.rcrbrd_num, rb.mem_id, rb.rcrbrd_subject, rb.rcrbrd_content, rb.rcrbrd_pw, rb.rcrbrd_views, rb.rcrbrd_date, rb.rcrbrd_edate, rb.rcrbrd_ip, rb.gm_code, rb.rcrbrd_status, rb.rcrbrd_adr, rb.rcrbrd_max, gm.gm_name
+FROM tb_rcrboard as rb join tb_game as gm
+on rb.gm_code = gm.gm_code;
+
+SELECT COUNT(*)
+FROM tb_rcrboard
+group by mem_id
+having mem_id = 'fjhdmj555';
+
+select mem_id
+from tb_rcrboard
+where rcrbrd_num = 1;
+
+SELECT COUNT(*)
+FROM tb_rcrboard
+group by mem_id
+having mem_id = (select mem_id
+                 from tb_rcrboard
+                 where rcrbrd_num = 5);

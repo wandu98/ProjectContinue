@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -32,6 +33,7 @@ public class RecruitController {
         System.out.println("-----RecruitController() 객체 생성됨");
     } // RecruitController() end
 
+    // 모집 게시판 홈
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView recruitList() {
         RecruitDTO dto = new RecruitDTO();
@@ -42,11 +44,18 @@ public class RecruitController {
         return mav;
     } // recruitList() end
 
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String recruitForm() {
-        return "/recruit/recruitForm";
+    // 모집 게시판 글 작성
+    @RequestMapping("/form")
+    public ModelAndView recruitForm(HttpServletRequest req) throws Exception {
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = req.getSession();
+        String mem_id = (String) session.getAttribute("mem_id");
+        mav.addObject("nickname", recruitDAO.nickname(mem_id));
+        mav.setViewName("/recruit/recruitForm");
+        return mav;
     } // recruitForm() end
 
+    // 모집 게시판 검색 과정
     @RequestMapping("/searchProc")
     @ResponseBody
     public String search(HttpServletRequest req) {
@@ -97,6 +106,7 @@ public class RecruitController {
         return message;
     } // searchProc() end
 
+    // 모집 게시판 검색 리스트
     public ArrayList<String> searchList(String keyword) {
         // 검색하고자 하는 게임 타이틀 목록
         ArrayList<String> list2 = new ArrayList<String>();
@@ -118,7 +128,7 @@ public class RecruitController {
         return list;
     } // searchList() end
 
-    // 이미지 업로드
+    // CKEditor 이미지 업로드
     @RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
     public void imageUpload(HttpServletRequest request,
                             HttpServletResponse response, MultipartHttpServletRequest multiFile
@@ -180,7 +190,7 @@ public class RecruitController {
         return;
     }// imageUpload() end
 
-    // 서버로 전송된 이미지 뿌려주기
+    // CKEditor 서버로 전송된 이미지 뿌려주기
     @RequestMapping(value = "/ckImgSubmit")
     public void ckSubmit(@RequestParam(value = "uid") String uid
             , @RequestParam(value = "fileName") String fileName
@@ -232,12 +242,27 @@ public class RecruitController {
         }
     } // ckSubmit() end
 
+    // 모집 정보 상세보기
     @RequestMapping("/detail/{rcrbrd_num}")
     public ModelAndView recruitDetail(@PathVariable int rcrbrd_num) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("recruitDetail", recruitDAO.detail(rcrbrd_num));
+        mav.addObject("detail", recruitDAO.detail(rcrbrd_num));
+        mav.addObject("gameDetail", recruitDAO.gameDetail(rcrbrd_num));
+        mav.addObject("memDetail", recruitDAO.memDetail(rcrbrd_num));
+        mav.addObject("recruitCount", recruitDAO.recruitCount(rcrbrd_num));
         mav.setViewName("recruit/recruitDetail");
         return mav;
     } // recruitDetail() end
+    
+    // 모집 정보 작성
+    @RequestMapping("/insert")
+    public ModelAndView recruitInsert(@ModelAttribute RecruitDTO recruitDTO) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("insert", recruitDAO.insert(recruitDTO));
+        mav.setViewName("/recruit/recruitInsert");
+        return mav;
+    } // recruitWrite() end
+    
+    // 삭제 후 이메일 발송
 
 } // class end
