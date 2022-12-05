@@ -492,6 +492,7 @@ drop table tb_review;
 drop table tb_sales;
 drop table tb_seller;
 drop table tb_wish;
+drop table tb_rcrboard;
 
 SET foreign_key_checks = 0; -- 외래키 해제
 SET foreign_key_checks = 1; -- 외래키 설정

@@ -69,7 +69,7 @@
                     <li><a href="/">1:1문의</a></li>
                 </ul>
             </li>
-            <li><a href="/mypage">마이페이지</a>
+            <li><a href="/mypage/mypage">마이페이지</a>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -98,7 +98,7 @@
                             <a href="/mem/signup">회원가입</a>
                         </div>
                         <div class="header__top__right__auth">
-                            <a href="/mypage"><i class="fa fa-user"></i> 마이페이지</a>
+                            <a href="/mypage/mypage"><i class="fa fa-user"></i> 마이페이지</a>
                         </div>
                     </div>
                 </div>

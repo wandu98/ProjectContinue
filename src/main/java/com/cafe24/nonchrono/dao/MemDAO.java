@@ -30,4 +30,9 @@ public class MemDAO { //Data Access Object
         sqlSession.update("memmodify.update", memDTO);
     }
 
-    }//end
+    public MemDTO list() {
+        return sqlSession.selectOne("mypage.list");
+    }//list() end
+
+
+}//end

@@ -9,6 +9,7 @@ import lombok.*;
 @ToString
 public class WishlistDTO {
 
+    private int ws_num;
     private int ss_price;
     private String ss_img;
     private String ss_name;

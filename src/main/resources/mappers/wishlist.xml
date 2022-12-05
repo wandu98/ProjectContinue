@@ -3,12 +3,35 @@
 
 <mapper namespace="wishlist">
 
-    <select id="list" resultType="com.cafe24.nonchrono.dto.WishlistDTO">
-        select ss_price, ss_img, ss_name, dv_fee, ss_price+dv_fee as total
-        from tb_wish wi join tb_sales sa
-                             on wi.ss_num = sa.ss_num join tb_delivery de
-                                                           on sa.dv_num = de.dv_num
+    <select id="list" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.WishlistDTO">
+        <![CDATA[
+            select *
+            from (
+                     select ws_num, ss_price, ss_img, ss_name, dv_fee, total, @rno := @rno + 1 as r
+                     from (
+                              select ws_num, ss_price, ss_img, ss_name, dv_fee, ss_price+dv_fee as total
+                              from tb_wish wi join tb_sales sa
+                                                   on wi.ss_num = sa.ss_num join tb_delivery de
+                                                                                 on sa.dv_num = de.dv_num
+                              where mem_id = 'fjhdmj555'
+                          ) AA, (select @rno := 0) BB
+                 ) CC
+            where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <delete id="allRemove">
+        delete from tb_wish
         where mem_id = 'fjhdmj555'
+    </delete>
+
+    <delete id="delete">
+        delete from tb_wish
+        where ws_num = #{ws_num}
+    </delete>
+
+    <select id="totalRowCount" resultType="int">
+        select count(*) from tb_wish where mem_id = 'fjhdmj555'
     </select>
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.cafe24.nonchrono.dao;
 
+import com.cafe24.nonchrono.dto.PagingDTO;
 import com.cafe24.nonchrono.dto.WishlistDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,26 @@ public class WishDAO {
     @Autowired
     SqlSession sqlSession;
 
-    public List<WishlistDTO> list() {
-        return sqlSession.selectList("wishlist.list");
+    public List<WishlistDTO> list(PagingDTO pagingDTO) {
+        return sqlSession.selectList("wishlist.list", pagingDTO);
     }
+
+    public void allRemove() {
+        sqlSession.delete("wishlist.allRemove");
+    }
+
+    public void delete(int ws_num) {
+        sqlSession.delete("wishlist.delete", ws_num);
+    }
+
+    public int totalRowCount() {
+        int cnt = 0;
+        try {
+            cnt = sqlSession.selectOne("wishlist.totalRowCount");
+        } catch (Exception e) {
+            System.out.println("전체 행 갯수 : " + e);
+        }//end
+        return cnt;
+    }//totalRowCount() end
 
 }

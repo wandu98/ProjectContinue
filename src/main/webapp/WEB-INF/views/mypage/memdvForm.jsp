@@ -14,7 +14,7 @@
     <div class="container">
         <div class="checkout__form">
             <h4>배송지 등록</h4>
-            <form action="insert">
+            <form action="/mypage/memdvForm/insert">
                 <input type="hidden" id="mem_id" name="mem_id" value="">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
