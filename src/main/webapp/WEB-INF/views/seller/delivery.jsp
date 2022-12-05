@@ -11,7 +11,7 @@ To change this template use File | Settings | File Templates.
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>배송정책</h1>
+        <h1><i class="bi bi-truck"></i> 배송정책</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/seller">Home</a></li>
@@ -23,7 +23,7 @@ To change this template use File | Settings | File Templates.
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
 
                 <div class="card">
                     <div class="card-body">
@@ -409,26 +409,16 @@ To change this template use File | Settings | File Templates.
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
 
                 <div class="card">
                     <div class="card-body">
                         <!-- Active Table -->
                         <table class="table">
-                            <script>
-                                function cAll() {
-                                    if ($("#checkAll").is(':checked')) {
-                                        $("input[type=checkbox]").prop("checked", true);
-                                    } else {
-                                        $("input[type=checkbox]").prop("checked", false);
-                                    }
-                                }
-                            </script>
                             <thead>
                             <tr>
                                 <th scope="col">
-
-                                    <input class="form-check-input" id="checkAll" type="checkbox" onclick="cAll();">
+                                    <input class="form-check-input" id="checkAll" name="checkAll" type="checkbox">
                                 </th>
                                 <th scope="col">NO.</th>
                                 <th scope="col">이름</th>
@@ -445,7 +435,7 @@ To change this template use File | Settings | File Templates.
                             <tbody>
                             <tr>
                                 <th scope="col">
-                                    <input class="form-check-input" name="chk" id="chk1"  type="checkbox">
+                                    <input class="form-check-input" name="check" type="checkbox">
                                 </th>
                                 <th scope="row">1</th>
                                 <td>기본 정책으로 많이 사용중</td>
@@ -459,7 +449,7 @@ To change this template use File | Settings | File Templates.
                             </tr>
                             <tr>
                                 <th scope="col">
-                                    <input class="form-check-input" name="chk" id="chk2"   type="checkbox">
+                                    <input class="form-check-input" name="check" type="checkbox">
                                 </th>
                                 <th scope="row">2</th>
                                 <td>기본 정책으로 많이 사용중</td>
@@ -473,7 +463,7 @@ To change this template use File | Settings | File Templates.
                             </tr>
                             <tr>
                                 <th scope="col">
-                                    <input class="form-check-input" name="chk3" id="chk3"  type="checkbox">
+                                    <input class="form-check-input" name="check" type="checkbox">
                                 </th>
                                 <th scope="row">3</th>
                                 <td>기본 정책으로 많이 사용중</td>
@@ -487,7 +477,7 @@ To change this template use File | Settings | File Templates.
                             </tr>
                             <tr class="table-success">
                                 <th scope="col">
-                                    <input class="form-check-input" name="chk4" id="chk4"  type="checkbox">
+                                    <input class="form-check-input" name="check" type="checkbox">
                                 </th>
                                 <th scope="row">4</th>
                                 <td>기본 정책으로 많이 사용중</td>
@@ -501,7 +491,7 @@ To change this template use File | Settings | File Templates.
                             </tr>
                             <tr class="table-danger">
                                 <th scope="col">
-                                    <input class="form-check-input" name="chk5"  id="chk5" type="checkbox">
+                                    <input class="form-check-input" name="check" type="checkbox">
                                 </th>
                                 <th scope="row">5</th>
                                 <td>반품지역 다름, 산간지역 x</td>
@@ -515,7 +505,27 @@ To change this template use File | Settings | File Templates.
                             </tr>
                             </tbody>
                         </table>
-
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info">수정</button>
+                            <button type="button" class="btn btn-danger">삭제</button>
+                        </div>
+                        <nav class="pagination justify-content-center">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -526,10 +536,28 @@ To change this template use File | Settings | File Templates.
 </main>
 <!-- End #main -->
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary">Save changes</button>
-</div>
 
-
+<!-- checkbox All Select -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //전체박스 클릭
+        $("#checkAll").click(function () {
+            if ($("#checkAll").prop("checked")) {
+                $(".form-check-input").prop("checked", true);
+            } else {
+                $(".form-check-input").prop("checked", false);
+            }
+        });
+        //전체 체크박스 선택중 체크박스 하나를 풀었을때 "전체" 체크해제
+        $(".form-check-input").click(function () {
+            if ($("input[name='check']:checked").length == 5) {
+                $("#checkAll").prop("checked", true);
+            } else {
+                $("#checkAll").prop("checked", false);
+            }
+        });
+    });
+</script>
+<!-- checkbox All Select end -->
 <jsp:include page="sellerfooter.jsp"></jsp:include>
