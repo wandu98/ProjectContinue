@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <script src="/js/memmodify.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
@@ -204,13 +207,13 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
                             <div class="col-lg-4">
-                                <img src="/images/ProfilePicture.png">
+                                <img src="/images/profile/ProfilePicture.png">
                             </div>
                             <div class="col-lg-8">
                                 <table style="width: 100%; height: 100%">
                                     <tr>
                                         <td>닉네임(회원 ID)</td>
-                                        <td>루이지</td>
+                                        <td>루이지<a style="float: right" href="mypage/memmodify">회원 정보 수정</a></td>
                                     </tr>
                                     <tr>
                                         <td>회원등급</td>
@@ -335,7 +338,7 @@
                                                 <tbody>
                                                 <tr>
                                                     <td class="shoping__cart__item">
-                                                        <img src="img/cart/cart-1.jpg" alt="">
+                                                        <img src="/images/001.jpg" alt="">
                                                         <h5>동숲 같이 하실분</h5>
                                                     </td>
                                                     <td class="shoping__cart__price">
@@ -353,7 +356,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="shoping__cart__item">
-                                                        <img src="img/cart/cart-2.jpg" alt="">
+                                                        <img src="/images/002.jpg" alt="">
                                                         <h5>스플래툰3 하실 분</h5>
                                                     </td>
                                                     <td class="shoping__cart__price">
@@ -371,7 +374,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="shoping__cart__item">
-                                                        <img src="img/cart/cart-3.jpg" alt="">
+                                                        <img src="/images/003.jpg" alt="">
                                                         <h5>피파하자</h5>
                                                     </td>
                                                     <td class="shoping__cart__price">

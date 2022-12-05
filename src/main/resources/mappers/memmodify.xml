@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memmodify">
+
+    <select id="list" resultType="com.cafe24.nonchrono.dto.MemDTO">
+        select mem_id, mem_nick, mem_pw, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_birth, mem_receive, mem_pic
+        from tb_mem
+        where mem_id = 'oejdf9090'
+    </select>
+
+    <update id="update" parameterType="com.cafe24.nonchrono.dto.MemDTO">
+        update tb_mem
+        set mem_name = #{mem_name}, mem_pic = #{mem_pic}, mem_nick = #{mem_nick}, mem_pw = #{mem_pw}, mem_zip = #{mem_zip}, mem_adr1 = #{mem_adr1}, mem_adr2 = #{mem_adr2}, mem_birth = #{mem_birth}
+        where mem_id = 'oejdf9090'
+    </update>
+
+</mapper>

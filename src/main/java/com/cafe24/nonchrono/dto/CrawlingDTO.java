@@ -1,14 +1,12 @@
 package com.cafe24.nonchrono.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class CrawlingDTO {
 
     private String gm_code; // 품목 코드
@@ -16,5 +14,6 @@ public class CrawlingDTO {
     private int gm_price; // 가격
     private String gm_level; // 이용등급
     private String gm_category; // 카테고리
+    private String gm_img; // 이미지
 
 } // class end

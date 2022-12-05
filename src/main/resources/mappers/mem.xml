@@ -2,9 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="login">
-    <select id="list" resultType="com.cafe24.nonchrono.dto.MemDTO">
+    <select id="list" parameterType="com.cafe24.nonchrono.dto.MemDTO">
         SELECT mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad
         FROM tb_mem
         ORDER BY mem_id
     </select>
+
+    <select id="memid" parameterType="String">
+        SELECT mem_id
+        FROM tb_mem
+    </select>
+
+    <select id="mempw" parameterType="String">
+        SELECT mem_pw
+        FROM tb_mem
+    </select>
+
+
 </mapper>

@@ -2,16 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="recruit">
-<!--    <select id="list" resultType="com.cafe24.nonchrono.dto.RecruitDTO">-->
-<!--        SELECT rcrbrd_num, mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_region, rcrbrd_max-->
-<!--        FROM tb_rcrboard-->
-<!--        ORDER BY rcrbrd_num-->
-<!--    </select>-->
+    <select id="list" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
+        SELECT rcrbrd_num, mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max
+        FROM tb_rcrboard
+        ORDER BY rcrbrd_num
+    </select>
 
-<!--    <select id="gm_name" resultType="String">-->
-<!--        select gm.gm_name-->
-<!--        from tb_game as gm join tb_rcrboard as rb-->
-<!--        on rb.gm_code = gm.gm_code-->
-<!--        where rb.gm_code = #{gm_code}-->
-<!--    </select>-->
+    <select id="game" resultType="com.cafe24.nonchrono.dto.GameDTO">
+        select gm.gm_name
+        from tb_game as gm join tb_rcrboard as rb
+        on rb.gm_code = gm.gm_code
+    </select>
+
+    <select id="gm_list" resultType="com.cafe24.nonchrono.dto.GameDTO">
+        SELECT gm_name, gm_code
+        FROM tb_game
+    </select>
+
+    <select id="gm_list2" parameterType="String" resultType="String">
+        SELECT gm_code
+        FROM tb_game
+        WHERE gm_name = #{gm_name}
+    </select>
+
+    <select id="detail" parameterType="int" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
+        SELECT rcrbrd_num, mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max
+        FROM tb_rcrboard
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
+
+    <select id="detail2" parameterType="int" resultType="com.cafe24.nonchrono.dto.GameDTO">
+        SELECT gm.gm_code,  gm.gm_name, gm.gm_price, gm.gm_level, gm.gm_category, gm.gm_img
+        FROM tb_rcrboard as rb join tb_game as gm
+        on rb.gm_code = gm.gm_code
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
 </mapper>

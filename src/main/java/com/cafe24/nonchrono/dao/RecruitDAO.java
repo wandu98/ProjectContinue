@@ -1,10 +1,10 @@
 package com.cafe24.nonchrono.dao;
 
+import com.cafe24.nonchrono.dto.GameDTO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -23,8 +23,24 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.list");
     } // list() end
 
-    public String gm_name() {
-        return sqlSession.selectOne("recruit.gm_name");
+    public List<GameDTO> game() {
+        return sqlSession.selectList("recruit.game");
     } // gm_name() end
+
+    public List<GameDTO> gm_list() {
+        return sqlSession.selectList("recruit.gm_list");
+    } // gm_name() end
+
+    public String gm_list2(String title) {
+        return sqlSession.selectOne("recruit.gm_list2", title);
+    } // gm_name() end
+
+    public RecruitDTO detail(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.detail", rcrbrd_num);
+    } // detail() end
+
+    public GameDTO detail2(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.detail2", rcrbrd_num);
+    } // detail2() end
 
 } // class end

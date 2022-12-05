@@ -12,6 +12,11 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Favicons -->
+    <link href="/images/favicon.png" rel="icon">
+    <link href="/images/apple-touch-icon.png" rel="apple-touch-icon">
+
     <title>Continue? | 마켓 & 모집</title>
 
     <!-- Google Font -->
@@ -26,6 +31,11 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <script src="/js/memmodify.js"></script>
+    <script src="/js/jquery-3.6.1.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
@@ -102,8 +112,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <div class="header__logo">
-                    <a href="/"><img src="/images/logo.png" alt="" style="width: 70%"></a>
+                <div class="header__logo" style="padding: 10%; text-align: center">
+                    <a href="/"><img src="/images/logo.png" alt="" style="width: 100%"></a>
                 </div>
             </div>
             <div class="col-lg-6">

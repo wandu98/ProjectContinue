@@ -36,16 +36,22 @@ create table tb_sales
     FOREIGN KEY (dv_num) REFERENCES tb_delivery (dv_num) -- 배송 정책
 );
 
+
+
 -- 게임기 / 게임 타이틀
 create table tb_game
 (
-    gm_code     varchar(100) primary key -- 품목 코드
+    gm_code     varchar(100) primary key            -- 품목 코드
     ,
-    gm_name     varchar(255) not null    -- 품목명
+    gm_name     varchar(255) not null               -- 품목명
     ,
-    gm_level    varchar(100) not null    -- 이용 등급
+    gm_price    int          not null default 0     -- 가격
     ,
-    gm_category varchar(100) not null    -- 카테고리
+    gm_level    varchar(100) not null               -- 이용 등급
+    ,
+    gm_category varchar(100) not null               -- 카테고리
+    ,
+    gm_img      varchar(255) not null               -- 이미지
 );
 
 
@@ -249,39 +255,39 @@ CREATE TABLE tb_delivery
 -- 회원
 CREATE TABLE tb_mem
 (
-    mem_id      varchar(20)  NOT NULL PRIMARY KEY       -- 회원ID
+    mem_id       varchar(20)  NOT NULL PRIMARY KEY -- 회원ID
     ,
-    mem_pw      varchar(20)  NOT NULL                   -- 회원PW
+    mem_pw       varchar(20)  NOT NULL             -- 회원PW
     ,
-    mem_nick    varchar(20)  NOT NULL                   -- 닉네임
+    mem_nick     varchar(20)  NOT NULL             -- 닉네임
     ,
-    mem_name    varchar(20)  NOT NULL                   -- 이름
+    mem_name     varchar(20)  NOT NULL             -- 이름
     ,
-    mem_zip     varchar(6)   NOT NULL                   -- 우편번호
+    mem_zip      varchar(6)   NOT NULL             -- 우편번호
     ,
-    mem_adr1    varchar(255) NOT NULL                   -- 주소1
+    mem_adr1     varchar(255) NOT NULL             -- 주소1
     ,
-    mem_adr2    varchar(255) NOT NULL                   -- 주소2
+    mem_adr2     varchar(255) NOT NULL             -- 주소2
     ,
-    mem_phone   varchar(20)  NOT NULL                   -- 연락처
+    mem_phone    varchar(20)  NOT NULL             -- 연락처
     ,
-    mem_birth   date         NOT NULL                   -- 생년월일
+    mem_birth    date         NOT NULL             -- 생년월일
     ,
-    mem_grade   varchar(20)  NOT NULL                   -- 회원등급
+    mem_grade    varchar(20)  NOT NULL             -- 회원등급
     ,
-    upoint      int          NOT NULL                   -- 가용적립금
+    upoint       int          NOT NULL             -- 가용적립금
     ,
-    apoint      int          NOT NULL                   -- 누적적립금
+    apoint       int          NOT NULL             -- 누적적립금
     ,
-    mem_receive char(1)      NOT NULL                   -- 수신여부
+    mem_receive  char(1)      NOT NULL             -- 수신여부
     ,
-    good        int          NOT NULL default 0         -- 좋아요
+    good         int          NOT NULL default 0   -- 좋아요
     ,
-    buyer_bad   int          NOT NULL default 0         -- 누적신고횟수
+    buyer_bad    int          NOT NULL default 0   -- 누적신고횟수
     ,
-    mem_pic    varchar      NOT NULL                    -- 프로필사진
+    mem_pic    varchar(255)   NOT NULL default 'ProfilePicture.png'                  -- 프로필사진
     ,
-    mem_joindate date       NOT NULL  default now()
+    mem_joindate date       NOT NULL  default now()     -- 가입일
 );
 
 
@@ -315,10 +321,11 @@ CREATE TABLE tb_wish
     ,
     mem_id  varchar(20)  NOT NULL                            -- 회원ID
     ,
-    gm_code varchar(100) NOT NULL                            -- 품목코드
+    ss_num int           NOT NULL                            -- 품목코드
     ,
-    FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id),
-    FOREIGN KEY (gm_code) REFERENCES tb_game (gm_code)
+    FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)
+    ,
+    FOREIGN KEY (ss_num) REFERENCES tb_sales (ss_num)
 );
 
 
@@ -358,6 +365,8 @@ create table tb_recruit
     ,
     rcrbrd_num int         not null                              -- 게시판 글번호
     ,
+    rcrtm_cnfrm char(1)    not null
+    ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)              -- 회원ID
     ,
     FOREIGN KEY (rcrbrd_num) REFERENCES tb_rcrboard (rcrbrd_num) -- 게시판 글번호
@@ -379,19 +388,26 @@ create table tb_rcrboard
     ,
     rcrbrd_views   int                    not null     -- 조회수
     ,
-    rcrbrd_regdate datetime default now() not null     -- 등록일
+    rcrbrd_date    datetime default now() not null     -- 등록일
     ,
     rcrbrd_ip      varchar(50)            not null     -- IP
     ,
     gm_code        varchar(100)           not null     -- 품목코드
     ,
-    rcrbrd_status  varchar(20)            not null     -- 모집진행상태
+    rcrbrd_status  varchar(20)            not null     -- 모집 진행상태
+    ,
+    rcrbrd_edate   datetime default now() not null     -- 모집 마감일
+    ,
+    rcrbrd_max     int                    not null     -- 모집 최대인원
+    ,
+    rcrbrd_region  varchar(255)           not null     -- 모집 장소
     ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)    -- 회원ID
     ,
     FOREIGN KEY (gm_code) REFERENCES tb_game (gm_code) -- 품목코드
 );
 
+drop table tb_rcrboard;
 
 -- 이벤트신청자
 create table tb_evtapl
@@ -453,5 +469,32 @@ create table tb_comment
     FOREIGN KEY (rcrbrd_num) REFERENCES tb_rcrboard (rcrbrd_num) -- 게시판글번호
 );
 
+
+drop table tb_rcrboard;
+drop table tb_answer;
+drop table tb_basket;
+drop table tb_comment;
+drop table tb_coupon;
+drop table tb_couponlist;
+drop table tb_delivery;
+drop table tb_detail;
+drop table tb_er;
+drop table tb_evaluation;
+drop table tb_evt;
+drop table tb_evtapl;
+drop table tb_game;
+drop table tb_mem;
+drop table tb_memdv;
+drop table tb_nt;
+drop table tb_order;
+drop table tb_question;
+drop table tb_recruit;
+drop table tb_review;
+drop table tb_sales;
+drop table tb_seller;
+drop table tb_wish;
+
+SET foreign_key_checks = 0; -- 외래키 해제
+SET foreign_key_checks = 1; -- 외래키 설정
 
 commit;

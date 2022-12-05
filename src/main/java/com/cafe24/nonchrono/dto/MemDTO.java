@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class MemDTO {
+
     private String mem_id;  //회원ID
     private String mem_pw;     //회원PW
     private String mem_nick;   //닉네임
@@ -23,4 +24,7 @@ public class MemDTO {
     private String mem_receive; //수신여부
     private int good; //좋아요
     private int buyer_bad; //누적횟수신고
+    private String mem_pic;         // 프로필사진
+    private String mem_joindate;    // 가입일
+
 }
