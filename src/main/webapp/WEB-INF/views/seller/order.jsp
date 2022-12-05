@@ -13,7 +13,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>전체주문조회</h1>
+        <h1><i class="bi bi-card-list"></i> 전체주문조회</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/seller">홈</a></li>
@@ -66,26 +66,26 @@
                             </div>
 
 
-                                <div class="row mb-3">
-                                    <label for="inputEmail" class="col-sm-2 col-form-label">조건검색</label>
-                                    <div class="col-md-4" style="width: 10%">
-                                        <select id="inputState" class="form-select">
-                                            <option selected>--------</option>
-                                            <option>주문번호</option>
-                                            <option>상품명</option>
-                                            <option>상품가격</option>
-                                            <option>회원ID</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-sm-10" style="width: 10%;">
-                                        <input type="email" class="form-control">
-                                    </div>
-
-                                    <div class="col-sm-10" style="width: 10%">
-                                        <button type="button" class="btn btn-outline-info">검색</button>
-                                    </div>
+                            <div class="row mb-3">
+                                <label for="inputEmail" class="col-sm-2 col-form-label">조건검색</label>
+                                <div class="col-md-4" style="width: 10%">
+                                    <select id="inputState" class="form-select">
+                                        <option selected>--------</option>
+                                        <option>주문번호</option>
+                                        <option>상품명</option>
+                                        <option>상품가격</option>
+                                        <option>회원ID</option>
+                                    </select>
                                 </div>
+
+                                <div class="col-sm-10" style="width: 10%;">
+                                    <input type="email" class="form-control">
+                                </div>
+
+                                <div class="col-sm-10" style="width: 10%">
+                                    <button type="button" class="btn btn-outline-info">검색</button>
+                                </div>
+                            </div>
 
                             <!-- Active Table -->
                             <table class="table">
@@ -140,7 +140,23 @@
 
 
                         </form><!-- End General Form Elements -->
-
+                        <nav class="pagination justify-content-center">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
 
