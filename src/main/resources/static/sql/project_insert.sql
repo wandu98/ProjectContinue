@@ -38,13 +38,13 @@ values ('PT0001', '젤다의 전설 브레스 오브 더 와일드', '12세 이�
 
 -- 포토 리뷰
 INSERT INTO tb_review (mem_id, rv_content, rv_star, rv_filename, ss_num)
-values ('gjdjj888', '이건 아니다', 10, 'not.jpg', 2);
+values ('gjdjj888', '이건 아니다', 10, 'not.jpg', 5);
 
 INSERT INTO tb_review (mem_id, rv_content, rv_star, rv_filename, ss_num)
-values ('oejdf9090', '이 세상의 것이 아니다', 5, 'real.jpg', 3);
+values ('oejdf9090', '이 세상의 것이 아니다', 5, 'real.jpg', 6);
 
 insert into tb_review (mem_id, rv_content, rv_star, rv_filename, ss_num)
-values ('fjhdmj555', '한때의 꿈', 6, 'dream.jpg', 4);
+values ('fjhdmj555', '한때의 꿈', 6, 'dream.jpg', 7);
 
 -- 1:1 문의
 insert into tb_question (mem_id, qs_content, qs_date, qs_category)
@@ -176,7 +176,7 @@ VALUES ('gjdjj888', '김민경', '12345', '서울특별시 중구 세종대로',
 
 -- 위시리스트
 INSERT INTO tb_wish (mem_id, ss_num)
-VALUES ('gjdjj888', 4)
+VALUES ('gjdjj888', 5)
      ,('oejdf9090', 5)
      ,('fjhdmj555', 6)
      ,('fjhdmj555', 7)

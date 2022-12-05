@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="question">
+
+    <select id="list" resultType="com.cafe24.nonchrono.dto.QuestionDTO">
+        select qs_num, mem_id, qs_content, qs_date, qs_category
+        from tb_question
+        where mem_id = 'oejdf9090'
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        from tb_question
+        where mem_id = 'oejdf9090'
+    </select>
+
+</mapper>
