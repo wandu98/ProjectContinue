@@ -7,7 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
 
-<jsp:include page="sellerheader.jsp"></jsp:include>
+<%@ include file="sellerheader.jsp"%>
 
 
 <main id="main" class="main">
@@ -25,7 +25,7 @@
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
 
                 <div class="card">
                     <div class="card-body">

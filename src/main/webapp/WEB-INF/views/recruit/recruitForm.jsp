@@ -27,12 +27,18 @@
 </section>
 <!-- 모집 게시판 배너 끝 -->
 
+<%-- ip 주소 가져오기 --%>
+<% String ip = request.getRemoteAddr(); %>
+
 <!-- 등록 폼 시작 -->
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">
             <h4>모집글 등록</h4>
-            <form action="#">
+            <form action="/recruit/insert">
+                <input type="hidden" id="mem_id" name="mem_id" value="${sessionScope.mem_id}">
+                <input type="hidden" id="gm_code" name="gm_code" value="">
+                <input type="hidden" id="rcrbrd_ip" name="rcrbrd_ip" value="<%=ip%>">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="row">
@@ -84,25 +90,25 @@
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>닉네임<span>*</span></p>
-                                    <input type="text" value="닉네임" readonly>
+                                    <input type="text" value="${nickname}" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>패스워드<span>*</span></p>
-                                    <input type="text" placeholder="password">
+                                    <input type="text" placeholder="password" id="rcrbrd_pw" name="rcrbrd_pw">
                                 </div>
                             </div>
                         </div>
                         <div class="checkout__input">
                             <p>제목<span>*</span></p>
-                            <input type="text">
+                            <input type="text" id="rcrbrd_subject" name="rcrbrd_subject">
                         </div>
                         <div class="checkout__input">
                             <p>내용</p>
-                            <textarea name="description" id="description"></textarea>
+                            <textarea name="rcrbrd_content" id="rcrbrd_content"></textarea>
                             <script type="text/javascript">    // 글쓰기 editor 및 사진 업로드 기능
-                            CKEDITOR.replace('description',
+                            CKEDITOR.replace('rcrbrd_content',
                                 {
                                     width: '100%',
                                     height: '500',
@@ -120,7 +126,7 @@
                             <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
                         </div>
                         <div class="checkout__input" id="address0" style="display: none">
-                            <input type="text" id="address1" readonly>
+                            <input type="text" id="rcrbrd_adr" name="rcrbrd_adr" readonly>
                         </div>
 
                         <div class="checkout__input">
@@ -199,7 +205,7 @@
             $.each(title, function (index, key) {
                 str += "<hr>";
                 str += "<img src='/images/thumb/" + code[index] + "/thumb.jpg' style='width: 10%'>&nbsp;"
-                str += "<span id='title_key' style='cursor: pointer' onclick='panelClick()'>" + key + "</span>";
+                str += "<span id='title_key' style='cursor: pointer' onclick='panelClick(code)'>" + key + "</span>";
                 str += "<hr>";
             }); // each() end
 
@@ -214,13 +220,14 @@
     } // responseProc() end
 
     // 모달창에서 타이틀 제목이 선택되면 본문과 요약 창에도 반영
-    function panelClick() {
+    function panelClick(code) {
         // 타겟의 내부 텍스트 추출
         let title = event.target.innerText;
 
         // 추출한 텍스트를 모달창의 검색창에 입력
         $("#game_search").val(title);
         $("#game_search2").text(title);
+        $("#gm_code").text(code);
 
         $("#gs_modal").modal("hide");
     }
@@ -312,7 +319,6 @@
             $('.site-btn').attr("disabled", true);
         }
     });
-
 
 </script>
 

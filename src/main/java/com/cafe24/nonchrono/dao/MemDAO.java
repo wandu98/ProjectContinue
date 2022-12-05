@@ -15,13 +15,12 @@ public class MemDAO { //Data Access Object
         System.out.println("-----memDAO() 객체 생성됨");
     } // end
     
-    public String idcheck() {
-        return sqlSession.selectOne("login.memid"); //mapper id 'login' 안에 select id 'memid'
-    }//idcheck() end
-
-    public String pwcheck() {
-        return sqlSession.selectOne("login.mempw");
-    }//pwcheck() end
+    public String login(String id, String pw) {
+        MemDTO dto = new MemDTO();
+        dto.setMem_id(id);
+        dto.setMem_pw(pw);
+        return sqlSession.selectOne("login.login", dto);
+    }
 
     public MemDTO modify_list() {
         return sqlSession.selectOne("memmodify.list");
