@@ -32,13 +32,18 @@ public class MemController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)//정보를 가지고 로그인폼
     public ModelAndView loginProc(@ModelAttribute MemDTO dto, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
         String id=dto.getMem_id();
+        System.out.println(id);
         String pw=dto.getMem_pw();
+        System.out.println(pw);
         ModelAndView mav = new ModelAndView();
+        String grade = memDAO.login(id, pw);
 
-        if(id.equals(memDAO.idcheck()) && pw.equals(memDAO.pwcheck())) {//디비랑 비교(equals)
+        if(grade != null) {
             mav.setViewName("redirect:/");
             session.setAttribute("mem_id", id);//세션에 값 저장. "" 내용에 id를 저장
             session.setAttribute("mem_pw", pw);
+            System.out.println("세션에 저장된 아이디 : " + session.getAttribute("mem_id"));
+            System.out.println("세션에 저장된 비밀번호 : " + session.getAttribute("mem_pw"));
         } else {
             mav.setViewName("/mem/loginalert");
             req.setAttribute("msg","아이디와 비번이 일치하지 않습니다");

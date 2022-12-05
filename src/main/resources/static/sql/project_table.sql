@@ -1,5 +1,6 @@
 -- 구천우
-select * from tb_game;
+select *
+from tb_game;
 
 
 -- 상품 테이블
@@ -37,21 +38,20 @@ create table tb_sales
 );
 
 
-
 -- 게임기 / 게임 타이틀
 create table tb_game
 (
-    gm_code     varchar(100) primary key            -- 품목 코드
+    gm_code     varchar(100) primary key        -- 품목 코드
     ,
-    gm_name     varchar(255) not null               -- 품목명
+    gm_name     varchar(255) not null           -- 품목명
     ,
-    gm_price    int          not null default 0     -- 가격
+    gm_price    int          not null default 0 -- 가격
     ,
-    gm_level    varchar(100) not null               -- 이용 등급
+    gm_level    varchar(100) not null           -- 이용 등급
     ,
-    gm_category varchar(100) not null               -- 카테고리
+    gm_category varchar(100) not null           -- 카테고리
     ,
-    gm_img      varchar(255) not null               -- 이미지
+    gm_img      varchar(255) not null           -- 이미지
 );
 
 
@@ -169,7 +169,7 @@ CREATE table tb_er
 
 -- 쿠폰
 create table tb_coupon
-( 
+(
     cp_code    varchar(100) default 'A0000' not null PRIMARY KEY,
     cp_name    varchar(50)                  not null,
     cp_speriod datetime     default now()   not null,
@@ -180,7 +180,7 @@ create table tb_coupon
 
 -- 쿠폰리스트
 create table tb_couponlist
-( 
+(
     cl_num  int not null AUTO_INCREMENT PRIMARY KEY,
     cp_code varchar(100),
     mem_id  varchar(20),
@@ -255,39 +255,39 @@ CREATE TABLE tb_delivery
 -- 회원
 CREATE TABLE tb_mem
 (
-    mem_id       varchar(20)  NOT NULL PRIMARY KEY -- 회원ID
+    mem_id       varchar(20)  NOT NULL PRIMARY KEY                  -- 회원ID
     ,
-    mem_pw       varchar(20)  NOT NULL             -- 회원PW
+    mem_pw       varchar(20)  NOT NULL                              -- 회원PW
     ,
-    mem_nick     varchar(20)  NOT NULL             -- 닉네임
+    mem_nick     varchar(20)  NOT NULL                              -- 닉네임
     ,
-    mem_name     varchar(20)  NOT NULL             -- 이름
+    mem_name     varchar(20)  NOT NULL                              -- 이름
     ,
-    mem_zip      varchar(6)   NOT NULL             -- 우편번호
+    mem_zip      varchar(6)   NOT NULL                              -- 우편번호
     ,
-    mem_adr1     varchar(255) NOT NULL             -- 주소1
+    mem_adr1     varchar(255) NOT NULL                              -- 주소1
     ,
-    mem_adr2     varchar(255) NOT NULL             -- 주소2
+    mem_adr2     varchar(255) NOT NULL                              -- 주소2
     ,
-    mem_phone    varchar(20)  NOT NULL             -- 연락처
+    mem_phone    varchar(20)  NOT NULL                              -- 연락처
     ,
-    mem_birth    date         NOT NULL             -- 생년월일
+    mem_birth    date         NOT NULL                              -- 생년월일
     ,
-    mem_grade    varchar(20)  NOT NULL             -- 회원등급
+    mem_grade    varchar(20)  NOT NULL                              -- 회원등급
     ,
-    upoint       int          NOT NULL             -- 가용적립금
+    upoint       int          NOT NULL                              -- 가용적립금
     ,
-    apoint       int          NOT NULL             -- 누적적립금
+    apoint       int          NOT NULL                              -- 누적적립금
     ,
-    mem_receive  char(1)      NOT NULL             -- 수신여부
+    mem_receive  char(1)      NOT NULL                              -- 수신여부
     ,
-    good         int          NOT NULL default 0   -- 좋아요
+    good         int          NOT NULL default 0                    -- 좋아요
     ,
-    buyer_bad    int          NOT NULL default 0   -- 누적신고횟수
+    buyer_bad    int          NOT NULL default 0                    -- 누적신고횟수
     ,
-    mem_pic    varchar(255)   NOT NULL default 'ProfilePicture.png'                  -- 프로필사진
+    mem_pic      varchar(255) NOT NULL default 'ProfilePicture.png' -- 프로필사진
     ,
-    mem_joindate date       NOT NULL  default now()     -- 가입일
+    mem_joindate date         NOT NULL default now()                -- 가입일
 );
 
 
@@ -317,14 +317,13 @@ CREATE TABLE tb_memdv
 -- 위시리스트
 CREATE TABLE tb_wish
 (
-    ws_num  int          NOT NULL AUTO_INCREMENT PRIMARY KEY -- 위시리스트 번호
+    ws_num int         NOT NULL AUTO_INCREMENT PRIMARY KEY -- 위시리스트 번호
     ,
-    mem_id  varchar(20)  NOT NULL                            -- 회원ID
+    mem_id varchar(20) NOT NULL                            -- 회원ID
     ,
-    ss_num int           NOT NULL                            -- 품목코드
+    ss_num int         NOT NULL                            -- 품목코드
     ,
-    FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)
-    ,
+    FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id),
     FOREIGN KEY (ss_num) REFERENCES tb_sales (ss_num)
 );
 
@@ -359,13 +358,13 @@ CREATE TABLE tb_nt
 -- 모집정보
 create table tb_recruit
 (
-    rcrtm_num  INT AUTO_INCREMENT primary key                    -- 모집일련번호
+    rcrtm_num   INT AUTO_INCREMENT primary key                   -- 모집일련번호
     ,
-    mem_id     varchar(20) not null                              -- 회원ID
+    mem_id      varchar(20) not null                             -- 회원ID
     ,
-    rcrbrd_num int         not null                              -- 게시판 글번호
+    rcrbrd_num  int         not null                             -- 게시판 글번호
     ,
-    rcrtm_cnfrm char(1)    not null
+    rcrtm_cnfrm char(1)     not null                             -- 모집확정여부
     ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)              -- 회원ID
     ,
@@ -378,29 +377,29 @@ create table tb_rcrboard
 (
     rcrbrd_num     INT AUTO_INCREMENT primary key      -- 게시판 글번호
     ,
-    mem_id         varchar(20)            not null     -- 회원ID
+    mem_id         varchar(20)               not null  -- 회원ID
     ,
-    rcrbrd_subject varchar(255)           not null     -- 글제목
+    rcrbrd_subject varchar(255)              not null  -- 글제목
     ,
-    rcrbrd_content text(5000)             not null     -- 글내용
+    rcrbrd_content text(5000)                not null  -- 글내용
     ,
-    rcrbrd_pw      varchar(20)            not null     -- 게시판PW
+    rcrbrd_pw      varchar(20)               not null  -- 게시판PW
     ,
-    rcrbrd_views   int                    not null     -- 조회수
+    rcrbrd_views   int         default 0     not null  -- 조회수
     ,
-    rcrbrd_date    datetime default now() not null     -- 등록일
+    rcrbrd_date    datetime    default now() not null  -- 등록일
     ,
-    rcrbrd_ip      varchar(50)            not null     -- IP
+    rcrbrd_ip      varchar(50)               not null  -- IP
     ,
-    gm_code        varchar(100)           not null     -- 품목코드
+    gm_code        varchar(100)              not null  -- 품목코드
     ,
-    rcrbrd_status  varchar(20)            not null     -- 모집 진행상태
+    rcrbrd_status  varchar(20) default '진행중' not null  -- 모집 진행상태
     ,
-    rcrbrd_edate   datetime default now() not null     -- 모집 마감일
+    rcrbrd_edate   datetime    default now() not null  -- 모집 마감일
     ,
-    rcrbrd_max     int                    not null     -- 모집 최대인원
+    rcrbrd_max     int                       not null  -- 모집 최대인원
     ,
-    rcrbrd_region  varchar(255)           not null     -- 모집 장소
+    rcrbrd_adr     varchar(255)              not null  -- 모집 장소
     ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)    -- 회원ID
     ,
