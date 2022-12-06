@@ -358,13 +358,13 @@ CREATE TABLE tb_nt
 -- 모집정보
 create table tb_recruit
 (
-    rcrtm_num   INT AUTO_INCREMENT primary key                   -- 모집일련번호
+    rcrtm_num  INT AUTO_INCREMENT primary key                    -- 모집일련번호
     ,
-    mem_id      varchar(20) not null                             -- 회원ID
+    mem_id     varchar(20) not null                              -- 회원ID
     ,
-    rcrbrd_num  int         not null                             -- 게시판 글번호
+    rcrbrd_num int         not null                              -- 게시판 글번호
     ,
-    rcrtm_cnfrm char(1)     not null                             -- 모집확정여부
+    rcrtm_seat int         not null                              -- 좌석번호
     ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)              -- 회원ID
     ,
