@@ -178,14 +178,26 @@
                         <br>
                         <br>
                         <br>
+                        <div id="rcrbrd_content" name="rcrbrd_content" style="min-height: 300px">
+                            ${detail.rcrbrd_content}
+                        </div>
+                        <hr>
                     </div>
-                    <c:forEach var="row" begin="1" end="8" step="1">
+                    <c:forEach var="row" begin="1" end="${detail.rcrbrd_max}" step="1" varStatus="vs">
                         <div class="col-lg-3 col-md-4 col-sm-4">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="/images/profilePicture.png">
+                                <div id="recruitmember/${vs.count}" class="product__item__pic set-bg" data-setbg="/images/profilePicture.png">
+                                    <input type="hidden" id="recruitseat" name="recruitseat" value="${vs.count}">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#">신고</a></li>
+                                        <c:choose>
+                                            <c:when test="${1 == 1}">
+                                                <li><a href="#">참가</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#">신고</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">

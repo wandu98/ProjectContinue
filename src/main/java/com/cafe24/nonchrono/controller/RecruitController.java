@@ -256,11 +256,9 @@ public class RecruitController {
     
     // 모집 정보 작성
     @RequestMapping("/insert")
-    public ModelAndView recruitInsert(@ModelAttribute RecruitDTO recruitDTO) {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("insert", recruitDAO.insert(recruitDTO));
-        mav.setViewName("/recruit/recruitInsert");
-        return mav;
+    public String recruitInsert(@ModelAttribute RecruitDTO recruitDTO) {
+        recruitDAO.insert(recruitDTO);
+        return "redirect:/recruit";
     } // recruitWrite() end
     
     // 삭제 후 이메일 발송

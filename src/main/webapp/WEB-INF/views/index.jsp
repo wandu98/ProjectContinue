@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
+<%@ include file="auth.jsp" %>
 <html lang="ko">
 
 <head>
