@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ include file="../header.jsp" %>
 
 <!-- 모집 게시판 배너 시작 -->
@@ -37,7 +38,6 @@
             <form action="/recruit/insert">
                 <input type="hidden" id="mem_id" name="mem_id" value="${sessionScope.mem_id}">
                 <input type="hidden" id="rcrbrd_ip" name="rcrbrd_ip" value="<%=ip%>">
-                <input type="hidden" id="gm_code" name="gm_code" value="">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="row">
@@ -162,7 +162,6 @@
 
 <script>
 
-
 /* 클릭하면 모달창 보이기 */
     $(document).ready(function () {
         $("#game_search").click(function () {
@@ -202,12 +201,9 @@
 
             let str = ""; // 검색 결과를 저장할 변수
             $.each(title, function (index, key) {
-                let codenum = code[index];
-                //alert(codenum);
-
                 str += "<hr>";
-                str += "<img src='/images/thumb/" + codenum + "/thumb.jpg' style='width: 10%'>&nbsp;"
-                str += "<span id='title_key' style='cursor: pointer' onclick='panelClick(\"" + codenum + "\")'>" + key + "</span>";
+                str += "<img src='/images/thumb/" + code[index] + "/thumb.jpg' style='width: 10%'>&nbsp;"
+                str += "<span id='title_key' style='cursor: pointer' onclick='panelClick("+code[index]+")'>" + key + "</span>";
                 str += "<hr>";
             }); // each() end
 
@@ -222,16 +218,17 @@
     } // responseProc() end
 
     // 모달창에서 타이틀 제목이 선택되면 본문과 요약 창에도 반영
-    function panelClick(codenum) {
+    function panelClick(x) {
         // 타겟의 내부 텍스트 추출
         let title = event.target.innerText;
 
         // 추출한 텍스트를 모달창의 검색창에 입력
         $("#game_search").val(title);
         $("#game_search2").text(title);
-        $("#gm_code").val(codenum);
-        $("#gs_modal").modal("hide");
+        alert(x);
+        $("#gm_code").text(x);
 
+        $("#gs_modal").modal("hide");
     }
 
     // 최대 인원 수를 변경하면 요약 창에도 반영

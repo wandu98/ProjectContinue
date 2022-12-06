@@ -15,6 +15,7 @@ public class SalesController {
     @Autowired
     SalesDAO salesDAO;
 
+    //상품 메인
     @RequestMapping("/sales")
     public ModelAndView sales() {
         ModelAndView mav = new ModelAndView();
@@ -22,6 +23,7 @@ public class SalesController {
         return mav;
     } // sales() end
 
+    //상품 상세
     @RequestMapping("/detail")
     public ModelAndView detail() {
         ModelAndView mav = new ModelAndView();

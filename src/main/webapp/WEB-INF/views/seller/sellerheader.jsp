@@ -1,19 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: wandu
-  Date: 2022/12/02
-  Time: 11:01 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="../auth.jsp" %>
+
 
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="robots" content="noindex">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Continue? Seller_page</title>
     <meta content="" name="description">
@@ -38,6 +38,9 @@
 
     <!-- Template Main CSS File -->
     <link href="/admin_assets/css/style.css" rel="stylesheet">
+    <script src="/js/memmodify.js"></script>
+    <script src="/js/jquery-3.6.1.min.js"></script>
+
 </head>
 
 <body>
@@ -155,7 +158,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="/images/thumb-1.jpg" class="rounded-circle">
+                    <img src="/images/001.jpg" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">회원ID</span>
                 </a><!-- End Profile Iamge Icon -->
 
