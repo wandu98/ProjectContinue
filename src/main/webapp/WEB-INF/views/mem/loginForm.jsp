@@ -1,25 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ include file="auth.jsp"%>
 <%@ include file="../header.jsp"%>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-<!-- Css Styles -->
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="css/style.css" type="text/css">
-
-
-
-
-
-
 <!--본문시작 loginForm.jsp-->
-<%if(mem_id.equals("guest") || mem_pw.equals("guest") || mem_grade.equals("guest")) {
+<%--<%if(mem_id.equals("guest") || mem_pw.equals("guest") || mem_grade.equals("guest")) {
     //아이디저장 쿠키 확인----------------------------------
     Cookie[] cookies=request.getCookies(); //사용자 PC에 저장된 모든 쿠키값 가져오기
     String c_id="";
@@ -32,7 +15,7 @@
         }//for end
     }//if end
     //--------------------------------------------------
-%>
+%>--%>
 
 <div class="container">
     <h4>로그인</h4>
@@ -42,7 +25,8 @@
             <div class="col-lg-4 col-md-4">
                 <div class="checkout__input">
                     <p>아이디</p>
-                    <input type="text" id="mem_id" value="<%=c_id%>" name="mem_id">
+                    <%--<input type="text" id="mem_id" value="<%=c_id%>" name="mem_id">--%>
+                    <input type="text" id="mem_id" value="" name="mem_id">
                 </div>
                 <div class="checkout__input">
                     <p>비밀번호</p>
@@ -50,7 +34,7 @@
                 </div>
             </div>
             <div class="checkout__input__checkbox">
-                <input type="checkbox" name="c_id" value="SAVE" <%if(!c_id.isEmpty()){out.print("checked");}%>>
+               <%-- <input type="checkbox" name="c_id" value="SAVE" <%if(!c_id.isEmpty()){out.print("checked");}%>>--%>
                 로그인유지
                 <span class="checkmark"></span>
             </div>
@@ -65,4 +49,4 @@
     </form>
 </div>
 
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+<%@ include file="../footer.jsp"%>
