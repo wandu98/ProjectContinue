@@ -5,9 +5,9 @@
   Time: 1:02 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="sellerheader.jsp"></jsp:include>
+<%@include file="sellerheader.jsp" %>
 
 
 <main id="main" class="main">
@@ -36,91 +36,126 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">카테고리</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>--------------</option>
-                                        <option value="1">본체</option>
-                                        <option value="2">타이틀(패키지)</option>
-                                        <option value="3">타이틀(다운로드)</option>
-                                        <option value="4">다운로드 추가 컨텐츠</option>
-                                        <option value="5">온라인 이용권</option>
-                                        <option value="6">선불 번호</option>
-                                        <option value="7">무료 컨텐츠</option>
-                                        <option value="8">프로컨트롤러</option>
-                                        <option value="9">조이콘</option>
-                                        <option value="10">주변 기기</option>
-
-                                    </select>
+                                    <input type="text" class="form-control" data-bs-toggle="modal"
+                                           data-bs-target="#scrollingModal" readonly placeholder="Search...">
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="inputText" class="col-sm-2 col-form-label">제목</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">가격</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control">
-                                </div>
-                            </div>
+                            <%-- 모달창 헤더--%>
+                            <div class="modal fade" id="scrollingModal" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">카테고리 찾기</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
 
-                            <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-2 col-form-label">판매기간 해당날짜로 only read</label>
-                                <div class="col-sm-10">
-                                    <input type="date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-2 col-form-label">판매종료</label>
-                                <div class="col-sm-10">
-                                    <input type="date" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">상품내용</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" style="height: 100px"></textarea>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="row mb-3">
-                                    <label for="inputEmail" class="col-sm-2 col-form-label">수량</label>
-                                    <div class="col-sm-10">
-                                        <input type="email" class="form-control">
+                                        <%--모달창 본문--%>
+                                        <div class="card">
+                                            <div class="card-body" style="box-sizing: initial">
+                                                <h5 class="card-title">단어를 입력해주세요</h5>
+                                            </div>
+                                            <div class="modal-body" id="gs_main">
+                                                <input type="text" placeholder="Search..."
+                                                       id="gs_keyword"
+                                                       name="gs_keyword"
+                                                       style="width: 100%;
+                                                              border-radius: 10px;
+                                                              border-style: solid">
+                                                <div id="panel" style="display: none"></div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
 
+                        </form><!-- End floating Labels Form -->
+
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-2 col-form-label">상품명</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-2 col-form-label">가격</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-2 col-form-label">판매시작</label>
+                            <div class="col-sm-10">
+                                <input type="Date" class="form-control" id="currentDate" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputDate" class="col-sm-2 col-form-label">판매종료</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-2 col-form-label">상품내용</label>
+                            <div class="col-sm-10">
+                                <!-- Quill Editor Full -->
+                                <div class="quill-editor-full" style="min-height: 400px"></div>
+                                <!-- End Quill Editor Full -->
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-3" style="margin-top: 80px; margin-right: -35px">
                             <div class="row mb-3">
-                                <label for="inputNumber" class="col-sm-2 col-form-label">사진 업로드</label>
+                                <label for="inputEmail" class="col-sm-2 col-form-label">수량</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="file" id="image" accept="image/*" onchange="setThumbnail(event);" multiple/>
-                                    <br>
-                                    <input class="form-control" type="reset" style="width: 10%">
-                                    <br>
-                                    <div id="image_container"></div>
-                                    <script>
-                                        function setThumbnail(event) {
-                                            for (var image of event.target.files) {
-                                                var reader = new FileReader();
-
-                                                reader.onload = function(event) {
-                                                    var img = document.createElement("img");
-                                                    img.setAttribute("src", event.target.result);
-                                                    document.querySelector("div#image_container").appendChild(img);
-                                                };
-
-                                                console.log(image);
-                                                reader.readAsDataURL(image);
-                                            }
-                                        }
-                                    </script>
+                                    <input type="email" class="form-control">
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="inputNumber" class="col-sm-2 col-form-label">썸네일 사진 업로드</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="file" id="image" accept="image/*"
+                                       onchange="setThumbnail(event);" multiple/>
+                                <br>
 
 
+                                <br>
+                                <div id="image_container"></div>
+                                <script>
+                                    function setThumbnail(event) {
+                                        for (var image of event.target.files) {
+                                            var reader = new FileReader();
+
+                                            reader.onload = function (event) {
+                                                var img = document.createElement("img");
+                                                img.setAttribute("src", event.target.result);
+                                                document.querySelector("div#image_container").appendChild(img);
+                                            };
+
+                                            console.log(image);
+                                            reader.readAsDataURL(image);
+                                        }
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-outline-primary">확인</button>
+                            <button type="submit" class="btn btn-outline-danger">초기화</button>
+                        </div>
 
                         </form><!-- End General Form Elements -->
 
@@ -131,6 +166,58 @@
         </div>
     </section>
 
-</main><!-- End #main -->
+</main>
+<!-- End #main -->
 
-<jsp:include page="sellerfooter.jsp"></jsp:include>
+
+<script>
+    <%--현재 날짜 가져오기--%>
+    document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);
+
+    $("#gs_keyword").keyup(function () {
+
+        // 검색어가 존재하지 않으면 출력결과 숨기기
+        if ($("#gs_keyword").val() == "") {
+            $("#panel").hide();
+        } // if end
+
+        // 모달창의 검색창에 검색어 추출
+        let params = $("#gs_keyword").serialize();
+
+        // ajax로 searchProc 실행
+        $.post("searchProc", params, responseProc);
+    }); // keyup() end
+
+    function responseProc(data) {
+        // alert(data)
+
+        if (data.length > 0) {
+            let result = data.split("|"); // | 기호를 기준으로 문자열 분리
+            // alert(result[0]); // 검색 결과 수
+            // alert(result[1]); // 검색 결과 내용
+
+            let title = result[1].split(","); // , 기호를 기준으로 문자열 분리
+            let code = result[2].split(",");
+
+            console.log(code);
+
+            let str = ""; // 검색 결과를 저장할 변수
+            $.each(title, function (index, key) {
+                str += "<hr>";
+                str += "<img src='/images/thumb/" + code[index] + "/thumb.jpg' style='width: 10%'>&nbsp;"
+                str += "<span id='title_key' style='cursor: pointer' onclick='panelClick(" + code[index] + ")'>" + key + "</span>";
+                str += "<hr>";
+            }); // each() end
+
+            $("#panel").html(str);
+            $("#panel").show();
+
+        } else {
+            $("#panel").hide();
+        } // if end
+    }//responseProc() end
+
+</script>
+
+
+<%@ include file="sellerfooter.jsp" %>
