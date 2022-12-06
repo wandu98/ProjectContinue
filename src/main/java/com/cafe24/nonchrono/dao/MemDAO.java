@@ -28,6 +28,8 @@ public class MemDAO { //Data Access Object
         return sqlSession.selectOne("login.login", dto);
     }
 
+
+
     public MemDTO modify_list() {
         return sqlSession.selectOne("memmodify.list");
     }
@@ -40,9 +42,8 @@ public class MemDAO { //Data Access Object
         return sqlSession.selectOne("mypage.list");
     }//list() end
 
-    public int meminsert(MemDTO memDTO) {
-        int cnt = sqlSession.insert("login.insert", memDTO);
-        return cnt;
-    }//meminsert() end
+    public int memInsert(MemDTO memDTO) {
+        return sqlSession.insert("login.insert", memDTO);
+    } //memInsert() end
 
 }//end
