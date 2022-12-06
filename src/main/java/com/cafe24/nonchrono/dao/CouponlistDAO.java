@@ -1,23 +1,19 @@
 package com.cafe24.nonchrono.dao;
 
-import com.cafe24.nonchrono.dto.ReviewDTO;
+import com.cafe24.nonchrono.dto.CouponDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public class ReviewDAO {
+public class CouponlistDAO {
 
     @Autowired
     SqlSession sqlSession;
 
-    public ReviewDTO list() {
-        return sqlSession.selectOne("review.list");
+    public List<CouponDTO> list(String mem_id) {
+        return sqlSession.selectList("couponlist.list", mem_id);
     }
-
-    public int count(String mem_id) {
-        return sqlSession.selectOne("review.count", mem_id);
-    }
-
-
 }

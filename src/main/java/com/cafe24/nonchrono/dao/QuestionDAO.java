@@ -15,7 +15,7 @@ public class QuestionDAO {
         return sqlSession.selectOne("question.list");
     }
 
-    public int count() {
-        return sqlSession.selectOne("question.count");
+    public int count(String mem_id) {
+        return sqlSession.selectOne("question.count", mem_id);
     }
 }

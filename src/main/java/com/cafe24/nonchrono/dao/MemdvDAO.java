@@ -17,12 +17,20 @@ public class MemdvDAO {
     @Autowired
     SqlSession sqlSession;
 
-    public List<MemdvDTO> list() {
-        return sqlSession.selectList("memdv.list");
+    public List<MemdvDTO> list(String mem_id) {
+        return sqlSession.selectList("memdv.list", mem_id);
     }
 
     public void insert(MemdvDTO memdvDTO) {
         sqlSession.insert("memdv.insert", memdvDTO);
+    }
+
+    public MemdvDTO listDetail(int mem_dvnum) {
+        return sqlSession.selectOne("memdv.listDetail", mem_dvnum);
+    }
+
+    public void update(MemdvDTO memdvDTO) {
+        sqlSession.update("memdv.update", memdvDTO);
     }
 
 }

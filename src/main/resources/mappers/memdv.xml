@@ -4,14 +4,26 @@
 <mapper namespace="memdv">
 
     <select id="list" resultType="com.cafe24.nonchrono.dto.MemdvDTO">
-        select mem_dvinfo, mem_dvadr1, mem_dvadr2, mem_dvphone, mem_dvnick
+        select mem_dvnum, mem_id, mem_dvinfo, mem_dvzip, mem_dvadr1, mem_dvadr2, mem_dvphone, mem_dvnick
         from tb_memdv
-        where mem_id = 'fjhdmj555'
+        where mem_id = #{mem_id}
     </select>
 
     <insert id="insert">
         insert into tb_memdv(mem_id, mem_dvinfo, mem_dvzip, mem_dvadr1, mem_dvadr2, mem_dvphone, mem_dvnick)
         values (#{mem_id}, #{mem_dvinfo}, #{mem_dvzip}, #{mem_dvadr1}, #{mem_dvadr2}, #{mem_dvphone}, #{mem_dvnick})
     </insert>
+
+    <select id="listDetail" resultType="com.cafe24.nonchrono.dto.MemdvDTO">
+        select mem_dvnum, mem_id, mem_dvinfo, mem_dvzip, mem_dvadr1, mem_dvadr2, mem_dvphone, mem_dvnick
+        from tb_memdv
+        where mem_dvnum = #{mem_dvnum}
+    </select>
+
+    <update id="update" parameterType="com.cafe24.nonchrono.dto.MemdvDTO">
+        update tb_memdv
+        set mem_dvinfo = #{mem_dvinfo}, mem_dvadr1 = #{mem_dvadr1}, mem_dvadr2 = #{mem_dvadr2}, mem_dvphone = #{mem_dvphone}, mem_dvnick = #{mem_dvnick}
+        where mem_dvnum = #{mem_dvnum}
+    </update>
 
 </mapper>

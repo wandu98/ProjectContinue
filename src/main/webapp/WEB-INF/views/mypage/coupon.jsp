@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -19,91 +20,33 @@
                         <thead>
                         <tr>
                             <th class="shoping__product">쿠폰명</th>
-                            <th>쿠폰명</th>
+                            <th colspan="2">사용기간</th>
                             <th>할인율</th>
-                            <th>사용기간</th>
                             <th></th>
                         </tr>
+
                         </thead>
                         <tbody>
+                        <c:forEach var="row" items="${couponlist}" varStatus="vs">
                         <tr>
                             <td class="shoping__cart__item">
                                 <img src="img/cart/cart-1.jpg" alt="">
-                                <h5>회원가입 축하 쿠폰</h5>
+                                <h5>${row.cp_name}</h5>
                             </td>
-                            <td class="shoping__cart__price">
-                                $55.00
-                            </td>
-                            <td class="shoping__cart__quantity">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
+                            <td colspan="2" class="shoping__cart__price">
+                                ${row.cp_speriod} ~ ${row.cp_eperiod}
                             </td>
                             <td class="shoping__cart__total">
-                                $110.00
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
+                                ${row.cp_percent}%
                             </td>
                         </tr>
-                        <tr>
-                            <td class="shoping__cart__item">
-                                <img src="img/cart/cart-2.jpg" alt="">
-                                <h5>생일 쿠폰</h5>
-                            </td>
-                            <td class="shoping__cart__price">
-                                $39.00
-                            </td>
-                            <td class="shoping__cart__quantity">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="shoping__cart__total">
-                                $39.99
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="shoping__cart__item">
-                                <img src="img/cart/cart-3.jpg" alt="">
-                                <h5>첫 결제 이벤트 쿠폰</h5>
-                            </td>
-                            <td class="shoping__cart__price">
-                                $69.00
-                            </td>
-                            <td class="shoping__cart__quantity">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="shoping__cart__total">
-                                $69.99
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
-                            </td>
-                        </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="product__pagination blog__pagination wishlist__pagination">
-            <a href="#"><i class="fa fa-long-arrow-left"></i></a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-        </div>
+
 
 
         <br><br><br><br><hr><br><br><br><br>

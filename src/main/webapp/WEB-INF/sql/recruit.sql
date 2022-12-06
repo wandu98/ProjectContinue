@@ -51,3 +51,61 @@ group by mem_id
 having mem_id = (select mem_id
                  from tb_rcrboard
                  where rcrbrd_num = 5);
+
+
+select *
+from tb_rcrboard
+where mem_id = 'fjhdmj555';
+
+
+select ga.gm_img, rb.rcrbrd_subject, rb.rcrbrd_num, ri.rcrbrd_num, nvl(ri.rcrbrd_num, 0), count(ri.rcrbrd_num)
+from tb_rcrboard rb left join tb_recruitinfo ri
+on rb.rcrbrd_num = ri.rcrbrd_num join tb_game ga
+on rb.gm_code = ga.gm_code
+where rb.mem_id = 'fjhdmj555'
+group by rb.rcrbrd_num;
+
+
+
+
+
+select ga.gm_img, rb.rcrbrd_subject, ga.gm_name, count(ri.rcrbrd_num) as cnt, rb.rcrbrd_edate
+from tb_rcrboard rb left join tb_recruitinfo ri
+                              on rb.rcrbrd_num = ri.rcrbrd_num join tb_game ga
+                                                                    on rb.gm_code = ga.gm_code
+where rb.mem_id = 'fjhdmj555'
+group by rb.rcrbrd_num;
+
+
+
+
+
+
+
+
+select rcrbrd_subject, rcrbrd_edate, gm_code
+from tb_rcrboard
+where mem_id = 'fjhdmj555';
+
+from tb_game
+where
+
+
+select rb.rcrbrd_num, rb.gm_code, gm_name, gm_img
+from tb_rcrboard rb join tb_game ga
+on rb.gm_code = ga.gm_code
+where mem_id = 'fjhdmj555';
+
+select rcrbrd_subject, rcrbrd_num, rcrbrd_edate
+from tb_rcrboard
+where mem_id = 'fjhdmj555';
+
+
+select count(ri.rcrbrd_num) as cnt
+from tb_rcrboard rb left join tb_recruitinfo ri
+on rb.rcrbrd_num = ri.rcrbrd_num
+where rb.mem_id = 'fjhdmj555'
+group by rb.rcrbrd_num;
+
+
+

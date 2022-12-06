@@ -7,8 +7,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class PagingDTO {
-    private int startRow;
-    private int endRow;
+public class CouponlistDTO {
+
+    private int cl_num;
+    private String cp_code;
     private String mem_id;
+
 }

@@ -28,16 +28,16 @@ public class MemDAO { //Data Access Object
         return sqlSession.selectOne("login.login", dto);
     }
 
-    public MemDTO modify_list() {
-        return sqlSession.selectOne("memmodify.list");
+    public MemDTO modify_list(String mem_id) {
+        return sqlSession.selectOne("memmodify.list", mem_id);
     }
 
     public void modify_update(MemDTO memDTO) {
         sqlSession.update("memmodify.update", memDTO);
     }
 
-    public MemDTO myList() {
-        return sqlSession.selectOne("mypage.list");
+    public MemDTO myList(String mem_id) {
+        return sqlSession.selectOne("mypage.list", mem_id);
     }//list() end
 
     public int meminsert(MemDTO memDTO) {

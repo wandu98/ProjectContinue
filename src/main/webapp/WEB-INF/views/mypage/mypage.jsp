@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../header.jsp"></jsp:include>
+
 
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
@@ -11,7 +13,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
                             <div class="col-lg-4">
-                                <img src="/images/profile/ProfilePicture.png">
+                                <img src="/images/profile/${meminfo.mem_pic}">
                             </div>
                             <div class="col-lg-8">
                                 <table style="width: 100%; height: 100%">
@@ -33,7 +35,7 @@
                                     </tr>
                                     <tr>
                                         <td>구매평 수</td>
-                                        <td>2</td>
+                                        <td>${revlist}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -136,60 +138,26 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                <c:forEach var="row" items="${recruitlist}" varStatus="vs">
                                                 <tr>
                                                     <td class="shoping__cart__item">
                                                         <img src="/images/001.jpg" alt="">
-                                                        <h5>동숲 같이 하실분</h5>
+                                                        <h5>${rcrlist[vs.index].rcrbrd_subject}</h5>
                                                     </td>
                                                     <td class="shoping__cart__price">
-                                                        모여봐요 동물의 숲
+                                                        ${row.gm_name}
                                                     </td>
                                                     <td class="shoping__cart__quantity">
-                                                        <h5>3</h5>
+                                                        <h5>${rcrcount[vs.index]}</h5>
                                                     </td>
                                                     <td class="shoping__cart__total">
-                                                        2022.12.13
+                                                        ${rcrlist[vs.index].rcrbrd_edate}
                                                     </td>
                                                     <td class="shoping__cart__item__close">
                                                         <span class="icon_close"></span>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="shoping__cart__item">
-                                                        <img src="/images/002.jpg" alt="">
-                                                        <h5>스플래툰3 하실 분</h5>
-                                                    </td>
-                                                    <td class="shoping__cart__price">
-                                                        스플래툰3
-                                                    </td>
-                                                    <td class="shoping__cart__quantity">
-                                                        <h5>4</h5>
-                                                    </td>
-                                                    <td class="shoping__cart__total">
-                                                        2022.12.31
-                                                    </td>
-                                                    <td class="shoping__cart__item__close">
-                                                        <span class="icon_close"></span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="shoping__cart__item">
-                                                        <img src="/images/003.jpg" alt="">
-                                                        <h5>피파하자</h5>
-                                                    </td>
-                                                    <td class="shoping__cart__price">
-                                                        EA SPORTS™《FIFA 23》Nintendo Switch™ Legacy Edition
-                                                    </td>
-                                                    <td class="shoping__cart__quantity">
-                                                        <h5>1</h5>
-                                                    </td>
-                                                    <td class="shoping__cart__total">
-                                                        2022.12.09
-                                                    </td>
-                                                    <td class="shoping__cart__item__close">
-                                                        <span class="icon_close"></span>
-                                                    </td>
-                                                </tr>
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>

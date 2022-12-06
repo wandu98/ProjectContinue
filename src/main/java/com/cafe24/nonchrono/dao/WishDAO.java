@@ -22,18 +22,18 @@ public class WishDAO {
         return sqlSession.selectList("wishlist.list", pagingDTO);
     }
 
-    public void allRemove() {
-        sqlSession.delete("wishlist.allRemove");
+    public void allRemove(String mem_id) {
+        sqlSession.delete("wishlist.allRemove", mem_id);
     }
 
     public void delete(int ws_num) {
         sqlSession.delete("wishlist.delete", ws_num);
     }
 
-    public int totalRowCount() {
+    public int totalRowCount(String mem_id) {
         int cnt = 0;
         try {
-            cnt = sqlSession.selectOne("wishlist.totalRowCount");
+            cnt = sqlSession.selectOne("wishlist.totalRowCount", mem_id);
         } catch (Exception e) {
             System.out.println("전체 행 갯수 : " + e);
         }//end

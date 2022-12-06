@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/wishlist")
 public class WishlistController {
@@ -20,8 +22,9 @@ public class WishlistController {
     WishDAO wishDAO;
 
     @RequestMapping("/allRemove")
-    public String allRemove() {
-        wishDAO.allRemove();
+    public String allRemove(HttpSession session) {
+        String mem_id = (String) session.getAttribute("mem_id");
+        wishDAO.allRemove(mem_id);
         return "redirect:/mypage/wishlist";
     }
 

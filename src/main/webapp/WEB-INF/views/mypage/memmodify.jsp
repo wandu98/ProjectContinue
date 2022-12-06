@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="checkout__input">
-                        <p>생년월일<span>*</span> (-없이 숫자만 입력하세요)</p>
+                        <p>생년월일<span>*</span></p>
                         <input type="date" value="${mem.mem_birth}" id="mem_birth" name="mem_birth">
                     </div>
                 </div>
