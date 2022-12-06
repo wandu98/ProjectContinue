@@ -2,6 +2,7 @@ package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
+import com.cafe24.nonchrono.dto.RecruitInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
@@ -260,7 +261,14 @@ public class RecruitController {
         recruitDAO.insert(recruitDTO);
         return "redirect:/recruit";
     } // recruitWrite() end
-    
+
+    // 모집 좌석 예약
+    @RequestMapping("/attend")
+    public String attend(@ModelAttribute RecruitInfoDTO recruitInfoDTO) {
+        recruitDAO.attend(recruitInfoDTO);
+        return "redirect:/recruit";
+    } // attend() end
+
     // 삭제 후 이메일 발송
 
 } // class end

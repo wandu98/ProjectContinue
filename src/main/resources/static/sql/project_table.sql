@@ -356,15 +356,15 @@ CREATE TABLE tb_nt
 
 -- 최다은
 -- 모집정보
-create table tb_recruit
+create table tb_recruitInfo
 (
-    rcrtm_num  INT AUTO_INCREMENT primary key                    -- 모집일련번호
+    ri_num  INT AUTO_INCREMENT primary key                    -- 모집일련번호
     ,
     mem_id     varchar(20) not null                              -- 회원ID
     ,
     rcrbrd_num int         not null                              -- 게시판 글번호
     ,
-    rcrtm_seat int         not null                              -- 좌석번호
+    ri_seat int         not null                              -- 좌석번호
     ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)              -- 회원ID
     ,
@@ -487,7 +487,7 @@ drop table tb_memdv;
 drop table tb_nt;
 drop table tb_order;
 drop table tb_question;
-drop table tb_recruit;
+drop table tb_recruitInfo;
 drop table tb_review;
 drop table tb_sales;
 drop table tb_seller;

@@ -114,6 +114,25 @@
         right: 15px;
     }
 
+    .product__item__pic__hover li span {
+        font-size: 16px;
+        color: #1c1c1c;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        text-align: center;
+        border: 1px solid #ebebeb;
+        background: #ffffff;
+        display: block;
+        border-radius: 50%;
+        -webkit-transition: all, 0.5s;
+        -moz-transition: all, 0.5s;
+        -ms-transition: all, 0.5s;
+        -o-transition: all, 0.5s;
+        transition: all, 0.5s;
+        cursor: pointer;
+    }
+
 </style>
 
 <!-- 모집 게시판 배너 시작 -->
@@ -186,16 +205,18 @@
                     <c:forEach var="row" begin="1" end="${detail.rcrbrd_max}" step="1" varStatus="vs">
                         <div class="col-lg-3 col-md-4 col-sm-4">
                             <div class="product__item">
-                                <div id="recruitmember/${vs.count}" class="product__item__pic set-bg" data-setbg="/images/profilePicture.png">
+                                <div id="recruitmember/${vs.count}" class="product__item__pic set-bg"
+                                     data-setbg="/images/profilePicture.png">
                                     <input type="hidden" id="recruitseat" name="recruitseat" value="${vs.count}">
                                     <ul class="product__item__pic__hover">
                                         <c:choose>
                                             <c:when test="${1 == 1}">
-                                                <li><a href="#">참가</a></li>
+                                                <li><span id="attendbtn" onclick="attend()">참가</span></li>
                                             </c:when>
                                             <c:otherwise>
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#">신고</a></li>
+                                                <li><span><i class="fa fa-heart"></i></span></li>
+                                                <li><span>신고</span></li>
+
                                             </c:otherwise>
                                         </c:choose>
                                     </ul>
@@ -214,5 +235,34 @@
         </div>
     </div>
 </section>
+
+<script>
+
+    // 참가에 대한 내용
+    function attend() {
+        $.ajax({
+            url: "/recruit/attend",
+            type: "post",
+            data: {
+                "rcrbrd_num": "${detail.rcrbrd_num}",
+                "mem_id": "${memDetail.mem_id}",
+                "rcrbrd_seat": $("#recruitseat").val()
+            },
+            success: function (data) {
+                if (1 == 1) {
+                    alert("참가 신청이 완료되었습니다.");
+                    $("#attendbtn").css("cursor",  "default");
+                    $("#attendbtn").css("background-color", "gray");
+                } else {
+                    alert("참가 신청에 실패하였습니다.");
+                }
+            },
+            error: function (error) {
+                console.log("에러 발생 : " + error);
+            }
+        });
+
+    } // attend() end
+</script>
 
 <%@ include file="../footer.jsp" %>
