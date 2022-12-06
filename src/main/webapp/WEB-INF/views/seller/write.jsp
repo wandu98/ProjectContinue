@@ -25,7 +25,7 @@
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
 
                 <div class="card">
                     <div class="card-body">
@@ -36,37 +36,40 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">카테고리</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" data-bs-toggle="modal"
+                                    <input type="text" class="form-control" id="category" name="category"
+                                           data-bs-toggle="modal"
                                            data-bs-target="#scrollingModal" readonly placeholder="Search...">
-                                </div>
-                            </div>
 
-                            <%-- 모달창 헤더--%>
-                            <div class="modal fade" id="scrollingModal" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">카테고리 찾기</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                        </div>
+                                    <%-- 모달창 --%>
+                                    <div class="modal fade" id="scrollingModal" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
 
-                                        <%--모달창 본문--%>
-                                        <div class="card">
-                                            <div class="card-body" style="box-sizing: initial">
-                                                <h5 class="card-title">단어를 입력해주세요</h5>
-                                            </div>
-                                            <div class="modal-body" id="gs_main">
-                                                <input type="text" placeholder="Search..."
-                                                       id="gs_keyword"
-                                                       name="gs_keyword"
-                                                       style="width: 100%;
+                                                <%-- 모달창 헤더 --%>
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">카테고리 찾기</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+
+                                                <%--모달창 본문--%>
+                                                <div class="card">
+                                                    <div class="card-body" style="box-sizing: initial">
+                                                        <h5 class="card-title">단어를 입력해주세요</h5>
+                                                    </div>
+                                                    <div class="modal-body" id="gs_main">
+                                                        <input type="text" placeholder="Search..."
+                                                               id="gs_keyword"
+                                                               name="gs_keyword"
+                                                               style="width: 100%;
                                                               border-radius: 10px;
                                                               border-style: solid">
-                                                <div id="panel" style="display: none"></div>
+                                                        <div id="panel" style="display: none"></div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
