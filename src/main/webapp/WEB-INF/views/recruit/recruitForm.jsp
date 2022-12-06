@@ -37,7 +37,6 @@
             <h4>모집글 등록</h4>
             <form action="/recruit/insert">
                 <input type="hidden" id="mem_id" name="mem_id" value="${sessionScope.mem_id}">
-                <input type="hidden" id="gm_code" name="gm_code" value="">
                 <input type="hidden" id="rcrbrd_ip" name="rcrbrd_ip" value="<%=ip%>">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
@@ -125,13 +124,13 @@
                         <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
                             <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
                         </div>
-                        <div class="checkout__input" id="address0" style="display: none">
+                        <div class="checkout__input" id="rcrbrd_adr0" style="display: none">
                             <input type="text" id="rcrbrd_adr" name="rcrbrd_adr" readonly>
                         </div>
 
                         <div class="checkout__input">
                             <p>종료일 선택<span>*</span></p>
-                            <input id="rcrbrd_edate" type="datetime-local" style="width: 50%" onchange="dateSummary()">
+                            <input id="rcrbrd_edate" name="rcrbrd_edate" type="datetime-local" style="width: 50%" onchange="dateSummary()">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -205,7 +204,7 @@
             $.each(title, function (index, key) {
                 str += "<hr>";
                 str += "<img src='/images/thumb/" + code[index] + "/thumb.jpg' style='width: 10%'>&nbsp;"
-                str += "<span id='title_key' style='cursor: pointer' onclick='panelClick(code)'>" + key + "</span>";
+                str += "<span id='title_key' style='cursor: pointer' onclick='panelClick("+code[index]+")'>" + key + "</span>";
                 str += "<hr>";
             }); // each() end
 
@@ -220,14 +219,15 @@
     } // responseProc() end
 
     // 모달창에서 타이틀 제목이 선택되면 본문과 요약 창에도 반영
-    function panelClick(code) {
+    function panelClick(x) {
         // 타겟의 내부 텍스트 추출
         let title = event.target.innerText;
 
         // 추출한 텍스트를 모달창의 검색창에 입력
         $("#game_search").val(title);
         $("#game_search2").text(title);
-        $("#gm_code").text(code);
+        alert(x);
+        $("#gm_code").text(x);
 
         $("#gs_modal").modal("hide");
     }
@@ -277,7 +277,7 @@
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('address1').value = fullAddr;
+                document.getElementById('rcrbrd_adr').value = fullAddr;
                 $('#rcrbrd_adr2').text(fullAddr);
 
                 // iframe을 넣은 element를 안보이게 한다.
@@ -288,7 +288,7 @@
                 document.body.scrollTop = currentScroll;
 
 
-                $('#address0').show();
+                $('#rcrbrd_adr0').show();
             },
             // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
             onresize : function(size) {
