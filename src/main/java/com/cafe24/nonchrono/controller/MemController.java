@@ -31,14 +31,14 @@ public class MemController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)//정보를 가지고 로그인폼
     public ModelAndView loginProc(@ModelAttribute MemDTO dto, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
-        String id=dto.getMem_id();
-        System.out.println(id);
-        String pw=dto.getMem_pw();
-        System.out.println(pw);
+        String id = dto.getMem_id();
+        // System.out.println(id);
+        String pw = dto.getMem_pw();
+        // System.out.println(pw);
         ModelAndView mav = new ModelAndView();
         String grade = memDAO.login(id, pw);
 
-        if(grade != null) {
+        if (grade != null) {
             mav.setViewName("redirect:/");
             session.setAttribute("mem_id", id);//세션에 값 저장. "" 내용에 id를 저장
             session.setAttribute("mem_pw", pw);
@@ -46,11 +46,21 @@ public class MemController {
             System.out.println("세션에 저장된 비밀번호 : " + session.getAttribute("mem_pw"));
         } else {
             mav.setViewName("/mem/loginalert");
-            req.setAttribute("msg","아이디와 비번이 일치하지 않습니다");
+            req.setAttribute("msg", "아이디와 비번이 일치하지 않습니다");
         }//if end
 
         return mav;
     }//loginProc() end
+
+    //회원가입 폼 -> db -> sql ->
+
+//    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+//    public ModelAndView memList(@ModelAttribute MemDTO dto) {
+//        ModelAndView mav =new ModelAndView();
+//        mav.addObject("insert", memDAO.meminsert(dto));
+//        mav.setViewName("/mem");
+//        return mav;
+//    }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String memsignup() {

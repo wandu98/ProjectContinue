@@ -8,20 +8,15 @@
         ORDER BY mem_id
     </select>
 
-    <select id="memid" parameterType="String">
-        SELECT mem_id
-        FROM tb_mem
-    </select>
-
-    <select id="mempw" parameterType="String">
-        SELECT mem_pw
-        FROM tb_mem
-    </select>
-
     <select id="login" parameterType="com.cafe24.nonchrono.dto.MemDTO" resultType="String">
         SELECT mem_grade
         FROM tb_mem
         WHERE mem_id = #{mem_id} AND mem_pw = #{mem_pw} AND mem_grade IN ('admin', 'Vip', 'Gold', 'Silver', 'Bronze', 'New');
     </select>
+
+    <insert id="insert">
+        INSERT INTO tb_mem(mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_birth, mem_grade, upoint, apoint, mem_receive)
+        VALUES (#{mem_id}, #{mem_pw}, #{mem_nick}, #{mem_name}, #{mem_zip}, #{mem_adr2}, #{mem_phone}, #{mem_birth}, #{mem_grade}, #{upoint}, #{apoint}, #{mem_receive})
+    </insert>
 
 </mapper>
