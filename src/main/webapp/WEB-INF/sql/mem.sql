@@ -13,7 +13,7 @@ CREATE TABLE tb_mem
     ,
     mem_pw      varchar(20)  NOT NULL             -- 회원PW
     ,
-    mem_nick    varchar(20)  NOT NULL             -- 닉네임
+    mem_nick    varchar(255)  NOT NULL             -- 닉네임
     ,
     mem_name    varchar(20)  NOT NULL             -- 이름
     ,
@@ -33,7 +33,7 @@ CREATE TABLE tb_mem
     ,
     apoint      int          NOT NULL             -- 누적적립금
     ,
-    mem_receive char(1)      NOT NULL             -- 수신여부
+    mem_receive char(1)      default ''             -- 수신여부
     ,
     good        int          NOT NULL default 0   -- 좋아요
     ,
@@ -82,4 +82,7 @@ commit;
 
 -- 회원가입
 INSERT INTO tb_mem (mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate)
-VALUES(?,?,?,?,?,?,?,?,?,'new',?,?,?,?,?,?,--)
+VALUES(?,?,?,?,?,?,?,?,?,'new',?,?,?,?,?,?,--);
+
+INSERT INTO tb_mem(mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_birth, mem_receive)
+VALUES ('newbee', '1234', '방화범', '김주완', '05853', '경기도 평택시', '커닝시티', '010-0000-0000', '19980228', 1);

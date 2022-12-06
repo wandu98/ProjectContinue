@@ -271,15 +271,17 @@ CREATE TABLE tb_mem
     ,
     mem_phone    varchar(20)  NOT NULL                              -- 연락처
     ,
+    mem_email    varchar(255) not null                              -- 이메일
+    ,
     mem_birth    date         NOT NULL                              -- 생년월일
     ,
-    mem_grade    varchar(20)  NOT NULL                              -- 회원등급
+    mem_grade    varchar(20)  NOT NULL default 'new'                -- 회원등급
     ,
-    upoint       int          NOT NULL                              -- 가용적립금
+    upoint       int          NOT NULL default 0                    -- 가용적립금
     ,
-    apoint       int          NOT NULL                              -- 누적적립금
+    apoint       int          NOT NULL default 0                    -- 누적적립금
     ,
-    mem_receive  char(1)      NOT NULL                              -- 수신여부
+    mem_receive  char(1)                                            -- 수신여부
     ,
     good         int          NOT NULL default 0                    -- 좋아요
     ,
@@ -356,7 +358,7 @@ CREATE TABLE tb_nt
 
 -- 최다은
 -- 모집정보
-create table tb_recruitinfo
+create table tb_recruitInfo
 (
     ri_num  INT AUTO_INCREMENT primary key                    -- 모집일련번호
     ,
@@ -487,7 +489,7 @@ drop table tb_memdv;
 drop table tb_nt;
 drop table tb_order;
 drop table tb_question;
-drop table tb_recruitinfo;
+drop table tb_recruitInfo;
 drop table tb_review;
 drop table tb_sales;
 drop table tb_seller;

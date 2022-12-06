@@ -17,6 +17,7 @@ public class MemDTO {
     private String mem_adr1;   //주소1
     private String mem_adr2;   //주소2
     private String mem_phone;   //연락처
+    private String mem_email;
     private String mem_birth;  //생년월일
     private String mem_grade; //회원등급
     private int upoint; //가용적립금

@@ -3,6 +3,7 @@ package com.cafe24.nonchrono.dao;
 import com.cafe24.nonchrono.dto.GameDTO;
 import com.cafe24.nonchrono.dto.MemDTO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
+import com.cafe24.nonchrono.dto.RecruitInfoDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -71,5 +72,10 @@ public class RecruitDAO {
     public List<Integer> rcrCoount(String mem_id) {
         return sqlSession.selectList("mypage.rcrCount", mem_id);
     }
+
+    public int attend(RecruitInfoDTO recruitInfoDTO) {
+        return sqlSession.insert("recruit.attend", recruitInfoDTO);
+    } // attend() end
+
 
 } // class end
