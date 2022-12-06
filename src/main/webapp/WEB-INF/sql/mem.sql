@@ -33,7 +33,7 @@ CREATE TABLE tb_mem
     ,
     apoint      int          NOT NULL             -- 누적적립금
     ,
-    mem_receive char(1)      default NULL             -- 수신여부
+    mem_receive char(1)      default ''             -- 수신여부
     ,
     good        int          NOT NULL default 0   -- 좋아요
     ,
