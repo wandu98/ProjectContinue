@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="couponlist">
+
+    <select id="list" resultType="com.cafe24.nonchrono.dto.CouponDTO">
+        select cp.cp_code, cp_name, cp_speriod, cp_eperiod, cp_percent
+        from tb_couponlist cl join tb_coupon cp
+                                   on cl.cp_code = cp.cp_code
+        where mem_id = #{mem_id}
+    </select>
+
+</mapper>

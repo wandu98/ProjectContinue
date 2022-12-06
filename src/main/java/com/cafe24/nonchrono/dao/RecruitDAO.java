@@ -61,8 +61,21 @@ public class RecruitDAO {
         return sqlSession.insert("recruit.insert", recruitDTO);
     } // insert() end
 
+    public List<GameDTO> myriList(String mem_id) {
+        return sqlSession.selectList("mypage.recruitList", mem_id);
+    }
+
+    public List<RecruitDTO> myrcrList(String mem_id) {
+        return sqlSession.selectList("mypage.rcrList", mem_id);
+    }
+
+    public List<Integer> rcrCoount(String mem_id) {
+        return sqlSession.selectList("mypage.rcrCount", mem_id);
+    }
+
     public int attend(RecruitInfoDTO recruitInfoDTO) {
         return sqlSession.insert("recruit.attend", recruitInfoDTO);
     } // attend() end
+
 
 } // class end

@@ -6,7 +6,28 @@
     <select id="list" resultType="com.cafe24.nonchrono.dto.MemDTO">
         select mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate
         from tb_mem
-        where mem_id = 'oejdf9090'
+        where mem_id = #{mem_id}
+    </select>
+
+    <select id="recruitList" resultType="com.cafe24.nonchrono.dto.GameDTO">
+        select rb.gm_code, gm_name, gm_img
+        from tb_rcrboard rb join tb_game ga
+                                 on rb.gm_code = ga.gm_code
+        where mem_id = #{mem_id}
+    </select>
+
+    <select id="rcrList" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
+        select rcrbrd_subject, rcrbrd_num, rcrbrd_edate
+        from tb_rcrboard
+        where mem_id = #{mem_id}
+    </select>
+
+    <select id="rcrCount" resultType="int">
+        select count(ri.rcrbrd_num) as cnt
+        from tb_rcrboard rb left join tb_recruitinfo ri
+                                      on rb.rcrbrd_num = ri.rcrbrd_num
+        where rb.mem_id = #{mem_id}
+        group by rb.rcrbrd_num
     </select>
 
 </mapper>

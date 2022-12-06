@@ -228,13 +228,13 @@ VALUES ('gjdjj888', '잠실 핵주먹을 찾습니다', '핵주먹 뭐하냐', '
 
 
 -- 모집정보
-INSERT INTO tb_recruit(mem_id, rcrbrd_num, rcrtm_cnfrm)
-VALUES ('oejdf9090', 5, 1)
-     ,('gjdjj888', 6, 1)
-     ,('fjhdmj555', 7, 1)
-     ,('fjhdmj555', 8, 1)
-     ,('fjhdmj555', 5, 1)
-     ,('oejdf9090', 6, 1);
+INSERT INTO tb_recruitinfo(mem_id, rcrbrd_num, ri_seat)
+VALUES ('oejdf9090', 7, 1)
+     ,('gjdjj888', 3, 1)
+     ,('fjhdmj555', 2, 1)
+     ,('fjhdmj555', 1, 1)
+     ,('fjhdmj555', 6, 1)
+     ,('oejdf9090', 8, 1);
 
 
 -- 모집댓글

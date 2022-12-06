@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
@@ -38,23 +39,36 @@ public class MypageController {
     @Autowired
     ReviewDAO reviewDAO;
 
+    @Autowired
+    CouponlistDAO couponlistDAO;
+
+    @Autowired
+    RecruitDAO recruitDAO;
+
 
     @RequestMapping("/mypage")
-    public ModelAndView mypage() {
+    public ModelAndView mypage(HttpSession session) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("meminfo", memDAO.list());
-        mav.addObject("qslist", questionDAO.count());
-        mav.addObject("revlist", reviewDAO.list());
+        String mem_id = (String) session.getAttribute("mem_id");
+        mav.addObject("meminfo", memDAO.myList(mem_id));
+        mav.addObject("qslist", questionDAO.count(mem_id));
+        mav.addObject("revlist", reviewDAO.count(mem_id));
+        mav.addObject("recruitlist", recruitDAO.myriList(mem_id));
+        mav.addObject("rcrlist", recruitDAO.myrcrList(mem_id));
+        mav.addObject("rcrcount", recruitDAO.rcrCoount(mem_id));
         mav.setViewName("mypage/mypage");
         return mav;
     }//mypage() end
 
     @RequestMapping("/wishlist")
-    public ModelAndView wishlist(HttpServletRequest req, PagingDTO pagingDTO) {
+    public ModelAndView wishlist(HttpServletRequest req, PagingDTO pagingDTO, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("mypage/wishlist");
 
-        int totalRowCount = wishDAO.totalRowCount(); //총 글갯수  6 |  52개
+        String mem_id = (String) session.getAttribute("mem_id");
+        pagingDTO.setMem_id(mem_id);
+
+        int totalRowCount = wishDAO.totalRowCount(mem_id); //총 글갯수  6 |  52개
 
         //페이징
         int numPerPage = 5; //한 페이지당 레코드 갯수
@@ -111,8 +125,10 @@ public class MypageController {
     }
 
     @RequestMapping("/coupon")
-    public ModelAndView coupon() {
+    public ModelAndView coupon(HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        String mem_id = session.getAttribute("mem_id").toString();
+        mav.addObject("couponlist", couponlistDAO.list(mem_id));
         mav.setViewName("mypage/coupon");
         return mav;
     }
@@ -125,24 +141,26 @@ public class MypageController {
     }
 
     @RequestMapping("/memdv")
-    public ModelAndView memdv() {
+    public ModelAndView memdv(HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        String mem_id = session.getAttribute("mem_id").toString();
         mav.setViewName("mypage/memdv");
-        mav.addObject("list", memdvDAO.list());
+        mav.addObject("list", memdvDAO.list(mem_id));
         return mav;
     }
 
     @RequestMapping("/memmodify")
-    public ModelAndView memmodify() {
+    public ModelAndView memmodify(HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        String mem_id = (String) session.getAttribute("mem_id");
         mav.setViewName("mypage/memmodify");
-        mav.addObject("mem", memDAO.modify_list());
+        mav.addObject("mem", memDAO.modify_list(mem_id));
         return mav;
     }
 
     @RequestMapping("/memmodify/update")
-    public String memUpdate(@RequestParam String mem_name, @RequestParam MultipartFile mem_pic, @RequestParam String mem_nick, @RequestParam String mem_pw, @RequestParam String mem_zip, @RequestParam String mem_adr1, @RequestParam String mem_adr2, @RequestParam String mem_birth, HttpServletRequest request) {
-
+    public String memUpdate(@RequestParam String mem_name, @RequestParam MultipartFile mem_pic, @RequestParam String mem_nick, @RequestParam String mem_pw, @RequestParam String mem_zip, @RequestParam String mem_adr1, @RequestParam String mem_adr2, @RequestParam String mem_birth, HttpServletRequest request, HttpSession session) {
+        String mem_id = (String) session.getAttribute("mem_id");
         // 프로필 사진 등록
         String profile = "";
         MemDTO memDTO = new MemDTO();
@@ -156,10 +174,11 @@ public class MypageController {
                 e.printStackTrace();
             }
         } else {
-            MemDTO mem = memDAO.modify_list();
+            MemDTO mem = memDAO.modify_list(mem_id);
             profile = mem.getMem_pic();
         }
 
+        memDTO.setMem_id(mem_id);
         memDTO.setMem_name(mem_name);
         memDTO.setMem_pic(profile);
         memDTO.setMem_nick(mem_nick);

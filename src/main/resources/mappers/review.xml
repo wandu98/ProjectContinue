@@ -6,7 +6,13 @@
     <select id="list" resultType="com.cafe24.nonchrono.dto.ReviewDTO">
         select rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num
         from tb_review
-        where mem_id = 'oejdf9090';
+        where mem_id = #{mem_id}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        from tb_review
+        where mem_id = #{mem_id}
     </select>
 
 </mapper>

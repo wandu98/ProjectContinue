@@ -43,7 +43,7 @@
                                     ${row.mem_dvnick}
                                 </td>
                                 <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
+                                    <span class="icon_check" onclick="location.href='/mypage/memdvForm/modify/${row.mem_dvnum}'"></span>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -55,7 +55,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="memdvForm" class="primary-btn cart-btn cart-btn-right">
+                    <a href="/mypage/memdvForm" class="primary-btn cart-btn cart-btn-right">
                         배송지 등록</a>
                 </div>
             </div>
@@ -63,6 +63,8 @@
     </div>
 </section>
 <!-- Shoping Cart Section End -->
+
+
 
 
 <jsp:include page="../footer.jsp"></jsp:include>

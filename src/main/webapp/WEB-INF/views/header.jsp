@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="auth.jsp" %>
 
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -59,7 +60,7 @@
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__auth">
-            <a href="#"><i class="fa fa-user"></i> 로그인</a>
+            <a href="/mem/login"><i class="fa fa-user"></i> 로그인</a>
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">

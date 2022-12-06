@@ -14,37 +14,37 @@
     <div class="container">
         <div class="checkout__form">
             <h4>배송지 등록</h4>
-            <form action="/mypage/memdvForm/insert">
-                <input type="hidden" id="mem_id" name="mem_id" value="">
+            <form action="/mypage/memdvForm/update">
+                <input type="hidden" id="mem_dvnum" name="mem_dvnum" value="${listDetail.mem_dvnum}">
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>별칭<span>*</span></p>
-                                    <input type="text" id="mem_dvnick" name="mem_dvnick">
+                                    <input type="text" id="mem_dvnick" name="mem_dvnick" value="${listDetail.mem_dvnick}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>수령인<span>*</span></p>
-                                    <input type="text" id="mem_dvinfo" name="mem_dvinfo">
+                                    <input type="text" id="mem_dvinfo" name="mem_dvinfo" value="${listDetail.mem_dvinfo}">
                                 </div>
                             </div>
                         </div>
                         <div class="checkout__input">
                             <p>주소<span>*</span></p>
-                            <input type="text" id="mem_dvzip" name="mem_dvzip" placeholder="우편번호" readonly>
+                            <input type="text" id="mem_dvzip" name="mem_dvzip" placeholder="우편번호", value="${listDetail.mem_dvzip}" readonly>
                             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                            <input type="text" id="mem_dvadr1" name="mem_dvadr1" placeholder="도로명주소" readonly>
+                            <input type="text" id="mem_dvadr1" name="mem_dvadr1" placeholder="도로명주소" value="${listDetail.mem_dvadr1}" readonly>
                             <span id="guide" style="color:#999;display:none"></span>
-                            <input type="text" id="mem_dvadr2" name="mem_dvadr2" placeholder="상세주소" readonly>
+                            <input type="text" id="mem_dvadr2" name="mem_dvadr2" placeholder="상세주소" value="${listDetail.mem_dvadr2}" readonly>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Phone<span>*</span></p>
-                                    <input type="text" id="mem_dvphone" name="mem_dvphones">
+                                    <input type="text" id="mem_dvphone" name="mem_dvphone" value="${listDetail.mem_dvphone}">
                                 </div>
                             </div>
                         </div>
