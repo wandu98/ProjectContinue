@@ -108,4 +108,62 @@ where rb.mem_id = 'fjhdmj555'
 group by rb.rcrbrd_num;
 
 
+select * from tb_rcrboard;
+
+SELECT rcrbrd_num
+FROM tb_rcrboard
+WHERE mem_id = 'gjdjj888' and rcrbrd_subject = '실험 1' and rcrbrd_pw = '1234' and rcrbrd_views = 0 and rcrbrd_date = '2022-12-07 16:08:14' and rcrbrd_edate = '2022-12-17 16:00:00' and rcrbrd_ip = '0:0:0:0:0:0:0:1' and gm_code = 'dt0051' and rcrbrd_status = '진행중' and rcrbrd_adr = '서울 강북구 삼양로123길 1 (수유동, 삼원빌딩)' and rcrbrd_max = 5;
+
+select * from tb_role;
+
+
+SELECT rcrbrd_num, @ROWNUM :=@ROWNUM +1 AS ROWNUM
+FROM (SELECT rcrbrd_num
+      FROM (SELECT rcrbrd_num
+            FROM tb_rcrboard) AS AA
+            ORDER BY rcrbrd_num DESC) AS BB, (SELECT @ROWNUM := 0) AS CC;
+
+SELECT MAX(rcrbrd_num) FROM tb_rcrboard;
+
+SELECT rcrbrd_num
+FROM tb_rcrboard
+WHERE rcrbrd_num = (SELECT MAX(rcrbrd_num) FROM tb_rcrboard);
+
+-- 모집순 랭킹 (index)
+select ga.gm_code, ga.gm_name, count(*)
+from tb_rcrboard rb join tb_game ga
+on rb.gm_code = ga.gm_code
+group by ga.gm_code
+order by count(*) desc;
+
+
+
+
+
+select rcrbrd_num
+from tb_rcrboard
+order by rcrbrd_num;
+
+select rcrbrd_num, @rno := @rno + 1 as r
+from (
+        select rcrbrd_num
+        from tb_rcrboard
+        order by rcrbrd_num
+    ) AA, (select @rno := 0) BB;
+
+
+
+select rcrbrd_num
+from tb_rcrboard
+order by rcrbrd_num;
+
+select @rno := @rno + 1 as r
+from (select @rno := 0) AA;
+
+
+select *
+from (select rcrbrd_num
+      from tb_rcrboard
+      order by rcrbrd_num) AA, (select @rno := 0) BB;
+
 
