@@ -121,8 +121,11 @@
                             <input type="text" id="zipcode" style="margin-left: auto; width: 50%" readonly>&nbsp;
                             <button type="button" onclick="DaumPostcode()" class="btn btn-danger">검색</button>
                         </div>
-                        <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
-                            <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+                        <div id="wrap"
+                             style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
+                            <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap"
+                                 style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1"
+                                 onclick="foldDaumPostcode()" alt="접기 버튼">
                         </div>
                         <div class="checkout__input" id="rcrbrd_adr0" style="display: none">
                             <input type="text" id="rcrbrd_adr" name="rcrbrd_adr" readonly>
@@ -130,7 +133,24 @@
 
                         <div class="checkout__input">
                             <p>종료일 선택<span>*</span></p>
-                            <input id="rcrbrd_edate" name="rcrbrd_edate" type="datetime-local" style="width: 50%" onchange="dateSummary()">
+                            <input id="rcrbrd_edate" name="rcrbrd_edate" type="datetime-local" style="width: 50%"
+                                   onchange="dateSummary()">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="checkout__input__checkbox">
+                            <label for="role" onclick="roleCheck()">
+                                역할 구분이 필요하신가요?
+                                <input type="checkbox" id="role" name="role">
+                                <span class="checkmark"></span>
+                                &nbsp;&nbsp;&nbsp;
+                                <button type="button" id="addRoleBtn" name="addRoleBtn" onclick="addRoleText()"
+                                        class="btn btn-danger" style="display: none">역할 추가
+                                </button>
+                            </label>
+                            <div id="addRoleArea" class="checkout__input col-lg-8">
+                                <input type="hidden" id="hiddenCount" name="hiddenCount" value=0>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -150,7 +170,9 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <button type="submit" class="site-btn" style="background-color: #fba1a4" disabled="disabled">등록</button>
+                            <button type="submit" class="site-btn" style="background-color: #fba1a4"
+                                    disabled="disabled">등록
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -163,7 +185,7 @@
 <script>
 
 
-/* 클릭하면 모달창 보이기 */
+    /* 클릭하면 모달창 보이기 */
     $(document).ready(function () {
         $("#game_search").click(function () {
             // 모달창의 검색창 초기화
@@ -255,7 +277,7 @@
         // 현재 scroll 위치를 저장해놓는다.
         let currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
         new daum.Postcode({
-            oncomplete: function(data) {
+            oncomplete: function (data) {
                 // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -264,17 +286,17 @@
                 var extraAddr = ''; // 조합형 주소 변수
 
                 // 기본 주소가 도로명 타입일때 조합한다.
-                if(data.addressType === 'R'){
+                if (data.addressType === 'R') {
                     //법정동명이 있을 경우 추가한다.
-                    if(data.bname !== ''){
+                    if (data.bname !== '') {
                         extraAddr += data.bname;
                     }
                     // 건물명이 있을 경우 추가한다.
-                    if(data.buildingName !== ''){
+                    if (data.buildingName !== '') {
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                    fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')' : '');
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -293,16 +315,17 @@
                 $('#rcrbrd_adr0').show();
             },
             // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
-            onresize : function(size) {
-                element_wrap.style.height = size.height+'px';
+            onresize: function (size) {
+                element_wrap.style.height = size.height + 'px';
             },
-            width : '100%',
-            height : '100%'
+            width: '100%',
+            height: '100%'
         }).embed(element_wrap);
 
         // iframe을 넣은 element를 보이게 한다.
         element_wrap.style.display = 'block';
     }
+
     <!-- ----- DAUM 우편번호 API 종료 ----- -->
 
     // 날짜 정보 요약 창으로 옮기기
@@ -321,6 +344,26 @@
             $('.site-btn').attr("disabled", true);
         }
     });
+
+    // 역할 추가 버튼 히든 처리 해제
+    function roleCheck() {
+
+        if ($('#role').is(':checked')) {
+            $('#addRoleBtn').show();
+        } else {
+            $('#addRoleBtn').hide();
+        }
+    } // roleCheck() end
+
+    // 역할 추가 텍스트 박스 생성
+    function addRoleText() {
+        let count = parseInt(document.getElementById('hiddenCount').value);
+        count += 1;
+        let str = '<br><input type="text" id="rl_role' + count + '" name="rl_role' + count + '" placeholder="역할을 입력해주세요."><br>';
+        $('#addRoleArea').append(str);
+        document.getElementById('hiddenCount').value = count;
+    } // addRoleText() end
+
 
 </script>
 

@@ -3,6 +3,7 @@ package com.cafe24.nonchrono.controller;
 import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
 import com.cafe24.nonchrono.dto.RecruitInfoDTO;
+import com.cafe24.nonchrono.dto.RoleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -257,8 +259,23 @@ public class RecruitController {
     
     // 모집 정보 작성
     @RequestMapping("/insert")
-    public String recruitInsert(@ModelAttribute RecruitDTO recruitDTO) {
+    public String recruitInsert(@ModelAttribute RecruitDTO recruitDTO, @ModelAttribute RoleDTO roleDTO, HttpServletRequest req) {
+
+        // 모집 내용 insert
         recruitDAO.insert(recruitDTO);
+        // 위에서 insert한 게시글 번호 가져오기
+        int num = recruitDAO.numSearch();
+
+         // 역할 추가 수만큼 반복하여 역할 내용 insert
+        for (int i = 1; i <= Integer.parseInt(req.getParameter("hiddenCount")); i++) {
+            // System.out.println(req.getParameter("rl_role"+i+"")); // null null null
+
+            roleDTO.setRl_name(req.getParameter("rl_role" + i));
+            roleDTO.setRcrbrd_num(num);
+
+            recruitDAO.roleInsert(roleDTO);
+        }
+
         return "redirect:/recruit";
     } // recruitWrite() end
 
@@ -268,6 +285,12 @@ public class RecruitController {
         recruitDAO.attend(recruitInfoDTO);
         return "redirect:/recruit";
     } // attend() end
+
+    // 역할 테이블에서 내용 가져오기
+    @RequestMapping("/roleList")
+    public List<RoleDTO> roleList(@RequestParam int rcrbrd_num) {
+        return recruitDAO.roleList(rcrbrd_num);
+    } // roleList() end
 
     // 삭제 후 이메일 발송
 

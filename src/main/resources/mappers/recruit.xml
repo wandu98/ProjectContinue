@@ -80,4 +80,21 @@
         INSERT INTO tb_recruitInfo (mem_id, rcrbrd_num, ri_seat)
         VALUES (#{mem_id}, #{rcrbrd_num}, #{ri_seat})
     </insert>
+
+    <insert id="roleInsert" parameterType="com.cafe24.nonchrono.dto.RoleDTO">
+        INSERT INTO tb_role (rl_name, rcrbrd_num)
+        VALUES (#{rl_name}, #{rcrbrd_num})
+    </insert>
+
+    <!-- 부모 게시글 번호 찾아오기 -->
+    <select id="numSearch" resultType="int">
+        SELECT MAX(rcrbrd_num) FROM tb_rcrboard
+    </select>
+
+    <!-- 역할 테이블에서 내용 가져오기 -->
+    <select id="roleList" parameterType="int" resultType="com.cafe24.nonchrono.dto.RoleDTO">
+        SELECT rl_name
+        FROM tb_role
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
 </mapper>
