@@ -81,6 +81,22 @@
         VALUES (#{mem_id}, #{rcrbrd_num}, #{ri_seat})
     </insert>
 
+    <insert id="roleInsert" parameterType="com.cafe24.nonchrono.dto.RoleDTO">
+        INSERT INTO tb_role (rl_name, rcrbrd_num)
+        VALUES (#{rl_name}, #{rcrbrd_num})
+    </insert>
+
+    <!-- 부모 게시글 번호 찾아오기 -->
+    <select id="numSearch" resultType="int">
+        SELECT MAX(rcrbrd_num) FROM tb_rcrboard
+    </select>
+
+    <!-- 역할 테이블에서 내용 가져오기 -->
+    <select id="roleList" parameterType="int" resultType="com.cafe24.nonchrono.dto.RoleDTO">
+        SELECT rl_name
+        FROM tb_role
+        WHERE rcrbrd_num = #{rcrbrd_num}
+
     <!-- 인덱스 페이지 월간 타이틀 순위 모집순 -->
     <select id="idxRankingRecruit" resultType="com.cafe24.nonchrono.dto.GameDTO">
         select ga.gm_code, ga.gm_name, count(*)
@@ -88,5 +104,6 @@
                                  on rb.gm_code = ga.gm_code
         group by ga.gm_code
         order by count(*) desc
+
     </select>
 </mapper>

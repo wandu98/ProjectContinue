@@ -216,10 +216,14 @@
                                             <c:otherwise>
                                                 <li><span><i class="fa fa-heart"></i></span></li>
                                                 <li><span>신고</span></li>
-
                                             </c:otherwise>
                                         </c:choose>
                                     </ul>
+                                    <select id="roleList" name="roleList">
+                                        <c:forEach var="role" items="${roleList}" varStatus="vs">
+                                            <option value="${role.rl_name[vs.count]}">${role.rl_name[vs.count]}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#">Crab Pool Security</a></h6>
