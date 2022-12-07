@@ -116,6 +116,7 @@ WHERE mem_id = 'gjdjj888' and rcrbrd_subject = '실험 1' and rcrbrd_pw = '1234'
 
 select * from tb_role;
 
+
 SELECT rcrbrd_num, @ROWNUM :=@ROWNUM +1 AS ROWNUM
 FROM (SELECT rcrbrd_num
       FROM (SELECT rcrbrd_num
@@ -127,3 +128,42 @@ SELECT MAX(rcrbrd_num) FROM tb_rcrboard;
 SELECT rcrbrd_num
 FROM tb_rcrboard
 WHERE rcrbrd_num = (SELECT MAX(rcrbrd_num) FROM tb_rcrboard);
+
+-- 모집순 랭킹 (index)
+select ga.gm_code, ga.gm_name, count(*)
+from tb_rcrboard rb join tb_game ga
+on rb.gm_code = ga.gm_code
+group by ga.gm_code
+order by count(*) desc;
+
+
+
+
+
+select rcrbrd_num
+from tb_rcrboard
+order by rcrbrd_num;
+
+select rcrbrd_num, @rno := @rno + 1 as r
+from (
+        select rcrbrd_num
+        from tb_rcrboard
+        order by rcrbrd_num
+    ) AA, (select @rno := 0) BB;
+
+
+
+select rcrbrd_num
+from tb_rcrboard
+order by rcrbrd_num;
+
+select @rno := @rno + 1 as r
+from (select @rno := 0) AA;
+
+
+select *
+from (select rcrbrd_num
+      from tb_rcrboard
+      order by rcrbrd_num) AA, (select @rno := 0) BB;
+
+

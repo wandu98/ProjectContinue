@@ -85,5 +85,10 @@ public class RecruitDAO {
     public List<RoleDTO> roleList(int rcrbrd_num) {
         return sqlSession.selectList("recruit.roleList", rcrbrd_num);
     } // roleList() end
+    
+    public List<GameDTO> idxRankingRecruit() {
+        return sqlSession.selectList("recruit.idxRankingRecruit");
+    }
+
 
 } // class end
