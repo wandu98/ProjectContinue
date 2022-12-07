@@ -77,5 +77,9 @@ public class RecruitDAO {
         return sqlSession.insert("recruit.attend", recruitInfoDTO);
     } // attend() end
 
+    public List<GameDTO> idxRankingRecruit() {
+        return sqlSession.selectList("recruit.idxRankingRecruit");
+    }
+
 
 } // class end
