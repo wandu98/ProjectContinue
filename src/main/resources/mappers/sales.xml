@@ -3,4 +3,42 @@
 
 <mapper namespace="sales">
 
+    <select id="idxLatestProduct" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        from tb_sales
+        where ss_status = 'S1'
+        order by ss_speriod desc
+    </select>
+
+    <select id="idxTopProduct" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select sa.ss_num, ss_name, ss_price, ss_img
+        from tb_sales sa join tb_detail dt
+                              on sa.ss_num = dt.ss_num
+        group by dt.ss_num
+        order by count(*) desc
+    </select>
+
+    <select id="idxReviewProduct" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select sa.ss_num, ss_name, ss_price, ss_img
+        from tb_sales sa join tb_review rv
+                              on sa.ss_num = rv.ss_num
+        group by sa.ss_num
+        order by count(*) desc
+    </select>
+
+    <select id="idxFeaturedProduct" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select ss_num, ss_name, ss_price, ss_img
+        from tb_sales
+        order by ss_eperiod
+    </select>
+
+    <select id="idxRankingSales" resultType="com.cafe24.nonchrono.dto.GameDTO">
+        select ga.gm_name
+        from tb_detail dt join tb_sales sa
+                               on dt.ss_num = sa.ss_num join tb_game ga
+                                                             on sa.gm_code = ga.gm_code
+        group by ga.gm_code
+        order by count(*) desc
+    </select>
+
 </mapper>

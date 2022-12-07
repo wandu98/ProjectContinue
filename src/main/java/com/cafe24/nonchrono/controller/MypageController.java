@@ -53,14 +53,18 @@ public class MypageController {
     public ModelAndView mypage(HttpSession session) {
         ModelAndView mav = new ModelAndView();
         String mem_id = (String) session.getAttribute("mem_id");
-        mav.addObject("meminfo", memDAO.myList(mem_id));
-        mav.addObject("qslist", questionDAO.count(mem_id));
-        mav.addObject("revlist", reviewDAO.count(mem_id));
-        mav.addObject("recruitlist", recruitDAO.myriList(mem_id));
-        mav.addObject("rcrlist", recruitDAO.myrcrList(mem_id));
-        mav.addObject("rcrcount", recruitDAO.rcrCoount(mem_id));
-        mav.addObject("detailcount", detailDAO.detailCount(mem_id));
-        mav.setViewName("mypage/mypage");
+        if (mem_id != null) {
+            mav.addObject("meminfo", memDAO.myList(mem_id));
+            mav.addObject("qslist", questionDAO.count(mem_id));
+            mav.addObject("revlist", reviewDAO.count(mem_id));
+            mav.addObject("recruitlist", recruitDAO.myriList(mem_id));
+            mav.addObject("rcrlist", recruitDAO.myrcrList(mem_id));
+            mav.addObject("rcrcount", recruitDAO.rcrCoount(mem_id));
+            mav.addObject("detailcount", detailDAO.detailCount(mem_id));
+            mav.setViewName("mypage/mypage");
+        } else {
+            mav.setViewName("mem/loginForm");
+        }
         return mav;
     }//mypage() end
 
