@@ -73,30 +73,30 @@ VALUES(4, 8, 'fjhdmj555');
 
 -- 주문서
 INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
-VALUES('202211021003-002', now(), 'gjdjj888', 6, 4, 'A0000', 0, 3600, 360000);
+VALUES('202211021003-002', now(), 'gjdjj888', 1, 4, 'A0000', 0, 3600, 360000);
 
 INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
-VALUES('202211231620-001', now(), 'oejdf9090', 7, 3, 'A0002', 1500, 798, 78300);
+VALUES('202211231620-001', now(), 'oejdf9090', 2, 3, 'A0002', 1500, 798, 78300);
 
 INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
-VALUES('202211021003-001', now(), 'gjdjj888', 8, 2, 'A0001', 1000, 3600, 359000);
+VALUES('202211021003-001', now(), 'gjdjj888', 3, 2, 'A0001', 1000, 3600, 359000);
 
 INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
-VALUES('202210010903-001', now(), 'fjhdmj555', 9, 1, 'A0000', 0, 648, 64800);
+VALUES('202210010903-001', now(), 'fjhdmj555', 4, 1, 'A0000', 0, 648, 64800);
 
 
 -- 주문상세보기
 INSERT INTO tb_detail(od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
-VALUES('202211021003-002', 6, '교환', '교환', 'Y', 11, '신용카드','문 앞에 예쁘게 놔주세요');
+VALUES('202211021003-002', 1, 'J01', '교환', 'Y', 5, '신용카드','문 앞에 예쁘게 놔주세요');
 
 INSERT INTO tb_detail(od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
-VALUES('202211231620-001', 7, '배송완료', '없음', 'Y', 10, '무통장','');
+VALUES('202211231620-001', 2, 'J02', '없음', 'Y', 6, '무통장','잘 배송해주세요');
 
 INSERT INTO tb_detail(od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
-VALUES('202211021003-001', 8, '반품', '반품', 'Y', 9, '신용카드','문 앞에 예쁘게 놔주세요');
+VALUES('202211021003-001', 3, 'J03', '반품', 'Y', 7, '신용카드','문 앞에 예쁘게 놔주세요');
 
 INSERT INTO tb_detail(od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
-VALUES('202210010903-001', 9, '구매확정', '없음', 'N', 8, '카카오페이','안전하게 보내주세요 박스 망가지면 환불요청함');
+VALUES('202210010903-001', 4, 'J04', '없음', 'N', 8, '카카오페이','안전하게 보내주세요 박스 망가지면 환불요청함');
 
 
 -- 교환반품

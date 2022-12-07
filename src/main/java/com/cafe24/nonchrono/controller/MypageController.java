@@ -45,6 +45,9 @@ public class MypageController {
     @Autowired
     RecruitDAO recruitDAO;
 
+    @Autowired
+    DetailDAO detailDAO;
+
 
     @RequestMapping("/mypage")
     public ModelAndView mypage(HttpSession session) {
@@ -56,6 +59,7 @@ public class MypageController {
         mav.addObject("recruitlist", recruitDAO.myriList(mem_id));
         mav.addObject("rcrlist", recruitDAO.myrcrList(mem_id));
         mav.addObject("rcrcount", recruitDAO.rcrCoount(mem_id));
+        mav.addObject("detailcount", detailDAO.detailCount(mem_id));
         mav.setViewName("mypage/mypage");
         return mav;
     }//mypage() end

@@ -62,28 +62,28 @@
                                         <div class="contact__widget">
                                             <img src="/images/card-approve-icon.png" style="width: 25%">
                                             <h5>결제완료</h5>
-                                            <p>1</p>
+                                            <p>${detailcount[0]}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                                         <div class="contact__widget">
                                             <img src="/images/goods-contents-icon.png" style="width: 20%">
                                             <h5>출고준비중</h5>
-                                            <p>0</p>
+                                            <p>${detailcount[1]}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                                         <div class="contact__widget">
                                             <img src="/images/product-package-delivered-icon.png" style="width: 25%">
                                             <h5>출고완료</h5>
-                                            <p>2</p>
+                                            <p>${detailcount[2]}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                                         <div class="contact__widget">
                                             <img src="/images/logistic-truck-icon.png" style="width: 45%">
                                             <h5>배송중</h5>
-                                            <p>2</p>
+                                            <p>${detailcount[3]}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -92,28 +92,28 @@
                                         <div class="contact__widget">
                                             <img src="/images/door-service-icon.png" style="width: 25%">
                                             <h5>배송완료</h5>
-                                            <p>1</p>
+                                            <p>${detailcount[4]}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                                         <div class="contact__widget">
                                             <img src="/images/purchase2.png" style="width:25%">
                                             <h5>구매확정</h5>
-                                            <p>6</p>
+                                            <p>${detailcount[5]}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                                         <div class="contact__widget">
                                             <img src="/images/product-replacement-icon.png" style="width: 25%">
                                             <h5>교환</h5>
-                                            <p>1</p>
+                                            <p>${detailcount[6]}</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                                         <div class="contact__widget">
                                             <img src="/images/return.png" style="width: 25%">
                                             <h5>반품</h5>
-                                            <p>0</p>
+                                            <p>${detailcount[7]}</p>
                                         </div>
                                     </div>
                                 </div>
