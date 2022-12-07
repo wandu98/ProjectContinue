@@ -38,8 +38,8 @@
 
     <!-- Template Main CSS File -->
     <link href="/admin_assets/css/style.css" rel="stylesheet">
-    <script src="/js/memmodify.js"></script>
     <script src="/js/jquery-3.6.1.min.js"></script>
+    <script src="/js/memmodify.js"></script>
 
 </head>
 
@@ -79,7 +79,12 @@
             </li>
 
             <li class="nav-item dropdown">
+                <a class="nav-link nav-icon" href="/seller/loginForm">
+                    <i class="ri-login-box-line"></i>
+                </a><!-- login Icon -->
+            </li>
 
+            <li class="nav-item dropdown">
                 <a class="nav-link nav-icon" href="" data-bs-toggle="dropdown">
                     <i class="bi bi-bell"></i>
                     <span class="badge bg-primary badge-number">4</span>
@@ -246,7 +251,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>문의관리</span><i
+                <i class="bi bi-question-circle"></i></i><span>문의관리</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">

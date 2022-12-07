@@ -1,5 +1,7 @@
 package com.cafe24.nonchrono.dao;
 
+
+import com.cafe24.nonchrono.dto.SellerDTO;
 import com.cafe24.nonchrono.dto.GameDTO;
 import com.cafe24.nonchrono.dto.SalesDTO;
 import org.apache.ibatis.session.SqlSession;
@@ -14,7 +16,11 @@ public class SalesDAO {
     public SalesDAO() {System.out.println("-----SalesDAO() 객체 생성"); }
 
     @Autowired
-    SqlSession sqlSession;
+    private SqlSession sqlSession;
+
+    public int insert(SalesDTO salesDTO) {
+        return sqlSession.insert("sales.insert", salesDTO);
+    } // insert() end
 
     public List<SalesDTO> idxLatestProduct() {
         return sqlSession.selectList("sales.idxLatestProduct");
@@ -35,6 +41,5 @@ public class SalesDAO {
     public List<GameDTO> idxRankingSales() {
         return sqlSession.selectList("sales.idxRankingSales");
     }
-
 
 }//class end

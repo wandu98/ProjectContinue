@@ -33,3 +33,7 @@
 
 <!-- Template Main JS File -->
 <script src="/admin_assets/js/main.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/main.js"></script>
