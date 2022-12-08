@@ -3,18 +3,20 @@ package com.cafe24.nonchrono.controller;
 import com.cafe24.nonchrono.dao.MemDAO;
 import com.cafe24.nonchrono.dto.MemDTO;
 import org.apache.ibatis.binding.MapperMethod;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import java.util.List;
 
 
 @RequestMapping("/mem")
@@ -67,6 +69,27 @@ public class MemController {
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String memsignup() {
         return "mem/signupForm";
+    }
+
+    @RequestMapping("idcheckcookieproc.do") // 경로
+    @ResponseBody
+    public String idcheckcookieProc(HttpServletRequest req) {
+        String mem_id = req.getParameter("mem_id").trim();
+
+        List<MemDTO> check = memDAO.idcheck();
+        String cnt = "0";
+        for (int i=0; i< check.size(); i++) {
+            if(mem_id.equals(check.get(i).getMem_id())) {
+                //getMem_id() 넣어줘서 행에서 id만 불러오기
+                cnt = "1";
+                break;
+            }
+        }
+
+        JSONObject json = new JSONObject();
+        json.put("count", cnt);
+        return json.toString();
+
     }
 
 } // class end
