@@ -45,4 +45,8 @@ public class WishDAO {
         sqlSession.insert("wishlist.insert", wishDTO);
     }
 
+    public int idxWishCount(String mem_id) {
+        return sqlSession.selectOne("wishlist.idxWishCount", mem_id);
+    }
+
 }
