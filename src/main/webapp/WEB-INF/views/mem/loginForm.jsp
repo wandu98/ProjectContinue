@@ -38,10 +38,12 @@
                 로그인유지
                 <span class="checkmark"></span>
             </div>
-            <div class="checkout__inputlogin">
+            <div class="checkout__input login">
                 <input type="submit" class="site-btn" value="로그인">
             </div>
-            &nbsp;&nbsp;
+            <div class="checkout__input" id="logout">
+                <input type="button" class="site-btn" value="로그아웃" onclick="location.href='/mem/logout'">
+            </div>
             <div class="checkout__input">
                 <button type="button" onclick="location.href='/mem/signup'" class="site-btn">회원 가입하기</button>
             </div>

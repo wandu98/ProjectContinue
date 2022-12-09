@@ -167,3 +167,18 @@ from (select rcrbrd_num
       order by rcrbrd_num) AA, (select @rno := 0) BB;
 
 
+SELECT rl_name
+FROM tb_role
+WHERE rcrbrd_num = 16;
+
+select * from tb_role;
+
+SELECT rl_name, rs_seat
+FROM tb_roleseat
+WHERE rcrbrd_num = 4;
+
+SELECT rl_name
+FROM tb_roleseat
+WHERE rcrbrd_num = 4 and rs_seat = 1;
+
+select * from tb_roleseat;

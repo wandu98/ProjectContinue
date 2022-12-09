@@ -268,7 +268,7 @@ CREATE TABLE tb_mem
     mem_adr1     varchar(255) NOT NULL                              -- 주소1
     ,
     mem_adr2     varchar(255) NOT NULL                              -- 주소2
-   ,
+    ,
     mem_phone    varchar(20)  NOT NULL                              -- 연락처
     ,
     mem_email    varchar(255) not null                              -- 이메일
@@ -360,13 +360,13 @@ CREATE TABLE tb_nt
 -- 모집정보
 create table tb_recruitInfo
 (
-    ri_num  INT AUTO_INCREMENT primary key                    -- 모집일련번호
+    ri_num     INT AUTO_INCREMENT primary key                    -- 모집일련번호
     ,
     mem_id     varchar(20) not null                              -- 회원ID
     ,
     rcrbrd_num int         not null                              -- 게시판 글번호
     ,
-    ri_seat int         not null                              -- 좌석번호
+    ri_seat    int         not null                              -- 좌석번호
     ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)              -- 회원ID
     ,
@@ -473,15 +473,29 @@ create table tb_comment
 -- 역할 테이블
 create table tb_role
 (
-    rl_num     int AUTO_INCREMENT primary key,                    -- 역할 일련번호
-    rl_name    varchar(255) not null,                             -- 역할 이름
-    rcrbrd_num int          not null,                             -- 모집 게시판 글 번호
+    rl_num     int AUTO_INCREMENT primary key, -- 역할 일련번호
+    rl_name    varchar(255) not null,          -- 역할 이름
+    rcrbrd_num int          not null,          -- 모집 게시판 글 번호
+    FOREIGN KEY (rcrbrd_num) REFERENCES tb_rcrboard (rcrbrd_num)
+);
+
+-- 역할 배정 테이블
+create table tb_roleseat
+(
+    rs_num     int AUTO_INCREMENT primary key, -- 역할 배정 일련번호
+    rl_name    varchar(255) not null,          -- 역할 이름
+    rcrbrd_num int          not null,          -- 모집 게시판 글 번호
+    rs_seat    int          not null,          -- 좌석 코드
     FOREIGN KEY (rcrbrd_num) REFERENCES tb_rcrboard (rcrbrd_num)
 );
 
 select *
 from tb_role;
 
+select *
+from tb_roleseat;
+
+drop table tb_roleseat;
 drop table tb_role;
 drop table tb_rcrboard;
 drop table tb_answer;
