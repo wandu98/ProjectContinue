@@ -69,4 +69,10 @@ public class MemController {
         return "mem/signupForm";
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
 } // class end
