@@ -90,5 +90,13 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.idxRankingRecruit");
     }
 
+    public List<RecruitDTO> idxrcrbrd() {
+        return sqlSession.selectList("recruit.idxrcrbrdlist");
+    }
+
+    public Integer idxrcrbrdCount(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.idxrcrbrdCount", rcrbrd_num);
+    }
+
 
 } // class end
