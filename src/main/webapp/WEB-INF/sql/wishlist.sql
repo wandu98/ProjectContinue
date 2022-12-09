@@ -53,3 +53,8 @@ where r>=6 and r <=10;
 
 
 select count(*) from tb_wish where mem_id = 'fjhdmj555';
+
+select count(*)
+from tb_wish
+where mem_id = 'fjhdmj555'
+group by mem_id;

@@ -42,4 +42,12 @@ public class SalesDAO {
         return sqlSession.selectList("sales.idxRankingSales");
     }
 
+    public List<SalesDTO> searchAll(String keyword) {
+        return sqlSession.selectList("sales.searchAll", keyword);
+    }
+
+    public List<SalesDTO> searchCategory(SalesDTO salesDTO) {
+        return sqlSession.selectList("sales.searchCategory", salesDTO);
+    }
+
 }//class end

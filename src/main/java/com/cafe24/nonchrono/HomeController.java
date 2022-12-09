@@ -2,6 +2,7 @@ package com.cafe24.nonchrono;
 
 import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
+import com.cafe24.nonchrono.dao.WishDAO;
 import com.cafe24.nonchrono.dto.GameDTO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +31,25 @@ public class HomeController {
     @Autowired
     RecruitDAO recruitDAO;
 
+    @Autowired
+    WishDAO wishDAO;
+
     @RequestMapping("/") // 메인
-    public ModelAndView Index() {
+    public ModelAndView Index(HttpServletRequest request) {
+        String mem_id = (String) request.getAttribute("mem_id");
         ModelAndView mav = new ModelAndView();
+        System.out.println(mem_id);
         mav.addObject("idxLatestProduct", salesDAO.idxLatestProduct());
         mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
         mav.addObject("idxReviewProduct", salesDAO.idxReviewProduct());
         mav.addObject("idxFeaturedProduct", salesDAO.idxFeaturedProduct());
         mav.addObject("idxRankingSales", salesDAO.idxRankingSales());
+//        int zero = 0;
+//        if (mem_id != null) {
+//            mav.addObject("idxWishCount", wishDAO.idxWishCount(mem_id));
+//        } else {
+//            mav.addObject("idxWishCount", zero);
+//        }
         List<RecruitDTO> list = recruitDAO.idxrcrbrd();
         List list2 = new ArrayList<>();
         for (int i=0; i< list.size(); i++) {

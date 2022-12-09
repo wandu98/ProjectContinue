@@ -41,4 +41,16 @@
         order by count(*) desc
     </select>
 
+    <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        from tb_sales
+        where ss_name like #{keyword}
+    </select>
+
+    <select id="searchCategory" parameterType="com.cafe24.nonchrono.dto.SalesDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        from tb_sales
+        where gm_code = #{gm_code} and ss_name like #{ss_name}
+    </select>
+
 </mapper>

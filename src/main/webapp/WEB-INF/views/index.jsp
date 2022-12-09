@@ -75,6 +75,10 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+
+
+
     </style>
 </head>
 
@@ -92,7 +96,7 @@
     </div>
     <div class="humberger__menu__cart">
         <ul>
-            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <li><a href="#"><i class="fa fa-heart"></i> <span>${idxWishCount}</span></a></li>
             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
         </ul>
     </div>
@@ -175,7 +179,7 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="mypage/wishlist"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="mypage/wishlist"><i class="fa fa-heart"></i> <span></span></a></li>
                         <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                     </ul>
                 </div>
@@ -214,15 +218,25 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form">
-                        <form action="#">
-                            <div class="hero__search__categories">
-                                모든 카테고리
-                                <span class="arrow_carrot-down"></span>
-                            </div>
-                            <input type="text">
-                            <button type="submit" class="site-btn">검색</button>
+                <div>
+                    <div class="search_form">
+                        <form action="/sales/search">
+                            <select id="ctg" name="ctg">
+                                <option value="ALL" selected>모든 카테고리</option>
+                                <option value="MN">본체</option>
+                                <option value="PT">타이틀(패키지)</option>
+                                <option value="DT">타이틀(다운로드)</option>
+                                <option value="DL">다운로드 추가 컨텐츠 (DLC)</option>
+                                <option value="OL">온라인 이용권</option>
+                                <option value="PN">선불 번호</option>
+                                <option value="FC">무료 컨텐츠</option>
+                                <option value="AM">아미보</option>
+                                <option value="PC">프로컨트롤러</option>
+                                <option value="JC">조이콘</option>
+                                <option value="AC">주변 기기</option>
+                            </select>
+                            <input class="search_keyword" type="text" id="keyword" name="keyword">
+                            <button type="submit" class="site-btn-search">검색</button>
                         </form>
                     </div>
                     <div class="hero__search__phone">
@@ -235,27 +249,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="images/banner.jpg">
-                    <div class="hero__text" style="text-align: center;">
-                        <h2>월간 <br/>타이틀 순위</h2>
-                        <a href="/sales" class="success-btn">SHOP NOW</a>
-                        <br><br>
-                        <button type="button" class="btn btn-outline-warning" onclick="rankingSales()">판매순</button>
-                        <button type="button" class="btn btn-outline-warning" onclick="rankingRecruit()">모집순</button>
-                    </div>
-                    <div id="ranking" style="position: absolute; left: 50%">
-                        <ol>
-                            <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
-                            <li>${row.gm_name}</li>
-                            </c:forEach>
-                        </ol>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </section>
 <!-- 카테고리 & 배너 끝 -->
+
+<section>
+    <div class="hero__item set-bg" data-setbg="images/banner.jpg">
+        <div class="hero__text" style="text-align: center; left: 25%; position: absolute">
+            <h2>월간 <br/>타이틀 순위</h2>
+            <a href="/sales" class="success-btn">SHOP NOW</a>
+            <br><br>
+            <button type="button" class="btn btn-outline-warning" onclick="rankingSales()">판매순</button>
+            <button type="button" class="btn btn-outline-warning" onclick="rankingRecruit()">모집순</button>
+        </div>
+        <div id="ranking" style="position: absolute; left: 50%">
+            <ol>
+                <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
+                    <li>${row.gm_name}</li>
+                </c:forEach>
+            </ol>
+        </div>
+    </div>
+</section>
 
 <!-- Categories Section Begin -->
 <section class="categories">
