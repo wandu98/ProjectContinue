@@ -135,4 +135,17 @@
         WHERE rcrbrd_num = #{rcrbrd_num}
     </select>
 
+    <!-- 게시판 번호와 좌석 번호로 데이터가 존재하는지 확인 -->
+    <select id="roleSeatCheck" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
+        SELECT rs_seat
+        FROM tb_roleseat
+        WHERE rcrbrd_num = #{rcrbrd_num} AND rs_seat = #{rs_seat}
+    </select>
+
+    <select id="roleSeatCount" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
+        SELECT count(rs_seat)
+        FROM tb_roleseat
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
+
 </mapper>

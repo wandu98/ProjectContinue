@@ -107,4 +107,12 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.roleName", rcrbrd_num);
     } // roleName() end
 
+    public int roleSeatCheck(RoleSeatDTO roleSeatDTO) {
+        return sqlSession.selectOne("recruit.roleSeatCheck", roleSeatDTO);
+    } // roleSeatCheck() end
+
+    public int roleSeatCount(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.roleSeatCount", rcrbrd_num);
+    } // roleSeatCount() end
+
 } // class end
