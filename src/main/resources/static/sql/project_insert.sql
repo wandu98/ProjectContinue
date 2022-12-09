@@ -73,30 +73,30 @@ VALUES(4, 8, 'fjhdmj555');
 
 -- 주문서
 INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
-VALUES('202211021003-002', now(), 'gjdjj888', 1, 4, 'A0000', 0, 3600, 360000);
+VALUES('202211021003-002', now(), 'gjdjj888', 6, 4, 'A0000', 0, 3600, 360000);
 
 INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
-VALUES('202211231620-001', now(), 'oejdf9090', 2, 3, 'A0002', 1500, 798, 78300);
+VALUES('202211231620-001', now(), 'oejdf9090', 7, 3, 'A0002', 1500, 798, 78300);
 
 INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
-VALUES('202211021003-001', now(), 'gjdjj888', 3, 2, 'A0001', 1000, 3600, 359000);
+VALUES('202211021003-001', now(), 'gjdjj888', 8, 2, 'A0001', 1000, 3600, 359000);
 
 INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
-VALUES('202210010903-001', now(), 'fjhdmj555', 4, 1, 'A0000', 0, 648, 64800);
+VALUES('202210010903-001', now(), 'fjhdmj555', 9, 1, 'A0000', 0, 648, 64800);
 
 
 -- 주문상세보기
 INSERT INTO tb_detail(od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
-VALUES('202211021003-002', 1, 'J01', '교환', 'Y', 5, '신용카드','문 앞에 예쁘게 놔주세요');
+VALUES('202211021003-002', 6, '교환', '교환', 'Y', 11, '신용카드','문 앞에 예쁘게 놔주세요');
 
 INSERT INTO tb_detail(od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
-VALUES('202211231620-001', 2, 'J02', '없음', 'Y', 6, '무통장','잘 배송해주세요');
+VALUES('202211231620-001', 7, '배송완료', '없음', 'Y', 10, '무통장','');
 
 INSERT INTO tb_detail(od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
-VALUES('202211021003-001', 3, 'J03', '반품', 'Y', 7, '신용카드','문 앞에 예쁘게 놔주세요');
+VALUES('202211021003-001', 8, '반품', '반품', 'Y', 9, '신용카드','문 앞에 예쁘게 놔주세요');
 
 INSERT INTO tb_detail(od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
-VALUES('202210010903-001', 4, 'J04', '없음', 'N', 8, '카카오페이','안전하게 보내주세요 박스 망가지면 환불요청함');
+VALUES('202210010903-001', 9, '구매확정', '없음', 'N', 8, '카카오페이','안전하게 보내주세요 박스 망가지면 환불요청함');
 
 
 -- 교환반품
@@ -220,20 +220,20 @@ VALUES (1, 'gjdjj888', '20220108')
 
 -- 모집게시판
 INSERT INTO tb_rcrboard(mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max)
-VALUES ('gjdjj888', '잠실 핵주먹을 찾습니다', '핵주먹 뭐하냐', '1234', 2, '20221121', '20221121', '192.195.14.23', 'AC0001', '마감', '서울', 5)
-     ,('oejdf9090', '아직...한발 남았다', '도망쳐', '1234', 3, '20221121', '20221121', '192.195.14.97', 'DT0001', '진행중', '부산', 10)
-     ,('fjhdmj555', '너만오면시작', '토니 김홍승', '1234', 4, '20221121', '20221121', '192.195.14.77', 'DT0002', '마감', '제주', 7)
-     ,('fjhdmj555', '쉽지 않다 인생', '스타크 김홍승', '1234', 21, '20221121', '20221121', '192.195.14.36', 'MN0001', '진행중', '서울', 5);
+VALUES ('gjdjj888', '잠실 핵주먹을 찾습니다', '핵주먹 뭐하냐', '1234', 2, '20221121', '20221221140000', '192.195.14.23', 'AC0001', '마감', '서울', 5)
+     ,('oejdf9090', '아직...한발 남았다', '도망쳐', '1234', 3, '20221121', '20221222150000', '192.195.14.97', 'DT0001', '진행중', '부산', 10)
+     ,('fjhdmj555', '너만오면시작', '토니 김홍승', '1234', 4, '20221121', '20221221110000', '192.195.14.77', 'DT0002', '마감', '제주', 7)
+     ,('fjhdmj555', '쉽지 않다 인생', '스타크 김홍승', '1234', 21, '20221121', '20221221090000', '192.195.14.36', 'MN0001', '진행중', '서울', 5);
 
 
 -- 모집정보
-INSERT INTO tb_recruitnfo(mem_id, rcrbrd_num, ri_seat)
-VALUES ('oejdf9090', 7, 1)
-     ,('gjdjj888', 3, 1)
-     ,('fjhdmj555', 2, 1)
-     ,('fjhdmj555', 1, 1)
-     ,('fjhdmj555', 6, 1)
-     ,('oejdf9090', 8, 1);
+INSERT INTO tb_recruitinfo(mem_id, rcrbrd_num, ri_seat)
+VALUES ('oejdf9090', 10, 1)
+     ,('gjdjj888', 13, 1)
+     ,('fjhdmj555', 15, 1)
+     ,('fjhdmj555', 17, 1)
+     ,('fjhdmj555', 19, 1)
+     ,('oejdf9090', 20, 1);
 
 
 -- 모집댓글
