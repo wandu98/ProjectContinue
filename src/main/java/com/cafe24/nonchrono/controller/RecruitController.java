@@ -4,6 +4,7 @@ import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
 import com.cafe24.nonchrono.dto.RecruitInfoDTO;
 import com.cafe24.nonchrono.dto.RoleDTO;
+import com.cafe24.nonchrono.dto.RoleSeatDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
@@ -249,10 +250,12 @@ public class RecruitController {
     @RequestMapping("/detail/{rcrbrd_num}")
     public ModelAndView recruitDetail(@PathVariable int rcrbrd_num) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("detail", recruitDAO.detail(rcrbrd_num));
-        mav.addObject("gameDetail", recruitDAO.gameDetail(rcrbrd_num));
-        mav.addObject("memDetail", recruitDAO.memDetail(rcrbrd_num));
-        mav.addObject("recruitCount", recruitDAO.recruitCount(rcrbrd_num));
+        mav.addObject("detail", recruitDAO.detail(rcrbrd_num)); // 모집 정보 상세보기
+        mav.addObject("gameDetail", recruitDAO.gameDetail(rcrbrd_num)); // 게임 정보 상세보기
+        mav.addObject("memDetail", recruitDAO.memDetail(rcrbrd_num)); // 모집장 정보 상세보기
+        mav.addObject("recruitCount", recruitDAO.recruitCount(rcrbrd_num)); // 게시판의 모집장의 모집 횟수 카운트
+        mav.addObject("roleList", recruitDAO.roleList(rcrbrd_num)); // 역할 테이블에서 역할 리스트 가져오기
+        mav.addObject("roleNameSeat", recruitDAO.roleName(rcrbrd_num)); // 역할 배정 테이블에서 역할 이름과 좌석 번호 가져오기
         mav.setViewName("recruit/recruitDetail");
         return mav;
     } // recruitDetail() end
@@ -286,11 +289,31 @@ public class RecruitController {
         return "redirect:/recruit";
     } // attend() end
 
-    // 역할 테이블에서 내용 가져오기
-    @RequestMapping("/roleList")
-    public List<RoleDTO> roleList(@RequestParam int rcrbrd_num) {
-        return recruitDAO.roleList(rcrbrd_num);
-    } // roleList() end
+    @RequestMapping("/roleConfirm")
+    @ResponseBody
+    public void roleConfirm(@ModelAttribute RoleSeatDTO roleSeatDTO, HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = resp.getWriter();
+        System.out.println(roleSeatDTO.toString());
+        int cnt = recruitDAO.roleConfirm(roleSeatDTO);
+        if (cnt == 0) {
+            out.println("<script>alert('해당 역할은 모집이 마감되었습니다.'); history.go(-1);</script>");
+            out.flush();
+        }
+    } // roleConfirm() end
+
+    @RequestMapping("/roleName")
+    @ResponseBody
+    public List<RoleSeatDTO> roleName(@RequestParam int rcrbrd_num) throws IOException {
+        /*ModelAndView mav = new ModelAndView();
+        mav.addObject("roleName", recruitDAO.roleName(rcrbrd_num));
+        return mav;*/
+
+        List<RoleSeatDTO> list = new ArrayList<RoleSeatDTO>();
+        list = recruitDAO.roleName(rcrbrd_num);
+
+        return list;
+    } // roleName() end
 
     // 삭제 후 이메일 발송
 

@@ -166,4 +166,58 @@ from (select rcrbrd_num
       from tb_rcrboard
       order by rcrbrd_num) AA, (select @rno := 0) BB;
 
+-- 인덱스 페이지 모집 현황 --------------------------
+-- 모집 게시판 제목, 모집종료일자
+select rcrbrd_num, rcrbrd_subject, rcrbrd_edate, gm_code
+from tb_rcrboard
+order by rcrbrd_edate;
 
+-- 게임 타이틀 이미지
+select rcrbrd_num, rb.gm_code, rcrbrd_edate
+from tb_rcrboard rb join tb_game ga
+on rb.gm_code = ga.gm_code
+order by rcrbrd_edate;
+
+-- 참여 인원 수
+select rb.rcrbrd_num, count(*), nvl(count(*), 0)
+from tb_rcrboard rb join tb_recruitinfo ri
+on rb.rcrbrd_num = ri.rcrbrd_num
+group by rb.rcrbrd_num;
+
+select rb.rcrbrd_num, rcrbrd_subject, rcrbrd_edate, ga.gm_code, count(*)
+from tb_rcrboard rb join tb_game ga
+on rb.gm_code = ga.gm_code join tb_recruitinfo ri
+on rb.rcrbrd_num = ri.rcrbrd_num
+group by rb.rcrbrd_num
+order by rcrbrd_edate;
+
+-- 참여 인원수
+select rb.rcrbrd_num, count(ri.rcrbrd_num)
+from tb_recruitinfo ri right join tb_rcrboard rb
+on ri.rcrbrd_num = rb.rcrbrd_num
+where rb.rcrbrd_num = 5;
+
+
+update tb_rcrboard
+set gm_code = 'dt0004'
+where rcrbrd_num = 3;
+
+
+-- ------------------------------------------------
+
+
+SELECT rl_name
+FROM tb_role
+WHERE rcrbrd_num = 16;
+
+select * from tb_role;
+
+SELECT rl_name, rs_seat
+FROM tb_roleseat
+WHERE rcrbrd_num = 4;
+
+SELECT rl_name
+FROM tb_roleseat
+WHERE rcrbrd_num = 4 and rs_seat = 1;
+
+select * from tb_roleseat;

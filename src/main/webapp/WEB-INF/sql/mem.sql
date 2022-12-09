@@ -86,3 +86,13 @@ VALUES(?,?,?,?,?,?,?,?,?,'new',?,?,?,?,?,?,--);
 
 INSERT INTO tb_mem(mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_birth, mem_receive)
 VALUES ('newbee', '1234', '방화범', '김주완', '05853', '경기도 평택시', '커닝시티', '010-0000-0000', '19980228', 1);
+
+
+select mem_id
+from tb_mem;
+
+
+<select id="">
+    select mem_id
+    from tb_mem
+</select>

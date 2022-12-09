@@ -219,15 +219,24 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </ul>
-                                    <select id="roleList" name="roleList">
-                                        <c:forEach var="role" items="${roleList}" varStatus="vs">
-                                            <option value="${role.rl_name[vs.count]}">${role.rl_name[vs.count]}</option>
-                                        </c:forEach>
-                                    </select>
+                                    <c:choose>
+                                        <c:when test="${detail.mem_id eq sessionScope.mem_id && roleNameSeat.size() < roleList.size()}">
+                                            <select id="roleSelect${vs.count}" name="roleSelect${vs.count}">
+                                                <c:forEach var="role" items="${roleList}" varStatus="vs2">
+                                                    <option value="${role.rl_name}"
+                                                            id="option${vs2.count}">${role.rl_name}</option>
+                                                </c:forEach>
+                                            </select>
+                                            <button type="button" id="roleBtn${vs.count}"
+                                                    onclick="roleConfirm(${fn:length(roleList)}, $(this).attr('id'))"
+                                                    class="btn btn-warning">확정
+                                            </button>
+                                        </c:when>
+                                    </c:choose>
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
+                                    <h5 id="roleText${vs.count}" name="roleText${vs.count}"></h5>
                                 </div>
                             </div>
                         </div>
@@ -255,7 +264,7 @@
             success: function (data) {
                 if (1 == 1) {
                     alert("참가 신청이 완료되었습니다.");
-                    $("#attendbtn").css("cursor",  "default");
+                    $("#attendbtn").css("cursor", "default");
                     $("#attendbtn").css("background-color", "gray");
                 } else {
                     alert("참가 신청에 실패하였습니다.");
@@ -267,6 +276,66 @@
         });
 
     } // attend() end
+
+    // 역할을 선택하고 확정하는 내용
+    function roleConfirm(x, y) {
+        let num = y.substring(y.length - 1, y.length);
+        let role = $('#roleSelect' + num + ' option:selected').val();
+        //let role = $('#roleSelect' + num +' option:selected').val();
+
+        for (let i = 1; i <= x; i++) {
+            if ($('#option' + i).val() == role) {
+                $('#roleText').text(role);
+                $('#roleSelect' + num).attr('disabled', true).niceSelect('update');
+                $('#' + y).hide();
+            }
+        }
+
+        $.ajax({
+            url: "/recruit/roleConfirm",
+            type: "post",
+            data: {
+                "rl_name": role,
+                "rcrbrd_num": ${detail.rcrbrd_num},
+                "rs_seat": num
+            },
+            success: function (data) {
+                alert("역할이 확정되었습니다");
+            },
+            error: function (error) {
+                console.log("에러 발생 : " + error);
+            }
+        });
+
+    } // roleConfirm() end
+
+    $(document).ready(function roleName() {
+        $.ajax({
+            url: "/recruit/roleName",
+            type: "post",
+            data: {
+                "rcrbrd_num": ${detail.rcrbrd_num}
+            },
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    // $('#roleText' + data[i].rs_seat).text(data[i].rl_name);
+                    // console.log(i+"번째 좌석 : " + data[i].rs_seat);
+                    // console.log(i+"번째 이름 : " + data[i].rl_name);
+
+                    console.log(data);
+                }
+            },
+            error: function (request,status,error) {
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+
+        let timer = setTimeout(function () {
+            roleName();
+        }, 500);
+    });
+
+
 </script>
 
 <%@ include file="../footer.jsp" %>

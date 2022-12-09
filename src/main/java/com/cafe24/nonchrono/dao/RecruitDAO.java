@@ -85,10 +85,26 @@ public class RecruitDAO {
     public List<RoleDTO> roleList(int rcrbrd_num) {
         return sqlSession.selectList("recruit.roleList", rcrbrd_num);
     } // roleList() end
-    
+
     public List<GameDTO> idxRankingRecruit() {
         return sqlSession.selectList("recruit.idxRankingRecruit");
     }
 
+    public List<RecruitDTO> idxrcrbrd() {
+        return sqlSession.selectList("recruit.idxrcrbrdlist");
+    }
+
+    public Integer idxrcrbrdCount(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.idxrcrbrdCount", rcrbrd_num);
+    }
+
+
+    public int roleConfirm(RoleSeatDTO roleSeatDTO) {
+        return sqlSession.insert("recruit.roleConfirm", roleSeatDTO);
+    } // roleConfirm() end
+
+    public List<RoleSeatDTO> roleName(int rcrbrd_num) {
+        return sqlSession.selectList("recruit.roleName", rcrbrd_num);
+    } // roleName() end
 
 } // class end

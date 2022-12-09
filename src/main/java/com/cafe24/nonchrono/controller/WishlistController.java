@@ -1,13 +1,16 @@
 package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.WishDAO;
+import com.cafe24.nonchrono.dto.WishDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -33,6 +36,18 @@ public class WishlistController {
         wishDAO.delete(ws_num);
         return "redirect:/mypage/wishlist";
     }
+
+    @RequestMapping("/insert")
+    public void insert(HttpServletRequest request, HttpSession session) {
+        String mem_id = (String) session.getAttribute("mem_id");
+        int ss_num = Integer.parseInt(request.getParameter("ss_num"));
+        WishDTO wishDTO = new WishDTO();
+        wishDTO.setMem_id(mem_id);
+        wishDTO.setSs_num(ss_num);
+        wishDAO.insert(wishDTO);
+    }
+
+
 
 
 }

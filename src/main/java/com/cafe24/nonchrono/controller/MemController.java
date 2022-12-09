@@ -89,7 +89,12 @@ public class MemController {
         JSONObject json = new JSONObject();
         json.put("count", cnt);
         return json.toString();
-
+    }
+     
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 
 } // class end
