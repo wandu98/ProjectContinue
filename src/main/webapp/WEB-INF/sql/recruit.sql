@@ -214,10 +214,14 @@ select * from tb_role;
 
 SELECT rl_name, rs_seat
 FROM tb_roleseat
-WHERE rcrbrd_num = 4;
+WHERE rcrbrd_num = 5;
 
 SELECT rl_name
 FROM tb_roleseat
 WHERE rcrbrd_num = 4 and rs_seat = 1;
 
 select * from tb_roleseat;
+
+
+select * from tb_roleseat
+where rs_seat = 1 and rcrbrd_num = 4;

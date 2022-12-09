@@ -302,18 +302,35 @@ public class RecruitController {
         }
     } // roleConfirm() end
 
-    @RequestMapping("/roleName")
+    // 역할 배정 정보 실시간 갱신
+    /*@RequestMapping("/roleName")
     @ResponseBody
     public List<RoleSeatDTO> roleName(@RequestParam int rcrbrd_num) throws IOException {
-        /*ModelAndView mav = new ModelAndView();
+        *//*ModelAndView mav = new ModelAndView();
         mav.addObject("roleName", recruitDAO.roleName(rcrbrd_num));
-        return mav;*/
+        return mav;*//*
 
         List<RoleSeatDTO> list = new ArrayList<RoleSeatDTO>();
         list = recruitDAO.roleName(rcrbrd_num);
 
         return list;
-    } // roleName() end
+    } // roleName() end*/
+
+    // 게시판 번호와 좌석 번호로 데이터가 존재하는지 확인
+    @RequestMapping("/roleSeatCheck")
+    @ResponseBody
+    public int roleSeatCheck(@ModelAttribute RoleSeatDTO roleSeatDTO) {
+        int cnt = recruitDAO.roleSeatCheck(roleSeatDTO);
+        return cnt;
+    } // roleSeatCheck() end
+
+    // 게시판 번호와 좌석 번호로 좌석 수 확인
+    @RequestMapping("/roleSeatCount")
+    @ResponseBody
+    public int roleSeatCount(@RequestParam int rcrbrd_num) {
+        int cnt = recruitDAO.roleSeatCount(rcrbrd_num);
+        return cnt;
+    } // roleSeatCount() end
 
     // 삭제 후 이메일 발송
 
