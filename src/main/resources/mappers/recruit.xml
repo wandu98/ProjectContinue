@@ -122,5 +122,17 @@
         where rb.rcrbrd_num = #{rcrbrd_num}
     </select>
 
+    <!-- 모집 역할 부여 -->
+    <insert id="roleConfirm" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO">
+        INSERT INTO tb_roleseat (rl_name, rcrbrd_num, rs_seat)
+        VALUES (#{rl_name}, #{rcrbrd_num}, #{rs_seat})
+    </insert>
+
+    <!-- 자리당 역할 이름 조회 -->
+    <select id="roleName" parameterType="int" resultType="com.cafe24.nonchrono.dto.RoleSeatDTO">
+        SELECT rl_name, rs_seat
+        FROM tb_roleseat
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
 
 </mapper>
