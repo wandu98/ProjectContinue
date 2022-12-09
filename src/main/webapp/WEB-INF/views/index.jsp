@@ -112,7 +112,7 @@
             <li><a href="/" class="active">미니 게임</a></li>
             <li><a href="#">고객센터</a>
                 <ul class="header__menu__dropdown">
-                    <li><a href="/">공지사항</a></li>
+                    <li><a href="/notice/noticeList">공지사항</a></li>
                     <li><a href="/">이벤트</a></li>
                     <li><a href="/">1:1문의</a></li>
                 </ul>
@@ -168,7 +168,7 @@
                         <li class="active"><a href="/">미니게임</a></li>
                         <li><a href="#">고객센터</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="/">공지사항</a></li>
+                                <li><a href="/notice/noticeList">공지사항</a></li>
                                 <li><a href="/">이벤트</a></li>
                                 <li><a href="/">1:1문의</a></li>
                             </ul>

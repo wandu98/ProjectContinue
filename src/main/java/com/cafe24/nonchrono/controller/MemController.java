@@ -59,11 +59,9 @@ public class MemController {
     }//loginProc() end
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView signProc(@ModelAttribute MemDTO dto) {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("memInsert", memDAO.memInsert(dto));
-        mav.setViewName("/");
-        return mav;
+    public String signProc(@ModelAttribute MemDTO dto) {
+        memDAO.memInsert(dto); // dto에 담은 내용 insert
+        return "redirect:/";
     }//signProc()
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)

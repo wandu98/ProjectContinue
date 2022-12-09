@@ -121,7 +121,8 @@
                                             <li><i class="fa fa-comment-o"></i> 댓글 수</li>
                                         </ul>
                                         <h5>${row.rcrbrd_subject}</h5>
-                                        <p>${game[vs.index].gm_name} (N / ${row.rcrbrd_max})</p>
+                                        <p>${game[vs.index].gm_name} (<span id="list${vs.count}" name="list${vs.count}">0</span>
+                                            / ${row.rcrbrd_max})</p>
                                     </div>
                                 </div>
                             </a>
@@ -135,7 +136,9 @@
                 </div>
             </div>
 
-            <div style="margin: auto"><button id="more" class="btn btn-outline-danger">더보기 (more)</button></div>
+            <div style="margin: auto">
+                <button id="more" class="btn btn-outline-danger">더보기 (more)</button>
+            </div>
         </div>
     </div>
 </section>
@@ -144,7 +147,34 @@
 <script>
     function recruitForm() {
         location.href = "/recruit/form";
+    } // recruitForm() end
+
+
+    function roleSeatCount() {
+        <c:forEach var="row2" items="${list}" varStatus="vs2">
+        $.ajax({
+            url: "/recruit/roleSeatCount",
+            type: "post",
+            data: {
+                "rcrbrd_num": ${row2.rcrbrd_num}
+            },
+            success: function (data) {
+                console.log(data);
+
+                for (let i = 1; i <= data.length; i++) {
+                    $("#list" + i).text(data[i]);
+                    console.log(data[i]);
+                }
+
+
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
+        </c:forEach>
     }
+
 </script>
 
 <%@ include file="../footer.jsp" %>

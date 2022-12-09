@@ -19,24 +19,24 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="admin_assets/img/favicon.png" rel="icon">
-    <link href="admin_assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/admin_assets/img/favicon.png" rel="icon">
+    <link href="/admin_assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="admin_assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="admin_assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="admin_assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="admin_assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="admin_assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="admin_assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="admin_assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="/admin_assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/admin_assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/admin_assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/admin_assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/admin_assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/admin_assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/admin_assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="admin_assets/css/style.css" rel="stylesheet">
+    <link href="/admin_assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -46,7 +46,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="admin_index.jsp" class="logo d-flex align-items-center">
-            <img src="admin_assets/img/logo.png" alt="">
+            <img src="/admin_assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">ontinue? Admin</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -376,7 +376,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="ad_noticeList.jsp">
+                    <a href="/admin/noticeWrite">
                         <i class="bi bi-circle"></i><span>글쓰기</span>
                     </a>
                 </li>

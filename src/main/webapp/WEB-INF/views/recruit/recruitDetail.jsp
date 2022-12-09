@@ -220,11 +220,13 @@
                                         </c:choose>
                                     </ul>
                                     <c:choose>
-                                        <c:when test="${detail.mem_id eq sessionScope.mem_id && roleNameSeat.size() < roleList.size()}">
+                                        <c:when test="${detail.mem_id eq sessionScope.mem_id}">
                                             <select id="roleSelect${vs.count}" name="roleSelect${vs.count}">
                                                 <c:forEach var="role" items="${roleList}" varStatus="vs2">
+                                                    <%-- 사용자가 선택한 옵션 출력 --%>
                                                     <option value="${role.rl_name}"
-                                                            id="option${vs2.count}">${role.rl_name}</option>
+                                                            id="${vs.count}option${vs2.count}">${role.rl_name}
+                                                    </option>
                                                 </c:forEach>
                                             </select>
                                             <button type="button" id="roleBtn${vs.count}"
@@ -236,7 +238,14 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5 id="roleText${vs.count}" name="roleText${vs.count}"></h5>
+                                    <h5 id="roleText${vs.count}" name="roleText${vs.count}">
+                                        <c:forEach var="role" items="${roleNameSeat}" varStatus="vs3">
+                                            <%-- vs.count번째 자리에 vs.count와 자리 번호가 동일하면 역할 부여 --%>
+                                            <c:if test="${vs.count == role.rs_seat}">
+                                                ${role.rl_name}
+                                            </c:if>
+                                        </c:forEach>
+                                    </h5>
                                 </div>
                             </div>
                         </div>
@@ -284,11 +293,13 @@
         //let role = $('#roleSelect' + num +' option:selected').val();
 
         for (let i = 1; i <= x; i++) {
-            if ($('#option' + i).val() == role) {
-                $('#roleText').text(role);
-                $('#roleSelect' + num).attr('disabled', true).niceSelect('update');
-                $('#' + y).hide();
+            for (let j = 1; j <= x; j++) {
+                if ($('#' + j + 'option' + i).val() == role) {
+                    $('#roleSelect' + num).attr('disabled', true).niceSelect('update');
+                    $('#' + y).hide();
+                }
             }
+
         }
 
         $.ajax({
@@ -309,6 +320,8 @@
 
     } // roleConfirm() end
 
+    // 실시간 갱신에 대한 내용
+    /*
     $(document).ready(function roleName() {
         $.ajax({
             url: "/recruit/roleName",
@@ -334,7 +347,30 @@
             roleName();
         }, 500);
     });
+    */
 
+    $(document).ready(function () {
+        for (let i = 1; i <= ${detail.rcrbrd_max}; i++) {
+            $.ajax({
+                url: "/recruit/roleSeatCheck",
+                type: "post",
+                data: {
+                    "rcrbrd_num": ${detail.rcrbrd_num},
+                    "rs_seat": i
+                },
+                success: function (data) {
+                    if (data != null) {
+                        $('#roleSelect' + i).attr('disabled', true).niceSelect('update');
+                        $('#roleBtn' + i).hide();
+                    }
+                },
+                error: function (request,status,error) {
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            })
+        }
+
+    });
 
 </script>
 
