@@ -96,6 +96,7 @@
         SELECT rl_name
         FROM tb_role
         WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
 
     <!-- 인덱스 페이지 월간 타이틀 순위 모집순 -->
     <select id="idxRankingRecruit" resultType="com.cafe24.nonchrono.dto.GameDTO">

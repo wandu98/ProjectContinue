@@ -65,7 +65,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li><a href="/">마켓 플레이스</a></li>
+            <li><a href="/sales/sales">마켓 플레이스</a></li>
             <li><a href="/">모집 게시판</a></li>
             <li><a href="/" class="active">미니 게임</a></li>
             <li><a href="#">고객센터</a>
@@ -121,7 +121,7 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li><a href="/sales">마켓 플레이스</a></li>
+                        <li><a href="/sales/sales">마켓 플레이스</a></li>
                         <li><a href="/recruit">모집 게시판</a></li>
                         <li class="active"><a href="/">미니게임</a></li>
                         <li><a href="#">고객센터</a>

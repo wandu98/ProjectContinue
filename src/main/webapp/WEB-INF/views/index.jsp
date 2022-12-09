@@ -61,7 +61,7 @@
     </div>
     <nav class="humberger__menu__nav mobile-menu">
         <ul>
-            <li><a href="/sales">마켓 플레이스</a></li>
+            <li><a href="/sales/sales">마켓 플레이스</a></li>
             <li><a href="/recruit">모집 게시판</a></li>
             <li><a href="/" class="active">미니 게임</a></li>
             <li><a href="#">고객센터</a>
@@ -117,7 +117,7 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li><a href="/sales">마켓 플레이스</a></li>
+                        <li><a href="/sales/sales">마켓 플레이스</a></li>
                         <li><a href="/recruit">모집 게시판</a></li>
                         <li class="active"><a href="/">미니게임</a></li>
                         <li><a href="#">고객센터</a>
@@ -262,7 +262,7 @@
         <div class="row featured__filter">
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/${idxFeaturedProduct[0].ss_img}">
+                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[0].ss_img}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -277,7 +277,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/${idxFeaturedProduct[1].ss_img}">
+                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[1].ss_img}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -292,7 +292,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/${idxFeaturedProduct[2].ss_img}">
+                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[2].ss_img}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -307,7 +307,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/${idxFeaturedProduct[3].ss_img}">
+                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[3].ss_img}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -322,7 +322,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/${idxFeaturedProduct[4].ss_img}">
+                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[4].ss_img}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -337,7 +337,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/${idxFeaturedProduct[5].ss_img}">
+                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[5].ss_img}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -352,7 +352,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/${idxFeaturedProduct[6].ss_img}">
+                    <div class="featured__item__pic set-bg" data-setbg="/images/product/saels_main/${idxFeaturedProduct[6].ss_img}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -367,7 +367,7 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/${idxFeaturedProduct[7].ss_img}">
+                 <div class="featured__item__pic set-bg"  data-setbg="/images/product/sales_main/${idxFeaturedProduct[7].ss_img}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
