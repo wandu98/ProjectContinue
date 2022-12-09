@@ -362,7 +362,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-journal-text"></i><span>공지사항</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -376,8 +376,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="forms-editors.html">
-                        <i class="bi bi-circle"></i><span>Form Editors</span>
+                    <a href="ad_noticeList.jsp">
+                        <i class="bi bi-circle"></i><span>글쓰기</span>
                     </a>
                 </li>
                 <li>
@@ -455,9 +455,9 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed" href="/notice">
                 <i class="bi bi-person"></i>
-                <span>Profile</span>
+                <span></span>
             </a>
         </li><!-- End Profile Page Nav -->
 

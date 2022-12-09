@@ -19,4 +19,10 @@
         VALUES (#{mem_id}, #{mem_pw}, #{mem_nick}, #{mem_name}, #{mem_zip}, #{mem_adr1}, #{mem_adr2}, #{mem_phone}, #{mem_email}, #{mem_birth}, #{mem_receive})
     </insert>
 
+    <select id="check" resultType="com.cafe24.nonchrono.dto.MemDTO">
+        SELECT mem_id
+        FROM tb_mem
+    </select>
+
+
 </mapper>
