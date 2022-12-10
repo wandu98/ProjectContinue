@@ -225,3 +225,8 @@ select * from tb_roleseat;
 
 select * from tb_roleseat
 where rs_seat = 1 and rcrbrd_num = 4;
+
+select gm.gm_name
+from tb_rcrboard as rb join tb_game as gm
+                            on rb.gm_code = gm.gm_code
+where rb.rcrbrd_num = 7;

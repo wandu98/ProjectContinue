@@ -22,8 +22,8 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.list");
     } // list() end
 
-    public List<GameDTO> game() {
-        return sqlSession.selectList("recruit.game");
+    public String game(int rcrbrd_num) {
+        return sqlSession.selectOne("recruit.game", rcrbrd_num);
     } // gm_name() end
 
     public List<GameDTO> gm_list() {
@@ -107,13 +107,20 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.roleName", rcrbrd_num);
     } // roleName() end
 
-    public int roleSeatCheck(RoleSeatDTO roleSeatDTO) {
-        return sqlSession.selectOne("recruit.roleSeatCheck", roleSeatDTO);
+    public Integer roleSeatCheck(RoleSeatDTO roleSeatDTO) {
+        String result = sqlSession.selectOne("recruit.roleSeatCheck", roleSeatDTO);
+
+        if (result == null) {
+            return 0;
+        } else {
+            return Integer.parseInt(result);
+        }
     } // roleSeatCheck() end
 
+    /*
     public int roleSeatCount(int rcrbrd_num) {
         return sqlSession.selectOne("recruit.roleSeatCount", rcrbrd_num);
     } // roleSeatCount() end
-
+    */
 
 } // class end
