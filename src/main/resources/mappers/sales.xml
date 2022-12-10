@@ -101,3 +101,4 @@
         from tb_sales
         where gm_code = #{gm_code} and ss_name like #{ss_name}
     </select>
+</mapper>
