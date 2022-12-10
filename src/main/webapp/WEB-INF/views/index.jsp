@@ -34,6 +34,52 @@
     <script src="/js/jquery-3.6.1.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/ckeditor/ckeditor.js"></script>
+
+    <style>
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 20%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+
+
+    </style>
 </head>
 
 <body>
@@ -50,7 +96,7 @@
     </div>
     <div class="humberger__menu__cart">
         <ul>
-            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <li><a href="#"><i class="fa fa-heart"></i> <span>${idxWishCount}</span></a></li>
             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
         </ul>
     </div>
@@ -66,7 +112,7 @@
             <li><a href="/" class="active">미니 게임</a></li>
             <li><a href="#">고객센터</a>
                 <ul class="header__menu__dropdown">
-                    <li><a href="/">공지사항</a></li>
+                    <li><a href="/notice/noticeList">공지사항</a></li>
                     <li><a href="/">이벤트</a></li>
                     <li><a href="/">1:1문의</a></li>
                 </ul>
@@ -122,7 +168,7 @@
                         <li class="active"><a href="/">미니게임</a></li>
                         <li><a href="#">고객센터</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="/">공지사항</a></li>
+                                <li><a href="/notice/noticeList">공지사항</a></li>
                                 <li><a href="/">이벤트</a></li>
                                 <li><a href="/">1:1문의</a></li>
                             </ul>
@@ -133,7 +179,7 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="mypage/wishlist"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="mypage/wishlist"><i class="fa fa-heart"></i> <span></span></a></li>
                         <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                     </ul>
                 </div>
@@ -172,15 +218,25 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form">
-                        <form action="#">
-                            <div class="hero__search__categories">
-                                모든 카테고리
-                                <span class="arrow_carrot-down"></span>
-                            </div>
-                            <input type="text">
-                            <button type="submit" class="site-btn">검색</button>
+                <div>
+                    <div class="search_form">
+                        <form action="/sales/search">
+                            <select id="ctg" name="ctg">
+                                <option value="ALL" selected>모든 카테고리</option>
+                                <option value="MN">본체</option>
+                                <option value="PT">타이틀(패키지)</option>
+                                <option value="DT">타이틀(다운로드)</option>
+                                <option value="DL">다운로드 추가 컨텐츠 (DLC)</option>
+                                <option value="OL">온라인 이용권</option>
+                                <option value="PN">선불 번호</option>
+                                <option value="FC">무료 컨텐츠</option>
+                                <option value="AM">아미보</option>
+                                <option value="PC">프로컨트롤러</option>
+                                <option value="JC">조이콘</option>
+                                <option value="AC">주변 기기</option>
+                            </select>
+                            <input class="search_keyword" type="text" id="keyword" name="keyword">
+                            <button type="submit" class="site-btn-search">검색</button>
                         </form>
                     </div>
                     <div class="hero__search__phone">
@@ -193,27 +249,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="images/banner.jpg">
-                    <div class="hero__text" style="text-align: center;">
-                        <h2>월간 <br/>타이틀 순위</h2>
-                        <a href="/sales" class="success-btn">SHOP NOW</a>
-                        <br><br>
-                        <button type="button" class="btn btn-outline-warning" onclick="rankingSales()">판매순</button>
-                        <button type="button" class="btn btn-outline-warning" onclick="rankingRecruit()">모집순</button>
-                    </div>
-                    <div id="ranking" style="position: absolute; left: 50%">
-                        <ol>
-                            <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
-                            <li>${row.gm_name}</li>
-                            </c:forEach>
-                        </ol>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </section>
 <!-- 카테고리 & 배너 끝 -->
+
+<section>
+    <div class="hero__item set-bg" data-setbg="images/banner.jpg">
+        <div class="hero__text" style="text-align: center; left: 25%; position: absolute">
+            <h2>월간 <br/>타이틀 순위</h2>
+            <a href="/sales" class="success-btn">SHOP NOW</a>
+            <br><br>
+            <button type="button" class="btn btn-outline-warning" onclick="rankingSales()">판매순</button>
+            <button type="button" class="btn btn-outline-warning" onclick="rankingRecruit()">모집순</button>
+        </div>
+        <div id="ranking" style="position: absolute; left: 50%">
+            <ol>
+                <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
+                    <li>${row.gm_name}</li>
+                </c:forEach>
+            </ol>
+        </div>
+    </div>
+</section>
 
 <!-- Categories Section Begin -->
 <section class="categories">
@@ -264,13 +323,12 @@
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[0].ss_img}">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a onclick="wishlistModal(${idxFeaturedProduct[0].ss_num})"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">${idxFeaturedProduct[0].ss_name}</a></h6>
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}">${idxFeaturedProduct[0].ss_name}</a></h6>
                         <h5>${idxFeaturedProduct[0].ss_price}</h5>
                     </div>
                 </div>
@@ -279,13 +337,12 @@
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[1].ss_img}">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a onclick="wishlistModal(${idxFeaturedProduct[1].ss_num})"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">${idxFeaturedProduct[1].ss_name}</a></h6>
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[1].ss_num}">${idxFeaturedProduct[1].ss_name}</a></h6>
                         <h5>${idxFeaturedProduct[1].ss_price}</h5>
                     </div>
                 </div>
@@ -294,13 +351,12 @@
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[2].ss_img}">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a onclick="wishlistModal(${idxFeaturedProduct[2].ss_num})"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">${idxFeaturedProduct[2].ss_name}</a></h6>
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[2].ss_num}">${idxFeaturedProduct[2].ss_name}</a></h6>
                         <h5>${idxFeaturedProduct[2].ss_price}</h5>
                     </div>
                 </div>
@@ -309,13 +365,12 @@
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[3].ss_img}">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a onclick="wishlistModal(${idxFeaturedProduct[3].ss_num})"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">${idxFeaturedProduct[3].ss_name}</a></h6>
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[3].ss_num}">${idxFeaturedProduct[3].ss_name}</a></h6>
                         <h5>${idxFeaturedProduct[3].ss_price}</h5>
                     </div>
                 </div>
@@ -324,13 +379,12 @@
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[4].ss_img}">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a onclick="wishlistModal(${idxFeaturedProduct[4].ss_num})"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">${idxFeaturedProduct[4].ss_name}</a></h6>
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[4].ss_num}">${idxFeaturedProduct[4].ss_name}</a></h6>
                         <h5>${idxFeaturedProduct[4].ss_price}</h5>
                     </div>
                 </div>
@@ -339,13 +393,12 @@
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[5].ss_img}">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a onclick="wishlistModal(${idxFeaturedProduct[5].ss_num})"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">${idxFeaturedProduct[5].ss_name}</a></h6>
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[5].ss_num}">${idxFeaturedProduct[5].ss_name}</a></h6>
                         <h5>${idxFeaturedProduct[5].ss_price}</h5>
                     </div>
                 </div>
@@ -354,13 +407,12 @@
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="/images/product/saels_main/${idxFeaturedProduct[6].ss_img}">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a onclick="wishlistModal(${idxFeaturedProduct[6].ss_num})"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">${idxFeaturedProduct[6].ss_name}</a></h6>
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[6].ss_num}">${idxFeaturedProduct[6].ss_name}</a></h6>
                         <h5>${idxFeaturedProduct[6].ss_price}</h5>
                     </div>
                 </div>
@@ -369,13 +421,12 @@
                 <div class="featured__item">
                  <div class="featured__item__pic set-bg"  data-setbg="/images/product/sales_main/${idxFeaturedProduct[7].ss_img}">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a onclick="wishlistModal(${idxFeaturedProduct[7].ss_num})"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">${idxFeaturedProduct[7].ss_name}</a></h6>
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[7].ss_num}">${idxFeaturedProduct[7].ss_name}</a></h6>
                         <h5>${idxFeaturedProduct[7].ss_price}</h5>
                     </div>
                 </div>
@@ -614,7 +665,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title from-blog__title">
-                    <h2>From The Blog</h2>
+                    <h2>같이 게임 할래?</h2>
                 </div>
             </div>
         </div>
@@ -622,45 +673,42 @@
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="blog__item">
                     <div class="blog__item__pic">
-                        <img src="img/blog/blog-1.jpg" alt="">
+                        <img src="/images/thumb/${idxrcrbrd[0].gm_code}/thumb.jpg" alt="">
                     </div>
                     <div class="blog__item__text">
                         <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
+                            <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[0].rcrbrd_edate}</li>
+                            <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[0]}</li>
                         </ul>
-                        <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        <h5><a href="#">${idxrcrbrd[0].rcrbrd_subject}</a></h5>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="blog__item">
                     <div class="blog__item__pic">
-                        <img src="img/blog/blog-2.jpg" alt="">
+                        <img src="/images/thumb/${idxrcrbrd[1].gm_code}/thumb.jpg" alt="">
                     </div>
                     <div class="blog__item__text">
                         <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
+                            <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[1].rcrbrd_edate}</li>
+                            <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[1]}</li>
                         </ul>
-                        <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        <h5><a href="#">${idxrcrbrd[1].rcrbrd_subject}</a></h5>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="blog__item">
                     <div class="blog__item__pic">
-                        <img src="img/blog/blog-3.jpg" alt="">
+                        <img src="images/thumb/${idxrcrbrd[2].gm_code}/thumb.jpg" alt="">
                     </div>
                     <div class="blog__item__text">
                         <ul>
-                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                            <li><i class="fa fa-comment-o"></i> 5</li>
+                            <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[2].rcrbrd_edate}</li>
+                            <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[2]}</li>
                         </ul>
-                        <h5><a href="#">Visit the clean farm in the US</a></h5>
-                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                        <h5><a href="#">${idxrcrbrd[2].rcrbrd_subject}</a></h5>
                     </div>
                 </div>
             </div>
@@ -668,6 +716,21 @@
     </div>
 </section>
 <!-- Blog Section End -->
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" onclick="modalClose()">&times;</span>
+        <p>선택하신 상품을 위시리스트에 담았습니다.<br>지금 위시리스트를 확인하시겠습니까?</p>
+        <div>
+            <a onclick="modalClose()" style="margin: 8px;">쇼핑 계속하기</a><a onclick="goWishlist()">위시리스트 확인</a>
+        </div>
+
+    </div>
+
+</div>
 
 
 <script>
@@ -687,6 +750,49 @@
 
     function responseRecruit(result) {
         $("#ranking").html(result);
+    }
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    function wishlistModal(ss_num) {
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
+        let params = "ss_num=" + ss_num;
+
+        if (mem_id != 'null') {
+            // location.href = "/wishlist/insert/" + ss_num;
+            $.get("/wishlist/insert", params, openModal());
+
+        } else {
+            alert("로그인 후 이용해주세요");
+        }
+    }
+
+    // Get the <span> element that closes the modal
+    // var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    // span.onclick = function() {
+    //     modal.style.display = "none";
+    // }
+
+    function modalClose() {
+        modal.style.display = "none";
+    }
+
+    function openModal() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    function goWishlist() {
+        location.href = "/mypage/wishlist";
     }
 </script>
 

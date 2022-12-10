@@ -105,6 +105,47 @@
                                  on rb.gm_code = ga.gm_code
         group by ga.gm_code
         order by count(*) desc
-
     </select>
+
+    <!-- 인덱스 페이지 모집 현황 -->
+    <select id="idxrcrbrdlist" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
+        select rcrbrd_num, rcrbrd_subject, rcrbrd_edate, gm_code
+        from tb_rcrboard
+        order by rcrbrd_edate
+    </select>
+
+    <!-- 인덱스 페이지 모집 현황 참여 인원수 -->
+    <select id="idxrcrbrdCount" parameterType="int" resultType="int">
+        select count(ri.rcrbrd_num)
+        from tb_recruitinfo ri right join tb_rcrboard rb
+                                          on ri.rcrbrd_num = rb.rcrbrd_num
+        where rb.rcrbrd_num = #{rcrbrd_num}
+    </select>
+
+    <!-- 모집 역할 부여 -->
+    <insert id="roleConfirm" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO">
+        INSERT INTO tb_roleseat (rl_name, rcrbrd_num, rs_seat)
+        VALUES (#{rl_name}, #{rcrbrd_num}, #{rs_seat})
+    </insert>
+
+    <!-- 자리당 역할 이름 조회 -->
+    <select id="roleName" parameterType="int" resultType="com.cafe24.nonchrono.dto.RoleSeatDTO">
+        SELECT rl_name, rs_seat
+        FROM tb_roleseat
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
+
+    <!-- 게시판 번호와 좌석 번호로 데이터가 존재하는지 확인 -->
+    <select id="roleSeatCheck" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
+        SELECT rs_seat
+        FROM tb_roleseat
+        WHERE rcrbrd_num = #{rcrbrd_num} AND rs_seat = #{rs_seat}
+    </select>
+
+    <select id="roleSeatCount" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
+        SELECT count(rs_seat)
+        FROM tb_roleseat
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
+
 </mapper>

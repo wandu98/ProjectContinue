@@ -34,4 +34,16 @@
         select count(*) from tb_wish where mem_id = #{mem_id}
     </select>
 
+    <insert id="insert" parameterType="com.cafe24.nonchrono.dto.WishDTO">
+        insert into tb_wish (mem_id, ss_num)
+        values (#{mem_id}, #{ss_num})
+    </insert>
+
+    <select id="idxWishCount" resultType="int">
+        select count(*)
+        from tb_wish
+        where mem_id = #{mem_id}
+        group by mem_id
+    </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.cafe24.nonchrono.dao;
 
 import com.cafe24.nonchrono.dto.PagingDTO;
+import com.cafe24.nonchrono.dto.WishDTO;
 import com.cafe24.nonchrono.dto.WishlistDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,13 @@ public class WishDAO {
         }//end
         return cnt;
     }//totalRowCount() end
+
+    public void insert(WishDTO wishDTO) {
+        sqlSession.insert("wishlist.insert", wishDTO);
+    }
+
+    public int idxWishCount(String mem_id) {
+        return sqlSession.selectOne("wishlist.idxWishCount", mem_id);
+    }
 
 }

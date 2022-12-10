@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -103,6 +104,29 @@ public class SalesController {
         mav.setViewName("sales/detail");
         return mav;
     }// detail() end
+
+    @RequestMapping("/search")
+    public ModelAndView search(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        String ctg = request.getParameter("ctg");
+        String keyword = request.getParameter("keyword");
+        SalesDTO salesDTO = new SalesDTO();
+        salesDTO.setGm_code(ctg);
+        salesDTO.setSs_name(keyword);
+//        System.out.println(ctg);
+//        System.out.println(keyword);
+        List<SalesDTO> allList = new ArrayList<>();
+        List<SalesDTO> searchList = new ArrayList<>();
+        if (ctg == "ALL") {
+            allList = salesDAO.searchAll(keyword);
+        } else {
+            searchList = salesDAO.searchCategory(salesDTO);
+        }
+        mav.addObject("allList", allList);
+        mav.addObject("searchList", searchList);
+        mav.setViewName("sales/sales");
+        return mav;
+    }
 
 
 }//class end

@@ -3469,7 +3469,41 @@ ol {
 
 
 /* 홍승 */
+/* 헤더 검색기능 */
+.search_form {
+	width: 600px;
+	height: 50px;
+	border: 1px solid #ebebeb;
+	position: relative;
+	float: left;
+}
+
+.search_keyword {
+	width: 60%;
+	border: none;
+	height: 48px;
+	font-size: 16px;
+	color: #b2b2b2;
+	padding-left: 20px;
+}
+
+.site-btn-search {
+	position: absolute;
+	right: 0;
+	top: -1px;
+	height: 50px;
+	font-size: 14px;
+	color: #ffffff;
+	font-weight: 800;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 13px 30px 12px;
+	background: #ff0000;
+	border: none;
+}
+
 /* Mypage */
 .Complete-payment:before {
 	background-image: url("/images/card-approve-icon.png");
 }
+

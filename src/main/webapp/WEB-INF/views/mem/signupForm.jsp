@@ -7,7 +7,7 @@
 --%>
 <head>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+    <%@ include file="../header.jsp"%>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -21,7 +21,7 @@
 </head>
 <!-- 본문 시작 signupForm.jsp-->
 <div class="container">
-    <form name="Signupfrm" id="Signupfrm" action="/mem/signup" method="post">
+    <form name="Signupfrm" id="Signupfrm" action="/mem/signup" method="post" onsubmit="return send()">
         <div class="checkout__form">
             <h4>회원가입</h4>
             <div class="row">
@@ -32,12 +32,14 @@
                                 <p>아이디<span>*</span></p>
                                 <input type="text" name="mem_id" id="mem_id">
                             </div>
+                            <div id="panel"></div>
+                            <input type="button" value="중복확인" id="idcheck">
                         </div>
-                        <div class="col-lg-5">
-                            <div class="checkout__input">
-                                <p>이름<span>*</span></p>
-                                <input type="text" name="mem_name" id="mem_name">
-                            </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="checkout__input">
+                            <p>이름<span>*</span></p>
+                            <input type="text" name="mem_name" id="mem_name">
                         </div>
                     </div>
                 </div>
@@ -109,16 +111,49 @@
 </div>
 
 <script>
-    $('#mem_email').click(function () {
-        if ($('#mem_email').is(':checked')) {
-            $('#mem_email').val("N");
-        } else {
-            $('#mem_email').val('N');
-        }
-        if ($('#mem_email').val() == null) {
-            $('#mem_email').val('N');
-        }
+    // $('#mem_email').click(function () {
+    //     if ($('#mem_email').is(':checked')) {
+    //         $('#mem_email').val("N");
+    //     } else {
+    //         $('#mem_email').val('N');
+    //     }
+    //     if ($('#mem_email').val() == null) {
+    //         $('#mem_email').val('N');
+    //     }
+    // });
+
+    $(function (){
+        $.removeCookie("checkID");
     });
+
+    $('#idcheck').click(function (){
+        let params = "mem_id=" + $('#mem_id').val().trim();
+        $.post("idcheckcookieproc.do", params, checkID, "json");
+    });
+
+    function checkID(result) {
+        let count = eval(result.count);
+        if (count == 0) { //1 중복 0 사용가능
+            alert("사용가능한 아이디 입니다");
+            $.cookie("checkID", "PASS"); //중복확인을 했다는 증거
+        } else {
+            alert("중복된 아이디 입니다");
+            $("#mem_id").focus;
+        }//if end
+    }//checkID() end
+
+
+    function send() {
+        let checkID = $.cookie("checkID");
+        if(checkID == "PASS") {
+            return true;
+        }else {
+            alert("아이디 중복확인 해주세요");
+            $("#mem_id").focus;
+        }//if() end
+    }//send() end
+
+
 </script>
 
-<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+<%@ include file="../footer.jsp"%>

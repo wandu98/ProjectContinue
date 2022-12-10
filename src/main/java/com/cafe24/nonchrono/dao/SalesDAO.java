@@ -72,4 +72,12 @@ public class SalesDAO {
     public List<SalesDTO> list3(PagingDTO pagingDTO) {
         return sqlSession.selectList("sales.list3", pagingDTO);
     }
+    public List<SalesDTO> searchAll(String keyword) {
+        return sqlSession.selectList("sales.searchAll", keyword);
+    }
+
+    public List<SalesDTO> searchCategory(SalesDTO salesDTO) {
+        return sqlSession.selectList("sales.searchCategory", salesDTO);
+    }
+    
 }//class end

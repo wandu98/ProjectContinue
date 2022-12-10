@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+    <insert id="ntinsert" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
+        INSERT INTO tb_nt(nt_title, nt_cmt, nt_views)
+        VALUES (#{nt_title}, #{nt_cmt}, #{nt_views})
+    </insert>
+</mapper>
