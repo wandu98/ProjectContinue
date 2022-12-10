@@ -38,8 +38,11 @@
 
     <!-- Template Main CSS File -->
     <link href="/admin_assets/css/style.css" rel="stylesheet">
+
+    <%-- Script --%>
     <script src="/js/jquery-3.6.1.min.js"></script>
     <script src="/js/memmodify.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
 
 </head>
 

@@ -115,4 +115,5 @@ public class RecruitDAO {
         return sqlSession.selectOne("recruit.roleSeatCount", rcrbrd_num);
     } // roleSeatCount() end
 
+
 } // class end

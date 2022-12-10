@@ -1,14 +1,11 @@
 package com.cafe24.nonchrono.controller;
 
 
-
+import com.cafe24.nonchrono.dao.MemDAO;
 import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
 import com.cafe24.nonchrono.dao.SellerDAO;
-import com.cafe24.nonchrono.dto.MemDTO;
-import com.cafe24.nonchrono.dto.RecruitDTO;
-import com.cafe24.nonchrono.dto.SalesDTO;
-import com.cafe24.nonchrono.dto.SellerDTO;
+import com.cafe24.nonchrono.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -25,9 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.UUID;
-
+import java.util.*;
 
 @Controller
 @RequestMapping("/seller")
@@ -41,7 +36,6 @@ public class SellerController {
     SellerDAO sellerDAO;
     @Autowired
     RecruitDAO recruitDAO;
-
     @Autowired
     SalesDAO salesDAO;
 
@@ -56,9 +50,10 @@ public class SellerController {
 
     //판매자가 판매하는 리스트 현황
     @RequestMapping("/list")
-    public ModelAndView list() {
+    public ModelAndView list2() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("seller/list");
+        mav.addObject("list2", salesDAO.list2());
         return mav;
     }// list() end
 
@@ -109,6 +104,7 @@ public class SellerController {
         return mav;
     }//loginForm() end
 
+    //카테고리 검색
     @RequestMapping("/searchProc")
     @ResponseBody
     public String search(HttpServletRequest req) {
@@ -181,11 +177,36 @@ public class SellerController {
         return list;
     } // searchList() end
 
+    //상품등록
     @RequestMapping("/insert")
-    public String recruitInsert(@ModelAttribute SalesDTO salesDTO) {
+    public String selaseInsert(@RequestParam String gm_code, @RequestParam String ss_name, @RequestParam int ss_price, @RequestParam String ss_speriod, @RequestParam String ss_eperiod, @RequestParam int ss_stock, @RequestParam MultipartFile ss_img, @RequestParam String ss_status, @RequestParam String ss_description, @RequestParam int dv_num) {
+        String profile = "";
+        SalesDTO salesDTO = new SalesDTO();
+        if (ss_img != null && !ss_img.isEmpty()) {
+            profile = ss_img.getOriginalFilename();
+
+            try {
+                String path = ResourceUtils.getURL("classpath:static/images/product/sales_main").getPath();
+                ss_img.transferTo(new File(path + "/" + profile));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        salesDTO.setGm_code(gm_code);
+        salesDTO.setSs_name(ss_name);
+        salesDTO.setSs_price(ss_price);
+        salesDTO.setSs_speriod(ss_speriod);
+        salesDTO.setSs_eperiod(ss_eperiod);
+        salesDTO.setSs_stock(ss_stock);
+        salesDTO.setSs_img(profile);
+        salesDTO.setSs_status(ss_status);
+        salesDTO.setSs_description(ss_description);
+        salesDTO.setDv_num(dv_num);
         salesDAO.insert(salesDTO);
         return "redirect:/seller";
     } // insert() end
+
 
 
     // CKEditor 이미지 업로드
@@ -209,7 +230,7 @@ public class SellerController {
 
             //이미지 경로 생성
             String path = ResourceUtils.getURL("classpath:static/images").getPath(); // 이미지 경로 설정(폴더 자동 생성)
-            path = path + "/recruit/";
+            path = path + "/product/seller/";
 
             String ckUploadPath = path + uid + "_" + fileName;
             File folder = new File(path);
@@ -228,7 +249,7 @@ public class SellerController {
 
             String callback = request.getParameter("CKEditorFuncNum");
             printWriter = response.getWriter();
-            String fileUrl = "/recruit/ckImgSubmit?uid=" + uid + "&fileName=" + fileName; // 작성화면
+            String fileUrl = "/seller/ckImgSubmit?uid=" + uid + "&fileName=" + fileName; // 작성화면
             // 업로드시 메시지 출력
             printWriter.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1, \"url\":\"" + fileUrl + "\"}");
             printWriter.flush();
@@ -261,7 +282,7 @@ public class SellerController {
         // String path = "target/classes/static/images/recruit/";
         ServletContext application = req.getSession().getServletContext();
         String path = ResourceUtils.getURL("classpath:static/images").getPath(); // 이미지 경로 설정(폴더 자동 생성)
-        path = path + "/recruit/";
+        path = path + "/product/seller/";
         System.out.println("path : " + path);
         String sDirPath = path + uid + "_" + fileName;
 
