@@ -10,10 +10,11 @@
     </select>
 
     <!-- 품목 코드에 맞는 품목명 가져오기 -->
-    <select id="game" resultType="com.cafe24.nonchrono.dto.GameDTO">
+    <select id="game" resultType="String">
         select gm.gm_name
-        from tb_game as gm join tb_rcrboard as rb
+        from tb_rcrboard as rb join tb_game as gm
         on rb.gm_code = gm.gm_code
+        where rb.rcrbrd_num = #{rcrbrd_num}
     </select>
 
     <!-- 품목 테이블의 품목 코드와 품목명 가져오기 -->
@@ -136,16 +137,16 @@
     </select>
 
     <!-- 게시판 번호와 좌석 번호로 데이터가 존재하는지 확인 -->
-    <select id="roleSeatCheck" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
+    <select id="roleSeatCheck" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="String">
         SELECT rs_seat
         FROM tb_roleseat
         WHERE rcrbrd_num = #{rcrbrd_num} AND rs_seat = #{rs_seat}
     </select>
 
-    <select id="roleSeatCount" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
+    <!--<select id="roleSeatCount" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
         SELECT count(rs_seat)
         FROM tb_roleseat
         WHERE rcrbrd_num = #{rcrbrd_num}
-    </select>
+    </select>-->
 
 </mapper>

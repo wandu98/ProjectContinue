@@ -287,16 +287,17 @@
     } // attend() end
 
     // 역할을 선택하고 확정하는 내용
-    function roleConfirm(x, y) {
-        let num = y.substring(y.length - 1, y.length);
+    function roleConfirm(x, id) {
+        let num = id.substring(id.length - 1, id.length);
         let role = $('#roleSelect' + num + ' option:selected').val();
         //let role = $('#roleSelect' + num +' option:selected').val();
 
+        // 여기서 disabled 하는 이유는 모집장이 역할을 선택하고 나서 disabled를 해야 다른 역할을 선택할 수 없기 때문
         for (let i = 1; i <= x; i++) {
             for (let j = 1; j <= x; j++) {
                 if ($('#' + j + 'option' + i).val() == role) {
                     $('#roleSelect' + num).attr('disabled', true).niceSelect('update');
-                    $('#' + y).hide();
+                    $('#' + id).hide();
                 }
             }
 
@@ -359,7 +360,16 @@
                     "rs_seat": i
                 },
                 success: function (data) {
-                    if (data != null) {
+                    if (data != 0) {
+                        // 여기서 disabled 하는 이유는 모집장이 새로고침 후에도 해당 좌석은 역할 선택을 할 수 없게 해야하기 때문
+                        // $('#roleSelect' + i).val().attr('selected', 'selected');
+                        // console.log($('#roleSelect' + i).attr('id'));
+
+                        console.log(${rname});
+                        if (data == i) {
+                            $('#roleSelect' + i).val().prop('selected', true);
+                        }
+
                         $('#roleSelect' + i).attr('disabled', true).niceSelect('update');
                         $('#roleBtn' + i).hide();
                     }

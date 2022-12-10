@@ -42,8 +42,20 @@ public class RecruitController {
     public ModelAndView recruitList() {
         RecruitDTO dto = new RecruitDTO();
         ModelAndView mav = new ModelAndView();
-        mav.addObject("list", recruitDAO.list());
-        mav.addObject("game", recruitDAO.game());
+        List<RecruitDTO> list = recruitDAO.list();
+        List<String> gameList = new ArrayList<>();
+
+        for(int i = 0; i < list.size(); i++) {
+            dto = list.get(i);
+            int num = dto.getRcrbrd_num();
+            System.out.println("num : " + num);
+            gameList.add(recruitDAO.game(num));
+            System.out.println("게임 이름 : "+gameList.get(i));
+        }
+
+        mav.addObject("list", list);
+        mav.addObject("game", gameList);
+
         mav.setViewName("/recruit/recruit");
         return mav;
     } // recruitList() end
@@ -256,6 +268,11 @@ public class RecruitController {
         mav.addObject("recruitCount", recruitDAO.recruitCount(rcrbrd_num)); // 게시판의 모집장의 모집 횟수 카운트
         mav.addObject("roleList", recruitDAO.roleList(rcrbrd_num)); // 역할 테이블에서 역할 리스트 가져오기
         mav.addObject("roleNameSeat", recruitDAO.roleName(rcrbrd_num)); // 역할 배정 테이블에서 역할 이름과 좌석 번호 가져오기
+
+        List<RoleSeatDTO> rname = recruitDAO.roleName(rcrbrd_num);
+
+        System.out.println(rname);
+        mav.addObject("rname", rname); // 역할 이름 리스트
         mav.setViewName("recruit/recruitDetail");
         return mav;
     } // recruitDetail() end
@@ -325,12 +342,14 @@ public class RecruitController {
     } // roleSeatCheck() end
 
     // 게시판 번호와 좌석 번호로 좌석 수 확인
+    /*
     @RequestMapping("/roleSeatCount")
     @ResponseBody
     public int roleSeatCount(@RequestParam int rcrbrd_num) {
         int cnt = recruitDAO.roleSeatCount(rcrbrd_num);
         return cnt;
     } // roleSeatCount() end
+    */
 
     // 삭제 후 이메일 발송
 
