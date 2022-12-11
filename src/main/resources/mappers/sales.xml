@@ -56,21 +56,21 @@
     <insert id="insert" parameterType="com.cafe24.nonchrono.dto.SalesDTO">
         INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status,
                               ss_description, dv_num, ss_name)
-        VALUES (#{gm_code}, 'codingking', #{ss_price}, now(), #{ss_eperiod}, #{ss_stock}, #{ss_img}, #{ss_status},
+        VALUES (#{gm_code}, #{sl_id}, #{ss_price}, now(), #{ss_eperiod}, #{ss_stock}, #{ss_img}, #{ss_status},
                 #{ss_description}, #{dv_num}, #{ss_name})
     </insert>
 
     <select id="list2" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select ss_num, ss_name, ss_price, ss_status, ss_speriod
         from tb_sales
-        where sl_id = 'codingking'
+        where sl_id = #{sl_id}
         ORDER BY ss_num DESC
     </select>
 
     <select id="totalRowCount" resultType="int">
         select count(*)
         from tb_sales
-        where sl_id = 'codingking'
+        where sl_id = #{sl_id}
         group by sl_id
     </select>
 
@@ -82,7 +82,7 @@
                 from(
                     select ss_img, ss_price, ss_name
                     from tb_sales
-                    where sl_id = 'codingking'
+                    where sl_id = #{sl_id}
                     ) AA,
                     (select @rno :=0) BB
             )CC
@@ -93,7 +93,7 @@
     <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
         from tb_sales
-        where ss_name like #{keyword}
+        where ss_name like #{ss_name}
     </select>
 
     <select id="searchCategory" parameterType="com.cafe24.nonchrono.dto.SalesDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">

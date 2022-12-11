@@ -281,7 +281,7 @@ CREATE TABLE tb_mem
     ,
     apoint       int          NOT NULL default 0                    -- 누적적립금
     ,
-    mem_receive  char(1)                                            -- 수신여부
+    mem_receive  char(1)      NOT NULL default 'N'                  -- 수신여부
     ,
     good         int          NOT NULL default 0                    -- 좋아요
     ,
@@ -289,7 +289,7 @@ CREATE TABLE tb_mem
     ,
     mem_pic      varchar(255) NOT NULL default 'ProfilePicture.png' -- 프로필사진
     ,
-    mem_joindate date         NOT NULL default now()                -- 가입일
+    mem_joindate datetime     NOT NULL default now()                -- 가입일
 );
 
 
@@ -358,7 +358,7 @@ CREATE TABLE tb_nt
 
 -- 최다은
 -- 모집정보
-create table tb_recruitInfo
+create table tb_recruitinfo
 (
     ri_num     INT AUTO_INCREMENT primary key                    -- 모집일련번호
     ,
@@ -515,7 +515,7 @@ drop table tb_memdv;
 drop table tb_nt;
 drop table tb_order;
 drop table tb_question;
-drop table tb_recruitInfo;
+drop table tb_recruitinfo;
 drop table tb_review;
 drop table tb_sales;
 drop table tb_seller;

@@ -245,3 +245,11 @@ VALUES (1, 'oejdf9090', '당신이 아이티윌의 김두한입니까', '2022112
      ,(3, 'fjhdmj555', 'ㄴㅇㄱ', '20221121', 2, 0, 5)
      ,(1, 'gjdjj888', '갈비찜을 밥 위에 올려주세요', '20221121', 3, 0, 6);
 
+INSERT INTO tb_mem (mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_email, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate)
+VALUES ('gjdjj888', '1234', '방이동도도민경', '김민경', '12345', '서울특별시 중구 세종대로', '67', '02-6466-4564', 'kimminkyeong@naver.com', '19980224', 'SILVER', 5000, 5000, 'N', 0, 0, 'pic.jpg', now());
+
+INSERT INTO tb_mem (mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_email, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate)
+VALUES ('oejdf9090', '1234', '장지동십만우', '구천우', '34567', '서울특별시 서초구 서초대로78길', '5 대각빌딩', '010-4363-5464', 'kimjoowan@naver.com', '19951103', 'GOLD', 2500, 12500, 'N', 0, 0, 'pic2.jpg', now());
+
+INSERT INTO tb_mem (mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_email, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate)
+VALUES ('fjhdmj555', '1234', '정릉동핵주먹', '최다은', '12345', '서울특별시 서대문구 통일로', '97', '010-4893-7777', 'kimjoowan@naver.com', '19880520', 'SILVER', 3000, 3000, 'Y', 0, 0,  'pic3.jpg', now());
