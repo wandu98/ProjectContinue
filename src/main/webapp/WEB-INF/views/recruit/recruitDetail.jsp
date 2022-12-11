@@ -1,4 +1,4 @@
-<%--
+<%@ page import="javax.websocket.Session" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 2022-12-04
@@ -165,7 +165,7 @@
                     </div>
                     <div class="col-lg-1"></div>
                     <div class="col-lg-4 detail_profile">
-                        <img alt="" src="/images/profilePicture.png" class="img-thumbnail img-fluid"
+                        <img alt="" id="profile0" src="/images/profilePicture.png" class="img-thumbnail img-fluid"
                              style="width: 100%; height: auto"/>
                         <div class="detail_profile_hover">
                             닉네임 : ${memDetail.mem_nick}<br>
@@ -205,17 +205,26 @@
                     <c:forEach var="row" begin="1" end="${detail.rcrbrd_max}" step="1" varStatus="vs">
                         <div class="col-lg-3 col-md-4 col-sm-4">
                             <div class="product__item">
-                                <div id="recruitmember/${vs.count}" class="product__item__pic set-bg"
+                                <div id="profile${vs.count}" class="product__item__pic set-bg"
                                      data-setbg="/images/profilePicture.png">
-                                    <input type="hidden" id="recruitseat" name="recruitseat" value="${vs.count}">
+                                    <c:forEach var="pic" items="${memPic}" varStatus="vs4">
+                                        <c:if test="${vs.count == vs4.count and pic != '' and pic != null}">
+                                            <img src="/images/profile/${pic}"
+                                                 style="height: 100%; overflow: hidden">
+                                        </c:if>
+                                    </c:forEach>
+                                    <input type="hidden" id="recruitseat${vs.count}" name="recruitseat${vs.count}"
+                                           value="${vs.count}">
                                     <ul class="product__item__pic__hover">
                                         <c:choose>
-                                            <c:when test="${1 == 1}">
-                                                <li><span id="attendbtn" onclick="attend()">참가</span></li>
-                                            </c:when>
-                                            <c:otherwise>
+                                            <c:when test="${attendCount != 0 or detail.mem_id eq mem_id}">
                                                 <li><span><i class="fa fa-heart"></i></span></li>
                                                 <li><span>신고</span></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li><span id="attendBtn${vs.count}"
+                                                          onclick="attend(${vs.count}, '<%=(String)session.getAttribute("mem_id")%>')">참가</span>
+                                                </li>
                                             </c:otherwise>
                                         </c:choose>
                                     </ul>
@@ -237,12 +246,18 @@
                                     </c:choose>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
+                                    <h6 id="attendText${vs.count}" name="attendText${vs.count}">
+                                        <c:forEach var="mem" items="${memName}" varStatus="vs4">
+                                            <c:if test="${vs.count == mem.ri_seat}">
+                                                ${memNick[mem.ri_seat-1]} (${mem.mem_id})
+                                            </c:if>
+                                        </c:forEach>
+                                    </h6>
                                     <h5 id="roleText${vs.count}" name="roleText${vs.count}">
                                         <c:forEach var="role" items="${roleNameSeat}" varStatus="vs3">
                                             <%-- vs.count번째 자리에 vs.count와 자리 번호가 동일하면 역할 부여 --%>
                                             <c:if test="${vs.count == role.rs_seat}">
-                                                ${role.rl_name}
+                                                ${role.rl_name.trim()}
                                             </c:if>
                                         </c:forEach>
                                     </h5>
@@ -250,9 +265,21 @@
                             </div>
                         </div>
                     </c:forEach>
-
-
                 </div>
+                <hr>
+                <form>
+                    <br>
+                    <h3 style="text-align: center; font-weight: bold">댓글 작성</h3>
+                    <br>
+                    <div class="text-center">
+                        <textarea placeholder="댓글 작성란..."
+                                  style="width: 100%; height: 150px; font-size: 16px; color: #6f6f6f; padding-left: 20px; margin-bottom: 24px; border: 1px solid #ebebeb; border-radius: 4px; padding-top: 12px; resize: none;"></textarea>
+                    </div>
+                    <button type="submit" class="site-btn" style="float: right">댓글 작성</button>
+                    <br><br><br>
+                    <hr>
+                </form>
+
             </div>
         </div>
     </div>
@@ -261,20 +288,26 @@
 <script>
 
     // 참가에 대한 내용
-    function attend() {
+    function attend(num, mem_id) {
+
         $.ajax({
             url: "/recruit/attend",
             type: "post",
             data: {
                 "rcrbrd_num": "${detail.rcrbrd_num}",
-                "mem_id": "${memDetail.mem_id}",
-                "rcrbrd_seat": $("#recruitseat").val()
+                "mem_id": mem_id,
+                "ri_seat": num
             },
             success: function (data) {
-                if (1 == 1) {
-                    alert("참가 신청이 완료되었습니다.");
-                    $("#attendbtn").css("cursor", "default");
-                    $("#attendbtn").css("background-color", "gray");
+                if (mem_id != '${detail.mem_id}' || 0 == ${attendCount}) {
+                    for (let i = 1; i <= ${detail.rcrbrd_max}; i++) {
+                        $("#attendBtn" + i).attr('onclick', '').unbind('click');
+                        $("#attendBtn" + i).css("cursor", "default");
+                        $("#attendBtn" + i).css("background-color", "lightgray");
+                        $("#attendBtn" + i).css("border", "solid 2px gray");
+                    }
+
+                    alert(mem_id + "님, 참가 신청이 완료되었습니다.");
                 } else {
                     alert("참가 신청에 실패하였습니다.");
                 }
@@ -361,23 +394,26 @@
                 },
                 success: function (data) {
                     if (data != 0) {
+
+                        $('#roleSelect' + i).val($('#roleText' + i).text().trim());
+                        // console.log($('#roleSelect'+i).val()); 해당 select box id의 value값
+                        // console.log($('#roleText'+i).text().trim()); 선택된 값
+
                         // 여기서 disabled 하는 이유는 모집장이 새로고침 후에도 해당 좌석은 역할 선택을 할 수 없게 해야하기 때문
-                        // $('#roleSelect' + i).val().attr('selected', 'selected');
-                        // console.log($('#roleSelect' + i).attr('id'));
-
-                        console.log(${rname});
-                        if (data == i) {
-                            $('#roleSelect' + i).val().prop('selected', true);
-                        }
-
                         $('#roleSelect' + i).attr('disabled', true).niceSelect('update');
                         $('#roleBtn' + i).hide();
                     }
                 },
-                error: function (request,status,error) {
-                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                error: function (request, status, error) {
+                    console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
                 }
             })
+
+            // 만약 역할 추가를 안 했다면 select box와 버튼이 안 보이게 처리
+            if ($('#roleSelect' + i).val() == null) {
+                $('.nice-select').css('display', 'none').niceSelect('update');
+                $('#roleBtn' + i).hide();
+            }
         }
 
     });

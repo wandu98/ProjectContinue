@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -122,5 +123,57 @@ public class RecruitDAO {
         return sqlSession.selectOne("recruit.roleSeatCount", rcrbrd_num);
     } // roleSeatCount() end
     */
+
+    public List<RecruitInfoDTO> attendMembers(int rcrbrd_num) {
+        return sqlSession.selectList("recruit.attendMembers", rcrbrd_num);
+    } // attendMembers() end
+
+    public int attendCount(int rcrbrd_num, String mem_id) {
+        RecruitInfoDTO recruitInfoDTO = new RecruitInfoDTO();
+        recruitInfoDTO.setRcrbrd_num(rcrbrd_num);
+        recruitInfoDTO.setMem_id(mem_id);
+        return sqlSession.selectOne("recruit.attendCount", recruitInfoDTO);
+    }
+
+    public List<RecruitInfoDTO> memName(int rcrbrd_num) {
+        return sqlSession.selectList("recruit.memName", rcrbrd_num);
+    }
+
+    public List<String> memNick(int rcrbrd_num) {
+        int count = (int) sqlSession.selectOne("recruit.rcrbrdMax", rcrbrd_num);
+        List<String> list = new ArrayList<>();
+        RecruitInfoDTO recruitInfoDTO = new RecruitInfoDTO();
+        recruitInfoDTO.setRcrbrd_num(rcrbrd_num);
+        for (int i = 1; i <= count; i++) {
+            recruitInfoDTO.setRi_seat(i);
+            String nick = sqlSession.selectOne("recruit.memNick", recruitInfoDTO);
+            if (nick != null) {
+                //System.out.println(nick.trim());
+                list.add(nick);
+            } else {
+                list.add("");
+            }
+        }
+        //System.out.println(list);
+        return list;
+    }
+
+    public List<String> memPic(int rcrbrd_num) {
+        int count = (int) sqlSession.selectOne("recruit.rcrbrdMax", rcrbrd_num);
+        List<String> list = new ArrayList<>();
+        RecruitInfoDTO recruitInfoDTO = new RecruitInfoDTO();
+        recruitInfoDTO.setRcrbrd_num(rcrbrd_num);
+        for (int i = 1; i <= count; i++) {
+            recruitInfoDTO.setRi_seat(i);
+            String pic = sqlSession.selectOne("recruit.memPic", recruitInfoDTO);
+            if (pic != null) {
+                list.add(pic.trim());
+            } else {
+                list.add("");
+            }
+        }
+        // System.out.println(list);
+        return list;
+    } // membersPic() end
 
 } // class end

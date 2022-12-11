@@ -230,3 +230,16 @@ select gm.gm_name
 from tb_rcrboard as rb join tb_game as gm
                             on rb.gm_code = gm.gm_code
 where rb.rcrbrd_num = 7;
+
+SELECT mem_id, ri_seat, ri_num
+FROM tb_recruitInfo
+WHERE rcrbrd_num = 7;
+
+SELECT mem_id, ri_seat
+FROM tb_recruitInfo
+WHERE rcrbrd_num = 7;
+
+SELECT mm.mem_nick
+FROM tb_recruitInfo as ri JOIN tb_mem as mm
+                               ON ri.mem_id = mm.mem_id
+WHERE ri.rcrbrd_num = 7 AND ri.ri_seat = 3;
