@@ -93,7 +93,7 @@
                     <p>수신여부(선택)</p>
                     <label for="mem_recieve">
                         e-mail 수신동의
-                        <input type="checkbox" name="mem_recieve" id="mem_recieve" value="N">
+                        <input type="checkbox" name="mem_receive" id="mem_receive" value="N">
                         <span class="checkmark"></span>
                     </label>
                 </div>
@@ -111,16 +111,16 @@
 </div>
 
 <script>
-    // $('#mem_email').click(function () {
-    //     if ($('#mem_email').is(':checked')) {
-    //         $('#mem_email').val("N");
-    //     } else {
-    //         $('#mem_email').val('N');
-    //     }
-    //     if ($('#mem_email').val() == null) {
-    //         $('#mem_email').val('N');
-    //     }
-    // });
+    $('#mem_receive').click(function () {
+        if ($('#mem_receive').is(':checked')) {
+            $('#mem_receive').val('Y');
+        } else {
+            $('#mem_receive').val('N');
+        }
+        if ($('#mem_receive').val() == null) {
+            $('#mem_receive').val('N');
+        }
+    });
 
     $(function (){
         $.removeCookie("checkID");

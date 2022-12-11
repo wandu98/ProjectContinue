@@ -121,7 +121,7 @@
 
     <!-- 모집 상세에서 참가 신청 -->
     <insert id="attend" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO">
-        INSERT INTO tb_recruitInfo (mem_id, rcrbrd_num, ri_seat)
+        INSERT INTO tb_recruitinfo (mem_id, rcrbrd_num, ri_seat)
         VALUES (#{mem_id}, #{rcrbrd_num}, #{ri_seat})
     </insert>
 
@@ -199,14 +199,14 @@
     <!-- 참여한 멤버 리스트 불러오기 -->
     <select id="attendMembers" parameterType="int" resultType="com.cafe24.nonchrono.dto.RecruitInfoDTO">
         SELECT mem_id, ri_seat, ri_num
-        FROM tb_recruitInfo
+        FROM tb_recruitinfo
         WHERE rcrbrd_num = #{rcrbrd_num}
     </select>
 
     <!-- 로그인한 사용자가 해당 게시물에서 참가 버튼을 눌렀는지 여부 -->
     <select id="attendCount" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="int">
         SELECT count(*)
-        FROM tb_recruitInfo
+        FROM tb_recruitinfo
         WHERE rcrbrd_num = #{rcrbrd_num}
           AND mem_id in (#{mem_id})
     </select>
@@ -214,14 +214,14 @@
     <!-- 자리당 아이디 조회 -->
     <select id="memName" parameterType="int" resultType="com.cafe24.nonchrono.dto.RecruitInfoDTO">
         SELECT mem_id, ri_seat
-        FROM tb_recruitInfo
+        FROM tb_recruitinfo
         WHERE rcrbrd_num = #{rcrbrd_num}
     </select>
 
     <!-- 자리당 닉네임 조회 -->
     <select id="memNick" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="String">
         SELECT mm.mem_nick
-        FROM tb_recruitInfo as ri JOIN tb_mem as mm
+        FROM tb_recruitinfo as ri JOIN tb_mem as mm
         ON ri.mem_id = mm.mem_id
         WHERE ri.rcrbrd_num = #{rcrbrd_num} AND ri.ri_seat = #{ri_seat}
     </select>
@@ -236,7 +236,7 @@
     <!-- 자리당 이미지 조회 -->
     <select id="memPic" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="String">
         SELECT mm.mem_pic
-        FROM tb_recruitInfo as ri JOIN tb_mem as mm
+        FROM tb_recruitinfo as ri JOIN tb_mem as mm
         ON ri.mem_id = mm.mem_id
         WHERE ri.rcrbrd_num = #{rcrbrd_num} AND ri.ri_seat = #{ri_seat}
     </select>
