@@ -15,5 +15,6 @@ public class ReviewDTO {
     private int rv_star;
     private String rv_filename;
     private int ss_num;
+    private int rnum;
 
 }

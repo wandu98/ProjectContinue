@@ -2,7 +2,9 @@ package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.*;
 import com.cafe24.nonchrono.dto.MemDTO;
+import com.cafe24.nonchrono.dto.OrderDTO;
 import com.cafe24.nonchrono.dto.PagingDTO;
+import com.cafe24.nonchrono.dto.SalesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,11 +51,29 @@ public class MypageController {
     @Autowired
     DetailDAO detailDAO;
 
+    @Autowired
+    OrderDAO orderDAO;
+
 
     @RequestMapping("/mypage")
     public ModelAndView mypage(HttpSession session) {
         ModelAndView mav = new ModelAndView();
         String mem_id = (String) session.getAttribute("mem_id");
+        String path = "";
+        Boolean yn;
+        try {
+            path = ResourceUtils.getURL("classpath:static/images/profile").getPath();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        File folder = new File(path + "/" + mem_id);
+        if (folder.exists()) {
+            yn = true;
+            mav.addObject("YN", yn);
+        } else {
+            yn = false;
+            mav.addObject("YN", yn);
+        }
         if (mem_id != null) {
             mav.addObject("meminfo", memDAO.myList(mem_id));
             mav.addObject("qslist", questionDAO.count(mem_id));
@@ -137,13 +158,62 @@ public class MypageController {
         ModelAndView mav = new ModelAndView();
         String mem_id = session.getAttribute("mem_id").toString();
         mav.addObject("couponlist", couponlistDAO.list(mem_id));
+        mav.addObject("point", memDAO.myList(mem_id));
         mav.setViewName("mypage/coupon");
         return mav;
     }
 
     @RequestMapping("/review")
-    public ModelAndView review() {
+    public ModelAndView review(HttpSession session, PagingDTO pagingDTO, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        String mem_id = (String) session.getAttribute("mem_id");
+        pagingDTO.setMem_id(mem_id);
+
+        int totalRowCount = reviewDAO.totalRowCount(mem_id);
+
+        //페이징
+        int numPerPage = 5; //한 페이지당 레코드 갯수
+        int pagePerBlock = 10; //페이지 리스트
+
+        //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
+        //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
+        String pageNum = request.getParameter("pageNum");
+        if(pageNum==null) {
+            pageNum = "1";
+        }//if end
+
+        //현재 보고 있는 페이지
+        int currentPage = Integer.parseInt(pageNum);
+
+        int startRow = (currentPage-1)*numPerPage+1; //1  | 1
+        int endRow = currentPage*numPerPage; //5
+        pagingDTO.setStartRow(startRow);
+        pagingDTO.setEndRow(endRow);
+
+        double totcnt = (double)totalRowCount/numPerPage;
+        int totalPage = (int)Math.ceil(totcnt);
+
+        double d_page = (double)currentPage/pagePerBlock; // 1/10 -> 0.1
+        //페이지 묶음 번호
+        int Pages = (int)Math.ceil(d_page)-1; //0  1~10페이지 : 0, 11~20 : 1
+        //페이지 묶음의 시작 페이지 번호
+        int startPage = Pages*pagePerBlock; //0*10 -> 0
+        //페이지 묶음의 마지막 페이지 번호
+        int endPage = startPage + pagePerBlock+1; //0+10+1 = 11
+
+        List list = null;
+        if(totalRowCount>0) {
+            list = reviewDAO.list(pagingDTO); // 1, 5
+        } else {
+            list = Collections.EMPTY_LIST;
+        }//if end
+
+        mav.addObject("pageNum", currentPage);
+        mav.addObject("count", totalRowCount);
+        mav.addObject("totalPage", totalPage);
+        mav.addObject("startPage", startPage);
+        mav.addObject("endPage", endPage);
+        mav.addObject("rvlist", list);
         mav.setViewName("mypage/review");
         return mav;
     }
@@ -161,6 +231,21 @@ public class MypageController {
     public ModelAndView memmodify(HttpSession session) {
         ModelAndView mav = new ModelAndView();
         String mem_id = (String) session.getAttribute("mem_id");
+        String path = "";
+        Boolean yn;
+        try {
+            path = ResourceUtils.getURL("classpath:static/images/profile").getPath();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        File folder = new File(path + "/" + mem_id);
+        if (folder.exists()) {
+            yn = true;
+            mav.addObject("YN", yn);
+        } else {
+            yn = false;
+            mav.addObject("YN", yn);
+        }
         mav.setViewName("mypage/memmodify");
         mav.addObject("mem", memDAO.modify_list(mem_id));
         return mav;
@@ -174,10 +259,18 @@ public class MypageController {
         MemDTO memDTO = new MemDTO();
         if (mem_pic != null && !mem_pic.isEmpty()) {
             profile = mem_pic.getOriginalFilename();
+            profile.toLowerCase();
+            String[] img_name = profile.split("\\.");
+            profile = "thumb." + img_name[1];
 
             try {
                 String path = ResourceUtils.getURL("classpath:static/images/profile").getPath();
-                mem_pic.transferTo(new File(path + "/" + profile));
+                File folder = new File(path + "/" + mem_id);
+                if (!folder.exists()) {
+                    folder.mkdirs();
+                }
+                mem_pic.transferTo(new File(path + "/" + mem_id + "/" + profile));
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -198,6 +291,24 @@ public class MypageController {
         memDAO.modify_update(memDTO);
 
         return "redirect:/mypage/memmodify";
+    }
+
+    @RequestMapping("/purchaseHistory")
+    public ModelAndView purchaseHistory(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        String mem_id = (String) session.getAttribute("mem_id");
+        List<OrderDTO> list = orderDAO.purchaseHistoryList(mem_id);
+        List list1 = new ArrayList<>();
+        for (int i=0; i< list.size(); i++) {
+            String od_num = list.get(i).getOd_num();
+            list1.add(orderDAO.purchaseHistoryProduct(od_num));
+        }
+        System.out.println(list);
+        System.out.println(list1);
+        mav.addObject("historylist", list);
+        mav.addObject("historyproduct", list1);
+        mav.setViewName("mypage/purchaseHistory");
+        return mav;
     }
 
 

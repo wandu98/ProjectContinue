@@ -37,7 +37,8 @@
                     <table>
                         <thead>
                         <tr>
-                            <th class="shoping__product">상품</th>
+                            <th></th>
+                            <th class="shoping__product" style="padding-left: 5%; text-align: center">상품</th>
                             <th>가격</th>
                             <th>배송비</th>
                             <th>합계</th>
@@ -47,13 +48,12 @@
                         <tbody>
                         <c:forEach var="row" items="${list}" varStatus="vs">
                             <tr>
+                                <td class="shoping__cart__price">
+                                    1
+                                </td>
                                 <td class="shoping__cart__product">
-                                    <table>
-                                        <tr>
-                                            <td><img src="/images/${row.ss_img}" alt="" style="max-width: 80px"></td>
-                                            <td><h6>${row.ss_name}</h6></td>
-                                        </tr>
-                                    </table>
+                                        <img src="/images/${row.ss_img}" alt="" style="max-width: 80px"> <%--상품이미지 경로 수정해야함--%>
+                                        <h5>${row.ss_name}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
                                     ${row.ss_price}원
@@ -66,7 +66,7 @@
                                 </td>
                                 <td class="shoping__cart__item__close">
                                     <form id="form1" name="form1" method="post" action="/wishlist/delete">
-                                        <input type="hidden", id="ws_num" name="ws_num" value="${row.ws_num}">
+                                        <input type="hidden" id="ws_num" name="ws_num" value="${row.ws_num}">
                                         <span class="icon_close" onclick="wsDelete()"></span>
                                     </form>
                                 </td>

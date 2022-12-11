@@ -19,3 +19,7 @@ from tb_mem mem join (
                         group by mem_id
                     ) qu
 on mem.mem_id = qu.mem_id;
+
+update tb_mem
+set mem_pic = 'ProfilePicture.png'
+where mem_id = 'gjdjj888';

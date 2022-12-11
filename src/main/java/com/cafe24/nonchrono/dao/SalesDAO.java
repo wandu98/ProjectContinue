@@ -50,4 +50,6 @@ public class SalesDAO {
         return sqlSession.selectList("sales.searchCategory", salesDTO);
     }
 
+
+
 }//class end

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order">
+
+    <select id="historylist" resultType="com.cafe24.nonchrono.dto.OrderDTO">
+        select dt.od_num, total, od_date
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num
+        where mem_id = #{mem_id}
+        group by dt.od_num
+    </select>
+
+    <select id="historyproduct" resultType="String">
+        select ss_name
+        from tb_detail dt join tb_sales sl
+                               on dt.ss_num = sl.ss_num
+        where od_num = #{od_num}
+    </select>
+</mapper>
