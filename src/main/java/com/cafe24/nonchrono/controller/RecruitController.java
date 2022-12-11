@@ -39,24 +39,34 @@ public class RecruitController {
 
     // 모집 게시판 홈
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelAndView recruitList() {
+    public ModelAndView recruitList(HttpSession session) {
         RecruitDTO dto = new RecruitDTO();
         ModelAndView mav = new ModelAndView();
         List<RecruitDTO> list = recruitDAO.list();
         List<String> gameList = new ArrayList<>();
+        List<String> attendMembers = new ArrayList<>();
 
         for(int i = 0; i < list.size(); i++) {
             dto = list.get(i);
             int num = dto.getRcrbrd_num();
-            System.out.println("num : " + num);
+            // 게임 이름 가져오기
             gameList.add(recruitDAO.game(num));
-            System.out.println("게임 이름 : "+gameList.get(i));
+            // 참여한 모집원들 수
+            attendMembers.add(String.valueOf(recruitDAO.attendMembers(num).size()));
+
+            //System.out.println("num : " + num);
+            //System.out.println("게임 이름 : "+gameList.get(i));
         }
 
-        mav.addObject("list", list);
-        mav.addObject("game", gameList);
-
-        mav.setViewName("/recruit/recruit");
+        String mem_id = (String) session.getAttribute("mem_id");
+        if (mem_id != null && !mem_id.equals("guest")) {
+            mav.addObject("list", list);
+            mav.addObject("game", gameList);
+            mav.addObject("attendCount", attendMembers);
+            mav.setViewName("/recruit/recruit");
+        } else {
+            mav.setViewName("mem/loginForm");
+        }
         return mav;
     } // recruitList() end
 
@@ -97,7 +107,7 @@ public class RecruitController {
                     message += title;
                     // System.out.println(recruitDAO.gm_list2(title));
                     list2.add(recruitDAO.gm_list2(title));
-                    System.out.println(list2.get(i));
+                    // System.out.println(list2.get(i));
                     if (i < size - 1) {
                         message += ",";
                     } // if end
@@ -109,7 +119,7 @@ public class RecruitController {
                 // 타이틀 코드를 message에 담기
                 for (int j = 0; j < size; j++) {
                     String code = list2.get(j);
-                    System.out.println("code : " + code);
+                    // System.out.println("code : " + code);
                     message += code;
                     if (j < size - 1) {
                         message += ",";
@@ -169,7 +179,7 @@ public class RecruitController {
 
             String ckUploadPath = path + uid + "_" + fileName;
             File folder = new File(path);
-            System.out.println("path : " + path);// 이미지 저장경로 console에 확인//해당 디렉토리 확인
+            // System.out.println("path : " + path);// 이미지 저장경로 console에 확인//해당 디렉토리 확인
             if (!folder.exists()) {
                 try {
                     folder.mkdirs();// 폴더 생성
@@ -218,7 +228,7 @@ public class RecruitController {
         ServletContext application = req.getSession().getServletContext();
         String path = ResourceUtils.getURL("classpath:static/images").getPath(); // 이미지 경로 설정(폴더 자동 생성)
         path = path + "/recruit/";
-        System.out.println("path : " + path);
+        // System.out.println("path : " + path);
         String sDirPath = path + uid + "_" + fileName;
 
         File imgFile = new File(sDirPath);
@@ -260,19 +270,30 @@ public class RecruitController {
 
     // 모집 정보 상세보기
     @RequestMapping("/detail/{rcrbrd_num}")
-    public ModelAndView recruitDetail(@PathVariable int rcrbrd_num) {
+    public ModelAndView recruitDetail(@PathVariable int rcrbrd_num, HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        String mem_id = (String) session.getAttribute("mem_id");
+        // System.out.println(mem_id);
+
         mav.addObject("detail", recruitDAO.detail(rcrbrd_num)); // 모집 정보 상세보기
         mav.addObject("gameDetail", recruitDAO.gameDetail(rcrbrd_num)); // 게임 정보 상세보기
         mav.addObject("memDetail", recruitDAO.memDetail(rcrbrd_num)); // 모집장 정보 상세보기
         mav.addObject("recruitCount", recruitDAO.recruitCount(rcrbrd_num)); // 게시판의 모집장의 모집 횟수 카운트
         mav.addObject("roleList", recruitDAO.roleList(rcrbrd_num)); // 역할 테이블에서 역할 리스트 가져오기
         mav.addObject("roleNameSeat", recruitDAO.roleName(rcrbrd_num)); // 역할 배정 테이블에서 역할 이름과 좌석 번호 가져오기
-
+        mav.addObject("attendMembers", recruitDAO.attendMembers(rcrbrd_num)); // 참여자 목록 가져오기
+        mav.addObject("attendCount", recruitDAO.attendCount(rcrbrd_num, mem_id));
+        mav.addObject("memName", recruitDAO.memName(rcrbrd_num)); // 자리당 id 조회
+        mav.addObject("memNick", recruitDAO.memNick(rcrbrd_num)); // 자리당 닉네임 조회
+        mav.addObject("mem_id", mem_id);
+        mav.addObject("memPic", recruitDAO.memPic(rcrbrd_num));
+        /*
         List<RoleSeatDTO> rname = recruitDAO.roleName(rcrbrd_num);
 
         System.out.println(rname);
         mav.addObject("rname", rname); // 역할 이름 리스트
+        */
+
         mav.setViewName("recruit/recruitDetail");
         return mav;
     } // recruitDetail() end
@@ -311,7 +332,7 @@ public class RecruitController {
     public void roleConfirm(@ModelAttribute RoleSeatDTO roleSeatDTO, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html; charset=UTF-8");
         PrintWriter out = resp.getWriter();
-        System.out.println(roleSeatDTO.toString());
+        // System.out.println(roleSeatDTO.toString());
         int cnt = recruitDAO.roleConfirm(roleSeatDTO);
         if (cnt == 0) {
             out.println("<script>alert('해당 역할은 모집이 마감되었습니다.'); history.go(-1);</script>");
@@ -350,6 +371,7 @@ public class RecruitController {
         return cnt;
     } // roleSeatCount() end
     */
+
 
     // 삭제 후 이메일 발송
 
