@@ -199,6 +199,8 @@ CREATE TABLE tb_seller
     ,
     sl_name     varchar(30)  NOT NULL             -- 사업자명
     ,
+    sl_zip      varchar(6)   NOT NULL             -- 우편번호
+    ,
     sl_adr1     varchar(255) NOT NULL             -- 주소1
     ,
     sl_adr2     varchar(255) NOT NULL             -- 주소2

@@ -21,6 +21,11 @@
         WHERE sl_id = #{sl_id} AND sl_pw = #{sl_pw} AND sl_grade IN ('SVip', 'SGold', 'SSilver', 'SBronze', 'SNew');
     </select>
 
+    <select id="check" resultType="com.cafe24.nonchrono.dto.SellerDTO">
+        SELECT sl_pw
+        FROM tb_seller
+    </select>
+
     <insert id="insert" parameterType="com.cafe24.nonchrono.dto.SellerDTO">
         INSERT INTO tb_seller(sl_id, sl_pw, sl_name, sl_adr1, sl_adr2, sl_phone, sl_birth, sl_grade, sl_receive, sl_number, sl_bank, sl_bankcode)
         VALUES (#{sl_id}, #{sl_pw}, #{sl_name}, #{sl_adr1}, #{sl_adr2}, #{sl_phone}, #{sl_birth}, #{sl_grade}, #{sl_receive}, #{sl_number}, #{sl_bank}, #{sl_bankcode})
