@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -29,7 +30,7 @@ public class ContinueApplication {
 	} // sqlSessionFactory() end
 
 	@Bean
-	public SqlSessionTemplate sqlSession(SqlSessionFactory factory) {
+	public SqlSessionTemplate sqlSession(SqlSessionFactory factory) throws Exception{
 		return new SqlSessionTemplate(factory);
 	} // sqlSession() end
 

@@ -75,7 +75,7 @@
                             <div class="blog__sidebar__recent__item__text">
                                 <div style="margin: 7%">
                                     <ol>
-                                        <li></li>
+                                        <li id=""></li>
                                         <br>
                                         <li></li>
                                         <br>
@@ -106,7 +106,6 @@
             <div class="col-lg-8 col-md-7">
                 <div class="row">
 
-
                     <c:forEach var="row" items="${list}" varStatus="vs">
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <a href="/recruit/detail/${row.rcrbrd_num}">
@@ -121,7 +120,7 @@
                                             <li><i class="fa fa-comment-o"></i> 댓글 수</li>
                                         </ul>
                                         <h5>${row.rcrbrd_subject}</h5>
-                                        <p>${game[vs.index].gm_name} (<span id="list${vs.count}" name="list${vs.count}">0</span>
+                                        <p>${game[vs.index]} (<span id="list${vs.count}" name="list${vs.count}">${attendCount.get(vs.index)}</span>
                                             / ${row.rcrbrd_max})</p>
                                     </div>
                                 </div>
@@ -149,14 +148,16 @@
         location.href = "/recruit/form";
     } // recruitForm() end
 
+    /*
+    function roleSeatCount(cnt, num) {
+        //alert(cnt); id=list번호
+        //alert(num); 게시글 번호
 
-    function roleSeatCount() {
-        <c:forEach var="row2" items="${list}" varStatus="vs2">
         $.ajax({
             url: "/recruit/roleSeatCount",
             type: "post",
             data: {
-                "rcrbrd_num": ${row2.rcrbrd_num}
+                "rcrbrd_num": num
             },
             success: function (data) {
                 console.log(data);
@@ -172,8 +173,10 @@
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
         })
-        </c:forEach>
-    }
+
+        onclick="roleSeatCount(${vs.count},${row.rcrbrd_num})"
+
+    }*/
 
 </script>
 

@@ -7,7 +7,7 @@
 --%>
 <head>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ include file="../header.jsp"%>
+    <%@ include file="../header.jsp" %>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -91,11 +91,10 @@
                 </div>
                 <div class="checkout__input__checkbox">
                     <p>수신여부(선택)</p>
-                    <label for="mem_recieve">
-                        e-mail 수신동의
-                        <input type="checkbox" name="mem_recieve" id="mem_recieve" value="N">
-                        <span class="checkmark"></span>
-                    </label>
+                    e-mail 수신동의
+                    <input type="hidden" id="mem_receive" name="mem_receive" value="N">
+                    <input type="checkbox" name="receive" id="receive">
+                    <span class="checkmark"></span>
                 </div>
                 <%--<div class="checkout__input__checkbox">
                     <label for="recieve2">
@@ -111,22 +110,19 @@
 </div>
 
 <script>
-    // $('#mem_email').click(function () {
-    //     if ($('#mem_email').is(':checked')) {
-    //         $('#mem_email').val("N");
-    //     } else {
-    //         $('#mem_email').val('N');
-    //     }
-    //     if ($('#mem_email').val() == null) {
-    //         $('#mem_email').val('N');
-    //     }
-    // });
+    $('#receive').click(function () {
+        if ($('#receive').is(':checked')) {
+            $('#mem_receive').val('Y');
+        } else {
+            $('#mem_receive').val('N');
+        }
+    });
 
-    $(function (){
+    $(function () {
         $.removeCookie("checkID");
     });
 
-    $('#idcheck').click(function (){
+    $('#idcheck').click(function () {
         let params = "mem_id=" + $('#mem_id').val().trim();
         $.post("idcheckcookieproc.do", params, checkID, "json");
     });
@@ -145,9 +141,9 @@
 
     function send() {
         let checkID = $.cookie("checkID");
-        if(checkID == "PASS") {
+        if (checkID == "PASS") {
             return true;
-        }else {
+        } else {
             alert("아이디 중복확인 해주세요");
             $("#mem_id").focus;
         }//if() end
@@ -156,4 +152,4 @@
 
 </script>
 
-<%@ include file="../footer.jsp"%>
+<%@ include file="../footer.jsp" %>

@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ include file="../header.jsp"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../header.jsp" %>
 
 <!--본문시작 loginForm.jsp-->
 <%--<%if(mem_id.equals("guest") || mem_pw.equals("guest") || mem_grade.equals("guest")) {
@@ -16,39 +16,100 @@
     }//if end
     //--------------------------------------------------
 %>--%>
+<style>
+    .checkout__input {
+        position: relative;
+        margin: 10px 0;
+    }
+
+    .checkout__input > input {
+        background: transparent;
+        border: none;
+        border-bottom: solid 1px #ccc;
+        padding: 20px 0px 5px 0px;
+        font-size: 14pt;
+        width: 100%;
+    }
+
+    input::placeholder {
+        color: transparent;
+    }
+
+    input:placeholder-shown + label {
+        color: #aaa;
+        font-size: 14pt;
+        top: 15px;
+    }
+
+    input:focus + label, label {
+        color: #8aa1a1;
+        font-size: 10pt;
+        pointer-events: none;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+    }
+
+    input:focus, input:not(:placeholder-shown) {
+        border-bottom: solid 1px #8aa1a1;
+        outline: none;
+    }
+</style>
+
 
 <div class="container">
-    <h4>로그인</h4>
+    <br><br>
+    <h4 style="font-weight: bold; margin-left: 5%">로그인</h4>
+    <hr>
     <form name="Loginfrm" id="Loginfrm" action="/mem/login" method="post" onsubmit="return memberCheck()">
         <!-- myscript.js -->
-        <table class="table">
-            <div class="col-lg-4 col-md-4">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <br>
                 <div class="checkout__input">
-                    <p>아이디</p>
+                    <label id="mem_id">아이디</label>
+                    <br>
                     <%--<input type="text" id="mem_id" value="<%=c_id%>" name="mem_id">--%>
-                    <input type="text" id="mem_id" value="" name="mem_id">
+                    <input type="text" id="mem_id" name="mem_id" class="col-lg-9 col-md-9" style="letter-spacing: 10px">
                 </div>
+                <br>
                 <div class="checkout__input">
-                    <p>비밀번호</p>
-                    <input type="text" id="mem_pw" name="mem_pw">
+                    <label id="mem_pw">비밀번호</label>
+                    <br>
+                    <input type="password" id="mem_pw" name="mem_pw" class="col-lg-9 col-md-9" style="letter-spacing: 15px">
+                </div>
+                <br>
+                <input type="checkbox" class="checkout__input__checkbox">
+                <%-- <input type="checkbox" name="c_id" value="SAVE" <%if(!c_id.isEmpty()){out.print("checked");}%>>--%>
+                로그인 유지
+                <span class="checkmark"></span>
+                <div>
+                    <br>
+                    <div class="checkout__input login float-left" style="padding-left: 3%">
+                        <button type="submit" class="site-btn">로그인</button>
+                    </div>
+                    <div class="checkout__input float-left" style="padding-left: 3%">
+                        <button type="button" onclick="location.href='/mem/signup'" class="site-btn">회원 가입하기</button>
+                    </div>
+                    <div class="checkout__input float-left" id="logout" style="padding-left: 3%">
+                        <button type="button" class="site-btn" onclick="location.href='/mem/logout'">로그아웃</button>
+                    </div>
                 </div>
             </div>
-            <div class="checkout__input__checkbox">
-               <%-- <input type="checkbox" name="c_id" value="SAVE" <%if(!c_id.isEmpty()){out.print("checked");}%>>--%>
-                로그인유지
-                <span class="checkmark"></span>
+            <div class="col-lg-3 col-md-3">
             </div>
-            <div class="checkout__input login">
-                <input type="submit" class="site-btn" value="로그인">
-            </div>
-            <div class="checkout__input" id="logout">
-                <input type="button" class="site-btn" value="로그아웃" onclick="location.href='/mem/logout'">
-            </div>
-            <div class="checkout__input">
-                <button type="button" onclick="location.href='/mem/signup'" class="site-btn">회원 가입하기</button>
-            </div>
-        </table>
+        </div>
     </form>
 </div>
 
-<%@ include file="../footer.jsp"%>
+<br>
+<br>
+<br>
+<br>
+<%@ include file="../footer.jsp" %>

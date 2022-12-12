@@ -12,16 +12,18 @@
 
     <select id="idxTopProduct" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select sa.ss_num, ss_name, ss_price, ss_img
-        from tb_sales sa join tb_detail dt
-                              on sa.ss_num = dt.ss_num
+        from tb_sales sa
+                 join tb_detail dt
+                      on sa.ss_num = dt.ss_num
         group by dt.ss_num
         order by count(*) desc
     </select>
 
     <select id="idxReviewProduct" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select sa.ss_num, ss_name, ss_price, ss_img
-        from tb_sales sa join tb_review rv
-                              on sa.ss_num = rv.ss_num
+        from tb_sales sa
+                 join tb_review rv
+                      on sa.ss_num = rv.ss_num
         group by sa.ss_num
         order by count(*) desc
     </select>
@@ -34,17 +36,64 @@
 
     <select id="idxRankingSales" resultType="com.cafe24.nonchrono.dto.GameDTO">
         select ga.gm_name
-        from tb_detail dt join tb_sales sa
-                               on dt.ss_num = sa.ss_num join tb_game ga
-                                                             on sa.gm_code = ga.gm_code
+        from tb_detail dt
+                 join tb_sales sa
+                      on dt.ss_num = sa.ss_num
+                 join tb_game ga
+                      on sa.gm_code = ga.gm_code
         group by ga.gm_code
         order by count(*) desc
     </select>
 
+    <!-- 목록 출력-->
+    <select id="list" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        FROM tb_sales
+        ORDER BY ss_num DESC
+    </select>
+
+    <!-- 상품 글 등록하기 -->
+    <insert id="insert" parameterType="com.cafe24.nonchrono.dto.SalesDTO">
+        INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status,
+                              ss_description, dv_num, ss_name)
+        VALUES (#{gm_code}, #{sl_id}, #{ss_price}, now(), #{ss_eperiod}, #{ss_stock}, #{ss_img}, #{ss_status},
+                #{ss_description}, #{dv_num}, #{ss_name})
+    </insert>
+
+    <select id="list2" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select ss_num, ss_name, ss_price, ss_status, ss_speriod
+        from tb_sales
+        where sl_id = #{sl_id}
+        ORDER BY ss_num DESC
+    </select>
+
+    <select id="totalRowCount" resultType="int">
+        select count(*)
+        from tb_sales
+        where sl_id = #{sl_id}
+        group by sl_id
+    </select>
+
+    <select id="list3" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+    <![CDATA[
+        select *
+        from(
+                select *,  @rno := @rno +1 as r
+                from(
+                    select ss_img, ss_price, ss_name
+                    from tb_sales
+                    where sl_id = #{sl_id}
+                    ) AA,
+                    (select @rno :=0) BB
+            )CC
+        where r>= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+    
     <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
         from tb_sales
-        where ss_name like #{keyword}
+        where ss_name like #{ss_name}
     </select>
 
     <select id="searchCategory" parameterType="com.cafe24.nonchrono.dto.SalesDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
@@ -52,5 +101,4 @@
         from tb_sales
         where gm_code = #{gm_code} and ss_name like #{ss_name}
     </select>
-
 </mapper>

@@ -4,16 +4,30 @@
 <mapper namespace="recruit">
     <!-- 목록 출력 -->
     <select id="list" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
-        SELECT rcrbrd_num, mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max
+        SELECT rcrbrd_num,
+               mem_id,
+               rcrbrd_subject,
+               rcrbrd_content,
+               rcrbrd_pw,
+               rcrbrd_views,
+               rcrbrd_date,
+               rcrbrd_edate,
+               rcrbrd_ip,
+               gm_code,
+               rcrbrd_status,
+               rcrbrd_adr,
+               rcrbrd_max
         FROM tb_rcrboard
         ORDER BY rcrbrd_num DESC
     </select>
 
     <!-- 품목 코드에 맞는 품목명 가져오기 -->
-    <select id="game" resultType="com.cafe24.nonchrono.dto.GameDTO">
+    <select id="game" resultType="String">
         select gm.gm_name
-        from tb_game as gm join tb_rcrboard as rb
-        on rb.gm_code = gm.gm_code
+        from tb_rcrboard as rb
+                 join tb_game as gm
+                      on rb.gm_code = gm.gm_code
+        where rb.rcrbrd_num = #{rcrbrd_num}
     </select>
 
     <!-- 품목 테이블의 품목 코드와 품목명 가져오기 -->
@@ -31,24 +45,52 @@
 
     <!-- 게시판 번호에 맞는 상세 정보 가져오기 -->
     <select id="detail" parameterType="int" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
-        SELECT rcrbrd_num, mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max
+        SELECT rcrbrd_num,
+               mem_id,
+               rcrbrd_subject,
+               rcrbrd_content,
+               rcrbrd_pw,
+               rcrbrd_views,
+               rcrbrd_date,
+               rcrbrd_edate,
+               rcrbrd_ip,
+               gm_code,
+               rcrbrd_status,
+               rcrbrd_adr,
+               rcrbrd_max
         FROM tb_rcrboard
         WHERE rcrbrd_num = #{rcrbrd_num}
     </select>
 
     <!-- 게시판의 품목(게임)의 상세 정보 가져오기 -->
     <select id="gameDetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.GameDTO">
-        SELECT gm.gm_code,  gm.gm_name, gm.gm_price, gm.gm_level, gm.gm_category, gm.gm_img
-        FROM tb_rcrboard as rb join tb_game as gm
-        on rb.gm_code = gm.gm_code
+        SELECT gm.gm_code, gm.gm_name, gm.gm_price, gm.gm_level, gm.gm_category, gm.gm_img
+        FROM tb_rcrboard as rb
+                 join tb_game as gm
+                      on rb.gm_code = gm.gm_code
         WHERE rcrbrd_num = #{rcrbrd_num}
     </select>
 
     <!-- 게시판의 모집장의 상세 정보 가져오기 -->
     <select id="memDetail" resultType="com.cafe24.nonchrono.dto.MemDTO">
-        SELECT rb.mem_id, mm.mem_pw, mm.mem_nick, mm.mem_name, mm.mem_zip, mm.mem_adr1, mm.mem_adr2, mm.mem_phone, mm.mem_birth, mm.mem_grade, mm.upoint, mm.apoint, mm.mem_receive, mm.good, mm.buyer_bad
-        from tb_mem as mm join tb_rcrboard as rb
-        on rb.mem_id = mm.mem_id
+        SELECT rb.mem_id,
+               mm.mem_pw,
+               mm.mem_nick,
+               mm.mem_name,
+               mm.mem_zip,
+               mm.mem_adr1,
+               mm.mem_adr2,
+               mm.mem_phone,
+               mm.mem_birth,
+               mm.mem_grade,
+               mm.upoint,
+               mm.apoint,
+               mm.mem_receive,
+               mm.good,
+               mm.buyer_bad
+        from tb_mem as mm
+                 join tb_rcrboard as rb
+                      on rb.mem_id = mm.mem_id
         WHERE rb.rcrbrd_num = #{rcrbrd_num}
     </select>
 
@@ -58,8 +100,8 @@
         FROM tb_rcrboard
         group by mem_id
         having mem_id = (select mem_id
-        from tb_rcrboard
-        where rcrbrd_num = #{rcrbrd_num})
+                         from tb_rcrboard
+                         where rcrbrd_num = #{rcrbrd_num})
     </select>
 
     <!-- 멤버 아이디로 닉네임 가져오기 -->
@@ -71,13 +113,15 @@
 
     <!-- 모집 게시판 글 등록하기 -->
     <insert id="insert" parameterType="com.cafe24.nonchrono.dto.RecruitDTO">
-        INSERT INTO tb_rcrboard (mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date, rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max)
-        VALUES (#{mem_id}, #{rcrbrd_subject}, #{rcrbrd_content}, #{rcrbrd_pw}, #{rcrbrd_views}, now(), #{rcrbrd_edate}, #{rcrbrd_ip}, #{gm_code}, '진행중', #{rcrbrd_adr}, #{rcrbrd_max})
+        INSERT INTO tb_rcrboard (mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date,
+                                 rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max)
+        VALUES (#{mem_id}, #{rcrbrd_subject}, #{rcrbrd_content}, #{rcrbrd_pw}, #{rcrbrd_views}, now(), #{rcrbrd_edate},
+                #{rcrbrd_ip}, #{gm_code}, '진행중', #{rcrbrd_adr}, #{rcrbrd_max})
     </insert>
 
     <!-- 모집 상세에서 참가 신청 -->
     <insert id="attend" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO">
-        INSERT INTO tb_recruitInfo (mem_id, rcrbrd_num, ri_seat)
+        INSERT INTO tb_recruitinfo (mem_id, rcrbrd_num, ri_seat)
         VALUES (#{mem_id}, #{rcrbrd_num}, #{ri_seat})
     </insert>
 
@@ -88,7 +132,8 @@
 
     <!-- 부모 게시글 번호 찾아오기 -->
     <select id="numSearch" resultType="int">
-        SELECT MAX(rcrbrd_num) FROM tb_rcrboard
+        SELECT MAX(rcrbrd_num)
+        FROM tb_rcrboard
     </select>
 
     <!-- 역할 테이블에서 내용 가져오기 -->
@@ -101,8 +146,9 @@
     <!-- 인덱스 페이지 월간 타이틀 순위 모집순 -->
     <select id="idxRankingRecruit" resultType="com.cafe24.nonchrono.dto.GameDTO">
         select ga.gm_code, ga.gm_name, count(*)
-        from tb_rcrboard rb join tb_game ga
-                                 on rb.gm_code = ga.gm_code
+        from tb_rcrboard rb
+                 join tb_game ga
+                      on rb.gm_code = ga.gm_code
         group by ga.gm_code
         order by count(*) desc
     </select>
@@ -117,8 +163,9 @@
     <!-- 인덱스 페이지 모집 현황 참여 인원수 -->
     <select id="idxrcrbrdCount" parameterType="int" resultType="int">
         select count(ri.rcrbrd_num)
-        from tb_recruitinfo ri right join tb_rcrboard rb
-                                          on ri.rcrbrd_num = rb.rcrbrd_num
+        from tb_recruitinfo ri
+                 right join tb_rcrboard rb
+                            on ri.rcrbrd_num = rb.rcrbrd_num
         where rb.rcrbrd_num = #{rcrbrd_num}
     </select>
 
@@ -136,16 +183,62 @@
     </select>
 
     <!-- 게시판 번호와 좌석 번호로 데이터가 존재하는지 확인 -->
-    <select id="roleSeatCheck" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
+    <select id="roleSeatCheck" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="String">
         SELECT rs_seat
         FROM tb_roleseat
-        WHERE rcrbrd_num = #{rcrbrd_num} AND rs_seat = #{rs_seat}
+        WHERE rcrbrd_num = #{rcrbrd_num}
+          AND rs_seat = #{rs_seat}
     </select>
 
-    <select id="roleSeatCount" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
+    <!--<select id="roleSeatCount" parameterType="com.cafe24.nonchrono.dto.RoleSeatDTO" resultType="int">
         SELECT count(rs_seat)
         FROM tb_roleseat
         WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>-->
+
+    <!-- 참여한 멤버 리스트 불러오기 -->
+    <select id="attendMembers" parameterType="int" resultType="com.cafe24.nonchrono.dto.RecruitInfoDTO">
+        SELECT mem_id, ri_seat, ri_num
+        FROM tb_recruitinfo
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
+
+    <!-- 로그인한 사용자가 해당 게시물에서 참가 버튼을 눌렀는지 여부 -->
+    <select id="attendCount" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="int">
+        SELECT count(*)
+        FROM tb_recruitinfo
+        WHERE rcrbrd_num = #{rcrbrd_num}
+          AND mem_id in (#{mem_id})
+    </select>
+
+    <!-- 자리당 아이디 조회 -->
+    <select id="memName" parameterType="int" resultType="com.cafe24.nonchrono.dto.RecruitInfoDTO">
+        SELECT mem_id, ri_seat
+        FROM tb_recruitinfo
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
+
+    <!-- 자리당 닉네임 조회 -->
+    <select id="memNick" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="String">
+        SELECT mm.mem_nick
+        FROM tb_recruitinfo as ri JOIN tb_mem as mm
+        ON ri.mem_id = mm.mem_id
+        WHERE ri.rcrbrd_num = #{rcrbrd_num} AND ri.ri_seat = #{ri_seat}
+    </select>
+
+    <!-- 해당 게시물에 모집 최대 인원 조회 -->
+    <select id="rcrbrdMax" parameterType="int" resultType="int">
+        SELECT rcrbrd_max
+        FROM tb_rcrboard
+        WHERE rcrbrd_num = #{rcrbrd}
+    </select>
+
+    <!-- 자리당 이미지 조회 -->
+    <select id="memPic" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="String">
+        SELECT mm.mem_pic
+        FROM tb_recruitinfo as ri JOIN tb_mem as mm
+        ON ri.mem_id = mm.mem_id
+        WHERE ri.rcrbrd_num = #{rcrbrd_num} AND ri.ri_seat = #{ri_seat}
     </select>
 
 </mapper>

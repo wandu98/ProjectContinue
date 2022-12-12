@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">상품입력</h5>
-                        <form action="/seller/insert">
+                        <form action="/seller/insert" method="post" enctype="multipart/form-data">
                             <input type="hidden" id="mem_id" name="mem_id" value="${sessionScope.mem_id}">
                             <input type="hidden" id="gm_code" name="gm_code" value="">
 
@@ -123,10 +123,15 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">상품내용</label>
                                 <div class="col-sm-10">
-                                    <!-- Quill Editor Full -->
-                                    <div class="quill-editor-full" style="min-height: 400px" name="ss_description"
-                                         id="ss_description"></div>
-                                    <!-- End Quill Editor Full -->
+                                    <textarea name="ss_description" id="ss_description"></textarea>
+                                    <script type="text/javascript">    // 글쓰기 editor 및 사진 업로드 기능
+                                    CKEDITOR.replace('ss_description',
+                                        {
+                                            width: '100%',
+                                            height: '500',
+                                            filebrowserUploadUrl: '/seller/imageUpload'
+                                        });
+                                    </script>
                                 </div>
                             </div>
 
@@ -172,19 +177,12 @@
                                     <input type="text" class="form-control" name="dv_num" id="dv_num" required>
                                 </div>
                             </div>
-
-
-                            <form action="" method="POST">
-                                <textarea name="text" id="editor"></textarea>
-                                <p><input type="submit" value="전송"></p>
-                            </form>
-
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">썸네일 사진 업로드</label>
+                                <label class="col-sm-2 col-form-label">대표 이미지</label>
                                 <div class="col-lg-3">
                                     <div class="checkout__input">
-                                        <label for="ss_img" class="col-sm 2 col-form-label"> 사진 선택</label>
                                         <img id="pic_view" src="" style="width: 90%">
+                                        <label for="ss_img" class="col-sm 2 col-form-label"> 사진 선택</label>
                                         <input type="file" id="ss_img" name="ss_img" style="display: none">
                                     </div>
                                 </div>
@@ -216,11 +214,6 @@
 <script>
     <%--현재 날짜 가져오기--%>
     document.getElementById('ss_speriod').value = new Date().toISOString().substring(0, 10);
-
-
-
-
-
 
     /* 클릭하면 모달창 보이기 */
     $(document).ready(function () {
@@ -359,12 +352,7 @@
 
 </script>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-<script>
-    ClassicEditor.create( document.querySelector( '#editor' ), {
-        language: "ko"
-    } );
-</script>
+
+
 
 <%@ include file="sellerfooter.jsp" %>
