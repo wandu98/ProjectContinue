@@ -376,7 +376,7 @@ public class RecruitController {
 
     @RequestMapping("/getMoreContents")
     @ResponseBody
-    public ModelAndView getMoreContents(Integer startCount, Integer endCount) {
+    public ModelAndView getMoreContents(int startCount, int endCount) {
         ModelAndView mav = new ModelAndView();
         List<RecruitDTO> list = recruitDAO.getMoreContents(startCount, endCount);
         mav.addObject("more", list);
