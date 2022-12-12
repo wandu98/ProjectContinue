@@ -18,7 +18,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
                             <div class="col-lg-4">
-                                <img src="/images/profile/<c:choose><c:when test="${YN eq true}">${meminfo.mem_id}/${meminfo.mem_pic}</c:when><c:when test="${YN eq false}">${meminfo.mem_pic}</c:when>  </c:choose>">
+                                <c:if test="${YN eq true}"><img src="/images/profile/${meminfo.mem_id}/${meminfo.mem_pic}"></c:if>
                             </div>
                             <div class="col-lg-8">
                                 <table style="width: 100%; height: 100%">
