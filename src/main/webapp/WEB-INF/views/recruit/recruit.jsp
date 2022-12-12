@@ -75,16 +75,10 @@
                             <div class="blog__sidebar__recent__item__text">
                                 <div style="margin: 7%">
                                     <ol>
-                                        <li id="king1"></li>
+                                        <c:forEach var="king" items="${rcrKing}" varStatus="vs2">
+                                        <li id="king${vs2.count}">${king.mem_nick}(${king.mem_id})</li>
                                         <br>
-                                        <li id="king2"></li>
-                                        <br>
-                                        <li id="king3"></li>
-                                        <br>
-                                        <li id="king4"></li>
-                                        <br>
-                                        <li id="king5"></li>
-                                        <br>
+                                        </c:forEach>
                                     </ol>
                                 </div>
                             </div>
@@ -105,7 +99,8 @@
             </div>
             <div class="col-lg-8 col-md-7">
                 <div class="row">
-
+                    <input type="hidden" id="startCount" name="startCount" value=9>
+                    <input type="hidden" id="endCount" name="endCount" value=17>
                     <c:forEach var="row" items="${list}" varStatus="vs">
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <a href="/recruit/detail/${row.rcrbrd_num}">
@@ -136,7 +131,7 @@
             </div>
 
             <div style="margin: auto">
-                <button id="more" class="btn btn-outline-danger">더보기 (more)</button>
+                <button type="button" id="more" class="btn btn-outline-danger" onclick="more($('#startCount').val(), $('#plusCount').val())">더보기 (more)</button>
             </div>
         </div>
     </div>
@@ -148,34 +143,78 @@
         location.href = "/recruit/form";
     } // recruitForm() end
 
-    /*
-    function roleSeatCount(cnt, num) {
-        //alert(cnt); id=list번호
-        //alert(num); 게시글 번호
+    function more(startCount, endCount) {
+        // alert(startCount);
 
         $.ajax({
-            url: "/recruit/roleSeatCount",
             type: "post",
-            data: {
-                "rcrbrd_num": num
-            },
-            success: function (data) {
-                console.log(data);
+            url: "/recruit/getMoreContents",
+            data: startCount, plusCount,
+            success: function (result) {
 
-                for (let i = 1; i <= data.length; i++) {
-                    $("#list" + i).text(data[i]);
-                    console.log(data[i]);
-                }
+                $('#startCount').val($('#startCount').val+9);
+                $('#endCount').val($('#endCount').val+9);
 
-
+                alert($('#startCount').val());
+                alert($('#endCount').val());
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
         })
 
-        onclick="roleSeatCount(${vs.count},${row.rcrbrd_num})"
+    } // more() end
 
+/*    function more(id, cnt) {
+        let list_length = ${list.size()};
+        let aname = id + "_btn";
+        let callLength = list_length;
+
+        $('#startCount').val(callLength);
+        $('#viewCount').val(cnt);
+
+        $.ajax({
+            type: "post",
+            url: "/recruit/getMoreContents"
+            data: $('#recruitMain').serialize(),
+            dataType: "json",
+            success: function (data) {
+                if (data.resultCnt > 0) {
+                    let list = data.resultlist;
+                    if(row.rcrbrd_subject != '') {
+                        $('#'+aname).attr('href', "javascript:moreContent('"+id+"', "+cnt+");");
+                        getMoreList(list);
+                    } else {
+                        $("#"+id).remove();
+                    }
+                }
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
+
+    function getMoreList(list) {
+        let content = "";
+        let length = list.length;
+        for (let i = 0; i < list.length; i++) {
+            let row = list[i];
+            if (row.rcrbrd_subject != '') {
+                content += '<div class="col-lg-4 col-md-4 col-sm-4">';
+                content += '<div class=\"<a href="/recruit/detail/' + row.rcrbrd_num+ '">\"';
+                content += '<div class="blog__item" style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">';
+                content += '<div class="blog__item__pic">';
+                content += '<img src="/images/thumb/' + row.gm_code + '/thumb.jpg" alt="">';
+                content += '</div>';
+                content += '<div class="blog__item__text">';
+                content += '</div>';
+                content += '</div>';
+                content += '</a>';
+                content += '</div>';
+            }
+        }
+        $("#more_list div:last").after(content);
     }*/
 
 </script>

@@ -374,6 +374,16 @@ public class RecruitController {
     } // roleSeatCount() end
     */
 
+    @RequestMapping("/getMoreContents")
+    @ResponseBody
+    public ModelAndView getMoreContents(Integer startCount, Integer endCount) {
+        ModelAndView mav = new ModelAndView();
+        List<RecruitDTO> list = recruitDAO.getMoreContents(startCount, endCount);
+        mav.addObject("more", list);
+        mav.setViewName("/recruit/recruit");
+        return mav;
+    } // getMoreContents() end
+
 
     // 삭제 후 이메일 발송
 

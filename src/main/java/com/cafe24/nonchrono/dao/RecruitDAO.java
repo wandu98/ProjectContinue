@@ -178,8 +178,14 @@ public class RecruitDAO {
         return list;
     } // membersPic() end
 
-    public List<Object> rcrKing() {
+    public List<Map<String, Object>> rcrKing() {
         return sqlSession.selectList("recruit.rcrKing");
     } // rcrKing() end
 
+    public List<RecruitDTO> getMoreContents(Integer startCount, Integer endCount) {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("startCount", startCount);
+        map.put("endCount", endCount);
+        return sqlSession.selectList("recruit.more", map);
+    }
 } // class end
