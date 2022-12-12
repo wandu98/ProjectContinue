@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="../auth.jsp" %>
+<%@ include file="../seller/sellerauth.jsp" %>
 
 
 <!DOCTYPE html>
@@ -348,7 +348,7 @@
         </li><!-- End Register Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-login.html">
+            <a class="nav-link collapsed" href="/seller/loginForm">
                 <i class="bi bi-box-arrow-in-right"></i>
                 <span>Login</span>
             </a>

@@ -97,12 +97,51 @@ public class SellerController {
         return mav;
     }//one_sentence() end
 
+    //판매자로그인
     @RequestMapping("/loginForm")
     public ModelAndView loginForm() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("seller/loginForm");
         return mav;
     }//loginForm() end
+
+    @RequestMapping("/login")
+    public ModelAndView loginProc(@ModelAttribute SellerDTO dto, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
+        String id =dto.getSl_id();
+        //System.out.println("id : "+id);
+        String pw = dto.getSl_pw();
+        //System.out.println("pw : "+pw);
+        ModelAndView mav = new ModelAndView();
+        String grade = sellerDAO.login(id, pw);
+
+        if ( grade != null) {
+            mav.setViewName("redirect:/seller");
+            session.setAttribute("sl_id", id);
+            session.setAttribute("sl_pw", pw);
+        } else {
+            mav.setViewName("/seller/loginalert");
+            req.setAttribute("msg", "아이디와 비번이 일치하지 않습니다");
+        }//if end
+
+        return mav;
+    }//loginProc() end
+
+    //회원가입
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signProc(@ModelAttribute SellerDTO dto) {
+        sellerDAO.sellerInsert(dto);
+        return "redirect:/seller";
+    }//signProc() end
+
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String sellersignup() {
+        return "seller/sellerSignup";
+    }
+
+
+
+
+
 
     //카테고리 검색
     @RequestMapping("/searchProc")
