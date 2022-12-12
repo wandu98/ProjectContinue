@@ -75,13 +75,19 @@ public class SellerController {
 
     //배송정책
     @RequestMapping("/delivery")
-    public ModelAndView delivery(/*RequestAttribute DeliveryDTO deliveryDTO */ ) {
+    public ModelAndView delivery() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("seller/delivery");
-        //sellerDAO.insert(deliveryDTO);
-
+        mav.addObject("dv_list", sellerDAO.dv_list());
         return mav;
     }// delivery() end
+
+    //배송정책 추가
+    @RequestMapping("/dv_insert")
+    public String dv_insert(@ModelAttribute DeliveryDTO deliveryDTO) {
+        sellerDAO.dv_insert(deliveryDTO);
+        return "redirect:seller";
+    }
 
     ///후기관리
     @RequestMapping("/review")
@@ -109,14 +115,14 @@ public class SellerController {
 
     @RequestMapping("/login")
     public ModelAndView loginProc(@ModelAttribute SellerDTO dto, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
-        String id =dto.getSl_id();
+        String id = dto.getSl_id();
         //System.out.println("id : "+id);
         String pw = dto.getSl_pw();
         //System.out.println("pw : "+pw);
         ModelAndView mav = new ModelAndView();
         String grade = sellerDAO.login(id, pw);
 
-        if ( grade != null) {
+        if (grade != null) {
             mav.setViewName("redirect:/seller");
             session.setAttribute("sl_id", id);
             session.setAttribute("sl_pw", pw);
@@ -139,10 +145,6 @@ public class SellerController {
     public String sellersignup() {
         return "seller/sellerSignup";
     }
-
-
-
-
 
 
     //카테고리 검색
@@ -248,7 +250,6 @@ public class SellerController {
         salesDAO.insert(salesDTO);
         return "redirect:/seller";
     } // insert() end
-
 
 
     // CKEditor 이미지 업로드

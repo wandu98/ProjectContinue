@@ -6,7 +6,7 @@ To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="sellerheader.jsp"></jsp:include>
+<%@include file="sellerheader.jsp"%>
 
 <main id="main" class="main">
 
@@ -51,25 +51,17 @@ To change this template use File | Settings | File Templates.
                                             <h5 class="card-title">나만의 배송정책을 만들어봅시다</h5>
 
                                             <!-- Horizontal Form -->
-                                            <form>
-                                                <div class="row mb-3">
-                                                    <label
-                                                           class="col-sm-2 col-form-label">이름</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control"
-                                                               placeholder="이름을 입력해주세요">
-                                                    </div>
-                                                </div>
+                                            <form action="/seller/dv_insert" method="post">
                                                 <div class="row md-3">
                                                     <label
-                                                           class="col-sm-2 col-form-label">택배사</label>
+                                                            class="col-sm-2 col-form-label">택배사</label>
                                                     <div class="col-sm-10">
-                                                        <select id="inputState" class="form-select">
+                                                        <select id="inputState" class="form-select" name="dv_courier">
                                                             <option selected>택배회사를 선택해주세요</option>
-                                                            <option>CJ택배</option>
-                                                            <option>우체국</option>
-                                                            <option>로젠</option>
-                                                            <option>한진택배</option>
+                                                            <option value="CJ택배">CJ택배</option>
+                                                            <option value="우체국">우체국</option>
+                                                            <option value="로젠">로젠</option>
+                                                            <option value="한진택배">한진택배</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -81,19 +73,19 @@ To change this template use File | Settings | File Templates.
                                                     <div class="col-sm-10">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                   name="gridRadios" id="gridRadios1"
-                                                                   value="option1" checked>
+                                                                   name="dv_how" id="dv_how"
+                                                                   value="택배" checked>
                                                             <label class="form-check-label"
-                                                                   for="gridRadios1">
+                                                                   for="dv_how">
                                                                 택배
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                   name="gridRadios" id="gridRadios2"
-                                                                   value="option2">
+                                                                   name="dv_how" id="dv_how2"
+                                                                   value="화물">
                                                             <label class="form-check-label"
-                                                                   for="gridRadios2">
+                                                                   for="dv_how2">
                                                                 화물
                                                             </label>
                                                         </div>
@@ -102,25 +94,27 @@ To change this template use File | Settings | File Templates.
 
                                                 <div class="row mb-3">
                                                     <label
-                                                           class="col-sm-2 col-form-label">배송비용</label>
+                                                            class="col-sm-2 col-form-label">배송비용</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" name="dv_fee">
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-3">
                                                     <label
-                                                           class="col-sm-2 col-form-label">반품교환</label>
+                                                            class="col-sm-2 col-form-label">교환비용</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" placeholder="편도 1회 가격">
+                                                        <input type="text" class="form-control" name="dv_exfee"
+                                                               placeholder="왕복 1회 가격">
                                                     </div>
                                                 </div>
 
                                                 <div class="row mb-3">
                                                     <label
-                                                           class="col-sm-2 col-form-label">배송비</label>
+                                                            class="col-sm-2 col-form-label">반품비용</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" name="dv_rffee"
+                                                               placeholder="편도 1회 가격">
                                                     </div>
                                                 </div>
 
@@ -131,17 +125,17 @@ To change this template use File | Settings | File Templates.
                                                     <div class="col-sm-10">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                   name="gridRadios" id="gridRadios3"
-                                                                   value="option1" checked>
+                                                                   name="dv_extrafee" id="gridRadios3"
+                                                                   value=2500 checked>
                                                             <label class="form-check-label"
                                                                    for="gridRadios3">
-                                                                사용
+                                                                사용(+2500)
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
-                                                                   name="gridRadios" id="gridRadios4"
-                                                                   value="option2">
+                                                                   name="dv_extrafee" id="gridRadios4"
+                                                                   value="0">
                                                             <label class="form-check-label"
                                                                    for="gridRadios4">
                                                                 사용안함
@@ -152,7 +146,7 @@ To change this template use File | Settings | File Templates.
 
                                                 <div class="row mb-3">
                                                     <label
-                                                           class="col-sm-2 col-form-label">출고지역</label>
+                                                            class="col-sm-2 col-form-label">출고지역</label>
                                                     <div class="col-sm-10">
                                                         <div style="width: 100%">
                                                             <div style="float: left">
@@ -166,9 +160,10 @@ To change this template use File | Settings | File Templates.
                                                                        class="form-control" value="우편번호 찾기"
                                                                        style="float: right"></div>
                                                         </div>
-                                                        <input type="text" id="sample3_address" class="form-control"
+                                                        <input type="text" id="sample3_address" name="dv_adr1"
+                                                               class="form-control"
                                                                placeholder="주소" style="margin-bottom: 10px">
-                                                        <input type="text" id="sample3_detailAddress"
+                                                        <input type="text" id="sample3_detailAddress" name="dv_adr2"
                                                                class="form-control" style="margin-bottom: 10px"
                                                                placeholder="상세주소">
                                                         <input type="text" id="sample3_extraAddress"
@@ -264,7 +259,7 @@ To change this template use File | Settings | File Templates.
 
                                                 <div class="row mb-3">
                                                     <label
-                                                           class="col-sm-2 col-form-label">반품지역</label>
+                                                            class="col-sm-2 col-form-label">반품지역</label>
                                                     <div class="col-sm-10">
                                                         <div style="width: 100%">
                                                             <div style="float: left">
@@ -279,8 +274,9 @@ To change this template use File | Settings | File Templates.
                                                                        style="float: right"></div>
                                                         </div>
                                                         <input type="text" id="sample4_address2" class="form-control"
+                                                               name="dv_exadr1"
                                                                placeholder="주소" style="margin-bottom: 10px">
-                                                        <input type="text" id="sample4_detailAddress2"
+                                                        <input type="text" id="sample4_detailAddress2" name="dv_exadr2"
                                                                class="form-control" style="margin-bottom: 10px"
                                                                placeholder="상세주소">
                                                         <input type="text" id="sample4_extraAddress2"
@@ -413,88 +409,35 @@ To change this template use File | Settings | File Templates.
                                     <input class="form-check-input" id="checkAll" name="checkAll" type="checkbox">
                                 </th>
                                 <th scope="col">NO.</th>
-                                <th scope="col">이름</th>
                                 <th scope="col">택배사</th>
                                 <th scope="col">배송방법</th>
                                 <th scope="col">기본배송비용</th>
-                                <th scope="col">반품/교환비용</th>
+                                <th scope="col">반품비용</th>
+                                <th scope="col">교환비용</th>
                                 <th scope="col">섬/도서산간지역</th>
                                 <th scope="col">출고지역</th>
                                 <th scope="col">반품지역</th>
 
                             </tr>
                             </thead>
+
                             <tbody>
-                            <tr>
-                                <th scope="col">
-                                    <input class="form-check-input" name="check" type="checkbox">
-                                </th>
-                                <th scope="row">1</th>
-                                <td>기본 정책으로 많이 사용중</td>
-                                <td>우체국택배</td>
-                                <td>택배</td>
-                                <td>3500</td>
-                                <td>3500</td>
-                                <td>2500</td>
-                                <td>평택시 세교동</td>
-                                <td>수원시 인계동</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">
-                                    <input class="form-check-input" name="check" type="checkbox">
-                                </th>
-                                <th scope="row">2</th>
-                                <td>기본 정책으로 많이 사용중</td>
-                                <td>우체국택배</td>
-                                <td>택배</td>
-                                <td>3500</td>
-                                <td>3500</td>
-                                <td>2500</td>
-                                <td>평택시 세교동</td>
-                                <td>수원시 인계동</td>
-                            </tr>
-                            <tr>
-                                <th scope="col">
-                                    <input class="form-check-input" name="check" type="checkbox">
-                                </th>
-                                <th scope="row">3</th>
-                                <td>기본 정책으로 많이 사용중</td>
-                                <td>우체국택배</td>
-                                <td>택배</td>
-                                <td>3500</td>
-                                <td>3500</td>
-                                <td>2500</td>
-                                <td>평택시 세교동</td>
-                                <td>수원시 인계동</td>
-                            </tr>
-                            <tr class="table-success">
-                                <th scope="col">
-                                    <input class="form-check-input" name="check" type="checkbox">
-                                </th>
-                                <th scope="row">4</th>
-                                <td>기본 정책으로 많이 사용중</td>
-                                <td>우체국택배</td>
-                                <td>택배</td>
-                                <td>3500</td>
-                                <td>3500</td>
-                                <td>2500</td>
-                                <td>평택시 세교동</td>
-                                <td>수원시 인계동</td>
-                            </tr>
-                            <tr class="table-danger">
-                                <th scope="col">
-                                    <input class="form-check-input" name="check" type="checkbox">
-                                </th>
-                                <th scope="row">5</th>
-                                <td>반품지역 다름, 산간지역 x</td>
-                                <td>CJ택배</td>
-                                <td>택배</td>
-                                <td>2500</td>
-                                <td>2500</td>
-                                <td>사용안함</td>
-                                <td>경기도 평택시 세교동</td>
-                                <td>경기도 수원시 인계동</td>
-                            </tr>
+                            <c:forEach var="row" items="${dv_list}" varStatus="vs">
+                                <tr>
+                                    <th scope="col">
+                                        <input class="form-check-input" name="check" type="checkbox">
+                                    </th>
+                                    <th scope="row">${row.dv_num}</th>
+                                    <td>${row.dv_courier}</td>
+                                    <td>${row.dv_how}</td>
+                                    <td>${row.dv_fee}</td>
+                                    <td>${row.dv_rffee}</td>
+                                    <td>${row.dv_exfee}</td>
+                                    <td>${row.dv_extrafee}</td>
+                                    <td>${row.dv_adr1}</td>
+                                    <td>${row.dv_exadr2}</td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                         <div class="modal-footer">
@@ -552,4 +495,4 @@ To change this template use File | Settings | File Templates.
     });
 </script>
 <!-- checkbox All Select end -->
-<jsp:include page="sellerfooter.jsp"></jsp:include>
+<%@ include file="sellerfooter.jsp"%>
