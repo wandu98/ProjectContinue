@@ -7,10 +7,7 @@ import com.cafe24.nonchrono.dto.RecruitDTO;
 import com.cafe24.nonchrono.dto.SalesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,7 +39,6 @@ public class SalesController {
     public ModelAndView list(HttpServletRequest req, PagingDTO pagingDTO) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("sales/sales");
-        mav.addObject("list",salesDAO.list());
 
         int totalRowCount = salesDAO.totalRowCount(); //총 글갯수  6 |  52개
         //System.out.println(totalRowCount);
@@ -92,20 +88,24 @@ public class SalesController {
         } else {
             list = Collections.EMPTY_LIST;
         }//if end
-
+        mav.addObject("list",salesDAO.list());
         mav.addObject("pageNum", currentPage);
         mav.addObject("count", totalRowCount);
         mav.addObject("totalPage", totalPage);
         mav.addObject("startPage", startPage);
         mav.addObject("endPage", endPage);
-        mav.addObject("list", list);
+        mav.addObject("list4", list);
         return mav;
     } // sales() end
 
     //상품 상세
-    @RequestMapping("/detail")
-    public ModelAndView detail() {
+    @RequestMapping("/detail/{ss_num}")
+    public ModelAndView salesDetail(@PathVariable int ss_num) {
         ModelAndView mav = new ModelAndView();
+        mav.addObject("detail", salesDAO.detail(ss_num)); //상품 상세보기
+        mav.addObject("gameDetail", salesDAO.gameDetail(ss_num)); // 게임정보 상세
+        mav.addObject("reviewCount", salesDAO.reviewCount(ss_num)); // 리뷰 갯수
+        mav.addObject("reviewDetail", salesDAO.reviewDetail(ss_num));
         mav.setViewName("sales/detail");
         return mav;
     }// detail() end

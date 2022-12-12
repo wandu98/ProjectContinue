@@ -8,8 +8,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="../header.jsp"></jsp:include>
-
+<%@include file="../header.jsp" %>
 
 
 <!-- Breadcrumb Section Begin -->
@@ -38,41 +37,43 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="/images/001.jpg">
+                             src="/images/product/sales_main/${detail.ss_img}">
                     </div>
                     <div class="product__details__pic__slider owl-carousel">
                         <img data-imgbigurl="/images/002.jpg"
-                             src="/images/002.jpg">
+                             src="">
                         <img data-imgbigurl="/images/003.jpg"
-                             src="/images/003.jpg">
+                             src="">
                         <img data-imgbigurl="/images/004.jpg"
-                             src="/images/004.jpg">
+                             src="">
                         <img data-imgbigurl="/images/001.jpg"
-                             src="/images/001.jpg">
+                             src="">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
-                    <h3>닌텐도 스위치 OLED</h3>
+                    <h3>${detail.ss_name}</h3>
                     <div class="product__details__rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-half-o"></i>
-                        <span>(1 reviews)</span>
+                        <span>(${reviewCount} reviews)</span>
                     </div>
-                    <div class="product__details__price">판매가  ₩50,000</div>
-                        <ul>
-                            <li><b>배송비</b> <span>무료</span></li>
-                            <li><b>플랫폼</b> <span>SWITCH</span></li>
-                            <li><b>퍼블리셔</b> <span>닌텐도</span></li>
-                            <li><b>언어</b> <span>제조국-중국</span></li>
-                            <li><b>이용등급</b> <span>청소년 이용불가</span></li>
-                            <li><b>상품코드</b> <span>P00000CYO</span></li>
-                        </ul><hr>
-
+                    <div class="product__details__price">판매가 ₩<fmt:formatNumber value="${detail.ss_price}"
+                                                                                pattern="#,###"/></div>
+                    <ul>
+                        <li><b>배송비</b> <span>무료</span></li>
+                        <li><b>재고</b> <span>${detail.ss_stock}개</span></li>
+                        <li><b>플랫폼</b> <span>SWITCH</span></li>
+                        <li><b>퍼블리셔</b> <span>닌텐도</span></li>
+                        <li><b>언어</b> <span>제조국-중국</span></li>
+                        <li><b>이용등급</b> <span>${gameDetail.gm_level}</span></li>
+                        <li><b>상품코드</b> <span>${gameDetail.gm_code}</span></li>
+                    </ul>
+                    <hr>
 
 
                     <!-- 스크롤2 영역시작 -->
@@ -81,41 +82,58 @@
                         <div id="totalProducts" class="">
                             <table border="1" summary="" class="op_h">
                                 <colgroup>
-                                    <col style="width:500px;"/>
-                                    <col style="width:68px;"/>
+                                    <col style="width:300px"/>
+                                    <col style="width:300px"/>
                                 </colgroup>
-                                <thead><tr>
+                                <thead>
+                                <tr>
                                     <th scope="col">상품명</th>
                                     <th scope="col">가격</th>
-                                </tr></thead>
-                                <tbody class="product__details__text"><tr>
-                                    <td>SWITCH 본체 스플래툰3 에디션(OLED 모델)</td>
-                                    <td class="">
-                                        <span class="quantity_price">50,000</span> <span class="mileage ">&nbsp;&nbsp;&nbsp;(<img src="//img.echosting.cafe24.com/design/skin/admin/ko_KR/ico_product_point.gif"/> <span class="mileage_price">500</span>)</span>
+                                </tr>
+                                </thead>
+                                <tbody class="product__details__text">
+                                <tr>
+                                    <td>${gameDetail.gm_name}</td>
+                                    <td>
+                                        <span class="quantity_price">₩<fmt:formatNumber value="${detail.ss_price}"
+                                                                                        pattern="#,###"/></span>
+                                        <span class="mileage ">&nbsp;&nbsp;&nbsp;
+                                        <img src="//img.echosting.cafe24.com/design/skin/admin/ko_KR/ico_product_point.gif"/>
+                                        <span class="mileage_price">(<fmt:parseNumber value="${detail.ss_price * 0.01}"
+                                                                                      integerOnly="true"/>원)</span></span>
                                     </td>
-                                </tr></tbody>
+                                </tr>
+                                </tbody>
 
                                 </tbody>
                             </table>
                             <!-- //참고 -->
                         </div>
                         <!-- //참고 -->
-                    </div><br>
+                    </div>
+                    <br>
                     <!-- //스크롤2 영역끝 -->
 
 
                     <div id="totalPrice" class="top_total_box">
-                        <strong>총 상품금액</strong>(수량) : <span class="total"><strong><em>50,000</em></strong> (1개)</span>
-                    </div><br>
+                        <strong>총 상품금액</strong>(수량) :
+                        <span class="total" id="il">
+                            <strong>
+                               <input type="text" value="0" name="inputValue" style="border: none; text-align: center" readonly/>
+                                <input type="text" value="0" name="inputCount" style="border: none; text-align: left" readonly/>
+                            </strong>
+                        </span>
+                    </div>
+                    <br>
                     <div class="product__details__quantity">
                         <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
+                            <div class="pro-qty" id="count2">
+                                <input type="text" id="count" value=1>
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn">바로구매</a>
-                    <a href="#" class="primary-btn">장바구니 추가</a>
+                    <a href="#" class="primary-btn btn-outline-danger">바로구매</a>
+                    <a href="#" class="primary-btn btn-outline-danger">장바구니 추가</a>
                     <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                 </div>
 
@@ -133,14 +151,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                               aria-selected="false">상품리뷰 <span>(1)</span></a>
+                               aria-selected="false">상품리뷰 <span>(${reviewCount})</span></a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <h6>상품상세정보</h6>
-                                <p>정보는 나무위키에서 보세요</p>
+                                <p>${detail.ss_description}</p>
 
                             </div>
                         </div>
@@ -153,7 +171,8 @@
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <h6>리뷰</h6>
-                                <p>노잼이었다.</p>
+                                <p>별점 : ${reviewDetail.rv_star}<br>회원ID : ${reviewDetail.mem_id}
+                                    <br> ${reviewDetail.rv_content}<br> ${reviewDetail.rv_filename}</p>
                             </div>
                         </div>
                     </div>
@@ -239,9 +258,27 @@
     </div>
 </section>
 
+<script>
+    $(document).ready(function () {
+        $('#count2 span').on('click', function () {
+            let count = $('#count').val();
+            let tot2 = (parseInt(count) *${detail.ss_price});
+
+            if(count <= ${detail.ss_stock}){
+                $('input[name=inputCount]').attr('value', count)
+                $('input[name=inputValue]').attr('value', tot2)
+            } else{
+              alert("재고가 부족합니다")
+            };
 
 
+
+
+        });
+    });
+
+</script>
 
 <!-- End #main -->
 
-<jsp:include page="../footer.jsp"></jsp:include>
+<%@include file="../footer.jsp" %>

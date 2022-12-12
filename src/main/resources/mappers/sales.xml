@@ -101,4 +101,34 @@
         from tb_sales
         where gm_code = #{gm_code} and ss_name like #{ss_name}
     </select>
+    <!-- 상품 번호와 맞는 상세정보 가져오기 -->
+    <select id="detail" parameterType="int" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select  ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        from tb_sales
+        where ss_num = #{ss_num}
+    </select>
+
+    <!-- 상품 품목(게임)의 상세 정보 가져오기 -->
+    <select id="gameDetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.GameDTO">
+        SELECT gm.gm_code,  gm.gm_name, gm.gm_price, gm.gm_level, gm.gm_category, gm.gm_img
+        FROM tb_sales as rb join tb_game as gm
+                                 on rb.gm_code = gm.gm_code
+        WHERE ss_num = #{ss_num}
+    </select>
+
+    <select id="reviewCount" resultType="int">
+        select ifnull(count(*),0)
+        from(
+                select count(*)
+                from tb_review
+                where ss_num = #{ss_num}
+                group by ss_num
+            ) aa
+    </select>
+
+    <select id="reviewDetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.ReviewDTO">
+        SELECT rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num
+        from tb_review
+        WHERE ss_num = #{ss_num}
+    </select>
 </mapper>

@@ -75,9 +75,11 @@ public class SellerController {
 
     //배송정책
     @RequestMapping("/delivery")
-    public ModelAndView delivery() {
+    public ModelAndView delivery(/*RequestAttribute DeliveryDTO deliveryDTO */ ) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("seller/delivery");
+        //sellerDAO.insert(deliveryDTO);
+
         return mav;
     }// delivery() end
 
@@ -231,6 +233,7 @@ public class SellerController {
                 e.printStackTrace();
             }
         }
+
 
         salesDTO.setGm_code(gm_code);
         salesDTO.setSs_name(ss_name);

@@ -24,7 +24,7 @@ from(
     from tb_sales
     where sl_id = 'codingking'
 ) AA,
-    (select @rno :=0) BB
+    (select @rno :=0) BB;
 
 select *
 from(
@@ -32,11 +32,11 @@ from(
         from(
                 select ss_img, ss_price, ss_name
                 from tb_sales
-                where sl_id = 'codingking'
+
             ) AA,
             (select @rno :=0) BB
     )CC
-where r >=1 and r<=5;
+where r >=1 and r<=16;
 
 -- Featured Product
 -- All
@@ -55,3 +55,45 @@ where gm_code = 'dt0009' and ss_name like '%D%';
 select *
 from tb_sales
 where ss_name like '%D%';
+
+
+
+select  ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+from tb_sales
+where ss_num = '19';
+
+
+SELECT gm.gm_code,  gm.gm_name, gm.gm_price, gm.gm_level, gm.gm_category, gm.gm_img
+FROM tb_sales as rb join tb_game as gm
+                         on rb.gm_code = gm.gm_code
+WHERE ss_num = '19';
+
+select count(*)
+from(
+    select ss_num, count(*)
+    from tb_review
+    where ss_num = '4') aa;
+
+select count(*)
+from(
+        select  rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num
+        from tb_review
+        where ss_num = '15') aa;
+
+
+select count(*)
+from tb_review
+where ss_num = '4'
+group by ss_num;
+
+select ifnull(count(*),0)
+from(
+    select count(*)
+    from tb_review
+    where ss_num = '3'
+    group by ss_num
+    ) aa;
+
+
+select ss_price, ss_stock
+from tb_sales

@@ -285,46 +285,46 @@
     }
 
 
-    //가격 숫자와 콤마(,) 이외의 문자는 입력할 수 없는 기능
-    // $(document).on("keyup", "input:text[numberOnlyMinComma]", function () {
-    //     var strVal = $(this).val();
-    //
-    //     event = event || window.event;
-    //     var keyID = (event.which) ? event.which : event.keyCode;
-    //
-    //     if ((keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105)
-    //         || keyID == 46 || keyID == 8 || keyID == 109
-    //         || keyID == 189 || keyID == 9
-    //         || keyID == 37 || keyID == 39) {
-    //
-    //         if (strVal.length > 1 && (keyID == 109 || keyID == 189)) {
-    //             return false;
-    //         } else {
-    //             return;
-    //         }
-    //     } else {
-    //         return false;
-    //     }
-    // });
-    //
-    // $(document).on("keyup", "input:text[numberOnlyMinComma]", function () {
-    //     $(this).val($(this).val().replace(/[^-\.0-9]/gi, ""));
-    //     $(this).val($(this).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-    // });
-    //
-    // //"123,456원"이 입력된 input 영역 focus가 이동하면 "123,456"으로 숫자와 콤마(,)만 나오도록 변환
-    // $(document).on("focusout", "input:text[koreanCurrency]", function () {
-    //     $(this).val($(this).val().replace(",", ""));
-    //     $(this).val($(this).val().replace(/[^-\.0-9]/gi, ""));
-    //     $(this).val($(this).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-    //     if ($(this).val() != '') {
-    //         $(this).val($(this).val() + '원');
-    //     }
-    // });
-    //
-    // $(document).on("focus", "input:text[koreanCurrency]", function () {
-    //     $(this).val($(this).val().replace("원", ""));
-    // });
+    // 가격 숫자와 콤마(,) 이외의 문자는 입력할 수 없는 기능
+    $(document).on("keyup", "input:text[numberOnlyMinComma]", function () {
+        var strVal = $(this).val();
+
+        event = event || window.event;
+        var keyID = (event.which) ? event.which : event.keyCode;
+
+        if ((keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105)
+            || keyID == 46 || keyID == 8 || keyID == 109
+            || keyID == 189 || keyID == 9
+            || keyID == 37 || keyID == 39) {
+
+            if (strVal.length > 1 && (keyID == 109 || keyID == 189)) {
+                return false;
+            } else {
+                return;
+            }
+        } else {
+            return false;
+        }
+    });
+
+    $(document).on("keyup", "input:text[numberOnlyMinComma]", function () {
+        $(this).val($(this).val().replace(/[^-\.0-9]/gi, ""));
+        $(this).val($(this).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+    });
+
+    //"123,456원"이 입력된 input 영역 focus가 이동하면 "123,456"으로 숫자와 콤마(,)만 나오도록 변환
+    $(document).on("focusout", "input:text[koreanCurrency]", function () {
+        $(this).val($(this).val().replace(",", ""));
+        $(this).val($(this).val().replace(/[^-\.0-9]/gi, ""));
+        $(this).val($(this).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        if ($(this).val() != '') {
+            $(this).val($(this).val() + '원');
+        }
+    });
+
+    $(document).on("focus", "input:text[koreanCurrency]", function () {
+        $(this).val($(this).val().replace("원", ""));
+    });
 
     //사진 미리보기
     <%-- 올린 이미지 미리보기 --%>
