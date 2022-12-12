@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="checkout__input" style="width: 70%; padding-left: 20%">
-                                    <img id="pic_view" src="/images/profile/<c:choose><c:when test="${YN eq true}">${mem.mem_id}/${mem.mem_pic}</c:when><c:when test="${YN eq false}">${mem.mem_pic}</c:when>  </c:choose>">
+                                    <c:if test="${YN eq true}"><img src="/images/profile/${meminfo.mem_id}/${meminfo.mem_pic}"></c:if>
                                     <label for="mem_pic">사진 선택</label>
                                     <input type="file" id="mem_pic" name="mem_pic" style="display: none">
                                 </div>
