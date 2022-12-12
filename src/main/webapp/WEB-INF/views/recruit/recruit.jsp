@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="col-lg-8 col-md-7">
-                <div class="row">
+                <div class="row" id="board">
                     <input type="hidden" id="startCount" name="startCount" value=9>
                     <input type="hidden" id="endCount" name="endCount" value=17>
                     <c:forEach var="row" items="${list}" varStatus="vs">
@@ -131,7 +131,7 @@
             </div>
 
             <div style="margin: auto">
-                <button type="button" id="more" class="btn btn-outline-danger" onclick="more($('#startCount').val(), $('#plusCount').val())">더보기 (more)</button>
+                <button type="button" id="more" class="btn btn-outline-danger" onclick="more($('#startCount').val(), $('#endCount').val())">더보기 (more)</button>
             </div>
         </div>
     </div>
@@ -143,20 +143,50 @@
         location.href = "/recruit/form";
     } // recruitForm() end
 
+    /*
     function more(startCount, endCount) {
-        // alert(startCount);
+        console.log(startCount);
+        console.log(endCount);
 
         $.ajax({
             type: "post",
             url: "/recruit/getMoreContents",
-            data: startCount, endCount,
+            data: {
+                "startCount": startCount,
+                "endCount": endCount
+            },
             success: function (result) {
+                let message = "";
+                message += "<c:forEach var='mo' items='${more}' varStatus='vs4'>";
+                message += "<div class='col-lg-4 col-md-4 col-sm-4'>";
+                message += "<a href='/recruit/detail/${mo.rcrbrd_num}'>";
+                message += "<div class='blog__item' style='box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%'>";
+                message += "<div class='blog__item__pic'>";
+                message += "<img src='/images/thumb/${mo.gm_code}/thumb.jpg' alt=''>";
+                message += "</div>";
+                message += "<div class='blog__item__text'>";
+                message += "<ul>";
+                message += "<li><i class='fa fa-calendar-o'></i> ${mo.rcrbrd_edate}</li>";
+                message += "<li><i class='fa fa-comment-o'></i> 댓글 수</li>";
+                message += "</ul>";
+                message += "<h5>${mo.rcrbrd_subject}</h5>";
+                message += "<p>${game[vs4.index]} (<span id='list${vs4.count}' name='list${vs4.count}'>${attendCount.get(vs4.index)}</span> / ${mo.rcrbrd_max})</p>";
+                message += "</div>";
+                message += "</div>";
+                message += "</a>";
+                message += "</div>";
+                message += "<c:if test='${vs4.count mod 3==0}'>";
+                message += "<br>";
+                message += "</c:if>";
+                message += "</c:forEach>";
 
-                $('#startCount').val($('#startCount').val+9);
-                $('#endCount').val($('#endCount').val+9);
+                console.log(message);
+                $('#board').html(message);
 
-                alert($('#startCount').val());
-                alert($('#endCount').val());
+                $('#startCount').val((parseInt($('#startCount').val()))+9);
+                $('#endCount').val((parseInt($('#endCount').val()))+9);
+                // console.log($('#startCount').val());+
+                // console.log($('#endCount').val());
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -164,6 +194,7 @@
         })
 
     } // more() end
+    */
 
 /*    function more(id, cnt) {
         let list_length = ${list.size()};

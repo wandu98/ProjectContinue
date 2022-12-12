@@ -255,3 +255,22 @@ SELECT mem_id, count(*)
 FROM tb_rcrboard
 group by mem_id
 order by count(*) DESC;
+
+# more
+
+SELECT rcrbrd_num,
+       mem_id,
+       rcrbrd_subject,
+       rcrbrd_content,
+       rcrbrd_pw,
+       rcrbrd_views,
+       rcrbrd_date,
+       rcrbrd_edate,
+       rcrbrd_ip,
+       gm_code,
+       rcrbrd_status,
+       rcrbrd_adr,
+       rcrbrd_max
+FROM tb_rcrboard
+ORDER BY rcrbrd_num DESC
+Limit 17 OFFSET 9;
