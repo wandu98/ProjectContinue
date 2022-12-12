@@ -30,7 +30,7 @@
                         <div class="col-lg-4">
                             <div class="checkout__input">
                                 <p>아이디<span>*</span></p>
-                                <input type="text" name="mem_id" id="mem_id">
+                                <input type="text" name="mem_id" id="mem_id" required>
                             </div>
                             <div id="panel"></div>
                             <input type="button" value="중복확인" id="idcheck">
@@ -39,34 +39,34 @@
                     <div class="col-lg-5">
                         <div class="checkout__input">
                             <p>이름<span>*</span></p>
-                            <input type="text" name="mem_name" id="mem_name">
+                            <input type="text" name="mem_name" id="mem_name" required>
                         </div>
                     </div>
                 </div>
                 <div class="checkout__input">
                     <p>닉네임<span>*</span></p>
-                    <input type="text" name="mem_nick" id="mem_nick">
+                    <input type="text" name="mem_nick" id="mem_nick" required>
                 </div>
                 <div class="checkout__input">
                     <p>비밀번호<span>*</span></p>
-                    <input type="password" name="mem_pw" id="mem_pw">
+                    <input type="password" name="mem_pw" id="mem_pw" required>
                 </div>
                 <div class="checkout__input">
                     <p>비밀번호 확인<span>*</span></p>
-                    <input type="password" name="repw" id="repw">
+                    <input type="password" name="repw" id="repw" required>
                 </div>
                 <div class="col-lg-8 col-md-6">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="checkout__input">
                                 <p>우편번호<span>*</span></p>
-                                <input type="text" name="mem_zip" id="mem_zip">
+                                <input type="text" name="mem_zip" id="mem_zip" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="checkout__input">
                                 <p>주소<span>*</span></p>
-                                <input type="text" placeholder="기본주소" name="mem_adr1" id="mem_adr1">
+                                <input type="text" placeholder="기본주소" name="mem_adr1" id="mem_adr1" required>
                             </div>
                         </div>
                     </div>
@@ -79,15 +79,15 @@
                 <div class="checkout__input">
                     <p>이메일<span>*</span></p>
                     <input type="text" placeholder="이메일 작성" class="checkout__input__add" name="mem_email"
-                           id="mem_email">
+                           id="mem_email" required>
                 </div>
                 <div class="checkout__input">
                     <p>생년월일<span>*</span></p>
-                    <input type="text" name="mem_birth" id="mem_birth">
+                    <input type="text" name="mem_birth" id="mem_birth" required>
                 </div>
                 <div class="checkout__input">
                     <p>휴대전화<span>*</span></p>
-                    <input type="text" name="mem_phone" id="mem_phone">
+                    <input type="text" name="mem_phone" id="mem_phone" required>
                 </div>
                 <div class="checkout__input__checkbox">
                     <p>수신여부(선택)</p>
