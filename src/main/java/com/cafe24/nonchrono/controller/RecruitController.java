@@ -64,7 +64,7 @@ public class RecruitController {
             mav.addObject("game", gameList);
             mav.addObject("attendCount", attendMembers);
             mav.addObject("rcrKing", recruitDAO.rcrKing());
-            System.out.println(recruitDAO.rcrKing());
+            // System.out.println(recruitDAO.rcrKing());
             mav.setViewName("/recruit/recruit");
         } else {
             mav.setViewName("mem/loginForm");
@@ -380,6 +380,7 @@ public class RecruitController {
         ModelAndView mav = new ModelAndView();
         List<RecruitDTO> list = recruitDAO.getMoreContents(startCount, endCount);
         mav.addObject("more", list);
+        // System.out.println("list : "+list);
         mav.setViewName("/recruit/recruit");
         return mav;
     } // getMoreContents() end

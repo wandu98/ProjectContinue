@@ -271,7 +271,7 @@
                rcrbrd_max
         FROM tb_rcrboard
         ORDER BY rcrbrd_num DESC
-        Limit #{startCount} OFFSET #{endCount}
+        Limit #{endCount} OFFSET #{startCount}
     </select>
 
 </mapper>

@@ -182,10 +182,15 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.rcrKing");
     } // rcrKing() end
 
-    public List<RecruitDTO> getMoreContents(Integer startCount, Integer endCount) {
+    public List<RecruitDTO> getMoreContents(int startCount, int endCount) {
+        // System.out.println(startCount);
+        // System.out.println(endCount);
+
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("startCount", startCount);
         map.put("endCount", endCount);
+        //System.out.println(map);
+        System.out.println(sqlSession.selectList("recruit.more", map));
         return sqlSession.selectList("recruit.more", map);
     }
 } // class end

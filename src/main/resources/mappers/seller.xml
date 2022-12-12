@@ -3,13 +3,20 @@
 
 <mapper namespace="seller">
     <!-- 배송정책 등록하기 -->
-    <insert id="insert2" parameterType="com.cafe24.nonchrono.dto.DeliveryDTO">
-        INSERT INTO tb_delivery ( dv_num, sl_id, dv_exist, dv_how, dv_courier, dv_fee, dv_extrafee, dv_adr1, dv_adr2, dv_rffee, dv_exfee, dv_exadr1, dv_exadr2)
-        VALUES (#{dv_num}, 'codingking', #{sl_id}, #{dv_how}, #{dv_courier}, #{dv_fee}, #{dv_extrafee}, #{dv_adr1}, #{dv_adr2}, #{dv_rffee}, #{dv_exfee}, #{dv_exadr1}, #{dv_exadr2})
+    <insert id="dv_insert" parameterType="com.cafe24.nonchrono.dto.DeliveryDTO">
+        INSERT INTO tb_delivery ( sl_id,  dv_how, dv_courier, dv_fee, dv_extrafee, dv_adr1, dv_adr2, dv_rffee, dv_exfee, dv_exadr1, dv_exadr2)
+        VALUES ( 'codingking', #{dv_how}, #{dv_courier}, #{dv_fee}, #{dv_extrafee}, #{dv_adr1}, #{dv_adr2}, #{dv_rffee}, #{dv_exfee}, #{dv_exadr1}, #{dv_exadr2})
     </insert>
 
+    <!-- 판마자별 배송정책 리스트 -->
+    <select id="dv_list" resultType="com.cafe24.nonchrono.dto.DeliveryDTO">
+        select dv_num ,sl_id ,dv_how ,dv_courier ,dv_fee ,dv_extrafee ,dv_adr1 ,dv_adr2 ,dv_rffee ,dv_exfee ,dv_exadr1 ,dv_exadr2
+        from tb_delivery
+        where sl_id = 'codingking'
+        ORDER BY dv_num DESC
+    </select>
 
-    <select id="list" resultType="com.cafe24.nonchrono.dto.SellerDTO">
+    <select id="list" parameterType="com.cafe24.nonchrono.dto.SellerDTO">
         SELECT sl_id, sl_pw, sl_name, sl_adr1, sl_adr2, sl_phone, sl_birth, sl_grade, sl_receive, sl_number, sl_bank, sl_bankcode
         FROM tb_seller
         ORDER BY sl_id
@@ -26,8 +33,10 @@
         FROM tb_seller
     </select>
 
-    <insert id="insert" parameterType="com.cafe24.nonchrono.dto.SellerDTO">
+    <insert id="seller_insert" parameterType="com.cafe24.nonchrono.dto.SellerDTO">
         INSERT INTO tb_seller(sl_id, sl_pw, sl_name, sl_adr1, sl_adr2, sl_phone, sl_birth, sl_grade, sl_receive, sl_number, sl_bank, sl_bankcode)
         VALUES (#{sl_id}, #{sl_pw}, #{sl_name}, #{sl_adr1}, #{sl_adr2}, #{sl_phone}, #{sl_birth}, #{sl_grade}, #{sl_receive}, #{sl_number}, #{sl_bank}, #{sl_bankcode})
     </insert>
+
+
 </mapper>
