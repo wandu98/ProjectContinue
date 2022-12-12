@@ -32,14 +32,21 @@ public class SellerDAO {
         return sqlSession.insert("seller.insert", sellerDTO);
     }//sellerInsert() end
 
+    public List<SellerDTO> selcheck() {
+        return sqlSession.selectList("seller.check");
+    }//selcheck() end
+
+    public int insert(DeliveryDTO deliveryDTO) {
+        return sqlSession.insert("delivery.insert", deliveryDTO);
+    }
+
     public int dv_insert(DeliveryDTO deliveryDTO) {
         return sqlSession.insert("seller.dv_insert", deliveryDTO);
+
     } // insert() end
 
     public List<DeliveryDTO> dv_list() {
         return sqlSession.selectList("seller.dv_list");
     }
-
-
 
 }//class end

@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../header.jsp" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -5,33 +8,26 @@
   Time: 오전 11:07
   To change this template use File | Settings | File Templates.
 --%>
-<head>
-    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ include file="../header.jsp" %>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
+<style>
+
+</style>
+
 <!-- 본문 시작 signupForm.jsp-->
 <div class="container">
+    <br><br>
+    <h4 style="font-weight: bold; margin-left: 5%">회원가입</h4>
+    <hr>
     <form name="Signupfrm" id="Signupfrm" action="/mem/signup" method="post" onsubmit="return send()">
-        <div class="checkout__form">
-            <h4>회원가입</h4>
+        <div class="col-lg-3 col-md-3">
             <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="checkout__input">
-                                <p>아이디<span>*</span></p>
-                                <input type="text" name="mem_id" id="mem_id" required>
-                            </div>
+                <div class="col-lg-3 col-md-3">
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <br>
+                    <div class="checkout__input">
+                        <p>아이디<span>*</span></p>
+                        <input type="text" name="mem_id" id="mem_id" required>
+                    </div>
                             <div id="panel"></div>
                             <input type="button" value="중복확인" id="idcheck">
                         </div>

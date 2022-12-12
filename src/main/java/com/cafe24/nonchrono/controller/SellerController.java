@@ -6,6 +6,7 @@ import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
 import com.cafe24.nonchrono.dao.SellerDAO;
 import com.cafe24.nonchrono.dto.*;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -146,6 +147,23 @@ public class SellerController {
         return "seller/sellerSignup";
     }
 
+    @RequestMapping("checkselPWproc.do")
+    @ResponseBody
+    public String checkselPWproc(HttpServletRequest req) {
+        String sl_pw = req.getParameter("sl_pw").trim();
+
+        List<SellerDTO> selcheck = sellerDAO.selcheck();
+        String cnt = "0";
+        for (int i=0; i< selcheck.size(); i++) {
+            if(sl_pw.equals(selcheck.get(i).getSl_pw())) {
+                cnt = "1";
+                break;
+            }
+        }
+        JSONObject json = new JSONObject();
+        json.put("count", cnt);
+        return json.toString();
+    }
 
     //카테고리 검색
     @RequestMapping("/searchProc")
