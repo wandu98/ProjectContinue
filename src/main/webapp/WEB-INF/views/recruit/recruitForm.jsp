@@ -95,7 +95,7 @@
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>패스워드<span>*</span></p>
-                                    <input type="text" placeholder="password" id="rcrbrd_pw" name="rcrbrd_pw">
+                                    <input type="password" placeholder="password" id="rcrbrd_pw" name="rcrbrd_pw">
                                 </div>
                             </div>
                         </div>

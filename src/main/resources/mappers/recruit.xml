@@ -18,7 +18,7 @@
                rcrbrd_adr,
                rcrbrd_max
         FROM tb_rcrboard
-        ORDER BY rcrbrd_num DESC
+        ORDER BY rcrbrd_num DESC Limit 9
     </select>
 
     <!-- 품목 코드에 맞는 품목명 가져오기 -->
@@ -221,9 +221,11 @@
     <!-- 자리당 닉네임 조회 -->
     <select id="memNick" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="String">
         SELECT mm.mem_nick
-        FROM tb_recruitinfo as ri JOIN tb_mem as mm
-        ON ri.mem_id = mm.mem_id
-        WHERE ri.rcrbrd_num = #{rcrbrd_num} AND ri.ri_seat = #{ri_seat}
+        FROM tb_recruitinfo as ri
+                 JOIN tb_mem as mm
+                      ON ri.mem_id = mm.mem_id
+        WHERE ri.rcrbrd_num = #{rcrbrd_num}
+          AND ri.ri_seat = #{ri_seat}
     </select>
 
     <!-- 해당 게시물에 모집 최대 인원 조회 -->
@@ -235,19 +237,41 @@
 
     <!-- 자리당 이미지 조회 -->
     <select id="memPic" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="String">
-        SELECT mm.mem_pic
-        FROM tb_recruitinfo as ri JOIN tb_mem as mm
-        ON ri.mem_id = mm.mem_id
-        WHERE ri.rcrbrd_num = #{rcrbrd_num} AND ri.ri_seat = #{ri_seat}
+        SELECT mm.mem_pic, mm.mem_id
+        FROM tb_recruitinfo as ri
+                 JOIN tb_mem as mm
+                      ON ri.mem_id = mm.mem_id
+        WHERE ri.rcrbrd_num = #{rcrbrd_num}
+          AND ri.ri_seat = #{ri_seat}
     </select>
 
     <!-- 이번달 모집왕 -->
-    <select id="rcrKing" resultType="hashMap">
-        SELECT mm.mem_nick, mm.mem_id, count(*)
-        FROM tb_mem as mm JOIN tb_rcrboard as rb
-                               on mm.mem_id = rb.mem_id
+    <select id="rcrKing" resultType="java.util.Map">
+        SELECT mm.mem_nick, mm.mem_id, count(*) as cnt
+        FROM tb_mem as mm
+                 JOIN tb_rcrboard as rb
+                      on mm.mem_id = rb.mem_id
         group by rb.mem_id
-        order by count(*) DESC
+        order by count(*) DESC Limit 5
+    </select>
+
+    <select id="more" parameterType="java.util.Map" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
+        SELECT rcrbrd_num,
+               mem_id,
+               rcrbrd_subject,
+               rcrbrd_content,
+               rcrbrd_pw,
+               rcrbrd_views,
+               rcrbrd_date,
+               rcrbrd_edate,
+               rcrbrd_ip,
+               gm_code,
+               rcrbrd_status,
+               rcrbrd_adr,
+               rcrbrd_max
+        FROM tb_rcrboard
+        ORDER BY rcrbrd_num DESC
+        Limit #{startCount} OFFSET #{endCount}
     </select>
 
 </mapper>
