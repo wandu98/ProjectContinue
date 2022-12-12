@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="basket">
+
+    <select id="list" parameterType="java.lang.String" resultType="java.util.Map">
+        select bk_num, bk_amount, mem_id, ss_name, ss_img, ss_price, bk_amount*sl.ss_price as total
+        from tb_basket bk join tb_sales sl
+                               on bk.ss_num = sl.ss_num
+        where mem_id = #{mem_id}
+    </select>
+
+    <delete id="delete">
+        delete from tb_basket
+        where bk_num = #{bk_num}
+    </delete>
+
+    <delete id="allclear">
+        delete from tb_basket
+        where mem_id = #{mem_id}
+    </delete>
+
+    <select id="total" resultType="int">
+        select sum(total)
+        from (
+                 select mem_id, bk_amount*sl.ss_price as total
+                 from tb_basket bk join tb_sales sl
+                                        on bk.ss_num = sl.ss_num
+                 where mem_id = #{mem_id}
+             ) AA
+        group by mem_id
+    </select>
+
+</mapper>

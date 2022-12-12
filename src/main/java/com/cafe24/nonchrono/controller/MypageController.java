@@ -6,6 +6,7 @@ import com.cafe24.nonchrono.dto.OrderDTO;
 import com.cafe24.nonchrono.dto.PagingDTO;
 import com.cafe24.nonchrono.dto.SalesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +54,9 @@ public class MypageController {
 
     @Autowired
     OrderDAO orderDAO;
+
+    @Autowired
+    BasketDAO basketDAO;
 
 
     @RequestMapping("/mypage")
@@ -308,6 +312,16 @@ public class MypageController {
         mav.addObject("historylist", list);
         mav.addObject("historyproduct", list1);
         mav.setViewName("mypage/purchaseHistory");
+        return mav;
+    }
+
+    @RequestMapping("/cart")
+    public ModelAndView cart(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        String mem_id = (String) session.getAttribute("mem_id");
+        mav.addObject("list", basketDAO.mylist(mem_id));
+        mav.addObject("total", basketDAO.total(mem_id));
+        mav.setViewName("mypage/cart");
         return mav;
     }
 

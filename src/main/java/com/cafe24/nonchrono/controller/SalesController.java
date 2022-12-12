@@ -1,5 +1,6 @@
 package com.cafe24.nonchrono.controller;
 
+import com.cafe24.nonchrono.dao.BasketDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
 import com.cafe24.nonchrono.dto.PagingDTO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,9 @@ public class SalesController {
 
     @Autowired
     SalesDAO salesDAO;
+
+    @Autowired
+    BasketDAO basketDAO;
 
     public SalesController() {
         System.out.println("-----SalesController() 객체 생성");
@@ -125,6 +130,15 @@ public class SalesController {
         mav.addObject("allList", allList);
         mav.addObject("searchList", searchList);
         mav.setViewName("sales/sales");
+        return mav;
+    }
+
+    @RequestMapping("/checkout")
+    public ModelAndView checkout(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        String mem_id = (String) session.getAttribute("mem_id");
+        mav.addObject("list", basketDAO.mylist(mem_id));
+        mav.setViewName("sales/checkout");
         return mav;
     }
 

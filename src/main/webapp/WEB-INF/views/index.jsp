@@ -179,8 +179,8 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="mypage/wishlist"><i class="fa fa-heart"></i> <span></span></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a href="/mypage/wishlist"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="/mypage/cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                     </ul>
                 </div>
             </div>

@@ -62,13 +62,13 @@ values (1, '내일 됩니다. 떽!', '2022-01-01 12:00:00')
 -- 김주완
 -- 장바구니
 INSERT INTO tb_basket(ss_num, bk_amount, mem_id)
-VALUES(2, 12, 'oejdf9090');
+VALUES(1, 12, 'oejdf9090');
 
 INSERT into tb_basket(ss_num, bk_amount, mem_id)
-VALUES(3, 5, 'gjdjj888');
+VALUES(2, 5, 'gjdjj888');
 
 INSERT into tb_basket(ss_num, bk_amount, mem_id)
-VALUES(4, 8, 'fjhdmj555');
+VALUES(2, 4, 'fjhdmj555');
 
 
 -- 주문서
