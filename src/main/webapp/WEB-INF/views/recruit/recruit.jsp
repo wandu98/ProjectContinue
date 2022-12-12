@@ -149,7 +149,7 @@
         $.ajax({
             type: "post",
             url: "/recruit/getMoreContents",
-            data: startCount, plusCount,
+            data: startCount, endCount,
             success: function (result) {
 
                 $('#startCount').val($('#startCount').val+9);

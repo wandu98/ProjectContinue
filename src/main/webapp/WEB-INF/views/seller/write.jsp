@@ -286,7 +286,7 @@
 
 
     // 가격 숫자와 콤마(,) 이외의 문자는 입력할 수 없는 기능
-    $(document).on("keyup", "input:text[numberOnlyMinComma]", function () {
+    /*$(document).on("keyup", "input:text[numberOnlyMinComma]", function () {
         var strVal = $(this).val();
 
         event = event || window.event;
@@ -324,7 +324,7 @@
 
     $(document).on("focus", "input:text[koreanCurrency]", function () {
         $(this).val($(this).val().replace("원", ""));
-    });
+    });*/
 
     //사진 미리보기
     <%-- 올린 이미지 미리보기 --%>
