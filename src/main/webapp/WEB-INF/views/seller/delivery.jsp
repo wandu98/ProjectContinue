@@ -53,7 +53,7 @@ To change this template use File | Settings | File Templates.
                                             <!-- Horizontal Form -->
                                             <form>
                                                 <div class="row mb-3">
-                                                    <label for="inputEmail3"
+                                                    <label
                                                            class="col-sm-2 col-form-label">이름</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" class="form-control"
@@ -61,7 +61,7 @@ To change this template use File | Settings | File Templates.
                                                     </div>
                                                 </div>
                                                 <div class="row md-3">
-                                                    <label for="inputEmail3"
+                                                    <label
                                                            class="col-sm-2 col-form-label">택배사</label>
                                                     <div class="col-sm-10">
                                                         <select id="inputState" class="form-select">
@@ -74,15 +74,6 @@ To change this template use File | Settings | File Templates.
                                                     </div>
                                                 </div>
                                                 <br>
-                                                <div class="row mb-3">
-                                                    <label for="inputEmail3"
-                                                           class="col-sm-2 col-form-label">배송메모</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control"
-                                                               placeholder="배송 메모를 입력해주세요">
-                                                    </div>
-                                                </div>
-
                                                 <fieldset class="row mb-3">
                                                     <legend class="col-form-label col-sm-2 pt-0">
                                                         배송방법
@@ -106,10 +97,11 @@ To change this template use File | Settings | File Templates.
                                                                 화물
                                                             </label>
                                                         </div>
+                                                    </div>
                                                 </fieldset>
 
                                                 <div class="row mb-3">
-                                                    <label for="inputEmail3"
+                                                    <label
                                                            class="col-sm-2 col-form-label">배송비용</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" class="form-control">
@@ -117,7 +109,7 @@ To change this template use File | Settings | File Templates.
                                                 </div>
 
                                                 <div class="row mb-3">
-                                                    <label for="inputEmail3"
+                                                    <label
                                                            class="col-sm-2 col-form-label">반품교환</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" class="form-control" placeholder="편도 1회 가격">
@@ -125,7 +117,7 @@ To change this template use File | Settings | File Templates.
                                                 </div>
 
                                                 <div class="row mb-3">
-                                                    <label for="inputEmail3"
+                                                    <label
                                                            class="col-sm-2 col-form-label">배송비</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" class="form-control">
@@ -159,7 +151,7 @@ To change this template use File | Settings | File Templates.
                                                 </fieldset>
 
                                                 <div class="row mb-3">
-                                                    <label for="inputEmail3"
+                                                    <label
                                                            class="col-sm-2 col-form-label">출고지역</label>
                                                     <div class="col-sm-10">
                                                         <div style="width: 100%">
@@ -271,7 +263,7 @@ To change this template use File | Settings | File Templates.
                                                 </div>
 
                                                 <div class="row mb-3">
-                                                    <label for="inputEmail3"
+                                                    <label
                                                            class="col-sm-2 col-form-label">반품지역</label>
                                                     <div class="col-sm-10">
                                                         <div style="width: 100%">

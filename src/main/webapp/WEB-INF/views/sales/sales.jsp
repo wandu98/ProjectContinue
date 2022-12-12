@@ -271,17 +271,20 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic">
-                                    <img src="/images/product/sales_main/${row.ss_img}">
+                                    <a href="/sales/detail/${row.ss_num}"><img
+                                            src="/images/product/sales_main/${row.ss_img}"></a>
                                     <ul class="product__item__pic__hover">
-                                        <li><a href=""><i class="fa fa-heart"></i></a></li>
-                                        <li><a href=""><i class="fa fa-retweet"></i></a></li>
+                                        <li>
+                                            <a href=""><i class="fa fa-heart"></i></a>
+                                        </li>
                                         <li><a href=""><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
 
                                 <div class="product__item__text">
-                                    <h6><a href="sales/detail/${row.ss_num}">${row.ss_name}</a></h6>
-                                    <h5><a href="sales/detail/${row.ss_num}">${row.ss_price}</a></h5>
+                                    <h6><a href="/sales/detail/${row.ss_num}">${row.ss_name}</a></h6>
+                                    <h5><a href="/sales/detail/${row.ss_num}"><fmt:formatNumber
+                                            value="${row.ss_price}"/></a></h5>
                                 </div>
                             </div>
                         </div>
@@ -313,7 +316,7 @@
                             </c:if>
 
                             <c:if test="${startPage>0}"> <!-- 첫번째 페이지 묶음이 아니라면 -->
-                                <a href="/mypage/wishlist?pageNum=${startPage}">[이전]</a>
+                                <a href="/sales/sales?pageNum=${startPage}">[이전]</a>
                             </c:if>
 
                             <!-- 페이지 표시 -->

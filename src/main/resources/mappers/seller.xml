@@ -2,5 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="seller">
+    <!-- 배송정책 등록하기 -->
+    <insert id="insert" parameterType="com.cafe24.nonchrono.dto.DeliveryDTO">
+        INSERT INTO tb_delivery ( dv_num, sl_id, dv_exist, dv_how, dv_courier, dv_fee, dv_extrafee, dv_adr1, dv_adr2, dv_rffee, dv_exfee, dv_exadr1, dv_exadr2)
+        VALUES (#{dv_num}, 'codingking', #{sl_id}, #{dv_how}, #{dv_courier}, #{dv_fee}, #{dv_extrafee}, #{dv_adr1}, #{dv_adr2}, #{dv_rffee}, #{dv_exfee}, #{dv_exadr1}, #{dv_exadr2})
+    </insert>
+
 
 </mapper>

@@ -1,10 +1,7 @@
 package com.cafe24.nonchrono.dao;
 
 
-import com.cafe24.nonchrono.dto.GameDTO;
-import com.cafe24.nonchrono.dto.PagingDTO;
-import com.cafe24.nonchrono.dto.SalesDTO;
-import com.cafe24.nonchrono.dto.WishlistDTO;
+import com.cafe24.nonchrono.dto.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -69,9 +66,11 @@ public class SalesDAO {
         return cnt;
     }//totalRowCount() end
 
+    //상품메인 페이징
     public List<SalesDTO> list3(PagingDTO pagingDTO) {
         return sqlSession.selectList("sales.list3", pagingDTO);
     }
+
     public List<SalesDTO> searchAll(String keyword) {
         return sqlSession.selectList("sales.searchAll", keyword);
     }
@@ -79,5 +78,23 @@ public class SalesDAO {
     public List<SalesDTO> searchCategory(SalesDTO salesDTO) {
         return sqlSession.selectList("sales.searchCategory", salesDTO);
     }
-    
+
+    public SalesDTO detail(int ss_num) {
+        return sqlSession.selectOne("sales.detail", ss_num);
+    } // detail() end
+
+    public GameDTO gameDetail(int ss_num) {
+        return sqlSession.selectOne("sales.gameDetail", ss_num);
+    } // gameDetail() end
+
+    public int reviewCount(int ss_num) {
+        return sqlSession.selectOne("sales.reviewCount", ss_num);
+    }// reviewDetail() end
+
+    public ReviewDTO reviewDetail(int ss_num) {
+        return sqlSession.selectOne("sales.reviewDetail", ss_num);
+    } // reviewCmt() end
+
+
+
 }//class end

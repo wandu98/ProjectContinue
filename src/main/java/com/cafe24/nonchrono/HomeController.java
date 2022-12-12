@@ -14,8 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +35,10 @@ public class HomeController {
     WishDAO wishDAO;
 
     @RequestMapping("/") // 메인
-    public ModelAndView Index(HttpSession session) {
-        String mem_id = (String) session.getAttribute("mem_id");
-        System.out.println(mem_id);
+    public ModelAndView Index(HttpServletRequest request) {
+        String mem_id = (String) request.getAttribute("mem_id");
         ModelAndView mav = new ModelAndView();
+        System.out.println(mem_id);
         mav.addObject("idxLatestProduct", salesDAO.idxLatestProduct());
         mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
         mav.addObject("idxReviewProduct", salesDAO.idxReviewProduct());
