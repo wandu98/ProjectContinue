@@ -4,7 +4,7 @@
 <mapper namespace="detail">
 
     <select id="count" resultType="int">
-        select nvl(cnt, 0) as ct
+        select ifnull(cnt, 0) as ct
         from (
                  select od.od_num, mem_id, dt_prog, count(dt_prog) as cnt
                  from tb_order od join tb_detail dt
