@@ -18,10 +18,9 @@ public class SellerDAO {
         System.out.println("------SellerDAO() 객체 생성");
     }//end
 
-    /*public List<SellerDTO> list() {
+    public List<SellerDTO> list() {
         return sqlSession.selectList("seller.list");
-    }*/
-
+    }
     public String login(String id, String pw) {
         SellerDTO dto = new SellerDTO();
         dto.setSl_id(id);
@@ -33,14 +32,13 @@ public class SellerDAO {
         return sqlSession.insert("seller.insert", sellerDTO);
     }//sellerInsert() end
 
-
-
-
-    public int insert(DeliveryDTO deliveryDTO) {
-        return sqlSession.insert("delivery.insert", deliveryDTO);
+    public int dv_insert(DeliveryDTO deliveryDTO) {
+        return sqlSession.insert("seller.dv_insert", deliveryDTO);
     } // insert() end
 
-
+    public List<DeliveryDTO> dv_list() {
+        return sqlSession.selectList("seller.dv_list");
+    }
 
 
 

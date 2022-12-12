@@ -99,8 +99,7 @@
                                                                                         pattern="#,###"/></span>
                                         <span class="mileage ">&nbsp;&nbsp;&nbsp;
                                         <img src="//img.echosting.cafe24.com/design/skin/admin/ko_KR/ico_product_point.gif"/>
-                                        <span class="mileage_price">(<fmt:parseNumber value="${detail.ss_price * 0.01}"
-                                                                                      integerOnly="true"/>원)</span></span>
+                                        <span class="mileage_price">(<fmt:parseNumber value="${detail.ss_price * 0.01}" integerOnly="true"/>원)</span></span>
                                     </td>
                                 </tr>
                                 </tbody>
