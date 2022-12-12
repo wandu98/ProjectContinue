@@ -241,4 +241,13 @@
         WHERE ri.rcrbrd_num = #{rcrbrd_num} AND ri.ri_seat = #{ri_seat}
     </select>
 
+    <!-- 이번달 모집왕 -->
+    <select id="rcrKing" resultType="hashMap">
+        SELECT mm.mem_nick, mm.mem_id, count(*)
+        FROM tb_mem as mm JOIN tb_rcrboard as rb
+                               on mm.mem_id = rb.mem_id
+        group by rb.mem_id
+        order by count(*) DESC
+    </select>
+
 </mapper>

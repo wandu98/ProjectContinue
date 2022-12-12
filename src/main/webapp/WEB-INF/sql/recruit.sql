@@ -232,14 +232,26 @@ from tb_rcrboard as rb join tb_game as gm
 where rb.rcrbrd_num = 7;
 
 SELECT mem_id, ri_seat, ri_num
-FROM tb_recruitInfo
+FROM tb_recruitinfo
 WHERE rcrbrd_num = 7;
 
 SELECT mem_id, ri_seat
-FROM tb_recruitInfo
+FROM tb_recruitinfo
 WHERE rcrbrd_num = 7;
 
 SELECT mm.mem_nick
-FROM tb_recruitInfo as ri JOIN tb_mem as mm
+FROM tb_recruitinfo as ri JOIN tb_mem as mm
                                ON ri.mem_id = mm.mem_id
 WHERE ri.rcrbrd_num = 7 AND ri.ri_seat = 3;
+
+/* 이번달 모집왕 */
+SELECT mm.mem_nick, mm.mem_id, count(*)
+FROM tb_mem as mm JOIN tb_rcrboard as rb
+on mm.mem_id = rb.mem_id
+group by rb.mem_id
+order by count(*) DESC;
+
+SELECT mem_id, count(*)
+FROM tb_rcrboard
+group by mem_id
+order by count(*) DESC;

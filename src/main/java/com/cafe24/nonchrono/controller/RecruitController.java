@@ -63,6 +63,8 @@ public class RecruitController {
             mav.addObject("list", list);
             mav.addObject("game", gameList);
             mav.addObject("attendCount", attendMembers);
+            mav.addObject("rcrKing", recruitDAO.rcrKing());
+            System.out.println(recruitDAO.rcrKing());
             mav.setViewName("/recruit/recruit");
         } else {
             mav.setViewName("mem/loginForm");

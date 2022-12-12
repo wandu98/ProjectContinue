@@ -75,15 +75,15 @@
                             <div class="blog__sidebar__recent__item__text">
                                 <div style="margin: 7%">
                                     <ol>
-                                        <li id=""></li>
+                                        <li id="king1"></li>
                                         <br>
-                                        <li></li>
+                                        <li id="king2"></li>
                                         <br>
-                                        <li></li>
+                                        <li id="king3"></li>
                                         <br>
-                                        <li></li>
+                                        <li id="king4"></li>
                                         <br>
-                                        <li></li>
+                                        <li id="king5"></li>
                                         <br>
                                     </ol>
                                 </div>
