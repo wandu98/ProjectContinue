@@ -3,16 +3,36 @@
 
 <mapper namespace="review">
 
-    <select id="list" resultType="com.cafe24.nonchrono.dto.ReviewDTO">
-        select rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num
-        from tb_review
-        where mem_id = #{mem_id}
+    <select id="list" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.ReviewDTO">
+        <![CDATA[
+            select *
+            from (
+                    select *, @rno := @rno + 1 as rnum
+                    from (
+                            select rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num
+                            from tb_review
+                            where mem_id = #{mem_id}
+                    ) AA, (select @rno := 0) BB
+            ) CC
+            where rnum >= #{startRow} and rnum <= #{endRow}
+        ]]>
     </select>
 
     <select id="count" resultType="int">
         select count(*)
         from tb_review
         where mem_id = #{mem_id}
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from tb_review
+        where rv_num = #{rv_num}
+    </delete>
+
+    <select id="listOne" parameterType="int" resultType="com.cafe24.nonchrono.dto.ReviewDTO">
+        select rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num
+        from tb_review
+        where rv_num = #{rv_num}
     </select>
 
 </mapper>

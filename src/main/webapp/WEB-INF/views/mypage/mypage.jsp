@@ -1,6 +1,11 @@
+<%@ page import="java.io.File" %>
+<%@ page import="org.springframework.util.ResourceUtils" %>
+<%@ page import="com.cafe24.nonchrono.dto.MemDTO" %>
+<%@ page import="com.cafe24.nonchrono.dao.MemDAO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../header.jsp"></jsp:include>
+
 
 
 <!-- Checkout Section Begin -->
@@ -13,7 +18,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
                             <div class="col-lg-4">
-                                <img src="/images/profile/${meminfo.mem_pic}">
+                                <img src="/images/profile/<c:choose><c:when test="${YN eq true}">${meminfo.mem_id}/${meminfo.mem_pic}</c:when><c:when test="${YN eq false}">${meminfo.mem_pic}</c:when>  </c:choose>">
                             </div>
                             <div class="col-lg-8">
                                 <table style="width: 100%; height: 100%">
@@ -174,7 +179,7 @@
                                     <div class="col-lg-12 mix oranges fresh-meat">
                                         <div class="featured__item">
                                             <div class="featured__item__text">
-                                                <h5><a href="#">구매 기록<p>고객님께서 구매하신 상품의 내역을 확인하실 수 있습니다.</p></a></h5>
+                                                <h5><a href="/mypage/purchaseHistory">구매 기록<p>고객님께서 구매하신 상품의 내역을 확인하실 수 있습니다.</p></a></h5>
                                             </div>
                                         </div>
                                     </div>

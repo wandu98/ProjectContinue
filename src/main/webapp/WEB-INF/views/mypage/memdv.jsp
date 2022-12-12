@@ -23,7 +23,7 @@
                             <th>수령인</th>
                             <th>연락처</th>
                             <th>별칭</th>
-                            <th>수정</th>
+                            <th>수정/삭제</th>
                         </tr>
                         </thead>
                         <tbody>

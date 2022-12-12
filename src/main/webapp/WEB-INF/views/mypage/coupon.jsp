@@ -58,8 +58,8 @@
         <%--    적립금    --%>
         <div class="shoping__checkout">
             <ul>
-                <li>누적 적립금 <span>10,000</span></li>
-                <li>가용 적립금 <span>2,000</span></li>
+                <li>누적 적립금 <span>${point.apoint}</span></li>
+                <li>가용 적립금 <span>${point.upoint}</span></li>
             </ul>
         </div>
 
