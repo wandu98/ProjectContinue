@@ -130,7 +130,7 @@
                 </div>
             </div>
 
-            <div style="margin: auto">
+            <div style="margin: auto" id="more_div">
                 <button type="button" id="more" class="btn btn-outline-danger" onclick="more($('#startCount').val(), $('#endCount').val())">더보기 (more)</button>
             </div>
         </div>
@@ -145,8 +145,8 @@
 
 
     function more(startCount, endCount) {
-        console.log(startCount);
-        console.log(endCount);
+        console.log("시작 번호 : " + startCount);
+        console.log("마지막 번호 : " + endCount);
 
         $.ajax({
             type: "post",
@@ -177,7 +177,6 @@
                     message += "</ul>";
                     message += "<h5>" + value.rcrbrd_subject + "</h5>";
                     message += "<p>" + value.gm_name + " (<span id='list" + (index + startCount + 1) + "' name='list" + (index + startCount + 1) + "'>" + value.count + "</span> / " + value.rcrbrd_max + ")</p>";
-                    // message += "<p>${game[vs4.index]} (<span id='list${vs4.count}' name='list${vs4.count}'>${attendCount.get(vs4.index)}</span> / ${mo.rcrbrd_max})</p>";
                     message += "</div>";
                     message += "</div>";
                     message += "</a>";
@@ -187,13 +186,18 @@
                         message += "<br>"
                     }
 
-
                 });
 
-                $('#board').append(message);
+                let listSize = ${list[0].rcrbrd_num}
 
-                $('#startCount').val((parseInt($('#startCount').val()))+9);
-                $('#endCount').val((parseInt($('#endCount').val()))+9);
+                if ($('#endCount').val() >= listSize) {
+                    $('#more_div').css("display", "none");
+                } else {
+                    $('#startCount').val((parseInt($('#startCount').val()))+9);
+                    $('#endCount').val((parseInt($('#endCount').val()))+9);
+                }
+
+                $('#board').append(message);
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);

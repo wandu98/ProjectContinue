@@ -395,4 +395,9 @@ public class SellerController {
 //    @RequestMapping("/orderserach")
 //    public void
 
+    @RequestMapping(value = "/memLogin", method = RequestMethod.GET)
+    public String memLogin() {
+        return "/mem/loginForm2";
+    }
+
 }//class end
