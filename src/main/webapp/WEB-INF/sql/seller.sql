@@ -48,3 +48,141 @@ WHERE sl_id='itwill' AND sl_pw='dkdk123' AND sl_grade IN ('SVip', 'SGold', 'SSil
 
 INSERT INTO tb_seller(sl_id, sl_pw, sl_name, sl_zip, sl_adr1, sl_adr2, sl_phone, sl_birth, sl_receive, sl_number, sl_bank, sl_bankcode)
 VALUES ('dddd', '1234', 'cd', '12345', '12345', '12345', '123456789', '19990408', '1212', 1, '1234', '1234');
+
+
+select dt_prog, count(*) as cnt, dt.ss_num, sl.sl_id
+from tb_detail dt join tb_sales sl
+on dt.ss_num = sl.ss_num
+where sl_id = 'codingking'
+group by dt_prog
+order by dt_prog;
+
+
+select *
+from (
+         select 'J01' dt_prog from dual union all
+         select 'J02' dt_prog from dual union all
+         select 'J03' dt_prog from dual union all
+         select 'J04' dt_prog from dual union all
+         select 'J05' dt_prog from dual union all
+         select 'J06' dt_prog from dual union all
+         select 'J07' dt_prog from dual union all
+         select 'J08' dt_prog from dual
+     ) tbb;
+
+
+select tbc.dt_prog, ifnull(cnt, 0) as ct
+from (
+        select dt_prog, count(*) as cnt, dt.ss_num, sl.sl_id
+        from tb_detail dt join tb_sales sl
+        on dt.ss_num = sl.ss_num join tb_order od
+        on dt.od_num = od.od_num
+        where sl_id = 'codingking' and od_date = ''
+        group by dt_prog
+        order by dt_prog
+    ) tba right join (select *
+                               from (
+                                        select 'J01' dt_prog from dual union all
+                                        select 'J02' dt_prog from dual union all
+                                        select 'J03' dt_prog from dual union all
+                                        select 'J04' dt_prog from dual union all
+                                        select 'J05' dt_prog from dual union all
+                                        select 'J06' dt_prog from dual union all
+                                        select 'J07' dt_prog from dual union all
+                                        select 'J08' dt_prog from dual
+                                    ) tbb
+     ) tbc on tba.dt_prog = tbc.dt_prog;
+
+
+
+select dt.dt_prog, dt.ss_num, sl_id, count(*) as cnt
+from tb_order od join tb_detail dt
+on od.od_num = dt.od_num join tb_sales sl
+on dt.ss_num = sl.ss_num
+where od_date between '20221201' and '20221231' and sl_id = 'codingking'
+group by dt_prog;
+
+
+
+select tbc.dt_prog, ifnull(cnt, 0)
+from (
+        select dt.dt_prog, dt.ss_num, sl_id, count(*) as cnt
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales sl
+        on dt.ss_num = sl.ss_num
+        where DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(now(), '%Y-%m') and sl_id = 'codingking'
+        group by dt_prog
+    ) tba right join (select *
+                               from (
+                                        select 'J01' dt_prog from dual union all
+                                        select 'J02' dt_prog from dual union all
+                                        select 'J03' dt_prog from dual union all
+                                        select 'J04' dt_prog from dual union all
+                                        select 'J05' dt_prog from dual union all
+                                        select 'J06' dt_prog from dual union all
+                                        select 'J07' dt_prog from dual union all
+                                        select 'J08' dt_prog from dual
+                                    ) tbb
+    ) tbc on tba.dt_prog = tbc.dt_prog;
+
+
+select dt.dt_prog, dt.ss_num, sl_id, count(*) as cnt, od_date
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales sl
+                                                    on dt.ss_num = sl.ss_num
+where DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d') and sl_id = 'codingking'
+group by dt_prog;
+
+
+-- dt_progCountDay
+select tbc.dt_prog, ifnull(cnt, 0)
+from (
+        select dt.dt_prog, dt.ss_num, sl_id, count(*) as cnt, od_date
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales sl
+        on dt.ss_num = sl.ss_num
+        where DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d') and sl_id = 'codingking'
+        group by dt_prog
+    ) tba right join (select *
+                               from (
+                                        select 'J01' dt_prog from dual union all
+                                        select 'J02' dt_prog from dual union all
+                                        select 'J03' dt_prog from dual union all
+                                        select 'J04' dt_prog from dual union all
+                                        select 'J05' dt_prog from dual union all
+                                        select 'J06' dt_prog from dual union all
+                                        select 'J07' dt_prog from dual union all
+                                        select 'J08' dt_prog from dual
+                                    ) tbb
+    ) tbc on tba.dt_prog = tbc.dt_prog;
+
+
+-- dt_progCountAll
+select tbc.dt_prog, ifnull(cnt, 0) as ct
+from (
+         select dt_prog, count(*) as cnt, dt.ss_num, sl.sl_id
+         from tb_detail dt join tb_sales sl
+                                on dt.ss_num = sl.ss_num join tb_order od
+                                                              on dt.od_num = od.od_num
+         where sl_id = 'codingking'
+         group by dt_prog
+         order by dt_prog
+     ) tba right join (select *
+                       from (
+                                select 'J01' dt_prog from dual union all
+                                select 'J02' dt_prog from dual union all
+                                select 'J03' dt_prog from dual union all
+                                select 'J04' dt_prog from dual union all
+                                select 'J05' dt_prog from dual union all
+                                select 'J06' dt_prog from dual union all
+                                select 'J07' dt_prog from dual union all
+                                select 'J08' dt_prog from dual
+                            ) tbb
+) tbc on tba.dt_prog = tbc.dt_prog;
+
+
+select od.od_num ,od_date, dt.ss_num, dt_amount, sl_id, ss_price, substr(gm_code,1,2) as gm_code, dt_amount*sl.ss_price as sales
+from tb_detail dt join tb_sales sl
+on dt.ss_num = sl.ss_num join tb_order od
+on dt.od_num = od.od_num
+where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d');

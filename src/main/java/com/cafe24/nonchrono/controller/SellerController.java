@@ -43,8 +43,11 @@ public class SellerController {
 
     //판매자 메인
     @RequestMapping("/seller")
-    public ModelAndView seller() {
+    public ModelAndView seller(HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        String sl_id = (String) session.getAttribute("sl_id");
+        mav.addObject("progCountDay", sellerDAO.dt_progCountDay(sl_id));
+        mav.addObject("progCountAll", sellerDAO.dt_progCountAll(sl_id));
         mav.setViewName("seller/seller");
         return mav;
     }//seller() end
@@ -130,7 +133,7 @@ public class SellerController {
         String grade = sellerDAO.login(id, pw);
 
         if (grade != null) {
-            mav.setViewName("redirect:/seller");
+            mav.setViewName("redirect:/seller/seller");
             session.setAttribute("sl_id", id);
             session.setAttribute("sl_pw", pw);
         } else {

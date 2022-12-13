@@ -37,6 +37,11 @@
 
     <!-- Template Main CSS File -->
     <link href="/admin_assets/css/style.css" rel="stylesheet">
+
+    <%-- Script --%>
+    <script src="/js/jquery-3.6.1.min.js"></script>
+    <script src="/js/memmodify.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
@@ -45,7 +50,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="admin_index.jsp" class="logo d-flex align-items-center">
+        <a href="/admin" class="logo d-flex align-items-center">
             <img src="/admin_assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">ontinue? Admin</span>
         </a>
@@ -61,6 +66,12 @@
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link nav-icon" href="/">
+                    <i class="bi-house"></i>
+                </a><!-- End Messages Icon -->
+            </li>
 
             <li class="nav-item d-block d-lg-none">
                 <a class="nav-link nav-icon search-bar-toggle " href="#">
@@ -276,89 +287,11 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="admin_index.jsp">
+            <a class="nav-link " href="/admin">
                 <i class="bi bi-grid"></i>
-                <span>Dashboard</span>
+                <span>대시보드</span>
             </a>
         </li><!-- End Dashboard Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>공지사항</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="components-alerts.html">
-                        <i class="bi bi-circle"></i><span>Alerts</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-accordion.html">
-                        <i class="bi bi-circle"></i><span>Accordion</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-badges.html">
-                        <i class="bi bi-circle"></i><span>Badges</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-breadcrumbs.html">
-                        <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-buttons.html">
-                        <i class="bi bi-circle"></i><span>Buttons</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-cards.html">
-                        <i class="bi bi-circle"></i><span>Cards</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-carousel.html">
-                        <i class="bi bi-circle"></i><span>Carousel</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-list-group.html">
-                        <i class="bi bi-circle"></i><span>List group</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-modal.html">
-                        <i class="bi bi-circle"></i><span>Modal</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-tabs.html">
-                        <i class="bi bi-circle"></i><span>Tabs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-pagination.html">
-                        <i class="bi bi-circle"></i><span>Pagination</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-progress.html">
-                        <i class="bi bi-circle"></i><span>Progress</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-spinners.html">
-                        <i class="bi bi-circle"></i><span>Spinners</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="components-tooltips.html">
-                        <i class="bi bi-circle"></i><span>Tooltips</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Components Nav -->
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
@@ -366,142 +299,34 @@
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="forms-elements.html">
-                        <i class="bi bi-circle"></i><span>Form Elements</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="forms-layouts.html">
-                        <i class="bi bi-circle"></i><span>Form Layouts</span>
-                    </a>
-                </li>
-                <li>
                     <a href="/admin/noticeWrite">
                         <i class="bi bi-circle"></i><span>글쓰기</span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="forms-validation.html">
-                        <i class="bi bi-circle"></i><span>Form Validation</span>
+                    <a href="/notice/noticeList">
+                        <i class="bi bi-circle"></i><span>공지사항 목록</span>
                     </a>
                 </li>
             </ul>
         </li><!-- End Forms Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>품목 등록</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="tables-general.html">
-                        <i class="bi bi-circle"></i><span>General Tables</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="tables-data.html">
-                        <i class="bi bi-circle"></i><span>Data Tables</span>
+                    <a href="/">
+                        <i class="bi bi-circle"></i><span>품목 등록</span>
                     </a>
                 </li>
             </ul>
-        </li><!-- End Tables Nav -->
+        </li><!-- End Components Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="charts-chartjs.html">
-                        <i class="bi bi-circle"></i><span>Chart.js</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="charts-apexcharts.html">
-                        <i class="bi bi-circle"></i><span>ApexCharts</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>ECharts</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Charts Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="icons-bootstrap.html">
-                        <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons-remix.html">
-                        <i class="bi bi-circle"></i><span>Remix Icons</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons-boxicons.html">
-                        <i class="bi bi-circle"></i><span>Boxicons</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Icons Nav -->
-
-        <li class="nav-heading">Pages</li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/notice">
-                <i class="bi bi-person"></i>
-                <span></span>
-            </a>
-        </li><!-- End Profile Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>F.A.Q</span>
-            </a>
-        </li><!-- End F.A.Q Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-contact.html">
-                <i class="bi bi-envelope"></i>
-                <span>Contact</span>
-            </a>
-        </li><!-- End Contact Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-register.html">
-                <i class="bi bi-card-list"></i>
-                <span>Register</span>
-            </a>
-        </li><!-- End Register Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-login.html">
-                <i class="bi bi-box-arrow-in-right"></i>
-                <span>Login</span>
-            </a>
-        </li><!-- End Login Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-error-404.html">
-                <i class="bi bi-dash-circle"></i>
-                <span>Error 404</span>
-            </a>
-        </li><!-- End Error 404 Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-blank.html">
-                <i class="bi bi-file-earmark"></i>
-                <span>Blank</span>
-            </a>
-        </li><!-- End Blank Page Nav -->
+        <%--<li class="nav-heading">Pages</li>--%>
 
     </ul>
 
@@ -510,11 +335,11 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Dashboard</h1>
+        <h1>대시보드</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="admin_index.jsp">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                <li class="breadcrumb-item active">대시보드</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -535,24 +360,24 @@
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                                        <h6>일자별</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" onclick="sales('day')" id="sales_day">하루</a></li>
+                                    <li><a class="dropdown-item" onclick="sales('month')" id="sales_month">한달</a></li>
+                                    <li><a class="dropdown-item" onclick="sales('year')" id="sales_year">일년</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Sales <span>| Today</span></h5>
+                                <h5 class="card-title">판매 현황 <span id="sales_date">| Today</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-cart"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>145</h6>
+                                        <h6 id="sales_value">${sales}</h6>
                                         <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                                     </div>
@@ -570,17 +395,17 @@
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                                        <h6>일자별</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" onclick="revenue('day')" id="revenue_day">하루</a></li>
+                                    <li><a class="dropdown-item" onclick="revenue('month')" id="revenue_month">한달</a></li>
+                                    <li><a class="dropdown-item" onclick="revenue('year')" id="revenue_year">일년</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                                <h5 class="card-title">수익 <span>| This Month</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -606,12 +431,12 @@
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                                        <h6>일자별</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" onclick="customer('day')" id="customer_day">하루</a></li>
+                                    <li><a class="dropdown-item" onclick="customer('month')" id="customer_month">한달</a></li>
+                                    <li><a class="dropdown-item" onclick="customer('year')" id="customer_year">일년</a></li>
                                 </ul>
                             </div>
 
@@ -908,18 +733,124 @@
                                     <div class="row mb-3">
                                         <legend class="col-form-label col-sm-2 pt-0">카테고리</legend>
                                         <div class="col-sm-10">
+                                            <input type="hidden" id="gm_category" name="gm_category" value="" readonly>
 
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cate_action">
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_action" value="액션">
                                                 <label class="form-check-label" for="cate_action">
                                                     액션
                                                 </label>
                                             </div>
 
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cate_adventure">
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_adventure" value="어드벤처">
                                                 <label class="form-check-label" for="cate_adventure">
                                                     어드벤처
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 34%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_rpg" value="RPG">
+                                                <label class="form-check-label" for="cate_rpg">
+                                                    RPG
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_strategy" value="전략">
+                                                <label class="form-check-label" for="cate_strategy">
+                                                    전략
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_fight" value="격투">
+                                                <label class="form-check-label" for="cate_fight">
+                                                    격투
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 34%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_puzzle" value="퍼즐">
+                                                <label class="form-check-label" for="cate_puzzle">
+                                                    퍼즐
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_party" value="파티">
+                                                <label class="form-check-label" for="cate_party">
+                                                    파티
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_simulation" value="시뮬레이션">
+                                                <label class="form-check-label" for="cate_simulation">
+                                                    시뮬레이션
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 34%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_racing" value="레이싱">
+                                                <label class="form-check-label" for="cate_racing">
+                                                    레이싱
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_sports" value="스포츠">
+                                                <label class="form-check-label" for="cate_sports">
+                                                    스포츠
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_arcade" value="아케이드">
+                                                <label class="form-check-label" for="cate_arcade">
+                                                    아케이드
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 34%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_utility" value="실용">
+                                                <label class="form-check-label" for="cate_utility">
+                                                    실용
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_training" value="트레이닝">
+                                                <label class="form-check-label" for="cate_training">
+                                                    트레이닝
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_study" value="학습">
+                                                <label class="form-check-label" for="cate_study">
+                                                    학습
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 34%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_shooting" value="슈팅">
+                                                <label class="form-check-label" for="cate_shooting">
+                                                    슈팅
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_board" value="보드">
+                                                <label class="form-check-label" for="cate_board">
+                                                    보드
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check" style="float: left; width: 33%;">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_extra" value="기타">
+                                                <label class="form-check-label" for="cate_extra">
+                                                    기타
                                                 </label>
                                             </div>
                                         </div>
@@ -1221,31 +1152,18 @@
 
             </div><!-- End Right side columns -->
 
-            <div style="text-align: right" onclick="location.href='redirect:/crawling/AutoCrawling'">
-                <button type="button" class="btn btn-outline-primary" onclick="crawling()">품목 자동 등록</button>
-                <a href="/crawling">품목 자동 등록</a>
+            <div style="text-align: right">
+                <button type="button" onclick="location.href='/crawling'" class="btn btn-outline-primary">품목 자동 등록</button>
             </div>
         </div>
     </section>
-
-    <script>
-        function crawling() {
-            location.href= "redirect:/";
-        } </script>
 
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
     <div class="copyright">
-        &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        &copy; Copyright <strong><span>Continue?</span></strong>. All Rights Reserved
     </div>
 </footer><!-- End Footer -->
 
@@ -1262,8 +1180,49 @@
 <script src="admin_assets/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
-<script src="admin_assets/js/main.js"></script>
+<script src="/admin_assets/js/main.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
 
 </body>
-
 </html>
+
+<script>
+    function sales(time) {
+        $.ajax({
+            url: "/admin/sales_" + time,
+            type: "post",
+            success: function (data) {
+                $("#sales_value").text(data);
+
+                if (time == "day") {
+                    $('#sales_date').text("| TODAY");
+                } else if (time == "month") {
+                    $('#sales_date').text("| MONTH");
+                } else if (time == "year") {
+                    $('#sales_date').text("| YEAR");
+                }
+
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $(".form-check-input").click(function() {
+            // alert($("input[type=checkbox][name=inputCate]:checked").val());
+            let tmp_arr = [];
+             $(".form-check-input:checked").each(function() {
+                 let tmp = $(this).val();
+                 tmp_arr.push(tmp);
+             })
+            alert(tmp_arr);
+        })
+    })
+
+</script>

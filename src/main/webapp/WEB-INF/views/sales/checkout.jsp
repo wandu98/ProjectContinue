@@ -53,7 +53,8 @@
                                     <h5>${row.ss_name}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    <fmt:formatNumber type="currency" value="${row.ss_price}" groupingUsed="true"></fmt:formatNumber>
+                                    <fmt:formatNumber type="currency" value="${row.ss_price}"
+                                                      groupingUsed="true"></fmt:formatNumber>
                                 </td>
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
@@ -63,7 +64,8 @@
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total" id="total">
-                                    <fmt:formatNumber value="${row.total}" type="currency" groupingUsed="true"></fmt:formatNumber>
+                                    <fmt:formatNumber value="${row.total}" type="currency"
+                                                      groupingUsed="true"></fmt:formatNumber>
                                 </td>
                                 <td class="shoping__cart__item__close">
                                     <form id="form1" name="form1" method="post" action="/sales/checkoutdelete">
@@ -197,8 +199,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <button type="submit" class="site-btn">결제하기</button>
-                            <input type="button" id="naverPayBtn" value="네이버페이 결제 버튼">
+                            <button type="submit" class="site-btn" onclick="requestPay()">결제하기</button>
                         </div>
                     </div>
                 </div>
@@ -207,6 +208,40 @@
     </div>
 </section>
 <!-- Checkout Section End -->
+
+<%--결제 API--%>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script>
+    <%-- 결제 API  --%>
+    function requestPay() {
+        IMP.init('imp62827174')
+        //IMP.reqeust_pay(param, callback) 결제창 호출
+        IMP.request_pay({
+            pg:"html5_inicis.INIpayTest",
+            pay_method: "card",
+            merchant_uid: "merchant_continue_id" + new Date().getTime(),
+            name: "포켓몬스터 골드",
+            amount: 1000,
+            buyer_email: "",
+            buyer_name: "",
+            buyer_tel: "",
+            buyer_addr: "",
+            buyer_postcode: "",
+        },  function(rsp) {
+            if (rsp.success) {
+                alert("결제가 완료되었습니다. -> imp_uid :" + rsp.merchant_uid+" / merchant_uid(orderKey) : " +rsp.merchant_uid);
+                location.href = '/';
+            } else {
+                alert("결제에 실패하였습니다. : 코드("+rsp.error_code+") / 메세지(" + rsp.error_msg + ")");
+
+
+            }
+        });
+    }
+
+
+</script>
 
 <script>
     function checkoutDelete() {
