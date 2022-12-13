@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="checkout__input" style="width: 70%;">
-                                    <div class="set-bg product__item__pic" data-setbg="/images/profile/ProfilePicture.png"><c:if test="${YN eq true}"><img id="pic_view" src="/images/profile/${mem.mem_id}/${mem.mem_pic}"></c:if></div>
+                                    <div id="pic_view2" class="set-bg product__item__pic" data-setbg="/images/profile/ProfilePicture.png"><c:if test="${YN eq true}"><img id="pic_view" src="/images/profile/${mem.mem_id}/${mem.mem_pic}" style="height: 100%; overflow: hidden"></c:if></div>
                                     <label for="mem_pic">사진 선택</label>
                                     <input type="file" id="mem_pic" name="mem_pic" style="display: none">
                                 </div>
@@ -139,8 +139,15 @@
         let file = event.target.files[0];
         // alert(file);    //[object File]
         let reader = new FileReader();
-        reader.onload = function (e) {
-            $("#pic_view").attr('src', e.target.result);
+        if (${YN eq true}) {
+            reader.onload = function (e) {
+                $("#pic_view").attr('src', e.target.result);
+            }
+        } else {
+            $("#pic_view2").append('<img id="pic_view" src="" style="height: 100%; overflow: hidden"></<img>');
+            reader.onload = function (e) {
+                $("#pic_view").attr('src', e.target.result);
+            }
         }
         reader.readAsDataURL(file);
     });

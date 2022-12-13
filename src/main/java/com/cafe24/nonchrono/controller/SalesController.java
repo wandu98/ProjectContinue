@@ -142,5 +142,11 @@ public class SalesController {
         return mav;
     }
 
+    @RequestMapping("checkoutdelete")
+    public String checkoutdelete(@RequestParam int bk_num) {
+        basketDAO.delete(bk_num);
+        return "/sales/checkout";
+    }
+
 
 }//class end
