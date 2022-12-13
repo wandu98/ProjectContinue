@@ -31,4 +31,9 @@
         group by mem_id
     </select>
 
+    <insert id="insert" parameterType="com.cafe24.nonchrono.dto.BasketDTO">
+        insert into tb_basket (ss_num, bk_amount, mem_id)
+        values (#{ss_num}, #{bk_amount}, #{mem_id})
+    </insert>
+
 </mapper>

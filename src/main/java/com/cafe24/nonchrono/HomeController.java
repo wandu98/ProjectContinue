@@ -38,7 +38,7 @@ public class HomeController {
     @RequestMapping("/") // 메인
     public ModelAndView Index(HttpSession session) {
         String mem_id = (String) session.getAttribute("mem_id");
-        System.out.println(mem_id);
+//        System.out.println(mem_id);
         ModelAndView mav = new ModelAndView();
         mav.addObject("idxLatestProduct", salesDAO.idxLatestProduct());
         mav.addObject("idxTopProduct", salesDAO.idxTopProduct());

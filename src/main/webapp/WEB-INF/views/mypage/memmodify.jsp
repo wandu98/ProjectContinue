@@ -31,8 +31,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                <div class="checkout__input" style="width: 70%; padding-left: 20%">
-                                    <c:if test="${YN eq true}"><img src="/images/profile/${meminfo.mem_id}/${meminfo.mem_pic}"></c:if>
+                                <div class="checkout__input" style="width: 70%;">
+                                    <div class="set-bg product__item__pic" data-setbg="/images/profile/ProfilePicture.png"><c:if test="${YN eq true}"><img id="pic_view" src="/images/profile/${mem.mem_id}/${mem.mem_pic}"></c:if></div>
                                     <label for="mem_pic">사진 선택</label>
                                     <input type="file" id="mem_pic" name="mem_pic" style="display: none">
                                 </div>
