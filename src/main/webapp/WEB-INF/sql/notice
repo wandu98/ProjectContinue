@@ -1,8 +1,0 @@
-CREATE TABLE tb_nt
-(
-    nt_num     int          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nt_title   varchar(255) NOT NULL,
-    nt_cmt     text(5000)   NOT NULL,
-    nt_regdate datetime     NOT NULL default now(),
-    nt_views   int          NOT NULL
-);
