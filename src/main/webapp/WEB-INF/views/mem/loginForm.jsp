@@ -87,13 +87,13 @@
                     <label for="mem_id">아이디</label>
                     <br>
                     <%--<input type="text" id="mem_id" value="<%=c_id%>" name="mem_id">--%>
-                    <input type="text" id="mem_id" name="mem_id" class="col-lg-9 col-md-9" style="letter-spacing: 10px">
+                    <input type="text" id="mem_id" name="mem_id" class="col-lg-10 col-md-10" style="letter-spacing: 10px">
                 </div>
                 <br>
                 <div class="checkout__input">
                     <label for="mem_pw">비밀번호</label>
                     <br>
-                    <input type="password" id="mem_pw" name="mem_pw" class="col-lg-9 col-md-9" style="letter-spacing: 15px">
+                    <input type="password" id="mem_pw" name="mem_pw" class="col-lg-10 col-md-10" style="letter-spacing: 15px">
                 </div>
                 <br>
                 <input type="checkbox" class="checkout__input__checkbox">
