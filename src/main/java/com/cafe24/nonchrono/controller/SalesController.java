@@ -100,12 +100,14 @@ public class SalesController {
 
     //상품 상세
     @RequestMapping("/detail/{ss_num}")
-    public ModelAndView salesDetail(@PathVariable int ss_num) {
+    public ModelAndView salesDetail(@PathVariable int ss_num)  {
         ModelAndView mav = new ModelAndView();
         mav.addObject("detail", salesDAO.detail(ss_num)); //상품 상세보기
         mav.addObject("gameDetail", salesDAO.gameDetail(ss_num)); // 게임정보 상세
         mav.addObject("reviewCount", salesDAO.reviewCount(ss_num)); // 리뷰 갯수
-        mav.addObject("reviewDetail", salesDAO.reviewDetail(ss_num));
+        mav.addObject("reviewDetail", salesDAO.reviewDetail(ss_num)); //리뷰 상세
+        mav.addObject("deliveryDetail", salesDAO.deliveryDetail(ss_num));// 배송비 가져오기
+
         mav.setViewName("sales/detail");
         return mav;
     }// detail() end

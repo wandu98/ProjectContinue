@@ -56,14 +56,14 @@
     <insert id="insert" parameterType="com.cafe24.nonchrono.dto.SalesDTO">
         INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status,
                               ss_description, dv_num, ss_name)
-        VALUES (#{gm_code}, 'codingking', #{ss_price}, now(), #{ss_eperiod}, #{ss_stock}, #{ss_img}, #{ss_status},
+        VALUES (#{gm_code}, #{sl_id}, #{ss_price}, now(), #{ss_eperiod}, #{ss_stock}, #{ss_img}, #{ss_status},
                 #{ss_description}, '1', #{ss_name})
     </insert>
 
     <select id="list2" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select ss_num, ss_name, ss_price, ss_status, ss_speriod
         from tb_sales
-        where sl_id = 'codingking'
+        where sl_id = #{sl_id}
         ORDER BY ss_num DESC
     </select>
 
@@ -131,4 +131,12 @@
         from tb_review
         WHERE ss_num = #{ss_num}
     </select>
+
+    <!-- 배송비 가져오기 -->
+    <select id="deliveryDetail" resultType="com.cafe24.nonchrono.dto.DeliveryDTO">
+        select tb_sales.ss_num, tb_sales.sl_id, tb_sales.dv_num, tb_delivery.dv_num ,dv_fee
+        from tb_delivery join tb_sales on tb_delivery.dv_num = tb_sales.dv_num
+        where tb_sales.ss_num = #{ss_num}
+    </select>
+
 </mapper>

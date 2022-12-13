@@ -5,14 +5,15 @@
     <!-- 배송정책 등록하기 -->
     <insert id="dv_insert" parameterType="com.cafe24.nonchrono.dto.DeliveryDTO">
         INSERT INTO tb_delivery ( sl_id,  dv_how, dv_courier, dv_fee, dv_extrafee, dv_adr1, dv_adr2, dv_rffee, dv_exfee, dv_exadr1, dv_exadr2)
-        VALUES ( 'codingking', #{dv_how}, #{dv_courier}, #{dv_fee}, #{dv_extrafee}, #{dv_adr1}, #{dv_adr2}, #{dv_rffee}, #{dv_exfee}, #{dv_exadr1}, #{dv_exadr2})
+        VALUES ( #{sl_id}, #{dv_how}, #{dv_courier}, #{dv_fee}, #{dv_extrafee}, #{dv_adr1}, #{dv_adr2}, #{dv_rffee}, #{dv_exfee}, #{dv_exadr1}, #{dv_exadr2})
     </insert>
+
 
     <!-- 판마자별 배송정책 리스트 -->
     <select id="dv_list" resultType="com.cafe24.nonchrono.dto.DeliveryDTO">
         select dv_num ,sl_id ,dv_how ,dv_courier ,dv_fee ,dv_extrafee ,dv_adr1 ,dv_adr2 ,dv_rffee ,dv_exfee ,dv_exadr1 ,dv_exadr2
         from tb_delivery
-        where sl_id = 'codingking'
+        where sl_id = #{sl_id}
         ORDER BY dv_num DESC
     </select>
 
