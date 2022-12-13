@@ -148,21 +148,21 @@
                                     <div class="col-sm-10">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="ss_status"
-                                                   id="ss_status" value="S1" checked>
+                                                   id="ss_status" value="판매중" checked>
                                             <label class="form-check-label" for="ss_status">
                                                 판매중
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="ss_status"
-                                                   id="ss_status2" value="S2" disabled>
+                                                   id="ss_status2" value="판매중지" disabled>
                                             <label class="form-check-label" for="ss_status2">
                                                 판매중지
                                             </label>
                                         </div>
                                         <div class="form-check disabled">
                                             <input class="form-check-input" type="radio" name="ss_status"
-                                                   id="ss_status3" value="S3" disabled>
+                                                   id="ss_status3" value="품절" disabled>
                                             <label class="form-check-label" for="ss_status3">
                                                 품절
                                             </label>
@@ -174,7 +174,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">배송정책</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="dv_num" id="dv_num" required>
+                                    <input type="text" class="form-control" name="dv_num" id="dv_num" placeholder="판매자 아이디의 배송정책 리스트 보여주기" required>
                                 </div>
                             </div>
                             <div class="row mb-3">

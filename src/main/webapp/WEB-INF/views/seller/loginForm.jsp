@@ -2,9 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--<%@ include file="../seller/sellerauth.jsp" %>--%>
-<%--<%@ include file="../auth.jsp" %>--%>
-<%@ include file="../seller/sellerheader.jsp" %>
+<%@ include file="sellerauth.jsp" %>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -64,7 +63,6 @@
                                         <div class="pt-4 pb-2">
                                             <h5 class="card-title text-center pb-0 fs-4">로그인</h5>
                                         </div>
-
                                         <form class="row g-3 needs-validation" novalidate name="Selloginfrm" id="Selloginfrm" action="/seller/login" method="post">
 
                                             <div class="col-12">
@@ -97,9 +95,10 @@
                                                 <button class="btn btn-primary w-100" type="submit">로그인</button>
                                             </div>
                                             <div class="col-12">
-                                                <p class="small mb-0">회원이 아니십니까? <button type="button" class="site-btn" onclick="location.href='/seller/signup'">회원가입 하기</button></p>
+                                                <p class="small mb-0">회원이 아니십니까? <button type="button" class="site-btn" >회원가입 하기</button></p>
                                             </div>
                                         </form>
+
 
                                     </div>
                                 </div>

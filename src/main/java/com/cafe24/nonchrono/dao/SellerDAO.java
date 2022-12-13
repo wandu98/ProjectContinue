@@ -40,13 +40,16 @@ public class SellerDAO {
         return sqlSession.insert("delivery.insert", deliveryDTO);
     }
 
+    //배송정책 추가
     public int dv_insert(DeliveryDTO deliveryDTO) {
         return sqlSession.insert("seller.dv_insert", deliveryDTO);
 
     } // insert() end
 
-    public List<DeliveryDTO> dv_list() {
-        return sqlSession.selectList("seller.dv_list");
-    }
+    public DeliveryDTO deliveryDetail(String sl_id) {
+        return sqlSession.selectOne("sales.deliveryDetail", sl_id);
+    } // deliveryDetail() end
+
+    public List<DeliveryDTO> dv_list(String sl_id) {return sqlSession.selectList("seller.dv_list", sl_id);}
 
 }//class end

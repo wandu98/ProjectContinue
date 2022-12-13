@@ -435,7 +435,7 @@ To change this template use File | Settings | File Templates.
                                     <td>${row.dv_exfee}</td>
                                     <td>${row.dv_extrafee}</td>
                                     <td>${row.dv_adr1}</td>
-                                    <td>${row.dv_exadr2}</td>
+                                    <td>${row.dv_exadr1}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>

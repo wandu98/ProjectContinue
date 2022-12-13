@@ -106,7 +106,7 @@
                     <div class="product__details__price">판매가 ₩<fmt:formatNumber value="${detail.ss_price}"
                                                                                 pattern="#,###"/></div>
                     <ul>
-                        <li><b>배송비</b> <span>무료</span></li>
+                        <li><b>배송비</b> <span>${deliveryDetail.dv_fee}</span></li>
                         <li><b>재고</b> <span>${detail.ss_stock}개</span></li>
                         <li><b>플랫폼</b> <span>SWITCH</span></li>
                         <li><b>퍼블리셔</b> <span>닌텐도</span></li>

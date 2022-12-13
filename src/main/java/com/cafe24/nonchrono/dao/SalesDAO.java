@@ -25,8 +25,8 @@ public class SalesDAO {
 
 
     //판매자의 상품 리스트
-    public List<SalesDTO> list2() {
-        return sqlSession.selectList("sales.list2");
+    public List<SalesDTO> list2(String sl_id) {
+        return sqlSession.selectList("sales.list2", sl_id);
     } // list2() end
 
     //상품메인 리스트
@@ -94,6 +94,10 @@ public class SalesDAO {
     public ReviewDTO reviewDetail(int ss_num) {
         return sqlSession.selectOne("sales.reviewDetail", ss_num);
     } // reviewCmt() end
+
+    public DeliveryDTO deliveryDetail(int ss_num) {
+        return sqlSession.selectOne("sales.deliveryDetail", ss_num);
+    } // deliveryDetail() end
 
 
 

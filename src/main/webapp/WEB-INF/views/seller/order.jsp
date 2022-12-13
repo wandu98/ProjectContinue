@@ -37,16 +37,15 @@
                                 <label class="col-sm-2 col-form-label">진행상태</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" aria-label="Default select example">
-                                        <option selected>--------------</option>
-                                        <option value="1">전체</option>
-                                        <option value="2">결제완료</option>
-                                        <option value="3">출고준비중</option>
-                                        <option value="4">출고완료</option>
-                                        <option value="5">배송중</option>
-                                        <option value="6">배송완료</option>
-                                        <option value="7">구매확정</option>
-                                        <option value="8">교환</option>
-                                        <option value="9">반품</option>
+                                        <option value="all" selected>전체</option>
+                                        <option value="J01">결제완료</option>
+                                        <option value="J02">출고준비중</option>
+                                        <option value="J03">출고완료</option>
+                                        <option value="J04">배송중</option>
+                                        <option value="J05">배송완료</option>
+                                        <option value="J06">구매확정</option>
+                                        <option value="J07">교환</option>
+                                        <option value="J08">반품</option>
 
                                     </select>
                                 </div>
@@ -55,19 +54,19 @@
                             <div class="row mb-3">
                                 <label for="inputDate" class="col-sm-2 col-form-label">기간</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control">
+                                    <input type="date" class="form-control" id="inputDate">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-2 col-form-label">판매종료</label>
+                                <label for="inputDate2" class="col-sm-2 col-form-label">판매종료</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control">
+                                    <input type="date" class="form-control" id="inputDate2">
                                 </div>
                             </div>
 
 
                             <div class="row mb-3">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">조건검색</label>
+                                <label  class="col-sm-2 col-form-label">조건검색</label>
                                 <div class="col-md-4" style="width: 10%">
                                     <select id="inputState" class="form-select">
                                         <option selected>--------</option>
@@ -109,7 +108,7 @@
                                 <tr>
                                     <th scope="row">2</th>
                                     <td>202212011451</td>
-                                    <td>닌텐도Switch OLED</td>
+                                    <td>닌텐도Switch OLED</td>료
                                     <td>2022-12-02</td>
                                     <td>결제완료</td>
                                 </tr>

@@ -51,10 +51,12 @@ public class SellerController {
 
     //판매자가 판매하는 리스트 현황
     @RequestMapping("/list")
-    public ModelAndView list2() {
+    public ModelAndView list2(HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        String sl_id = (String) session.getAttribute("sl_id");
         mav.setViewName("seller/list");
-        mav.addObject("list2", salesDAO.list2());
+        mav.addObject("list2", salesDAO.list2(sl_id));
+
         return mav;
     }// list() end
 
@@ -76,16 +78,20 @@ public class SellerController {
 
     //배송정책
     @RequestMapping("/delivery")
-    public ModelAndView delivery() {
+    public ModelAndView delivery(HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        String sl_id = (String) session.getAttribute("sl_id");
         mav.setViewName("seller/delivery");
-        mav.addObject("dv_list", sellerDAO.dv_list());
+        mav.addObject("dv_list", sellerDAO.dv_list(sl_id));
+
         return mav;
     }// delivery() end
 
     //배송정책 추가
     @RequestMapping("/dv_insert")
-    public String dv_insert(@ModelAttribute DeliveryDTO deliveryDTO) {
+    public String dv_insert(@ModelAttribute DeliveryDTO deliveryDTO, HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        deliveryDTO.setSl_id(sl_id);
         sellerDAO.dv_insert(deliveryDTO);
         return "redirect:seller";
     }
@@ -240,7 +246,8 @@ public class SellerController {
 
     //상품등록
     @RequestMapping("/insert")
-    public String selaseInsert(@RequestParam String gm_code, @RequestParam String ss_name, @RequestParam int ss_price, @RequestParam String ss_speriod, @RequestParam String ss_eperiod, @RequestParam int ss_stock, @RequestParam MultipartFile ss_img, @RequestParam String ss_status, @RequestParam String ss_description, @RequestParam int dv_num) {
+    public String selaseInsert(@RequestParam String gm_code, @RequestParam String ss_name, @RequestParam int ss_price, @RequestParam String ss_speriod, @RequestParam String ss_eperiod, @RequestParam int ss_stock, @RequestParam MultipartFile ss_img, @RequestParam String ss_status, @RequestParam String ss_description, @RequestParam int dv_num, HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
         String profile = "";
         SalesDTO salesDTO = new SalesDTO();
         if (ss_img != null && !ss_img.isEmpty()) {
@@ -254,7 +261,7 @@ public class SellerController {
             }
         }
 
-
+        salesDTO.setSl_id(sl_id);
         salesDTO.setGm_code(gm_code);
         salesDTO.setSs_name(ss_name);
         salesDTO.setSs_price(ss_price);
@@ -384,5 +391,8 @@ public class SellerController {
         }
     } // ckSubmit() end
 
+    //판매자 주문조회
+//    @RequestMapping("/orderserach")
+//    public void
 
 }//class end
