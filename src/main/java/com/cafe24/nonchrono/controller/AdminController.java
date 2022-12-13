@@ -31,6 +31,11 @@ public class AdminController {
         return mav;
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "/admin/loginForm";
+    }
+
     @RequestMapping(value = "/noticeWrite", method = RequestMethod.GET) // 이동만
     public String Adnotice() {
         return "/admin/noticeWrite";

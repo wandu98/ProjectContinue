@@ -1,21 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../header.jsp" %>
 
-<!--본문시작 loginForm.jsp-->
-<%--<%if(mem_id.equals("guest") || mem_pw.equals("guest") || mem_grade.equals("guest")) {
-    //아이디저장 쿠키 확인----------------------------------
-    Cookie[] cookies=request.getCookies(); //사용자 PC에 저장된 모든 쿠키값 가져오기
-    String c_id="";
-    if(cookies!=null){ //쿠키가 존재하는지?
-        for(int i=0; i<cookies.length; i++){ //모든 쿠기값을 검색
-            Cookie cookie=cookies[i]; //쿠키 하나씩 가져오기
-            if(cookie.getName().equals("c_id")==true){
-                c_id=cookie.getValue(); //쿠키변수값 가져오기
-            }//if end
-        }//for end
-    }//if end
-    //--------------------------------------------------
-%>--%>
 <style>
     .checkout__input {
         position: relative;
@@ -66,17 +51,12 @@
     <div class="row">
     <div class="col-lg-3 col-md-3"></div>
     <div class="col-lg-6 col-md-6" style="font-weight: bold">
-        <table style="width: 100%">
-            <tr>
-                <td style="text-align: left; border-right: solid 1px #bfbab9"><span style="cursor: pointer">회원 로그인</span></td>
-                <td style="text-align: center"><span onclick="sellerBtn()" style="cursor: pointer; color: #979392">판매자 로그인</span></td>
-            </tr>
-        </table>
+        <span style="cursor: pointer">관리자 로그인</span>
     </div>
     <div class="col-lg-3 col-md-3"></div>
     </div>
     <hr>
-    <form name="Loginfrm" id="Loginfrm" action="/mem/login" method="post" onsubmit="return memberCheck()">
+    <form name="Loginfrm" id="Loginfrm" action="/admin/login" method="post">
         <!-- myscript.js -->
         <div class="row">
             <div class="col-lg-3 col-md-3">
@@ -86,7 +66,6 @@
                 <div class="checkout__input">
                     <label for="mem_id">아이디</label>
                     <br>
-                    <%--<input type="text" id="mem_id" value="<%=c_id%>" name="mem_id">--%>
                     <input type="text" id="mem_id" name="mem_id" class="col-lg-10 col-md-10" style="letter-spacing: 10px">
                 </div>
                 <br>
@@ -96,20 +75,12 @@
                     <input type="password" id="mem_pw" name="mem_pw" class="col-lg-10 col-md-10" style="letter-spacing: 15px">
                 </div>
                 <br>
-                <input type="checkbox" class="checkout__input__checkbox">
-                <%-- <input type="checkbox" name="c_id" value="SAVE" <%if(!c_id.isEmpty()){out.print("checked");}%>>--%>
-                로그인 유지
-                <span class="checkmark"></span>
-                <div>
                     <br>
                     <div class="checkout__input login float-left" style="padding-left: 3%">
                         <button type="submit" class="site-btn">로그인</button>
                     </div>
-                    <div class="checkout__input float-left" style="padding-left: 3%">
-                        <button type="button" onclick="location.href='/mem/signup'" class="site-btn">회원 가입하기</button>
-                    </div>
                     <div class="checkout__input float-left" id="logout" style="padding-left: 3%">
-                        <button type="button" class="site-btn" onclick="location.href='/mem/logout'">로그아웃</button>
+                        <button type="button" class="site-btn" onclick="location.href='/admin/logout'">로그아웃</button>
                     </div>
                 </div>
             </div>
@@ -127,31 +98,8 @@
 
 <script>
 
-    function sellerBtn() {
-
-        $.ajax({
-            type: "get",
-            url: "/mem/sellerLogin",
-            dataType: "text",
-            success: function (result) {
-                $("#form").html(result);
-            }
-        })
-
-    }
-
-    function memBtn() {
-
-        $.ajax({
-            type: "get",
-            url: "/seller/memLogin",
-            dataType: "text",
-            success: function (result) {
-                $("#form").html(result);
-                console.log('멤버 로그인으로 이동..');
-            }
-        })
-
+    function adminLogin() {
+        if ($('mem_id'))
     }
 
 </script>
