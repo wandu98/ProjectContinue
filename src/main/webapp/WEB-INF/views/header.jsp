@@ -99,8 +99,11 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
                         <div class="header__top__right__social">
+                            <% if (session.getAttribute("sl_id") != null) { %>
                             <a href="/seller">판매자 모드</a>
+                            <% } else if (session.getAttribute("admin_id") != null) { %>
                             <a href="/admin">관리자 모드</a>
+                            <% } %>
                             <a href="/mem/login">로그인</a>
                             <a href="/mem/signup">회원가입</a>
                         </div>
