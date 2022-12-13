@@ -274,3 +274,10 @@ SELECT rcrbrd_num,
 FROM tb_rcrboard
 ORDER BY rcrbrd_num DESC
 Limit 17 OFFSET 9;
+
+select gm.gm_name, rb.rcrbrd_num, rb.rcrbrd_subject, rb.rcrbrd_edate, rb.gm_code
+from tb_rcrboard as rb
+         join tb_game as gm
+              on rb.gm_code = gm.gm_code
+ORDER BY rcrbrd_num DESC
+Limit 17 OFFSET 9;

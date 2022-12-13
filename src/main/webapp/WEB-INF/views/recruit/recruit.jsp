@@ -143,7 +143,7 @@
         location.href = "/recruit/form";
     } // recruitForm() end
 
-    /*
+
     function more(startCount, endCount) {
         console.log(startCount);
         console.log(endCount);
@@ -156,37 +156,44 @@
                 "endCount": endCount
             },
             success: function (result) {
-                let message = "";
-                message += "<c:forEach var='mo' items='${more}' varStatus='vs4'>";
-                message += "<div class='col-lg-4 col-md-4 col-sm-4'>";
-                message += "<a href='/recruit/detail/${mo.rcrbrd_num}'>";
-                message += "<div class='blog__item' style='box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%'>";
-                message += "<div class='blog__item__pic'>";
-                message += "<img src='/images/thumb/${mo.gm_code}/thumb.jpg' alt=''>";
-                message += "</div>";
-                message += "<div class='blog__item__text'>";
-                message += "<ul>";
-                message += "<li><i class='fa fa-calendar-o'></i> ${mo.rcrbrd_edate}</li>";
-                message += "<li><i class='fa fa-comment-o'></i> 댓글 수</li>";
-                message += "</ul>";
-                message += "<h5>${mo.rcrbrd_subject}</h5>";
-                message += "<p>${game[vs4.index]} (<span id='list${vs4.count}' name='list${vs4.count}'>${attendCount.get(vs4.index)}</span> / ${mo.rcrbrd_max})</p>";
-                message += "</div>";
-                message += "</div>";
-                message += "</a>";
-                message += "</div>";
-                message += "<c:if test='${vs4.count mod 3==0}'>";
-                message += "<br>";
-                message += "</c:if>";
-                message += "</c:forEach>";
 
-                console.log(message);
-                $('#board').html(message);
+                let message = "";
+
+                $.each(result, function (index, value) {
+                    // alert(index);
+                    // alert(value);
+                    startCount = parseInt(startCount);
+
+                    message += "<div class='col-lg-4 col-md-4 col-sm-4'>";
+                    message += "<a href='/recruit/detail/" + value.rcrbrd_num +"'>";
+                    message += "<div class='blog__item' style='box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%'>";
+                    message += "<div class='blog__item__pic'>";
+                    message += "<img src='/images/thumb/" + value.gm_code + "/thumb.jpg' alt=''>";
+                    message += "</div>";
+                    message += "<div class='blog__item__text'>";
+                    message += "<ul>";
+                    message += "<li><i class='fa fa-calendar-o'></i> " + value.rcrbrd_edate + "</li>";
+                    message += "<li><i class='fa fa-comment-o'></i> 댓글 수</li>";
+                    message += "</ul>";
+                    message += "<h5>" + value.rcrbrd_subject + "</h5>";
+                    message += "<p>" + value.gm_name + " (<span id='list" + (index + startCount + 1) + "' name='list" + (index + startCount + 1) + "'>" + value.count + "</span> / " + value.rcrbrd_max + ")</p>";
+                    // message += "<p>${game[vs4.index]} (<span id='list${vs4.count}' name='list${vs4.count}'>${attendCount.get(vs4.index)}</span> / ${mo.rcrbrd_max})</p>";
+                    message += "</div>";
+                    message += "</div>";
+                    message += "</a>";
+                    message += "</div>";
+
+                    if ((index % 3) == 0) {
+                        message += "<br>"
+                    }
+
+
+                });
+
+                $('#board').append(message);
 
                 $('#startCount').val((parseInt($('#startCount').val()))+9);
                 $('#endCount').val((parseInt($('#endCount').val()))+9);
-                // console.log($('#startCount').val());+
-                // console.log($('#endCount').val());
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -194,7 +201,7 @@
         })
 
     } // more() end
-    */
+
 
 /*    function more(id, cnt) {
         let list_length = ${list.size()};
