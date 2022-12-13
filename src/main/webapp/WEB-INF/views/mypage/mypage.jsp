@@ -17,8 +17,8 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
-                            <div class="col-lg-4">
-                                <c:if test="${YN eq true}"><img src="/images/profile/${meminfo.mem_id}/${meminfo.mem_pic}"></c:if>
+                            <div class="col-lg-4 set-bg product__item__pic" data-setbg="/images/profile/ProfilePicture.png">
+                                <c:if test="${YN eq true}"><img src="/images/profile/${meminfo.mem_id}/${meminfo.mem_pic}" style="height: 100%; overflow: hidden"></c:if>
                             </div>
                             <div class="col-lg-8">
                                 <table style="width: 100%; height: 100%">

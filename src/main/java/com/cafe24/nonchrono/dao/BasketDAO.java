@@ -1,5 +1,6 @@
 package com.cafe24.nonchrono.dao;
 
+import com.cafe24.nonchrono.dto.BasketDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,9 @@ public class BasketDAO {
 
     public int total(String mem_id) {
         return sqlSession.selectOne("basket.total", mem_id);
+    }
+
+    public void insert(BasketDTO basketDTO) {
+        sqlSession.insert("basket.insert", basketDTO);
     }
 }

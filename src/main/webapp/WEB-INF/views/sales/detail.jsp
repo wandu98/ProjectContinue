@@ -9,7 +9,48 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@include file="../header.jsp" %>
+<style>
 
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 20%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+</style>
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
@@ -120,7 +161,7 @@
                         <span class="total" id="il">
                             <strong>
                                <input type="text" value="0" name="inputValue" style="border: none; text-align: center" readonly/>
-                                <input type="text" value="0" name="inputCount" style="border: none; text-align: left" readonly/>
+                                <input type="text" value="0" id="inputCount" name="inputCount" style="border: none; text-align: left" readonly/>
                             </strong>
                         </span>
                     </div>
@@ -133,7 +174,7 @@
                         </div>
                     </div>
                     <a href="#" class="primary-btn btn-outline-danger">바로구매</a>
-                    <a href="#" class="primary-btn btn-outline-danger">장바구니 추가</a>
+                    <a onclick="cartModal(${detail.ss_num})" class="primary-btn btn-outline-danger">장바구니 추가</a>
                     <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                 </div>
 
@@ -258,6 +299,21 @@
     </div>
 </section>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" onclick="modalClose()">&times;</span>
+        <p>선택하신 상품을 장바구니에 담았습니다.<br>지금 장바구니를 확인하시겠습니까?</p>
+        <div>
+            <a onclick="modalClose()" style="margin: 8px;">쇼핑 계속하기</a><a onclick="goCart()">장바구니 확인</a>
+        </div>
+
+    </div>
+
+</div>
+
 <script>
     $(document).ready(function () {
         $('#count2 span').on('click', function () {
@@ -270,12 +326,52 @@
             } else{
               alert("재고가 부족합니다")
             };
-
-
-
-
         });
     });
+
+
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    function cartModal(ss_num) {
+        let mem_id = '<%= session.getAttribute("mem_id")%>';
+        let bk_amount = $("#inputCount").val();
+        console.log(mem_id);
+        console.log(bk_amount);
+        if (mem_id != 'null' && bk_amount > 0) {
+            $.ajax({
+                url : "/cart/insert"
+                ,data : {"ss_num":ss_num, "bk_amount":bk_amount}
+                ,type : "get"
+                ,success : openModal()
+            });
+        } else if (mem_id != 'null' && bk_amount == 0) {
+            alert("수량을 선택해주세요")
+        } else {
+            alert("로그인 후 이용해주세요")
+        }
+
+
+    }
+
+    function modalClose() {
+        modal.style.display = "none";
+    }
+
+    function openModal() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    function goCart() {
+        location.href = "/mypage/cart";
+    }
 
 </script>
 
