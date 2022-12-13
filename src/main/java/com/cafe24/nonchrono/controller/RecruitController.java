@@ -374,10 +374,10 @@ public class RecruitController {
     public List<MoreDTO> getMoreContents(int startCount, int endCount) {
         List<MoreDTO> list = new ArrayList<>();
         List<MoreDTO> list2 = new ArrayList<>();
-        MoreDTO moreDTO = new MoreDTO();
         list = recruitDAO.getMoreContents(startCount, endCount);
 
         for (int i = 0; i < list.size(); i++) {
+            MoreDTO moreDTO = new MoreDTO();
             moreDTO.setRcrbrd_num(list.get(i).getRcrbrd_num());
             moreDTO.setGm_code(list.get(i).getGm_code());
             moreDTO.setGm_name(list.get(i).getGm_name());
@@ -386,10 +386,18 @@ public class RecruitController {
             moreDTO.setRcrbrd_max(list.get(i).getRcrbrd_max());
             moreDTO.setCount(recruitDAO.attendMembers(list.get(i).getRcrbrd_num()).size());
 
-            list2.add(moreDTO);
-            System.out.println(list2);
+//            System.out.println("글번호 : " + moreDTO.getRcrbrd_num());
+//            System.out.println("게임코드 : " + moreDTO.getGm_code());
+//            System.out.println("게임 이름 : " + moreDTO.getGm_name());
+//            System.out.println("게시글 제목 : " + moreDTO.getRcrbrd_subject());
+//            System.out.println("종료 날짜 : " + moreDTO.getRcrbrd_edate());
+//            System.out.println("최대 인원 : " + moreDTO.getRcrbrd_max());
+//            System.out.println("카운트 : " + moreDTO.getCount());
+
+            list2.add(i, moreDTO);
         }
 
+        System.out.println(list2);
         return list2;
     } // getMoreContents() end
 
