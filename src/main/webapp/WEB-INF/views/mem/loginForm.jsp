@@ -61,9 +61,20 @@
 </style>
 
 
-<div class="container">
+<div class="container" id="form">
     <br><br>
-    <h4 style="font-weight: bold; margin-left: 5%">로그인</h4>
+    <div class="row">
+        <div class="col-lg-3 col-md-3"></div>
+        <div class="col-lg-6 col-md-6" style="font-weight: bold">
+            <table style="width: 100%">
+                <tr>
+                    <td style="text-align: left; border-right: solid 1px #bfbab9"><span style="cursor: pointer">회원 로그인</span></td>
+                    <td style="text-align: center"><span onclick="sellerBtn()" style="cursor: pointer; color: #979392">판매자 로그인</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-3 col-md-3"></div>
+    </div>
     <hr>
     <form name="Loginfrm" id="Loginfrm" action="/mem/login" method="post" onsubmit="return memberCheck()">
         <!-- myscript.js -->
@@ -73,14 +84,14 @@
             <div class="col-lg-6 col-md-6">
                 <br>
                 <div class="checkout__input">
-                    <label id="mem_id">아이디</label>
+                    <label for="mem_id">아이디</label>
                     <br>
                     <%--<input type="text" id="mem_id" value="<%=c_id%>" name="mem_id">--%>
                     <input type="text" id="mem_id" name="mem_id" class="col-lg-9 col-md-9" style="letter-spacing: 10px">
                 </div>
                 <br>
                 <div class="checkout__input">
-                    <label id="mem_pw">비밀번호</label>
+                    <label for="mem_pw">비밀번호</label>
                     <br>
                     <input type="password" id="mem_pw" name="mem_pw" class="col-lg-9 col-md-9" style="letter-spacing: 15px">
                 </div>
@@ -113,3 +124,34 @@
 <br>
 <br>
 <%@ include file="../footer.jsp" %>
+
+<script>
+
+    function sellerBtn() {
+
+        $.ajax({
+            type: "get",
+            url: "/mem/sellerLogin",
+            dataType: "text",
+            success: function (result) {
+                $("#form").html(result);
+            }
+        })
+
+    }
+
+    function memBtn() {
+
+        $.ajax({
+            type: "get",
+            url: "/seller/memLogin",
+            dataType: "text",
+            success: function (result) {
+                $("#form").html(result);
+                console.log('멤버 로그인으로 이동..');
+            }
+        })
+
+    }
+
+</script>
