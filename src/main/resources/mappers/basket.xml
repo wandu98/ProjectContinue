@@ -4,7 +4,7 @@
 <mapper namespace="basket">
 
     <select id="list" parameterType="java.lang.String" resultType="java.util.Map">
-        select bk_num, bk_amount, mem_id, ss_name, ss_img, ss_price, bk_amount*sl.ss_price as total
+        select bk_num, bk_amount, mem_id, ss_name, ss_img, ss_price, sl.ss_num
         from tb_basket bk join tb_sales sl
                                on bk.ss_num = sl.ss_num
         where mem_id = #{mem_id}
