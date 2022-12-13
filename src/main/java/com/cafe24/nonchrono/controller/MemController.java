@@ -58,6 +58,7 @@ public class MemController {
         return mav;
     }//loginProc() end
 
+
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signProc(@ModelAttribute MemDTO dto) {
         memDAO.memInsert(dto); // dto에 담은 내용 insert
