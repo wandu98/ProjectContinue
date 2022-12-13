@@ -33,15 +33,15 @@
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card sales-card">
                             <div class="card-body">
-                                <h5 class="card-title">입금대기 <span>| product</span></h5>
+                                <h5 class="card-title">결제완료 <span>| product</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-cart"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>??건</h6>
-                                        <span class="text-success small pt-1 fw-bold">??건</span> <span
+                                        <h6>${progCountDay[0].ct}건</h6>
+                                        <span class="text-success small pt-1 fw-bold">총${progCountAll[0].ct}건</span> <span
                                             class="text-muted small pt-2 ps-1"></span>
 
                                     </div>
@@ -56,15 +56,38 @@
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card sales-card">
                             <div class="card-body">
-                                <h5 class="card-title">신규주문 <span>| product</span></h5>
+                                <h5 class="card-title">출고준비중 <span>| product</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-cart"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>??건</h6>
-                                        <span class="text-success small pt-1 fw-bold">??건</span> <span
+                                        <h6>${progCountDay[1].ct}건</h6>
+                                        <span class="text-success small pt-1 fw-bold">총${progCountAll[1].ct}건</span> <span
+                                            class="text-muted small pt-2 ps-1"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div><!-- End Sales Card -->
+
+                    <!-- Sales Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">출고완료 <span>| product</span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>${progCountDay[2].ct}건</h6>
+                                        <span class="text-success small pt-1 fw-bold">총${progCountAll[2].ct}건</span> <span
                                             class="text-muted small pt-2 ps-1"></span>
 
                                     </div>
@@ -86,31 +109,8 @@
                                         <i class="bi bi-cart"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>??건</h6>
-                                        <span class="text-success small pt-1 fw-bold">??건</span> <span
-                                            class="text-muted small pt-2 ps-1"></span>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div><!-- End Sales Card -->
-
-                    <!-- Sales Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card sales-card">
-                            <div class="card-body">
-                                <h5 class="card-title">결제완료 <span>| product</span></h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>??건</h6>
-                                        <span class="text-success small pt-1 fw-bold">??건</span> <span
+                                        <h6>${progCountDay[3].ct}건</h6>
+                                        <span class="text-success small pt-1 fw-bold">총${progCountAll[3].ct}건</span> <span
                                             class="text-muted small pt-2 ps-1"></span>
 
                                     </div>
@@ -132,8 +132,8 @@
                                         <i class="bi bi-cart"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>??건</h6>
-                                        <span class="text-success small pt-1 fw-bold">??건</span> <span
+                                        <h6>${progCountDay[4].ct}건</h6>
+                                        <span class="text-success small pt-1 fw-bold">총${progCountAll[4].ct}건</span> <span
                                             class="text-muted small pt-2 ps-1"></span>
 
                                     </div>
@@ -146,40 +146,17 @@
 
                     <!-- Sales Card -->
                     <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card customers-card">
+                        <div class="card info-card sales-card">
                             <div class="card-body">
-                                <h5 class="card-title">취소요청 <span>| product</span></h5>
+                                <h5 class="card-title">구매확정 <span>| product</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-people"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>1244</h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div><!-- End Sales Card -->
-
-                    <!-- Sales Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card customers-card">
-                            <div class="card-body">
-                                <h5 class="card-title">반품요청 <span>| product</span></h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-people"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>??건</h6>
-                                        <span class="text-success small pt-1 fw-bold">??건</span> <span
+                                        <h6>${progCountDay[5].ct}건</h6>
+                                        <span class="text-success small pt-1 fw-bold">총${progCountAll[5].ct}건</span> <span
                                             class="text-muted small pt-2 ps-1"></span>
 
                                     </div>
@@ -201,8 +178,8 @@
                                         <i class="bi bi-people"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>??건</h6>
-                                        <span class="text-success small pt-1 fw-bold">??건</span> <span
+                                        <h6>${progCountDay[6].ct}건</h6>
+                                        <span class="text-success small pt-1 fw-bold">총${progCountAll[6].ct}건</span> <span
                                             class="text-muted small pt-2 ps-1"></span>
 
                                     </div>
@@ -217,15 +194,15 @@
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card customers-card">
                             <div class="card-body">
-                                <h5 class="card-title">문의요청 <span>| product</span></h5>
+                                <h5 class="card-title">반품요청 <span>| product</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
+                                        <i class="bi bi-people"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>??건</h6>
-                                        <span class="text-success small pt-1 fw-bold">??건</span> <span
+                                        <h6>${progCountDay[7].ct}건</h6>
+                                        <span class="text-success small pt-1 fw-bold">총${progCountAll[7].ct}건</span> <span
                                             class="text-muted small pt-2 ps-1"></span>
 
                                     </div>
@@ -237,27 +214,6 @@
                     </div><!-- End Sales Card -->
 
 
-                    <!-- Revenue Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card revenue-card">
-                            <div class="card-body">
-                                <h5 class="card-title">매출 <span>| Today</span></h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-currency-dollar"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>₩567,000</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                            class="text-muted small pt-2 ps-1">전일 대비 증가</span>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div><!-- End Revenue Card -->
 
                     <!-- Reports -->
                     <div class="col-12">

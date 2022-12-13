@@ -99,7 +99,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
                         <div class="header__top__right__social">
-                            <a href="/seller">판매자 모드</a>
+                            <a href="/seller/seller">판매자 모드</a>
                             <a href="/admin">관리자 모드</a>
                             <a href="/mem/login">로그인</a>
                             <a href="/mem/signup">회원가입</a>

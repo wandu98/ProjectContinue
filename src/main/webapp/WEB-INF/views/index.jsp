@@ -140,7 +140,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
                         <div class="header__top__right__social">
-                            <a href="/seller">판매자 모드</a>
+                            <a href="/seller/seller">판매자 모드</a>
                             <a href="/admin">관리자 모드</a>
                             <a href="/mem/login">로그인</a>
                             <a href="/mem/signup">회원가입</a>
@@ -680,7 +680,7 @@
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[0].rcrbrd_edate}</li>
                             <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[0]}</li>
                         </ul>
-                        <h5><a href="#">${idxrcrbrd[0].rcrbrd_subject}</a></h5>
+                        <h5><a href="/recruit/detail/${idxrcrbrd[0].rcrbrd_num}">${idxrcrbrd[0].rcrbrd_subject}</a></h5>
                     </div>
                 </div>
             </div>
@@ -694,7 +694,7 @@
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[1].rcrbrd_edate}</li>
                             <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[1]}</li>
                         </ul>
-                        <h5><a href="#">${idxrcrbrd[1].rcrbrd_subject}</a></h5>
+                        <h5><a href="/recruit/detail/${idxrcrbrd[1].rcrbrd_num}">${idxrcrbrd[1].rcrbrd_subject}</a></h5>
                     </div>
                 </div>
             </div>
@@ -708,7 +708,7 @@
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[2].rcrbrd_edate}</li>
                             <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[2]}</li>
                         </ul>
-                        <h5><a href="#">${idxrcrbrd[2].rcrbrd_subject}</a></h5>
+                        <h5><a href="/recruit/detail/${idxrcrbrd[2].rcrbrd_num}">${idxrcrbrd[2].rcrbrd_subject}</a></h5>
                     </div>
                 </div>
             </div>

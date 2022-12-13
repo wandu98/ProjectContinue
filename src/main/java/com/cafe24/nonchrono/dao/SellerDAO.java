@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Repository
@@ -51,5 +52,13 @@ public class SellerDAO {
     } // deliveryDetail() end
 
     public List<DeliveryDTO> dv_list(String sl_id) {return sqlSession.selectList("seller.dv_list", sl_id);}
+
+    public List<Map<String, Integer>> dt_progCountDay(String sl_id) {
+        return sqlSession.selectList("seller.progCountDay", sl_id);
+    }
+
+    public List<Map<String, Integer>> dt_progCountAll(String sl_id) {
+        return sqlSession.selectList("seller.progCountAll", sl_id);
+    }
 
 }//class end
