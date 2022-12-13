@@ -683,7 +683,7 @@
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[0].rcrbrd_edate}</li>
                             <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[0]}</li>
                         </ul>
-                        <h5><a href="#">${idxrcrbrd[0].rcrbrd_subject}</a></h5>
+                        <h5><a href="/recruit/detail/${idxrcrbrd[0].rcrbrd_num}">${idxrcrbrd[0].rcrbrd_subject}</a></h5>
                     </div>
                 </div>
             </div>
@@ -697,7 +697,7 @@
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[1].rcrbrd_edate}</li>
                             <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[1]}</li>
                         </ul>
-                        <h5><a href="#">${idxrcrbrd[1].rcrbrd_subject}</a></h5>
+                        <h5><a href="/recruit/detail/${idxrcrbrd[1].rcrbrd_num}">${idxrcrbrd[1].rcrbrd_subject}</a></h5>
                     </div>
                 </div>
             </div>
@@ -711,7 +711,7 @@
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[2].rcrbrd_edate}</li>
                             <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[2]}</li>
                         </ul>
-                        <h5><a href="#">${idxrcrbrd[2].rcrbrd_subject}</a></h5>
+                        <h5><a href="/recruit/detail/${idxrcrbrd[2].rcrbrd_num}">${idxrcrbrd[2].rcrbrd_subject}</a></h5>
                     </div>
                 </div>
             </div>

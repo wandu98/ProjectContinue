@@ -74,4 +74,9 @@ from () left join ( select od.od_num, mem_id, dt_prog, count(dt_prog)
         on od.od_num = dt.od_num
         where mem_id = 'fjhdmj555'
         group by dt_prog
-        order by dt_prog) tbb
+        order by dt_prog) tbb;
+
+
+update tb_detail
+set dt_prog = 'J04'
+where dt_num = 26;
