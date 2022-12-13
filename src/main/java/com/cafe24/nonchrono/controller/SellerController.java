@@ -384,5 +384,9 @@ public class SellerController {
         }
     } // ckSubmit() end
 
+    @RequestMapping(value = "/memLogin", method = RequestMethod.GET)
+    public String memLogin() {
+        return "/mem/loginForm2";
+    }
 
 }//class end

@@ -95,4 +95,9 @@ public class MemController {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "/sellerLogin", method = RequestMethod.GET)
+    public String sellerLogin() {
+        return "/seller/loginForm";
+    }
+
 } // class end
