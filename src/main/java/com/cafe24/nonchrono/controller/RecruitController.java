@@ -1,10 +1,7 @@
 package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.RecruitDAO;
-import com.cafe24.nonchrono.dto.RecruitDTO;
-import com.cafe24.nonchrono.dto.RecruitInfoDTO;
-import com.cafe24.nonchrono.dto.RoleDTO;
-import com.cafe24.nonchrono.dto.RoleSeatDTO;
+import com.cafe24.nonchrono.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
@@ -20,9 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/recruit")
@@ -376,13 +371,26 @@ public class RecruitController {
 
     @RequestMapping("/getMoreContents")
     @ResponseBody
-    public ModelAndView getMoreContents(int startCount, int endCount) {
-        ModelAndView mav = new ModelAndView();
-        List<RecruitDTO> list = recruitDAO.getMoreContents(startCount, endCount);
-        mav.addObject("more", list);
-        // System.out.println("list : "+list);
-        mav.setViewName("/recruit/recruit");
-        return mav;
+    public List<MoreDTO> getMoreContents(int startCount, int endCount) {
+        List<MoreDTO> list = new ArrayList<>();
+        List<MoreDTO> list2 = new ArrayList<>();
+        MoreDTO moreDTO = new MoreDTO();
+        list = recruitDAO.getMoreContents(startCount, endCount);
+
+        for (int i = 0; i < list.size(); i++) {
+            moreDTO.setRcrbrd_num(list.get(i).getRcrbrd_num());
+            moreDTO.setGm_code(list.get(i).getGm_code());
+            moreDTO.setGm_name(list.get(i).getGm_name());
+            moreDTO.setRcrbrd_subject(list.get(i).getRcrbrd_subject());
+            moreDTO.setRcrbrd_edate(list.get(i).getRcrbrd_edate());
+            moreDTO.setRcrbrd_max(list.get(i).getRcrbrd_max());
+            moreDTO.setCount(recruitDAO.attendMembers(list.get(i).getRcrbrd_num()).size());
+
+            list2.add(moreDTO);
+            System.out.println(list2);
+        }
+
+        return list2;
     } // getMoreContents() end
 
 

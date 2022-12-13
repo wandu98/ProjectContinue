@@ -255,21 +255,11 @@
         order by count(*) DESC Limit 5
     </select>
 
-    <select id="more" parameterType="java.util.Map" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
-        SELECT rcrbrd_num,
-               mem_id,
-               rcrbrd_subject,
-               rcrbrd_content,
-               rcrbrd_pw,
-               rcrbrd_views,
-               rcrbrd_date,
-               rcrbrd_edate,
-               rcrbrd_ip,
-               gm_code,
-               rcrbrd_status,
-               rcrbrd_adr,
-               rcrbrd_max
-        FROM tb_rcrboard
+    <select id="more" parameterType="java.util.Map" resultType="com.cafe24.nonchrono.dto.MoreDTO">
+        select gm.gm_name, rb.rcrbrd_num, rb.rcrbrd_subject, rb.rcrbrd_edate, rb.gm_code, rb.rcrbrd_max
+        from tb_rcrboard as rb
+                 join tb_game as gm
+                      on rb.gm_code = gm.gm_code
         ORDER BY rcrbrd_num DESC
         Limit #{endCount} OFFSET #{startCount}
     </select>
