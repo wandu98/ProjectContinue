@@ -65,8 +65,7 @@
 
                                         <div class="col-12">
                                             <p>주소<span>*</span></p>
-                                            <input type="text" name="zipcode" class="form-control"
-                                                   id="zipcode" style="margin-left: auto; width: 50%" readonly>
+                                            <input type="text" name="sl_zip" class="form-control" id="sl_zip" style="margin-left: auto; width: 50%" readonly>
                                             <button type="button" onclick="DaumPostcode()" class="btn btn-danger">우편번호</button>
                                             <div class="invalid-feedback">우편번호 입력 필수 입니다.</div>
                                         </div>
@@ -77,17 +76,9 @@
                                                  onclick="foldDaumPostcode()" alt="접기 버튼">
                                         </div>
 
-                                        <div class="checkout__input" id="sl_zip0" style="display: none">
-                                            <input type="text" id="sl_zip" name="sl_zip" readonly>
+                                        <div class="col-12" id="sl_adr" >
+                                            <input type="text" id="sl_adr1" name="sl_adr1" readonly>
                                         </div>
-
-                                        <div class="col-12">
-                                            <label for="sl_adr1" class="form-label"></label>
-                                            <input type="text" name="sl_adr1" class="form-control"
-                                                   id="sl_adr1" required>
-                                            <div class="invalid-feedback">사업자주소를 입력 해주세요.</div>
-                                        </div>
-
 
                                         <div class="col-12">
                                             <label for="sl_adr2" class="form-label">상세주소</label>
@@ -160,7 +151,7 @@
             </section>
 
     </div>
-
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
 
@@ -196,6 +187,7 @@
 
     <!-- ----- DAUM 우편번호 API 시작 ----- -->
     // 우편번호 찾기 화면을 넣을 element
+
     let element_wrap = document.getElementById('wrap');
 
     function foldDaumPostcode() {
@@ -230,8 +222,8 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('sl_zip').value = fullAddr;
+                document.getElementById('sl_zip').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sl_adr1').value = fullAddr;
                 //$('#rcrbrd_adr2').text(fullAddr);
 
                 // iframe을 넣은 element를 안보이게 한다.
@@ -242,7 +234,7 @@
                 document.body.scrollTop = currentScroll;
 
 
-                $('#sl_zip0').show();
+                $('#sl_adr').show();
             },
             // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
             onresize: function (size) {
