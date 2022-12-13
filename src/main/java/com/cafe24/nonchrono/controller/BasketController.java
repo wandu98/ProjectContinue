@@ -6,10 +6,7 @@ import com.cafe24.nonchrono.dto.BasketDTO;
 import com.cafe24.nonchrono.dto.SalesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,12 +29,14 @@ public class BasketController {
     }
 
     @RequestMapping("/allClear")
-    public void allClear(HttpSession session) {
+    public String allClear(HttpSession session) {
         String mem_id = (String) session.getAttribute("mem_id");
         basketDAO.allClear(mem_id);
+        return "mypage/cart";
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.GET)
+    @ResponseBody
     public void insert(HttpSession session, HttpServletRequest request) {
         String mem_id = (String) session.getAttribute("mem_id");
         int ss_num = Integer.parseInt(request.getParameter("ss_num"));

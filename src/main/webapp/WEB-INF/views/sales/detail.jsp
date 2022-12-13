@@ -172,7 +172,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn btn-outline-danger">바로구매</a>
+                    <a onclick="purchase(${detail.ss_num})" class="primary-btn btn-outline-danger">바로구매</a>
                     <a onclick="cartModal(${detail.ss_num})" class="primary-btn btn-outline-danger">장바구니 추가</a>
                     <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                 </div>
@@ -344,6 +344,27 @@
                 ,type : "get"
                 ,success : openModal()
             });
+        } else if (mem_id != 'null' && bk_amount == 0) {
+            alert("수량을 선택해주세요")
+        } else {
+            alert("로그인 후 이용해주세요")
+        }
+
+
+    }
+
+    function purchase(ss_num) {
+        let mem_id = '<%= session.getAttribute("mem_id")%>';
+        let bk_amount = $("#inputCount").val();
+        console.log(mem_id);
+        console.log(bk_amount);
+        if (mem_id != 'null' && bk_amount > 0) {
+            $.ajax({
+                url : "/cart/insert"
+                ,data : {"ss_num":ss_num, "bk_amount":bk_amount}
+                ,type : "get"
+            });
+            location.href = "/sales/checkout";
         } else if (mem_id != 'null' && bk_amount == 0) {
             alert("수량을 선택해주세요")
         } else {
