@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+    <select id="sales_day" parameterType="String" resultType="int">
+        <![CDATA[
+            select count(dt_num)
+            from tb_detail as dt join tb_order as od
+            on dt.od_num = od.od_num
+            where DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+        ]]>
+    </select>
+
+    <select id="sales_month" parameterType="String" resultType="int">
+        <![CDATA[
+        select count(dt_num)
+        from tb_detail as dt join tb_order as od
+        on dt.od_num = od.od_num
+        where DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(now(), '%Y-%m')
+        ]]>
+    </select>
+
+    <select id="sales_year" parameterType="String" resultType="int">
+        <![CDATA[
+        select count(dt_num)
+        from tb_detail as dt join tb_order as od
+        on dt.od_num = od.od_num
+        where DATE_FORMAT(od_date, '%Y') = DATE_FORMAT(now(), '%Y')
+        ]]>
+    </select>
+</mapper>

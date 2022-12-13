@@ -2,7 +2,6 @@ package com.cafe24.nonchrono;
 
 import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
-import com.cafe24.nonchrono.dao.WishDAO;
 import com.cafe24.nonchrono.dto.GameDTO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +26,18 @@ public class HomeController {
     } // HomeController() end
 
     @Autowired
-    SalesDAO salesDAO;
+    private SalesDAO salesDAO;
 
     @Autowired
-    RecruitDAO recruitDAO;
-
-    @Autowired
-    WishDAO wishDAO;
+    private RecruitDAO recruitDAO;
 
     @RequestMapping("/") // 메인
     public ModelAndView Index(HttpSession session) {
         String mem_id = (String) session.getAttribute("mem_id");
-//        System.out.println(mem_id);
+        String sl_id = (String) session.getAttribute("sl_id");
+        String admin_id = (String) session.getAttribute("admin_id");
+        System.out.println(mem_id);
+        System.out.println(sl_id);
         ModelAndView mav = new ModelAndView();
         mav.addObject("idxLatestProduct", salesDAO.idxLatestProduct());
         mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
@@ -61,11 +60,6 @@ public class HomeController {
         mav.addObject("idxrcrbrd", list);
         mav.setViewName("index");
         return mav;
-    }
-
-    @RequestMapping("/admin") // 관리자 메인
-    public String AdminIndex() {
-        return "admin/admin_index";
     }
 
     @RequestMapping("/mypage") // 마이페이지
