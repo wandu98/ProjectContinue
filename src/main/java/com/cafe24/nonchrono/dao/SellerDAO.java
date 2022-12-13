@@ -30,7 +30,7 @@ public class SellerDAO {
     }//login() end
 
     public int sellerInsert(SellerDTO sellerDTO) {
-        return sqlSession.insert("seller.insert", sellerDTO);
+        return sqlSession.insert("seller.seller_insert", sellerDTO);
     }//sellerInsert() end
 
     public List<SellerDTO> selcheck() {

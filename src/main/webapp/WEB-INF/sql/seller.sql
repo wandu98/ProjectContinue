@@ -1,31 +1,33 @@
 CREATE TABLE tb_seller
 (
-    sl_id       varchar(20)  NOT NULL PRIMARY KEY -- 판매자ID
+    sl_id       varchar(20)  NOT NULL PRIMARY KEY    -- 판매자ID
     ,
-    sl_pw       varchar(20)  NOT NULL             -- 판매자PW
+    sl_pw       varchar(20)  NOT NULL                -- 판매자PW
     ,
-    sl_name     varchar(30)  NOT NULL             -- 사업자명
+    sl_name     varchar(30)  NOT NULL                -- 사업자명
     ,
-    sl_zip      varchar(6)   NOT NULL             -- 우편번호
+    sl_zip      varchar(6)   NOT NULL                -- 우편번호
     ,
-    sl_adr1     varchar(255) NOT NULL             -- 주소1
+    sl_adr1     varchar(255) NOT NULL                -- 주소1
     ,
-    sl_adr2     varchar(255) NOT NULL             -- 주소2
+    sl_adr2     varchar(255) NOT NULL                -- 주소2
     ,
-    sl_phone    varchar(20)  NOT NULL             -- 연락처
+    sl_phone    varchar(20)  NOT NULL                -- 연락처
     ,
-    sl_birth    date         NOT NULL             -- 생년월일
+    sl_birth    date         NOT NULL                -- 생년월일
     ,
-    sl_grade    varchar(20)  NOT NULL             -- 회원등급
+    sl_grade    varchar(20)  NOT NULL default 'snew' -- 회원등급
     ,
-    sl_receive  char(1)      NOT NULL             -- 수신여부
+    sl_receive  char(1)      NOT NULL default 'N'    -- 수신여부
     ,
-    sl_number   varchar(12)  NOT NULL             -- 사업자번호
+    sl_number   varchar(12)  NOT NULL                -- 사업자번호
     ,
-    sl_bank     varchar(30)  NOT NULL             -- 계좌번호
+    sl_bank     varchar(30)  NOT NULL                -- 계좌번호
     ,
-    sl_bankcode int          NOT NULL             -- 은행코드
+    sl_bankcode int          NOT NULL                -- 은행코드
 );
+
+ALTER TABLE tb_seller CHANGE sl_receive sl_receive  char(1) NOT NULL default 'N';
 
 INSERT INTO tb_seller (sl_id, sl_pw, sl_name, sl_zip, sl_adr1, sl_adr2, sl_phone, sl_birth, sl_grade, sl_receive, sl_number, sl_bank, sl_bankcode)
 VALUES ('ekdm1234', '1q2w3e4r!', '닌텐돌', '09876', '경기도 성남시 분당구 정자일로', '95', '031-1111-2222', '19801002', 'SVIP', 'Y', '123-12-12345', '110-36-2345-474', 4)
@@ -43,6 +45,9 @@ select * from tb_seller;
 SELECT sl_grade
 FROM tb_seller
 WHERE sl_id='itwill' AND sl_pw='dkdk123' AND sl_grade IN ('SVip', 'SGold', 'SSilver', 'SBronze', 'SNew');
+
+INSERT INTO tb_seller(sl_id, sl_pw, sl_name, sl_zip, sl_adr1, sl_adr2, sl_phone, sl_birth, sl_receive, sl_number, sl_bank, sl_bankcode)
+VALUES ('dddd', '1234', 'cd', '12345', '12345', '12345', '123456789', '19990408', '1212', 1, '1234', '1234');
 
 
 select dt_prog, count(*) as cnt, dt.ss_num, sl.sl_id

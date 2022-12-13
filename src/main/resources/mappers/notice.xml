@@ -6,4 +6,10 @@
         INSERT INTO tb_nt(nt_title, nt_cmt, nt_views)
         VALUES (#{nt_title}, #{nt_cmt}, #{nt_views})
     </insert>
+
+    <select id="list" resultType="com.cafe24.nonchrono.dto.NoticeDTO">
+        select nt_num, nt_title, nt_cmt, nt_regdate, nt_views
+        from tb_nt
+        ORDER BY nt_num DESC
+    </select>
 </mapper>

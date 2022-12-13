@@ -19,4 +19,10 @@ public class NoticeDAO {
     public int ntInsert(NoticeDTO noticeDTO) {
         return sqlSession.insert("notice.ntinsert", noticeDTO);
     }//NtInsert() end
+
+    public List<NoticeDTO> list(NoticeDTO noticeDTO) {
+        return sqlSession.selectList("notice.list");
+    }//list() end
+
+
 }//end

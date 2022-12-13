@@ -151,20 +151,21 @@ public class SellerController {
         return "redirect:/seller";
     }//signProc() end
 
+    //id 중복확인
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String sellersignup() {
         return "seller/sellerSignup";
     }
 
-    @RequestMapping("checkselPWproc.do")
+    @RequestMapping("checkIDselproc.do")
     @ResponseBody
-    public String checkselPWproc(HttpServletRequest req) {
-        String sl_pw = req.getParameter("sl_pw").trim();
+    public String checkIDselproc(HttpServletRequest req) {
+        String sl_id = req.getParameter("sl_id").trim();
 
         List<SellerDTO> selcheck = sellerDAO.selcheck();
         String cnt = "0";
         for (int i=0; i< selcheck.size(); i++) {
-            if(sl_pw.equals(selcheck.get(i).getSl_pw())) {
+            if(sl_id.equals(selcheck.get(i).getSl_id())) {
                 cnt = "1";
                 break;
             }

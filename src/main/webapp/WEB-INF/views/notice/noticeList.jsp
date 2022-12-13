@@ -11,35 +11,30 @@
 <div class="container">
     <h3>공지사항</h3>
     <br>
-    <form name="ntlist" id="ntlist">
+    <form name="ntlist" id="ntlist" action="noticeList">
         <table class="table table-hover">
             <thead>
             <tr>
                 <th>번호</th>
                 <th>제목</th>
+                <th>내용</th>
                 <th>작성일</th>
                 <th>조회수</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>John</td>
-                <td>Doe</td>
-                <td>john@example.com</td>
-            </tr>
-            <tr>
-                <td>Mary</td>
-                <td>Moe</td>
-                <td>mary@example.com</td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
-            </tr>
-
+            <c:forEach var="notice" items="${ntlist}">
+                <tr>
+                    <td>${notice.nt_num}</td>
+                    <td>${notice.nt_title}</td>
+                    <td>${notice.nt_cmt}</td>
+                    <td>${notice.nt_regdate}</td>
+                    <td>${notice.nt_views}</td>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
+
     </form>
 </div>
 

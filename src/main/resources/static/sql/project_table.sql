@@ -193,31 +193,31 @@ create table tb_couponlist
 -- 판매자
 CREATE TABLE tb_seller
 (
-    sl_id       varchar(20)  NOT NULL PRIMARY KEY -- 판매자ID
+    sl_id       varchar(20)  NOT NULL PRIMARY KEY    -- 판매자ID
     ,
-    sl_pw       varchar(20)  NOT NULL             -- 판매자PW
+    sl_pw       varchar(20)  NOT NULL                -- 판매자PW
     ,
-    sl_name     varchar(30)  NOT NULL             -- 사업자명
+    sl_name     varchar(30)  NOT NULL                -- 사업자명
     ,
-    sl_zip      varchar(6)   NOT NULL             -- 우편번호
+    sl_zip      varchar(6)   NOT NULL                -- 우편번호
     ,
-    sl_adr1     varchar(255) NOT NULL             -- 주소1
+    sl_adr1     varchar(255) NOT NULL                -- 주소1
     ,
-    sl_adr2     varchar(255) NOT NULL             -- 주소2
+    sl_adr2     varchar(255) NOT NULL                -- 주소2
     ,
-    sl_phone    varchar(20)  NOT NULL             -- 연락처
+    sl_phone    varchar(20)  NOT NULL                -- 연락처
     ,
-    sl_birth    date         NOT NULL             -- 생년월일
+    sl_birth    date         NOT NULL                -- 생년월일
     ,
-    sl_grade    varchar(20)  NOT NULL             -- 회원등급
+    sl_grade    varchar(20)  NOT NULL default 'snew' -- 회원등급
     ,
-    sl_receive  char(1)      NOT NULL             -- 수신여부
+    sl_receive  char(1)      NOT NULL default 'N'    -- 수신여부
     ,
-    sl_number   varchar(12)  NOT NULL             -- 사업자번호
+    sl_number   varchar(12)  NOT NULL                -- 사업자번호
     ,
-    sl_bank     varchar(30)  NOT NULL             -- 계좌번호
+    sl_bank     varchar(30)  NOT NULL                -- 계좌번호
     ,
-    sl_bankcode int          NOT NULL             -- 은행코드
+    sl_bankcode int          NOT NULL                -- 은행코드
 );
 
 
