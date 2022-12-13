@@ -82,7 +82,7 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link nav-icon" href="/seller/loginForm">
+                <a class="nav-link nav-icon" href="/mem/login">
                     <i class="ri-login-box-line"></i>
                 </a><!-- login Icon -->
             </li>

@@ -320,7 +320,7 @@ public class MypageController {
         ModelAndView mav = new ModelAndView();
         String mem_id = (String) session.getAttribute("mem_id");
         mav.addObject("list", basketDAO.mylist(mem_id));
-//        mav.addObject("total", basketDAO.total(mem_id));
+//      mav.addObject("total", basketDAO.total(mem_id));
         mav.setViewName("mypage/cart");
         return mav;
     }

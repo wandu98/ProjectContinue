@@ -61,4 +61,8 @@ public class SellerDAO {
         return sqlSession.selectList("seller.progCountAll", sl_id);
     }
 
+//판매자 페이지 전부 유효성 검사
+//판매등록 write 배송정책 판매자의 배송정책 리스트에서 선택할 수 있게 변경해야됨
+//판매자 헤더 알람, 로그아웃
+
 }//class end
