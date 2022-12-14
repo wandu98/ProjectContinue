@@ -91,7 +91,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__left">
                         <ul>
-                            <li><a href="/admin/login"> Continue?</a></li>
+                            <li><a href="/admin/login" style="text-decoration: none; color: black; cursor: default"> Continue?</a></li>
                             <li>같이 놀자, 우리</li>
                         </ul>
                     </div>
