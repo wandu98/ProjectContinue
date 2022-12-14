@@ -143,7 +143,7 @@ public class SalesController {
         mav.addObject("bk_total", basketDAO.bk_total(mem_id));
         mav.addObject("max_fee", basketDAO.max_fee(mem_id));
         mav.addObject("dv_mem_info",salesDAO.dv_mem_info(mem_id));
-//        mav.addObject("dvmem_info", salesDAO.dvmem_info(mem_id));
+        mav.addObject("dvmem_info", salesDAO.dvmem_info(mem_id));
         mav.setViewName("sales/checkout");
         return mav;
     }

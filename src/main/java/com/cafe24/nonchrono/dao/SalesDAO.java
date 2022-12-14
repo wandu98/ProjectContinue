@@ -103,5 +103,6 @@ public class SalesDAO {
     public MemDTO dv_mem_info(String mem_id) {return sqlSession.selectOne("sales.dv_mem_info", mem_id);}
 
 //  회원 memdv 정보 가져오기
-//    public MemdvDTO dvmem_info(String mem_id) {return sqlSession.selectOne("sales.dvmem_info", mem_id);}
+    public List<MemdvDTO> dvmem_info(String mem_id) {return sqlSession.selectList("sales.dvmem_info", mem_id);}
+
 }//class end
