@@ -55,7 +55,7 @@ public class AdminController {
     public ModelAndView noticeProc(@ModelAttribute NoticeDTO noticeDTO) {
         ModelAndView mav = new ModelAndView();
         mav.addObject(noticeDAO.ntInsert(noticeDTO));
-        mav.setViewName("admin/admin_index");
+        mav.setViewName("redirect:/notice/noticeList");
         return mav;
     } // noticeProc() end
 
