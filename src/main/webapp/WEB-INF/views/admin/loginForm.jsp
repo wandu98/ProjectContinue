@@ -46,17 +46,17 @@
 </style>
 
 
-<div class="container" id="form">
+<form class="container" id="form" action="/admin/login" method="post" onsubmit="return loginCheck()">
     <br><br>
     <div class="row">
-    <div class="col-lg-3 col-md-3"></div>
-    <div class="col-lg-6 col-md-6" style="font-weight: bold">
-        <span style="cursor: pointer">관리자 로그인</span>
-    </div>
-    <div class="col-lg-3 col-md-3"></div>
+        <div class="col-lg-3 col-md-3"></div>
+        <div class="col-lg-6 col-md-6" style="font-weight: bold">
+            <span style="cursor: pointer">관리자 로그인</span>
+        </div>
+        <div class="col-lg-3 col-md-3"></div>
     </div>
     <hr>
-    <form name="Loginfrm" id="Loginfrm" action="/admin/login" method="post">
+    <div name="Loginfrm" id="Loginfrm">
         <!-- myscript.js -->
         <div class="row">
             <div class="col-lg-3 col-md-3">
@@ -64,31 +64,33 @@
             <div class="col-lg-6 col-md-6">
                 <br>
                 <div class="checkout__input">
-                    <label for="mem_id">아이디</label>
+                    <label for="admin_id">아이디</label>
                     <br>
-                    <input type="text" id="mem_id" name="mem_id" class="col-lg-10 col-md-10" style="letter-spacing: 10px">
+                    <input type="text" id="admin_id" name="admin_id" class="col-lg-10 col-md-10"
+                           style="letter-spacing: 10px">
                 </div>
                 <br>
                 <div class="checkout__input">
-                    <label for="mem_pw">비밀번호</label>
+                    <label for="admin_pw">비밀번호</label>
                     <br>
-                    <input type="password" id="mem_pw" name="mem_pw" class="col-lg-10 col-md-10" style="letter-spacing: 15px">
+                    <input type="password" id="admin_pw" name="admin_pw" class="col-lg-10 col-md-10"
+                           style="letter-spacing: 15px">
                 </div>
                 <br>
-                    <br>
-                    <div class="checkout__input login float-left" style="padding-left: 3%">
-                        <button type="submit" class="site-btn">로그인</button>
-                    </div>
-                    <div class="checkout__input float-left" id="logout" style="padding-left: 3%">
-                        <button type="button" class="site-btn" onclick="location.href='/admin/logout'">로그아웃</button>
-                    </div>
+                <br>
+                <div class="checkout__input login float-left" style="padding-left: 3%">
+                    <button type="submit" class="site-btn">로그인</button>
+                </div>
+                <div class="checkout__input float-left" id="logout" style="padding-left: 3%">
+                    <button type="button" class="site-btn" onclick="location.href='/admin/logout'">로그아웃</button>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3">
-            </div>
         </div>
-    </form>
-</div>
+        <div class="col-lg-3 col-md-3">
+        </div>
+    </div>
+</form>
+
 
 <br>
 <br>
@@ -97,9 +99,14 @@
 <%@ include file="../footer.jsp" %>
 
 <script>
+    function loginCheck() {
 
-    function adminLogin() {
-        if ($('mem_id'))
+        if ($('#admin_id').val() == 'admin' && $('#admin_pw').val() == 'admin') {
+            console.log("반갑습니다. admin님");
+            return true;
+        } else {
+            console.log("다시 시도해주세요");
+            return false;
+        }
     }
-
 </script>
