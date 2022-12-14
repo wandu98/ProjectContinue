@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -34,6 +37,13 @@ public class AdminController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "/admin/loginForm";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginProc(HttpSession session) {
+        session.setAttribute("admin_id", "admin");
+        session.setAttribute("admin_pw", "admin");
+        return "/admin/admin_index";
     }
 
     @RequestMapping(value = "/noticeWrite", method = RequestMethod.GET) // 이동만
