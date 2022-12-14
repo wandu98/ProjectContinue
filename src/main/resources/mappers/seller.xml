@@ -86,5 +86,176 @@
         ) tbc on tba.dt_prog = tbc.dt_prog
     </select>
 
+    <select id="saleAmountDay" resultType="java.lang.Integer">
+        select ifnull(total, 0) as totsale
+        from (
+                 select substr(gm_code,1,2) as gc, sum(dt_amount) as total
+                 from tb_detail dt join tb_order t on dt.od_num = t.od_num
+                                   join tb_sales ts on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+    
+    <select id="saleAmountMonth" resultType="java.lang.Integer">
+        select ifnull(total, 0) as totsale
+        from (
+                 select substr(gm_code,1,2) as gc, sum(dt_amount) as total
+                 from tb_detail dt join tb_order t on dt.od_num = t.od_num
+                                   join tb_sales ts on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(now(), '%Y-%m')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="saleAmountYear" resultType="java.lang.Integer">
+        select ifnull(total, 0) as totsale
+        from (
+                 select substr(gm_code,1,2) as gc, sum(dt_amount) as total
+                 from tb_detail dt join tb_order t on dt.od_num = t.od_num
+                                   join tb_sales ts on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y') = DATE_FORMAT(now(), '%Y')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="topSellingDay" resultType="java.util.Map">
+        select *, ss_price * cnt as sales
+        from (
+                 select ss_name, ss_price, count(*) as cnt, ss_img
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+                 group by dt.ss_num
+             ) AA
+        order by cnt desc, sales desc
+        limit 5
+    </select>
+
+    <select id="topSellingMonth" resultType="java.util.Map">
+        select *, ss_price * cnt as sales
+        from (
+                 select ss_name, ss_price, count(*) as cnt, ss_img
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(now(), '%Y-%m')
+                 group by dt.ss_num
+             ) AA
+        order by cnt desc, sales desc
+        limit 5
+    </select>
+
+    <select id="topSellingYear" resultType="java.util.Map">
+        select *, ss_price * cnt as sales
+        from (
+                 select ss_name, ss_price, count(*) as cnt, ss_img
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y') = DATE_FORMAT(now(), '%Y')
+                 group by dt.ss_num
+             ) AA
+        order by cnt desc, sales desc
+            limit 5
+    </select>
+
+    <select id="recentsalesDay" resultType="java.util.Map">
+        select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, case dt_prog when 'J01' then '결제완료'
+                                                                                               when 'J02' then '출고준비중'
+                                                                                               when 'J03' then '출고완료'
+                                                                                               when 'J04' then '배송중'
+                                                                                               when 'J05' then '배송완료'
+                                                                                               when 'J06' then '구매확정'
+                                                                                               when 'J07' then '교환'
+                                                                                               when 'J08' then '반품' end as dt_prog
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_mem mem
+                                                            on od.mem_id = mem.mem_id join tb_sales ts
+                                                                                           on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+        order by od_date desc
+            limit 5
+    </select>
+
+    <select id="recentsalesMonth" resultType="java.util.Map">
+        select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, case dt_prog when 'J01' then '결제완료'
+                                                                                               when 'J02' then '출고준비중'
+                                                                                               when 'J03' then '출고완료'
+                                                                                               when 'J04' then '배송중'
+                                                                                               when 'J05' then '배송완료'
+                                                                                               when 'J06' then '구매확정'
+                                                                                               when 'J07' then '교환'
+                                                                                               when 'J08' then '반품' end as dt_prog
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_mem mem
+                                                            on od.mem_id = mem.mem_id join tb_sales ts
+                                                                                           on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(now(), '%Y-%m')
+        order by od_date desc
+            limit 5
+    </select>
+
+    <select id="recentsalesYear" resultType="java.util.Map">
+        select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, case dt_prog when 'J01' then '결제완료'
+                                                                                               when 'J02' then '출고준비중'
+                                                                                               when 'J03' then '출고완료'
+                                                                                               when 'J04' then '배송중'
+                                                                                               when 'J05' then '배송완료'
+                                                                                               when 'J06' then '구매확정'
+                                                                                               when 'J07' then '교환'
+                                                                                               when 'J08' then '반품' end as dt_prog
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_mem mem
+                                                            on od.mem_id = mem.mem_id join tb_sales ts
+                                                                                           on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y') = DATE_FORMAT(now(), '%Y')
+        order by od_date desc
+            limit 5
+    </select>
+
 
 </mapper>

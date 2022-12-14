@@ -96,4 +96,93 @@ from(
 
 
 select ss_price, ss_stock
-from tb_sales
+from tb_sales;
+
+
+
+
+select *, @rno := @rno + 1 as r
+from (
+        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        from tb_sales
+        where ss_name like '%마%'
+     ) AA, (select @rno :=0) BB;
+
+-- 검색
+select *
+from (
+        select *, @rno := @rno + 1 as r
+        from (
+                select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+                from tb_sales
+                where ss_name like '%마%'
+        ) AA, (select @rno :=0) BB
+    ) CC;
+where r >= 1 and r <= 5;
+
+
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+                  from tb_sales
+                  where ss_name like '%c%' and gm_code like '%dt%'
+              ) AA, (select @rno :=0) BB
+     ) CC
+where r >= 1 and r <= 5;
+
+
+select *
+from tb_sales;
+
+select *
+from tb_detail;
+
+select od_num, sl.ss_num, ss_price, dt_amount, sl_id
+from tb_detail dt join tb_sales sl
+on dt.ss_num = sl.ss_num
+where sl_id = 'digj1908';
+
+select ss_name, ss_price, count(*) as cnt
+from tb_detail dt join tb_sales sl
+                       on dt.ss_num = sl.ss_num
+where sl_id = 'digj1908'
+group by dt.ss_num
+order by cnt desc
+limit 5;
+
+
+select *, ss_price*cnt as sales
+from (
+        select ss_name, ss_price, count(*) as cnt, ss_img
+        from tb_detail dt join tb_sales sl
+                               on dt.ss_num = sl.ss_num
+        where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+        group by dt.ss_num
+    ) AA
+order by cnt desc, sales desc
+limit 5;
+
+
+
+select ss_name, ss_price, count(*) as cnt, ss_img
+from tb_order od join tb_detail dt
+on od.od_num = dt.od_num join tb_sales ts
+on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+group by dt.ss_num;
+
+select *, ss_price * cnt as sales
+from (
+        select ss_name, ss_price, count(*) as cnt, ss_img
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(now(), '%Y-%m')
+        group by dt.ss_num
+    ) AA
+order by cnt desc, sales desc
+limit 5;
+
+

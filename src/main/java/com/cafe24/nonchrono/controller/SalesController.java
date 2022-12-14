@@ -113,25 +113,88 @@ public class SalesController {
     }// detail() end
 
     @RequestMapping("/search")
-    public ModelAndView search(HttpServletRequest request) {
+    public ModelAndView search(HttpServletRequest request, PagingDTO pagingDTO, SalesDTO salesDTO) {
         ModelAndView mav = new ModelAndView();
         String ctg = request.getParameter("ctg");
         String keyword = request.getParameter("keyword");
-        SalesDTO salesDTO = new SalesDTO();
-        salesDTO.setGm_code(ctg);
-        salesDTO.setSs_name(keyword);
 //        System.out.println(ctg);
 //        System.out.println(keyword);
-        List<SalesDTO> allList = new ArrayList<>();
-        List<SalesDTO> searchList = new ArrayList<>();
-        if (ctg == "ALL") {
-            allList = salesDAO.searchAll(keyword);
+        salesDTO.setGm_code(ctg);
+        salesDTO.setSs_name(keyword);
+        pagingDTO.setGm_code(ctg);
+        pagingDTO.setSs_name(keyword);
+
+        int totalRowCount = 0; //총 글갯수  6 |  52개
+        if (ctg.equals("ALL")) {
+            totalRowCount = salesDAO.searchAlltotalRowCount(keyword);
         } else {
-            searchList = salesDAO.searchCategory(salesDTO);
+            totalRowCount = salesDAO.searchCategorytotalRowCount(salesDTO);
         }
-        mav.addObject("allList", allList);
-        mav.addObject("searchList", searchList);
-        mav.setViewName("sales/sales");
+
+//        System.out.println(totalRowCount);
+
+        //페이징
+        int numPerPage = 9; //한 페이지당 레코드 갯수
+        int pagePerBlock = 10; //페이지 리스트
+
+        //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
+        //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
+        String pageNum = request.getParameter("pageNum");
+        if (pageNum == null) {
+            pageNum = "1";
+        }//if end
+
+        //현재 보고 있는 페이지
+        int currentPage = Integer.parseInt(pageNum); //1  | 1
+
+        //한페이지에 보여지는 행 갯수는 5
+        //따라서 1페이지 : rnum 1~5, 2페이지 : 6~10, 3페이지 : 11~15
+        //1~5 = (0*5+1)~(1*5), 6~10 = (1*5+1)~(2*5), 11~15 = (2*5+1)~(3*5) 와 같은 규칙이 있음.
+        int startRow = (currentPage - 1) * numPerPage + 1; //1  | 1
+        int endRow = currentPage * numPerPage; //5
+        pagingDTO.setStartRow(startRow);
+        pagingDTO.setEndRow(endRow);
+
+        //페이지 수
+        //행을 페이지마다 5개씩 보여주므로 전체 행을 5로 나눔
+        double totcnt = (double) totalRowCount / numPerPage; // 6/5 ->1.2 | 52/5 = 10.4
+        //나누어 떨어지지 않으면 한페이지를 더 늘려야 모든 행이 나오므로 totcnt를 올림
+        //전체 페이지 수
+        int totalPage = (int) Math.ceil(totcnt); //2 | 11
+
+
+        double d_page = (double) currentPage / pagePerBlock; // 1/10 -> 0.1
+        //페이지 묶음 번호
+        int Pages = (int) Math.ceil(d_page) - 1; //0  1~10페이지 : 0, 11~20 : 1
+        //페이지 묶음의 시작 페이지 번호
+        int startPage = Pages * pagePerBlock; //0*10 -> 0
+        //페이지 묶음의 마지막 페이지 번호
+        int endPage = startPage + pagePerBlock + 1; //0+10+1 = 11
+        pagingDTO.setStartRow(startRow);
+        pagingDTO.setEndRow(endRow);
+//        System.out.println(pagingDTO);
+        System.out.println(totalRowCount);
+        System.out.println(ctg);
+        List list = null;
+        if (totalRowCount > 0) {
+            if (ctg.equals("ALL")) {
+                list = salesDAO.searchAlllist(pagingDTO); // 1, 5
+            } else {
+                list = salesDAO.searchCategorylist(pagingDTO);
+            }
+        } else {
+            list = Collections.EMPTY_LIST;
+        }//if end
+
+        mav.addObject("pageNum", currentPage);
+        mav.addObject("count", totalRowCount);
+        mav.addObject("totalPage", totalPage);
+        mav.addObject("startPage", startPage);
+        mav.addObject("endPage", endPage);
+        mav.addObject("ctg", ctg);
+        mav.addObject("keyword", keyword);
+        mav.addObject("list", list);
+        mav.setViewName("sales/searchSales");
         return mav;
     }
 
