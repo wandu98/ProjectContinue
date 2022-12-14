@@ -61,6 +61,44 @@ public class SellerDAO {
         return sqlSession.selectList("seller.progCountAll", sl_id);
     }
 
+    public List<Integer> saleAmountDay(String sl_id) {
+        return sqlSession.selectList("seller.saleAmountDay", sl_id);
+    }
+
+    public List<Integer> saleAmountMonth(String sl_id) {
+        return sqlSession.selectList("seller.saleAmountMonth", sl_id);
+    }
+
+    public List<Integer> saleAmountYear(String sl_id) {
+        return sqlSession.selectList("seller.saleAmountYear", sl_id);
+    }
+
+    public List<Map<String, ?>> topSellingDay(String sl_id) {
+        return sqlSession.selectList("seller.topSellingDay", sl_id);
+    }
+
+    public List<Map<String, ?>> topSellingMonth(String sl_id) {
+        return sqlSession.selectList("seller.topSellingMonth", sl_id);
+    }
+
+    public List<Map<String, ?>> topSellingYear(String sl_id) {
+        return sqlSession.selectList("seller.topSellingYear", sl_id);
+    }
+
+    public List<Map<String, ?>> recentsalesDay(String sl_id) {
+        return sqlSession.selectList("seller.recentsalesDay", sl_id);
+    }
+
+    public List<Map<String, ?>> recentsalesMonth(String sl_id) {
+        return sqlSession.selectList("seller.recentsalesMonth", sl_id);
+    }
+
+    public List<Map<String, ?>> recentsalesYear(String sl_id) {
+        return sqlSession.selectList("seller.recentsalesYear", sl_id);
+    }
+
+
+
 //판매자 페이지 전부 유효성 검사
 //판매등록 write 배송정책 판매자의 배송정책 리스트에서 선택할 수 있게 변경해야됨
 //판매자 헤더 알람, 로그아웃
