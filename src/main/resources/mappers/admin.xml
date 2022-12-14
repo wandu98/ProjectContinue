@@ -28,4 +28,24 @@
         where DATE_FORMAT(od_date, '%Y') = DATE_FORMAT(now(), '%Y')
         ]]>
     </select>
+
+    <select id="typeName" parameterType="String" resultType="String">
+        SELECT gm_code
+        FROM tb_game
+        WHERE gm_code LIKE CONCAT('%',#{type},'%')
+        ORDER BY gm_code DESC
+        LIMIT 1
+    </select>
+
+    <insert id="gameInsert" parameterType="com.cafe24.nonchrono.dto.GameDTO">
+        INSERT INTO tb_game (gm_code, gm_name, gm_price, gm_level, gm_category, gm_img)
+        VALUES (#{gm_code}, #{gm_name}, #{gm_price}, #{gm_level}, #{gm_category}, #{gm_img})
+    </insert>
+
+    <select id="gameList" parameterType="String" resultType="com.cafe24.nonchrono.dto.GameDTO">
+        SELECT gm_code, gm_name, gm_price, gm_category, gm_level
+        FROM tb_game
+        WHERE gm_code LIKE CONCAT('%',#{type},'%')
+        ORDER BY gm_code ASC
+    </select>
 </mapper>
