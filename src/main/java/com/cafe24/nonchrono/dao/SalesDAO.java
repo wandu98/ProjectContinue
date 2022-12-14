@@ -127,6 +127,10 @@ public class SalesDAO {
         return sqlSession.selectOne("sales.deliveryDetail", ss_num);
     } // deliveryDetail() end
 
+//  회원정보 동일 눌렀을 때 회원정보 가져오기
+    public MemDTO dv_mem_info(String mem_id) {return sqlSession.selectOne("sales.dv_mem_info", mem_id);}
 
+//  회원 memdv 정보 가져오기
+    public List<MemdvDTO> dvmem_info(String mem_id) {return sqlSession.selectList("sales.dvmem_info", mem_id);}
 
 }//class end

@@ -89,7 +89,7 @@
         where r>= #{startRow} and r <= #{endRow}
         ]]>
     </select>
-    
+
     <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
         from tb_sales
@@ -151,6 +151,20 @@
         where tb_sales.ss_num = #{ss_num}
     </select>
 
+    <!-- 회원 배송정보 가져오기   -->
+    <select id="dv_mem_info" resultType="com.cafe24.nonchrono.dto.MemDTO">
+        select mem_id, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone
+        from tb_mem
+        where mem_id = #{mem_id}
+    </select>
+
+    <!-- 회원 배송지(tb_memdv)정보   -->
+    <select id="dvmem_info" resultType="com.cafe24.nonchrono.dto.MemdvDTO">
+        select mem_dvnum, mem_id, mem_dvinfo, mem_dvzip, mem_dvadr1, mem_dvadr2, mem_dvphone, mem_dvnick
+        from tb_memdv
+        where mem_id = #{mem_id}
+    </select>
+    
     <!-- 검색시(모든카테고리) 페이징 된 리스트-->
     <select id="searchAllList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
     <![CDATA[

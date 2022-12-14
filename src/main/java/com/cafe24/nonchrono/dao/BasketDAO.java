@@ -28,10 +28,15 @@ public class BasketDAO {
         sqlSession.delete("basket.allclear", mem_id);
     }
 
-    public int total(String mem_id) {
-        return sqlSession.selectOne("basket.total", mem_id);
+//   장바구니 합계
+    public int bk_total(String mem_id) {
+        return sqlSession.selectOne("basket.bk_total", mem_id);
     }
 
+//   배송비 제일 높은 값
+    public int max_fee(String mem_id) {
+        return sqlSession.selectOne("basket.max_fee", mem_id);
+    }
     public void insert(BasketDTO basketDTO) {
         sqlSession.insert("basket.insert", basketDTO);
     }

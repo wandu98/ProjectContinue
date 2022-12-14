@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="../header.jsp"></jsp:include>
-
+<script type="text/javascript" src="/js/10-11.js"></script>
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="/images/002.jpg">
     <div class="container">
@@ -69,11 +69,12 @@
                                 </td>
 
                                 <td class="shoping__cart__price">
-                                    <input type="text" id="dv_fee" name="dv_fee" readonly value="${row.ss_name}" style="border: none; text-align: center">
+                                    <input type="text" id="dv_fee" name="dv_fee" readonly value="${row.dv_fee}원" style="border: none; text-align: center">
                                 </td>
 
                                 <td class="shoping__cart__price">
-                                    <input type="text" id="mileage" name="mileage" readonly value="" style="border: none; text-align: center">
+                                    <input type="hidden" id="mileage" name="mileage" readonly value="${row.ss_price * 0.01}" style="border: none; text-align: center">
+                                    <fmt:parseNumber value="${row.ss_price * row.bk_amount * 0.01}" integerOnly="true"/>원
                                 </td>
 
                                 <td class="shoping__cart__total" id="total${vs.index}">
@@ -99,7 +100,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="/sales" class="primary-btn cart-btn">쇼핑하기</a>
+                    <a href="/sales/sales" class="primary-btn cart-btn">쇼핑하기</a>
                     <a href="/cart/allClear" class="primary-btn cart-btn cart-btn-right"></span>
                         장바구니 비우기</a>
                 </div>
@@ -109,10 +110,25 @@
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Cart Total</h5>
+                        <span>총 상품금액 :  <fmt:formatNumber type="currency" value="${bk_total}" groupingUsed="true"/></span><br>
+                        <span>배송비 :
+                            <c:set var="total" value="${bk_total}"/>
+                            <c:choose>
+                                <c:when test="${total>=50000}">
+                                    <a>10만원 이상 구매 시 배송비 무료!</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a>${max_fee}<a>
+                                </c:otherwise>
+
+                            </c:choose>
+                        </span>
+                    <hr>
+
                     <ul>
-                        <li>Total <span><fmt:formatNumber value="${total}" groupingUsed="true"
-                                                          type="currency"></fmt:formatNumber></span></li>
+                        <li>Total <span><fmt:formatNumber type="currency" value="${bk_total + max_fee}" groupingUsed="true"/></span></li>
                     </ul>
+
                     <a href="/sales/checkout" class="primary-btn" style="background-color: red">주문하기</a>
                 </div>
             </div>
