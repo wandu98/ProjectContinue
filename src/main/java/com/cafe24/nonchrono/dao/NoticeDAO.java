@@ -20,9 +20,18 @@ public class NoticeDAO {
         return sqlSession.insert("notice.ntinsert", noticeDTO);
     }//NtInsert() end
 
-    public List<NoticeDTO> list(NoticeDTO noticeDTO) {
-        return sqlSession.selectList("notice.list");
+    public List<NoticeDTO> noticelist() {
+        List<NoticeDTO> list = sqlSession.selectList("notice.noticelist");
+        return list;
     }//list() end
+
+    public NoticeDTO ntdetail(int nt_num) {
+        return sqlSession.selectOne("notice.ntdetail", nt_num);
+    }//ntdetail() end
+
+    /*public NoticeDTO ntUpdate(int nt_num) {
+        return sqlSession.selectOne("notice.ntUpdate", nt_num);
+    }*/
 
 
 }//end

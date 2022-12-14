@@ -7,9 +7,22 @@
         VALUES (#{nt_title}, #{nt_cmt}, #{nt_views})
     </insert>
 
-    <select id="list" resultType="com.cafe24.nonchrono.dto.NoticeDTO">
+    <select id="noticelist" resultType="com.cafe24.nonchrono.dto.NoticeDTO">
         select nt_num, nt_title, nt_cmt, nt_regdate, nt_views
         from tb_nt
         ORDER BY nt_num DESC
     </select>
+
+    <select id="ntdetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.NoticeDTO" >
+        select *
+        from tb_nt
+        where nt_num = #{nt_num}
+    </select>
+
+    <!--<update id="ntUpdate" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
+        UPDATE tb_nt
+        SET nt_views = nt_views + 1
+        WHERE nt_num = ?
+    </update>-->
+
 </mapper>

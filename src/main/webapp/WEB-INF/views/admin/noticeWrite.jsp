@@ -62,7 +62,7 @@
                             </div>
                             <br>
                             <div class="text-center">
-                                <button class="btn btn-outline-primary" id="NTbutton">
+                                <button type="submit" class="btn btn-outline-primary" id="NTbutton">
                                     등록
                                 </button>
                                 <input type="reset" class="btn btn-outline-danger" disabled="disabled">
