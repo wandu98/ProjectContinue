@@ -47,6 +47,7 @@
                                     <input type="text" placeholder="Search..." class="col-lg-12" id="game_search"
                                            name="game_search" readonly>&nbsp;
 
+
                                     <!-- 모달창 -->
                                     <div class="modal fade" id="gs_modal">
                                         <div class="modal-dialog">
