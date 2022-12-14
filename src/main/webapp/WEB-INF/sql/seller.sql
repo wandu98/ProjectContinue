@@ -186,3 +186,142 @@ from tb_detail dt join tb_sales sl
 on dt.ss_num = sl.ss_num join tb_order od
 on dt.od_num = od.od_num
 where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d');
+
+
+select od.od_num, od_date, dt.ss_num, dt_amount, sl_id, ss_price, substr(gm_code,1,2) as gm_code, dt_amount*ss_price as sales
+from tb_order od join tb_detail dt
+on od.od_num = dt.od_num join tb_sales ts
+on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d');
+
+
+select ss_num, gm_code, sales, gc, percent_rank() over (PARTITION BY gc order by sales) as ratio, rank() over (PARTITION BY gc ORDER BY sales)
+from (
+        select od.od_num, od_date, dt.ss_num, dt_amount, sl_id, ss_price, gm_code, substr(gm_code,1,2) as gc, dt_amount*ss_price as sales
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+    ) AA;
+
+
+select sales, gc, sum(sales)
+from (
+         select od.od_num, od_date, dt.ss_num, dt_amount, sl_id, ss_price, gm_code, substr(gm_code,1,2) as gc, dt_amount*ss_price as sales
+         from tb_order od join tb_detail dt
+                               on od.od_num = dt.od_num join tb_sales ts
+                                                             on dt.ss_num = ts.ss_num
+         where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+     ) AA
+group by gc;
+
+
+
+select substr(gm_code,1,2) as gc, dt_amount*ss_price as sales
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num right join (select *
+                                                                                         from (
+                                                                                                  select 'mn' gc from dual union all
+                                                                                                  select 'pt' gc from dual union all
+                                                                                                  select 'dt' gc from dual union all
+                                                                                                  select 'dl' gc from dual union all
+                                                                                                  select 'ol' gc from dual union all
+                                                                                                  select 'pn' gc from dual union all
+                                                                                                  select 'fc' gc from dual union all
+                                                                                                  select 'am' gc from dual union all
+                                                                                                  select 'pc' gc from dual union all
+                                                                                                  select 'jc' gc from dual union all
+                                                                                                  select 'ac' gc from dual
+                                                                                              ) tbb
+                                                                                         ) tbc
+on tbb.gc =
+where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+group by gc;
+
+
+select substr(gm_code,1,2) as gc, dt_amount*ss_price as sales
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+group by gc;
+
+
+
+
+-- 타이틀별 판매액
+select tbc.gc, ifnull(sale, 0) as sales
+from (
+        select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+        group by gc
+    ) tba right join (select *
+                     from (
+                              select 'mn' gc from dual union all
+                              select 'pt' gc from dual union all
+                              select 'dt' gc from dual union all
+                              select 'dl' gc from dual union all
+                              select 'ol' gc from dual union all
+                              select 'pn' gc from dual union all
+                              select 'fc' gc from dual union all
+                              select 'am' gc from dual union all
+                              select 'pc' gc from dual union all
+                              select 'jc' gc from dual union all
+                              select 'ac' gc from dual
+                          ) tbb
+                     ) tbc on tba.gc = tbc.gc;
+
+
+-- 타이틀별 판매 건수
+select substr(gm_code,1,2) as gc, sum(dt_amount) as total
+from tb_detail dt join tb_order t on dt.od_num = t.od_num
+join tb_sales ts on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+group by gc;
+
+
+-- 타이틀별 판매 건수 (일)
+select tbc.gc, ifnull(total, 0) as totsale
+from (
+        select substr(gm_code,1,2) as gc, sum(dt_amount) as total
+        from tb_detail dt join tb_order t on dt.od_num = t.od_num
+        join tb_sales ts on dt.ss_num = ts.ss_num
+        where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+        group by gc
+    ) tba right join (select *
+                     from (
+                              select 'mn' gc from dual union all
+                              select 'pt' gc from dual union all
+                              select 'dt' gc from dual union all
+                              select 'dl' gc from dual union all
+                              select 'ol' gc from dual union all
+                              select 'pn' gc from dual union all
+                              select 'fc' gc from dual union all
+                              select 'am' gc from dual union all
+                              select 'pc' gc from dual union all
+                              select 'jc' gc from dual union all
+                              select 'ac' gc from dual
+                          ) tbb
+                     ) tbc on tba.gc = tbc.gc;
+
+
+
+select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, case dt_prog when 'J01' then '결제완료'
+                                                                                                when 'J02' then '출고준비중'
+                                                                                                when 'J03' then '출고완료'
+                                                                                                when 'J04' then '배송중'
+                                                                                                when 'J05' then '배송완료'
+                                                                                                when 'J06' then '구매확정'
+                                                                                                when 'J07' then '교환'
+                                                                                                when 'J08' then '반품' end as dt_prog
+from tb_order od join tb_detail dt
+on od.od_num = dt.od_num join tb_mem mem
+on od.mem_id = mem.mem_id join tb_sales ts
+on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+order by od_date desc
+limit 5;

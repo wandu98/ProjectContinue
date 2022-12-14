@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ include file="adminheader.jsp" %>
+<%@ include file="admin_header.jsp" %>
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -62,7 +62,7 @@
                             </div>
                             <br>
                             <div class="text-center">
-                                <button class="btn btn-outline-primary" id="NTbutton">
+                                <button type="submit" class="btn btn-outline-primary" id="NTbutton">
                                     등록
                                 </button>
                                 <input type="reset" class="btn btn-outline-danger" disabled="disabled">
@@ -88,4 +88,4 @@
         }
     });
 </script>
-<%@ include file="adminfooter.jsp" %>
+<%@ include file="admin_footer.jsp" %>

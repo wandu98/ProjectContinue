@@ -214,89 +214,6 @@
                     </div><!-- End Sales Card -->
 
 
-
-                    <!-- Reports -->
-                    <div class="col-12">
-                        <div class="card">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="card-body">
-                                <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                                <!-- Line Chart -->
-                                <div id="reportsChart"></div>
-
-                                <script>
-                                    document.addEventListener("DOMContentLoaded", () => {
-                                        new ApexCharts(document.querySelector("#reportsChart"), {
-                                            series: [{
-                                                name: 'Sales',
-                                                data: [31, 40, 28, 51, 42, 82, 56],
-                                            }, {
-                                                name: 'Revenue',
-                                                data: [11, 32, 45, 32, 34, 52, 41]
-                                            }, {
-                                                name: 'Customers',
-                                                data: [15, 11, 32, 18, 9, 24, 11]
-                                            }],
-                                            chart: {
-                                                height: 350,
-                                                type: 'area',
-                                                toolbar: {
-                                                    show: false
-                                                },
-                                            },
-                                            markers: {
-                                                size: 4
-                                            },
-                                            colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                                            fill: {
-                                                type: "gradient",
-                                                gradient: {
-                                                    shadeIntensity: 1,
-                                                    opacityFrom: 0.3,
-                                                    opacityTo: 0.4,
-                                                    stops: [0, 90, 100]
-                                                }
-                                            },
-                                            dataLabels: {
-                                                enabled: false
-                                            },
-                                            stroke: {
-                                                curve: 'smooth',
-                                                width: 2
-                                            },
-                                            xaxis: {
-                                                type: 'datetime',
-                                                categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                                            },
-                                            tooltip: {
-                                                x: {
-                                                    format: 'dd/MM/yy HH:mm'
-                                                },
-                                            }
-                                        }).render();
-                                    });
-                                </script>
-                                <!-- End Line Chart -->
-
-                            </div>
-
-                        </div>
-                    </div><!-- End Reports -->
-
                     <!-- Recent Sales -->
                     <div class="col-12">
                         <div class="card recent-sales overflow-auto">
@@ -308,16 +225,16 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" onclick="recentSales('Today')">Today</a></li>
+                                    <li><a class="dropdown-item" onclick="recentSales('Month')">This Month</a></li>
+                                    <li><a class="dropdown-item" onclick="recentSales('Year')">This Year</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
                                 <h5 class="card-title">Recent Sales <span>| Today</span></h5>
 
-                                <table class="table table-borderless datatable">
+                                <table class="table table-borderless">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -382,14 +299,14 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" onclick="topSelling('Today')">Today</a></li>
+                                    <li><a class="dropdown-item" onclick="topSelling('Month')">This Month</a></li>
+                                    <li><a class="dropdown-item" onclick="topSelling('Year')">This Year</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body pb-0">
-                                <h5 class="card-title">Top Selling <span>| Today</span></h5>
+                                <h5 class="card-title">Top Selling <span id="TMY2">| Today</span></h5>
 
                                 <table class="table table-borderless">
                                     <thead>
@@ -401,52 +318,16 @@
                                         <th scope="col">Revenue</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-1.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas
-                                            nulla</a></td>
-                                        <td>$64</td>
-                                        <td class="fw-bold">124</td>
-                                        <td>$5,828</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-2.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Exercitationem similique
-                                            doloremque</a></td>
-                                        <td>$46</td>
-                                        <td class="fw-bold">98</td>
-                                        <td>$4,508</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-3.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a>
-                                        </td>
-                                        <td>$59</td>
-                                        <td class="fw-bold">74</td>
-                                        <td>$4,366</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-4.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum
-                                            error</a></td>
-                                        <td>$32</td>
-                                        <td class="fw-bold">63</td>
-                                        <td>$2,016</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-5.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus
-                                            repellendus</a></td>
-                                        <td>$79</td>
-                                        <td class="fw-bold">41</td>
-                                        <td>$3,239</td>
-                                    </tr>
+                                    <tbody id="topselling">
+                                    <c:forEach var="row" items="${tsd}" varStatus="vs">
+                                        <tr>
+                                            <th scope="row"><a href="#"><img src="/imagese/product/sales_main/${row.ss_img}"></a></th>
+                                            <td><a href="#" class="text-primary fw-bold">${row.ss_name}</a></td>
+                                            <td>${row.ss_price}</td>
+                                            <td class="fw-bold">${row.cnt}</td>
+                                            <td>${row.sales}</td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
 
@@ -454,78 +335,6 @@
 
                         </div>
                     </div><!-- End Top Selling -->
-
-
-                    <!-- 품목 등록 -->
-                    <div class="col-12">
-                        <div class="card overflow-auto">
-
-                            <div class="card-body pb-0">
-                                <h5 class="card-title">품목 관리 <span>| 등록</span></h5>
-
-                                <form action="">
-                                    <div class="form-floating mb-3">
-                                        <select class="form-select" id="gm_code">
-                                            <option value="mn" selected>본체</option>
-                                            <option value="pt">타이틀 (패키지)</option>
-                                            <option value="dt">타이틀 (다운로드)</option>
-                                            <option value="dl">다운로드 추가 컨텐츠</option>
-                                            <option value="ol">온라인 이용권</option>
-                                            <option value="pn">선불 번호</option>
-                                            <option value="fc">무료 컨텐츠</option>
-                                            <option value="am">아미보</option>
-                                            <option value="pc">프로컨트롤러</option>
-                                            <option value="jc">조이콘</option>
-                                            <option value="ac">주변기기</option>
-                                        </select>
-                                        <label for="gm_code">품목 종류</label>
-                                    </div>
-
-                                    <div class="form-floating mb-3">
-                                        <textarea class="form-control" placeholder="품목명을 작성해주세요" id="gm_name"
-                                                  style="height: 100px;"></textarea>
-                                        <label for="gm_name">품목명</label>
-                                    </div>
-
-                                    <div class="form-floating mb-3">
-                                        <select class="form-select" id="gm_level">
-                                            <option value="all" selected>전체이용가</option>
-                                            <option value="12">12세 이용가</option>
-                                            <option value="15">15세 이용가</option>
-                                            <option value="19">19세 이용가</option>
-                                        </select>
-                                        <label for="gm_level">이용등급</label>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <legend class="col-form-label col-sm-2 pt-0">카테고리</legend>
-                                        <div class="col-sm-10">
-
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cate_action">
-                                                <label class="form-check-label" for="cate_action">
-                                                    액션
-                                                </label>
-                                            </div>
-
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cate_adventure">
-                                                <label class="form-check-label" for="cate_adventure">
-                                                    어드벤처
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
-
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- 품목 등록 END -->
-
                 </div>
             </div><!-- End Left side columns -->
 
@@ -616,14 +425,14 @@
                                 <h6>Filter</h6>
                             </li>
 
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                            <li><a class="dropdown-item" onclick="sales('Today')">Today</a></li>
+                            <li><a class="dropdown-item" onclick="sales('Month')">This Month</a></li>
+                            <li><a class="dropdown-item" onclick="sales('Year')">This Year</a></li>
                         </ul>
                     </div>
 
                     <div class="card-body pb-0">
-                        <h5 class="card-title">Website Traffic <span>| Today</span></h5>
+                        <h5 class="card-title">판매량 <span id="tmy">| Today</span></h5>
 
                         <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
 
@@ -657,24 +466,48 @@
                                             show: false
                                         },
                                         data: [{
-                                            value: 1048,
-                                            name: 'Search Engine'
+                                            value: ${saleAmountDay[0]},
+                                            name: '본체'
                                         },
                                             {
-                                                value: 735,
-                                                name: 'Direct'
+                                                value: ${saleAmountDay[1]},
+                                                name: '타이틀(패키지)'
                                             },
                                             {
-                                                value: 580,
-                                                name: 'Email'
+                                                value: ${saleAmountDay[2]},
+                                                name: '타이틀(다운로드)'
                                             },
                                             {
-                                                value: 484,
-                                                name: 'Union Ads'
+                                                value: ${saleAmountDay[3]},
+                                                name: '다운로드 추가 컨텐츠'
                                             },
                                             {
-                                                value: 300,
-                                                name: 'Video Ads'
+                                                value: ${saleAmountDay[4]},
+                                                name: '온라인 이용권'
+                                            },
+                                            {
+                                                value: ${saleAmountDay[5]},
+                                                name: '선불번호'
+                                            },
+                                            {
+                                                value: ${saleAmountDay[6]},
+                                                name: '무료컨텐츠'
+                                            },
+                                            {
+                                                value: ${saleAmountDay[7]},
+                                                name: '아미보'
+                                            },
+                                            {
+                                                value: ${saleAmountDay[8]},
+                                                name: '프로컨트롤러'
+                                            },
+                                            {
+                                                value: ${saleAmountDay[9]},
+                                                name: '조이콘'
+                                            },
+                                            {
+                                                value: ${saleAmountDay[10]},
+                                                name: '주변기기'
                                             }
                                         ]
                                     }]
@@ -685,60 +518,6 @@
                     </div>
                 </div><!-- End Website Traffic -->
 
-                <!-- News & Updates Traffic -->
-                <div class="card">
-                    <div class="filter">
-                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
-                            </li>
-
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="card-body pb-0">
-                        <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-                        <div class="news">
-                            <div class="post-item clearfix">
-                                <img src="admin_assets/img/news-1.jpg" alt="">
-                                <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                                <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="admin_assets/img/news-2.jpg" alt="">
-                                <h4><a href="#">Quidem autem et impedit</a></h4>
-                                <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="admin_assets/img/news-3.jpg" alt="">
-                                <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                                <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="admin_assets/img/news-4.jpg" alt="">
-                                <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                                <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-                            </div>
-
-                            <div class="post-item clearfix">
-                                <img src="admin_assets/img/news-5.jpg" alt="">
-                                <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                                <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos
-                                    eius...</p>
-                            </div>
-
-                        </div><!-- End sidebar recent posts-->
-
-                    </div>
-                </div><!-- End News & Updates -->
 
             </div><!-- End Right side columns -->
 
@@ -747,5 +526,123 @@
 
 </main>
 <!-- End #main -->
+
+<script>
+    function sales(time) {
+        $.ajax({
+            url : "/seller/sales_" + time
+            ,type : "post"
+            ,success : function (data) {
+                $("#tmy").text("| " + time);
+                echarts.init(document.querySelector("#trafficChart")).setOption({
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        top: '5%',
+                        left: 'center'
+                    },
+                    series: [{
+                        name: 'Access From',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '18',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [{
+                            value: data[0],
+                            name: '본체'
+                        },
+                            {
+                                value: data[1],
+                                name: '타이틀(패키지)'
+                            },
+                            {
+                                value: data[2],
+                                name: '타이틀(다운로드)'
+                            },
+                            {
+                                value: data[3],
+                                name: '다운로드 추가 컨텐츠'
+                            },
+                            {
+                                value: data[4],
+                                name: '온라인 이용권'
+                            },
+                            {
+                                value: data[5],
+                                name: '선불번호'
+                            },
+                            {
+                                value: data[6],
+                                name: '무료컨텐츠'
+                            },
+                            {
+                                value: data[7],
+                                name: '아미보'
+                            },
+                            {
+                                value: data[8],
+                                name: '프로컨트롤러'
+                            },
+                            {
+                                value: data[9],
+                                name: '조이콘'
+                            },
+                            {
+                                value: data[10],
+                                name: '주변기기'
+                            }
+                        ]
+                    }]
+                });
+            }
+            ,error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
+
+    function topSelling(time) {
+        $.ajax({
+           url : "/seller/topselling_" + time
+           ,type : "post"
+           ,success : function (data) {
+                // console.log(data);
+                $("#TMY2").text("| " + time);
+                $("#topselling").html(data);
+            }
+           ,error : function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
+
+    function recentSales(time) {
+        $.ajax({
+            url : "/seller/recentsales_" + time
+            ,type : "post"
+            ,success : function (data) {
+
+            }
+            ,error : function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+
+        })
+    }
+</script>
 
 <%@ include file="sellerfooter.jsp" %>

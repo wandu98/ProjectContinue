@@ -93,13 +93,25 @@
     <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
         from tb_sales
-        where ss_name like #{ss_name}
+        where ss_name like CONCAT('%',#{ss_name},'%')
+    </select>
+
+    <select id="searchAlltotalRowCount" resultType="java.lang.Integer">
+        select count(*)
+        from tb_sales
+        where ss_name like CONCAT('%',#{ss_name},'%')
     </select>
 
     <select id="searchCategory" parameterType="com.cafe24.nonchrono.dto.SalesDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
         from tb_sales
-        where gm_code = #{gm_code} and ss_name like #{ss_name}
+        where gm_code like CONCAT('%',#{gm_code},'%') and ss_name like CONCAT('%',#{ss_name},'%')
+    </select>
+
+    <select id="searchCategorytotalRowCount" parameterType="com.cafe24.nonchrono.dto.SalesDTO" resultType="java.lang.Integer">
+        select count(*)
+        from tb_sales
+        where gm_code like CONCAT('%',#{gm_code},'%') and ss_name like CONCAT('%',#{ss_name},'%')
     </select>
     <!-- 상품 번호와 맞는 상세정보 가져오기 -->
     <select id="detail" parameterType="int" resultType="com.cafe24.nonchrono.dto.SalesDTO">
@@ -152,4 +164,37 @@
         from tb_memdv
         where mem_id = #{mem_id}
     </select>
+    
+    <!-- 검색시(모든카테고리) 페이징 된 리스트-->
+    <select id="searchAllList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+    <![CDATA[
+        select *
+        from (
+                select *, @rno := @rno + 1 as r
+                from (
+                        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+                        from tb_sales
+                        where ss_name like CONCAT('%',#{ss_name},'%')
+                ) AA, (select @rno :=0) BB
+        ) CC
+        where r >= #{startRow} and r <= #{endRow}
+    ]]>
+    </select>
+
+    <!--  검색시(카테고리 선택) 페이징 된 리스트  -->
+    <select id="searchCategorylist" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+    <![CDATA[
+        select *
+        from (
+                select *, @rno := @rno + 1 as r
+                from (
+                        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+                        from tb_sales
+                        where ss_name like CONCAT('%',#{ss_name},'%') and gm_code like CONCAT('%',#{gm_code},'%')
+                ) AA, (select @rno :=0) BB
+        ) CC
+        where r >= #{startRow} and r <= #{endRow}
+    ]]>
+    </select>
+
 </mapper>

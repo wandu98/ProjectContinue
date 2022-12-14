@@ -66,17 +66,45 @@ public class SalesDAO {
         return cnt;
     }//totalRowCount() end
 
+    public int searchAlltotalRowCount(String ss_name) {
+        int cnt = 0;
+        try {
+            cnt = sqlSession.selectOne("sales.searchAlltotalRowCount", ss_name);
+        } catch (Exception e) {
+            System.out.println("전체 행 갯수 : " + e);
+        }
+        return cnt;
+    }
+
+    public int searchCategorytotalRowCount(SalesDTO salesDTO) {
+        int cnt = 0;
+        try {
+            cnt = sqlSession.selectOne("sales.searchAlltotalRowCount", salesDTO);
+        } catch (Exception e) {
+            System.out.println("전체 행 갯수 : " + e);
+        }
+        return cnt;
+    }
+
     //상품메인 페이징
     public List<SalesDTO> list3(PagingDTO pagingDTO) {
         return sqlSession.selectList("sales.list3", pagingDTO);
     }
 
-    public List<SalesDTO> searchAll(String keyword) {
-        return sqlSession.selectList("sales.searchAll", keyword);
+//    public List<SalesDTO> searchAll(String keyword) {
+//        return sqlSession.selectList("sales.searchAll", keyword);
+//    }
+
+//    public List<SalesDTO> searchCategory(SalesDTO salesDTO) {
+//        return sqlSession.selectList("sales.searchCategory", salesDTO);
+//    }
+
+    public List<SalesDTO> searchAlllist(PagingDTO pagingDTO) {
+        return sqlSession.selectList("sales.searchAllList", pagingDTO);
     }
 
-    public List<SalesDTO> searchCategory(SalesDTO salesDTO) {
-        return sqlSession.selectList("sales.searchCategory", salesDTO);
+    public List<SalesDTO> searchCategorylist(PagingDTO pagingDTO) {
+        return sqlSession.selectList("sales.searchCategorylist", pagingDTO);
     }
 
     public SalesDTO detail(int ss_num) {

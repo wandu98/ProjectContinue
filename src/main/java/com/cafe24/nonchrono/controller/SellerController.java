@@ -1,7 +1,6 @@
 package com.cafe24.nonchrono.controller;
 
 
-import com.cafe24.nonchrono.dao.MemDAO;
 import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
 import com.cafe24.nonchrono.dao.SellerDAO;
@@ -48,6 +47,8 @@ public class SellerController {
         String sl_id = (String) session.getAttribute("sl_id");
         mav.addObject("progCountDay", sellerDAO.dt_progCountDay(sl_id));
         mav.addObject("progCountAll", sellerDAO.dt_progCountAll(sl_id));
+        mav.addObject("saleAmountDay", sellerDAO.saleAmountDay(sl_id));
+        mav.addObject("tsd", sellerDAO.topSellingDay(sl_id));
         mav.setViewName("seller/seller");
         return mav;
     }//seller() end
@@ -403,5 +404,141 @@ public class SellerController {
     public String memLogin() {
         return "/mem/loginForm2";
     }
+
+    @RequestMapping("/sales_Today")
+    @ResponseBody
+    public List<Integer> sales_today(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Integer> list = sellerDAO.saleAmountDay(sl_id);
+        return list;
+    }
+
+    @RequestMapping("/sales_Month")
+    @ResponseBody
+    public List<Integer> sales_month(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Integer> list = sellerDAO.saleAmountMonth(sl_id);
+        return list;
+    }
+
+    @RequestMapping("/sales_Year")
+    @ResponseBody
+    public List<Integer> sales_year(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Integer> list = sellerDAO.saleAmountYear(sl_id);
+        return list;
+    }
+
+    @RequestMapping("/topselling_Today")
+    @ResponseBody
+    public String topselling_Today(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Map<String, ?>> list = sellerDAO.topSellingDay(sl_id);
+//        System.out.println(list);
+        String result = "";
+        for (int i=0; i<list.size(); i++){
+            result += "<tr>";
+            result += "     <th scope=\"row\"><a href=\"#\"><img src=\"/imagese/product/sales_main/" + list.get(i).get("ss_img") + "\"></a></th>";
+            result += "     <td><a href=\"#\" class=\"text-primary fw-bold\">" + list.get(i).get("ss_name") + "</a></td>";
+            result += "     <td>" + list.get(i).get("ss_price") + "</td>";
+            result += "     <td class=\"fw-bold\">" + list.get(i).get("cnt") + "</td>";
+            result += "     <td>" + list.get(i).get("sales") + "</td>";
+            result += "</tr>";
+        }
+        return result;
+    }
+
+    @RequestMapping("/topselling_Month")
+    @ResponseBody
+    public String topselling_Month(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Map<String, ?>> list = sellerDAO.topSellingMonth(sl_id);
+//        System.out.println(list);
+        String result = "";
+        for (int i=0; i<list.size(); i++){
+            result += "<tr>";
+            result += "     <th scope=\"row\"><a href=\"#\"><img src=\"/imagese/product/sales_main/" + list.get(i).get("ss_img") + "\"></a></th>";
+            result += "     <td><a href=\"#\" class=\"text-primary fw-bold\">" + list.get(i).get("ss_name") + "</a></td>";
+            result += "     <td>" + list.get(i).get("ss_price") + "</td>";
+            result += "     <td class=\"fw-bold\">" + list.get(i).get("cnt") + "</td>";
+            result += "     <td>" + list.get(i).get("sales") + "</td>";
+            result += "</tr>";
+        }
+        return result;
+    }
+
+    @RequestMapping("/topselling_Year")
+    @ResponseBody
+    public String topselling_Year(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Map<String, ?>> list = sellerDAO.topSellingYear(sl_id);
+//        System.out.println(list);
+        String result = "";
+        for (int i=0; i<list.size(); i++){
+            result += "<tr>";
+            result += "     <th scope=\"row\"><a href=\"#\"><img src=\"/imagese/product/sales_main/" + list.get(i).get("ss_img") + "\"></a></th>";
+            result += "     <td><a href=\"#\" class=\"text-primary fw-bold\">" + list.get(i).get("ss_name") + "</a></td>";
+            result += "     <td>" + list.get(i).get("ss_price") + "</td>";
+            result += "     <td class=\"fw-bold\">" + list.get(i).get("cnt") + "</td>";
+            result += "     <td>" + list.get(i).get("sales") + "</td>";
+            result += "</tr>";
+        }
+        return result;
+    }
+
+    @RequestMapping("/recentsales_Today")
+    @ResponseBody
+    public String recentsales_Today(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Map<String, ?>> list = sellerDAO.recentsalesDay(sl_id);
+        String result = "";
+        for (int i=0; i<list.size(); i++){
+            result += "<tr>";
+            result += "     <th scope=\"row\"><a href=\"#\">#2457</a></th>";
+            result += "     <td>"+ list.get(i).get("mem_name") +"</td>";
+            result += "     <td><a href=\"#\" class=\"text-primary\">" + list.get(i).get("ss_name") + "</a></td>";
+            result += "     <td>" + list.get(i).get("ss_price") + "</td>";
+            result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
+            result += "</tr>";
+        }
+        return result;
+    }
+
+    @RequestMapping("/recentsales_Month")
+    @ResponseBody
+    public String recentsales_Month(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Map<String, ?>> list = sellerDAO.recentsalesMonth(sl_id);
+        String result = "";
+        for (int i=0; i<list.size(); i++){
+            result += "<tr>";
+            result += "     <th scope=\"row\"><a href=\"#\">#2457</a></th>";
+            result += "     <td>"+ list.get(i).get("mem_name") +"</td>";
+            result += "     <td><a href=\"#\" class=\"text-primary\">" + list.get(i).get("ss_name") + "</a></td>";
+            result += "     <td>" + list.get(i).get("ss_price") + "</td>";
+            result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
+            result += "</tr>";
+        }
+        return result;
+    }
+
+    @RequestMapping("/recentsales_Year")
+    @ResponseBody
+    public String recentsales_Year(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Map<String, ?>> list = sellerDAO.recentsalesYear(sl_id);
+        String result = "";
+        for (int i=0; i<list.size(); i++){
+            result += "<tr>";
+            result += "     <th scope=\"row\"><a href=\"#\">#2457</a></th>";
+            result += "     <td>"+ list.get(i).get("mem_name") +"</td>";
+            result += "     <td><a href=\"#\" class=\"text-primary\">" + list.get(i).get("ss_name") + "</a></td>";
+            result += "     <td>" + list.get(i).get("ss_price") + "</td>";
+            result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
+            result += "</tr>";
+        }
+        return result;
+    }
+
 
 }//class end

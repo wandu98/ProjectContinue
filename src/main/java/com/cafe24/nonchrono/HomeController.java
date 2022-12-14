@@ -36,8 +36,6 @@ public class HomeController {
         String mem_id = (String) session.getAttribute("mem_id");
         String sl_id = (String) session.getAttribute("sl_id");
         String admin_id = (String) session.getAttribute("admin_id");
-        System.out.println(mem_id);
-        System.out.println(sl_id);
         ModelAndView mav = new ModelAndView();
         mav.addObject("idxLatestProduct", salesDAO.idxLatestProduct());
         mav.addObject("idxTopProduct", salesDAO.idxTopProduct());

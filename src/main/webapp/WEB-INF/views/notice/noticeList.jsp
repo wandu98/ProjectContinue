@@ -11,23 +11,28 @@
 <div class="container">
     <h3>공지사항</h3>
     <br>
-    <form name="ntlist" id="ntlist" action="noticeList">
+    <div class="blog__sidebar__search" >
+        <form action="#">
+            <input type="text" placeholder="Search...">
+            <button type="submit"><span class="icon_search"></span></button>
+        </form>
+    </div>
+
+    <div name="ntlist" id="ntlist">
         <table class="table table-hover">
             <thead>
             <tr>
                 <th>번호</th>
                 <th>제목</th>
-                <th>내용</th>
                 <th>작성일</th>
                 <th>조회수</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="notice" items="${ntlist}">
-                <tr>
+            <c:forEach var="notice" items="${noticelist}">
+                <tr style="cursor: pointer" onclick="location.href='/notice/Detail/${notice.nt_num}'">
                     <td>${notice.nt_num}</td>
-                    <td>${notice.nt_title}</td>
-                    <td>${notice.nt_cmt}</td>
+                    <td >${notice.nt_title}</td>
                     <td>${notice.nt_regdate}</td>
                     <td>${notice.nt_views}</td>
                 </tr>
@@ -35,8 +40,11 @@
             </tbody>
         </table>
 
-    </form>
+    </div>
+
+
 </div>
+
 
 
 <%@ include file="../footer.jsp" %>
