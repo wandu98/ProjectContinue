@@ -112,7 +112,7 @@ public class AdminController {
             int typeNum = Integer.parseInt(typeName) + 1;
             // 숫자를 가져와서 4자리가 되도록 왼쪽에 0을 채움
             String typeNum2 = String.format("%04d", typeNum);
-            // gm_code와 typeNum2를 합치면 진짜 게임 코드가 된다 ex) dt0001
+            // gm_code와 typeNum2를 합치면 진짜 게임 코드가 된다 ex) dt0001-
             gameCode = gm_code + typeNum2;
             path += gameCode + "/";
             // 파일명 가져오기 + 소문자화

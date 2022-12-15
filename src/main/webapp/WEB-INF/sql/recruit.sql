@@ -321,3 +321,50 @@ SELECT rcrbrd_num,
            where rcrbrd_num = rb.rcrbrd_num) as cnt
 FROM tb_rcrboard rb
 ORDER BY cnt DESC;
+
+select gm.gm_name,
+       rb.rcrbrd_num,
+       rb.rcrbrd_subject,
+       rb.rcrbrd_edate,
+       rb.gm_code,
+       rb.rcrbrd_max,
+       (SELECT count(mem_id)
+        FROM tb_recruitinfo
+        WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
+from tb_rcrboard as rb
+         join tb_game as gm
+              on rb.gm_code = gm.gm_code
+WHERE rcrbrd_status = '진행중' AND rcrbrd_edate >= now()
+ORDER BY rcrbrd_num DESC
+Limit 99 OFFSET 0
+
+SELECT rcrbrd_num,
+       mem_id,
+       rcrbrd_subject,
+       rcrbrd_content,
+       rcrbrd_pw,
+       rcrbrd_views,
+       rcrbrd_date,
+       rcrbrd_edate,
+       rcrbrd_ip,
+       gm_code,
+       rcrbrd_status,
+       rcrbrd_adr,
+       rcrbrd_max,
+       (SELECT count(mem_id)
+        FROM tb_recruitinfo
+        where rcrbrd_num = rb.rcrbrd_num) as cnt
+FROM tb_rcrboard rb
+WHERE rcrbrd_status = '진행중' AND rcrbrd_edate >= now()
+ORDER BY rcrbrd_num DESC
+
+
+# 1. 배송정보 인서트를 한다
+
+
+# 2. max로 방금 인서트한 배송정보의 넘버를 알아온다
+select max(mem_dvnum)
+from tb_memdv
+where mem_id = 'fjhdmj555';
+
+#3. 방금 인서트한 배송정보의 넘버를 가지고 주문정보를 인서트를 한다
