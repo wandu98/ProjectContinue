@@ -232,6 +232,54 @@
                         </div>
                     </div>
 
+                    <%-- 회원정보와 동일 칸 --%>
+                    <div id="userDV" style="display: none">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>받으시는분<span>*</span></p>
+                                    <input type="text" id="mem_name" name="mem_name" value="${dv_mem_info.mem_name}"
+                                           readonly>
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="checkout__input" style="width: 30%">
+                            <p>주소<span>*</span></p>
+                            <input type="text" id="mem_zip" name="mem_zip" value="${dv_mem_info.mem_zip}"
+                                   style="margin-left: auto; width: 50%"
+                                   readonly>&nbsp;
+                            <button type="button" class="btn btn-danger">검색</button>
+                        </div>
+                        <div id="wrap2"
+                             style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
+                            <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png"
+                                 id="btnFoldWrap2"
+                                 style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1"
+                                 onclick="foldDaumPostcode()" alt="접기 버튼">
+                        </div>
+                        <div class="checkout__input" id="mem_adr3" style="width: 50%">
+                            <input type="text" id="mem_adr1" name="mem_adr1" value="${dv_mem_info.mem_adr1}"
+                                   readonly>
+                        </div>
+                        <div class="checkout__input" id="mem_adr4" style="width: 50%">
+                            <input type="text" id="mem_adr2" name="mem_adr2" value="${dv_mem_info.mem_adr2}"
+                                   readonly>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Phone<span>*</span></p>
+                                    <input type="text" name="mem_phone" id="mem_phone"
+                                           value="${dv_mem_info.mem_phone}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="checkout__order" style="width: 120%">
