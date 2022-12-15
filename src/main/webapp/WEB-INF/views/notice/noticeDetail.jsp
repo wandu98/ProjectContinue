@@ -32,7 +32,25 @@
                 </td>
             </tbody>
         </table>
+        <c:if test="${admin_id eq 'admin'}">
+        <form class="modal-footer" method="post">
+            <input type="hidden" id="nt_num" name="nt_num" value="${ntdetail.nt_num}">
+            <button type="button" class="btn btn-info">수정</button>
+            <button type="button" class="btn btn-danger" onclick="ntDeleteConfirm(this.form)">삭제</button>
+        </form>
+        </c:if>
     </div>
 </div>
 
+
+<script>
+    function ntDeleteConfirm(form) {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            form.action = "/notice/Delete";
+            form.submit();
+        } else {
+            location.href = "#";
+        }
+    }
+</script>
 <%@ include file="../footer.jsp" %>
