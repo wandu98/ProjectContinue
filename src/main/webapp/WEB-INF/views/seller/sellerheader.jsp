@@ -52,7 +52,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="/seller" class="logo d-flex align-items-center">
+        <a href="/seller/seller" class="logo d-flex align-items-center">
             <img src="/admin_assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">ontinue? 판매자</span>
         </a>

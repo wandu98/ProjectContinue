@@ -61,7 +61,9 @@
     </insert>
 
     <select id="list2" resultType="com.cafe24.nonchrono.dto.SalesDTO">
-        select ss_num, ss_name, ss_price, ss_status, ss_speriod
+        select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
+                                                                      when 'S2' then '판매중지'
+                                                                      when 'S3' then '품절' end as ss_status
         from tb_sales
         where sl_id = #{sl_id}
         ORDER BY ss_num DESC

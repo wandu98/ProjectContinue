@@ -14,5 +14,6 @@ public class PagingDTO {
     private String mem_id;
     private String ss_name;
     private String gm_code;
+    private String sl_id;
 
 }

@@ -252,10 +252,10 @@
                                         <td><a href="#" class="text-primary">${row.ss_name}</a></td>
                                         <td>${row.ss_price}</td>
                                         <c:choose>
-                                            <c:when test="${row.dt_prog=='결제완료' or row.dt_prog=='출고준비중' or row.dt_prog=='출고완료' or row.dt_prog=='배송중'}">
+                                            <c:when test="${row.dt_prog=='결제완료' or row.dt_prog=='출고준비중' or row.dt_prog=='출고완료' or row.dt_prog=='배송중' or row.dt_prog=='배송완료'}">
                                                 <td><span class="badge bg-warning">${row.dt_prog}</span></td>
                                             </c:when>
-                                            <c:when test="${row.dt_prog=='배송완료' or row.dt_prog=='구매확정'}">
+                                            <c:when test="${row.dt_prog=='구매확정'}">
                                                 <td><span class="badge bg-success">${row.dt_prog}</span></td>
                                             </c:when>
                                             <c:otherwise>
@@ -342,7 +342,7 @@
                     </div>
 
                     <div class="card-body pb-0">
-                        <h5 class="card-title">Budget Report <span>| This Month</span></h5>
+                        <h5 class="card-title">매출 비교 <span id="TMY4">| Today</span></h5>
 
                         <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
 
@@ -350,33 +350,53 @@
                             document.addEventListener("DOMContentLoaded", () => {
                                 var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
                                     legend: {
-                                        data: ['Allocated Budget', 'Actual Spending']
+                                        data: ['어제', '오늘']
                                     },
                                     radar: {
                                         // shape: 'circle',
                                         indicator: [{
-                                            name: 'Sales',
-                                            max: 6500
+                                            name: '본체',
+                                            max: 1000000
                                         },
                                             {
-                                                name: 'Administration',
-                                                max: 16000
+                                                name: '타이틀(패키지)',
+                                                max: 1000000
                                             },
                                             {
-                                                name: 'Information Technology',
-                                                max: 30000
+                                                name: '타이틀(다운로드)',
+                                                max: 1000000
                                             },
                                             {
-                                                name: 'Customer Support',
-                                                max: 38000
+                                                name: '다운로드 추가 컨텐츠',
+                                                max: 1000000
                                             },
                                             {
-                                                name: 'Development',
-                                                max: 52000
+                                                name: '온라인 이용권',
+                                                max: 1000000
                                             },
                                             {
-                                                name: 'Marketing',
-                                                max: 25000
+                                                name: '선불번호',
+                                                max: 1000000
+                                            },
+                                            {
+                                                name: '무료컨텐츠',
+                                                max: 1000000
+                                            },
+                                            {
+                                                name: '아미보',
+                                                max: 1000000
+                                            },
+                                            {
+                                                name: '프로컨트롤러',
+                                                max: 1000000
+                                            },
+                                            {
+                                                name: '조이콘',
+                                                max: 1000000
+                                            },
+                                            {
+                                                name: '주변기기',
+                                                max: 1000000
                                             }
                                         ]
                                     },
@@ -384,12 +404,12 @@
                                         name: 'Budget vs spending',
                                         type: 'radar',
                                         data: [{
-                                            value: [4200, 3000, 20000, 35000, 50000, 18000],
-                                            name: 'Allocated Budget'
+                                            value: [${sryd[0]}, ${sryd[1]}, ${sryd[2]}, ${sryd[3]}, ${sryd[4]}, ${sryd[5]}, ${sryd[6]}, ${sryd[7]}, ${sryd[8]}, ${sryd[9]}, ${sryd[10]}],
+                                            name: '어제'
                                         },
                                             {
-                                                value: [5000, 14000, 28000, 26000, 42000, 21000],
-                                                name: 'Actual Spending'
+                                                value: [${srd[0]}, ${srd[1]}, ${srd[2]}, ${srd[3]}, ${srd[4]}, ${srd[5]}, ${srd[6]}, ${srd[7]}, ${srd[8]}, ${srd[9]}, ${srd[10]}],
+                                                name: '오늘'
                                             }
                                         ]
                                     }]
@@ -447,7 +467,7 @@
                                             }
                                         },
                                         labelLine: {
-                                            show: false
+                                            show: false,
                                         },
                                         data: [{
                                             value: ${saleAmountDay[0]},
@@ -632,60 +652,61 @@
     function budgetReport(time) {
         $.ajax({
             url : "/seller/budgetreport_" + time
-            ,type : "posrt"
+            ,type : "post"
             ,success : function (data) {
-                // console.log(data);
-                console.log(data.list[0])
+                // console.log(data.list);
+                // console.log(data.list1)
                 if (time == "Today") {
+                    $("#TMY4").text("| " + time);
                     var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
                         legend: {
-                            data: ['Yesterday Sales', 'Today Sales']
+                            data: ['어제', '오늘']
                         },
                         radar: {
                             // shape: 'circle',
                             indicator: [{
                                 name: '본체',
-                                max: 6500
+                                max: 1000000
                             },
                                 {
                                     name: '타이틀(패키지)',
-                                    max: 16000
+                                    max: 1000000
                                 },
                                 {
                                     name: '타이틀(다운로드)',
-                                    max: 30000
+                                    max: 1000000
                                 },
                                 {
                                     name: '다운로드 추가 컨텐츠',
-                                    max: 38000
+                                    max: 1000000
                                 },
                                 {
                                     name: '온라인 이용권',
-                                    max: 52000
+                                    max: 1000000
                                 },
                                 {
                                     name: '선불번호',
-                                    max: 25000
+                                    max: 1000000
                                 },
                                 {
                                     name: '무료컨텐츠',
-                                    max: 25000
+                                    max: 1000000
                                 },
                                 {
                                     name: '아미보',
-                                    max: 25000
+                                    max: 1000000
                                 },
                                 {
                                     name: '프로컨트롤러',
-                                    max: 25000
+                                    max: 1000000
                                 },
                                 {
                                     name: '조이콘',
-                                    max: 25000
+                                    max: 1000000
                                 },
                                 {
                                     name: '주변기기',
-                                    max: 25000
+                                    max: 1000000
                                 }
                             ]
                         },
@@ -693,20 +714,152 @@
                             name: 'Budget vs spending',
                             type: 'radar',
                             data: [{
-                                value: [4200, 3000, 20000, 35000, 50000, 18000],
-                                name: 'Yesterday Sales'
+                                value: [data.list1[0], data.list1[1], data.list1[2], data.list1[3], data.list1[4], data.list1[5], data.list1[6], data.list1[7], data.list1[8], data.list1[9], data.list1[10]],
+                                name: '어제'
                             },
                                 {
-                                    value: [5000, 14000, 28000, 26000, 42000, 21000],
-                                    name: 'Actual Spending'
+                                    value: [data.list[0], data.list[1], data.list[2], data.list[3], data.list[4], data.list[5], data.list[6], data.list[7], data.list[8], data.list[9], data.list[10]],
+                                    name: '오늘'
                                 }
                             ]
                         }]
                     });
                 } else if (time == "Month") {
-
+                    $("#TMY4").text("| " + time);
+                    var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
+                        legend: {
+                            data: ['지난달', '이번달']
+                        },
+                        radar: {
+                            // shape: 'circle',
+                            indicator: [{
+                                name: '본체',
+                                max: 1000000
+                            },
+                                {
+                                    name: '타이틀(패키지)',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '타이틀(다운로드)',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '다운로드 추가 컨텐츠',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '온라인 이용권',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '선불번호',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '무료컨텐츠',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '아미보',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '프로컨트롤러',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '조이콘',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '주변기기',
+                                    max: 1000000
+                                }
+                            ]
+                        },
+                        series: [{
+                            name: 'Budget vs spending',
+                            type: 'radar',
+                            data: [{
+                                value: [data.list1[0], data.list1[1], data.list1[2], data.list1[3], data.list1[4], data.list1[5], data.list1[6], data.list1[7], data.list1[8], data.list1[9], data.list1[10]],
+                                name: '지난달'
+                            },
+                                {
+                                    value: [data.list[0], data.list[1], data.list[2], data.list[3], data.list[4], data.list[5], data.list[6], data.list[7], data.list[8], data.list[9] ,data.list[10]],
+                                    name: '이번달'
+                                }
+                            ]
+                        }]
+                    });
                 } else {
-
+                    $("#TMY4").text("| " + time);
+                    var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
+                        legend: {
+                            data: ['작년', '금년']
+                        },
+                        radar: {
+                            // shape: 'circle',
+                            indicator: [{
+                                name: '본체',
+                                max: 1000000
+                            },
+                                {
+                                    name: '타이틀(패키지)',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '타이틀(다운로드)',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '다운로드 추가 컨텐츠',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '온라인 이용권',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '선불번호',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '무료컨텐츠',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '아미보',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '프로컨트롤러',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '조이콘',
+                                    max: 1000000
+                                },
+                                {
+                                    name: '주변기기',
+                                    max: 1000000
+                                }
+                            ]
+                        },
+                        series: [{
+                            name: 'Budget vs spending',
+                            type: 'radar',
+                            data: [{
+                                value: [data.list1[0], data.list1[1], data.list1[2], data.list1[3], data.list1[4], data.list1[5], data.list1[6], data.list1[7], data.list1[8], data.list1[9], data.list1[10]],
+                                name: '작년'
+                            },
+                                {
+                                    value: [data.list[0], data.list[1], data.list[2], data.list[3], data.list[4], data.list[5], data.list[6], data.list[7], data.list[8], data.list[9] ,data.list[10]],
+                                    name: '금년'
+                                }
+                            ]
+                        }]
+                    });
                 }
 
             }

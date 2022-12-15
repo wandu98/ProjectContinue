@@ -50,18 +50,65 @@ public class SellerController {
         mav.addObject("saleAmountDay", sellerDAO.saleAmountDay(sl_id));
         mav.addObject("tsd", sellerDAO.topSellingDay(sl_id));
         mav.addObject("rsd", sellerDAO.recentsalesDay(sl_id));
+        mav.addObject("srd", sellerDAO.salesreportDay(sl_id));
+        mav.addObject("sryd", sellerDAO.salesreportYesterday(sl_id));
         mav.setViewName("seller/seller");
         return mav;
     }//seller() end
 
     //판매자가 판매하는 리스트 현황
     @RequestMapping("/list")
-    public ModelAndView list2(HttpSession session) {
+    public ModelAndView list2(HttpSession session, PagingDTO pagingDTO, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
         String sl_id = (String) session.getAttribute("sl_id");
-        mav.setViewName("seller/list");
-        mav.addObject("list2", salesDAO.list2(sl_id));
 
+        pagingDTO.setSl_id(sl_id);
+
+        int totalRowCount = sellerDAO.totalRowCount(sl_id);
+
+        //페이징
+        int numPerPage = 5; //한 페이지당 레코드 갯수
+        int pagePerBlock = 10; //페이지 리스트
+
+        //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
+        //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
+        String pageNum = request.getParameter("pageNum");
+        if(pageNum==null) {
+            pageNum = "1";
+        }//if end
+
+        //현재 보고 있는 페이지
+        int currentPage = Integer.parseInt(pageNum);
+
+        int startRow = (currentPage-1)*numPerPage+1; //1  | 1
+        int endRow = currentPage*numPerPage; //5
+        pagingDTO.setStartRow(startRow);
+        pagingDTO.setEndRow(endRow);
+
+        double totcnt = (double)totalRowCount/numPerPage;
+        int totalPage = (int)Math.ceil(totcnt);
+
+        double d_page = (double)currentPage/pagePerBlock; // 1/10 -> 0.1
+        //페이지 묶음 번호
+        int Pages = (int)Math.ceil(d_page)-1; //0  1~10페이지 : 0, 11~20 : 1
+        //페이지 묶음의 시작 페이지 번호
+        int startPage = Pages*pagePerBlock; //0*10 -> 0
+        //페이지 묶음의 마지막 페이지 번호
+        int endPage = startPage + pagePerBlock+1; //0+10+1 = 11
+
+        List list = null;
+        if(totalRowCount>0) {
+            list = sellerDAO.paginglist(pagingDTO); // 1, 5
+        } else {
+            list = Collections.EMPTY_LIST;
+        }//if end
+        mav.addObject("pageNum", currentPage);
+        mav.addObject("count", totalRowCount);
+        mav.addObject("totalPage", totalPage);
+        mav.addObject("startPage", startPage);
+        mav.addObject("endPage", endPage);
+        mav.addObject("list2", list);
+        mav.setViewName("seller/list");
         return mav;
     }// list() end
 
@@ -96,9 +143,14 @@ public class SellerController {
     @RequestMapping("/dv_insert")
     public String dv_insert(@ModelAttribute DeliveryDTO deliveryDTO, HttpSession session) {
         String sl_id = (String) session.getAttribute("sl_id");
+        if (deliveryDTO.getDv_how().equals("택배")) {
+            deliveryDTO.setDv_exist('Y');
+        } else {
+            deliveryDTO.setDv_exist('N');
+        }
         deliveryDTO.setSl_id(sl_id);
         sellerDAO.dv_insert(deliveryDTO);
-        return "redirect:seller";
+        return "redirect:/seller/delivery";
     }
 
     ///후기관리
@@ -499,9 +551,9 @@ public class SellerController {
             result += "     <td>"+ list.get(i).get("mem_name") +"</td>";
             result += "     <td><a href=\"#\" class=\"text-primary\">" + list.get(i).get("ss_name") + "</a></td>";
             result += "     <td>" + list.get(i).get("ss_price") + "</td>";
-            if (list.get(i).get("dt_prog").equals("결제완료") || list.get(i).get("dt_prog").equals("출고준비중") || list.get(i).get("dt_prog").equals("출고완료") || list.get(i).get("dt_prog").equals("배송중")) {
+            if (list.get(i).get("dt_prog").equals("결제완료") || list.get(i).get("dt_prog").equals("출고준비중") || list.get(i).get("dt_prog").equals("출고완료") || list.get(i).get("dt_prog").equals("배송중") || list.get(i).get("dt_prog").equals("배송완료")) {
                 result += "     <td><span class=\"badge bg-warning\">" + list.get(i).get("dt_prog") + "</span></td>";
-            } else if (list.get(i).get("dt_prog").equals("배송완료") || list.get(i).get("dt_prog").equals("구매확정")) {
+            } else if (list.get(i).get("dt_prog").equals("구매확정")) {
                 result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
             } else {
                 result += "     <td><span class=\"badge bg-danger\">" + list.get(i).get("dt_prog") + "</span></td>";
@@ -523,9 +575,9 @@ public class SellerController {
             result += "     <td>"+ list.get(i).get("mem_name") +"</td>";
             result += "     <td><a href=\"#\" class=\"text-primary\">" + list.get(i).get("ss_name") + "</a></td>";
             result += "     <td>" + list.get(i).get("ss_price") + "</td>";
-            if (list.get(i).get("dt_prog").equals("결제완료") || list.get(i).get("dt_prog").equals("출고준비중") || list.get(i).get("dt_prog").equals("출고완료") || list.get(i).get("dt_prog").equals("배송중")) {
+            if (list.get(i).get("dt_prog").equals("결제완료") || list.get(i).get("dt_prog").equals("출고준비중") || list.get(i).get("dt_prog").equals("출고완료") || list.get(i).get("dt_prog").equals("배송중") || list.get(i).get("dt_prog").equals("배송완료")) {
                 result += "     <td><span class=\"badge bg-warning\">" + list.get(i).get("dt_prog") + "</span></td>";
-            } else if (list.get(i).get("dt_prog").equals("배송완료") || list.get(i).get("dt_prog").equals("구매확정")) {
+            } else if (list.get(i).get("dt_prog").equals("구매확정")) {
                 result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
             } else {
                 result += "     <td><span class=\"badge bg-danger\">" + list.get(i).get("dt_prog") + "</span></td>";
@@ -547,9 +599,9 @@ public class SellerController {
             result += "     <td>"+ list.get(i).get("mem_name") +"</td>";
             result += "     <td><a href=\"#\" class=\"text-primary\">" + list.get(i).get("ss_name") + "</a></td>";
             result += "     <td>" + list.get(i).get("ss_price") + "</td>";
-            if (list.get(i).get("dt_prog").equals("결제완료") || list.get(i).get("dt_prog").equals("출고준비중") || list.get(i).get("dt_prog").equals("출고완료") || list.get(i).get("dt_prog").equals("배송중")) {
+            if (list.get(i).get("dt_prog").equals("결제완료") || list.get(i).get("dt_prog").equals("출고준비중") || list.get(i).get("dt_prog").equals("출고완료") || list.get(i).get("dt_prog").equals("배송중") || list.get(i).get("dt_prog").equals("배송완료")) {
                 result += "     <td><span class=\"badge bg-warning\">" + list.get(i).get("dt_prog") + "</span></td>";
-            } else if (list.get(i).get("dt_prog").equals("배송완료") || list.get(i).get("dt_prog").equals("구매확정")) {
+            } else if (list.get(i).get("dt_prog").equals("구매확정")) {
                 result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
             } else {
                 result += "     <td><span class=\"badge bg-danger\">" + list.get(i).get("dt_prog") + "</span></td>";
@@ -563,8 +615,32 @@ public class SellerController {
     @ResponseBody
     public Map<String, Object> budgetreport_Today(HttpSession session) {
         String sl_id = (String) session.getAttribute("sl_id");
-        List<Integer> list = sellerDAO.budgetreportDay(sl_id);
-        List<Integer> list1 = sellerDAO.budgetreportYesterday(sl_id);
+        List<Integer> list = sellerDAO.salesreportDay(sl_id);
+        List<Integer> list1 = sellerDAO.salesreportYesterday(sl_id);
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+        map.put("list1", list1);
+        return map;
+    }
+
+    @RequestMapping("/budgetreport_Month")
+    @ResponseBody
+    public Map<String, Object> budgetreport_Month(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Integer> list = sellerDAO.salesreportMonth(sl_id);
+        List<Integer> list1 = sellerDAO.salesreportLastMonth(sl_id);
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+        map.put("list1", list1);
+        return map;
+    }
+
+    @RequestMapping("/budgetreport_Year")
+    @ResponseBody
+    public Map<String, Object> budgetreport_Year(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Integer> list = sellerDAO.salesreportYear(sl_id);
+        List<Integer> list1 = sellerDAO.salesreportLastYear(sl_id);
         Map<String, Object> map = new HashMap<>();
         map.put("list", list);
         map.put("list1", list1);

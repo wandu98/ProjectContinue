@@ -97,12 +97,42 @@ public class SellerDAO {
         return sqlSession.selectList("seller.recentsalesYear", sl_id);
     }
 
-    public List<Integer> budgetreportDay(String sl_id) {
+    public List<Integer> salesreportDay(String sl_id) {
         return sqlSession.selectList("seller.budgetreportDay", sl_id);
     }
 
-    public List<Integer> budgetreportYesterday(String sl_id) {
+    public List<Integer> salesreportYesterday(String sl_id) {
         return sqlSession.selectList("seller.budgetreportYesterday", sl_id);
+    }
+
+    public List<Integer> salesreportMonth(String sl_id) {
+        return sqlSession.selectList("seller.budgetreportMonth", sl_id);
+    }
+
+    public List<Integer> salesreportLastMonth(String sl_id) {
+        return sqlSession.selectList("seller.budgetreportLastMonth", sl_id);
+    }
+
+    public List<Integer> salesreportYear(String sl_id) {
+        return sqlSession.selectList("seller.budgetreportYear", sl_id);
+    }
+
+    public List<Integer> salesreportLastYear(String sl_id) {
+        return sqlSession.selectList("seller.budgetreportLastYear", sl_id);
+    }
+
+    public int totalRowCount(String sl_id) {
+        int cnt = 0;
+        try {
+            cnt = sqlSession.selectOne("seller.count", sl_id);
+        } catch (Exception e) {
+            System.out.println("전체 행 갯수 : " + e);
+        }//end
+        return cnt;
+    }
+
+    public List<SalesDTO> paginglist(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.paginglist", pagingDTO);
     }
 
 
