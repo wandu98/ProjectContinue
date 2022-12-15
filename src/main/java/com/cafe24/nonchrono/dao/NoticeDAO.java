@@ -29,9 +29,14 @@ public class NoticeDAO {
         return sqlSession.selectOne("notice.ntdetail", nt_num);
     }//ntdetail() end
 
-    /*public NoticeDTO ntUpdate(int nt_num) {
+    public NoticeDTO ntUpdate(int nt_num) {
         return sqlSession.selectOne("notice.ntUpdate", nt_num);
-    }*/
+    }//ntUpdate() end
 
+
+    public int ntDelete(int nt_num) {
+        System.out.println(nt_num);
+        return sqlSession.delete("notice.ntDelete", nt_num);
+    }//ntDelete() end
 
 }//end

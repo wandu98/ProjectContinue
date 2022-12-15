@@ -14,15 +14,21 @@
     </select>
 
     <select id="ntdetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.NoticeDTO" >
-        select *
+        select nt_num, nt_title, nt_cmt, nt_regdate, nt_views
         from tb_nt
         where nt_num = #{nt_num}
     </select>
 
-    <!--<update id="ntUpdate" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
+    <select id="ntUpdate" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
         UPDATE tb_nt
         SET nt_views = nt_views + 1
-        WHERE nt_num = ?
-    </update>-->
+        WHERE nt_num = #{nt_num}
+    </select>
+    
+    <!--게시물 삭제-->
+    <delete id="ntDelete" parameterType="int">
+        DELETE FROM tb_nt
+        WHERE nt_num = #{nt_num}
+    </delete>
 
 </mapper>
