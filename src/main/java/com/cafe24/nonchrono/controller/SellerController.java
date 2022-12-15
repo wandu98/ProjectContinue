@@ -49,6 +49,7 @@ public class SellerController {
         mav.addObject("progCountAll", sellerDAO.dt_progCountAll(sl_id));
         mav.addObject("saleAmountDay", sellerDAO.saleAmountDay(sl_id));
         mav.addObject("tsd", sellerDAO.topSellingDay(sl_id));
+        mav.addObject("rsd", sellerDAO.recentsalesDay(sl_id));
         mav.setViewName("seller/seller");
         return mav;
     }//seller() end
@@ -494,11 +495,17 @@ public class SellerController {
         String result = "";
         for (int i=0; i<list.size(); i++){
             result += "<tr>";
-            result += "     <th scope=\"row\"><a href=\"#\">#2457</a></th>";
+            result += "     <th scope=\"row\"><a href=\"#\">" + list.get(i).get("od_num") + "</a></th>";
             result += "     <td>"+ list.get(i).get("mem_name") +"</td>";
             result += "     <td><a href=\"#\" class=\"text-primary\">" + list.get(i).get("ss_name") + "</a></td>";
             result += "     <td>" + list.get(i).get("ss_price") + "</td>";
-            result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
+            if (list.get(i).get("dt_prog").equals("결제완료") || list.get(i).get("dt_prog").equals("출고준비중") || list.get(i).get("dt_prog").equals("출고완료") || list.get(i).get("dt_prog").equals("배송중")) {
+                result += "     <td><span class=\"badge bg-warning\">" + list.get(i).get("dt_prog") + "</span></td>";
+            } else if (list.get(i).get("dt_prog").equals("배송완료") || list.get(i).get("dt_prog").equals("구매확정")) {
+                result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
+            } else {
+                result += "     <td><span class=\"badge bg-danger\">" + list.get(i).get("dt_prog") + "</span></td>";
+            }
             result += "</tr>";
         }
         return result;
@@ -512,11 +519,17 @@ public class SellerController {
         String result = "";
         for (int i=0; i<list.size(); i++){
             result += "<tr>";
-            result += "     <th scope=\"row\"><a href=\"#\">#2457</a></th>";
+            result += "     <th scope=\"row\"><a href=\"#\">" + list.get(i).get("od_num") + "</a></th>";
             result += "     <td>"+ list.get(i).get("mem_name") +"</td>";
             result += "     <td><a href=\"#\" class=\"text-primary\">" + list.get(i).get("ss_name") + "</a></td>";
             result += "     <td>" + list.get(i).get("ss_price") + "</td>";
-            result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
+            if (list.get(i).get("dt_prog").equals("결제완료") || list.get(i).get("dt_prog").equals("출고준비중") || list.get(i).get("dt_prog").equals("출고완료") || list.get(i).get("dt_prog").equals("배송중")) {
+                result += "     <td><span class=\"badge bg-warning\">" + list.get(i).get("dt_prog") + "</span></td>";
+            } else if (list.get(i).get("dt_prog").equals("배송완료") || list.get(i).get("dt_prog").equals("구매확정")) {
+                result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
+            } else {
+                result += "     <td><span class=\"badge bg-danger\">" + list.get(i).get("dt_prog") + "</span></td>";
+            }
             result += "</tr>";
         }
         return result;
@@ -530,14 +543,32 @@ public class SellerController {
         String result = "";
         for (int i=0; i<list.size(); i++){
             result += "<tr>";
-            result += "     <th scope=\"row\"><a href=\"#\">#2457</a></th>";
+            result += "     <th scope=\"row\"><a href=\"#\">" + list.get(i).get("od_num") + "</a></th>";
             result += "     <td>"+ list.get(i).get("mem_name") +"</td>";
             result += "     <td><a href=\"#\" class=\"text-primary\">" + list.get(i).get("ss_name") + "</a></td>";
             result += "     <td>" + list.get(i).get("ss_price") + "</td>";
-            result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
+            if (list.get(i).get("dt_prog").equals("결제완료") || list.get(i).get("dt_prog").equals("출고준비중") || list.get(i).get("dt_prog").equals("출고완료") || list.get(i).get("dt_prog").equals("배송중")) {
+                result += "     <td><span class=\"badge bg-warning\">" + list.get(i).get("dt_prog") + "</span></td>";
+            } else if (list.get(i).get("dt_prog").equals("배송완료") || list.get(i).get("dt_prog").equals("구매확정")) {
+                result += "     <td><span class=\"badge bg-success\">" + list.get(i).get("dt_prog") + "</span></td>";
+            } else {
+                result += "     <td><span class=\"badge bg-danger\">" + list.get(i).get("dt_prog") + "</span></td>";
+            }
             result += "</tr>";
         }
         return result;
+    }
+
+    @RequestMapping("/budgetreport_Today")
+    @ResponseBody
+    public Map<String, Object> budgetreport_Today(HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        List<Integer> list = sellerDAO.budgetreportDay(sl_id);
+        List<Integer> list1 = sellerDAO.budgetreportYesterday(sl_id);
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+        map.put("list1", list1);
+        return map;
     }
 
 
