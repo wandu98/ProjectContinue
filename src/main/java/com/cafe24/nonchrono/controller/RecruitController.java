@@ -41,7 +41,7 @@ public class RecruitController {
         List<String> gameList = new ArrayList<>();
         List<String> attendMembers = new ArrayList<>();
 
-        for(int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             dto = list.get(i);
             int num = dto.getRcrbrd_num();
             // 게임 이름 가져오기
@@ -62,7 +62,7 @@ public class RecruitController {
             // System.out.println(recruitDAO.rcrKing());
             mav.setViewName("/recruit/recruit");
         } else {
-            mav.setViewName("mem/loginForm");
+            mav.setViewName("/mem/loginForm");
         }
         return mav;
     } // recruitList() end
@@ -73,8 +73,12 @@ public class RecruitController {
         ModelAndView mav = new ModelAndView();
         HttpSession session = req.getSession();
         String mem_id = (String) session.getAttribute("mem_id");
-        mav.addObject("nickname", recruitDAO.nickname(mem_id));
-        mav.setViewName("/recruit/recruitForm");
+        if (mem_id != null && !mem_id.equals("guest")) {
+            mav.addObject("nickname", recruitDAO.nickname(mem_id));
+            mav.setViewName("/recruit/recruitForm");
+        } else {
+            mav.setViewName("/mem/loginForm");
+        }
         return mav;
     } // recruitForm() end
 
@@ -272,18 +276,19 @@ public class RecruitController {
         String mem_id = (String) session.getAttribute("mem_id");
         // System.out.println(mem_id);
 
-        mav.addObject("detail", recruitDAO.detail(rcrbrd_num)); // 모집 정보 상세보기
-        mav.addObject("gameDetail", recruitDAO.gameDetail(rcrbrd_num)); // 게임 정보 상세보기
-        mav.addObject("memDetail", recruitDAO.memDetail(rcrbrd_num)); // 모집장 정보 상세보기
-        mav.addObject("recruitCount", recruitDAO.recruitCount(rcrbrd_num)); // 게시판의 모집장의 모집 횟수 카운트
-        mav.addObject("roleList", recruitDAO.roleList(rcrbrd_num)); // 역할 테이블에서 역할 리스트 가져오기
-        mav.addObject("roleNameSeat", recruitDAO.roleName(rcrbrd_num)); // 역할 배정 테이블에서 역할 이름과 좌석 번호 가져오기
-        mav.addObject("attendMembers", recruitDAO.attendMembers(rcrbrd_num)); // 참여자 목록 가져오기
-        mav.addObject("attendCount", recruitDAO.attendCount(rcrbrd_num, mem_id));
-        mav.addObject("memName", recruitDAO.memName(rcrbrd_num)); // 자리당 id 조회
-        mav.addObject("memNick", recruitDAO.memNick(rcrbrd_num)); // 자리당 닉네임 조회
-        mav.addObject("mem_id", mem_id);
-        mav.addObject("memPic", recruitDAO.memPic(rcrbrd_num));
+        if (mem_id != null && !mem_id.equals("guest")) {
+            mav.addObject("detail", recruitDAO.detail(rcrbrd_num)); // 모집 정보 상세보기
+            mav.addObject("gameDetail", recruitDAO.gameDetail(rcrbrd_num)); // 게임 정보 상세보기
+            mav.addObject("memDetail", recruitDAO.memDetail(rcrbrd_num)); // 모집장 정보 상세보기
+            mav.addObject("recruitCount", recruitDAO.recruitCount(rcrbrd_num)); // 게시판의 모집장의 모집 횟수 카운트
+            mav.addObject("roleList", recruitDAO.roleList(rcrbrd_num)); // 역할 테이블에서 역할 리스트 가져오기
+            mav.addObject("roleNameSeat", recruitDAO.roleName(rcrbrd_num)); // 역할 배정 테이블에서 역할 이름과 좌석 번호 가져오기
+            mav.addObject("attendMembers", recruitDAO.attendMembers(rcrbrd_num)); // 참여자 목록 가져오기
+            mav.addObject("attendCount", recruitDAO.attendCount(rcrbrd_num, mem_id));
+            mav.addObject("memName", recruitDAO.memName(rcrbrd_num)); // 자리당 id 조회
+            mav.addObject("memNick", recruitDAO.memNick(rcrbrd_num)); // 자리당 닉네임 조회
+            mav.addObject("mem_id", mem_id);
+            mav.addObject("memPic", recruitDAO.memPic(rcrbrd_num));
         /*
         List<RoleSeatDTO> rname = recruitDAO.roleName(rcrbrd_num);
 
@@ -291,10 +296,13 @@ public class RecruitController {
         mav.addObject("rname", rname); // 역할 이름 리스트
         */
 
-        mav.setViewName("recruit/recruitDetail");
+            mav.setViewName("/recruit/recruitDetail");
+        } else {
+            mav.setViewName("/mem/loginForm");
+        }
         return mav;
     } // recruitDetail() end
-    
+
     // 모집 정보 작성
     @RequestMapping("/insert")
     public String recruitInsert(@ModelAttribute RecruitDTO recruitDTO, @ModelAttribute RoleDTO roleDTO, HttpServletRequest req) {
@@ -304,7 +312,7 @@ public class RecruitController {
         // 위에서 insert한 게시글 번호 가져오기
         int num = recruitDAO.numSearch();
 
-         // 역할 추가 수만큼 반복하여 역할 내용 insert
+        // 역할 추가 수만큼 반복하여 역할 내용 insert
         for (int i = 1; i <= Integer.parseInt(req.getParameter("hiddenCount")); i++) {
             // System.out.println(req.getParameter("rl_role"+i+"")); // null null null
 
@@ -401,6 +409,36 @@ public class RecruitController {
         return list2;
     } // getMoreContents() end
 
+    /* 업데이트는 기능상 만들면 안 될 것 같다
+    @RequestMapping("/update")
+    public ModelAndView update(@RequestParam int rcrbrd_num, HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        String mem_id = (String) session.getAttribute("mem_id");
+        if (mem_id != null && !mem_id.equals("guest")) {
+            mav.addObject("detail", recruitDAO.detail(rcrbrd_num)); // 모집 정보 상세보기
+            mav.addObject("gameDetail", recruitDAO.gameDetail(rcrbrd_num)); // 게임 정보 상세보기
+            mav.addObject("roleList", recruitDAO.roleList(rcrbrd_num)); // 역할 테이블에서 역할 리스트 가져오기
+            mav.setViewName("/recruit/updateForm");
+        } else {
+            mav.setViewName("/mem/loginForm");
+        }
+        return mav;
+    } // update() end
+    */
+
+    @RequestMapping("/delete")
+    public String delete(@RequestParam int rcrbrd_num, HttpSession session) {
+        String mem_id = (String) session.getAttribute("mem_id");
+        if (mem_id != null && !mem_id.equals("guest")) {
+            int cnt = recruitDAO.delete(rcrbrd_num);
+            if (cnt == 0) {
+                System.out.println("삭제에 실패하였습니다!");
+            }
+            return "redirect:/recruit";
+        } else {
+            return "/mem/loginForm";
+        }
+    } // delete() end
 
     // 삭제 후 이메일 발송
 

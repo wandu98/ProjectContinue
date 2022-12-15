@@ -16,8 +16,12 @@
                gm_code,
                rcrbrd_status,
                rcrbrd_adr,
-               rcrbrd_max
-        FROM tb_rcrboard
+               rcrbrd_max,
+               (SELECT count(mem_id)
+                FROM tb_recruitinfo
+                where rcrbrd_num = rb.rcrbrd_num) as cnt
+        FROM tb_rcrboard rb
+        WHERE rcrbrd_status = '진행중'
         ORDER BY rcrbrd_num DESC Limit 9
     </select>
 
@@ -256,12 +260,34 @@
     </select>
 
     <select id="more" parameterType="java.util.Map" resultType="com.cafe24.nonchrono.dto.MoreDTO">
-        select gm.gm_name, rb.rcrbrd_num, rb.rcrbrd_subject, rb.rcrbrd_edate, rb.gm_code, rb.rcrbrd_max
+        select gm.gm_name, rb.rcrbrd_num, rb.rcrbrd_subject, rb.rcrbrd_edate, rb.gm_code, rb.rcrbrd_max, (SELECT count(mem_id)
+                                                                                                            FROM tb_recruitinfo
+                                                                                                            WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
         from tb_rcrboard as rb
                  join tb_game as gm
                       on rb.gm_code = gm.gm_code
         ORDER BY rcrbrd_num DESC
         Limit #{endCount} OFFSET #{startCount}
     </select>
+    
+    <delete id="delete" parameterType="int">
+        DELETE FROM tb_rcrboard
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </delete>
+
+    <delete id="deleteRole" parameterType="int">
+        DELETE FROM tb_role
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </delete>
+
+    <delete id="deleteRoleSeat" parameterType="int">
+        DELETE FROM tb_roleseat
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </delete>
+
+    <delete id="deleteRecruit" parameterType="int">
+        DELETE FROM tb_recruitinfo
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </delete>
 
 </mapper>

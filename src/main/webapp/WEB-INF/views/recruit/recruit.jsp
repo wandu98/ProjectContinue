@@ -143,7 +143,7 @@
         location.href = "/recruit/form";
     } // recruitForm() end
 
-
+    // 더보기 기능
     function more(startCount, endCount) {
         console.log("시작 번호 : " + startCount);
         console.log("마지막 번호 : " + endCount);
