@@ -97,6 +97,14 @@ public class SellerDAO {
         return sqlSession.selectList("seller.recentsalesYear", sl_id);
     }
 
+    public List<Integer> budgetreportDay(String sl_id) {
+        return sqlSession.selectList("seller.budgetreportDay", sl_id);
+    }
+
+    public List<Integer> budgetreportYesterday(String sl_id) {
+        return sqlSession.selectList("seller.budgetreportYesterday", sl_id);
+    }
+
 
 
 //판매자 페이지 전부 유효성 검사

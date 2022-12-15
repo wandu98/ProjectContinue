@@ -232,54 +232,38 @@
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                                <h5 class="card-title">최근 판매 <span id="TMY3">| Today</span></h5>
 
                                 <table class="table table-borderless">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">Order Number</th>
                                         <th scope="col">Customer</th>
                                         <th scope="col">Product</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Status</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="recentsales">
+                                    <c:forEach var="row" items="${rsd}" varStatus="vs">
                                     <tr>
-                                        <th scope="row"><a href="#">#2457</a></th>
-                                        <td>Brandon Jacob</td>
-                                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                                        <td>$64</td>
-                                        <td><span class="badge bg-success">Approved</span></td>
+                                        <th scope="row"><a href="#">${row.od_num}</a></th>
+                                        <td>${row.mem_name}</td>
+                                        <td><a href="#" class="text-primary">${row.ss_name}</a></td>
+                                        <td>${row.ss_price}</td>
+                                        <c:choose>
+                                            <c:when test="${row.dt_prog=='결제완료' or row.dt_prog=='출고준비중' or row.dt_prog=='출고완료' or row.dt_prog=='배송중'}">
+                                                <td><span class="badge bg-warning">${row.dt_prog}</span></td>
+                                            </c:when>
+                                            <c:when test="${row.dt_prog=='배송완료' or row.dt_prog=='구매확정'}">
+                                                <td><span class="badge bg-success">${row.dt_prog}</span></td>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <td><span class="badge bg-danger">${row.dt_prog}</span></td>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#">#2147</a></th>
-                                        <td>Bridie Kessler</td>
-                                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                                        <td>$47</td>
-                                        <td><span class="badge bg-warning">Pending</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#">#2049</a></th>
-                                        <td>Ashleigh Langosh</td>
-                                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                                        <td>$147</td>
-                                        <td><span class="badge bg-success">Approved</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#">#2644</a></th>
-                                        <td>Angus Grady</td>
-                                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                                        <td>$67</td>
-                                        <td><span class="badge bg-danger">Rejected</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#">#2644</a></th>
-                                        <td>Raheem Lehner</td>
-                                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                        <td>$165</td>
-                                        <td><span class="badge bg-success">Approved</span></td>
-                                    </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
 
@@ -306,7 +290,7 @@
                             </div>
 
                             <div class="card-body pb-0">
-                                <h5 class="card-title">Top Selling <span id="TMY2">| Today</span></h5>
+                                <h5 class="card-title">판매 순위 <span id="TMY2">| Today</span></h5>
 
                                 <table class="table table-borderless">
                                     <thead>
@@ -351,9 +335,9 @@
                                 <h6>Filter</h6>
                             </li>
 
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                            <li><a class="dropdown-item" onclick="budgetReport('Today')">Today</a></li>
+                            <li><a class="dropdown-item" onclick="budgetReport('Month')">This Month</a></li>
+                            <li><a class="dropdown-item" onclick="budgetReport('Year')">This Year</a></li>
                         </ul>
                     </div>
 
@@ -635,13 +619,101 @@
             url : "/seller/recentsales_" + time
             ,type : "post"
             ,success : function (data) {
-
+                $("#TMY3").text("| " + time)
+                $("#recentsales").html(data);
             }
             ,error : function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
 
         })
+    }
+
+    function budgetReport(time) {
+        $.ajax({
+            url : "/seller/budgetreport_" + time
+            ,type : "posrt"
+            ,success : function (data) {
+                // console.log(data);
+                console.log(data.list[0])
+                if (time == "Today") {
+                    var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
+                        legend: {
+                            data: ['Yesterday Sales', 'Today Sales']
+                        },
+                        radar: {
+                            // shape: 'circle',
+                            indicator: [{
+                                name: '본체',
+                                max: 6500
+                            },
+                                {
+                                    name: '타이틀(패키지)',
+                                    max: 16000
+                                },
+                                {
+                                    name: '타이틀(다운로드)',
+                                    max: 30000
+                                },
+                                {
+                                    name: '다운로드 추가 컨텐츠',
+                                    max: 38000
+                                },
+                                {
+                                    name: '온라인 이용권',
+                                    max: 52000
+                                },
+                                {
+                                    name: '선불번호',
+                                    max: 25000
+                                },
+                                {
+                                    name: '무료컨텐츠',
+                                    max: 25000
+                                },
+                                {
+                                    name: '아미보',
+                                    max: 25000
+                                },
+                                {
+                                    name: '프로컨트롤러',
+                                    max: 25000
+                                },
+                                {
+                                    name: '조이콘',
+                                    max: 25000
+                                },
+                                {
+                                    name: '주변기기',
+                                    max: 25000
+                                }
+                            ]
+                        },
+                        series: [{
+                            name: 'Budget vs spending',
+                            type: 'radar',
+                            data: [{
+                                value: [4200, 3000, 20000, 35000, 50000, 18000],
+                                name: 'Yesterday Sales'
+                            },
+                                {
+                                    value: [5000, 14000, 28000, 26000, 42000, 21000],
+                                    name: 'Actual Spending'
+                                }
+                            ]
+                        }]
+                    });
+                } else if (time == "Month") {
+
+                } else {
+
+                }
+
+            }
+            ,error : function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
     }
 </script>
 
