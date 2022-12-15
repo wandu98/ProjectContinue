@@ -133,6 +133,10 @@
         cursor: pointer;
     }
 
+    .nice-select {
+        border: none;
+    }
+
 </style>
 
 <!-- 모집 게시판 배너 시작 -->
@@ -162,6 +166,14 @@
                         <span style="font-size: 30px; font-weight: bold">파티장</span>
                         <br>
                         <br>
+                        <c:if test="${detail.mem_id eq mem_id}">
+                            <div style="float: right; padding-right: 7%">
+                                <select id="rcr_status" onchange="statusCheck()">
+                                    <option value="진행중">진행중</option>
+                                    <option value="모집완료">모집완료</option>
+                                </select>
+                            </div>
+                        </c:if>
                     </div>
                     <div class="col-lg-1"></div>
                     <div class="col-lg-4 detail_profile">
@@ -192,15 +204,12 @@
                 </div>
                 <br>
                 <c:if test="${detail.mem_id eq mem_id}">
-                <form style="text-align: right; padding-right: 7%" method="post">
-                    <input type="hidden" id="rcrbrd_num" name="rcrbrd_num" value="${detail.rcrbrd_num}">
-                    <%--<button type="submit" class="btn btn-outline-warning" onclick="updateConfirm(this.form)">글 수정</button>--%>
-                    <select id="rcr_status">
-                        <option value="진행중">진행중</option>
-                        <option value="모집완료">모집완료</option>
-                    </select>
-                    <button type="button" class="btn btn-outline-danger" onclick="deleteConfirm(this.form)">글 삭제</button>
-                </form>
+                    <form style="text-align: right; padding-right: 7%" method="post">
+                        <input type="hidden" id="rcrbrd_num" name="rcrbrd_num" value="${detail.rcrbrd_num}">
+                            <%--<button type="submit" class="btn btn-outline-warning" onclick="updateConfirm(this.form)">글 수정</button>--%>
+                        <button type="button" class="btn btn-outline-danger" onclick="deleteConfirm(this.form)">글 삭제
+                        </button>
+                    </form>
                 </c:if>
                 <br>
                 <hr>
@@ -424,9 +433,13 @@
 
             // 만약 역할 추가를 안 했다면 select box와 버튼이 안 보이게 처리
             if ($('#roleSelect' + i).val() == null) {
-                $('.nice-select').css('display', 'none').niceSelect('update');
+                $("#profile"+i+" > .nice-select").css('display', 'none').niceSelect('update');
                 $('#roleBtn' + i).hide();
             }
+        }
+
+        if ($('#rcr_status').val() == '모집완료') {
+            $('#rcr_status').attr('disabled', true).niceSelect('update');
         }
 
     });
@@ -446,6 +459,23 @@
             form.submit();
         } else {
             location.href = "#";
+        }
+    }
+
+    function statusCheck() {
+        if ($('#rcr_status').val() == '모집완료') {
+
+            $.ajax({
+                url: "/recruit/status",
+                type: "post",
+                data: {
+                    "rcrbrd_num": ${detail.rcrbrd_num}
+                },
+                success: function (data) {
+                    $('#rcr_status').attr('disabled', true).niceSelect('update');
+                    alert("모집이 완료되었습니다");
+                }
+            })
         }
     }
 

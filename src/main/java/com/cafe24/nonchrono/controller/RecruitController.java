@@ -34,10 +34,15 @@ public class RecruitController {
 
     // 모집 게시판 홈
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelAndView recruitList(HttpSession session) {
+    public ModelAndView recruitList(HttpSession session, String order) {
         RecruitDTO dto = new RecruitDTO();
         ModelAndView mav = new ModelAndView();
-        List<RecruitDTO> list = recruitDAO.list();
+        String order2 = "rcrbrd_num";
+        if (order == null || order.equals("")) {
+            order = order2;
+        }
+        System.out.println("order : " + order);
+        List<RecruitDTO> list = recruitDAO.list(order);
         List<String> gameList = new ArrayList<>();
         List<String> attendMembers = new ArrayList<>();
 
@@ -65,6 +70,35 @@ public class RecruitController {
             mav.setViewName("/mem/loginForm");
         }
         return mav;
+    } // recruitList() end
+
+    // ajax로 정렬 기준 바꿀 때
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseBody
+    public List<MoreDTO> recruitListAjax(HttpSession session, String order) {
+
+        String order2 = "rcrbrd_num";
+        if (order == null || order.equals("")) {
+            order = order2;
+        }
+        System.out.println("order : " + order);
+        List<MoreDTO> list = recruitDAO.listAjax(order);
+        List<MoreDTO> list2 = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            MoreDTO moreDTO = new MoreDTO();
+            moreDTO.setRcrbrd_num(list.get(i).getRcrbrd_num());
+            moreDTO.setGm_code(list.get(i).getGm_code());
+            moreDTO.setGm_name(list.get(i).getGm_name());
+            moreDTO.setRcrbrd_subject(list.get(i).getRcrbrd_subject());
+            moreDTO.setRcrbrd_edate(list.get(i).getRcrbrd_edate());
+            moreDTO.setRcrbrd_max(list.get(i).getRcrbrd_max());
+            moreDTO.setCount(recruitDAO.attendMembers(list.get(i).getRcrbrd_num()).size());
+
+            list2.add(i, moreDTO);
+        }
+        System.out.println(list2);
+        return list2;
     } // recruitList() end
 
     // 모집 게시판 글 작성
@@ -277,6 +311,7 @@ public class RecruitController {
         // System.out.println(mem_id);
 
         if (mem_id != null && !mem_id.equals("guest")) {
+            mav.addObject("views", recruitDAO.views(rcrbrd_num)); // 조회수 증가
             mav.addObject("detail", recruitDAO.detail(rcrbrd_num)); // 모집 정보 상세보기
             mav.addObject("gameDetail", recruitDAO.gameDetail(rcrbrd_num)); // 게임 정보 상세보기
             mav.addObject("memDetail", recruitDAO.memDetail(rcrbrd_num)); // 모집장 정보 상세보기
@@ -379,10 +414,10 @@ public class RecruitController {
 
     @RequestMapping("/getMoreContents")
     @ResponseBody
-    public List<MoreDTO> getMoreContents(int startCount, int endCount) {
+    public List<MoreDTO> getMoreContents(int startCount, int endCount, String order) {
         List<MoreDTO> list = new ArrayList<>();
         List<MoreDTO> list2 = new ArrayList<>();
-        list = recruitDAO.getMoreContents(startCount, endCount);
+        list = recruitDAO.getMoreContents(startCount, endCount, order);
 
         for (int i = 0; i < list.size(); i++) {
             MoreDTO moreDTO = new MoreDTO();
@@ -439,6 +474,14 @@ public class RecruitController {
             return "/mem/loginForm";
         }
     } // delete() end
+
+    // 진행중 -> 진행완료 변경
+    @RequestMapping("/status")
+    public String status(int rcrbrd_num) {
+        int cnt = recruitDAO.status(rcrbrd_num);
+        return "redirect:/recruit/detail/" + rcrbrd_num;
+    }
+
 
     // 삭제 후 이메일 발송
 

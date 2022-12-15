@@ -491,6 +491,14 @@ create table tb_roleseat
     FOREIGN KEY (rcrbrd_num) REFERENCES tb_rcrboard (rcrbrd_num)
 );
 
+create table tb_search
+(
+    sc_num   int AUTO_INCREMENT primary key,  -- 검색어 일련번호
+    sc_word  varchar(255)           not null, -- 검색어 내용
+    sc_date  datetime default now() not null, -- 단어 등록일
+    sc_where varchar(255)           not null  -- 검색된 페이지 구분
+);
+
 select *
 from tb_role;
 
@@ -523,6 +531,7 @@ drop table tb_sales;
 drop table tb_seller;
 drop table tb_wish;
 drop table tb_rcrboard;
+drop table tb_search;
 
 SET foreign_key_checks = 0; -- 외래키 해제
 SET foreign_key_checks = 1; -- 외래키 설정

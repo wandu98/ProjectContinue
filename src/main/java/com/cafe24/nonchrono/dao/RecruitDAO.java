@@ -21,8 +21,12 @@ public class RecruitDAO {
         System.out.println("-----RecruitDAO() 객체 생성됨");
     } // end
 
-    public List<RecruitDTO> list() {
-        return sqlSession.selectList("recruit.list");
+    public List<RecruitDTO> list(String order) {
+        return sqlSession.selectList("recruit.list", order);
+    } // list() end
+
+    public List<MoreDTO> listAjax(String order) {
+        return sqlSession.selectList("recruit.listAjax", order);
     } // list() end
 
     public String game(int rcrbrd_num) {
@@ -182,10 +186,11 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.rcrKing");
     } // rcrKing() end
 
-    public List<MoreDTO> getMoreContents(int startCount, int endCount) {
-        Map<String, Integer> map = new HashMap<String, Integer>();
+    public List<MoreDTO> getMoreContents(int startCount, int endCount, String order) {
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("startCount", startCount);
         map.put("endCount", endCount);
+        map.put("order", order);
         return sqlSession.selectList("recruit.more", map);
     }
 
@@ -196,5 +201,15 @@ public class RecruitDAO {
         cnt += sqlSession.delete("recruit.deleteRoleSeat", rcrbrd_num);
         cnt += sqlSession.delete("recruit.delete", rcrbrd_num);
         return cnt;
-    }
+    } // delete() end
+
+    public int status(int rcrbrd_num) {
+        return sqlSession.update("recruit.status", rcrbrd_num);
+    } // status() end
+
+    public int views(int rcrbrd_num) {
+        return sqlSession.update("recruit.views", rcrbrd_num);
+    } // views() end
+
+
 } // class end
