@@ -17,4 +17,5 @@
                                on dt.ss_num = sl.ss_num
         where od_num = #{od_num}
     </select>
+
 </mapper>

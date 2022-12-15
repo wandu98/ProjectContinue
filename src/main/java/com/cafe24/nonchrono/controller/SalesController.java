@@ -2,9 +2,7 @@ package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.BasketDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
-import com.cafe24.nonchrono.dto.PagingDTO;
-import com.cafe24.nonchrono.dto.RecruitDTO;
-import com.cafe24.nonchrono.dto.SalesDTO;
+import com.cafe24.nonchrono.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -216,6 +214,43 @@ public class SalesController {
         basketDAO.delete(bk_num);
         return "/sales/checkout";
     }
+
+    //주문인서트
+    @RequestMapping("/orderinsert")
+    public String orderinsert(@RequestParam String od_date, @RequestParam int dv_num, @RequestParam int mem_dvnum, @RequestParam String cp_code, @RequestParam int umileage, @RequestParam int pmileage, @RequestParam int total, HttpSession session) {
+    String mem_id = (String) session.getAttribute("mem_id");
+    OrderDTO orderDTO = new OrderDTO();
+    MemdvDTO memdvDTO = new MemdvDTO();
+
+    if (mem_dvnum == 0) {
+        salesDAO.memdv_insert(memdvDTO); // 배송정책 추가
+        int max = salesDAO.max_dvnum(mem_dvnum); // 추가된 배송정책의 번호 가져오기
+        System.out.println(max);
+        orderDTO.setMem_dvnum(max);
+    }
+    orderDTO.setMem_dvnum(mem_dvnum);
+    orderDTO.setMem_id(mem_id);
+    orderDTO.setOd_date(od_date);
+    orderDTO.setDv_num(dv_num);
+    orderDTO.setCp_code(cp_code);
+    orderDTO.setUmileage(umileage);
+    orderDTO.setPmileage(pmileage);
+    orderDTO.setTotal(total);
+    salesDAO.order_insert(orderDTO);
+    return "redirect:sales/salesorder";
+    }//ordercheck() end
+
+
+    //주문서
+    @RequestMapping("/salesorder")
+    public ModelAndView salesorder(HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        String mem_id = (String) session.getAttribute("mem_id");
+        mav.setViewName("sales/salesorder");
+        return mav;
+    }
+
+
 
 
 }//class end
