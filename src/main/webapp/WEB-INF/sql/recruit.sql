@@ -281,3 +281,43 @@ from tb_rcrboard as rb
               on rb.gm_code = gm.gm_code
 ORDER BY rcrbrd_num DESC
 Limit 17 OFFSET 9;
+
+select gm.gm_name, rb.rcrbrd_num, rb.rcrbrd_subject, rb.rcrbrd_edate, rb.gm_code, (SELECT count(mem_id)
+                                                                                   FROM tb_recruitinfo
+                                                                                   WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
+from tb_rcrboard as rb
+         join tb_game as gm
+              on rb.gm_code = gm.gm_code
+ORDER BY cnt DESC;
+
+SELECT count(mem_id)
+FROM tb_recruitinfo
+WHERE rcrbrd_num = 8;
+
+select gm.gm_name, rb.rcrbrd_num, rb.rcrbrd_subject, rb.rcrbrd_edate, rb.gm_code, (SELECT count(mem_id)
+                                                                                   FROM tb_recruitinfo
+                                                                                   WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
+from tb_rcrboard as rb
+         join tb_game as gm
+              on rb.gm_code = gm.gm_code
+ORDER BY cnt DESC;
+
+
+SELECT rcrbrd_num,
+        mem_id,
+       rcrbrd_subject,
+       rcrbrd_content,
+       rcrbrd_pw,
+       rcrbrd_views,
+       rcrbrd_date,
+       rcrbrd_edate,
+       rcrbrd_ip,
+       gm_code,
+       rcrbrd_status,
+       rcrbrd_adr,
+       rcrbrd_max,
+        (SELECT count(mem_id)
+           FROM tb_recruitinfo
+           where rcrbrd_num = rb.rcrbrd_num) as cnt
+FROM tb_rcrboard rb
+ORDER BY cnt DESC;

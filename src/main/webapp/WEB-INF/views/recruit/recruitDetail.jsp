@@ -190,6 +190,19 @@
                     </div>
                     <div class="col-lg-1"></div>
                 </div>
+                <br>
+                <c:if test="${detail.mem_id eq mem_id}">
+                <form style="text-align: right; padding-right: 7%" method="post">
+                    <input type="hidden" id="rcrbrd_num" name="rcrbrd_num" value="${detail.rcrbrd_num}">
+                    <%--<button type="submit" class="btn btn-outline-warning" onclick="updateConfirm(this.form)">글 수정</button>--%>
+                    <select id="rcr_status">
+                        <option value="진행중">진행중</option>
+                        <option value="모집완료">모집완료</option>
+                    </select>
+                    <button type="button" class="btn btn-outline-danger" onclick="deleteConfirm(this.form)">글 삭제</button>
+                </form>
+                </c:if>
+                <br>
                 <hr>
                 <div class="row">
                     <div class="col-lg-12" style="text-align: center;">
@@ -417,6 +430,24 @@
         }
 
     });
+
+    /*function updateConfirm(form) {
+        if (confirm("수정하시겠습니까?")) {
+            form.action = "/recruit/update";
+            form.submit();
+        } else {
+            location.href = "#";
+        }
+    }*/
+
+    function deleteConfirm(form) {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            form.action = "/recruit/delete";
+            form.submit();
+        } else {
+            location.href = "#";
+        }
+    }
 
 </script>
 

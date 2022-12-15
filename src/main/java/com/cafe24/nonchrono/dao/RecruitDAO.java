@@ -189,4 +189,12 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.more", map);
     }
 
+    public int delete(int rcrbrd_num) {
+        int cnt = 0;
+        cnt += sqlSession.delete("recruit.deleteRecruit", rcrbrd_num);
+        cnt += sqlSession.delete("recruit.deleteRole", rcrbrd_num);
+        cnt += sqlSession.delete("recruit.deleteRoleSeat", rcrbrd_num);
+        cnt += sqlSession.delete("recruit.delete", rcrbrd_num);
+        return cnt;
+    }
 } // class end
