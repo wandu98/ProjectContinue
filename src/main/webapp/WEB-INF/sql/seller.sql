@@ -301,7 +301,7 @@ from (
 ) tbc on tba.gc = tbc.gc;
 
 
-select DATE_FORMAT(od_date, '%Y-%m-%d'), date_format(subdate(now(), interval 1 month ), '%Y-%m-%d')
+select DATE_FORMAT(od_date, '%Y-%m-%d'), date_format(subdate(now(), interval 1 year ), '%Y-%m-%d')
 from tb_order;
 
 
@@ -354,3 +354,102 @@ on dt.ss_num = ts.ss_num
 where sl_id = 'digj1908' and DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
 order by od_date desc
 limit 5;
+
+
+
+-- 상품리스트
+
+select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
+                                                              when 'S2' then '판매중지'
+                                                              when 'S3' then '품절' end as ss_status
+from tb_sales
+where sl_id = 'digj1908'
+ORDER BY ss_num DESC;
+
+-- totalRowCount
+select count(*)
+from tb_sales
+where sl_id = 'digj1908';
+
+
+-- 상품리스트 페이징
+
+select *
+from (
+        select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
+                                                                      when 'S2' then '판매중지'
+                                                                      when 'S3' then '품절' end as ss_status
+        from tb_sales
+        where sl_id = 'digj1908'
+        ORDER BY ss_num DESC
+    ) AA, (select @rno := 0) BB;
+
+
+        select *, @rno := @rno + 1 as r
+        from (
+                select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
+                                                                              when 'S2' then '판매중지'
+                                                                              when 'S3' then '품절' end as ss_status
+                from tb_sales
+                where sl_id = 'digj1908'
+                ORDER BY ss_num DESC
+            ) AA, (select @rno := 0) BB;
+
+
+select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
+                                                              when 'S2' then '판매중지'
+                                                              when 'S3' then '품절' end as ss_status
+from tb_sales
+where sl_id = 'digj1908'
+ORDER BY ss_num DESC;
+
+select *
+from (
+        select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
+                                                                      when 'S2' then '판매중지'
+                                                                      when 'S3' then '품절' end as ss_status
+        from tb_sales
+        where sl_id = 'digj1908'
+
+    ) AA, (select @rno := 0) BB
+ORDER BY ss_num DESC;
+
+
+select *, @rno := @rno + 1 as r
+from (
+        select *
+        from (
+                select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
+                                                                              when 'S2' then '판매중지'
+                                                                              when 'S3' then '품절' end as ss_status
+                from tb_sales
+                where sl_id = 'digj1908'
+
+            ) AA, (select @rno := 0) BB
+        ORDER BY ss_num DESC
+    ) CC
+
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
+                                                                                         when 'S2' then '판매중지'
+                                                                                         when 'S3' then '품절' end as ss_status
+                           from tb_sales
+                           where sl_id = 'digj1908'
+
+                       ) AA, (select @rno := 0) BB
+                  ORDER BY ss_num DESC
+              ) CC
+     ) DD
+where r >= 1 and r<= 5;
+
+
+select *
+from tb_order od join tb_detail td
+on od.od_num = td.od_num join tb_sales ts
+on td.ss_num = ts.ss_num
+where sl_id = 'digj1908';

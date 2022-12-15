@@ -7,10 +7,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-
 public class DeliveryDTO {
     private int dv_num;
     private String sl_id;
+    private char dv_exist;
     private String dv_how;
     private String  dv_courier;
     private int dv_fee;

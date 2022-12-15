@@ -4,8 +4,8 @@
 <mapper namespace="seller">
     <!-- 배송정책 등록하기 -->
     <insert id="dv_insert" parameterType="com.cafe24.nonchrono.dto.DeliveryDTO">
-        INSERT INTO tb_delivery ( sl_id,  dv_how, dv_courier, dv_fee, dv_extrafee, dv_adr1, dv_adr2, dv_rffee, dv_exfee, dv_exadr1, dv_exadr2)
-        VALUES ( #{sl_id}, #{dv_how}, #{dv_courier}, #{dv_fee}, #{dv_extrafee}, #{dv_adr1}, #{dv_adr2}, #{dv_rffee}, #{dv_exfee}, #{dv_exadr1}, #{dv_exadr2})
+        INSERT INTO tb_delivery ( sl_id, dv_exist, dv_how, dv_courier, dv_fee, dv_extrafee, dv_adr1, dv_adr2, dv_rffee, dv_exfee, dv_exadr1, dv_exadr2)
+        VALUES ( #{sl_id}, #{dv_exist}, #{dv_how}, #{dv_courier}, #{dv_fee}, #{dv_extrafee}, #{dv_adr1}, #{dv_adr2}, #{dv_rffee}, #{dv_exfee}, #{dv_exadr1}, #{dv_exadr2})
     </insert>
 
 
@@ -307,6 +307,138 @@
                                         select 'ac' gc from dual
                                     ) tbb
         ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="budgetreportMonth" resultType="java.lang.Integer">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(now(), '%Y-%m')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="budgetreportLastMonth" resultType="java.lang.Integer">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(subdate(now(), interval 1 month), '%Y-%m')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="budgetreportYear" resultType="java.lang.Integer">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y') = DATE_FORMAT(now(), '%Y')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="budgetreportLastYear" resultType="java.lang.Integer">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where sl_id = #{sl_id} and DATE_FORMAT(od_date, '%Y') = DATE_FORMAT(subdate(now(), interval 1 year), '%Y')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        from tb_sales
+        where sl_id = #{sl_id}
+    </select>
+
+    <select id="paginglist" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        <![CDATA[
+            select *
+            from (
+                    select *, @rno := @rno + 1 as r
+                    from (
+                            select *
+                            from (
+                                    select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
+                                    when 'S2' then '판매중지'
+                                    when 'S3' then '품절' end as ss_status
+                                    from tb_sales
+                                    where sl_id = #{sl_id}
+
+                                    ) AA, (select @rno := 0) BB
+                            ORDER BY ss_num DESC
+                    ) CC
+            ) DD
+            where r >= #{startRow} and r<= #{endRow}
+        ]]>
     </select>
 
 
