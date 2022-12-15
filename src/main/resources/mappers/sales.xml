@@ -199,4 +199,15 @@
     ]]>
     </select>
 
+    <insert id="order_insert">
+            INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
+            VALUES((select receiptNo
+                    from(
+                            select concat(cast(d.receiptDate as char), right(concat('00000', rowCount+1), 6)) as receiptNo,
+                                   count(e.od_num) + 1 as od_num, rowCount + 1 as rowCount
+                            from tb_order as e,
+                                 (select concat(substr(date_format(now(), '%Y%m%d%H%i%s'),1,8))as receiptDate,
+                                 (select od_num as cnt from tb_order order by cnt desc limit 1) as rowCount from dual) d ) c),
+                now(), #{mem_id}, #{dv_num}, #{mem_dvnum}, #{cp_code}, #{umileage}, #{pmileage}, #{total});
+    </insert>
 </mapper>

@@ -133,4 +133,17 @@ public class SalesDAO {
 //  회원 memdv 정보 가져오기
     public List<MemdvDTO> dvmem_info(String mem_id) {return sqlSession.selectList("sales.dvmem_info", mem_id);}
 
+//  회원 memdv 인서트
+    public int memdv_insert(MemdvDTO memdvDTO) {return sqlSession.insert("sales.memdv_insert", memdvDTO);
+    }// memdv_insert() end
+
+//  주문인서트
+    public int order_insert(OrderDTO orderDTO) {
+    return sqlSession.insert("sales.order_insert", orderDTO);
+    }// insert() end
+
+// dvnum Max값 구해서 신규 배송지 유무 파악
+    public int max_dvnum(int mem_dvnum){ return sqlSession.selectOne("sales.max_dvnum", mem_dvnum);
+    }// max_dvnum() end
+
 }//class end
