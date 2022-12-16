@@ -59,13 +59,6 @@
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </form>
-    </div><!-- End Search Bar -->
-
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
 
@@ -87,80 +80,6 @@
                 </a><!-- login Icon -->
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link nav-icon" href="" data-bs-toggle="dropdown">
-                    <i class="bi bi-bell"></i>
-                    <span class="badge bg-primary badge-number">4</span>
-                </a><!-- End Notification Icon -->
-
-
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                    <li class="dropdown-header">
-                        4개의 새로운 알림이 있습니다.
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">알림 전부 읽기</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-exclamation-circle text-warning"></i>
-                        <div>
-                            <h4>교환/반품/취소</h4>
-                            <p>사용자ID - 주문번호ID 반품처리</p>
-                            <p>30분 전</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-info-circle text-primary"></i>
-                        <div>
-                            <h4>상품리뷰</h4>
-                            <p>천우 - 닌텐도Switch 리뷰을 남겨주셨습니다.</p>
-                            <p>5분 전</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-check-circle text-success"></i>
-                        <div>
-                            <h4>신규주문</h4>
-                            <p>회원ID - 상품ID 주문하셨습니다.</p>
-                            <p>10초 전</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="notification-item">
-                        <i class="bi bi-info-circle text-primary"></i>
-                        <div>
-                            <h4>상품문의</h4>
-                            <p>주완 - 닌텐도 Switch OLED 문의 글 등록</p>
-                            <p>2022. 11. 30 23:21</p>
-                        </div>
-                    </li>
-
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li class="dropdown-footer">
-                        <a href="#">모든 알람 표시</a>
-                    </li>
-
-                </ul><!-- End Notification Dropdown Items -->
-
-            </li><!-- End Notification Nav -->
 
 
             <li class="nav-item dropdown pe-3">

@@ -6,7 +6,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../header.jsp"></jsp:include>
 
-
+<style>
+    .product__item__pic {
+        height: 380px;
+        left: 50px;
+    }
+    #infotable {
+        padding-left: 10%;
+    }
+    .gm_img {
+        max-width: 50%;
+    }
+    .shoping__cart__table table tbody tr td.shoping__cart__quantity {
+        width: 200px;
+    }
+    .shoping__cart__table table tbody tr td.shoping__cart__price {
+        width: 200px;
+    }
+    #close {
+        width: 50px;
+    }
+</style>
 
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
@@ -17,29 +37,29 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="row">
-                            <div class="col-lg-4 set-bg product__item__pic" data-setbg="/images/profile/ProfilePicture.png">
-                                <c:if test="${YN eq true}"><img src="/images/profile/${meminfo.mem_id}/${meminfo.mem_pic}" style="height: 100%; overflow: hidden"></c:if>
+                            <div class="col-lg-4 set-bg product__item__pic" id="nomalimg" data-setbg="/images/profile/ProfilePicture.png">
+                                <c:if test="${YN eq true}"><img id="profile_img" src="/images/profile/${meminfo.mem_id}/${meminfo.mem_pic}" style="height: 100%; overflow: hidden"></c:if>
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-lg-8" id="infotable">
                                 <table style="width: 100%; height: 100%">
                                     <tr>
-                                        <td>닉네임(회원 ID)</td>
+                                        <th>닉네임(회원 ID)</th>
                                         <td>${meminfo.mem_nick}(${meminfo.mem_id})<a style="float: right" href="/mypage/memmodify">회원 정보 수정</a></td>
                                     </tr>
                                     <tr>
-                                        <td>회원등급</td>
+                                        <th>회원등급</th>
                                         <td>${meminfo.mem_grade}</td>
                                     </tr>
                                     <tr>
-                                        <td>가입일</td>
+                                        <th>가입일</th>
                                         <td>${meminfo.mem_joindate}</td>
                                     </tr>
                                     <tr>
-                                        <td>1:1 문의 수</td>
+                                        <th>1:1 문의 수</th>
                                         <td>${qslist}</td>
                                     </tr>
                                     <tr>
-                                        <td>구매평 수</td>
+                                        <th>구매평 수</th>
                                         <td>${revlist}</td>
                                     </tr>
                                 </table>
@@ -59,7 +79,7 @@
                         <!-- 주문처리현황 Section Begin -->
                         <section class="contact spad">
                             <div class="checkout__input">
-                                <h5>주문 처리 현황</h5>
+                                <h4>주문 처리 현황</h4>
                             </div>
                             <div class="container">
                                 <div class="row">
@@ -128,6 +148,7 @@
 
                         <!-- 모집현황 Section Begin -->
                         <section class="shoping-cart spad">
+                            <h4>등록한 모집글</h4>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -142,27 +163,34 @@
                                                     <th></th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <c:forEach var="row" items="${recruitlist}" varStatus="vs">
-                                                <tr>
-                                                    <td class="shoping__cart__item">
-                                                        <img src="/images/001.jpg" alt="">
-                                                        <h5>${rcrlist[vs.index].rcrbrd_subject}</h5>
-                                                    </td>
-                                                    <td class="shoping__cart__price">
-                                                        ${row.gm_name}
-                                                    </td>
-                                                    <td class="shoping__cart__quantity">
-                                                        <h5>${rcrcount[vs.index]}</h5>
-                                                    </td>
-                                                    <td class="shoping__cart__total">
-                                                        ${rcrlist[vs.index].rcrbrd_edate}
-                                                    </td>
-                                                    <td class="shoping__cart__item__close">
-                                                        <span class="icon_close"></span>
-                                                    </td>
-                                                </tr>
-                                                </c:forEach>
+                                                <tbody id="rcrbrdlist">
+                                                <c:choose>
+                                                    <c:when test="${recruitlist.size()==0}">
+                                                        <tr><td colspan="5"><h5><c:out value="없음"></c:out></h5></td></tr>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:forEach var="row" items="${recruitlist}" varStatus="vs">
+                                                        <tr>
+                                                            <td class="shoping__cart__item">
+                                                                <img class="gm_img" src="/images/thumb/${row.gm_code}/thumb.jpg">
+                                                                <h5 style="font-weight: 700">${row.rcrbrd_subject}</h5>
+                                                            </td>
+                                                            <td class="shoping__cart__price gm_name">
+                                                                ${row.gm_name}
+                                                            </td>
+                                                            <td class="shoping__cart__quantity people_cnt">
+                                                                <h5 style="font-weight: 700">${row.cnt}</h5>
+                                                            </td>
+                                                            <td class="shoping__cart__total">
+                                                                ${row.rcrbrd_edate}
+                                                            </td>
+                                                            <td class="shoping__cart__item__close" id="close">
+                                                                <span class="icon_close" onclick="rcrDelete(${row.rcrbrd_num})"></span>
+                                                            </td>
+                                                        </tr>
+                                                        </c:forEach>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -222,5 +250,29 @@
     </div>
 </section>
 <!-- Checkout Section End -->
+
+<script>
+    function rcrDelete(rcrbrd_num) {
+        if (confirm("모집 게시글을 삭제하시겠습니까?")) {
+            $.ajax({
+                url : "/recruit/myDelete"
+                ,type : "post"
+                ,data : "rcrbrd_num=" + rcrbrd_num
+                ,success : function (result) {
+                    $("#rcrbrdlist").html(result);
+                }
+                ,error : function (request, status, error) {
+                    console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                }
+            });
+        }
+    }
+
+    //프로필 사진 업로드 시 기본 이미지 안나오도록
+    <c:if test="${YN eq true}">
+        $("#nomalimg").attr("data-setbg", "");
+    </c:if>
+
+</script>
 
 <jsp:include page="../footer.jsp"></jsp:include>

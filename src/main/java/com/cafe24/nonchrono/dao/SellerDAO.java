@@ -135,6 +135,10 @@ public class SellerDAO {
         return sqlSession.selectList("seller.paginglist", pagingDTO);
     }
 
+    public List<Map<String, ?>> progSearch(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.progSearch", pagingDTO);
+    }
+
 
 
 //판매자 페이지 전부 유효성 검사

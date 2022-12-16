@@ -329,6 +329,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <c:forEach var="row" items="${reviewDetail}" varStatus="vs">
                             <div class="product__details__tab__desc">
                                 <div class="container">
                                     <h6 class="card-title">리뷰</h6>
@@ -363,7 +364,7 @@
                                                 </div>
 
 
-                                                <button type="submit" name="commentInsertBtn" id="commentInsertBtn"
+                                          4     <button type="submit" name="commentInsertBtn" id="commentInsertBtn"
                                                         class="btn btn-outline-primary">등록
                                                 </button>
                                             </div>
@@ -425,6 +426,7 @@
                                     </c:forEach>
                                 </div>
                             </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>

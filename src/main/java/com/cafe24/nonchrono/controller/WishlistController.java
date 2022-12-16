@@ -28,12 +28,27 @@ public class WishlistController {
     public String allRemove(HttpSession session) {
         String mem_id = (String) session.getAttribute("mem_id");
         wishDAO.allRemove(mem_id);
+        int wishcnt = 0;
+        if (mem_id != null) {
+            wishcnt = wishDAO.idxWishCount(mem_id);
+            session.setAttribute("idxBasketCount", wishcnt);
+        } else {
+            session.setAttribute("idxBasketCount", wishcnt);
+        }
         return "redirect:/mypage/wishlist";
     }
 
     @RequestMapping("/delete")
-    public String delete(@RequestParam int ws_num) {
+    public String delete(@RequestParam int ws_num, HttpSession session) {
+        String mem_id = (String) session.getAttribute("mem_id");
         wishDAO.delete(ws_num);
+        int wishcnt = 0;
+        if (mem_id != null) {
+            wishcnt = wishDAO.idxWishCount(mem_id);
+            session.setAttribute("idxBasketCount", wishcnt);
+        } else {
+            session.setAttribute("idxBasketCount", wishcnt);
+        }
         return "redirect:/mypage/wishlist";
     }
 

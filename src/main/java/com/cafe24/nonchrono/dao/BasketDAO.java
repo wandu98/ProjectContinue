@@ -41,6 +41,10 @@ public class BasketDAO {
         sqlSession.insert("basket.insert", basketDTO);
     }
 
+    public int count(String mem_id) {
+        return sqlSession.selectOne("basket.count", mem_id);
+    }
+
     public List<BasketDTO> basketList(String mem_id) {
         return sqlSession.selectList("basket.list", mem_id);
     }

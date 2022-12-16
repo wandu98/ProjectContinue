@@ -39,6 +39,12 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/ckeditor/ckeditor.js"></script>
     <script src="/js/jquery.cookie.js"></script>
+
+    <style>
+        #searchform > .nice-select {
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,7 +62,7 @@
     <div class="humberger__menu__cart">
         <ul>
             <li><a href="/mypage/wishlist"><i class="fa fa-heart"></i> <span>${idxWishCount}</span></a></li>
-            <li><a href="/mypage/cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+            <li><a href="/mypage/cart"><i class="fa fa-shopping-bag"></i> <span>${idxBasketCount}</span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -104,7 +110,10 @@
                             <% } else if (session.getAttribute("admin_id") != null) { %>
                             <a href="/admin">관리자 모드</a>
                             <% } %>
-                            <a href="/mem/login">로그인</a>
+                            <c:choose>
+                                <c:when test="${mem_id == null}"><a href="/mem/login">로그인</a></c:when>
+                                <c:otherwise><a href="/mem/logout">로그아웃</a></c:otherwise>
+                            </c:choose>
                             <a href="/mem/signup">회원가입</a>
                         </div>
                         <div class="header__top__right__auth">
@@ -142,7 +151,7 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="/mypage/wishlist"><i class="fa fa-heart"></i> <span>${idxWishCount}</span></a></li>
-                        <li><a href="/mypage/cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a href="/mypage/cart"><i class="fa fa-shopping-bag"></i> <span>${idxBasketCount}</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -182,7 +191,7 @@
             <div class="col-lg-9">
                 <div>
                     <div class="search_form">
-                        <form action="/sales/search">
+                        <form id="searchform" action="/sales/search">
                             <select id="ctg" name="ctg">
                                 <option value="ALL" selected>모든 카테고리</option>
                                 <option value="MN">본체</option>

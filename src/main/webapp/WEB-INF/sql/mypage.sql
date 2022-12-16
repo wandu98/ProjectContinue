@@ -23,3 +23,12 @@ on mem.mem_id = qu.mem_id;
 update tb_mem
 set mem_pic = 'ProfilePicture.png'
 where mem_id = 'gjdjj888';
+
+
+select rb.rcrbrd_num, rcrbrd_subject, rb.gm_code, gm_name, rcrbrd_edate, count(*) as cnt
+from tb_rcrboard rb join tb_recruitinfo tr
+on rb.rcrbrd_num = tr.rcrbrd_num join tb_game tg
+on rb.gm_code = tg.gm_code
+where rb.mem_id = 'fjhdmj555'
+group by rb.rcrbrd_num
+order by rcrbrd_num;

@@ -43,10 +43,11 @@
         select ss_num, ss_name, ss_price, ss_img
         from tb_sales
         order by ss_eperiod
+        limit 8
     </select>
 
     <select id="idxRankingSales" resultType="com.cafe24.nonchrono.dto.GameDTO">
-        select ga.gm_name
+        select ga.gm_name, ga.gm_code
         from tb_detail dt
                  join tb_sales sa
                       on dt.ss_num = sa.ss_num
@@ -54,6 +55,7 @@
                       on sa.gm_code = ga.gm_code
         group by ga.gm_code
         order by count(*) desc
+        limit 10
     </select>
 
     <!-- 목록 출력-->

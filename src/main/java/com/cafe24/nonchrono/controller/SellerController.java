@@ -647,5 +647,62 @@ public class SellerController {
         return map;
     }
 
+    @RequestMapping("/search")
+    @ResponseBody
+    public void orderSearch(HttpServletRequest request, PagingDTO pagingDTO, HttpSession session) {
+        String sl_id = request.getParameter("sl_id");
+        String dt_prog = request.getParameter("dt_prog");
+        String ss_speriod = request.getParameter("ss_speriod");
+        String ss_eperiod = request.getParameter("ss_eperiod");
+        String inputState = request.getParameter("inputState");
+        String keyword = request.getParameter("keyword");
+        pagingDTO.setSl_id(sl_id);
+        pagingDTO.setDt_prog(dt_prog);
+        pagingDTO.setSs_speriod(ss_speriod);
+        pagingDTO.setSs_eperiod(ss_eperiod);
+        pagingDTO.setInputState(inputState);
+        pagingDTO.setKeyword(keyword);
+
+        int totalRowCount = sellerDAO.totalRowCount(sl_id);
+
+        //페이징
+        int numPerPage = 5; //한 페이지당 레코드 갯수
+        int pagePerBlock = 10; //페이지 리스트
+
+        //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
+        //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
+        String pageNum = request.getParameter("pageNum");
+        if(pageNum==null) {
+            pageNum = "1";
+        }//if end
+
+        //현재 보고 있는 페이지
+        int currentPage = Integer.parseInt(pageNum);
+
+        int startRow = (currentPage-1)*numPerPage+1; //1  | 1
+        int endRow = currentPage*numPerPage; //5
+        pagingDTO.setStartRow(startRow);
+        pagingDTO.setEndRow(endRow);
+
+        double totcnt = (double)totalRowCount/numPerPage;
+        int totalPage = (int)Math.ceil(totcnt);
+
+        double d_page = (double)currentPage/pagePerBlock; // 1/10 -> 0.1
+        //페이지 묶음 번호
+        int Pages = (int)Math.ceil(d_page)-1; //0  1~10페이지 : 0, 11~20 : 1
+        //페이지 묶음의 시작 페이지 번호
+        int startPage = Pages*pagePerBlock; //0*10 -> 0
+        //페이지 묶음의 마지막 페이지 번호
+        int endPage = startPage + pagePerBlock+1; //0+10+1 = 11
+
+
+        List<Map<String,?>> progSearch = new ArrayList<>();
+
+        if (dt_prog != null && ss_speriod == null && ss_speriod == null && inputState == null && keyword == null) {
+            progSearch = sellerDAO.progSearch(pagingDTO);
+        }
+
+    }
+
 
 }//class end
