@@ -40,5 +40,7 @@ public class ReviewDAO {
         return cnt;
     }
 
+    public int rv_insert(ReviewDTO reviewDTO) { return sqlSession.insert("review.insert", reviewDTO);}
 
+    public List<ReviewDTO> rv_list(int ss_num) {return sqlSession.selectList("review.rv_list", ss_num);}
 }
