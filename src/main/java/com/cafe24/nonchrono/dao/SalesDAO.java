@@ -119,8 +119,8 @@ public class SalesDAO {
         return sqlSession.selectOne("sales.reviewCount", ss_num);
     }// reviewDetail() end
 
-    public ReviewDTO reviewDetail(int ss_num) {
-        return sqlSession.selectOne("sales.reviewDetail", ss_num);
+    public List<ReviewDTO> reviewDetail(int ss_num) {
+        return sqlSession.selectList("sales.reviewDetail", ss_num);
     } // reviewCmt() end
 
     public DeliveryDTO deliveryDetail(int ss_num) {

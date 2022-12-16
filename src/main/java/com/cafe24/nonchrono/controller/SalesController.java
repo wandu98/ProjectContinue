@@ -92,7 +92,7 @@ public class SalesController {
         mav.addObject("totalPage", totalPage);
         mav.addObject("startPage", startPage);
         mav.addObject("endPage", endPage);
-        mav.addObject("list4", list);
+        mav.addObject("list3", list);
         return mav;
     } // sales() end
 
@@ -238,7 +238,7 @@ public class SalesController {
     orderDTO.setTotal(total);
     salesDAO.order_insert(orderDTO);
     return "redirect:sales/salesorder";
-    }//ordercheck() end
+    }//orderinsert() end
 
 
     //주문서
