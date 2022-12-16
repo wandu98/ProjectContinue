@@ -113,7 +113,7 @@
             <li><a href="#">고객센터</a>
                 <ul class="header__menu__dropdown">
                     <li><a href="/notice/noticeList">공지사항</a></li>
-                    <li><a href="/">이벤트</a></li>
+                    <li><a href="/event/event">이벤트</a></li>
                     <li><a href="/">1:1문의</a></li>
                 </ul>
             </li>
@@ -172,7 +172,7 @@
                         <li><a href="#">고객센터</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="/notice/noticeList">공지사항</a></li>
-                                <li><a href="/">이벤트</a></li>
+                                <li><a href="/event/event">이벤트</a></li>
                                 <li><a href="/">1:1문의</a></li>
                             </ul>
                         </li>

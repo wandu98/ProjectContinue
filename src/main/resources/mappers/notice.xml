@@ -19,7 +19,7 @@
         where nt_num = #{nt_num}
     </select>
 
-    <select id="ntUpdate" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
+    <select id="ntUpdateviews" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
         UPDATE tb_nt
         SET nt_views = nt_views + 1
         WHERE nt_num = #{nt_num}
@@ -30,5 +30,12 @@
         DELETE FROM tb_nt
         WHERE nt_num = #{nt_num}
     </delete>
+
+    <!--게시물 수정-->
+    <update id="Update" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
+        UPDATE tb_nt
+        SET nt_title = #{nt_title}, nt_cmt = #{nt_cmt}
+        WHERE nt_num = #{nt_num}
+    </update>
 
 </mapper>
