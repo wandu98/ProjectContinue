@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="event">
+    <select id="list" parameterType="com.cafe24.nonchrono.dto.EventDTO">
+        SELECT evt_num, evt_title, evt_start, evt_end, evt_views, evt_desc, evt_regdate
+        FROM tb_evt
+        ORDER BY evt_num
+    </select>
+
+</mapper>

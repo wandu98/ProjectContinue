@@ -12,14 +12,14 @@ values ('MN0001', 'pogjj777', 360000, '2022-11-23 15:00:00', '2099-12-31 15:00:0
 
 INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_name, ss_description,
                       dv_num)
-values ('AC0001', 'digj1908', 79800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 0, 'AC0001.png', '판매 중지',
+values ('DT0001', 'digj1908', 79800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 100, 'AC0001.png', '판매 중지',
         'SWITCH Joy-Con(L/R) 네온레드/네온블루', '조이콘이에요', 3);
 
 INSERT INTO tb_sales (gm_code, sl_id, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_name, ss_description,
                       dv_num)
-values ('PT0001', 'itwill', 74800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 5, 'PT0001.jpg', '판매 중',
+values ('DT0002', 'itwill', 74800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 19, 'PT0001.jpg', '판매 중',
         '젤다의 전설 브레스 오브 더 와일드', '젤다입니다.', 4)
-     , ('DT0002', 'codingking', 74800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 2, 'DT0002.jpg', '판매 중',
+     , ('DT0003', 'codingking', 74800, '2022-11-23 15:00:00', '2099-12-31 15:00:00', 2, 'DT0002.jpg', '판매 중',
         '마리오 카트 8 디럭스', '마리오카드입니다.', 5);
 
 -- 게임기 / 게임 타이틀
