@@ -18,3 +18,13 @@ select cp.cp_code, cp_name, cp_speriod, cp_eperiod, cp_percent
 from tb_couponlist cl join tb_coupon cp
                            on cl.cp_code = cp.cp_code
 where mem_id = 'fjhdmj555';
+
+
+select cp.cp_code, cp_name, cp_speriod, cp_eperiod, cp_percent
+from tb_couponlist cl join tb_coupon cp
+                           on cl.cp_code = cp.cp_code
+where mem_id = 'gjdjj888';
+
+select count(mem_dvnick)
+from tb_memdv
+where mem_dvnick = '친구집' and mem_id = 'gjdjj888';

@@ -1,6 +1,7 @@
 package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.BasketDAO;
+import com.cafe24.nonchrono.dao.CouponlistDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
 import com.cafe24.nonchrono.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,13 @@ import java.util.Map;
 public class SalesController {
 
     @Autowired
-    SalesDAO salesDAO;
+    private SalesDAO salesDAO;
 
     @Autowired
-    BasketDAO basketDAO;
+    private BasketDAO basketDAO;
+
+    @Autowired
+    private CouponlistDAO couponlistDAO;
 
     public SalesController() {
         System.out.println("-----SalesController() 객체 생성");
@@ -86,7 +90,7 @@ public class SalesController {
         } else {
             list = Collections.EMPTY_LIST;
         }//if end
-        mav.addObject("list",salesDAO.list());
+        mav.addObject("list", salesDAO.list());
         mav.addObject("pageNum", currentPage);
         mav.addObject("count", totalRowCount);
         mav.addObject("totalPage", totalPage);
@@ -98,7 +102,7 @@ public class SalesController {
 
     //상품 상세
     @RequestMapping("/detail/{ss_num}")
-    public ModelAndView salesDetail(@PathVariable int ss_num)  {
+    public ModelAndView salesDetail(@PathVariable int ss_num) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("detail", salesDAO.detail(ss_num)); //상품 상세보기
         mav.addObject("gameDetail", salesDAO.gameDetail(ss_num)); // 게임정보 상세
@@ -203,8 +207,10 @@ public class SalesController {
         mav.addObject("list", basketDAO.mylist(mem_id));
         mav.addObject("bk_total", basketDAO.bk_total(mem_id));
         mav.addObject("max_fee", basketDAO.max_fee(mem_id));
-        mav.addObject("dv_mem_info",salesDAO.dv_mem_info(mem_id));
+        mav.addObject("dv_mem_info", salesDAO.dv_mem_info(mem_id));
         mav.addObject("dvmem_info", salesDAO.dvmem_info(mem_id));
+        mav.addObject("couponList", couponlistDAO.list(mem_id));
+        mav.addObject("mileage", salesDAO.mileage(mem_id));
         mav.setViewName("sales/checkout");
         return mav;
     }
@@ -216,7 +222,7 @@ public class SalesController {
     }
 
     //주문인서트
-    @RequestMapping("/orderinsert")
+    /*@RequestMapping("/orderinsert")
     public String orderinsert(@RequestParam String od_date, @RequestParam int dv_num, @RequestParam int mem_dvnum, @RequestParam String cp_code, @RequestParam int umileage, @RequestParam int pmileage, @RequestParam int total, HttpSession session) {
     String mem_id = (String) session.getAttribute("mem_id");
     OrderDTO orderDTO = new OrderDTO();
@@ -238,19 +244,115 @@ public class SalesController {
     orderDTO.setTotal(total);
     salesDAO.order_insert(orderDTO);
     return "redirect:sales/salesorder";
-    }//ordercheck() end
+    }//ordercheck() end*/
 
 
     //주문서
-    @RequestMapping("/salesorder")
+    /*@RequestMapping("/salesorder")
     public ModelAndView salesorder(HttpSession session) {
         ModelAndView mav = new ModelAndView();
         String mem_id = (String) session.getAttribute("mem_id");
         mav.setViewName("sales/salesorder");
         return mav;
-    }
+    }*/
 
+    // 천우 작품
+    /*@RequestMapping("/pay")
+    public void pay(HttpSession session, @ModelAttribute MemdvDTO memdvDTO, @ModelAttribute OrderDTO orderDTO, @ModelAttribute BasketDTO basketDTO) {
 
+        String mem_id = (String) session.getAttribute("mem_id");
+        if (memdvDTO.getMem_dvnum() == 0) {
+            // 별칭으로 검색해서 있는지 확인
+            int count = salesDAO.memdv_count(memdvDTO);
+            System.out.println("count : "+ count);
+
+            if (count == 0) {
+                // 없으면 배송정책 추가
+                int cnt = salesDAO.memdv_insert(memdvDTO);
+                if (cnt == 0) {
+                    System.out.println("배송정책 추가 실패");
+                } else {
+                    System.out.println("배송정책 추가 성공");
+                }
+                // 추가된 배송정책의 번호 가져오기
+                int max_dvnum = salesDAO.max_dvnum(memdvDTO.getMem_id());
+                // 주문서에 배송정책 번호 추가
+                orderDTO.setMem_dvnum(max_dvnum);
+                System.out.println("추가된 배송정책 번호 : " + max_dvnum);
+            } else {
+                // 있으면 배송정책 번호를 주문서에 추가
+                int dvnum = salesDAO.memdv_search(memdvDTO);
+                orderDTO.setMem_dvnum(dvnum);
+                System.out.println("dv_num : " + orderDTO.getMem_dvnum());
+            }
+        } else {
+            // 배송정책 번호를 주문서에 추가
+            orderDTO.setMem_dvnum(memdvDTO.getMem_dvnum());
+            System.out.println("dv_num : " + orderDTO.getMem_dvnum());
+        }
+
+        // 배송비 조회
+        int dv_fee = basketDAO.max_fee(mem_id);
+        System.out.println("dv_fee : " + dv_fee);
+
+        // 장바구니의 상품 총액 조회 (10만원 이상시 배송비 무료)
+        int bk_total = basketDAO.bk_total(mem_id);
+        if (bk_total > 100000) {
+            dv_fee = 0;
+        }
+        System.out.println(bk_total);
+
+        // 장바구니에 있는 내용 조회
+        List<BasketDTO> list = basketDAO.basketList(mem_id);
+        System.out.println("list : " + list);
+
+        // 주문서 추가
+
+        System.out.println("od_num : " + orderDTO.getOd_num()); // null
+        System.out.println("od_date : " + orderDTO.getOd_date()); // 현재 날짜 가져옴
+        System.out.println("mem_id : " + orderDTO.getMem_id()); // 제대로 가져옴
+        System.out.println("dv_num : " + orderDTO.getDv_num()); // 0 제대로 못 가져옴
+        System.out.println("mem_dvnum : " + orderDTO.getMem_dvnum()); // 0 제대로 못 가져옴
+        System.out.println("cp_code : " + orderDTO.getCp_code()); // A0000 제대로 가져옴
+        System.out.println("umileage : " + orderDTO.getUmileage()); // 0 제대로 못 가져옴
+        System.out.println("pmileage : " + orderDTO.getPmileage()); // 0 제대로 못 가져옴
+        System.out.println("total : " + orderDTO.getTotal()); // 74800 제대로 못 가져옴
+
+        // 닉네임 중복 안 되게 유효성 검사
+        
+        // 주문상세 추가
+        
+        // 장바구니 비우기
+
+        // 쿠폰 딜리트
+
+        // 마일리지 삭감
+
+        // 재고 삭감
+
+            *//*int cnt = basketDAO.newAddress(memdvDTO);
+            if (cnt != 0) {
+                System.out.println("주소 추가 성공");
+                // int dv_num = basketDAO.max_dvnum(mem_id);
+                if (cnt != 0) {
+                    // 쿠폰 delete도 해야함
+                    // od_num, od_date, dv_num, mem_dvnum, mem_id, cp_code, umileage, pmileage, total
+                    System.out.println("주소 넘버 성공");
+//                    orderDTO.getOd_num();
+//                    orderDTO.getOd_date();
+//                    orderDTO.getDv_num(dv_num);
+//                    orderDTO.getMem_dvnum();
+//                    orderDTO.getMem_id(mem_id);
+//                    orderDTO.getCp_code();
+//                    orderDTO.getUmileage();
+//                    orderDTO.getPmileage();
+//                    orderDTO.getTotal();
+//                    cnt = basketDAO.order(orderDTO);
+                }
+            }*//*
+
+        *//*return "/sales/salesorder";*//*
+    }*/
 
 
 }//class end

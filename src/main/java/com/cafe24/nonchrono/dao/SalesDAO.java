@@ -143,7 +143,21 @@ public class SalesDAO {
     }// insert() end
 
 // dvnum Max값 구해서 신규 배송지 유무 파악
-    public int max_dvnum(int mem_dvnum){ return sqlSession.selectOne("sales.max_dvnum", mem_dvnum);
+    public int max_dvnum(String mem_id){ return sqlSession.selectOne("sales.max_dvnum", mem_id);
     }// max_dvnum() end
+
+    // 사용 가능한 마일리지 가져오기
+    public int mileage(String mem_id) {
+        return sqlSession.selectOne("sales.mileage", mem_id);
+    }
+
+    // 별칭으로 검색해서 해당 회원의 배송지가 있는지 확인
+    public int memdv_count(MemdvDTO memdvDTO) {
+        return sqlSession.selectOne("sales.memdv_count", memdvDTO);
+    }
+
+    public int memdv_search(MemdvDTO memdvDTO) {
+        return sqlSession.selectOne("sales.memdv_search", memdvDTO);
+    }
 
 }//class end

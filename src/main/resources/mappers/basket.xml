@@ -57,4 +57,10 @@
                           join tb_delivery dv on sl.dv_num = dv.dv_num
         where mem_id = #{mem_id}
     </select>
+
+    <select id="item" parameterType="String" resultType="com.cafe24.nonchrono.dto.BasketDTO">
+        select bk_num, ss_num, bk_amount, mem_id
+        from tb_basket
+        where mem_id = #{mem_id}
+    </select>
 </mapper>
