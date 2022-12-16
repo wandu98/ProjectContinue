@@ -36,8 +36,8 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">진행상태</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option value="all" selected>전체</option>
+                                    <select class="form-select" aria-label="Default select example" id="dt_prog">
+                                        <option value="ALL" selected>전체</option>
                                         <option value="J01">결제완료</option>
                                         <option value="J02">출고준비중</option>
                                         <option value="J03">출고완료</option>
@@ -46,21 +46,20 @@
                                         <option value="J06">구매확정</option>
                                         <option value="J07">교환</option>
                                         <option value="J08">반품</option>
-
                                     </select>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-2 col-form-label">기간</label>
+                                <label for="ss_speriod" class="col-sm-2 col-form-label">판매시작일</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" id="inputDate">
+                                    <input type="date" class="form-control" id="ss_speriod">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputDate2" class="col-sm-2 col-form-label">판매종료</label>
+                                <label for="ss_eperiod" class="col-sm-2 col-form-label">판매종료일</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" id="inputDate2">
+                                    <input type="date" class="form-control" id="ss_eperiod">
                                 </div>
                             </div>
 
@@ -78,11 +77,11 @@
                                 </div>
 
                                 <div class="col-sm-10" style="width: 10%;">
-                                    <input type="email" class="form-control">
+                                    <input type="email" class="form-control" id="keyword">
                                 </div>
 
                                 <div class="col-sm-10" style="width: 10%">
-                                    <button type="button" class="btn btn-outline-info">검색</button>
+                                    <button type="button" class="btn btn-outline-info" onclick="search()">검색</button>
                                 </div>
                             </div>
 
@@ -165,5 +164,27 @@
 
 </main>
 <!-- End #main -->
+
+<script>
+    function search() {
+        let dt_prog = $("#dt_prog").val();
+        let ss_speriod = $("#ss_speriod").val();
+        let ss_eperiod = $("#ss_eperiod").val();
+        let inputState = $("#inputState").val();
+        let keyword = $("#keyword").val();
+
+        $.ajax({
+            url : "/seller/search"
+            ,type : "post"
+            ,data : {dt_prog, ss_speriod, ss_eperiod, inputState, keyword}
+            ,success : function () {
+                console.log("성공");
+            }
+
+
+        });
+
+    }
+</script>
 
 <jsp:include page="sellerfooter.jsp"></jsp:include>

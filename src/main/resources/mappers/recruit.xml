@@ -173,6 +173,7 @@
                       on rb.gm_code = ga.gm_code
         group by ga.gm_code
         order by count(*) desc
+        limit 10
     </select>
 
     <!-- 인덱스 페이지 모집 현황 -->

@@ -482,6 +482,47 @@ public class RecruitController {
         return "redirect:/recruit/detail/" + rcrbrd_num;
     }
 
+    @RequestMapping("/myDelete")
+    @ResponseBody
+    public String myDelete(HttpSession session, HttpServletRequest request) {
+        String mem_id = (String) session.getAttribute("mem_id");
+        int rcrbrd_num = Integer.parseInt(request.getParameter("rcrbrd_num"));
+        int cnt = recruitDAO.delete(rcrbrd_num);
+        String result = "";
+        List<Map<String,?>> list = new ArrayList<>();
+        if (cnt == 0) {
+            System.out.println("삭제에 실패하였습니다!");
+        } else {
+            list = recruitDAO.rcrbrdlist(mem_id);
+            if (list.size()==0) {
+                result += "<tr><td colspan=\"5\"><h5>없음</h5></td></tr>";
+            } else {
+                for (int i=0; i< list.size(); i++) {
+                    result += "<tr>";
+                    result += "    <td class=\"shoping__cart__item\">";
+                    result += "        <img class=\"gm_img\" src=\"/images/thumb/" + list.get(i).get("gm_code") + "/thumb.jpg\">";
+                    result += "        <h5 style=\"font-weight: 700\">" + list.get(i).get("rcrbrd_subject") + "</h5>";
+                    result += "    </td>";
+                    result += "    <td class=\"shoping__cart__price gm_name\">";
+                    result += "        "+list.get(i).get("gm_name");
+                    result += "    </td>";
+                    result += "    <td class=\"shoping__cart__quantity people_cnt\">";
+                    result += "        <h5 style=\"font-weight: 700\">" + list.get(i).get("cnt") + "</h5>";
+                    result += "    </td>";
+                    result += "    <td class=\"shoping__cart__total\">";
+                    result += "        " + list.get(i).get("rcrbrd_edate");
+                    result += "    </td>";
+                    result += "    <td class=\"shoping__cart__item__close\" id=\"close\">";
+                    result += "        <span class=\"icon_close\" onclick=\"rcrDelete(" + list.get(i).get("rcrbrd_num") + ")\"></span>";
+                    result += "    </td>";
+                    result += "</tr>";
+                }
+            }
+
+        }
+        return result;
+    }
+
 
     // 삭제 후 이메일 발송
 

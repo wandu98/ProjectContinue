@@ -15,5 +15,10 @@ public class PagingDTO {
     private String ss_name;
     private String gm_code;
     private String sl_id;
+    private String dt_prog;
+    private String ss_speriod;
+    private String ss_eperiod;
+    private String inputState;
+    private String keyword;
 
 }

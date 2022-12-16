@@ -209,11 +209,13 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <c:forEach var="row" items="${reviewDetail}" varStatus="vs">
                             <div class="product__details__tab__desc">
                                 <h6>리뷰</h6>
-                                <p>별점 : ${reviewDetail.rv_star}<br>회원ID : ${reviewDetail.mem_id}
-                                    <br> ${reviewDetail.rv_content}<br> ${reviewDetail.rv_filename}</p>
+                                <p>별점 : ${row.rv_star}<br>회원ID : ${row.mem_id}
+                                    <br> ${row.rv_content}<br> ${row.rv_filename}</p>
                             </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>

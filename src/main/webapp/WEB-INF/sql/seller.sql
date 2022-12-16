@@ -453,3 +453,195 @@ from tb_order od join tb_detail td
 on od.od_num = td.od_num join tb_sales ts
 on td.ss_num = ts.ss_num
 where sl_id = 'digj1908';
+
+
+-- 판매자 페이지 전체 주문 조회 (검색, 페이징)
+
+-- 진행상태만
+
+select *
+from (
+        select *, @rno := @rno + 1 as r
+        from (
+                select *
+                from (
+                        select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                      when 'J02' then '출고준비중'
+                                                                      when 'J03' then '출고완료'
+                                                                      when 'J04' then '배송중'
+                                                                      when 'J05' then '배송완료'
+                                                                      when 'J06' then '구매확정'
+                                                                      when 'J07' then '교환'
+                                                                      when 'J08' then '반품' end as dt_prog
+                        from tb_order od join tb_detail dt
+                                           on od.od_num = dt.od_num join tb_sales ts
+                                                                         on dt.ss_num = ts.ss_num
+                        where sl_id = 'digj1908' and dt_prog = 'J05'
+                 ) AA, (select @rno := 0) BB
+                order by od_date desc
+        ) CC
+    ) DD
+where r >= 1 and r <= 5;
+
+
+-- 판매일자만
+
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
+
+-- 조건 검색
+
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and ${od.od_num} like '%903%'
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5
+
+
+-- 진행상태 & 판매일
+
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and dt_prog = #{J05} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5
+
+
+-- 진행상태 & 조건 검색
+
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and ${ss_name} like '%네%'
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5
+
+
+-- 판매일 & 조건 검색
+
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and ${ss_name} like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5
+
+
+-- 진행상태 & 판매일 & 조건검색
+
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and ${ss_name} like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5
+
