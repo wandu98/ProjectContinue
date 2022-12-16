@@ -96,7 +96,7 @@ public class SalesController {
         mav.addObject("totalPage", totalPage);
         mav.addObject("startPage", startPage);
         mav.addObject("endPage", endPage);
-        mav.addObject("list4", list);
+        mav.addObject("list3", list);
         return mav;
     } // sales() end
 

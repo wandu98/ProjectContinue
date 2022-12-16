@@ -194,17 +194,19 @@
     </select>
 
     <select id="reviewCount" resultType="int">
-        select ifnull(count(*), 0)
-        from (select count(*)
-              from tb_review
-              where ss_num = #{ss_num}
-              group by ss_num) aa
+        select count(*)
+        from(
+                select ss_num
+                from tb_review
+                where ss_num = #{ss_num}
+            ) aa
     </select>
 
     <select id="reviewDetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.ReviewDTO">
-        SELECT rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num
+        SELECT rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num, rv_date
         from tb_review
         WHERE ss_num = #{ss_num}
+        ORDER BY rv_num desc
     </select>
 
     <!-- 배송비 가져오기 -->
