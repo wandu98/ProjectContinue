@@ -28,9 +28,6 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">
-                    <input class="form-check-input" id="checkAll" name="checkAll" type="checkbox">
-                </th>
                 <th>번호</th>
                 <th>제목</th>
                 <th>작성일</th>
@@ -40,9 +37,6 @@
             <tbody>
             <c:forEach var="notice" items="${noticelist}">
                 <tr style="cursor: pointer" onclick="location.href='/notice/Detail/${notice.nt_num}'">
-                    <th scope="col">
-                        <input class="form-check-input" name="check" type="checkbox">
-                    </th>
                     <td>${notice.nt_num}</td>
                     <td>${notice.nt_title}</td>
                     <td>${notice.nt_regdate}</td>
@@ -51,18 +45,12 @@
             </c:forEach>
             </tbody>
         </table>
-
-        <div class="modal-footer" >
-            <input type="hidden" id="nt_num" name="nt_num" value="${ntDelete.nt_num}">
-            <button type="button" class="btn btn-info">수정</button>
-            <button type="button" class="btn btn-danger" onclick="deleteConfirm(this.form)">삭제</button>
-        </div>
-
     </div>
 
 
 </div>
 
+<%--
 <!-- checkbox All Select -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -88,6 +76,7 @@
 
 </script>
 <!-- checkbox All Select end -->
+--%>
 
 
 

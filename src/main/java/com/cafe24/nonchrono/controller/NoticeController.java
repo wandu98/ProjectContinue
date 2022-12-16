@@ -21,6 +21,7 @@ public class NoticeController {
 
     @Autowired
     NoticeDAO noticeDAO;
+
     public NoticeController() {
         System.out.println("----NoticeController() 객체 생성");
     }//NoticeController() end
@@ -38,9 +39,9 @@ public class NoticeController {
     //리스트 상세보기
     @RequestMapping(value = "/Detail/{nt_num}")
     public ModelAndView ntdetail(@PathVariable int nt_num, HttpSession session) {
-        ModelAndView mav =new ModelAndView();
+        ModelAndView mav = new ModelAndView();
         String admin_id = (String) session.getAttribute("admin_id");
-        mav.addObject("ntUpdate", noticeDAO.ntUpdate(nt_num));
+        mav.addObject("ntUpdateviews", noticeDAO.ntUpdateviews(nt_num));
         mav.addObject("ntdetail", noticeDAO.ntdetail(nt_num));
         mav.addObject("admin_id", admin_id);
         mav.setViewName("notice/noticeDetail");
@@ -51,7 +52,6 @@ public class NoticeController {
     public String ntDelete(@RequestParam int nt_num, HttpSession session) {
         String admin_id = (String) session.getAttribute("admin_id");
         String admin_pw = (String) session.getAttribute("admin_pw");
-        System.out.println(admin_id);
         if (admin_id == "admin" && admin_pw == "admin") {
             int cnt = noticeDAO.ntDelete(nt_num);
             if (cnt == 0) {
@@ -59,10 +59,32 @@ public class NoticeController {
             }
             return "redirect:/notice/noticeList";
         } else {
-            return "/mem/loginForm";
+            return "redirect:/";
         }
     } // delete() end
 
 
+    @RequestMapping("/Update")
+    public ModelAndView update(@RequestParam int nt_num, HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        String admin_id = (String) session.getAttribute("admin_id");
+        //mav.addObject("Update", noticeDAO.Update());
+        mav.addObject("ntdetail", noticeDAO.ntdetail(nt_num));
+        mav.addObject("admin_id", admin_id);
+        mav.setViewName("/notice/noticeUpdate");
+        return mav;
+    } // update() end
+
+    @RequestMapping("/updateProc")
+    public String updateProc(@ModelAttribute NoticeDTO noticeDTO){
+
+//        System.out.println(noticeDTO.getNt_title());
+//        System.out.println(noticeDTO.getNt_cmt());
+        int cnt = noticeDAO.Update(noticeDTO);
+        return "redirect:/notice/noticeList";
+    }
+
 
 }
+
+
