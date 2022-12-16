@@ -4,7 +4,18 @@
 <mapper namespace="sales">
 
     <select id="idxLatestProduct" resultType="com.cafe24.nonchrono.dto.SalesDTO">
-        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        select ss_num,
+               gm_code,
+               sl_id,
+               ss_name,
+               ss_price,
+               ss_speriod,
+               ss_eperiod,
+               ss_stock,
+               ss_img,
+               ss_status,
+               ss_description,
+               dv_num
         from tb_sales
         where ss_status = 'S1'
         order by ss_speriod desc
@@ -47,7 +58,18 @@
 
     <!-- 목록 출력-->
     <select id="list" resultType="com.cafe24.nonchrono.dto.SalesDTO">
-        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        select ss_num,
+               gm_code,
+               sl_id,
+               ss_name,
+               ss_price,
+               ss_speriod,
+               ss_eperiod,
+               ss_stock,
+               ss_img,
+               ss_status,
+               ss_description,
+               dv_num
         FROM tb_sales
         ORDER BY ss_num DESC
     </select>
@@ -61,9 +83,14 @@
     </insert>
 
     <select id="list2" resultType="com.cafe24.nonchrono.dto.SalesDTO">
-        select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
-                                                                      when 'S2' then '판매중지'
-                                                                      when 'S3' then '품절' end as ss_status
+        select ss_num,
+               ss_name,
+               ss_price,
+               ss_speriod,
+               case ss_status
+                   when 'S1' then '판매중'
+                   when 'S2' then '판매중지'
+                   when 'S3' then '품절' end as ss_status
         from tb_sales
         where sl_id = #{sl_id}
         ORDER BY ss_num DESC
@@ -76,68 +103,102 @@
         group by sl_id
     </select>
 
-    <select id="list3" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+    <select id="list3" parameterType="com.cafe24.nonchrono.dto.PagingDTO"
+            resultType="com.cafe24.nonchrono.dto.SalesDTO">
     <![CDATA[
         select *
-        from(
-                select *,  @rno := @rno +1 as r
-                from(
-                    select ss_img, ss_price, ss_name
+        from (select *, @rno := @rno + 1 as r
+              from (select ss_img, ss_price, ss_name
                     from tb_sales
-                    where sl_id = #{sl_id}
-                    ) AA,
-                    (select @rno :=0) BB
-            )CC
-        where r>= #{startRow} and r <= #{endRow}
+                    where sl_id = #{sl_id}) AA,
+                   (select @rno := 0) BB) CC
+        where r >= #{startRow}
+          and r <= #{endRow}
         ]]>
     </select>
 
     <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">
-        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        select ss_num,
+               gm_code,
+               sl_id,
+               ss_name,
+               ss_price,
+               ss_speriod,
+               ss_eperiod,
+               ss_stock,
+               ss_img,
+               ss_status,
+               ss_description,
+               dv_num
         from tb_sales
-        where ss_name like CONCAT('%',#{ss_name},'%')
+        where ss_name like CONCAT('%', #{ss_name}, '%')
     </select>
 
     <select id="searchAlltotalRowCount" resultType="java.lang.Integer">
         select count(*)
         from tb_sales
-        where ss_name like CONCAT('%',#{ss_name},'%')
+        where ss_name like CONCAT('%', #{ss_name}, '%')
     </select>
 
-    <select id="searchCategory" parameterType="com.cafe24.nonchrono.dto.SalesDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
-        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+    <select id="searchCategory" parameterType="com.cafe24.nonchrono.dto.SalesDTO"
+            resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select ss_num,
+               gm_code,
+               sl_id,
+               ss_name,
+               ss_price,
+               ss_speriod,
+               ss_eperiod,
+               ss_stock,
+               ss_img,
+               ss_status,
+               ss_description,
+               dv_num
         from tb_sales
-        where gm_code like CONCAT('%',#{gm_code},'%') and ss_name like CONCAT('%',#{ss_name},'%')
+        where gm_code like CONCAT('%', #{gm_code}, '%')
+          and ss_name like CONCAT('%', #{ss_name}, '%')
     </select>
 
-    <select id="searchCategorytotalRowCount" parameterType="com.cafe24.nonchrono.dto.SalesDTO" resultType="java.lang.Integer">
+    <select id="searchCategorytotalRowCount" parameterType="com.cafe24.nonchrono.dto.SalesDTO"
+            resultType="java.lang.Integer">
         select count(*)
         from tb_sales
-        where gm_code like CONCAT('%',#{gm_code},'%') and ss_name like CONCAT('%',#{ss_name},'%')
+        where gm_code like CONCAT('%', #{gm_code}, '%')
+          and ss_name like CONCAT('%', #{ss_name}, '%')
     </select>
     <!-- 상품 번호와 맞는 상세정보 가져오기 -->
     <select id="detail" parameterType="int" resultType="com.cafe24.nonchrono.dto.SalesDTO">
-        select  ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+        select ss_num,
+               gm_code,
+               sl_id,
+               ss_name,
+               ss_price,
+               ss_speriod,
+               ss_eperiod,
+               ss_stock,
+               ss_img,
+               ss_status,
+               ss_description,
+               dv_num
         from tb_sales
         where ss_num = #{ss_num}
     </select>
 
     <!-- 상품 품목(게임)의 상세 정보 가져오기 -->
     <select id="gameDetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.GameDTO">
-        SELECT gm.gm_code,  gm.gm_name, gm.gm_price, gm.gm_level, gm.gm_category, gm.gm_img
-        FROM tb_sales as rb join tb_game as gm
-                                 on rb.gm_code = gm.gm_code
+        SELECT gm.gm_code, gm.gm_name, gm.gm_price, gm.gm_level, gm.gm_category, gm.gm_img
+        FROM tb_sales as rb
+                 join tb_game as gm
+                      on rb.gm_code = gm.gm_code
         WHERE ss_num = #{ss_num}
     </select>
 
     <select id="reviewCount" resultType="int">
-        select ifnull(count(*),0)
-        from(
-                select count(*)
-                from tb_review
-                where ss_num = #{ss_num}
-                group by ss_num
-            ) aa
+        select ifnull(count(*), 0)
+        from (select count(*)
+              from tb_review
+              where ss_num = #{ss_num}
+              group by ss_num) aa
     </select>
 
     <select id="reviewDetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.ReviewDTO">
@@ -148,8 +209,9 @@
 
     <!-- 배송비 가져오기 -->
     <select id="deliveryDetail" resultType="com.cafe24.nonchrono.dto.DeliveryDTO">
-        select tb_sales.ss_num, tb_sales.sl_id, tb_sales.dv_num, tb_delivery.dv_num ,dv_fee
-        from tb_delivery join tb_sales on tb_delivery.dv_num = tb_sales.dv_num
+        select tb_sales.ss_num, tb_sales.sl_id, tb_sales.dv_num, tb_delivery.dv_num, dv_fee
+        from tb_delivery
+                 join tb_sales on tb_delivery.dv_num = tb_sales.dv_num
         where tb_sales.ss_num = #{ss_num}
     </select>
 
@@ -162,52 +224,113 @@
 
     <!-- 회원 배송지(tb_memdv)정보   -->
     <select id="dvmem_info" resultType="com.cafe24.nonchrono.dto.MemdvDTO">
-        select mem_dvnum, mem_id, mem_dvinfo, mem_dvzip, mem_dvadr1, mem_dvadr2, mem_dvphone, mem_dvnick
+        select mem_dvnum,
+               mem_id,
+               mem_dvinfo,
+               mem_dvzip,
+               mem_dvadr1,
+               mem_dvadr2,
+               mem_dvphone,
+               mem_dvnick
         from tb_memdv
         where mem_id = #{mem_id}
     </select>
-    
+
     <!-- 검색시(모든카테고리) 페이징 된 리스트-->
-    <select id="searchAllList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+    <select id="searchAllList" parameterType="com.cafe24.nonchrono.dto.PagingDTO"
+            resultType="com.cafe24.nonchrono.dto.SalesDTO">
     <![CDATA[
         select *
-        from (
-                select *, @rno := @rno + 1 as r
-                from (
-                        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
-                        from tb_sales
-                        where ss_name like CONCAT('%',#{ss_name},'%')
-                ) AA, (select @rno :=0) BB
-        ) CC
-        where r >= #{startRow} and r <= #{endRow}
-    ]]>
+        from (select *, @rno := @rno + 1 as r
+              from (select ss_num,
+                           gm_code,
+                           sl_id,
+                           ss_name,
+                           ss_price,
+                           ss_speriod,
+                           ss_eperiod,
+                           ss_stock,
+                           ss_img,
+                           ss_status,
+                           ss_description,
+                           dv_num
+                    from tb_sales
+                    where ss_name like CONCAT('%', #{ss_name}, '%')) AA,
+                   (select @rno := 0) BB) CC
+        where r >= #{startRow}
+          and r <= #{endRow}
+        ]]>
     </select>
 
     <!--  검색시(카테고리 선택) 페이징 된 리스트  -->
-    <select id="searchCategorylist" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+    <select id="searchCategorylist" parameterType="com.cafe24.nonchrono.dto.PagingDTO"
+            resultType="com.cafe24.nonchrono.dto.SalesDTO">
     <![CDATA[
         select *
-        from (
-                select *, @rno := @rno + 1 as r
-                from (
-                        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
-                        from tb_sales
-                        where ss_name like CONCAT('%',#{ss_name},'%') and gm_code like CONCAT('%',#{gm_code},'%')
-                ) AA, (select @rno :=0) BB
-        ) CC
-        where r >= #{startRow} and r <= #{endRow}
-    ]]>
+        from (select *, @rno := @rno + 1 as r
+              from (select ss_num,
+                           gm_code,
+                           sl_id,
+                           ss_name,
+                           ss_price,
+                           ss_speriod,
+                           ss_eperiod,
+                           ss_stock,
+                           ss_img,
+                           ss_status,
+                           ss_description,
+                           dv_num
+                    from tb_sales
+                    where ss_name like CONCAT('%', #{ss_name}, '%')
+                      and gm_code like CONCAT('%', #{gm_code}, '%')) AA,
+                   (select @rno := 0) BB) CC
+        where r >= #{startRow}
+          and r <= #{endRow}
+        ]]>
     </select>
 
     <insert id="order_insert">
-            INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
-            VALUES((select receiptNo
-                    from(
-                            select concat(cast(d.receiptDate as char), right(concat('00000', rowCount+1), 6)) as receiptNo,
-                                   count(e.od_num) + 1 as od_num, rowCount + 1 as rowCount
-                            from tb_order as e,
-                                 (select concat(substr(date_format(now(), '%Y%m%d%H%i%s'),1,8))as receiptDate,
-                                 (select od_num as cnt from tb_order order by cnt desc limit 1) as rowCount from dual) d ) c),
+        INSERT INTO tb_order(od_num, od_date, mem_id, dv_num, mem_dvnum, cp_code, umileage, pmileage, total)
+        VALUES ((select receiptNo
+                 from (select concat(cast(d.receiptDate as char), right(concat('00000', rowCount + 1), 6)) as receiptNo,
+                              count(e.od_num) + 1                                                          as od_num,
+                              rowCount + 1                                                                 as rowCount
+                       from tb_order as e,
+                            (select concat(substr(date_format(now(), '%Y%m%d%H%i%s'), 1, 8))       as receiptDate,
+                                    (select od_num as cnt from tb_order order by cnt desc limit 1) as rowCount
+                             from dual) d) c),
                 now(), #{mem_id}, #{dv_num}, #{mem_dvnum}, #{cp_code}, #{umileage}, #{pmileage}, #{total});
     </insert>
+
+    <select id="mileage" resultType="int">
+        select upoint
+        from tb_mem
+        where mem_id = #{mem_id}
+    </select>
+
+    <select id="memdv_count" parameterType="com.cafe24.nonchrono.dto.MemdvDTO" resultType="int">
+        select count(mem_dvnick)
+        from tb_memdv
+        where mem_dvnick = #{mem_dvnick}
+          and mem_id = #{mem_id}
+    </select>
+
+    <select id="max_dvnum" parameterType="String" resultType="int">
+        select max(mem_dvnum)
+        from tb_memdv
+        where mem_id = #{mem_id}
+    </select>
+
+    <insert id="memdv_insert" parameterType="com.cafe24.nonchrono.dto.MemdvDTO">
+        INSERT INTO tb_memdv(mem_id, mem_dvinfo, mem_dvzip, mem_dvadr1, mem_dvadr2, mem_dvphone, mem_dvnick)
+        VALUES (#{mem_id}, #{mem_dvinfo}, #{mem_dvzip}, #{mem_dvadr1}, #{mem_dvadr2}, #{mem_dvphone}, #{mem_dvnick})
+    </insert>
+
+    <!-- 닉네임으로 배송정책 번호 찾기 -->
+    <select id="memdv_search" parameterType="int" resultType="com.cafe24.nonchrono.dto.MemdvDTO">
+        select mem_dvnum
+        from tb_memdv
+        where mem_dvnick = #{mem_dvnick} and mem_id = #{mem_id}
+    </select>
+
 </mapper>
