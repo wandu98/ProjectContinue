@@ -13,10 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Collections;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/sales")
@@ -205,8 +203,16 @@ public class SalesController {
         ModelAndView mav = new ModelAndView();
         String mem_id = (String) session.getAttribute("mem_id");
         mav.addObject("list", basketDAO.mylist(mem_id));
-        mav.addObject("bk_total", basketDAO.bk_total(mem_id));
-        mav.addObject("max_fee", basketDAO.max_fee(mem_id));
+        mav.addObject("bk_total", basketDAO.total(mem_id));
+
+        // 배송비 조회
+        int dv_fee = 0;
+        List<Map<String, Integer>> delivery = basketDAO.dv_sum(mem_id);
+        for (int i = 0; i < delivery.size(); i++) {
+            dv_fee += Integer.parseInt(String.valueOf(delivery.get(i).get("dv_sum")));
+        }
+
+        mav.addObject("max_fee", dv_fee);
         mav.addObject("dv_mem_info", salesDAO.dv_mem_info(mem_id));
         mav.addObject("dvmem_info", salesDAO.dvmem_info(mem_id));
         mav.addObject("couponList", couponlistDAO.list(mem_id));
@@ -221,138 +227,170 @@ public class SalesController {
         return "/sales/checkout";
     }
 
-    //주문인서트
-    /*@RequestMapping("/orderinsert")
-    public String orderinsert(@RequestParam String od_date, @RequestParam int dv_num, @RequestParam int mem_dvnum, @RequestParam String cp_code, @RequestParam int umileage, @RequestParam int pmileage, @RequestParam int total, HttpSession session) {
-    String mem_id = (String) session.getAttribute("mem_id");
-    OrderDTO orderDTO = new OrderDTO();
-    MemdvDTO memdvDTO = new MemdvDTO();
-
-    if (mem_dvnum == 0) {
-        salesDAO.memdv_insert(memdvDTO); // 배송정책 추가
-        int max = salesDAO.max_dvnum(mem_dvnum); // 추가된 배송정책의 번호 가져오기
-        System.out.println(max);
-        orderDTO.setMem_dvnum(max);
-    }
-    orderDTO.setMem_dvnum(mem_dvnum);
-    orderDTO.setMem_id(mem_id);
-    orderDTO.setOd_date(od_date);
-    orderDTO.setDv_num(dv_num);
-    orderDTO.setCp_code(cp_code);
-    orderDTO.setUmileage(umileage);
-    orderDTO.setPmileage(pmileage);
-    orderDTO.setTotal(total);
-    salesDAO.order_insert(orderDTO);
-    return "redirect:sales/salesorder";
-    }//ordercheck() end*/
-
-
-    //주문서
-    /*@RequestMapping("/salesorder")
-    public ModelAndView salesorder(HttpSession session) {
-        ModelAndView mav = new ModelAndView();
-        String mem_id = (String) session.getAttribute("mem_id");
-        mav.setViewName("sales/salesorder");
-        return mav;
-    }*/
-
-    // 천우 작품
-    /*@RequestMapping("/pay")
-    public void pay(HttpSession session, @ModelAttribute MemdvDTO memdvDTO, @ModelAttribute OrderDTO orderDTO, @ModelAttribute BasketDTO basketDTO) {
-
+    @RequestMapping("/pay")
+    public String pay(HttpSession session, @ModelAttribute MemdvDTO memdvDTO, @ModelAttribute OrderDTO orderDTO, @ModelAttribute BasketDTO basketDTO, @ModelAttribute DetailDTO detailDTO, @RequestParam(required = false) String pay_method) {
+        CouponlistDTO couponlistDTO = new CouponlistDTO();
         String mem_id = (String) session.getAttribute("mem_id");
         if (memdvDTO.getMem_dvnum() == 0) {
             // 별칭으로 검색해서 있는지 확인
             int count = salesDAO.memdv_count(memdvDTO);
-            System.out.println("count : "+ count);
+            System.out.println("count : " + count);
 
             if (count == 0) {
-                // 없으면 배송정책 추가
+                // 없으면 구매자 배송정책 추가
                 int cnt = salesDAO.memdv_insert(memdvDTO);
                 if (cnt == 0) {
                     System.out.println("배송정책 추가 실패");
                 } else {
                     System.out.println("배송정책 추가 성공");
                 }
-                // 추가된 배송정책의 번호 가져오기
+                // 추가된 구매자 배송정책의 번호 가져오기
                 int max_dvnum = salesDAO.max_dvnum(memdvDTO.getMem_id());
-                // 주문서에 배송정책 번호 추가
+                // 주문서에 구매자 배송정책 번호 추가
                 orderDTO.setMem_dvnum(max_dvnum);
                 System.out.println("추가된 배송정책 번호 : " + max_dvnum);
             } else {
-                // 있으면 배송정책 번호를 주문서에 추가
+                // 있으면 구매자 배송정책 번호를 주문서에 추가
                 int dvnum = salesDAO.memdv_search(memdvDTO);
                 orderDTO.setMem_dvnum(dvnum);
                 System.out.println("dv_num : " + orderDTO.getMem_dvnum());
             }
         } else {
-            // 배송정책 번호를 주문서에 추가
+            // 구매자 배송정책 번호를 주문서에 추가
             orderDTO.setMem_dvnum(memdvDTO.getMem_dvnum());
             System.out.println("dv_num : " + orderDTO.getMem_dvnum());
         }
 
         // 배송비 조회
-        int dv_fee = basketDAO.max_fee(mem_id);
+        int dv_fee = 0;
+        List<Map<String, Integer>> delivery = basketDAO.dv_sum(mem_id);
+        for (int i = 0; i < delivery.size(); i++) {
+            dv_fee += Integer.parseInt(String.valueOf(delivery.get(i).get("dv_sum")));
+        }
         System.out.println("dv_fee : " + dv_fee);
 
+
+        // 총액 가져오기
+        int total = basketDAO.total(mem_id);
+
         // 장바구니의 상품 총액 조회 (10만원 이상시 배송비 무료)
-        int bk_total = basketDAO.bk_total(mem_id);
-        if (bk_total > 100000) {
+        if (total > 100000) {
             dv_fee = 0;
         }
-        System.out.println(bk_total);
+        System.out.println("total : " + total);
+
+        // 추가될 마일리지 가져오기 (총액 기준)
+        int pmileage = (int) (total * 0.01);
 
         // 장바구니에 있는 내용 조회
-        List<BasketDTO> list = basketDAO.basketList(mem_id);
+        List<Map<String, Object>> list = basketDAO.mylist(mem_id);
         System.out.println("list : " + list);
 
+        // od_num 로직
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        Calendar calendar = Calendar.getInstance();
+        String today = sdf.format(calendar.getTime());
+        String last = "";
+        // System.out.println("today : " + today);
+        String od_num = basketDAO.od_num(today);
+        if (od_num != null) {
+            last = String.format("%03d", Integer.parseInt(od_num.substring(od_num.length() - 3)) + 1);
+        } else {
+            last = String.format("%03d", 1);
+        }
+        od_num = today + "-" + last;
+        System.out.println("od_num : " + od_num);
+
+        // 쿠폰명 변수화
+        String cp_name = orderDTO.getCp_code();
+        
+        // 사용한 마일리지 변수화
+        int umileage = orderDTO.getUmileage();
+
         // 주문서 추가
+        orderDTO.setOd_num(od_num);
+        orderDTO.setMem_id(mem_id);
+        orderDTO.setMem_dvnum(orderDTO.getMem_dvnum());
+        orderDTO.setCp_code(cp_name);
+        orderDTO.setUmileage(umileage);
+        orderDTO.setPmileage(pmileage);
+        orderDTO.setTotal(total);
+        int cnt = salesDAO.order(orderDTO);
+        if (cnt == 0) {
+            System.out.println("주문서 추가 실패");
+        } else {
+            System.out.println("주문서 추가 성공");
+        }
 
-        System.out.println("od_num : " + orderDTO.getOd_num()); // null
-        System.out.println("od_date : " + orderDTO.getOd_date()); // 현재 날짜 가져옴
-        System.out.println("mem_id : " + orderDTO.getMem_id()); // 제대로 가져옴
-        System.out.println("dv_num : " + orderDTO.getDv_num()); // 0 제대로 못 가져옴
-        System.out.println("mem_dvnum : " + orderDTO.getMem_dvnum()); // 0 제대로 못 가져옴
-        System.out.println("cp_code : " + orderDTO.getCp_code()); // A0000 제대로 가져옴
-        System.out.println("umileage : " + orderDTO.getUmileage()); // 0 제대로 못 가져옴
-        System.out.println("pmileage : " + orderDTO.getPmileage()); // 0 제대로 못 가져옴
-        System.out.println("total : " + orderDTO.getTotal()); // 74800 제대로 못 가져옴
+        // 주소 별칭 중복 안 되게 유효성 검사
 
-        // 닉네임 중복 안 되게 유효성 검사
-        
         // 주문상세 추가
-        
+        for (int i = 0; i < list.size(); i++) {
+            int ss_num = Integer.parseInt(String.valueOf(list.get(i).get("ss_num")));
+            detailDTO.setOd_num(od_num); // 주문서 번호
+            detailDTO.setDv_num(basketDAO.dv_num(ss_num)); // 배송정책
+            detailDTO.setDt_prog("결제완료"); // 진행상태
+            detailDTO.setDt_odstts("없음"); // 주문상태
+            detailDTO.setDt_refund('Y'); // 환불가능여부
+            detailDTO.setSs_num(ss_num); // 판매상품 번호
+            detailDTO.setDt_paymnt("card"); // 결제수단
+
+            cnt = basketDAO.order_detail(detailDTO);
+            if (cnt == 0) {
+                System.out.println("주문상세 추가 실패");
+            } else {
+                System.out.println("주문상세 추가 성공");
+            }
+        }
+
         // 장바구니 비우기
+        cnt = basketDAO.basket_delete(mem_id);
+        if (cnt == 0) {
+            System.out.println("장바구니 비우기 실패");
+        } else {
+            System.out.println("장바구니 비우기 성공");
+        }
 
         // 쿠폰 딜리트
+        // 쿠폰은 1개까지밖에 가질 수 없다.
+        couponlistDTO.setCp_code(cp_name);
+        couponlistDTO.setMem_id(mem_id);
+        if (!cp_name.equals("A0000")) {
+            cnt = basketDAO.coupon_delete(couponlistDTO);
 
-        // 마일리지 삭감
+            if (cnt == 0) {
+                System.out.println("쿠폰 삭제 실패");
+            } else {
+                System.out.println("쿠폰 삭제 성공");
+            }
+        }
+
+        // 사용 마일리지 삭감
+        if (umileage != 0) {
+            cnt = basketDAO.usemileage(mem_id, umileage);
+            if (cnt == 0) {
+                System.out.println("사용 마일리지 삭감 실패");
+            } else {
+                System.out.println("사용 마일리지 삭감 성공");
+            }
+        }
+
+        // 추가 마일리지 적립
 
         // 재고 삭감
+        for (int i = 0; i < list.size(); i++) {
+            int ss_num = Integer.parseInt(String.valueOf(list.get(i).get("ss_num")));
+            int bk_amount = Integer.parseInt(String.valueOf(list.get(i).get("bk_amount")));
+            cnt = basketDAO.stock(ss_num, bk_amount);
+            if (cnt == 0) {
+                System.out.println("재고 삭감 실패");
+            } else {
+                System.out.println("재고 삭감 성공");
+            }
+        }
 
-            *//*int cnt = basketDAO.newAddress(memdvDTO);
-            if (cnt != 0) {
-                System.out.println("주소 추가 성공");
-                // int dv_num = basketDAO.max_dvnum(mem_id);
-                if (cnt != 0) {
-                    // 쿠폰 delete도 해야함
-                    // od_num, od_date, dv_num, mem_dvnum, mem_id, cp_code, umileage, pmileage, total
-                    System.out.println("주소 넘버 성공");
-//                    orderDTO.getOd_num();
-//                    orderDTO.getOd_date();
-//                    orderDTO.getDv_num(dv_num);
-//                    orderDTO.getMem_dvnum();
-//                    orderDTO.getMem_id(mem_id);
-//                    orderDTO.getCp_code();
-//                    orderDTO.getUmileage();
-//                    orderDTO.getPmileage();
-//                    orderDTO.getTotal();
-//                    cnt = basketDAO.order(orderDTO);
-                }
-            }*//*
-
-        *//*return "/sales/salesorder";*//*
-    }*/
+        return "/sales/salesorder";
+    }
 
 
 }//class end

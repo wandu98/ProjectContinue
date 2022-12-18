@@ -36,6 +36,19 @@
         text-align: right;
         font-weight: 700
     }
+
+    #dt_msg {
+        width: 100%;
+        height: 150px;
+        font-size: 16px;
+        color: #6f6f6f;
+        padding-left: 20px;
+        margin-bottom: 24px;
+        border: 1px solid #ebebeb;
+        border-radius: 4px;
+        padding-top: 12px;
+        resize: none;
+    }
 </style>
 
 
@@ -264,6 +277,12 @@
                                         <input type="text" name="mem_dvnick" id="mem_dvnick">
                                     </div>
                                 </div>
+                                <div class="col-lg-12">
+                                    <div class="checkout__input">
+                                        <p>배송 메세지</p>
+                                        <textarea id="dt_msg" name="dt_msg" placeholder="배송 메세지를 입력해주세요."></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -281,7 +300,8 @@
                             <div class="checkout__order__products">
                                 <ul>
                                     <li style="color: black; font-weight: bold">마일리지 사용<br>남은 마일리지 : ${mileage}<input
-                                            type="text" id="umileage" name="umileage" value="0" style="float: right"></li>
+                                            type="text" id="umileage" name="umileage" value="0" style="float: right">
+                                    </li>
                                 </ul>
                             </div>
                             <hr>
@@ -331,7 +351,8 @@
                                 </label>
                             </div>
                             <p>결제 당일 취소가 아닌 경우에는 결제사에 따라 영업일 기준으로 3~5일 정도 소요됩니다. (카드사마다 취소 승인 소요 시일이 다를 수 있습니다)</p>
-                            <button type="submit" class="site-btn" id="csite-btn" <%--onclick="requestPay()"--%> disabled
+                            <button type="button" class="site-btn" id="csite-btn" onclick="requestPay()"
+                                    disabled
                                     style="background-color: skyblue">결제하기
                             </button>
                         </div>
@@ -442,7 +463,7 @@
         let minutes = ('0' + today.getMinutes()).slice(-2);
         let seconds = ('0' + today.getSeconds()).slice(-2);
 
-        let time = year + '-' + month  + '-' + day + " " + hours + ':' + minutes  + ':' + seconds;
+        let time = year + '-' + month + '-' + day + " " + hours + ':' + minutes + ':' + seconds;
         $('#od_date').val(time);
 
     });

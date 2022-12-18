@@ -24,30 +24,17 @@
     <select id="total" resultType="int">
         select sum(total)
         from (
-                 select mem_id, bk_amount*sl.ss_price as total
+                 select mem_id, bk_amount * sl.ss_price as total
                  from tb_basket bk join tb_sales sl
                                         on bk.ss_num = sl.ss_num
                  where mem_id = #{mem_id}
              ) AA
-        group by mem_id
     </select>
 
     <insert id="insert" parameterType="com.cafe24.nonchrono.dto.BasketDTO">
         insert into tb_basket (ss_num, bk_amount, mem_id)
         values (#{ss_num}, #{bk_amount}, #{mem_id})
     </insert>
-
-    <!-- 장바구니 합계   -->
-    <select id="bk_total" resultType="int">
-        select sum(total)
-        from (
-                 select mem_id, sl.ss_price as total
-                 from tb_basket bk join tb_sales sl
-                                        on bk.ss_num = sl.ss_num
-
-                 where mem_id = #{mem_id}
-             ) AA
-    </select>
 
     <!-- 배송비 제일 높은 값   -->
     <select id="max_fee" resultType="int">
@@ -63,4 +50,59 @@
         from tb_basket
         where mem_id = #{mem_id}
     </select>
+    
+    <select id="dv_sum" resultType="java.util.Map">
+        select dv_fee + dv_extrafee as dv_sum, sl.dv_num
+        from tb_basket bk join tb_sales sl
+                               on bk.ss_num = sl.ss_num
+                          join tb_delivery dv on sl.dv_num = dv.dv_num
+        where mem_id = #{mem_id}
+        group by sl.dv_num
+    </select>
+
+    <select id="od_num" resultType="String">
+        select od_num
+        from tb_order
+        where od_num like concat(#{od_num}, '%')
+        order by od_num desc
+        limit 1
+    </select>
+
+    <insert id="order" parameterType="com.cafe24.nonchrono.dto.OrderDTO">
+        insert into tb_order (od_num, od_date, mem_id, mem_dvnum, cp_code, umileage, pmileage, total)
+        values (#{od_num}, now(), #{mem_id}, #{mem_dvnum}, #{cp_code}, #{umileage}, #{pmileage}, #{total})
+    </insert>
+
+    <select id="dv_num" parameterType="int" resultType="int">
+        select dv_num
+        from tb_sales
+        where ss_num = #{ss_num}
+    </select>
+
+    <insert id="order_detail" parameterType="com.cafe24.nonchrono.dto.DetailDTO">
+        insert into tb_detail (od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
+        values (#{od_num}, #{dv_num}, #{dt_prog}, #{dt_odstts}, #{dt_refund}, #{ss_num}, #{dt_paymnt}, #{dt_msg})
+    </insert>
+
+    <delete id="basket_delete" parameterType="String">
+        delete from tb_basket
+        where mem_id = #{mem_id}
+    </delete>
+
+    <delete id="coupon_delete" parameterType="com.cafe24.nonchrono.dto.CouponlistDTO">
+        delete from tb_couponlist
+        where cp_code = #{cp_code} and mem_id = #{mem_id}
+    </delete>
+
+    <update id="usemileage" parameterType="com.cafe24.nonchrono.dto.OrderDTO">
+        update tb_mem
+        set upoint = tb_mem.upoint - #{umileage}
+        where mem_id = #{mem_id}
+    </update>
+
+    <update id="stock" parameterType="java.util.Map">
+        update tb_sales
+        set ss_stock = ss_stock - #{bk_amount}
+        where ss_num = #{ss_num}
+    </update>
 </mapper>
