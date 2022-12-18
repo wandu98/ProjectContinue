@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <div style="float: right; margin: 1%">
-                    <button type="button" class="btn btn-outline-danger" onclick="recruitForm()"> 모집글 등록
+                    <button type="button" class="btn btn-outline-danger" onclick="location.href = '/recruit/form'"> 모집글 등록
                     </button>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                     <div class="blog__sidebar__search" style="position: relative">
                         <form action="/recruit/searchWord">
                             <input type="text" id="gs_keyword" name="gs_keyword" placeholder="Search...">
-                            <button type="button"><span class="icon_search"></span></button>
+                            <button type="submit"><span class="icon_search"></span></button>
                         </form>
                         <div id="panel"></div>
                     </div>
@@ -172,10 +172,6 @@
     document.addEventListener("DOMContentLoaded", () => {
         $('#panel').niceScroll();
     });
-
-    function recruitForm() {
-        location.href = "/recruit/form";
-    } // recruitForm() end
 
     // 더보기 기능
     function more(startCount, endCount, order) {

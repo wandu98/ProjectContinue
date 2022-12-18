@@ -52,7 +52,11 @@ public class BasketDAO {
     }
 
     public int total(String mem_id) {
-        return sqlSession.selectOne("basket.total", mem_id);
+        if (sqlSession.selectOne("basket.total", mem_id) == null) {
+            return 0;
+        } else {
+            return sqlSession.selectOne("basket.total", mem_id);
+        }
     }
 
     public String od_num(String today) {

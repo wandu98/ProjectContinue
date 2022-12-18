@@ -46,7 +46,11 @@ public class WishDAO {
     }
 
     public int idxWishCount(String mem_id) {
-        return sqlSession.selectOne("wishlist.idxWishCount", mem_id);
+        if (sqlSession.selectOne("wishlist.idxWishCount", mem_id) == null){
+            return  0;
+        } else {
+            return sqlSession.selectOne("wishlist.idxWishCount", mem_id);
+        }
     }
 
 }
