@@ -333,7 +333,7 @@ CREATE TABLE tb_wish
 
 
 -- 회원평가
-CREATE TABLE tb_evaluation
+/*CREATE TABLE tb_evaluation
 (
     eval_num     int          NOT NULL AUTO_INCREMENT PRIMARY KEY -- 회원평가 게시판 번호
     ,
@@ -344,7 +344,7 @@ CREATE TABLE tb_evaluation
     eval_regdate datetime default now()                           -- 등록일
     ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)
-);
+);*/
 
 
 -- 공지사항
@@ -409,8 +409,6 @@ create table tb_rcrboard
     ,
     FOREIGN KEY (gm_code) REFERENCES tb_game (gm_code) -- 품목코드
 );
-
-drop table tb_rcrboard;
 
 -- 이벤트신청자
 create table tb_evtapl
@@ -499,6 +497,18 @@ create table tb_search
     sc_where varchar(255)           not null  -- 검색된 페이지 구분
 );
 
+-- 평점 테이블
+create table tb_rating
+(
+    rt_num     int AUTO_INCREMENT primary key, -- 평점 일련번호
+    rt_goodbad varchar(255) not null,          -- 좋아요/싫어요
+    rt_content varchar(255) not null,          -- 평점 내용
+    give_id     varchar(20)  not null,          -- 추천한 회원 아이디
+    receive_id  varchar(20)  not null,          -- 추천 받은 회원 아이디
+    rcrbrd_num int          not null,          -- 추천한 모집 게시판 글 번호
+    FOREIGN KEY (rcrbrd_num) REFERENCES tb_rcrboard (rcrbrd_num)
+);
+
 select *
 from tb_role;
 
@@ -516,7 +526,7 @@ drop table tb_couponlist;
 drop table tb_delivery;
 drop table tb_detail;
 drop table tb_er;
-drop table tb_evaluation;
+-- drop table tb_evaluation;
 drop table tb_evt;
 drop table tb_evtapl;
 drop table tb_game;
@@ -532,6 +542,7 @@ drop table tb_seller;
 drop table tb_wish;
 drop table tb_rcrboard;
 drop table tb_search;
+drop table tb_rating;
 
 SET foreign_key_checks = 0; -- 외래키 해제
 SET foreign_key_checks = 1; -- 외래키 설정

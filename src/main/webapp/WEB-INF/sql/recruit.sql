@@ -368,3 +368,12 @@ from tb_memdv
 where mem_id = 'fjhdmj555';
 
 #3. 방금 인서트한 배송정보의 넘버를 가지고 주문정보를 인서트를 한다
+
+SELECT mem_id, ri_seat, ri_num
+FROM tb_recruitinfo
+WHERE rcrbrd_num = 1
+
+SELECT count(*)
+FROM tb_rating
+WHERE rcrbrd_num = 5
+  AND give_id = 'koochunwoo' AND receive_id = 'gjdjj888';
