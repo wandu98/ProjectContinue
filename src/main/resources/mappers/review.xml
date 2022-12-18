@@ -37,7 +37,7 @@
 
     <insert id="insert" parameterType="com.cafe24.nonchrono.dto.ReviewDTO">
         INSERT INTO tb_review(mem_id, rv_content, rv_star, rv_filename, ss_num, rv_date)
-        VALUES (#{mem_id}, #{rv_content}, #{rv_star}, #{rv_filename}, #{ss_num}, #{rv_date})
+        VALUES (#{mem_id}, #{rv_content}, #{rv_star}, #{rv_filename}, #{ss_num}, now())
     </insert>
 
     <select id="rv_list" resultType="com.cafe24.nonchrono.dto.ReviewDTO" parameterType="int">

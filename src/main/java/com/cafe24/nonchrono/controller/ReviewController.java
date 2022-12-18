@@ -40,7 +40,7 @@ public class ReviewController {
     }
 
     @RequestMapping("/rv_insert")
-    private String rv_insert(@RequestParam String rv_content, @RequestParam int rv_star, @RequestParam int ss_num, @RequestParam MultipartFile rv_filename, @RequestParam String rv_date, HttpSession session){
+    private String rv_insert(@RequestParam String rv_content, @RequestParam int rv_star, @RequestParam int ss_num, @RequestParam MultipartFile rv_filename, HttpSession session){
         String mem_id = (String) session.getAttribute("mem_id");
         ReviewDTO reviewDTO = new ReviewDTO();
         String rv_img = "";
@@ -59,7 +59,6 @@ public class ReviewController {
         reviewDTO.setMem_id(mem_id);
         reviewDTO.setRv_content(rv_content);
         reviewDTO.setRv_filename(rv_img);
-        reviewDTO.setRv_date(rv_date);
         reviewDTO.setSs_num(ss_num);
         reviewDTO.setRv_star(rv_star);
         reviewDAO.rv_insert(reviewDTO);

@@ -107,6 +107,7 @@ public class SalesController {
         mav.addObject("reviewCount", salesDAO.reviewCount(ss_num)); // 리뷰 갯수
         mav.addObject("reviewDetail", salesDAO.reviewDetail(ss_num)); //리뷰 상세
         mav.addObject("deliveryDetail", salesDAO.deliveryDetail(ss_num));// 배송비 가져오기
+        mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
 
         mav.setViewName("sales/detail");
         return mav;
@@ -307,6 +308,8 @@ public class SalesController {
         // 사용한 마일리지 변수화
         int umileage = orderDTO.getUmileage();
 
+
+
         // 주문서 추가
         orderDTO.setOd_num(od_num);
         orderDTO.setMem_id(mem_id);
@@ -327,6 +330,7 @@ public class SalesController {
         // 주문상세 추가
         for (int i = 0; i < list.size(); i++) {
             int ss_num = Integer.parseInt(String.valueOf(list.get(i).get("ss_num")));
+            int amount = Integer.parseInt(String.valueOf(list.get(i).get("bk_amount")));
             detailDTO.setOd_num(od_num); // 주문서 번호
             detailDTO.setDv_num(basketDAO.dv_num(ss_num)); // 배송정책
             detailDTO.setDt_prog("결제완료"); // 진행상태
@@ -334,6 +338,7 @@ public class SalesController {
             detailDTO.setDt_refund('Y'); // 환불가능여부
             detailDTO.setSs_num(ss_num); // 판매상품 번호
             detailDTO.setDt_paymnt("card"); // 결제수단
+            detailDTO.setDt_amount(amount); // 구매수량
 
             cnt = basketDAO.order_detail(detailDTO);
             if (cnt == 0) {
@@ -389,7 +394,18 @@ public class SalesController {
             }
         }
 
-        return "/sales/salesorder";
+        return "/sales/salesorder/{od_num}";
+    }
+
+    //주문서 상세
+    @RequestMapping("/salesorder/{od_num}")
+    public ModelAndView salesorder(@PathVariable String od_num, HttpSession session) {
+        ModelAndView mav =new ModelAndView();
+        String mem_id = session.getAttribute("mem_id").toString();
+        mav.addObject("orderlist", salesDAO.orderlist(od_num));
+        mav.addObject("orderadr", salesDAO.orderadr(mem_id));
+        mav.setViewName("sales/salesorder");
+        return mav;
     }
 
 

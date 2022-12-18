@@ -40,10 +40,13 @@
     </insert>
 
     <select id="idxWishCount" resultType="int">
-        select count(*)
-        from tb_wish
-        where mem_id = #{mem_id}
-        group by mem_id
+        select ifnull(max(count), 0) as cnt
+        from (
+                 select count(*) as count
+                 from tb_wish
+                 where mem_id = #{mem_id}
+                 group by mem_id
+             ) AA
     </select>
 
 </mapper>

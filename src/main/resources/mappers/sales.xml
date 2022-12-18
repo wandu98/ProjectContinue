@@ -204,9 +204,9 @@
             ) aa
     </select>
 
-    <select id="reviewDetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.ReviewDTO">
-        SELECT rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num, rv_date
-        from tb_review
+    <select id="reviewDetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.ReviewnickDTO">
+        SELECT rv_num, rv.mem_id, rv_content, rv_star, rv_filename, ss_num, rv_date, tm.mem_nick
+        from tb_review rv join tb_mem tm on tm.mem_id = rv.mem_id
         WHERE ss_num = #{ss_num}
         ORDER BY rv_num desc
     </select>

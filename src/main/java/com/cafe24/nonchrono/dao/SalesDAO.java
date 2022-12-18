@@ -119,7 +119,7 @@ public class SalesDAO {
         return sqlSession.selectOne("sales.reviewCount", ss_num);
     }// reviewDetail() end
 
-    public List<ReviewDTO> reviewDetail(int ss_num) {
+    public List<ReviewnickDTO> reviewDetail(int ss_num) {
         return sqlSession.selectList("sales.reviewDetail", ss_num);
     } // reviewCmt() end
 
@@ -160,7 +160,15 @@ public class SalesDAO {
         return sqlSession.selectOne("sales.memdv_search", memdvDTO);
     }
 
+//   주문서 insert
     public int order(OrderDTO orderDTO) {
         return sqlSession.insert("basket.order", orderDTO);
     }
+
+    public List<OrderdetailDTO> orderlist(String  od_num) {return sqlSession.selectList("order.orderlist", od_num);
+    } // orderlist() end
+
+    public MemdvDTO orderadr(String mem_id) {return sqlSession.selectOne("order.orderadr", mem_id);
+    } // orderAdr() end
+
 }//class end

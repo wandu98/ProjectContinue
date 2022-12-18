@@ -18,4 +18,20 @@
         where od_num = #{od_num}
     </select>
 
+    <select id="orderlist" resultType="com.cafe24.nonchrono.dto.OrderdetailDTO">
+        select dt_num, dt.od_num, dt.dv_num, dt_prog, dt_odstts, dt_refund, ss.ss_num, dt_paymnt, dt_msg, dt_amount, mem_dvnum,
+               cp_code, umileage, pmileage, total, od_date, mem_id, ss_img, ss_name, ss_price
+        from tb_detail dt join tb_order od
+                               on dt.od_num = od.od_num
+                          join tb_sales ss on ss.ss_num = dt.ss_num
+        where dt.od_num = #{od_num}
+    </select>
+
+<select id="orderadr" resultType="com.cafe24.nonchrono.dto.MemdvDTO">
+    select od.mem_dvnum, od.mem_id ,mem_dvinfo ,mem_dvzip ,mem_dvadr1 ,mem_dvadr2 ,mem_dvphone, mem_dvnick
+    from tb_memdv mdv join tb_order od on mdv.mem_dvnum = od.mem_dvnum
+    where od.mem_dvnum = #{mem_dvnum}
+</select>
+
+
 </mapper>

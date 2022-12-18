@@ -47,7 +47,13 @@
 
     <!-- 장바구니에 담은 상품 갯수 -->
     <select id="count" resultType="java.lang.Integer">
-        select count(*)
+        select ifnull(max(count), 0) as cnt
+        from (
+                 select count(*) as count
+                 from tb_basket
+                 where mem_id = #{mem_id}
+                 group by mem_id
+             ) AA
     </select>
         
     <select id="item" parameterType="String" resultType="com.cafe24.nonchrono.dto.BasketDTO">
@@ -85,8 +91,8 @@
     </select>
 
     <insert id="order_detail" parameterType="com.cafe24.nonchrono.dto.DetailDTO">
-        insert into tb_detail (od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg)
-        values (#{od_num}, #{dv_num}, #{dt_prog}, #{dt_odstts}, #{dt_refund}, #{ss_num}, #{dt_paymnt}, #{dt_msg})
+        insert into tb_detail (od_num, dv_num, dt_prog, dt_odstts, dt_refund, ss_num, dt_paymnt, dt_msg, dt_amount)
+        values (#{od_num}, #{dv_num}, #{dt_prog}, #{dt_odstts}, #{dt_refund}, #{ss_num}, #{dt_paymnt}, #{dt_msg}, #{dt_amount})
     </insert>
 
     <delete id="basket_delete" parameterType="String">
