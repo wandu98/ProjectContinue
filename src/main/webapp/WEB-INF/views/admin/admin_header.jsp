@@ -305,6 +305,25 @@
         </li><!-- End Forms Nav -->
 
         <li class="nav-item">
+            <a class="nav-link" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#" aria-expanded="true">
+                <i class="bi bi-gem"></i><span>이벤트</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/admin/eventWrite">
+                        <i class="bi bi-circle"></i><span>글쓰기</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/event/event">
+                        <i class="bi bi-circle"></i><span>이벤트 목록</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End icons Nav -->
+
+        <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button-wide"></i><span>품목 등록</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>

@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -25,8 +24,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="/admin_assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -315,26 +313,43 @@
         </li><!-- End Forms Nav -->
 
         <li class="nav-item">
+            <a class="nav-link" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#" aria-expanded="true">
+                <i class="bi bi-gem"></i><span>이벤트</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/admin/eventWrite">
+                        <i class="bi bi-circle"></i><span>글쓰기</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/event/event">
+                        <i class="bi bi-circle"></i><span>이벤트 목록</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End icons Nav -->
+
+        <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-menu-button-wide"></i><span>품목 등록</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="/admin/gameWrite">
+                    <a href="/">
                         <i class="bi bi-circle"></i><span>품목 등록</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/admin/gameList">
-                        <i class="bi bi-circle"></i><span>품목 목록</span>
                     </a>
                 </li>
             </ul>
         </li><!-- End Components Nav -->
-    </ul>
-    <%--<li class="nav-heading">Pages</li>--%>
 
+
+
+
+        <%--<li class="nav-heading">Pages</li>--%>
+
+    </ul>
 
 </aside><!-- End Sidebar-->
 
@@ -383,10 +398,8 @@
                                         <i class="bi bi-cart"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6 id="sales_value"><c:choose><c:when test="${sales} != null">${sales}</c:when><c:otherwise>0</c:otherwise></c:choose>
-                                                </h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
+                                        <h6 id="sales_value">${sales}</h6>
+                                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                                     </div>
                                 </div>
@@ -407,8 +420,7 @@
                                     </li>
 
                                     <li><a class="dropdown-item" onclick="revenue('day')" id="revenue_day">하루</a></li>
-                                    <li><a class="dropdown-item" onclick="revenue('month')" id="revenue_month">한달</a>
-                                    </li>
+                                    <li><a class="dropdown-item" onclick="revenue('month')" id="revenue_month">한달</a></li>
                                     <li><a class="dropdown-item" onclick="revenue('year')" id="revenue_year">일년</a></li>
                                 </ul>
                             </div>
@@ -422,8 +434,7 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>$3,264</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
+                                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                                     </div>
                                 </div>
@@ -445,10 +456,8 @@
                                     </li>
 
                                     <li><a class="dropdown-item" onclick="customer('day')" id="customer_day">하루</a></li>
-                                    <li><a class="dropdown-item" onclick="customer('month')" id="customer_month">한달</a>
-                                    </li>
-                                    <li><a class="dropdown-item" onclick="customer('year')" id="customer_year">일년</a>
-                                    </li>
+                                    <li><a class="dropdown-item" onclick="customer('month')" id="customer_month">한달</a></li>
+                                    <li><a class="dropdown-item" onclick="customer('year')" id="customer_year">일년</a></li>
                                 </ul>
                             </div>
 
@@ -461,8 +470,7 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>1244</h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span>
+                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                                     </div>
                                 </div>
@@ -660,46 +668,36 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-1.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas
-                                            nulla</a></td>
+                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-1.jpg" alt=""></a></th>
+                                        <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
                                         <td>$64</td>
                                         <td class="fw-bold">124</td>
                                         <td>$5,828</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-2.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Exercitationem similique
-                                            doloremque</a></td>
+                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-2.jpg" alt=""></a></th>
+                                        <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
                                         <td>$46</td>
                                         <td class="fw-bold">98</td>
                                         <td>$4,508</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-3.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a>
-                                        </td>
+                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-3.jpg" alt=""></a></th>
+                                        <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
                                         <td>$59</td>
                                         <td class="fw-bold">74</td>
                                         <td>$4,366</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-4.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum
-                                            error</a></td>
+                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-4.jpg" alt=""></a></th>
+                                        <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
                                         <td>$32</td>
                                         <td class="fw-bold">63</td>
                                         <td>$2,016</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-5.jpg"
-                                                                         alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus
-                                            repellendus</a></td>
+                                        <th scope="row"><a href="#"><img src="admin_assets/img/product-5.jpg" alt=""></a></th>
+                                        <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
                                         <td>$79</td>
                                         <td class="fw-bold">41</td>
                                         <td>$3,239</td>
@@ -739,8 +737,7 @@
                                     </div>
 
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" placeholder="품목명을 작성해주세요" id="gm_name"
-                                                  style="height: 100px;"></textarea>
+                                        <textarea class="form-control" placeholder="품목명을 작성해주세요" id="gm_name" style="height: 100px;"></textarea>
                                         <label for="gm_name">품목명</label>
                                     </div>
 
@@ -760,136 +757,119 @@
                                             <input type="hidden" id="gm_category" name="gm_category" value="" readonly>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_action" value="액션">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_action" value="액션">
                                                 <label class="form-check-label" for="cate_action">
                                                     액션
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_adventure" value="어드벤처">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_adventure" value="어드벤처">
                                                 <label class="form-check-label" for="cate_adventure">
                                                     어드벤처
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 34%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_rpg" value="RPG">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_rpg" value="RPG">
                                                 <label class="form-check-label" for="cate_rpg">
                                                     RPG
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_strategy" value="전략">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_strategy" value="전략">
                                                 <label class="form-check-label" for="cate_strategy">
                                                     전략
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_fight" value="격투">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_fight" value="격투">
                                                 <label class="form-check-label" for="cate_fight">
                                                     격투
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 34%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_puzzle" value="퍼즐">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_puzzle" value="퍼즐">
                                                 <label class="form-check-label" for="cate_puzzle">
                                                     퍼즐
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_party" value="파티">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_party" value="파티">
                                                 <label class="form-check-label" for="cate_party">
                                                     파티
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_simulation" value="시뮬레이션">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_simulation" value="시뮬레이션">
                                                 <label class="form-check-label" for="cate_simulation">
                                                     시뮬레이션
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 34%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_racing" value="레이싱">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_racing" value="레이싱">
                                                 <label class="form-check-label" for="cate_racing">
                                                     레이싱
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_sports" value="스포츠">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_sports" value="스포츠">
                                                 <label class="form-check-label" for="cate_sports">
                                                     스포츠
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_arcade" value="아케이드">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_arcade" value="아케이드">
                                                 <label class="form-check-label" for="cate_arcade">
                                                     아케이드
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 34%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_utility" value="실용">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_utility" value="실용">
                                                 <label class="form-check-label" for="cate_utility">
                                                     실용
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_training" value="트레이닝">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_training" value="트레이닝">
                                                 <label class="form-check-label" for="cate_training">
                                                     트레이닝
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_study" value="학습">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_study" value="학습">
                                                 <label class="form-check-label" for="cate_study">
                                                     학습
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 34%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_shooting" value="슈팅">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_shooting" value="슈팅">
                                                 <label class="form-check-label" for="cate_shooting">
                                                     슈팅
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_board" value="보드">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_board" value="보드">
                                                 <label class="form-check-label" for="cate_board">
                                                     보드
                                                 </label>
                                             </div>
 
                                             <div class="form-check" style="float: left; width: 33%;">
-                                                <input class="form-check-input" name="inputCate" type="checkbox"
-                                                       id="cate_extra" value="기타">
+                                                <input class="form-check-input" name="inputCate" type="checkbox" id="cate_extra" value="기타">
                                                 <label class="form-check-label" for="cate_extra">
                                                     기타
                                                 </label>
@@ -960,8 +940,7 @@
                                 <div class="activite-label">1 day</div>
                                 <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
                                 <div class="activity-content">
-                                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a>
-                                    tempore
+                                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
                                 </div>
                             </div><!-- End activity item-->
 
@@ -1184,8 +1163,7 @@
                             <div class="post-item clearfix">
                                 <img src="admin_assets/img/news-5.jpg" alt="">
                                 <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                                <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos
-                                    eius...</p>
+                                <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
                             </div>
 
                         </div><!-- End sidebar recent posts-->
@@ -1196,8 +1174,7 @@
             </div><!-- End Right side columns -->
 
             <div style="text-align: right">
-                <button type="button" onclick="location.href='/crawling'" class="btn btn-outline-primary">품목 자동 등록
-                </button>
+                <button type="button" onclick="location.href='/crawling'" class="btn btn-outline-primary">품목 자동 등록</button>
             </div>
         </div>
     </section>
@@ -1211,21 +1188,25 @@
     </div>
 </footer><!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script src="/admin_assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="/admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/admin_assets/vendor/chart.js/chart.min.js"></script>
-<script src="/admin_assets/vendor/echarts/echarts.min.js"></script>
-<script src="/admin_assets/vendor/quill/quill.min.js"></script>
-<script src="/admin_assets/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="/admin_assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="/admin_assets/vendor/php-email-form/validate.js"></script>
+<script src="admin_assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="admin_assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="admin_assets/vendor/chart.js/chart.min.js"></script>
+<script src="admin_assets/vendor/echarts/echarts.min.js"></script>
+<script src="admin_assets/vendor/quill/quill.min.js"></script>
+<script src="admin_assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="admin_assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="admin_assets/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
-<script src="assets/js/main.js"></script>
+<script src="/admin_assets/js/main.js"></script>
+<script src="/js/jquery.nice-select.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/jquery.slicknav.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
 
 </body>
 </html>
@@ -1253,14 +1234,14 @@
         });
     }
 
-    $(document).ready(function () {
-        $(".form-check-input").click(function () {
+    $(document).ready(function() {
+        $(".form-check-input").click(function() {
             // alert($("input[type=checkbox][name=inputCate]:checked").val());
             let tmp_arr = [];
-            $(".form-check-input:checked").each(function () {
-                let tmp = $(this).val();
-                tmp_arr.push(tmp);
-            })
+             $(".form-check-input:checked").each(function() {
+                 let tmp = $(this).val();
+                 tmp_arr.push(tmp);
+             })
             alert(tmp_arr);
         })
     })

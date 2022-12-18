@@ -1,7 +1,9 @@
 package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.AdminDAO;
+import com.cafe24.nonchrono.dao.EventDAO;
 import com.cafe24.nonchrono.dao.NoticeDAO;
+import com.cafe24.nonchrono.dto.EventDTO;
 import com.cafe24.nonchrono.dto.GameDTO;
 import com.cafe24.nonchrono.dto.MemDTO;
 import com.cafe24.nonchrono.dto.NoticeDTO;
@@ -37,6 +39,9 @@ public class AdminController {
     @Autowired
     private AdminDAO adminDAO;
 
+    @Autowired
+    private EventDAO eventDAO;
+
     @RequestMapping("") // 관리자 메인
     public ModelAndView AdminIndex() {
         ModelAndView mav = new ModelAndView();
@@ -69,6 +74,19 @@ public class AdminController {
         mav.setViewName("redirect:/notice/noticeList");
         return mav;
     } // noticeProc() end
+
+    @RequestMapping(value = "/eventWrite", method = RequestMethod.GET) // 이동만
+    public String evtlist() {
+        return "/admin/eventWrite";
+    } // evtlist() end
+
+    @RequestMapping(value = "/eventWrite", method = RequestMethod.POST)
+    public ModelAndView eventProc(@ModelAttribute EventDTO eventDTO) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject(eventDAO.evtInsert(eventDTO));
+        mav.setViewName("redirect:/event/event");
+        return mav;
+    }//eventProc() end
 
     @RequestMapping("/sales_day")
     @ResponseBody

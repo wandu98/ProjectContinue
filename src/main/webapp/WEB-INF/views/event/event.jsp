@@ -74,119 +74,33 @@
             </div>
         </div>
         <div class="col-lg-8 col-md-7">
-            <div class="row">
-<%--                <c:forEach var="event" items="${eventlist}">--%>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="blog__item">
-                            <div class="blog__item__pic">
-                                <img src="/images/001.jpg" alt="">
-                            </div>
-                            <div class="blog__item__text">
-                                <ul>
-                                    <li><i class="fa fa-calendar-o"></i> ${event.evt_regdate}</li>
-                                    <li><i class="fa fa-calendar-o"></i> 2022-12-23 00:00:00</li>
-                                    <li><i class="fa fa-calendar-o"></i> 작성일</li>
-                                </ul>
-                                <h5><a href="#">제목</a></h5>
-                                <p>조회수</p>
-                                <a href="#" class="blog__btn">더보기 <span class="arrow_right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-<%--                </c:forEach>--%>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-3.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Visit the clean farm in the US</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                quaerat </p>
-                            <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-1.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                quaerat </p>
-                            <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-4.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                quaerat </p>
-                            <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-4.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">The Moment You Need To Remove Garlic From The Menu</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                quaerat </p>
-                            <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-6.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                quaerat </p>
-                            <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="product__pagination blog__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                    </div>
-                </div>
+            <h3>이벤트</h3>
+            <br>
+            <div name="evtlist" id="evtlist">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>시작일</th>
+                        <th>종료일</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="event" items="${eventlist}">
+                        <tr style="cursor: pointer" onclick="location.href='/event/Detail/${event.evt_num}'">
+                            <td>${event.evt_num}</td>
+                            <td>${event.evt_title}</td>
+                            <td>${event.evt_start}</td>
+                            <td>${event.evt_end}</td>
+                            <td>${event.evt_regdate}</td>
+                            <td>${event.evt_views}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
