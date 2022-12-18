@@ -18,5 +18,6 @@ public class DetailDTO {
     private int ss_num;
     private String dt_paymnt;
     private String dt_msg;
+    private int dt_amount;
 
 }
