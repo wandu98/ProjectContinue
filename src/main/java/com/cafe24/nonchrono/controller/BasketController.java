@@ -2,6 +2,7 @@ package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.BasketDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
+import com.cafe24.nonchrono.dao.WishDAO;
 import com.cafe24.nonchrono.dto.BasketDTO;
 import com.cafe24.nonchrono.dto.SalesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +21,40 @@ public class BasketController {
     }
 
     @Autowired
-    BasketDAO basketDAO;
+    private BasketDAO basketDAO;
+
+    @Autowired
+    private WishDAO wishDAO;
 
     @RequestMapping("/delete")
-    public String delete(@RequestParam int bk_num) {
+    public String delete(@RequestParam int bk_num, HttpSession session) {
+        String mem_id = (String) session.getAttribute("mem_id");
         basketDAO.delete(bk_num);
-        return "mypage/cart";
+
+        int basketcnt = 0;
+        if (mem_id != null) {
+            basketcnt = basketDAO.count(mem_id);
+            session.setAttribute("idxBasketCount", basketcnt);
+        } else {
+            session.setAttribute("idxBasketCount", basketcnt);
+        }
+
+        return "redirect:/mypage/cart";
     }
 
     @RequestMapping("/allClear")
     public String allClear(HttpSession session) {
         String mem_id = (String) session.getAttribute("mem_id");
         basketDAO.allClear(mem_id);
-        return "mypage/cart";
+
+        int basketcnt = 0;
+        if (mem_id != null) {
+            basketcnt = basketDAO.count(mem_id);
+            session.setAttribute("idxBasketCount", basketcnt);
+        } else {
+            session.setAttribute("idxBasketCount", basketcnt);
+        }
+        return "redirect:/mypage/cart";
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.GET)
@@ -48,6 +70,18 @@ public class BasketController {
         basketDTO.setMem_id(mem_id);
         basketDTO.setBk_amount(bk_amount);
         basketDTO.setSs_num(ss_num);
+        basketDAO.insert(basketDTO);
+    }
+
+    @RequestMapping("/idxinsert")
+    @ResponseBody
+    public void idxinsert(HttpSession session, HttpServletRequest request, BasketDTO basketDTO) {
+        String mem_id = (String) session.getAttribute("mem_id");
+        int ss_num = Integer.parseInt(request.getParameter("ss_num"));
+        int bk_amount = 1;
+        basketDTO.setMem_id(mem_id);
+        basketDTO.setSs_num(ss_num);
+        basketDTO.setBk_amount(bk_amount);
         basketDAO.insert(basketDTO);
     }
 

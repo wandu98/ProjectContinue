@@ -82,9 +82,7 @@ public class MypageController {
             mav.addObject("meminfo", memDAO.myList(mem_id));
             mav.addObject("qslist", questionDAO.count(mem_id));
             mav.addObject("revlist", reviewDAO.count(mem_id));
-            mav.addObject("recruitlist", recruitDAO.myriList(mem_id));
-            mav.addObject("rcrlist", recruitDAO.myrcrList(mem_id));
-            mav.addObject("rcrcount", recruitDAO.rcrCoount(mem_id));
+            mav.addObject("recruitlist", recruitDAO.rcrbrdlist(mem_id));
             mav.addObject("detailcount", detailDAO.detailCount(mem_id));
             mav.setViewName("mypage/mypage");
         } else {
@@ -96,7 +94,6 @@ public class MypageController {
     @RequestMapping("/wishlist")
     public ModelAndView wishlist(HttpServletRequest req, PagingDTO pagingDTO, HttpSession session) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("mypage/wishlist");
 
         String mem_id = (String) session.getAttribute("mem_id");
         pagingDTO.setMem_id(mem_id);
@@ -148,12 +145,20 @@ public class MypageController {
             list = Collections.EMPTY_LIST;
         }//if end
 
-        mav.addObject("pageNum", currentPage);
-        mav.addObject("count", totalRowCount);
-        mav.addObject("totalPage", totalPage);
-        mav.addObject("startPage", startPage);
-        mav.addObject("endPage", endPage);
-        mav.addObject("list", list);
+        int wishcnt = 0;
+        if (mem_id != null) {
+            wishcnt = wishDAO.idxWishCount(mem_id);
+            session.setAttribute("idxWishCount", wishcnt);
+            mav.addObject("pageNum", currentPage);
+            mav.addObject("count", totalRowCount);
+            mav.addObject("totalPage", totalPage);
+            mav.addObject("startPage", startPage);
+            mav.addObject("endPage", endPage);
+            mav.addObject("list", list);
+            mav.setViewName("mypage/wishlist");
+        } else {
+            mav.setViewName("mem/loginForm");
+        }
         return mav;
     }
 
@@ -307,8 +312,6 @@ public class MypageController {
             String od_num = list.get(i).getOd_num();
             list1.add(orderDAO.purchaseHistoryProduct(od_num));
         }
-        System.out.println(list);
-        System.out.println(list1);
         mav.addObject("historylist", list);
         mav.addObject("historyproduct", list1);
         mav.setViewName("mypage/purchaseHistory");
@@ -319,12 +322,19 @@ public class MypageController {
     public ModelAndView cart(HttpSession session) {
         ModelAndView mav = new ModelAndView();
         String mem_id = (String) session.getAttribute("mem_id");
-        mav.addObject("list", basketDAO.mylist(mem_id));
-        mav.addObject("bk_total", basketDAO.total(mem_id));
-        mav.addObject("max_fee", basketDAO.max_fee(mem_id));
-        mav.setViewName("mypage/cart");
+
+        int basketcnt = 0;
+        if (mem_id != null) {
+            basketcnt = basketDAO.count(mem_id);
+            session.setAttribute("idxBasketCount", basketcnt);
+            mav.addObject("list", basketDAO.mylist(mem_id));
+            mav.addObject("bk_total", basketDAO.bk_total(mem_id));
+            mav.addObject("max_fee", basketDAO.max_fee(mem_id));
+            mav.setViewName("mypage/cart");
+        } else {
+            mav.setViewName("mem/loginForm");
+        }
         return mav;
     }
-
 
 }

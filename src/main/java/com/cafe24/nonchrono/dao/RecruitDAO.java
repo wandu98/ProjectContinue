@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -211,5 +212,8 @@ public class RecruitDAO {
         return sqlSession.update("recruit.views", rcrbrd_num);
     } // views() end
 
+    public List<Map<String, ?>> rcrbrdlist(String mem_id) {
+        return sqlSession.selectList("mypage.rcrbrdlist", mem_id);
+    }
 
 } // class end

@@ -184,5 +184,3 @@ from (
     ) AA
 order by cnt desc, sales desc
 limit 5;
-
-

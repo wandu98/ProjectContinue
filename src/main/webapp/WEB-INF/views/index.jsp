@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <%@ include file="auth.jsp" %>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -36,50 +36,11 @@
     <script src="/ckeditor/ckeditor.js"></script>
 
     <style>
-
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        .nice-select {
+            border: none;
         }
-
-        /* Modal Content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 20%;
-        }
-
-        /* The Close Button */
-        .close {
-            color: #aaaaaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-
-
-
     </style>
+
 </head>
 
 <body>
@@ -97,7 +58,7 @@
     <div class="humberger__menu__cart">
         <ul>
             <li><a href="#"><i class="fa fa-heart"></i> <span>${idxWishCount}</span></a></li>
-            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>${idxBasketCount}</span></a></li>
         </ul>
     </div>
     <div class="humberger__menu__widget">
@@ -113,7 +74,7 @@
             <li><a href="#">고객센터</a>
                 <ul class="header__menu__dropdown">
                     <li><a href="/notice/noticeList">공지사항</a></li>
-                    <li><a href="/">이벤트</a></li>
+                    <li><a href="/event/event">이벤트</a></li>
                     <li><a href="/">1:1문의</a></li>
                 </ul>
             </li>
@@ -145,7 +106,10 @@
                             <% } else if (session.getAttribute("admin_id") != null) { %>
                             <a href="/admin">관리자 모드</a>
                             <% } %>
-                            <a href="/mem/login">로그인</a>
+                            <c:choose>
+                                <c:when test="${mem_id == null}"><a href="/mem/login">로그인</a></c:when>
+                                <c:otherwise><a href="/mem/logout">로그아웃</a></c:otherwise>
+                            </c:choose>
                             <a href="/mem/signup">회원가입</a>
                         </div>
                         <div class="header__top__right__auth">
@@ -172,7 +136,7 @@
                         <li><a href="#">고객센터</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="/notice/noticeList">공지사항</a></li>
-                                <li><a href="/">이벤트</a></li>
+                                <li><a href="/event/event">이벤트</a></li>
                                 <li><a href="/">1:1문의</a></li>
                             </ul>
                         </li>
@@ -182,8 +146,8 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="/mypage/wishlist"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="/mypage/cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li><a href="/mypage/wishlist"><i class="fa fa-heart"></i> <span id="idxWishCount">${idxWishCount}</span></a></li>
+                        <li><a href="/mypage/cart"><i class="fa fa-shopping-bag"></i> <span id="idxBasketCount">${idxBasketCount}</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -260,14 +224,14 @@
 
 <section>
     <div class="hero__item set-bg" data-setbg="images/banner.jpg">
-        <div class="hero__text" style="text-align: center; left: 25%; position: absolute">
+        <div class="hero__text" style="text-align: center; left: 35%; position: absolute">
             <h2>월간 <br/>타이틀 순위</h2>
             <a href="/sales" class="success-btn">SHOP NOW</a>
             <br><br>
             <button type="button" class="btn btn-outline-warning" onclick="rankingSales()">판매순</button>
             <button type="button" class="btn btn-outline-warning" onclick="rankingRecruit()">모집순</button>
         </div>
-        <div id="ranking" style="position: absolute; left: 50%">
+        <div id="ranking" style="position: absolute; left: 55%">
             <ol>
                 <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
                     <li>${row.gm_name}</li>
@@ -282,31 +246,12 @@
     <div class="container">
         <div class="row">
             <div class="categories__slider owl-carousel">
+                <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
                 <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="/images/soft1.jpeg">
-                        <h5><a href="#">아빠몰래 팜 선착순</a></h5>
+                    <div class="categories__item set-bg" data-setbg="/images/thumb/${row.gm_code}/thumb.jpg">
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="/images/001.jpg">
-                        <h5><a href="#">엄마 몰래 팜 선착순</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="/images/003.jpg">
-                        <h5><a href="#">오빠몰래 진짜 빠르게 팜</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="/images/004.jpg">
-                        <h5><a href="#">누나몰래 팜 네고사절</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="/images/switch2.jpeg">
-                        <h5><a href="#">삼촌몰래 팜 네고사절</a></h5>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
     </div>
@@ -319,121 +264,25 @@
 <section class="featured spad">
     <div class="container">
         <div class="section-title">
-            <h2>Featured Product</h2>
+            <h2>상품</h2>
         </div>
         <div class="row featured__filter">
+            <c:forEach var="row" items="${idxFeaturedProduct}" varStatus="vs">
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[0].ss_img}">
+                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${row.ss_img}">
                         <ul class="featured__item__pic__hover">
-                            <li><a onclick="wishlistModal(${idxFeaturedProduct[0].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i class="fa fa-heart"></i></a></li>
+                            <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}">${idxFeaturedProduct[0].ss_name}</a></h6>
-                        <h5>${idxFeaturedProduct[0].ss_price}</h5>
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}">${row.ss_name}</a></h6>
+                        <h5>${row.ss_price}</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[1].ss_img}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a onclick="wishlistModal(${idxFeaturedProduct[1].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="/sales/detail/${idxFeaturedProduct[1].ss_num}">${idxFeaturedProduct[1].ss_name}</a></h6>
-                        <h5>${idxFeaturedProduct[1].ss_price}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[2].ss_img}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a onclick="wishlistModal(${idxFeaturedProduct[2].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="/sales/detail/${idxFeaturedProduct[2].ss_num}">${idxFeaturedProduct[2].ss_name}</a></h6>
-                        <h5>${idxFeaturedProduct[2].ss_price}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[3].ss_img}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a onclick="wishlistModal(${idxFeaturedProduct[3].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="/sales/detail/${idxFeaturedProduct[3].ss_num}">${idxFeaturedProduct[3].ss_name}</a></h6>
-                        <h5>${idxFeaturedProduct[3].ss_price}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[4].ss_img}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a onclick="wishlistModal(${idxFeaturedProduct[4].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="/sales/detail/${idxFeaturedProduct[4].ss_num}">${idxFeaturedProduct[4].ss_name}</a></h6>
-                        <h5>${idxFeaturedProduct[4].ss_price}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${idxFeaturedProduct[5].ss_img}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a onclick="wishlistModal(${idxFeaturedProduct[5].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="/sales/detail/${idxFeaturedProduct[5].ss_num}">${idxFeaturedProduct[5].ss_name}</a></h6>
-                        <h5>${idxFeaturedProduct[5].ss_price}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/saels_main/${idxFeaturedProduct[6].ss_img}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a onclick="wishlistModal(${idxFeaturedProduct[6].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="/sales/detail/${idxFeaturedProduct[6].ss_num}">${idxFeaturedProduct[6].ss_name}</a></h6>
-                        <h5>${idxFeaturedProduct[6].ss_price}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                <div class="featured__item">
-                 <div class="featured__item__pic set-bg"  data-setbg="/images/product/sales_main/${idxFeaturedProduct[7].ss_img}">
-                        <ul class="featured__item__pic__hover">
-                            <li><a onclick="wishlistModal(${idxFeaturedProduct[7].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="featured__item__text">
-                        <h6><a href="/sales/detail/${idxFeaturedProduct[7].ss_num}">${idxFeaturedProduct[7].ss_name}</a></h6>
-                        <h5>${idxFeaturedProduct[7].ss_price}</h5>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </section>
@@ -464,10 +313,10 @@
         <div class="row">
             <div class="col-lg-4 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Latest Products</h4>
+                    <h4>최신 상품</h4>
                     <div class="latest-product__slider owl-carousel">
                         <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxLatestProduct[0].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxLatestProduct[0].ss_img}" alt="">
                                 </div>
@@ -476,7 +325,7 @@
                                     <span>${idxLatestProduct[0].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxLatestProduct[1].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxLatestProduct[1].ss_img}" alt="">
                                 </div>
@@ -485,7 +334,7 @@
                                     <span>${idxLatestProduct[1].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxLatestProduct[2].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxLatestProduct[2].ss_img}" alt="">
                                 </div>
@@ -496,7 +345,7 @@
                             </a>
                         </div>
                         <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxLatestProduct[3].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxLatestProduct[3].ss_img}" alt="">
                                 </div>
@@ -505,7 +354,7 @@
                                     <span>${idxLatestProduct[3].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxLatestProduct[4].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxLatestProduct[4].ss_img}" alt="">
                                 </div>
@@ -514,7 +363,7 @@
                                     <span>${idxLatestProduct[4].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxLatestProduct[5].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxLatestProduct[5].ss_img}" alt="">
                                 </div>
@@ -529,10 +378,10 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Top Rated Products</h4>
+                    <h4>인기 상품</h4>
                     <div class="latest-product__slider owl-carousel">
                         <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxTopProduct[0].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxTopProduct[0].ss_img}" alt="">
                                 </div>
@@ -541,7 +390,7 @@
                                     <span>${idxTopProduct[0].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxTopProduct[1].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxTopProduct[1].ss_img}" alt="">
                                 </div>
@@ -550,7 +399,7 @@
                                     <span>${idxTopProduct[1].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxTopProduct[2].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxTopProduct[2].ss_img}" alt="">
                                 </div>
@@ -561,7 +410,7 @@
                             </a>
                         </div>
                         <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxTopProduct[3].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxTopProduct[3].ss_img}" alt="">
                                 </div>
@@ -570,7 +419,7 @@
                                     <span>${idxTopProduct[3].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxTopProduct[4].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxTopProduct[4].ss_img}" alt="">
                                 </div>
@@ -579,7 +428,7 @@
                                     <span>${idxTopProduct[4].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxTopProduct[5].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxTopProduct[5].ss_img}" alt="">
                                 </div>
@@ -594,10 +443,10 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Review Products</h4>
+                    <h4>리뷰 많은 상품</h4>
                     <div class="latest-product__slider owl-carousel">
                         <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxReviewProduct[0].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxReviewProduct[0].ss_img}" alt="">
                                 </div>
@@ -606,7 +455,7 @@
                                     <span>${idxReviewProduct[0].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxReviewProduct[1].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxReviewProduct[1].ss_img}" alt="">
                                 </div>
@@ -615,7 +464,7 @@
                                     <span>${idxReviewProduct[1].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxReviewProduct[2].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxReviewProduct[2].ss_img}" alt="">
                                 </div>
@@ -626,7 +475,7 @@
                             </a>
                         </div>
                         <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxReviewProduct[3].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxReviewProduct[3].ss_img}" alt="">
                                 </div>
@@ -635,7 +484,7 @@
                                     <span>${idxReviewProduct[3].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxReviewProduct[4].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxReviewProduct[4].ss_img}" alt="">
                                 </div>
@@ -644,7 +493,7 @@
                                     <span>${idxReviewProduct[4].ss_price}</span>
                                 </div>
                             </a>
-                            <a href="#" class="latest-product__item">
+                            <a href="/sales/detail/${idxReviewProduct[5].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="/images/product/${idxReviewProduct[5].ss_img}" alt="">
                                 </div>
@@ -721,18 +570,73 @@
 <!-- Blog Section End -->
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<%--<div id="myModal" class="modal">--%>
+<%--    <!-- Modal content -->--%>
+<%--    <div class="modal-content">--%>
+<%--        <span class="close" onclick="modalClose()">&times;</span>--%>
+<%--        <p>선택하신 상품을 위시리스트에 담았습니다.<br>지금 위시리스트를 확인하시겠습니까?</p>--%>
+<%--        <div>--%>
+<%--            <a onclick="modalClose()" style="margin: 8px;">쇼핑 계속하기</a><a onclick="goWishlist()">위시리스트 확인</a>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close" onclick="modalClose()">&times;</span>
-        <p>선택하신 상품을 위시리스트에 담았습니다.<br>지금 위시리스트를 확인하시겠습니까?</p>
-        <div>
-            <a onclick="modalClose()" style="margin: 8px;">쇼핑 계속하기</a><a onclick="goWishlist()">위시리스트 확인</a>
+<%-- 위시리스트 모달 --%>
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    선택하신 상품을 위시리스트에 담았습니다.<br>지금 위시리스트를 확인하시겠습니까?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-success" onclick="goWishlist()">위시리스트 확인</button>
+                </div>
+
+            </div>
         </div>
-
     </div>
+</div>
 
+<%-- 장바구니 모달 --%>
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    선택하신 상품을 장바구니에 담았습니다.<br>지금 장바구니를 확인하시겠습니까?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-success" onclick="goBasket()">장바구니 확인</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -755,47 +659,57 @@
         $("#ranking").html(result);
     }
 
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
     function wishlistModal(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
         let params = "ss_num=" + ss_num;
-
-        if (mem_id != 'null') {
-            // location.href = "/wishlist/insert/" + ss_num;
-            $.get("/wishlist/insert", params, openModal());
-
-        } else {
+        if (mem_id == 'null') {
             alert("로그인 후 이용해주세요");
+        } else {
+            $(".wishlistModal").attr("data-toggle", "modal");
+            $(".wishlistModal").attr("data-target", "#myModal1");
+            if ($("#myModal1").on("DOMSubtreeModified")) {  // #myModal1의 변화 감지. 여기서는 변화가 3번이라 3번 insert가 되어 1번만 insert 시키기 위해 if의 조건으로 주었다.
+                $.get("/wishlist/insert", params);
+            }
         }
     }
-
-    // Get the <span> element that closes the modal
-    // var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on <span> (x), close the modal
-    // span.onclick = function() {
-    //     modal.style.display = "none";
-    // }
-
-    function modalClose() {
-        modal.style.display = "none";
-    }
-
-    function openModal() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    
+    function basketModal(ss_num) {
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
+        let params = "ss_num=" + ss_num;
+        if (mem_id == 'null') {
+            alert("로그인 후 이용해주세요");
+        } else {
+            console.log("false");
+            $(".basketModal").attr("data-toggle", "modal");
+            $(".basketModal").attr("data-target", "#myModal2");
+            if ($("#myModal2").on("DOMSubtreeModified")) {
+                $.get("/cart/idxinsert", params);
+            }
         }
     }
 
     function goWishlist() {
-        location.href = "/mypage/wishlist";
+        location.replace("/mypage/wishlist");
+    }
+
+    function goBasket() {
+        location.replace("/mypage/cart");
+    }
+
+    function renewal() {
+        $.ajax({
+            url : "/renewal"
+            ,type : "get"
+            ,success : function (list) {
+                let idxWishCount = list[0];
+                let idxBasketCount = list[1];
+                $("#idxWishCount").text(idxWishCount);
+                $("#idxBasketCount").text(idxBasketCount);
+            }
+            ,error : function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
     }
 </script>
 

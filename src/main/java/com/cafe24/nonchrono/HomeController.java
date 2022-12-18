@@ -1,7 +1,9 @@
 package com.cafe24.nonchrono;
 
+import com.cafe24.nonchrono.dao.BasketDAO;
 import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
+import com.cafe24.nonchrono.dao.WishDAO;
 import com.cafe24.nonchrono.dto.GameDTO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,29 +33,43 @@ public class HomeController {
     @Autowired
     private RecruitDAO recruitDAO;
 
+    @Autowired
+    private WishDAO wishDAO;
+
+    @Autowired
+    private BasketDAO basketDAO;
+
     @RequestMapping("/") // 메인
     public ModelAndView Index(HttpSession session) {
         String mem_id = (String) session.getAttribute("mem_id");
         String sl_id = (String) session.getAttribute("sl_id");
         String admin_id = (String) session.getAttribute("admin_id");
         ModelAndView mav = new ModelAndView();
-        mav.addObject("idxLatestProduct", salesDAO.idxLatestProduct());
-        mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
-        mav.addObject("idxReviewProduct", salesDAO.idxReviewProduct());
-        mav.addObject("idxFeaturedProduct", salesDAO.idxFeaturedProduct());
-        mav.addObject("idxRankingSales", salesDAO.idxRankingSales());
-//        int zero = 0;
-//        if (mem_id != null) {
-//            mav.addObject("idxWishCount", wishDAO.idxWishCount(mem_id));
-//        } else {
-//            mav.addObject("idxWishCount", zero);
-//        }
+
+        int wishcnt = 0;
+        int basketcnt = 0;
+        if (mem_id != null) {
+            wishcnt = wishDAO.idxWishCount(mem_id);
+            basketcnt = basketDAO.count(mem_id);
+            session.setAttribute("idxWishCount", wishcnt);
+            session.setAttribute("idxBasketCount", basketcnt);
+        } else {
+            session.setAttribute("idxWishCount", wishcnt);
+            session.setAttribute("idxBasketCount", basketcnt);
+        }
+
         List<RecruitDTO> list = recruitDAO.idxrcrbrd();
         List list2 = new ArrayList<>();
         for (int i=0; i< list.size(); i++) {
             int rcrbrd_num = list.get(i).getRcrbrd_num();
             list2.add(recruitDAO.idxrcrbrdCount(rcrbrd_num));
         }
+
+        mav.addObject("idxLatestProduct", salesDAO.idxLatestProduct());
+        mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
+        mav.addObject("idxReviewProduct", salesDAO.idxReviewProduct());
+        mav.addObject("idxFeaturedProduct", salesDAO.idxFeaturedProduct());
+        mav.addObject("idxRankingSales", salesDAO.idxRankingSales());
         mav.addObject("idxrcrbrdCount", list2);
         mav.addObject("idxrcrbrd", list);
         mav.setViewName("index");
@@ -100,6 +116,27 @@ public class HomeController {
         }
         result += "</ol>";
         return result;
+    }
+
+    @RequestMapping("/renewal")
+    @ResponseBody
+    public List<Integer> renewal(HttpSession session) {
+        String mem_id = (String) session.getAttribute("mem_id");
+        int wishcnt = 0;
+        int basketcnt = 0;
+        if (mem_id != null) {
+            wishcnt = wishDAO.idxWishCount(mem_id);
+            basketcnt = basketDAO.count(mem_id);
+            session.setAttribute("idxWishCount", wishcnt);
+            session.setAttribute("idxBasketCount", basketcnt);
+        } else {
+            session.setAttribute("idxWishCount", wishcnt);
+            session.setAttribute("idxBasketCount", basketcnt);
+        }
+        List<Integer> list = new ArrayList<>();
+        list.add(wishcnt);
+        list.add(basketcnt);
+        return list;
     }
 
 } // class end

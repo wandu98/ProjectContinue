@@ -57,7 +57,7 @@ WHERE mem_id = '1234';
 ALTER TABLE tb_mem convert to charset utf8;
 
 INSERT INTO tb_mem (mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_email, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate)
-VALUES ('gjdjj888', 'kkeioh45@', '방이동도도민경', '김민경', '12345', '서울특별시 중구 세종대로', '67', '02-6466-4564', 'kimjoowan@naver.com', '19980224', 'VIP', 5000, 5000, 'N', 0, 0, 'pic.jpg', now());
+VALUES ('gjdjj888', 'gjdjj888', '방이동도도민경', '김민경', '12345', '서울특별시 중구 세종대로', '67', '02-6466-4564', 'kimjoowan@naver.com', '19980224', 'VIP', 5000, 5000, 'N', 0, 0, 'pic.jpg', now());
 
 INSERT INTO tb_mem (mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_email, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate)
 VALUES ('oejdf9090', 'dkhofk777!!@@', '장지동십만우', '구천우', '34567', '서울특별시 서초구 서초대로78길', '5 대각빌딩', '010-4363-5464', 'kimjoowan@naver.com', '19951103', 'GOLD', 2500, 12500, 'N', 0, 0, 'pic.jpg', now());
