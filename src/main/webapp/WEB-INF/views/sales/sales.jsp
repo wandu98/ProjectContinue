@@ -11,7 +11,7 @@
 <%@include file="../header.jsp" %>
 
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="images/002.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="/images/samurai.jpeg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -274,10 +274,8 @@
                                     <a href="/sales/detail/${row.ss_num}"><img
                                             src="/images/product/sales_main/${row.ss_img}"></a>
                                     <ul class="product__item__pic__hover">
-                                        <li>
-                                            <a href=""><i class="fa fa-heart"></i></a>
-                                        </li>
-                                        <li><a href=""><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i class="fa fa-heart"></i></a></li>
+                                        <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
 
@@ -294,8 +292,6 @@
                             <br>
                         </c:if>
                     </c:forEach>
-
-
                 </div>
                 <div class="product__pagination" style="text-align: center">
                     <!-- 페이지 리스트 -->
@@ -340,4 +336,104 @@
 </section>
 <!-- Product Section End -->
 
+
+<%-- 위시리스트 모달 --%>
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    선택하신 상품을 위시리스트에 담았습니다.<br>지금 위시리스트를 확인하시겠습니까?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-success" onclick="goWishlist()">위시리스트 확인</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-- 장바구니 모달 --%>
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    선택하신 상품을 장바구니에 담았습니다.<br>지금 장바구니를 확인하시겠습니까?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-success" onclick="goBasket()">장바구니 확인</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function wishlistModal(ss_num) {
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
+        let params = "ss_num=" + ss_num;
+        if (mem_id == 'null') {
+            alert("로그인 후 이용해주세요");
+        } else {
+            $(".wishlistModal").attr("data-toggle", "modal");
+            $(".wishlistModal").attr("data-target", "#myModal1");
+            if ($("#myModal1").on("DOMSubtreeModified")) {  // #myModal1의 변화 감지. 여기서는 변화가 3번이라 3번 insert가 되어 1번만 insert 시키기 위해 if의 조건으로 주었다.
+                $.get("/wishlist/insert", params);
+            }
+        }
+    }
+
+    function basketModal(ss_num) {
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
+        let params = "ss_num=" + ss_num;
+        if (mem_id == 'null') {
+            alert("로그인 후 이용해주세요");
+        } else {
+            console.log("false");
+            $(".basketModal").attr("data-toggle", "modal");
+            $(".basketModal").attr("data-target", "#myModal2");
+            if ($("#myModal2").on("DOMSubtreeModified")) {
+                $.get("/cart/idxinsert", params);
+            }
+        }
+    }
+
+    function goWishlist() {
+        location.replace("/mypage/wishlist");
+    }
+
+    function goBasket() {
+        location.replace("/mypage/cart");
+    }
+
+</script>
 <%@ include file="../footer.jsp" %>

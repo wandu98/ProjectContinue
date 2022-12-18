@@ -17,6 +17,28 @@
 
 <style>
 
+    table.type04 {
+        border-collapse: separate;
+        border-spacing: 1px;
+        text-align: left;
+        line-height: 1.5;
+        border-top: 1px solid #ccc;
+        margin : 20px 10px;
+    }
+    table.type04 th {
+        width: 150px;
+        padding: 10px;
+        font-weight: bold;
+        vertical-align: top;
+        border-bottom: 1px solid #ccc;
+    }
+    table.type04 td {
+        width: 350px;
+        padding: 10px;
+        vertical-align: top;
+        border-bottom: 1px solid #ccc;
+    }
+
     .wrap {
         width: 500px;
     }
@@ -30,44 +52,44 @@
         line-height: 1.6;
     }
 
-    /* The Modal (background) */
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0); /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-    }
+    /*!* The Modal (background) *!*/
+    /*.modal {*/
+    /*    display: none; !* Hidden by default *!*/
+    /*    position: fixed; !* Stay in place *!*/
+    /*    z-index: 1; !* Sit on top *!*/
+    /*    padding-top: 100px; !* Location of the box *!*/
+    /*    left: 0;*/
+    /*    top: 0;*/
+    /*    width: 100%; !* Full width *!*/
+    /*    height: 100%; !* Full height *!*/
+    /*    overflow: auto; !* Enable scroll if needed *!*/
+    /*    background-color: rgb(0, 0, 0); !* Fallback color *!*/
+    /*    background-color: rgba(0, 0, 0, 0.4); !* Black w/ opacity *!*/
+    /*}*/
 
-    /* Modal Content */
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 20%;
-    }
+    /*!* Modal Content *!*/
+    /*.modal-content {*/
+    /*    background-color: #fefefe;*/
+    /*    margin: auto;*/
+    /*    padding: 20px;*/
+    /*    border: 1px solid #888;*/
+    /*    width: 20%;*/
+    /*}*/
 
-    /* The Close Button */
-    .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
+    /*!* The Close Button *!*/
+    /*.close {*/
+    /*    color: #aaaaaa;*/
+    /*    float: right;*/
+    /*    font-size: 28px;*/
+    /*    font-weight: bold;*/
+    /*}*/
 
-    .close:hover,
-    .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-    }
+    /*.close:hover,*/
+    /*.close:focus {*/
+    /*    color: #000;*/
+    /*    text-decoration: none;*/
+    /*    cursor: pointer;*/
+    /*}*/
 
 </style>
 
@@ -97,17 +119,7 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="/images/product/sales_main/${detail.ss_img}">
-                    </div>
-                    <div class="product__details__pic__slider owl-carousel">
-                        <img data-imgbigurl="/images/002.jpg"
-                             src="">
-                        <img data-imgbigurl="/images/003.jpg"
-                             src="">
-                        <img data-imgbigurl="/images/004.jpg"
-                             src="">
-                        <img data-imgbigurl="/images/001.jpg"
-                             src="">
+                             src="/images/product/sales_main/${detail.ss_img}" style="width: 330px; height: 550px">
                     </div>
                 </div>
             </div>
@@ -137,10 +149,10 @@
 
 
                     <!-- 스크롤2 영역시작 -->
-                    <div class="scrollbar_box op_view_h">
+                    <div class="type04">
                         <!-- 참고 : 뉴상품관리 전용 변수가 포함되어 있습니다. 뉴상품관리 이외의 곳에서 사용하면 일부 변수가 정상동작하지 않을 수 있습니다. -->
                         <div id="totalProducts" class="">
-                            <table border="1" summary="" class="op_h">
+                            <table>
                                 <colgroup>
                                     <col style="width:300px"/>
                                     <col style="width:300px"/>
@@ -179,9 +191,9 @@
                         <strong>총 상품금액</strong>(수량) :
                         <span class="total" id="il">
                             <strong>
-                               <input type="text" value="0" name="inputValue" style="border: none; text-align: center"
+                               <input type="text" value="0원" name="inputValue" style="border: none; text-align: center"
                                       readonly/>
-                                <input type="text" value="0" id="inputCount" name="inputCount"
+                                <input type="text" value="0개" id="inputCount" name="inputCount"
                                        style="border: none; text-align: left" readonly/>
                             </strong>
                         </span>
@@ -190,7 +202,7 @@
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty" id="count2">
-                                <input type="text" id="count" value=1>
+                                <input type="text" id="count" value=0>
                             </div>
                         </div>
                     </div>
@@ -329,7 +341,6 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <c:forEach var="row" items="${reviewDetail}" varStatus="vs">
                             <div class="product__details__tab__desc">
                                 <div class="container">
                                     <h6 class="card-title">리뷰</h6>
@@ -338,7 +349,12 @@
                                         <div>
                                             <input type="hidden" name="ss_num" id="ss_num"
                                                    value="${detail.ss_num}"><!-- 부모글 번호 -->
-                                            <input type="date" id="rv_date" name="rv_date" readonly>
+                                            <input type="hidden" id="rv_date" name="rv_date" readonly>
+                                            <span>
+                                            <label for="rv_filename" class="col-sm-2 col-form-label"><img
+                                                    src="/images/pic.jpeg" style="height: 50px;
+                                                                           padding-bottom: 20px;">
+                                            </label>
                                             <select name="rv_star">
                                                 <option>별점을 선택해주세요</option>
                                                 <option class="star_5 fa" value="10"><span>★★★★★</span></option>
@@ -347,91 +363,89 @@
                                                 <option class="star_2" value="4"><span>★★</span></option>
                                                 <option class="star_1" value="2"><span>★</span></option>
                                             </select>
-                                            <div class="row mb-3">
-                                                <label class="col-sm-2 col-form-label">내용</label>
-                                                <div class="col-sm-10">
+                                            </span>
+                                            <div>
+                                            <button type="submit" name="commentInsertBtn" id="commentInsertBtn"
+                                                    class="btn btn-outline-primary">등록
+                                            </button>
+                                            </div>
+                                            <div style="padding-top: 2%">
                                                     <textarea class="form-control" name="rv_content" id="rv_content"
-                                                              style="height: 100px"></textarea>
-                                                </div>
-
-
-                                                <div class="row mb-3">
-                                                    <label for="rv_filename" class="col-sm-2 col-form-label">사진 선택</label>
-                                                    <img id="pic_view" src="" alt="" style="width:30%">
-                                                    <div class="col-sm-10">
-                                                        <input class="form-control" type="file" id="rv_filename" name="rv_filename"style="display: none">
-                                                    </div>
-                                                </div>
-
-
-                                          4     <button type="submit" name="commentInsertBtn" id="commentInsertBtn"
-                                                        class="btn btn-outline-primary">등록
-                                                </button>
-                                            </div>
-                                            <hr>
-                                            <div class="container">
-                                                <div class="commentList"></div>
-                                            </div>
-                                    </form>
-                                    <c:forEach var="row" items="${reviewDetail}">
-                                        ${row.mem_id} | ${row.rv_date} |
-
-                                        <c:set var="star" value="${row.rv_star}"/>
-
-                                        <c:choose>
-                                            <c:when test="${star le 2}">
-                                                <i class="fa fa-star"></i>
-                                            </c:when>
-                                            <c:when test="${star le 4}">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </c:when>
-                                            <c:when test="${star le 6}">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </c:when>
-                                            <c:when test="${star le 8}">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <br>
-                                        <!-- 댓글 본문 -->
-                                        <div class="card mb-3">
-                                            <div class="row g-0">
-                                                <div class="col-md-4">
-                                                    <img src="/images/review/${row.rv_filename}"
-                                                         class="img-fluid rounded-start" alt="..."
-                                                         style="width:250px; height:auto">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title"></h5>
-                                                        <p class="card-text">${row.rv_content}</p>
-                                                    </div>
+                                                              style="height: 100px">
+                                                    </textarea>
+                                                <br>
+                                                <img id="pic_view" src="" alt="" style="width:30%">
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" type="file" id="rv_filename"
+                                                           name="rv_filename" style="display: none">
                                                 </div>
                                             </div>
                                         </div>
                                         <hr>
-                                    </c:forEach>
+                                        <div class="container">
+                                            <div class="commentList"></div>
+                                        </div>
+                                    </form>
                                 </div>
+                                </form>
+                                <c:forEach var="row" items="${reviewDetail}">
+                                    ${row.mem_nick} | ${row.rv_date} |
+
+                                    <c:set var="star" value="${row.rv_star}"/>
+
+                                    <c:choose>
+                                        <c:when test="${star le 2}">
+                                            <i class="fa fa-star"></i>
+                                        </c:when>
+                                        <c:when test="${star le 4}">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </c:when>
+                                        <c:when test="${star le 6}">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </c:when>
+                                        <c:when test="${star le 8}">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <br>
+                                    <!-- 댓글 본문 -->
+                                    <div class="card mb-3">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="/images/review/${row.rv_filename}"
+                                                     class="img-fluid rounded-start" alt="..."
+                                                     style="width:250px; height:auto">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"></h5>
+                                                    <p class="card-text">${row.rv_content}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </c:forEach>
                             </div>
-                            </c:forEach>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <!-- Product Details Section End -->
@@ -446,64 +460,63 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="/images/002.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="/images/product/sales_main/${idxTopProduct[0].ss_img}">
                         <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[0].ss_num})"><i class="fa fa-heart"></i></a></li>
+                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[0].ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">엄마 몰래 팜 급쳐</a></h6>
-                        <h5>30,000원</h5>
+                        <h6><a href="#">${idxTopProduct[0].ss_name}</a></h6>
+                        <h5><fmt:formatNumber value="${idxTopProduct[0].ss_price}" type="currency"/> </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="/images/product/sales_main/${idxTopProduct[1].ss_img}">
+                        <ul class="product__item__pic__hover">
+                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[1].ss_num})"><i class="fa fa-heart"></i></a></li>
+                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[1].ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">${idxTopProduct[1].ss_name}</a></h6>
+                        <h5><fmt:formatNumber value="${idxTopProduct[1].ss_price}" type="currency"/> </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="/images/product/sales_main/${idxTopProduct[2].ss_img}">
+                        <ul class="product__item__pic__hover">
+                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[2].ss_num})"><i class="fa fa-heart"></i></a></li>
+                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[2].ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="#">${idxTopProduct[2].ss_name}</a></h6>
+                        <h5><fmt:formatNumber value="${idxTopProduct[2].ss_price}" type="currency"/> </h5>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="/images/soft1.jpeg">
+                     <div class="product__item__pic set-bg" data-setbg="/images/product/sales_main/${idxTopProduct[3].ss_img}">
                         <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[3].ss_num})"><i class="fa fa-heart"></i></a></li>
+                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[3].ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">여자친구랑 헤어져서 팜</a></h6>
-                        <h5>150,000</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="/images/switch2.jpeg">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">동생 몰래 팜 ㅍㅍ</a></h6>
-                        <h5>₩130.00</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="/images/003.jpg">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">짝퉁 판매</a></h6>
-                        <h5>25,000</h5>
+                        <h6><a href="#">${idxTopProduct[3].ss_name}</a></h6>
+                        <h5><fmt:formatNumber value="${idxTopProduct[3].ss_price}" type="currency"/> </h5>
                     </div>
                 </div>
             </div>
@@ -526,15 +539,118 @@
 
 </div>
 
+
+<%-- 위시리스트 모달 --%>
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    선택하신 상품을 위시리스트에 담았습니다.<br>지금 위시리스트를 확인하시겠습니까?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-success" onclick="goWishlist()">위시리스트 확인</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-- 장바구니 모달 --%>
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    선택하신 상품을 장바구니에 담았습니다.<br>지금 장바구니를 확인하시겠습니까?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-success" onclick="goBasket()">장바구니 확인</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
+    //상품이미지에서 하트(위시리스트) 클릭했을 때
+    function wishlistModal(ss_num) {
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
+        let params = "ss_num=" + ss_num;
+        if (mem_id == 'null') {
+            alert("로그인 후 이용해주세요");
+        } else {
+            $(".wishlistModal").attr("data-toggle", "modal");
+            $(".wishlistModal").attr("data-target", "#myModal1");
+            if ($("#myModal1").on("DOMSubtreeModified")) {  // #myModal1의 변화 감지. 여기서는 변화가 3번이라 3번 insert가 되어 1번만 insert 시키기 위해 if의 조건으로 주었다.
+                $.get("/wishlist/insert", params);
+            }
+        }
+    }
+    //상품이미지에서 카트(장바구니) 클릭했을 때
+    function basketModal(ss_num) {
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
+        alert(mem_id);
+        let params = "ss_num=" + ss_num;
+        if (mem_id == 'null') {
+            alert("로그인 후 이용해주세요");
+        } else {
+            console.log("false");
+            $(".basketModal").attr("data-toggle", "modal");
+            $(".basketModal").attr("data-target", "#myModal2");
+            if ($("#myModal2").on("DOMSubtreeModified")) {
+                $.get("/cart/idxinsert", params);
+            }
+        }
+    }
+
+    //위시리스트 이동
+    function goWishlist() {
+        location.replace("/mypage/wishlist");
+    }
+
+    //마이페이지 이동
+    function goBasket() {
+        location.replace("/mypage/cart");
+    }
+
+
     $(document).ready(function () {
         $('#count2 span').on('click', function () {
             let count = $('#count').val();
             let tot2 = (parseInt(count) *${detail.ss_price});
 
-            if (count <= ${detail.ss_stock}) {
-                $('input[name=inputCount]').attr('value', count)
-                $('input[name=inputValue]').attr('value', tot2)
+            if (count < ${detail.ss_stock}) {
+                $('input[name=inputCount]').attr('value', count + '개')
+                $('input[name=inputValue]').attr('value', tot2 + '원')
+
             } else {
                 alert("재고가 부족합니다")
             }
@@ -586,6 +702,8 @@
         }
 
 
+
+
     }
 
     function modalClose() {
@@ -619,8 +737,6 @@
         }
         reader.readAsDataURL(file);
     });
-
-    document.getElementById('rv_date').value = new Date().toISOString().substring(0, 10);
 
 </script>
 

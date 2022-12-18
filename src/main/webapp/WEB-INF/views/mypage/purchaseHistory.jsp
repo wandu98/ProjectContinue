@@ -47,7 +47,7 @@
                         <tbody>
                         <c:forEach var="row" items="${historylist}" varStatus="vs">
                             <tr>
-                                <td class="shoping__cart__price">
+                                <td class="shoping__cart__price" onclick="location.href='/sales/salesorder/${row.od_num}'" style="cursor:pointer;">
                                         ${row.od_num}
                                 </td>
                                 <td class="shoping__cart__product">
