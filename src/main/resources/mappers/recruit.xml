@@ -260,7 +260,7 @@
 
     <!-- 자리당 이미지 조회 -->
     <select id="memPic" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="String">
-        SELECT mm.mem_pic, mm.mem_id
+        SELECT mm.mem_pic
         FROM tb_recruitinfo as ri
                  JOIN tb_mem as mm
                       ON ri.mem_id = mm.mem_id
@@ -344,5 +344,38 @@
         INSERT INTO tb_search (sc_word, sc_date, sc_where)
         VALUES (#{sc_word}, now(), '모집')
     </insert>
+
+    <select id="attendCheck" parameterType="java.util.Map" resultType="int">
+        SELECT ri_seat
+        FROM tb_recruitinfo
+        WHERE rcrbrd_num = #{rcrbrd_num}
+          AND mem_id = #{mem_id}
+    </select>
+
+    <select id="memSeat" parameterType="com.cafe24.nonchrono.dto.RecruitInfoDTO" resultType="String">
+        SELECT mem_id
+        FROM tb_recruitinfo
+        WHERE rcrbrd_num = #{rcrbrd_num}
+          AND ri_seat = #{ri_seat}
+    </select>
+
+    <select id="heartCheck" parameterType="com.cafe24.nonchrono.dto.RatingDTO" resultType="int">
+        SELECT count(*)
+        FROM tb_rating
+        WHERE rcrbrd_num = #{rcrbrd_num}
+          AND give_id = #{give_id} AND receive_id = #{receive_id}
+    </select>
+
+    <insert id="heart" parameterType="com.cafe24.nonchrono.dto.RatingDTO">
+        INSERT INTO tb_rating (rcrbrd_num, give_id, receive_id, rt_content, rt_goodbad)
+        VALUES (#{rcrbrd_num}, #{give_id}, #{receive_id}, #{rt_content}, #{rt_goodbad})
+    </insert>
+
+    <delete id="heartDelete" parameterType="com.cafe24.nonchrono.dto.RatingDTO">
+        DELETE
+        FROM tb_rating
+        WHERE rcrbrd_num = #{rcrbrd_num}
+          AND give_id = #{give_id} AND receive_id = #{receive_id}
+    </delete>
 
 </mapper>

@@ -183,7 +183,7 @@ VALUES ('gjdjj888', 5)
 
 
 -- 회원평가
-INSERT INTO tb_evaluation (mem_id, eval_content, eval_regdate)
+/*INSERT INTO tb_evaluation (mem_id, eval_content, eval_regdate)
 VALUES ('oejdf9090', '불친절해요', '20221001')
      ,('oejdf9090', '게임 이해도가 낮아요', '20221002')
      ,('oejdf9090', '급발진을 잘해요', '20221003')
@@ -193,7 +193,7 @@ VALUES ('oejdf9090', '불친절해요', '20221001')
      ,('fjhdmj555', '약속시간을 잘 지켜요', '20221101')
      ,('fjhdmj555', '매너가 좋아요', '20221102')
      ,('fjhdmj555', '상대방 말을 너무 끊어요', '20221103')
-     ,('gjdjj888', '억지가 너무 심해요', '20221104');
+     ,('gjdjj888', '억지가 너무 심해요', '20221104');*/
 
 
 -- 공지사항
