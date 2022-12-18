@@ -328,7 +328,7 @@ public class MypageController {
             basketcnt = basketDAO.count(mem_id);
             session.setAttribute("idxBasketCount", basketcnt);
             mav.addObject("list", basketDAO.mylist(mem_id));
-            mav.addObject("bk_total", basketDAO.bk_total(mem_id));
+            mav.addObject("bk_total", basketDAO.total(mem_id));
             mav.addObject("max_fee", basketDAO.max_fee(mem_id));
             mav.setViewName("mypage/cart");
         } else {
