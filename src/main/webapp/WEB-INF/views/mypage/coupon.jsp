@@ -10,6 +10,7 @@
 
 <jsp:include page="../header.jsp"></jsp:include>
 
+
 <!-- 쿠폰 관리 Section Begin -->
 <section class="shoping-cart spad">
     <div class="container">
@@ -19,24 +20,26 @@
                     <table>
                         <thead>
                         <tr>
-                            <th class="shoping__product">쿠폰명</th>
+                            <th>번호</th>
+                            <th>쿠폰명</th>
                             <th colspan="2">사용기간</th>
                             <th>할인율</th>
-                            <th></th>
                         </tr>
 
                         </thead>
                         <tbody>
                         <c:forEach var="row" items="${couponlist}" varStatus="vs">
                         <tr>
-                            <td class="shoping__cart__item">
-                                <img src="img/cart/cart-1.jpg" alt="">
+                            <td>
+                                ${vs.index+1}
+                            </td>
+                            <td class="shoping__cart__product">
                                 <h5>${row.cp_name}</h5>
                             </td>
-                            <td colspan="2" class="shoping__cart__price">
+                            <td colspan="2" class="shoping__cart__price" style="font-weight: 400">
                                 ${row.cp_speriod} ~ ${row.cp_eperiod}
                             </td>
-                            <td class="shoping__cart__total">
+                            <td class="shoping__cart__total" style="font-weight: 400">
                                 ${row.cp_percent}%
                             </td>
                         </tr>
@@ -49,7 +52,7 @@
 
 
 
-        <br><br><br><br><hr><br><br><br><br>
+        <br><br><br><br><br><br><br>
 
         <div class="blog__sidebar__item">
             <h4>적립금</h4>
@@ -65,94 +68,47 @@
 
         <br><br><br>
 
-        <div class="blog__sidebar__item">
-            <h4>적립 내역(만들까 말까?)</h4>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shoping__cart__table">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th class="shoping__product">쿠폰명</th>
-                            <th>쿠폰명</th>
-                            <th>할인율</th>
-                            <th>사용기간</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="shoping__cart__item">
-                                <img src="img/cart/cart-1.jpg" alt="">
-                                <h5>회원가입 축하 쿠폰</h5>
-                            </td>
-                            <td class="shoping__cart__price">
-                                $55.00
-                            </td>
-                            <td class="shoping__cart__quantity">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="shoping__cart__total">
-                                $110.00
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="shoping__cart__item">
-                                <img src="img/cart/cart-2.jpg" alt="">
-                                <h5>생일 쿠폰</h5>
-                            </td>
-                            <td class="shoping__cart__price">
-                                $39.00
-                            </td>
-                            <td class="shoping__cart__quantity">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="shoping__cart__total">
-                                $39.99
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="shoping__cart__item">
-                                <img src="img/cart/cart-3.jpg" alt="">
-                                <h5>첫 결제 이벤트 쿠폰</h5>
-                            </td>
-                            <td class="shoping__cart__price">
-                                $69.00
-                            </td>
-                            <td class="shoping__cart__quantity">
-                                <div class="quantity">
-                                    <div class="pro-qty">
-                                        <input type="text" value="1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="shoping__cart__total">
-                                $69.99
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+        <section class="checkout spad">
+            <div class="container">
+                <div class="checkout__form">
+                    <h4>적립 내역</h4>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="shoping__cart__table">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>주문번호</th>
+                                        <th>상품명</th>
+                                        <th>적립 마일리지</th>
+                                        <th>주문일자</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="row" items="${mileagelist}" varStatus="vs">
+                                        <tr>
+                                            <td class="shoping__cart__price" style="font-weight: 400">
+                                                ${row.od_num}
+                                            </td>
+                                            <td class="shoping__cart__product">
+                                                ${row.ss_name}
+                                            </td>
+                                            <td class="shoping__cart__price" style="font-weight: 400; width: 20%">
+                                                ${row.pmileage}
+                                            </td>
+                                            <td class="shoping__cart__quantity">
+                                                ${row.od_date}
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 
 </section>

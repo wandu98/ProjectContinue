@@ -33,4 +33,8 @@ public class MemdvDAO {
         sqlSession.update("memdv.update", memdvDTO);
     }
 
+    public int delete(int mem_dvnum) {
+        return sqlSession.delete("memdv.delete", mem_dvnum);
+    }
+
 }

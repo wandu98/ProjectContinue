@@ -60,4 +60,15 @@ public class MemdvController {
         memdvDAO.update(memdvDTO);
         return "redirect:/mypage/memdv";
     }
+
+    @RequestMapping("/delete/{mem_dvnum}")
+    public String delete(@PathVariable int mem_dvnum) {
+        int cnt = memdvDAO.delete(mem_dvnum);
+        if (cnt == 0) {
+            System.out.println("배송지 삭제 실패");
+        } else {
+            System.out.println("배송지 삭제 성공");
+        }
+        return "redirect:/mypage/memdv";
+    }
 }

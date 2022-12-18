@@ -45,4 +45,16 @@
         FROM tb_review
         WHERE ss_num = #{ss_num}
     </select>
+
+    <select id="myrv_list" resultType="com.cafe24.nonchrono.dto.ReviewDTO">
+        select rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num, rv_date
+        from tb_review
+        where rv_num = #{rv_num}
+    </select>
+
+    <update id="modify">
+        update tb_review
+        set rv_content = #{rv_content}, rv_star = #{rv_star}, rv_filename = #{rv_filename}
+        where rv_num = #{rv_num}
+    </update>
 </mapper>

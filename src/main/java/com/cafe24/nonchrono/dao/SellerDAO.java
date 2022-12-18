@@ -139,6 +139,134 @@ public class SellerDAO {
         return sqlSession.selectList("seller.progSearch", pagingDTO);
     }
 
+    public int fullTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.fullTotalRowCount", pagingDTO);
+    }
+
+    public int progTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.progTotalRowCount", pagingDTO);
+    }
+
+    public int speriodTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.speriodTotalRowCount", pagingDTO);
+    }
+
+    public int eperiodTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.eperiodTotalRowCount", pagingDTO);
+    }
+
+    public int spepTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.spepTotalRowCount", pagingDTO);
+    }
+
+    public int ikTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.ikTotalRowCount", pagingDTO);
+    }
+
+    public int psTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.psTotalRowCount", pagingDTO);
+    }
+
+    public int peTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.peTotalRowCount", pagingDTO);
+    }
+
+    public int pseTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.pseTotalRowCount", pagingDTO);
+    }
+
+    public int pikTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.pikTotalCount", pagingDTO);
+    }
+
+    public int sikTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.sikTotalCount", pagingDTO);
+    }
+
+    public int eikTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.eikTotalCount", pagingDTO);
+    }
+
+    public int seikTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.seikTotalCount", pagingDTO);
+    }
+
+    public int psikTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.psikTotalCount", pagingDTO);
+    }
+
+    public int peikTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.peikTotalRowCount", pagingDTO);
+    }
+
+    public int pseikTotalRowCount(PagingDTO pagingDTO) {
+        return sqlSession.selectOne("seller.pseikTotalRowCount", pagingDTO);
+    }
+
+    public List<Map<String,?>> fullList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.fullList", pagingDTO);
+    }
+
+    public List<Map<String,?>> progList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.progList", pagingDTO);
+    }
+
+    public List<Map<String,?>> speriodList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.speriodList", pagingDTO);
+    }
+
+    public List<Map<String,?>> eperiodList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.eperiodList", pagingDTO);
+    }
+
+    public List<Map<String,?>> spepList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.spepList", pagingDTO);
+    }
+
+    public List<Map<String,?>> ikList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.ikList", pagingDTO);
+    }
+
+    public List<Map<String,?>> psList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.psList", pagingDTO);
+    }
+
+    public List<Map<String,?>> peLIst(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.peLIst", pagingDTO);
+    }
+
+    public List<Map<String,?>> pseList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.pseList", pagingDTO);
+    }
+
+    public List<Map<String,?>> pikList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.pikList", pagingDTO);
+    }
+
+    public List<Map<String,?>> sikListList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.sikList", pagingDTO);
+    }
+
+    public List<Map<String,?>> eikList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.eikList", pagingDTO);
+    }
+
+    public List<Map<String,?>> seikList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.seikList", pagingDTO);
+    }
+
+    public List<Map<String,?>> psikList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.psikList", pagingDTO);
+    }
+
+    public List<Map<String,?>> peikList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.peikList", pagingDTO);
+    }
+
+    public List<Map<String,?>> pseikList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("seller.pseikList", pagingDTO);
+    }
+
 
 
 //판매자 페이지 전부 유효성 검사

@@ -32,7 +32,7 @@
                         <h5 class="card-title">주문조회</h5>
 
                         <!-- General Form Elements -->
-                        <form id="form1" name="form1" method="post" action="/seller/search">
+                        <form  id="form1" name="form1" method="post" action="/seller/search">
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">진행상태</label>
                                 <div class="col-sm-10">
@@ -97,41 +97,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>202212011451</td>
-                                    <td>닌텐도Switch OLED</td>
-                                    <td>2022-12-02</td>
-                                    <td>결제완료</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>202212011451</td>
-                                    <td>닌텐도Switch OLED</td>료
-                                    <td>2022-12-02</td>
-                                    <td>결제완료</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>202212011451</td>
-                                    <td>닌텐도Switch OLED</td>
-                                    <td>2022-12-02</td>
-                                    <td>결제완료</td>
-                                </tr>
-                                <tr class="table-success">
-                                    <th scope="row">4</th>
-                                    <td>202212011451</td>
-                                    <td>닌텐도Switch OLED</td>
-                                    <td>2022-12-02</td>
-                                    <td>구매확정</td>
-                                </tr>
-                                <tr class="table-danger">
-                                    <th scope="row">5</th>
-                                    <td>202212011451</td>
-                                    <td>닌텐도Switch OLED</td>
-                                    <td>2022-12-01</td>
-                                    <td>반품</td>
-                                </tr>
+<%--                                <c:forEach var="row" items="${progSearch}" varStatus="vs">--%>
+<%--                                    <tr>--%>
+<%--                                        <th scope="row">${row.r}</th>--%>
+<%--                                        <td>${row.od_num}</td>--%>
+<%--                                        <td>${row.ss_name}</td>--%>
+<%--                                        <td>${row.od_date}</td>--%>
+<%--                                        <td>${row.dt_prog}</td>--%>
+<%--                                    </tr>--%>
+<%--                                </c:forEach>--%>
                                 </tbody>
                             </table>
                             <!-- End Active Table -->
@@ -165,29 +139,5 @@
 </main>
 <!-- End #main -->
 
-<%--<script>--%>
-<%--    function search() {--%>
-<%--        let dt_prog = $("#dt_prog").val();--%>
-<%--        let ss_speriod = $("#ss_speriod").val();--%>
-<%--        let ss_eperiod = $("#ss_eperiod").val();--%>
-<%--        let inputState = $("#inputState").val();--%>
-<%--        let keyword = $("#keyword").val();--%>
-
-<%--        $.ajax({--%>
-<%--            url : "/seller/search"--%>
-<%--            ,type : "post"--%>
-<%--            ,data : {dt_prog, ss_speriod, ss_eperiod, inputState, keyword}--%>
-<%--            ,success : function () {--%>
-<%--                console.log("성공");--%>
-<%--            }--%>
-<%--            ,error : function (request, status, error) {--%>
-<%--                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);--%>
-<%--            }--%>
-
-
-<%--        });--%>
-
-<%--    }--%>
-<%--</script>--%>
 
 <jsp:include page="sellerfooter.jsp"></jsp:include>
