@@ -19,18 +19,18 @@
                     <table>
                         <thead>
                         <tr>
-                            <th class="shoping__product">주소</th>
+                            <th class="shoping__product" style="width: 50%">주소</th>
                             <th>수령인</th>
                             <th>연락처</th>
                             <th>별칭</th>
-                            <th>수정/삭제</th>
+                            <th>수정</th>
+                            <th>삭제</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="row" items="${list}">
                             <tr>
                                 <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-1.jpg" alt="">
                                     <h5>${row.mem_dvadr1} ${row.mem_dvadr2}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
@@ -42,8 +42,11 @@
                                 <td class="shoping__cart__total">
                                     ${row.mem_dvnick}
                                 </td>
-                                <td class="shoping__cart__item__close">
+                                <td class="shoping__cart__item__close" style="text-align: center">
                                     <span class="icon_check" onclick="location.href='/mypage/memdvForm/modify/${row.mem_dvnum}'"></span>
+                                </td>
+                                <td class="shoping__cart__item__close" style="text-align: center">
+                                    <span class="icon_close" onclick="memdvDelete(${row.mem_dvnum})"></span>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -55,7 +58,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="/mypage/memdvForm" class="primary-btn cart-btn cart-btn-right">
+                    <a href="/mypage/memdvForm" class="primary-btn cart-btn cart-btn-right" style="background-color: red; color: white">
                         배송지 등록</a>
                 </div>
             </div>
@@ -64,6 +67,13 @@
 </section>
 <!-- Shoping Cart Section End -->
 
+<script>
+    function memdvDelete(mem_dvnum) {
+        if (confirm("해당 배송지를 삭제하시겠습니까?")) {
+            location.replace("/mypage/delete/" + mem_dvnum);
+        }
+    }
+</script>
 
 
 

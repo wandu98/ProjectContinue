@@ -569,17 +569,6 @@
 </section>
 <!-- Blog Section End -->
 
-<!-- The Modal -->
-<%--<div id="myModal" class="modal">--%>
-<%--    <!-- Modal content -->--%>
-<%--    <div class="modal-content">--%>
-<%--        <span class="close" onclick="modalClose()">&times;</span>--%>
-<%--        <p>선택하신 상품을 위시리스트에 담았습니다.<br>지금 위시리스트를 확인하시겠습니까?</p>--%>
-<%--        <div>--%>
-<%--            <a onclick="modalClose()" style="margin: 8px;">쇼핑 계속하기</a><a onclick="goWishlist()">위시리스트 확인</a>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
 
 <%-- 위시리스트 모달 --%>
 <div class="container">

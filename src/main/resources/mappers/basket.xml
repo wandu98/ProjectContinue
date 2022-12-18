@@ -55,7 +55,7 @@
                  group by mem_id
              ) AA
     </select>
-        
+
     <select id="item" parameterType="String" resultType="com.cafe24.nonchrono.dto.BasketDTO">
         select bk_num, ss_num, bk_amount, mem_id
         from tb_basket

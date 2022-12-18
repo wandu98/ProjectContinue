@@ -49,7 +49,7 @@
                         <c:forEach var="row" items="${list}" varStatus="vs">
                             <tr>
                                 <td class="shoping__cart__price">
-                                    1
+                                    ${row.r}
                                 </td>
                                 <td class="shoping__cart__product">
                                         <img src="/images/${row.ss_img}" alt="" style="max-width: 80px"> <%--상품이미지 경로 수정해야함--%>

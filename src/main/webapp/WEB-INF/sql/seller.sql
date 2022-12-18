@@ -476,7 +476,7 @@ from (
                         from tb_order od join tb_detail dt
                                            on od.od_num = dt.od_num join tb_sales ts
                                                                          on dt.ss_num = ts.ss_num
-                        where sl_id = 'digj1908' and dt_prog = 'J05'
+                        where sl_id = 'digj1908' and dt_prog = 'J02'
                  ) AA, (select @rno := 0) BB
                 order by od_date desc
         ) CC
@@ -484,8 +484,122 @@ from (
 where r >= 1 and r <= 5;
 
 
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and dt_prog = 'J02'
+order by sl_id;
+
+
+select count(*) as count
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and dt_prog = 'J07'
+order by sl_id;
+
+select ifnull(max(count), 0) as cnt
+from (
+        select count(*) as count
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_sales ts
+                                                            on dt.ss_num = ts.ss_num
+        where sl_id = 'digj1908' and dt_prog = 'J02'
+        order by sl_id
+    ) AA;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908'
+group by sl_id;
+
+
+
+
+
+
+
+
+
+
 -- 판매일자만
 
+-- 시작일만
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d'))
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d'))
+group by sl_id;
+
+-- 종료일만
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d')
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                     on od.od_num = dt.od_num join tb_sales ts
+                                                   on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d')
+group by sl_id;
+
+
+
+-- 시작일, 종료일 둘다
 select *
 from (
          select *, @rno := @rno + 1 as r
@@ -511,7 +625,20 @@ from (
 where r >= 1 and r <= 5;
 
 
--- 조건 검색
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+group by sl_id;
+
+
+
+
+
+
+-- 조건 검색만
 
 select *
 from (
@@ -535,11 +662,20 @@ from (
                   order by od_date desc
               ) CC
      ) DD
-where r >= 1 and r <= 5
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and od.od_num like '%903%'
+group by sl_id;
 
 
 -- 진행상태 & 판매일
 
+-- 시작일만
 select *
 from (
          select *, @rno := @rno + 1 as r
@@ -557,12 +693,92 @@ from (
                            from tb_order od join tb_detail dt
                                                  on od.od_num = dt.od_num join tb_sales ts
                                                                                on dt.ss_num = ts.ss_num
-                           where sl_id = 'digj1908' and dt_prog = #{J05} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d'))
                        ) AA, (select @rno := 0) BB
                   order by od_date desc
               ) CC
      ) DD
-where r >= 1 and r <= 5
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and dt_prog = 'J05' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d'))
+group by sl_id;
+
+
+
+-- 종료일만
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d')
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and dt_prog = 'J05' and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d')
+group by sl_id;
+
+
+
+-- 시작일, 종료일 다
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and dt_prog = 'J05' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+group by sl_id;
+
 
 
 -- 진행상태 & 조건 검색
@@ -584,15 +800,92 @@ from (
                            from tb_order od join tb_detail dt
                                                  on od.od_num = dt.od_num join tb_sales ts
                                                                                on dt.ss_num = ts.ss_num
-                           where sl_id = 'digj1908' and dt_prog = 'J05' and ${ss_name} like '%네%'
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and ${ss_name} like concat('%') '%네%'
                        ) AA, (select @rno := 0) BB
                   order by od_date desc
               ) CC
      ) DD
-where r >= 1 and r <= 5
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and dt_prog = 'J05' and ss_name like '%네%'
+group by sl_id;
 
 
 -- 판매일 & 조건 검색
+
+-- 시작일만
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and ${ss_name} like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d'))
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and ss_name like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d'))
+group by sl_id;
+
+-- 종료일만
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and ${ss_name} like '%네%'and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d')
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and ss_name like '%네%'and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d')
+group by sl_id;
+
+-- 시작일, 종료일 다
 
 select *
 from (
@@ -616,11 +909,20 @@ from (
                   order by od_date desc
               ) CC
      ) DD
-where r >= 1 and r <= 5
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and ss_name like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+group by sl_id;
 
 
 -- 진행상태 & 판매일 & 조건검색
 
+-- 시작일만
 select *
 from (
          select *, @rno := @rno + 1 as r
@@ -638,10 +940,86 @@ from (
                            from tb_order od join tb_detail dt
                                                  on od.od_num = dt.od_num join tb_sales ts
                                                                                on dt.ss_num = ts.ss_num
-                           where sl_id = 'digj1908' and dt_prog = 'J05' and ${ss_name} like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and ss_name like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d'))
                        ) AA, (select @rno := 0) BB
                   order by od_date desc
               ) CC
      ) DD
-where r >= 1 and r <= 5
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and dt_prog = 'J05' and ss_name like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d'))
+group by sl_id;
+
+
+
+-- 종료일만
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and ss_name like '%네%' and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d')
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and dt_prog = 'J05' and ss_name like '%네%' and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d')
+group by sl_id;
+
+-- 시작일, 종료일 다
+select *
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and ss_name like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
+
+select count(*) as cnt
+from tb_order od join tb_detail dt
+                      on od.od_num = dt.od_num join tb_sales ts
+                                                    on dt.ss_num = ts.ss_num
+where sl_id = 'digj1908' and dt_prog = 'J05' and ss_name like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
+group by sl_id;
 

@@ -469,5 +469,640 @@
         ]]>
     </select>
 
+    <!-- 판매자 상품리스트 검색 -->
+    <!--  검색안할 시 -->
+    <select id="fullList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                select *, @rno := @rno + 1 as r
+                from (
+                        select *
+                        from (
+                                select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                when 'J02' then '출고준비중'
+                                                                                when 'J03' then '출고완료'
+                                                                                when 'J04' then '배송중'
+                                                                                when 'J05' then '배송완료'
+                                                                                when 'J06' then '구매확정'
+                                                                                when 'J07' then '교환'
+                                                                                when 'J08' then '반품' end as dt_prog
+                                from tb_order od join tb_detail dt
+                                on od.od_num = dt.od_num join tb_sales ts
+                                on dt.ss_num = ts.ss_num
+                                where sl_id = #{sl_id}
+                        ) AA, (select @rno := 0) BB
+                        order by od_date desc
+                ) CC
+        ) DD
+        where r >= {startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="fullTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_sales ts
+                                                            on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id}
+        group by sl_id
+    </select>
+
+    <!--  진행상태만  -->
+    <select id="progList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog}
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="progTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.lang.Integer">
+        select ifnull(max(count), 0) as cnt
+        from (
+                select count(*) as count
+                from tb_order od join tb_detail dt
+                                      on od.od_num = dt.od_num join tb_sales ts
+                                                                    on dt.ss_num = ts.ss_num
+                where sl_id = #{sl_id} and dt_prog = #{dt_prog}
+                group by sl_id
+            ) AA
+    </select>
+
+    <!--  시작일자만  -->
+    <select id="speriodList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="speriodTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_sales ts
+                                                            on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+        group by sl_id
+    </select>
+
+    <!--  종료일자만  -->
+    <select id="eperiodList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="eperiodTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+        group by sl_id
+        ]]>
+    </select>
+
+    <!--  시작, 종료일자 둘다  -->
+    <select id="spepList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="spepTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+        group by sl_id
+        ]]>
+    </select>
+
+    <!--  조건검색만  -->
+    <select id="ikList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%')
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="ikTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_sales ts
+                                                            on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%')
+        group by sl_id
+    </select>
+
+    <!--  진행상태 & 시작일  -->
+    <select id="psList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="psTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_sales ts
+                                                            on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and dt_prog = #{dt_prog} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+        group by sl_id
+        ]]>
+    </select>
+
+    <!--  진행상태 & 종료일  -->
+    <select id="peLIst" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="peTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and dt_prog = #{dt_prog} and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+        group by sl_id
+        ]]>
+    </select>
+
+
+
+    <select id="pseList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="pseTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and dt_prog = #{dt_prog} and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+        group by sl_id
+        ]]>
+    </select>
+
+    <!-- 진행상태 & 조건 검색 -->
+    <select id="pikList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%')
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="pikTotalCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_sales ts
+                                                            on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%')
+        group by sl_id
+    </select>
+
+    <!-- 시작일 & 조건 검색 -->
+    <select id="sikList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="sikTotalCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_sales ts
+                                                            on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+        group by sl_id
+        ]]>
+    </select>
+
+    <!-- 종료일 & 조건 검색 -->
+    <select id="eikList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_epeirod}, '%Y-%m-%d')
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="eikTotalCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and  #{inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+        group by sl_id
+        ]]>
+    </select>
+
+    <!-- 시작일, 종료일 & 조건 검색 -->
+    <select id="seikList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="seikTotalCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+        group by sl_id
+        ]]>
+    </select>
+
+    <!-- 진행상태 & 시작일 & 조건검색 -->
+    <select id="psikList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="psikTotalCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+                              on od.od_num = dt.od_num join tb_sales ts
+                                                            on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+        group by sl_id
+        ]]>
+    </select>
+
+    <!-- 진행상태 & 종료일 & 조건검색 -->
+    <select id="peikList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="peikTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+        group by sl_id
+        ]]>
+    </select>
+
+    <!-- 진행상태 & 시작,종료일 & 조건검색 -->
+    <select id="pseikList" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="java.util.Map">
+        <![CDATA[
+        select *
+        from (
+                 select *, @rno := @rno + 1 as r
+                 from (
+                         select *
+                         from (
+                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                                 when 'J02' then '출고준비중'
+                                                                                 when 'J03' then '출고완료'
+                                                                                 when 'J04' then '배송중'
+                                                                                 when 'J05' then '배송완료'
+                                                                                 when 'J06' then '구매확정'
+                                                                                 when 'J07' then '교환'
+                                                                                 when 'J08' then '반품' end as dt_prog
+                                 from tb_order od join tb_detail dt
+                                 on od.od_num = dt.od_num join tb_sales ts
+                                 on dt.ss_num = ts.ss_num
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+                         ) AA, (select @rno := 0) BB
+                         order by od_date desc
+                     ) CC
+             ) DD
+        where r >= #{startRow} and r <= #{endRow}
+        ]]>
+    </select>
+
+    <select id="pseikTotalRowCount" parameterType="com.cafe24.nonchrono.dto.PagingDTO" resultType="int">
+        <![CDATA[
+        select count(*) as cnt
+        from tb_order od join tb_detail dt
+        on od.od_num = dt.od_num join tb_sales ts
+        on dt.ss_num = ts.ss_num
+        where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+        group by sl_id
+        ]]>
+    </select>
+
 
 </mapper>
