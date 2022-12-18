@@ -138,9 +138,9 @@ public class SalesDAO {
     }// memdv_insert() end
 
 //  주문인서트
-    public int order_insert(OrderDTO orderDTO) {
+/*    public int order_insert(OrderDTO orderDTO) {
     return sqlSession.insert("sales.order_insert", orderDTO);
-    }// insert() end
+    }// insert() end*/
 
 // dvnum Max값 구해서 신규 배송지 유무 파악
     public int max_dvnum(String mem_id){ return sqlSession.selectOne("sales.max_dvnum", mem_id);
@@ -160,4 +160,7 @@ public class SalesDAO {
         return sqlSession.selectOne("sales.memdv_search", memdvDTO);
     }
 
+    public int order(OrderDTO orderDTO) {
+        return sqlSession.insert("basket.order", orderDTO);
+    }
 }//class end

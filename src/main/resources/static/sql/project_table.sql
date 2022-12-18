@@ -124,14 +124,14 @@ CREATE table tb_order
     od_num    varchar(50)                  not null PRIMARY KEY, -- 주문번호
     od_date   datetime     default now()   not null,             -- 주문일자
     mem_id    varchar(20)                  not null,             -- 회원ID
-    dv_num    int                          not null,             -- 배송정책
+    # dv_num    int                          not null,             -- 배송정책
     mem_dvnum int                          not null,             -- 회원 배송지 번호
     cp_code   varchar(100) default 'A0000' not null,             -- 쿠폰 코드
     umileage  int          default 0       not null,             -- 사용 적립금
     pmileage  int          default 0       not null,             -- 예정 적립금
     total     int          default 0       not null,             -- 총결제금액
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id),             -- 회원 FK
-    FOREIGN KEY (dv_num) REFERENCES tb_delivery (dv_num),        -- 배송 FK
+    # FOREIGN KEY (dv_num) REFERENCES tb_delivery (dv_num),        -- 배송 FK
     FOREIGN KEY (mem_dvnum) REFERENCES tb_memdv (mem_dvnum),     -- 회원배송지 정보 FK
     FOREIGN KEY (cp_code) REFERENCES tb_coupon (cp_code)         -- 쿠폰 FK
 );
@@ -261,7 +261,7 @@ CREATE TABLE tb_mem
     ,
     mem_pw       varchar(20)  NOT NULL                              -- 회원PW
     ,
-    mem_nick     varchar(20)  NOT NULL                              -- 닉네임
+    mem_nick     varchar(20)  NOT NULL UNIQUE                       -- 닉네임
     ,
     mem_name     varchar(20)  NOT NULL                              -- 이름
     ,

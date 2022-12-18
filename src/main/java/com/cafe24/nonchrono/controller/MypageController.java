@@ -322,6 +322,7 @@ public class MypageController {
     public ModelAndView cart(HttpSession session) {
         ModelAndView mav = new ModelAndView();
         String mem_id = (String) session.getAttribute("mem_id");
+
         int basketcnt = 0;
         if (mem_id != null) {
             basketcnt = basketDAO.count(mem_id);
@@ -335,6 +336,5 @@ public class MypageController {
         }
         return mav;
     }
-
 
 }
