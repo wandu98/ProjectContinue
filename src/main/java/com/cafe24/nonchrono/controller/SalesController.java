@@ -429,9 +429,11 @@ public class SalesController {
     }
 
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    /*@RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
     public List<SalesDTO> top_price_list() {
+
+    }*/
 
 
 
