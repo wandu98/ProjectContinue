@@ -29,3 +29,13 @@ from (
              ) AA, (select @rno := 0) BB
     ) CC
 where rnum>=1 and rnum<=5;
+
+
+select rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num, rv_date
+from tb_review
+where rv_num = 7;
+
+
+update tb_review
+set rv_content = '한때의 꿈이다', rv_star = 4, rv_filename = 'dream2.jpg'
+where rv_num = 7;

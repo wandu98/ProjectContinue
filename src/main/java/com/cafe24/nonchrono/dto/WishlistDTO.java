@@ -15,6 +15,7 @@ public class WishlistDTO {
     private String ss_name;
     private int dv_fee;
     private int total;
+    private int r;
 
 }
 

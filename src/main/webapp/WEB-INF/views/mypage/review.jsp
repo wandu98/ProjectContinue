@@ -47,94 +47,106 @@
                         <c:forEach var="row" items="${rvlist}" varStatus="vs">
                             <tr>
                                 <td class="shoping__cart__price">
-                                    1
+                                    ${vs.index+1}
                                 </td>
                                 <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-1.jpg" alt="">
-                                    <h5 onclick="rvDetail(${row.rv_num})">${row.rv_content}</h5>
+                                    <div onclick="rvList(${row.rv_num})">
+                                        <img src="/images/review/${row.rv_filename}" style="max-width: 20%">
+                                        <h5>${row.rv_content}</h5>
+                                    </div>
                                 </td>
-                                <td class="shoping__cart__quantity">
+                                <td class="shoping__cart__price">
                                     <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="${row.rv_star}">
-                                        </div>
+                                            ${row.rv_star}
                                     </div>
                                 </td>
                                 <td colspan="2" class="shoping__cart__item__close" style="text-align: center">
-                                    <form id="form1" name="form1" method="post" action="/review/delete">
-                                        <input type="hidden" id="rv_num" name="rv_num" value="${row.rv_num}">
-                                        <span class="icon_close" onclick="rvDelete()"></span>
-                                    </form>
+                                    <span class="icon_close" onclick="rvDelete(${row.rv_num})"></span>
                                 </td>
                             </tr>
+                            <form name="form1" method="post" enctype="multipart/form-data" action="/review/modify">
+                                <input id="rv_num" name="rv_num" type="hidden" value="${row.rv_num}">
+                                <tr id="myrv_list${row.rv_num}" style="display: none">
+                                    <td>
+                                        <input type="file" id="rv_filename" name="rv_filename">
+                                    </td>
+                                    <td class="shoping__cart__item">
+                                        <div class="row">
+                                            <textarea id="rv_content" name="rv_content" rows="10" style="width: 90%; float: right">${row.rv_content}</textarea>
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        <select name="rv_star">
+                                            <option>별점을 선택해주세요</option>
+                                            <option class="star_5 fa" value="10" <c:if test="${row.rv_star == 10}">selected</c:if>><span>★★★★★</span></option>
+                                            <option class="star_4" value="8" <c:if test="${row.rv_star==8}">selected</c:if>><span>★★★★</span></option>
+                                            <option class="star_3" value="6" <c:if test="${row.rv_star==6}">selected</c:if>><span>★★★</span></option>
+                                            <option class="star_2" value="4" <c:if test="${row.rv_star==4}">selected</c:if>><span>★★</span></option>
+                                            <option class="star_1" value="2" <c:if test="${row.rv_star==2}">selected</c:if>><span>★</span></option>
+                                        </select>
+                                    </td>
+                                    <td colspan="2" class="shoping__cart__item__close" style="text-align: center">
+                                        <button class="site-btn">수정</button>
+                                    </td>
+                                </tr>
+                            </form>
                         </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        <c:if test="${requestScope.count>0}">
+            <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
+            <c:set var="endPage" value="${requestScope.endPage}"></c:set>
+            <div class="product__pagination" style="text-align: center">
+                <c:if test="${endPage>pageCount}">
+                    <c:set var="endPage" value="${pageCount+1}"></c:set>
+                </c:if>
+                <c:if test="${startPage>0}">
+                    <a href="/mypage/review?pageNum=${startPage}"><i class="fa fa-long-arrow-left"></i></a>
+                </c:if>
+                <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
+                    <c:choose>
+                        <c:when test="${pageNum==i}"><a>${i}</a></c:when>
+                        <c:when test="${pageNum!=i}"><a href="/mypage/review?pageNum=${i}">${i}</a></c:when>
+                    </c:choose>
+                </c:forEach>
+                <c:if test="${endPage<=pageCount}">
+                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                </c:if>
+            </div>
+        </c:if>
     </div>
 </section>
 <!-- Shoping Cart Section End -->
 
-<!-- Blog Section Begin -->
-<section class="blog spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-7">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="product__pagination blog__pagination wishlist__pagination">
-                            <!-- 페이지 리스트 -->
-                            <c:if test="${requestScope.count>0}">
-                                <!-- 전체 페이지 수 -->
-                                <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
 
-                                <!-- 현재 보고 있는 페이지의 페이지 묶음 시작 페이지 -->
-                                <c:set var="startPage" value="${requestScope.startPage}"></c:set>
-                                <!-- 현재 보고 있는 페이지의 페이지 묶음 마지막 페이지 -->
-                                <c:set var="endPage" value="${requestScope.endPage}"></c:set>
 
-                                <div class="content" style="text-align: center">
-                                    <!-- endPage조정 -->
-                                    <!-- 전체 페이지가 22라면 세번째 페이지 묶음은 21, 22만 나오면 됨. -->
-                                    <c:if test="${endPage>pageCount}">
-                                        <c:set var="endPage" value="${pageCount+1}"></c:set>
-                                    </c:if>
-
-                                    <c:if test="${startPage>0}"> <!-- 첫번째 페이지 묶음이 아니라면 -->
-                                        <a href="/mypage/review?pageNum=${startPage}">[이전]</a>
-                                    </c:if>
-
-                                    <!-- 페이지 표시 -->
-                                    <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
-                                        <c:choose>
-                                            <c:when test="${pageNum==i}"><span style="font-weight: bold">${i}</span></c:when>
-                                            <c:when test="${pageNum!=i}"><a href="/mypage/review?pageNum=${i}">[${i}]</a></c:when>
-                                        </c:choose>
-                                    </c:forEach>
-
-                                    <!-- 현재 페이지 묶음의 마지막 페이지보다 페이지가 더 존재하면 -->
-                                    <c:if test="${endPage<=pageCount}">
-                                        <a href="/mypage/review?pageNum=${startPage+11}">[다음]</a>
-                                    </c:if>
-                                </div>
-                            </c:if>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Blog Section End -->
-
-<script type="text/javascript">
-    function rvDelete() {
-        if (confirm("해당 리뷰를 삭제하시겠습니까?")) {
-            $("form1").submit();
+<script>
+    function rvDelete(rv_num) {
+        if (confirm("해당 상품 리뷰를 삭제하시겠습니까?")) {
+            location.replace("/review/delete/"+rv_num);
         }
     }
+
+    function rvList(rv_num) {
+        let status = $("#myrv_list"+rv_num).css("display")
+        if (status == "none") {
+            $("#myrv_list"+rv_num).css("display", "");
+        } else {
+            $("#myrv_list"+rv_num).css("display", "none");
+        }
+    }
+
+    $("#rv_filename").change(function (event) {
+        let file = event.target.files[0];
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            $("#rv_img").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(file);
+    });
 </script>
 
 <jsp:include page="../footer.jsp"></jsp:include>

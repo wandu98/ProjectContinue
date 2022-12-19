@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CouponlistDAO {
@@ -15,5 +16,9 @@ public class CouponlistDAO {
 
     public List<CouponDTO> list(String mem_id) {
         return sqlSession.selectList("couponlist.list", mem_id);
+    }
+
+    public List<Map<String,?>> mileageList(String mem_id) {
+        return sqlSession.selectList("couponlist.mileageList", mem_id);
     }
 }

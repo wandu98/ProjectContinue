@@ -137,6 +137,19 @@
         border: none;
     }
 
+    #declare_content {
+        width: 100%;
+        height: 150px;
+        font-size: 13px;
+        color: #6f6f6f;
+        padding-left: 20px;
+        margin-bottom: 24px;
+        border: 1px solid #ebebeb;
+        border-radius: 4px;
+        padding-top: 12px;
+        resize: none;
+    }
+
 </style>
 
 <!-- 모집 게시판 배너 시작 -->
@@ -177,8 +190,18 @@
                     </div>
                     <div class="col-lg-1"></div>
                     <div class="col-lg-4 detail_profile">
-                        <img alt="" id="profile0" src="/images/profilePicture.png" class="img-thumbnail img-fluid"
-                             style="width: 100%; height: auto"/>
+                        <c:choose>
+                            <c:when test="${memDetail.mem_pic != 'ProfilePicture.png'}">
+                                <img alt="" id="profile0" src="/images/profile/${memDetail.mem_id}/thumb.jpg"
+                                     class="img-thumbnail img-fluid"
+                                     style="height: 100%; overflow: hidden"/>
+                            </c:when>
+                            <c:otherwise>
+                                <img alt="" id="profile0" src="/images/profile/ProfilePicture.png"
+                                     class="img-thumbnail img-fluid"
+                                     style="height: 100%; overflow: hidden"/>
+                            </c:otherwise>
+                        </c:choose>
                         <div class="detail_profile_hover">
                             닉네임 : ${memDetail.mem_nick}<br>
                             등급 : ${memDetail.mem_grade}<br>
@@ -228,25 +251,42 @@
                         <div class="col-lg-3 col-md-4 col-sm-4">
                             <div class="product__item">
                                 <div id="profile${vs.count}" class="product__item__pic set-bg"
-                                     data-setbg="/images/profilePicture.png">
-                                    <c:forEach var="pic" items="${memPic}" varStatus="vs4">
-                                        <c:if test="${vs.count == vs4.count and pic != '' and pic != null}">
-                                            <img src="/images/profile/${pic}"
-                                                 style="height: 100%; overflow: hidden">
-                                        </c:if>
-                                    </c:forEach>
+                                     data-setbg="/images/profile/ProfilePicture.png">
+                                    <c:if test="${memPic[vs.index-1] != '' and memPic[vs.index-1] != 'ProfilePicture.png' and memSeat[vs.index-1] != ''}">
+                                        <img src="/images/profile/${memSeat[vs.index-1]}/thumb.jpg"
+                                             style="height: 100%; overflow: hidden">
+                                    </c:if>
                                     <input type="hidden" id="recruitseat${vs.count}" name="recruitseat${vs.count}"
                                            value="${vs.count}">
                                     <ul class="product__item__pic__hover">
                                         <c:choose>
+                                            <%-- 그 방에 참가했거나 모집장인 경우 --%>
                                             <c:when test="${attendCount != 0 or detail.mem_id eq mem_id}">
-                                                <li><span><i class="fa fa-heart"></i></span></li>
-                                                <li><span>신고</span></li>
+                                                <%-- 그 자리에 참가한 인원이 없을 경우 --%>
+                                                <c:if test="${memNick[vs.index - 1] != ''}">
+                                                    <%-- 본인을 제외하고 신고와 하트를 출력 --%>
+                                                    <c:if test="${attendCheck != vs.index}">
+                                                        <li><span
+                                                                onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"><i
+                                                                class="fa fa-heart"></i></span></li>
+                                                        <li><span onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')">신고</span></li>
+                                                    </c:if>
+                                                </c:if>
                                             </c:when>
                                             <c:otherwise>
-                                                <li><span id="attendBtn${vs.count}"
-                                                          onclick="attend(${vs.count}, '<%=(String)session.getAttribute("mem_id")%>')">참가</span>
-                                                </li>
+                                                <c:if test="${memNick[vs.index - 1] == ''}">
+                                                    <li><span id="attendBtn${vs.count}"
+                                                              onclick="attend(${vs.count}, '${mem_id}')">참가</span>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test="${memNick[vs.index - 1] != ''}">
+                                                    <li><span
+                                                            onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"><i
+                                                            class="fa fa-heart"></i></span></li>
+                                                    <li><span onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')">신고</span>
+                                                    </li>
+                                                </c:if>
+
                                             </c:otherwise>
                                         </c:choose>
                                     </ul>
@@ -306,6 +346,35 @@
         </div>
     </div>
 </section>
+
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal fade" id="declaration">
+        <input type="hidden" id="modal_id" value="">
+        <input type="hidden" id="modal_nickname" value="">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">신고하기</h4>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <textarea id="declare_content"></textarea>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" onclick="declare2()" class="btn btn-primary">제출</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
 
@@ -433,7 +502,7 @@
 
             // 만약 역할 추가를 안 했다면 select box와 버튼이 안 보이게 처리
             if ($('#roleSelect' + i).val() == null) {
-                $("#profile"+i+" > .nice-select").css('display', 'none').niceSelect('update');
+                $("#profile" + i + " > .nice-select").css('display', 'none').niceSelect('update');
                 $('#roleBtn' + i).hide();
             }
         }
@@ -478,6 +547,66 @@
             })
         }
     }
+
+    function heart(id, nickname) {
+        // alert(id);
+
+        $.ajax({
+            url: "/recruit/heart",
+            type: "post",
+            data: {
+                "rt_goodbad": "좋아요",
+                "give_id": '${mem_id}',
+                "receive_id": id,
+                "rt_content": "-",
+                "rcrbrd_num": ${detail.rcrbrd_num}
+            },
+            success: function (result) {
+                alert(nickname + result);
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
+    }
+
+    function declare(id, nickname) {
+        if (confirm("정말로 신고하시겠습니까?")) {
+            $('#modal_id').val(id);
+            $('#modal_nickname').val(nickname);
+            $('#declaration').modal('show');
+        }
+    }
+
+    function declare2() {
+
+        $.ajax({
+            url: "/recruit/declare",
+            type: "post",
+            data: {
+                "rt_goodbad": "신고",
+                "give_id": '${mem_id}',
+                "receive_id": $('#modal_id').val(),
+                "rt_content": $('#declare_content').val(),
+                "rcrbrd_num": ${detail.rcrbrd_num}
+            },
+            success: function (result) {
+                alert($('#modal_nickname').val() + result);
+                $('#declaration').modal('hide');
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
+
+    }
+
+    $('#declare_content').keyup(function () {
+        let content = $(this).val();
+        if (content.length > 255) {
+            alert("최대 255자까지 입력 가능합니다.");
+        }
+    });
 
 </script>
 

@@ -32,3 +32,34 @@ on rb.gm_code = tg.gm_code
 where rb.mem_id = 'fjhdmj555'
 group by rb.rcrbrd_num
 order by rcrbrd_num;
+
+
+select ifnull(count(*), 0)
+from tb_wish
+where mem_id = 'ewok777'
+group by mem_id;
+
+
+select count(*)
+from tb_wish
+where mem_id = 'ewok777'
+group by mem_id;
+
+select ifnull(max(count), 0) as cnt
+from (
+        select count(*) as count
+        from tb_wish
+        where mem_id = 'ewok777'
+        group by mem_id
+    ) AA ;
+
+
+
+
+select rb.rcrbrd_num, rcrbrd_subject, rb.gm_code, gm_name, rcrbrd_edate, count(*) as cnt
+from tb_rcrboard rb join tb_recruitinfo tr
+on rb.rcrbrd_num = tr.rcrbrd_num join tb_game tg
+on rb.gm_code = tg.gm_code
+where rb.mem_id = 'fjhdmj555'
+group by rb.rcrbrd_num
+order by rcrbrd_num;

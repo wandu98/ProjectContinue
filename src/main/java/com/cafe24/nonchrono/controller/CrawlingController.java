@@ -157,10 +157,10 @@ public class CrawlingController {
                     String path = ResourceUtils.getURL("classpath:static/images").getPath();
 
                     // 이미 크롤링한 적이 있다면 해당 폴더 삭제
-                    File folder = new File(path + "/thumb");
+                    /*File folder = new File(path + "/thumb");
                     if (folder.exists()) {
                         folder.delete();
-                    }
+                    }*/
 
                     // 폴더 생성
                     File folder2 = new File(path + "/thumb/" + crawlingDTO.getGm_code());

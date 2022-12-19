@@ -2,10 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="event">
-    <select id="list" parameterType="com.cafe24.nonchrono.dto.EventDTO">
+    <insert id="evtInsert" parameterType="com.cafe24.nonchrono.dto.EventDTO">
+        INSERT INTO tb_evt(evt_title, evt_desc, evt_views, evt_start, evt_end)
+        VALUES (#{evt_title}, #{evt_desc}, #{evt_views}, #{evt_start}, #{evt_end})
+    </insert>
+
+    <select id="eventlist" resultType="com.cafe24.nonchrono.dto.EventDTO">
         SELECT evt_num, evt_title, evt_start, evt_end, evt_views, evt_desc, evt_regdate
         FROM tb_evt
-        ORDER BY evt_num
+        ORDER BY evt_num DESC
     </select>
 
+    <select id="evtdetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.EventDTO" >
+        select evt_num, evt_title, evt_start, evt_end, evt_views, evt_desc, evt_regdate
+        from tb_evt
+        where evt_num = #{evt_num}
+    </select>
+
+    <select id="evtviews" parameterType="com.cafe24.nonchrono.dto.EventDTO">
+        UPDATE tb_evt
+        SET evt_views = evt_views + 1
+        WHERE evt_num = #{evt_num}
+    </select>
+
+    <delete id="evtdelete" parameterType="int">
+        DELETE FROM tb_evt
+        WHERE evt_num = #{evt_num}
+    </delete>
+
+    <update id="evtUpdate" parameterType="com.cafe24.nonchrono.dto.EventDTO">
+        UPDATE tb_evt
+        SET evt_title = #{evt_title}, evt_start = #{evt_start}, evt_end = #{evt_end}, evt_desc = #{evt_desc}
+        WHERE evt_num = #{evt_num}
+    </update>
 </mapper>

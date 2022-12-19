@@ -207,7 +207,8 @@
                     message += "<li><i class='fa fa-comment-o'></i> 댓글 수</li>";
                     message += "</ul>";
                     message += "<h5>" + value.rcrbrd_subject + "</h5>";
-                    message += "<p>" + value.gm_name + " (<span id='list" + (index + startCount + 1) + "' name='list" + (index + startCount + 1) + "'>" + value.count + "</span> / " + value.rcrbrd_max + ")</p>";
+                    message += "<p>" + value.gm_name + "</p>";
+                    message += "<span id='list" + (index + startCount + 1) + "' name='list" + (index + startCount + 1) + "' style='color: #7796dc'>" + "(" + value.count + " / " + value.rcrbrd_max + ")</span>";
                     message += "</div>";
                     message += "</div>";
                     message += "</a>";
@@ -325,7 +326,8 @@
                     message += "<li><i class='fa fa-comment-o'></i> 댓글 수</li>";
                     message += "</ul>";
                     message += "<h5>" + value.rcrbrd_subject + "</h5>";
-                    message += "<p>" + value.gm_name + " (<span id='list" + (index + 1) + "' name='list" + (index + 1) + "'>" + value.count + "</span> / " + value.rcrbrd_max + ")</p>";
+                    message += "<p>" + value.gm_name + "</p>";
+                    message += "<span id='list" + (index + 1) + "' name='list" + (index + 1) + "' style='color: #7796dc'>" + "(" + value.count + " / " + value.rcrbrd_max + ")</span>";
                     message += "</div>";
                     message += "</div>";
                     message += "</a>";

@@ -168,6 +168,7 @@ public class MypageController {
         String mem_id = session.getAttribute("mem_id").toString();
         mav.addObject("couponlist", couponlistDAO.list(mem_id));
         mav.addObject("point", memDAO.myList(mem_id));
+        mav.addObject("mileagelist", couponlistDAO.mileageList(mem_id));
         mav.setViewName("mypage/coupon");
         return mav;
     }

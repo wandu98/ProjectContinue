@@ -36,4 +36,9 @@
         from tb_memdv
         where mem_id = #{mem_id}
     </select>
+
+    <delete id="delete">
+        delete from tb_memdv
+        where mem_dvnum = #{mem_dvnum}
+    </delete>
 </mapper>

@@ -26,8 +26,8 @@ public class ReviewDAO {
         return sqlSession.selectOne("review.count", mem_id);
     }
 
-    public void delete(int rv_num) {
-        sqlSession.delete("review.delete", rv_num);
+    public int delete(int rv_num) {
+        return sqlSession.delete("review.delete", rv_num);
     }
 
     public int totalRowCount(String mem_id) {
@@ -43,4 +43,12 @@ public class ReviewDAO {
     public int rv_insert(ReviewDTO reviewDTO) { return sqlSession.insert("review.insert", reviewDTO);}
 
     public List<ReviewDTO> rv_list(int ss_num) {return sqlSession.selectList("review.rv_list", ss_num);}
+
+    public ReviewDTO myrv_list (int rv_num) {
+        return sqlSession.selectOne("review.myrv_list", rv_num);
+    }
+
+    public int modify(ReviewDTO reviewDTO) {
+        return sqlSession.update("review.modify", reviewDTO);
+    }
 }

@@ -216,4 +216,46 @@ public class RecruitDAO {
         return sqlSession.selectList("mypage.rcrbrdlist", mem_id);
     }
 
+    public int attendCheck(int rcrbrd_num, String mem_id) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("rcrbrd_num", rcrbrd_num);
+        map.put("mem_id", mem_id);
+        if (sqlSession.selectOne("recruit.attendCheck", map) == null) {
+            return 0;
+        } else {
+            return sqlSession.selectOne("recruit.attendCheck", map);
+        }
+    }
+
+    public List<String> memSeat(int rcrbrd_num) {
+        int count = (int) sqlSession.selectOne("recruit.rcrbrdMax", rcrbrd_num);
+        List<String> list = new ArrayList<>();
+        RecruitInfoDTO recruitInfoDTO = new RecruitInfoDTO();
+        recruitInfoDTO.setRcrbrd_num(rcrbrd_num);
+        for (int i = 1; i <= count; i++) {
+            recruitInfoDTO.setRi_seat(i);
+            if (sqlSession.selectOne("recruit.memSeat", recruitInfoDTO) != null) {
+                list.add(sqlSession.selectOne("recruit.memSeat", recruitInfoDTO));
+            } else {
+                list.add("");
+            }
+        }
+        return list;
+    }
+
+    public String heart(RatingDTO ratingDTO) {
+        int cnt = sqlSession.selectOne("recruit.heartCheck", ratingDTO);
+        if (cnt == 0) {
+            sqlSession.insert("recruit.heart", ratingDTO);
+            return "님께 하트를 보냈습니다";
+        } else {
+            sqlSession.delete("recruit.heartDelete", ratingDTO);
+            return "님께 보낸 하트를 취소했습니다";
+        }
+    }
+
+    public String declare(RatingDTO ratingDTO) {
+        sqlSession.insert("recruit.heart", ratingDTO);
+        return "님을 신고했습니다";
+    }
 } // class end
