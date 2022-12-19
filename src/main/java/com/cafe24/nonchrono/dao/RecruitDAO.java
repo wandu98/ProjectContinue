@@ -287,4 +287,8 @@ public class RecruitDAO {
         map.put("keyword", keyword);
         return sqlSession.selectList("recruit.listAjax2", map);
     }
+
+    public List<String> searchRank() {
+        return sqlSession.selectList("recruit.searchRank");
+    }
 } // class end

@@ -377,3 +377,10 @@ SELECT count(*)
 FROM tb_rating
 WHERE rcrbrd_num = 5
   AND give_id = 'koochunwoo' AND receive_id = 'gjdjj888';
+
+SELECT sc_word
+FROM tb_search
+WHERE sc_where = '모집'
+GROUP BY sc_word
+ORDER BY count(sc_word) DESC
+LIMIT 5;

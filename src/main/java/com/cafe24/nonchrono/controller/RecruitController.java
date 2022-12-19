@@ -67,6 +67,7 @@ public class RecruitController {
             mav.addObject("game", gameList);
             mav.addObject("attendCount", attendMembers);
             mav.addObject("rcrKing", recruitDAO.rcrKing());
+            mav.addObject("searchRank", recruitDAO.searchRank());
             // System.out.println(recruitDAO.rcrKing());
             mav.setViewName("/recruit/recruit");
         } else {
@@ -594,6 +595,7 @@ public class RecruitController {
             mav.addObject("game", gameList);
             mav.addObject("attendCount", attendMembers);
             mav.addObject("rcrKing", recruitDAO.rcrKing());
+            mav.addObject("searchRank", recruitDAO.searchRank());
             // System.out.println(recruitDAO.rcrKing());
             mav.setViewName("/recruit/recruit");
         } else {
