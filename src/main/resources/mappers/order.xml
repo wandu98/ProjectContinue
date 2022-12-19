@@ -39,10 +39,28 @@
     where od_num = #{od_num}
 </select>
 
-<select id="ordertotal">
-    select *
-    from tb_detail dt join tb_order od
-                           on dt.od_num = od.od_num
+<select id="total" resultType="int">
+    select total from tb_order where od_num = #{od_num}
 </select>
 
+<select id="maxdt_fee" resultType="int">
+    select max(dv_fee)
+    from (
+             select dv_fee
+             from tb_detail dt join tb_delivery dv on dt.dv_num = dv.dv_num
+             where od_num = #{od_num}
+         ) aa
+</select>
+
+<select id="dt_coupon" parameterType="String" resultType="com.cafe24.nonchrono.dto.CouponDTO">
+    select od.cp_code, cp_percent, cp_name
+    from tb_order od join tb_coupon cp on cp.cp_code = od.cp_code
+    where od_num = #{od_num}
+</select>
+
+<select id="umileage" resultType="int">
+    select umileage
+    from tb_order
+    where od_num = #{od_num}
+</select>
 </mapper>

@@ -34,14 +34,8 @@
         <div class="row">
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
-                    <div class="blog__sidebar__search">
-                        <form action="#">
-                            <input type="text" placeholder="Search...">
-                            <button type="submit"><span class="icon_search"></span></button>
-                        </form>
-                    </div>
                     <div class="sidebar__item">
-                        <h4>인기 급상승 상품</h4>
+                        <h4>최근 검색어</h4>
                         <ul>
                             <li><a href="#">스위치1</a></li>
                             <li><a href="#">스위치2</a></li>
@@ -58,65 +52,49 @@
 
                     <div class="sidebar__item">
                         <div class="latest-product__text">
-                            <h4>방금 팔렸습니다..!</h4>
+                            <h4>판매완료</h4>
                             <div class="latest-product__slider owl-carousel">
                                 <div class="latest-prdouct__slider__item">
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="images/001.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>스위치 S급 ㅍㅍ</h6>
-                                            <span>₩30,000</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="images/002.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>급쳐 ㅍㅍ</h6>
-                                            <span>₩30,000</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="images/003.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>네고 사절 쿨거 스위치</h6>
-                                            <span>₩30,000</span>
-                                        </div>
-                                    </a>
+                                    <c:forEach var="row" items="${sold_out}" begin="0" end="2">
+                                        <a href="/sales/detail/${row.ss_num}" class="latest-product__item">
+                                            <div class="latest-product__item__pic" style="width: 50%;">
+                                                <img src="/images/product/sales_main/${row.ss_img}" alt="">
+                                            </div>
+                                            <div class="product__discount__item__text" style="font-size: revert">
+                                                <span>${row.gm_category}</span>
+                                                <h6>${row.ss_name}</h6>
+                                                <span><fmt:formatNumber value="${row.ss_price}" type="currency"/></span>
+                                            </div>
+                                        </a>
+                                    </c:forEach>
                                 </div>
                                 <div class="latest-prdouct__slider__item">
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="images/004.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>누나 몰래 팜</h6>
-                                            <span>₩30,000</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="images/switch.png" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>오빠 몰래 팜 선착순</h6>
-                                            <span>₩30,000</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="images/switch2.jpeg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>아빠 몰래 팜 선착순</h6>
-                                            <span>₩30,000</span>
-                                        </div>
-                                    </a>
+                                    <c:forEach var="row" items="${sold_out}" begin="3" end="5">
+                                        <a href="/sales/detail/${row.ss_num}" class="latest-product__item">
+                                            <div class="latest-product__item__pic" style="width: 50%;">
+                                                <img src="/images/product/sales_main/${row.ss_img}" alt="">
+                                            </div>
+                                            <div class="product__discount__item__text" style="font-size: revert">
+                                                <span>${row.gm_category}</span>
+                                                <h6>${row.ss_name}</h6>
+                                                <span><fmt:formatNumber value="${row.ss_price}" type="currency"/></span>
+                                            </div>
+                                        </a>
+                                    </c:forEach>
+                                </div>
+                                <div class="latest-prdouct__slider">
+                                    <c:forEach var="row" items="${sold_out}" begin="6" end="8">
+                                        <a href="/sales/detail/${row.ss_num}" class="latest-product__item">
+                                            <div class="latest-product__item__pic" style="width: 50%;">
+                                                <img src="/images/product/sales_main/${row.ss_img}" alt="">
+                                            </div>
+                                            <div class="product__discount__item__text" style="font-size: revert">
+                                                <span>${row.gm_category}</span>
+                                                <h6>${row.ss_name}</h6>
+                                                <span><fmt:formatNumber value="${row.ss_price}" type="currency"/></span>
+                                            </div>
+                                        </a>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -126,118 +104,32 @@
             <div class="col-lg-9 col-md-7">
                 <div class="product__discount">
                     <div class="section-title product__discount__title">
-                        <h2>폭풍 할인</h2>
+                        <h2>인기상품</h2>
                     </div>
                     <div class="row">
                         <div class="product__discount__slider owl-carousel">
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="/images/soft1.jpeg">
-                                        <div class="product__discount__percent">-20%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <span>스위치</span>
-                                        <h5><a href="#">아빠몰래 팜 선착순</a></h5>
-                                        <div class="product__item__price">₩50,000 <span>₩330,000</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="/images/001.jpg">
-                                        <div class="product__discount__percent">-50%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <span>스위치</span>
-                                        <h5><a href="#">엄마 몰래 팜 선착순</a></h5>
-                                        <div class="product__item__price">₩50,000 <span>₩150,000</span></div>
+                            <c:forEach var="row" items="${idxTopProduct}" varStatus="vs" begin="0" end="5">
+                                <div class="col-lg-4">
+                                    <div class="product__discount__item">
+                                        <div class="product__discount__item__pic set-bg"
+                                             data-setbg="/images/product/sales_main/${row.ss_img}">
+                                            <div class="product__discount__percent">${vs.count}위</div>
+                                            <ul class="product__item__pic__hover">
+                                                <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i
+                                                        class="fa fa-heart"></i></a></li>
+                                                <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i
+                                                        class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product__discount__item__text">
+                                            <span>${row.gm_category}</span>
+                                            <h6><a href="/sales/detail/${row.ss_num}">${row.ss_name}</a></h6>
+                                            <h5><a href="/sales/detail/${row.ss_num}"><fmt:formatNumber
+                                                    value="${row.ss_price}" type="currency"/></a></h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="images/003.jpg">
-                                        <div class="product__discount__percent">할인율</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <span>게임타이틀</span>
-                                        <h5><a href="#">별의커비</a></h5>
-                                        <div class="product__item__price">₩50,000 <span>₩250,000</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="/images/004.jpg">
-                                        <div class="product__discount__percent">-20%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <span>게임타이틀</span>
-                                        <h5><a href="#">마리오카트</a></h5>
-                                        <div class="product__item__price">₩50,000 <span>₩150,000</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="/images/switch2.jpeg">
-                                        <div class="product__discount__percent">-20%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <span>스위치 OLED</span>
-                                        <h5><a href="#">오빠몰래 진짜 빠르게 팜</a></h5>
-                                        <div class="product__item__price">₩30,000 <span>₩350,000</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="/images/switch2.jpeg">
-                                        <div class="product__discount__percent">-20%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <span>스위치</span>
-                                        <h5><a href="#">누나몰래 팜 네고사절</a></h5>
-                                        <div class="product__item__price">₩50,000 <span>₩350,000</span></div>
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -247,42 +139,40 @@
                             <div class="filter__sort">
                                 <span>정렬</span>
                                 <select>
-                                    <option value="0">최신순</option>
-                                    <option value="0">판매순</option>
+                                    <option  id="new">최신순</option>
+                                    <option  id="top_price">가격높은순</option>
+                                    <option  id="row_price">가격낮은순</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>${fn:length(list)}</span> Products</h6>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
-                                <span class="icon_grid-2x2"></span>
-                                <span class="icon_ul"></span>
+                                <h6><span>${fn:length(list3)}</span> Products</h6>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
 
-                    <c:forEach var="row" items="${list}" varStatus="vs">
+                    <c:forEach var="row" items="${list3}" varStatus="vs">
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic">
                                     <a href="/sales/detail/${row.ss_num}"><img
                                             src="/images/product/sales_main/${row.ss_img}"></a>
                                     <ul class="product__item__pic__hover">
-                                        <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i class="fa fa-heart"></i></a></li>
-                                        <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i
+                                                class="fa fa-heart"></i></a></li>
+                                        <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i
+                                                class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
 
-                                <div class="product__item__text">
+                                <div class="product__discount__item__text">
+                                    <span>${row.gm_category}</span>
                                     <h6><a href="/sales/detail/${row.ss_num}">${row.ss_name}</a></h6>
                                     <h5><a href="/sales/detail/${row.ss_num}"><fmt:formatNumber
-                                            value="${row.ss_price}"/></a></h5>
+                                            value="${row.ss_price}" type="currency"/></a></h5>
                                 </div>
                             </div>
                         </div>
@@ -357,7 +247,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기
+                    </button>
                     <button type="button" class="btn btn-success" onclick="goWishlist()">위시리스트 확인</button>
                 </div>
 
@@ -386,7 +277,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기
+                    </button>
                     <button type="button" class="btn btn-success" onclick="goBasket()">장바구니 확인</button>
                 </div>
 
@@ -398,6 +290,9 @@
 
 
 <script>
+
+
+
     function wishlistModal(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
         let params = "ss_num=" + ss_num;
@@ -436,4 +331,5 @@
     }
 
 </script>
+
 <%@ include file="../footer.jsp" %>

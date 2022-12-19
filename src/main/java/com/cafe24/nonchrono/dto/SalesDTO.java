@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class SalesDTO {
-
+    private String gm_category;
     private int ss_num;         //판매 상품 번호
     private String gm_code;     //품목코드
     private String sl_id;       //판매자ID

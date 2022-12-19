@@ -137,6 +137,7 @@
                     <div class="product__details__price">판매가 ₩<fmt:formatNumber value="${detail.ss_price}"
                                                                                 pattern="#,###"/></div>
                     <ul>
+                        <li><b>카테고리</b> <span>${detail.gm_category}</span></li>
                         <li><b>배송비</b> <span>${deliveryDetail.dv_fee}</span></li>
                         <li><b>재고</b> <span>${detail.ss_stock}개</span></li>
                         <li><b>플랫폼</b> <span>SWITCH</span></li>
@@ -167,12 +168,11 @@
                                 <tr>
                                     <td>${gameDetail.gm_name}</td>
                                     <td>
-                                        <span class="quantity_price">₩<fmt:formatNumber value="${detail.ss_price}"
-                                                                                        pattern="#,###"/></span>
+                                        <span class="quantity_price"><fmt:formatNumber value="${detail.ss_price}"
+                                                                                        type="currency"/></span>
                                         <span class="mileage ">&nbsp;&nbsp;&nbsp;
                                         <img src="//img.echosting.cafe24.com/design/skin/admin/ko_KR/ico_product_point.gif"/>
-                                        <span class="mileage_price">(<fmt:parseNumber value="${detail.ss_price * 0.01}"
-                                                                                      integerOnly="true"/>원)</span></span>
+                                        <span class="mileage_price">(<fmt:formatNumber value="${detail.ss_price * 0.01}" pattern="#,###"/>원)</span></span>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -617,7 +617,6 @@
     //상품이미지에서 카트(장바구니) 클릭했을 때
     function basketModal(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
-        alert(mem_id);
         let params = "ss_num=" + ss_num;
         if (mem_id == 'null') {
             alert("로그인 후 이용해주세요");
@@ -663,7 +662,7 @@
     var modal = document.getElementById("myModal");
 
     function cartModal(ss_num) {
-        let mem_id = '<%= session.getAttribute("mem_id")%>';
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
         let bk_amount = $("#inputCount").val();
         console.log(mem_id);
         console.log(bk_amount);
@@ -684,7 +683,7 @@
     }
 
     function purchase(ss_num) {
-        let mem_id = '<%= session.getAttribute("mem_id")%>';
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
         let bk_amount = $("#inputCount").val();
         console.log(mem_id);
         console.log(bk_amount);

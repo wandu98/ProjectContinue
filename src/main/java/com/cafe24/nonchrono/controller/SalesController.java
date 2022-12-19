@@ -47,8 +47,8 @@ public class SalesController {
         int totalRowCount = salesDAO.totalRowCount(); //총 글갯수  6 |  52개
         //System.out.println(totalRowCount);
         //페이징
-        int numPerPage = 5; //한 페이지당 레코드 갯수
-        int pagePerBlock = 10; //페이지 리스트
+        int numPerPage = 6; //한 페이지당 레코드 갯수
+        int pagePerBlock = 12; //페이지 리스트
 
         //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
         //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
@@ -92,15 +92,19 @@ public class SalesController {
         } else {
             list = Collections.EMPTY_LIST;
         }//if end
-        mav.addObject("list", salesDAO.list());
         mav.addObject("pageNum", currentPage);
         mav.addObject("count", totalRowCount);
         mav.addObject("totalPage", totalPage);
         mav.addObject("startPage", startPage);
         mav.addObject("endPage", endPage);
         mav.addObject("list3", list);
+        mav.addObject("list", salesDAO.list());
+        mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
+        mav.addObject("sold_out", salesDAO.sold_out());
+        mav.addObject("top_price_list", salesDAO.top_price_list());
         return mav;
     } // sales() end
+
 
     //상품 상세
     @RequestMapping("/detail/{ss_num}")
@@ -410,6 +414,10 @@ public class SalesController {
             mav.addObject("orderlist", salesDAO.orderlist(od_num));
             mav.addObject("orderadr", salesDAO.orderadr(mem_dvnum));
             mav.addObject("dvmsg", orderDAO.dvmsg(od_num));
+            mav.addObject("total", orderDAO.total(od_num));
+            mav.addObject("maxdt_fee", orderDAO.maxdt_fee(od_num));
+            mav.addObject("dt_coupon", orderDAO.dt_coupon(od_num));
+            mav.addObject("umileage", orderDAO.umileage(od_num));
             mav.setViewName("/sales/salesorder");
 
         } else {
@@ -419,6 +427,13 @@ public class SalesController {
 
         return mav;
     }
+
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseBody
+    public List<SalesDTO> top_price_list() {
+
+
 
 
 }//class end

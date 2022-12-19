@@ -171,4 +171,8 @@ public class SalesDAO {
     public MemdvDTO orderadr(int mem_dvnum) {return sqlSession.selectOne("order.orderadr", mem_dvnum);
     } // orderAdr() end
 
+    public List<SalesDTO> sold_out() {return sqlSession.selectList("sales.sold_out");
+    } // sold_out() end
+
+    public List<SalesDTO> top_price_list() {return sqlSession.selectList("sales.top_price_list");}
 }//class end
