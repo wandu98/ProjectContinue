@@ -10,6 +10,7 @@ import lombok.*;
 @ToString
 
 public class OrderdetailDTO {
+
     private String ss_name;
     private String ss_img;
     private int dt_num;

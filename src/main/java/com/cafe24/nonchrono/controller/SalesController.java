@@ -2,6 +2,7 @@ package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.BasketDAO;
 import com.cafe24.nonchrono.dao.CouponlistDAO;
+import com.cafe24.nonchrono.dao.OrderDAO;
 import com.cafe24.nonchrono.dao.SalesDAO;
 import com.cafe24.nonchrono.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class SalesController {
 
     @Autowired
     private BasketDAO basketDAO;
+
+    @Autowired
+    private OrderDAO orderDAO;
 
     @Autowired
     private CouponlistDAO couponlistDAO;
@@ -393,18 +397,26 @@ public class SalesController {
                 System.out.println("재고 삭감 성공");
             }
         }
-
-        return "/sales/salesorder/{od_num}";
+        int mem_dvnum = orderDTO.getMem_dvnum();
+        return "redirect:/sales/salesorder/" + od_num + "&"+ mem_dvnum;
     }
 
     //주문서 상세
-    @RequestMapping("/salesorder/{od_num}")
-    public ModelAndView salesorder(@PathVariable String od_num, HttpSession session) {
+    @RequestMapping("/salesorder/{od_num}&{mem_dvnum}")
+    public ModelAndView salesorder(@PathVariable String od_num, @PathVariable int mem_dvnum, HttpSession session) {
         ModelAndView mav =new ModelAndView();
         String mem_id = session.getAttribute("mem_id").toString();
-        mav.addObject("orderlist", salesDAO.orderlist(od_num));
-        mav.addObject("orderadr", salesDAO.orderadr(mem_id));
-        mav.setViewName("sales/salesorder");
+        if (mem_id != null && !mem_id.equals("guest")) {
+            mav.addObject("orderlist", salesDAO.orderlist(od_num));
+            mav.addObject("orderadr", salesDAO.orderadr(mem_dvnum));
+            mav.addObject("dvmsg", orderDAO.dvmsg(od_num));
+            mav.setViewName("/sales/salesorder");
+
+        } else {
+            mav.setViewName("/mem/loginForm");
+        }
+
+
         return mav;
     }
 

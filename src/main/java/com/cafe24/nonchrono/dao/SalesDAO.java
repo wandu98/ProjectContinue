@@ -168,7 +168,7 @@ public class SalesDAO {
     public List<OrderdetailDTO> orderlist(String  od_num) {return sqlSession.selectList("order.orderlist", od_num);
     } // orderlist() end
 
-    public MemdvDTO orderadr(String mem_id) {return sqlSession.selectOne("order.orderadr", mem_id);
+    public MemdvDTO orderadr(int mem_dvnum) {return sqlSession.selectOne("order.orderadr", mem_dvnum);
     } // orderAdr() end
 
 }//class end
