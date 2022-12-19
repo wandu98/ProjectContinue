@@ -187,11 +187,14 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.rcrKing");
     } // rcrKing() end
 
-    public List<MoreDTO> getMoreContents(int startCount, int endCount, String order) {
+    public List<MoreDTO> getMoreContents(int startCount, int endCount, String order, String keyword) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("startCount", startCount);
         map.put("endCount", endCount);
         map.put("order", order);
+        if (keyword != null) {
+            map.put("keyword", keyword);
+        }
         return sqlSession.selectList("recruit.more", map);
     }
 
@@ -245,8 +248,10 @@ public class RecruitDAO {
 
     public String heart(RatingDTO ratingDTO) {
         int cnt = sqlSession.selectOne("recruit.heartCheck", ratingDTO);
+        String mem_id = ratingDTO.getReceive_id();
         if (cnt == 0) {
             sqlSession.insert("recruit.heart", ratingDTO);
+            sqlSession.update("recruit.good", mem_id);
             return "님께 하트를 보냈습니다";
         } else {
             sqlSession.delete("recruit.heartDelete", ratingDTO);
@@ -256,10 +261,27 @@ public class RecruitDAO {
 
     public String declare(RatingDTO ratingDTO) {
         sqlSession.insert("recruit.heart", ratingDTO);
+        String mem_id = ratingDTO.getReceive_id();
+        sqlSession.update("recruit.buyer_bad", mem_id);
         return "님을 신고했습니다";
     }
 
     public int comment(CommentDTO commentDTO) {
         return sqlSession.insert("recruit.comment", commentDTO);
+    }
+
+    public List<RecruitDTO> list2(String order, String keyword) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("order", order);
+        map.put("keyword", keyword);
+        sqlSession.insert("recruit.searchInsert", keyword);
+        return sqlSession.selectList("recruit.list2", map);
+    }
+
+    public List<MoreDTO> listAjax2(String order, String keyword) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("order", order);
+        map.put("keyword", keyword);
+        return sqlSession.selectList("recruit.listAjax2", map);
     }
 } // class end

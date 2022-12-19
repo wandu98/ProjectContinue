@@ -205,7 +205,7 @@
                         <div class="detail_profile_hover">
                             닉네임 : ${memDetail.mem_nick}<br>
                             등급 : ${memDetail.mem_grade}<br>
-                            온도 : <br>
+                            온도 : ${memTemp}&deg;C<br>
                             모집 횟수 : ${recruitCount}<br>
                         </div>
                     </div>
@@ -221,7 +221,10 @@
                         </p>
                         <hr>
                         <p>${memDetail.mem_nick} &nbsp;|&nbsp; ${memDetail.mem_grade}</p>
-                        <p>온도</p>
+                        <p>
+                        <div class="progress" style="width: 50%; height:30px">
+                            <div class="progress-bar" style="width:${memTemp}%;height:30px; background-color: red">${memTemp}&deg;C</div>
+                        </div></p>
                     </div>
                     <div class="col-lg-1"></div>
                 </div>
