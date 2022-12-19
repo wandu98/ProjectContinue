@@ -37,7 +37,7 @@
                                 <label class="col-sm-2 col-form-label">진행상태</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" aria-label="Default select example" id="dt_prog" name="dt_prog">
-                                        <option value="ALL" selected>전체</option>
+                                        <option value="" selected>전체</option>
                                         <option value="J01">결제완료</option>
                                         <option value="J02">출고준비중</option>
                                         <option value="J03">출고완료</option>
@@ -77,7 +77,7 @@
                                 </div>
 
                                 <div class="col-sm-10" style="width: 10%;">
-                                    <input type="email" class="form-control" id="keyword" name="keyword">
+                                    <input type="text" class="form-control" id="keyword" name="keyword">
                                 </div>
 
                                 <div class="col-sm-10" style="width: 10%">
@@ -97,38 +97,52 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-<%--                                <c:forEach var="row" items="${progSearch}" varStatus="vs">--%>
-<%--                                    <tr>--%>
-<%--                                        <th scope="row">${row.r}</th>--%>
-<%--                                        <td>${row.od_num}</td>--%>
-<%--                                        <td>${row.ss_name}</td>--%>
-<%--                                        <td>${row.od_date}</td>--%>
-<%--                                        <td>${row.dt_prog}</td>--%>
-<%--                                    </tr>--%>
-<%--                                </c:forEach>--%>
+                                <c:forEach var="row" items="${progSearch}" varStatus="vs">
+                                    <tr>
+                                        <th scope="row">${row.rnum}</th>
+                                        <td>${row.od_num}</td>
+                                        <td>${row.ss_name}</td>
+                                        <td>${row.od_date}</td>
+                                        <td>${row.dt_prog}</td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                             <!-- End Active Table -->
                         </form><!-- End General Form Elements -->
 
 
-                        <nav class="pagination justify-content-center">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <c:if test="${requestScope.count>0}">
+                            <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
+                            <c:set var="endPage" value="${requestScope.endPage}"></c:set>
+                            <nav class="pagination justify-content-center">
+                                <c:if test="${endPage>pageCount}">
+                                    <c:set var="endPage" value="${pageCount+1}"></c:set>
+                                </c:if>
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <c:if test="${startPage>0}">
+                                            <a class="page-link" href="/seller/search?pageNum=${startPage}}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </c:if>
+                                    </li>
+                                    <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
+                                        <c:choose>
+                                            <c:when test="${pageNum==i}"><li class="page-item"><a class="page-link">${i}</a></li></c:when>
+                                            <c:when test="${pageNum!=i}"><li class="page-item"><a class="page-link" href="/seller/search?pageNum=${i}">${i}</a></li></c:when>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <c:if test="${endpage<=pageCount}">
+                                        <li class="page-item">
+                                            <a class="page-link" href="/seller/search?pageNum=${startPage+11}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </c:if>
+                                </ul>
+                            </nav>
+                        </c:if>
                     </div>
                 </div>
 

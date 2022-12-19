@@ -113,7 +113,7 @@
                     </c:choose>
                 </c:forEach>
                 <c:if test="${endPage<=pageCount}">
-                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                    <a href="/mypage/review?pageNum=${startPage+11}"><i class="fa fa-long-arrow-right"></i></a>
                 </c:if>
             </div>
         </c:if>

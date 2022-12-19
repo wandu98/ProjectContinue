@@ -78,8 +78,28 @@ public class MypageController {
             yn = false;
             mav.addObject("YN", yn);
         }
+        MemDTO memDTO = new MemDTO();
+        memDTO = memDAO.myList(mem_id);
+        String mem_grade = memDTO.getMem_grade();
+        mem_grade = mem_grade.toLowerCase();
+        int good = memDTO.getGood();
+        int buyer_bad = memDTO.getBuyer_bad();
+        double temp = 0;
+        if (mem_grade.equals("new")) {
+            temp = 36.5 + 0 + (good * 1) + (buyer_bad * -5);
+        } else if (mem_grade.equals("bronze")) {
+            temp = 36.5 + 10 + (good * 1) + (buyer_bad * -5);
+        } else if (mem_grade.equals("silver")) {
+            temp = 36.5 + 20 + (good * 1) + (buyer_bad * -5);
+        } else if (mem_grade.equals("gold")) {
+            temp = 36.5 + 30 + (good * 1) + (buyer_bad * -5);
+        } else {
+            temp = 36.5 + 40 + (good * 1) + (buyer_bad * -5);
+        }
+
         if (mem_id != null) {
             mav.addObject("meminfo", memDAO.myList(mem_id));
+            mav.addObject("temp", temp);
             mav.addObject("qslist", questionDAO.count(mem_id));
             mav.addObject("revlist", reviewDAO.count(mem_id));
             mav.addObject("recruitlist", recruitDAO.rcrbrdlist(mem_id));
