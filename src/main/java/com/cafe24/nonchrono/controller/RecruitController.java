@@ -542,13 +542,15 @@ public class RecruitController {
         return recruitDAO.declare(ratingDTO);
     }
 
-    /*@RequestMapping("/comment")
-    public String comment(@ModelAttribute CommentDTO commentDTO, HttpSession session) {
+    @RequestMapping("/comment")
+    @ResponseBody
+    public int comment(@ModelAttribute CommentDTO commentDTO, HttpSession session) {
         String mem_id = (String) session.getAttribute("mem_id");
         commentDTO.setMem_id(mem_id);
+        System.out.println(commentDTO);
         int cnt = recruitDAO.comment(commentDTO);
-        return "redirect:/recruit/detail/" + commentDTO.getRcrbrd_num();
-    }*/
+        return cnt;
+    }
 
 
     // 삭제 후 이메일 발송

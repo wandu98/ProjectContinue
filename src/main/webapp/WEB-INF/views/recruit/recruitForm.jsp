@@ -148,6 +148,9 @@
                                 <button type="button" id="addRoleBtn" name="addRoleBtn" onclick="addRoleText()"
                                         class="btn btn-danger" style="display: none">역할 추가
                                 </button>
+                                <button type="button" id="delRoleBtn" name="delRoleBtn" onclick="delRoleText()"
+                                        class="btn btn-outline-dark" style="display: none">역할 삭제
+                                </button>
                             </label>
                             <div id="addRoleArea" class="checkout__input col-lg-8">
                                 <input type="hidden" id="hiddenCount" name="hiddenCount" value=0>
@@ -363,10 +366,24 @@
     function addRoleText() {
         let count = parseInt(document.getElementById('hiddenCount').value);
         count += 1;
-        let str = '<br><input type="text" id="rl_role' + count + '" name="rl_role' + count + '" placeholder="역할을 입력해주세요."><br>';
+        let str = '<input type="text" id="rl_role' + count + '" name="rl_role' + count + '" placeholder="역할을 입력해주세요." style="margin: 2%">';
         $('#addRoleArea').append(str);
         document.getElementById('hiddenCount').value = count;
+        $('#delRoleBtn').show();
     } // addRoleText() end
+
+    function delRoleText() {
+        // 역할 추가 텍스트 박스 삭제
+        let count = parseInt(document.getElementById('hiddenCount').value);
+        if (count > 0) {
+            $('#rl_role' + count).remove();
+            count -= 1;
+            document.getElementById('hiddenCount').value = count;
+            if (count == 0) {
+                $('#delRoleBtn').hide();
+            }
+        }
+    }
 
 
 </script>

@@ -258,4 +258,8 @@ public class RecruitDAO {
         sqlSession.insert("recruit.heart", ratingDTO);
         return "님을 신고했습니다";
     }
+
+    public int comment(CommentDTO commentDTO) {
+        return sqlSession.insert("recruit.comment", commentDTO);
+    }
 } // class end

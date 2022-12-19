@@ -269,7 +269,9 @@
                                                         <li><span
                                                                 onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"><i
                                                                 class="fa fa-heart"></i></span></li>
-                                                        <li><span onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')">신고</span></li>
+                                                        <li><span
+                                                                onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')">신고</span>
+                                                        </li>
                                                     </c:if>
                                                 </c:if>
                                             </c:when>
@@ -283,7 +285,8 @@
                                                     <li><span
                                                             onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"><i
                                                             class="fa fa-heart"></i></span></li>
-                                                    <li><span onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')">신고</span>
+                                                    <li><span
+                                                            onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')">신고</span>
                                                     </li>
                                                 </c:if>
 
@@ -329,21 +332,24 @@
                     </c:forEach>
                 </div>
                 <hr>
-                <form action="/recruit/comment" onsubmit="return commentCheck()" method="post">
+                <form id="commentForm" onsubmit="return commentCheck()" method="post">
                     <input type="hidden" id="com_rcrnum" name="rcrbrd_num" value=${detail.rcrbrd_num}>
                     <input type="hidden" id="com_memid" name="mem_id" value="${mem_id}">
                     <br>
                     <h3 style="text-align: center; font-weight: bold">댓글 작성</h3>
                     <br>
                     <div class="text-center">
-                        <textarea id="comment" placeholder="댓글 작성란..."
+                        <textarea id="com_content" name="com_content" placeholder="댓글 작성란..."
                                   style="width: 100%; height: 150px; font-size: 16px; color: #6f6f6f; padding-left: 20px; margin-bottom: 24px; border: 1px solid #ebebeb; border-radius: 4px; padding-top: 12px; resize: none;"></textarea>
                     </div>
-                    <button type="submit" class="site-btn" style="float: right">댓글 작성</button>
+                    <button type="button" onclick="comment()" class="site-btn" style="float: right">댓글 작성</button>
                     <br><br><br>
                     <hr>
                 </form>
+                <hr>
+                <div id="commentList">
 
+                </div>
             </div>
         </div>
     </div>
@@ -611,13 +617,65 @@
     });
 
     function commentCheck() {
-        let size = $('#comment').val();
+        let size = $('#com_content').val();
         if (size.length < 2) {
             alert("두글자 이상 입력해주세요!");
             return false;
         } else {
             return true;
         }
+    }
+
+    function comment() {
+        let comment = $('#commentForm').serialize();
+        $.ajax({
+            url: "/recruit/comment",
+            type: "post",
+            data: comment,
+            success: function (data) {
+                commentList();
+                $('#com_content').val('');
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
+    }
+
+    function commentList() {
+        $.ajax({
+            url: "/recruit/commentList",
+            type: "post",
+            data: {
+                "rcrbrd_num": ${detail.rcrbrd_num}
+            },
+            success: function (data) {
+                let str = "";
+                for (let i = 0; i < data.length; i++) {
+                    str += "<div class='comment'>";
+                    str += "<div class='comment-header'>";
+                    str += "<div class='comment-header-left'>";
+                    str += "<img src='/images/profile/" + data[i].mem_id + "' alt=''>";
+                    str += "<div class='comment-header-left-info'>";
+                    str += "<span class='comment-header-left-info-nickname'>" + 닉네임 + "</span>";
+                    str += "<span class='comment-header-left-info-date'>" + data[i].com_date + "</span>";
+                    str += "</div>";
+                    str += "</div>";
+                    str += "<div class='comment-header-right'>";
+                    str += "<button class='comment-header-right-btn' onclick='commentDelete(" + data[i].com_num + ")'>삭제</button>";
+                    str += "</div>";
+                    str += "</div>";
+                    str += "<div class='comment-content'>";
+                    str += "<span>" + data[i].com_content + "</span>";
+                    str += "</div>";
+                    str += "</div>";
+                }
+                $('#commentList').html(str);
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
     }
 
 </script>
