@@ -34,7 +34,7 @@
     <div class="container">
         <div class="checkout__form">
             <h4>모집글 등록</h4>
-            <form action="/recruit/insert">
+            <form action="/recruit/insert" onsubmit="return formCheck()">
                 <input type="hidden" id="mem_id" name="mem_id" value="${sessionScope.mem_id}">
                 <input type="hidden" id="rcrbrd_ip" name="rcrbrd_ip" value="<%=ip%>">
                 <input type="hidden" id="gm_code" name="gm_code" value="">
@@ -96,13 +96,13 @@
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>패스워드<span>*</span></p>
-                                    <input type="password" placeholder="password" id="rcrbrd_pw" name="rcrbrd_pw">
+                                    <input type="password" placeholder="password" id="rcrbrd_pw" name="rcrbrd_pw" required>
                                 </div>
                             </div>
                         </div>
                         <div class="checkout__input">
                             <p>제목<span>*</span></p>
-                            <input type="text" id="rcrbrd_subject" name="rcrbrd_subject">
+                            <input type="text" id="rcrbrd_subject" name="rcrbrd_subject" required>
                         </div>
                         <div class="checkout__input">
                             <p>내용</p>
@@ -135,7 +135,7 @@
                         <div class="checkout__input">
                             <p>종료일 선택<span>*</span></p>
                             <input id="rcrbrd_edate" name="rcrbrd_edate" type="datetime-local" style="width: 50%"
-                                   onchange="dateSummary()">
+                                   onchange="dateSummary()" required>
                         </div>
                         <br>
                         <br>
@@ -366,14 +366,14 @@
     function addRoleText() {
         let count = parseInt(document.getElementById('hiddenCount').value);
         count += 1;
-        let str = '<input type="text" id="rl_role' + count + '" name="rl_role' + count + '" placeholder="역할을 입력해주세요." style="margin: 2%">';
-        $('#addRoleArea').append(str);
+        let str = '<input type="text" id="rl_role' + count + '" name="rl_role' + count + '" placeholder="역할을 입력해주세요." style="margin: 2%" required>';
+        $('#addRoleArea').append(str.trim());
         document.getElementById('hiddenCount').value = count;
         $('#delRoleBtn').show();
     } // addRoleText() end
 
+    // 역할 추가 텍스트 박스 삭제
     function delRoleText() {
-        // 역할 추가 텍스트 박스 삭제
         let count = parseInt(document.getElementById('hiddenCount').value);
         if (count > 0) {
             $('#rl_role' + count).remove();
@@ -383,6 +383,21 @@
                 $('#delRoleBtn').hide();
             }
         }
+    }
+
+    // 유효성 검사
+    function formCheck() {
+        if ($('#game_search').val().length < 1) {
+            alert("모집할 게임을 선택해주세요");
+            $('#gs_modal').modal('show');
+            return false;
+        }
+        if ($('#zipcode').val().length < 1) {
+            alert("주소를 선택해주세요");
+            DaumPostcode();
+            return false
+        }
+        return true;
     }
 
 
