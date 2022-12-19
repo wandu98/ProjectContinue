@@ -148,6 +148,9 @@
                                 <button type="button" id="addRoleBtn" name="addRoleBtn" onclick="addRoleText()"
                                         class="btn btn-danger" style="display: none">역할 추가
                                 </button>
+                                <button type="button" id="delRoleBtn" name="delRoleBtn" onclick="delRoleText()"
+                                        class="btn btn-outline-dark" style="display: none">역할 삭제
+                                </button>
                             </label>
                             <div id="addRoleArea" class="checkout__input col-lg-8">
                                 <input type="hidden" id="hiddenCount" name="hiddenCount" value=0>
@@ -206,6 +209,8 @@
         // 모달창의 검색창에 검색어 추출
         let params = $("#gs_keyword").serialize();
 
+        // alert(params);
+
         // ajax로 searchProc 실행
         $.post("searchProc", params, responseProc);
     }); // keyup() end
@@ -214,14 +219,14 @@
         // alert(data)
 
         if (data.length > 0) {
-            let result = data.split("|"); // | 기호를 기준으로 문자열 분리
+            let result = data.split("^^^"); // | 기호를 기준으로 문자열 분리
             // alert(result[0]); // 검색 결과 수
             // alert(result[1]); // 검색 결과 내용
 
             let title = result[1].split(","); // , 기호를 기준으로 문자열 분리
             let code = result[2].split(",");
 
-            console.log(code);
+            // console.log("code : " + code);
 
             let str = ""; // 검색 결과를 저장할 변수
             $.each(title, function (index, key) {
@@ -235,6 +240,7 @@
             }); // each() end
 
             $("#panel").html(str);
+            // console.log("패널에 출력되는 html : " + str);
             $("#panel").show();
 
         } else {
@@ -360,10 +366,24 @@
     function addRoleText() {
         let count = parseInt(document.getElementById('hiddenCount').value);
         count += 1;
-        let str = '<br><input type="text" id="rl_role' + count + '" name="rl_role' + count + '" placeholder="역할을 입력해주세요."><br>';
+        let str = '<input type="text" id="rl_role' + count + '" name="rl_role' + count + '" placeholder="역할을 입력해주세요." style="margin: 2%">';
         $('#addRoleArea').append(str);
         document.getElementById('hiddenCount').value = count;
+        $('#delRoleBtn').show();
     } // addRoleText() end
+
+    function delRoleText() {
+        // 역할 추가 텍스트 박스 삭제
+        let count = parseInt(document.getElementById('hiddenCount').value);
+        if (count > 0) {
+            $('#rl_role' + count).remove();
+            count -= 1;
+            document.getElementById('hiddenCount').value = count;
+            if (count == 0) {
+                $('#delRoleBtn').hide();
+            }
+        }
+    }
 
 
 </script>

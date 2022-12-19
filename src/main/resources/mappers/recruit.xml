@@ -385,4 +385,9 @@
           AND receive_id = #{receive_id}
     </delete>
 
+    <insert id="comment" parameterType="com.cafe24.nonchrono.dto.CommentDTO">
+        INSERT INTO tb_comment (rcrbrd_num, mem_id, com_content, com_date, com_grpno, com_indent, com_ansnum)
+        VALUES (#{rcrbrd_num}, #{mem_id}, #{com_content}, now(), #{com_grpno}, #{com_indent}, #{com_ansnum})
+    </insert>
+
 </mapper>

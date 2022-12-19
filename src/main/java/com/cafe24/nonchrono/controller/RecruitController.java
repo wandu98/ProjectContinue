@@ -117,7 +117,7 @@ public class RecruitController {
     } // recruitForm() end
 
     // 모집 게시판 검색 과정
-    @RequestMapping("/searchProc")
+    @RequestMapping( "/searchProc")
     @ResponseBody
     public String search(HttpServletRequest req) {
         String keyword = req.getParameter("gs_keyword").trim();
@@ -136,7 +136,7 @@ public class RecruitController {
             if (size > 0) {
 
                 // 타이틀 제목을 message에 담기
-                message += size + "|";
+                message += size + "^^^";
                 for (int i = 0; i < size; i++) {
                     String title = list.get(i);
                     message += title;
@@ -149,7 +149,7 @@ public class RecruitController {
                 } // for end
 
                 // 구분
-                message += "|";
+                message += "^^^";
 
                 // 타이틀 코드를 message에 담기
                 for (int j = 0; j < size; j++) {
@@ -163,6 +163,8 @@ public class RecruitController {
 
             } // if end
         } // if end
+
+        // System.out.println("view로 전달값 : " + message);
 
         return message;
     } // searchProc() end
@@ -186,6 +188,9 @@ public class RecruitController {
                 list.add(word);
             } // if end
         } // for end
+
+        // System.out.println("전체 게임 목록 : " + list2);
+        // System.out.println("검색어가 포함된 리스트 : " + list);
         return list;
     } // searchList() end
 
@@ -535,6 +540,16 @@ public class RecruitController {
     @ResponseBody
     public String declare(@ModelAttribute RatingDTO ratingDTO) {
         return recruitDAO.declare(ratingDTO);
+    }
+
+    @RequestMapping("/comment")
+    @ResponseBody
+    public int comment(@ModelAttribute CommentDTO commentDTO, HttpSession session) {
+        String mem_id = (String) session.getAttribute("mem_id");
+        commentDTO.setMem_id(mem_id);
+        System.out.println(commentDTO);
+        int cnt = recruitDAO.comment(commentDTO);
+        return cnt;
     }
 
 
