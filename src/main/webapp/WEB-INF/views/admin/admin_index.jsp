@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -224,7 +225,7 @@
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="admin_assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -337,8 +338,18 @@
             </a>
             <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="/">
+                    <a href="/admin/gameWrite">
                         <i class="bi bi-circle"></i><span>품목 등록</span>
+                    </a>
+                </li>
+                <li>
+                    <a onclick="location.href='/crawling'">
+                        <i class="bi bi-circle"></i><span>품목 자동 등록</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/gameList">
+                        <i class="bi bi-circle"></i><span>품목 목록</span>
                     </a>
                 </li>
             </ul>
@@ -399,8 +410,6 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6 id="sales_value">${sales}</h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
                                     </div>
                                 </div>
                             </div>
@@ -426,16 +435,14 @@
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">수익 <span>| This Month</span></h5>
+                                <h5 class="card-title">수익 <span id="revenue_date">| Today</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-currency-dollar"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>$3,264</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
+                                        <h6 id="revenue_value"><fmt:formatNumber type="currency" value="${revenue}" groupingUsed="true"></fmt:formatNumber></h6>
                                     </div>
                                 </div>
                             </div>
@@ -462,16 +469,14 @@
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Customers <span>| This Year</span></h5>
+                                <h5 class="card-title">구매고객 <span id="customer_date">| Today</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-people"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>1244</h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
+                                        <h6 id="customer_value">${customer}명</h6>
                                     </div>
                                 </div>
 
@@ -1225,6 +1230,53 @@
                     $('#sales_date').text("| MONTH");
                 } else if (time == "year") {
                     $('#sales_date').text("| YEAR");
+                }
+
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
+
+    function revenue(time) {
+        $.ajax({
+            url: "/admin/revenue_" + time,
+            type: "post",
+            success: function (data) {
+                data = "￦" + data.toLocaleString('ko-KR');
+
+                $("#revenue_value").text(data);
+
+                if (time == "day") {
+                    $('#revenue_date').text("| TODAY");
+                } else if (time == "month") {
+                    $('#revenue_date').text("| MONTH");
+                } else if (time == "year") {
+                    $('#revenue_date').text("| YEAR");
+                }
+
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
+
+    function customer(time) {
+        $.ajax({
+            url: "/admin/customer_" + time,
+            type: "post",
+            success: function (data) {
+                data = data + "명"
+                $("#customer_value").text(data);
+
+                if (time == "day") {
+                    $('#customer_date').text("| TODAY");
+                } else if (time == "month") {
+                    $('#customer_date').text("| MONTH");
+                } else if (time == "year") {
+                    $('#customer_date').text("| YEAR");
                 }
 
             },

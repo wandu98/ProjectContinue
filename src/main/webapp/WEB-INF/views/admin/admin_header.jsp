@@ -48,7 +48,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="admin_index.jsp" class="logo d-flex align-items-center">
+        <a href="/admin" class="logo d-flex align-items-center">
             <img src="/admin_assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">ontinue? Admin</span>
         </a>
@@ -216,7 +216,7 @@
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="admin_assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -333,12 +333,17 @@
                         <i class="bi bi-circle"></i><span>품목 등록</span>
                     </a>
                 </li>
-
+                <li>
+                    <a onclick="location.href='/crawling'">
+                        <i class="bi bi-circle"></i><span>품목 자동 등록</span>
+                    </a>
+                </li>
                 <li>
                     <a href="/admin/gameList">
                         <i class="bi bi-circle"></i><span>품목 목록</span>
                     </a>
                 </li>
+
             </ul>
         </li><!-- End Components Nav -->
     </ul>

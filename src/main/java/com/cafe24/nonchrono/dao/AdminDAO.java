@@ -43,4 +43,28 @@ public class AdminDAO {
     public List<GameDTO> gameList(String type) {
         return sqlSession.selectList("admin.gameList", type);
     }
+
+    public int revenue_day() {
+        return sqlSession.selectOne("admin.revenue_day");
+    }
+
+    public int revenue_month() {
+        return sqlSession.selectOne("admin.revenue_month");
+    }
+
+    public int revenue_year() {
+        return sqlSession.selectOne("admin.revenue_year");
+    }
+
+    public int customer_day() {
+        return sqlSession.selectOne("admin.customer_day");
+    }
+
+    public int customer_month() {
+        return sqlSession.selectOne("admin.customer_month");
+    }
+
+    public int customer_year() {
+        return sqlSession.selectOne("admin.customer_year");
+    }
 }
