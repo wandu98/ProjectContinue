@@ -63,3 +63,16 @@ on rb.gm_code = tg.gm_code
 where rb.mem_id = 'fjhdmj555'
 group by rb.rcrbrd_num
 order by rcrbrd_num;
+
+
+delimiter //
+create trigger trigger_coupon
+after insert on tb_mem
+for each row
+begin
+    if new.mem_id = new.mem_id then
+        insert into tb_couponlist(cp_code, mem_id)
+        values ('A0002', new.mem_id);
+    end if;
+end; //
+delimiter ;
