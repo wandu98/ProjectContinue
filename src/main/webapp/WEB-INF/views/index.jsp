@@ -39,6 +39,17 @@
         .nice-select {
             border: none;
         }
+        #ranking {
+            font-weight: 700;
+        }
+        #ranking > ol {
+            width: 400px;
+        }
+        #ranking > ol > li {
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
     </style>
 
 </head>
@@ -222,21 +233,22 @@
 </section>
 <!-- 카테고리 & 배너 끝 -->
 
-<section>
-    <div class="hero__item set-bg" data-setbg="images/banner.jpg">
-        <div class="hero__text" style="text-align: center; left: 35%; position: absolute">
-            <h2>월간 <br/>타이틀 순위</h2>
-            <a href="/sales" class="success-btn">SHOP NOW</a>
-            <br><br>
-            <button type="button" class="btn btn-outline-warning" onclick="rankingSales()">판매순</button>
-            <button type="button" class="btn btn-outline-warning" onclick="rankingRecruit()">모집순</button>
-        </div>
-        <div id="ranking" style="position: absolute; left: 55%">
-            <ol>
-                <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
-                    <li>${row.gm_name}</li>
-                </c:forEach>
-            </ol>
+<section class="hero">
+    <div class="container">
+        <div class="hero__item set-bg" data-setbg="/images/banner.png" style="">
+            <div class="hero__text" style="text-align: center; left: 40%; position: absolute">
+                <h2 style="color: #f3f37b; font-size: 55px; text-shadow: -5px 0px black, 0px 5px black, 5px 0px black, 0px -5px black;">월간 <br/>타이틀 순위</h2>
+                <br><br>
+                <button type="button" class="btn btn-danger" onclick="rankingSales()">판매순</button>
+                <button type="button" class="btn btn-primary" onclick="rankingRecruit()">모집순</button>
+            </div>
+            <div id="ranking" style="position: absolute; left: 57%;">
+                <ol>
+                    <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
+                        <li>${vs.index+1}. ${row.gm_name}</li>
+                    </c:forEach>
+                </ol>
+            </div>
         </div>
     </div>
 </section>
@@ -247,10 +259,11 @@
         <div class="row">
             <div class="categories__slider owl-carousel">
                 <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="/images/thumb/${row.gm_code}/thumb.jpg">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg product__discount__item__pic" data-setbg="/images/thumb/${row.gm_code}/thumb.jpg">
+                            <div class="product__discount__percent">${vs.index+1}</div>
+                        </div>
                     </div>
-                </div>
                 </c:forEach>
             </div>
         </div>

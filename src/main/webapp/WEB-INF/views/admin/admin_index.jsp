@@ -578,58 +578,58 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" onclick="seller('day')">Today</a></li>
+                                    <li><a class="dropdown-item" onclick="seller('month')">This Month</a></li>
+                                    <li><a class="dropdown-item" onclick="seller('year')">This Year</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                                <h5 class="card-title">Recent Sales <span id="mem_date">| Today</span></h5>
 
                                 <table class="table table-borderless datatable">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Customer</th>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">회원 ID</th>
+                                        <th scope="col">회원이름</th>
+                                        <th scope="col">닉네임</th>
+                                        <th scope="col">연락처</th>
+                                        <th scope="col">가입일</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="mem_value">
                                     <tr>
-                                        <th scope="row"><a href="#">#2457</a></th>
+                                        <th scope="row">#2457</th>
                                         <td>Brandon Jacob</td>
-                                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
+                                        <td><a>At</a></td>
                                         <td>$64</td>
-                                        <td><span class="badge bg-success">Approved</span></td>
+                                        <td><span>Approved</span></td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><a href="#">#2147</a></th>
                                         <td>Bridie Kessler</td>
-                                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
+                                        <td>Bl</td>
                                         <td>$47</td>
-                                        <td><span class="badge bg-warning">Pending</span></td>
+                                        <td><span>Pending</span></td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><a href="#">#2049</a></th>
                                         <td>Ashleigh Langosh</td>
-                                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
+                                        <td><a href="#" class="text-primary">At</a></td>
                                         <td>$147</td>
                                         <td><span class="badge bg-success">Approved</span></td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><a href="#">#2644</a></th>
                                         <td>Angus Grady</td>
-                                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                                        <td>$67</td>
+                                        <td><a href="#">Ut</a></td>
+                                        <td class="text-primary">$67</td>
                                         <td><span class="badge bg-danger">Rejected</span></td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><a href="#">#2644</a></th>
                                         <td>Raheem Lehner</td>
-                                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
+                                        <td><a href="#" class="text-primary">Sunt</a></td>
                                         <td>$165</td>
                                         <td><span class="badge bg-success">Approved</span></td>
                                     </tr>
@@ -1279,6 +1279,27 @@
                     $('#customer_date').text("| YEAR");
                 }
 
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
+
+    function seller(time) {
+        $.ajax({
+            url: "/admin/mem_" + time,
+            type: "post",
+            success: function (data) {
+                $("#mem_value").html(data);
+
+                if (time == "day") {
+                    $('#mem_date').text("| TODAY");
+                } else if (time == "month") {
+                    $('#mem_date').text("| MONTH");
+                } else if (time == "year") {
+                    $('#mem_date').text("| YEAR");
+                }
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);

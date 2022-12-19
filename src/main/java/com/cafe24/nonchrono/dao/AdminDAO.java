@@ -1,6 +1,7 @@
 package com.cafe24.nonchrono.dao;
 
 import com.cafe24.nonchrono.dto.GameDTO;
+import com.cafe24.nonchrono.dto.MemDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -66,5 +67,17 @@ public class AdminDAO {
 
     public int customer_year() {
         return sqlSession.selectOne("admin.customer_year");
+    }
+
+    public List<MemDTO> mem_day() {
+        return sqlSession.selectList("admin.mem_day");
+    }
+
+    public List<MemDTO> mem_month() {
+        return sqlSession.selectList("admin.mem_month");
+    }
+
+    public List<MemDTO> mem_year() {
+        return sqlSession.selectList("admin.mem_year");
     }
 }

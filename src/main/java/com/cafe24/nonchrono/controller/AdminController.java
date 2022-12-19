@@ -222,4 +222,58 @@ public class AdminController {
         return adminDAO.customer_year();
     }
 
+    @RequestMapping("/mem_day")
+    @ResponseBody
+    public String seller_day() {
+        MemDTO memDTO = new MemDTO();
+        List<MemDTO> list = adminDAO.mem_day();
+        String result = "";
+        for (int i=0; i< list.size(); i++) {
+            result += "<tr>\n" +
+                    "                                        <th scope=\"row\">"+list.get(i).getMem_id()+"</th>\n" +
+                    "                                        <td>"+list.get(i).getMem_nick()+"</td>\n" +
+                    "                                        <td><a class=\"text-primary\">"+list.get(i).getMem_name()+"</a></td>\n" +
+                    "                                        <td>"+list.get(i).getMem_phone()+"</td>\n" +
+                    "                                        <td><span class=\"badge bg-success\">"+list.get(i).getMem_joindate()+"</span></td>\n" +
+                    "                                    </tr>";
+        }
+        return result;
+    }
+
+    @RequestMapping("/mem_month")
+    @ResponseBody
+    public String seller_month() {
+        MemDTO memDTO = new MemDTO();
+        List<MemDTO> list = adminDAO.mem_month();
+        String result = "";
+        for (int i=0; i< list.size(); i++) {
+            result += "<tr>\n" +
+                    "                                        <th scope=\"row\">"+list.get(i).getMem_id()+"</th>\n" +
+                    "                                        <td>"+list.get(i).getMem_nick()+"</td>\n" +
+                    "                                        <td><a class=\"text-primary\">"+list.get(i).getMem_name()+"</a></td>\n" +
+                    "                                        <td>"+list.get(i).getMem_phone()+"</td>\n" +
+                    "                                        <td><span class=\"badge bg-success\">"+list.get(i).getMem_joindate()+"</span></td>\n" +
+                    "                                    </tr>";
+        }
+        return result;
+    }
+
+    @RequestMapping("/mem_year")
+    @ResponseBody
+    public String seller_year() {
+        MemDTO memDTO = new MemDTO();
+        List<MemDTO> list = adminDAO.mem_year();
+        String result = "";
+        for (int i=0; i< list.size(); i++) {
+            result += "<tr>\n" +
+                    "                                        <th scope=\"row\">"+list.get(i).getMem_id()+"</th>\n" +
+                    "                                        <td>"+list.get(i).getMem_nick()+"</td>\n" +
+                    "                                        <td><a class=\"text-primary\">"+list.get(i).getMem_name()+"</a></td>\n" +
+                    "                                        <td>"+list.get(i).getMem_phone()+"</td>\n" +
+                    "                                        <td><span class=\"badge bg-success\">"+list.get(i).getMem_joindate()+"</span></td>\n" +
+                    "                                    </tr>";
+        }
+        return result;
+    }
+
 }

@@ -94,4 +94,25 @@
              ) AA
     </select>
 
+    <select id="mem_day" resultType="com.cafe24.nonchrono.dto.MemDTO">
+        select mem_id, mem_nick, mem_name, mem_phone, mem_joindate
+        from tb_mem
+        where date_format(mem_joindate, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d')
+        order by mem_joindate desc
+    </select>
+
+    <select id="mem_month" resultType="com.cafe24.nonchrono.dto.MemDTO">
+        select mem_id, mem_nick, mem_name, mem_phone, mem_joindate
+        from tb_mem
+        where date_format(mem_joindate, '%Y-%m') = date_format(now(), '%Y-%m')
+        order by mem_joindate desc
+    </select>
+
+    <select id="mem_year" resultType="com.cafe24.nonchrono.dto.MemDTO">
+        select mem_id, mem_nick, mem_name, mem_phone, mem_joindate
+        from tb_mem
+        where date_format(mem_joindate, '%Y') = date_format(now(), '%Y')
+        order by mem_joindate desc
+    </select>
+
 </mapper>
