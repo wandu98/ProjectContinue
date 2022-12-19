@@ -23,4 +23,7 @@ public class OrderDAO {
     public List<String> purchaseHistoryProduct(String od_num) {
         return sqlSession.selectList("order.historyproduct", od_num);
     }
+
+    public String dvmsg(String od_num) {return sqlSession.selectOne("order.dvmsg", od_num);}
+
 }

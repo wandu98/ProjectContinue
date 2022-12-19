@@ -42,7 +42,6 @@
 </style>
 
 
-
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="/images/002.jpg">
     <div class="container">
@@ -76,7 +75,6 @@
                             <th>가격</th>
                             <th>수량</th>
                             <th>적립금</th>
-                            <th>쿠폰</th>
                             <th>주문일자</th>
 
                         </tr>
@@ -107,33 +105,12 @@
                                            style="border: none; text-align: center"
                                            value="${row.dt_amount}">
                                 </td>
-                                <td class="shoping__cart__total">
-                                        ${row.pmileage}
+                                <td class="shoping__cart__amount">
+                                    <input id="pmileage" name="pmileage" type="text"
+                                           style="border: none; text-align: center"
+                                           value="${row.pmileage}">
                                 </td>
-                                <td class="shoping__cart__total">
-                                    <c:choose>
-                                        <c:when test="${row.cp_code eq 'A0000' }">
-                                            쿠폰미사용
-                                        </c:when>
-
-                                        <c:when test="${row.cp_code eq 'A0001' }">
-                                            생일 쿠폰
-                                        </c:when>
-
-                                        <c:when test="${row.cp_code eq 'A0002' }">
-                                            회원가입 축하 쿠폰
-                                        </c:when>
-
-                                        <c:when test="${row.cp_code eq 'B0001' }">
-                                            첫결제 이벤트 쿠폰
-                                        </c:when>
-
-                                        <c:otherwise>
-                                            블.프 쿠폰
-                                        </c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td class="shoping__cart__total">
+                                <td class="shoping__cart__amount">
                                         ${row.od_date}
                                 </td>
                             </tr>
@@ -154,7 +131,8 @@
 
                                                     <div class="checkout__input">
                                                         <p>받으시는분<span>*</span></p>
-                                                        <input type="text" id="mem_dvinfo" name="mem_dvinfo" value=""
+                                                        <input type="text" id="mem_dvinfo" name="mem_dvinfo"
+                                                               value="${orderadr.mem_dvinfo}"
                                                                required readonly>
                                                     </div>
                                                 </div>
@@ -164,34 +142,39 @@
                                                 <p>주소<span>*</span></p>
                                                 <input type="text" id="mem_dvzip" name="mem_dvzip"
                                                        style="margin-left: auto; width: 50%"
-                                                       readonly>&nbsp;
+                                                       value="${orderadr.mem_dvzip}" readonly>&nbsp;
                                             </div>
-                                            <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
+                                            <div id="wrap"
+                                                 style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
                                             </div>
                                             <div class="checkout__input" id="rcrbrd_adr0" style="width: 50%">
-                                                <input type="text" id="mem_dvadr1" name="mem_dvadr1" readonly>
+                                                <input type="text" id="mem_dvadr1" name="mem_dvadr1"
+                                                       value="${orderadr.mem_dvadr1}" readonly>
                                             </div>
                                             <div class="checkout__input" id="rcrbrd_adr1" style="width: 50%">
-                                                <input type="text" id="mem_dvadr2" name="mem_dvadr2" readonly>
+                                                <input type="text" id="mem_dvadr2" name="mem_dvadr2"
+                                                       value="${orderadr.mem_dvadr2}" readonly>
                                             </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="checkout__input">
                                                         <p>휴대폰 번호<span>*</span></p>
-                                                        <input type="text" name="mem_dvphone" id="mem_dvphone" readonly>
+                                                        <input type="text" name="mem_dvphone" id="mem_dvphone"
+                                                               value="${orderadr.mem_dvphone}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="checkout__input">
                                                         <p>별칭<span>*</span></p>
-                                                        <input type="text" name="mem_dvnick" id="mem_dvnick" readonly>
+                                                        <input type="text" name="mem_dvnick" id="mem_dvnick"
+                                                               value="${orderadr.mem_dvnick}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="checkout__input">
                                                         <p>배송 메세지</p>
-                                                        <textarea id="dt_msg" name="dt_msg" readonly></textarea>
+                                                        <textarea id="dt_msg" name="dt_msg" readonly>${dvmsg}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -199,7 +182,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-6">
                                         <div class="checkout__order" style="width: 120%">
-                                            <h4>주문서</h4>
+                                            <h4>주문내역</h4>
                                             <div class="checkout__order__products">Products <span>Total</span></div>
                                             <ul>
                                                 <c:forEach var="row" items="${orderlist}" varStatus="vs">
@@ -213,24 +196,22 @@
                                             <div class="checkout__order__products">
                                                 <ul>
                                                     <li style="color: black; font-weight: bold">마일리지 사용
-                                                        : ${mileage}<input
-                                                                type="text" id="umileage" name="umileage" value="0"
-                                                                style="float: right" readonly>
+                                                        <input type="text" id="umileage" name="umileage" value="${um}"
+                                                               style="float: right" readonly>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <hr>
                                             <div class="checkout__order__products">
-                                                <button type="button" class="btn btn-dark" data-toggle="modal"
-                                                        data-target="#couponModal" style="width: 40%">쿠폰
-                                                    선택 <%--// onclick="couponList()"--%>
-                                                </button>
-                                                <input type="text" id="couponDiscount" value="0" style="float: right"
-                                                       readonly>
-                                            </div>
-                                            <hr>
-                                            <div class="checkout__order__products">할인 금액
-                                                <span id="discount">
+                                                <ul>
+                                                    <li style="color: black; font-weight: bold">쿠폰
+                                                        <input type="text" id="couponDiscount" name="umileage" value="0"
+                                                               style="float: right" readonly>
+                                                    </li>
+                                                </ul>
+                                                <hr>
+                                                <div class="checkout__order__products">할인 금액
+                                                    <span id="discount">
                                 <c:choose>
                                     <c:when test="${dt_total > 100000}">
                                         ${max_fee}
@@ -240,8 +221,8 @@
                                     </c:otherwise>
                                 </c:choose>
                             </span>
-                                            </div>
-                                            <div class="checkout__order__subtotal">배송비<span>
+                                                </div>
+                                                <div class="checkout__order__subtotal">배송비<span>
                                 <c:set var="bk_total" value="${bk_total}"/>
                             <c:choose>
                                 <c:when test="${bk_total>=100000}">
@@ -252,12 +233,17 @@
                                 </c:otherwise>
                             </c:choose>
                             </span>
-                                            </div>
-                                            <div class="checkout__order__total">Total <span id="payment"
-                                                                                            name="payment"><fmt:formatNumber
-                                                    type="currency"
-                                                    value=""
-                                                    groupingUsed="true"/></span>
+                                                </div>
+                                                <div class="checkout__order__total">Total
+                                                    <span id="payment" name="payment"><fmt:formatNumber
+                                                        type="currency"
+                                                        value=""
+                                                        groupingUsed="true"/>
+                                                    </span>
+                                                </div>
+                                                <button type="button" class="site-btn" style="background-color: red"
+                                                        onclick="location.href='/'">HOME
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
