@@ -70,7 +70,7 @@ public class MemController {
         return "mem/signupForm";
     }
 
-    @RequestMapping("idcheckcookieproc.do") // 경로
+    @RequestMapping("idcheckcookieproc") // 경로
     @ResponseBody
     public String idcheckcookieProc(HttpServletRequest req) {
         String mem_id = req.getParameter("mem_id").trim();
