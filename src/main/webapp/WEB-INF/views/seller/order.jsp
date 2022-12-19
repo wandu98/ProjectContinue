@@ -153,29 +153,6 @@
 </main>
 <!-- End #main -->
 
-<%--<script>--%>
-<%--    function search() {--%>
-<%--        let dt_prog = $("#dt_prog").val();--%>
-<%--        let ss_speriod = $("#ss_speriod").val();--%>
-<%--        let ss_eperiod = $("#ss_eperiod").val();--%>
-<%--        let inputState = $("#inputState").val();--%>
-<%--        let keyword = $("#keyword").val();--%>
 
-<%--        $.ajax({--%>
-<%--            url : "/seller/search"--%>
-<%--            ,type : "post"--%>
-<%--            ,data : {dt_prog, ss_speriod, ss_eperiod, inputState, keyword}--%>
-<%--            ,success : function () {--%>
-<%--                console.log("성공");--%>
-<%--            }--%>
-<%--            ,error : function (request, status, error) {--%>
-<%--                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);--%>
-<%--            }--%>
-
-
-<%--        });--%>
-
-<%--    }--%>
-<%--</script>--%>
 
 <jsp:include page="sellerfooter.jsp"></jsp:include>
