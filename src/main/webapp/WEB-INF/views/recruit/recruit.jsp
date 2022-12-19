@@ -17,7 +17,7 @@
         position: absolute;
         background-color: #f7f7f7;
         overflow-y: auto;
-        max-height:500px;
+        max-height: 500px;
         border-radius: 2%;
         box-shadow: 1px 1px 1px #bfbab9;
     }
@@ -60,27 +60,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12" style="text-align: center; margin: 3%;">
-                <div class="dropdown" style="float: left; margin: 1%">
-                    <button type="button" class="btn btn-danger dropdown-toggle"
-                            data-toggle="dropdown"> 지역 선택
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Link 1
-                        </a>
-                        <a class="dropdown-item" href="#">Link 2</a>
-                        <a class="dropdown-item" href="#">Link 3</a>
-                    </div>
-                </div>
                 <div style="float: right; margin: 1%">
-                    <button type="button" class="btn btn-outline-danger" onclick="location.href = '/recruit/form'"> 모집글 등록
+                    <button type="button" class="btn btn-outline-danger" onclick="location.href = '/recruit/form'"> 모집글
+                        등록
                     </button>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-4">
                 <div class="blog__sidebar">
-                    <div class="blog__sidebar__search" style="position: relative">
-                        <form action="/recruit/searchWord">
+                    <div class="blog__sidebar__search" style="position: relative" onsubmit="return keywordCheck()">
+                        <form action="/recruit/searchWord" method="get">
                             <input type="text" id="gs_keyword" name="gs_keyword" placeholder="Search...">
                             <button type="submit"><span class="icon_search"></span></button>
                         </form>
@@ -89,9 +79,10 @@
                     <div class="blog__sidebar__item">
                         <h4>정렬</h4>
                         <ul>
-                            <li><a href='javascript:void(0)' onclick='listAgain("rcrbrd_num")'>최신순</a></li>
-                            <li><a href='javascript:void(0)' onclick='listAgain("rcrbrd_views")'>인기순</a></li>
-                            <li><a href='javascript:void(0)' onclick='listAgain("cnt")'>참가인원 많은 순</a></li>
+                            <% String keyword3 = request.getParameter("gs_keyword");%>
+                            <li><a href='javascript:void(0)' onclick='listAgain("rcrbrd_num", "<%=keyword3%>")'>최신순</a></li>
+                            <li><a href='javascript:void(0)' onclick='listAgain("rcrbrd_views", "<%=keyword3%>")'>인기순</a></li>
+                            <li><a href='javascript:void(0)' onclick='listAgain("cnt", "<%=keyword3%>")'>참가인원 많은 순</a></li>
                         </ul>
                     </div>
                     <div class="blog__sidebar__item">
@@ -142,7 +133,8 @@
                                         <h5>${row.rcrbrd_subject}</h5>
                                         <p>${game[vs.index]}</p>
                                         <span id="list${vs.count}"
-                                               name="list${vs.count}" style="color: #7796dc">(${attendCount.get(vs.index)} / ${row.rcrbrd_max})</span>
+                                              name="list${vs.count}"
+                                              style="color: #7796dc">(${attendCount.get(vs.index)} / ${row.rcrbrd_max})</span>
 
                                     </div>
                                 </div>
@@ -159,8 +151,9 @@
 
             <div style="margin: auto" id="more_div">
                 <input type="hidden" id="more_order" name="more_order" value="rcrbrd_num">
+                <% String keyword2 = request.getParameter("gs_keyword");%>
                 <button type="button" id="more" class="btn btn-outline-danger"
-                        onclick="more($('#startCount').val(), $('#endCount').val(), $('#more_order').val())">더보기 (more)
+                        onclick="more($('#startCount').val(), $('#endCount').val(), $('#more_order').val(), '<%=keyword2%>')">더보기 (more)
                 </button>
             </div>
         </div>
@@ -174,9 +167,10 @@
     });
 
     // 더보기 기능
-    function more(startCount, endCount, order) {
+    function more(startCount, endCount, order, keyword) {
         console.log("시작 번호 : " + startCount);
         console.log("마지막 번호 : " + endCount);
+        console.log("keyword : " + keyword);
 
         $.ajax({
             type: "post",
@@ -184,7 +178,8 @@
             data: {
                 "startCount": startCount,
                 "endCount": endCount,
-                "order": order
+                "order": order,
+                "keyword": keyword
             },
             success: function (result) {
 
@@ -294,15 +289,16 @@
     }
     */
 
-    function listAgain(order) {
+    function listAgain(order, keyword) {
 
-        console.log("order : " + order);
+        // console.log("order : " + order);
 
         $.ajax({
             type: "post",
             url: "/recruit",
             data: {
-                "order": order
+                "order": order,
+                "keyword": keyword
             },
             success: function (result) {
 
@@ -408,6 +404,15 @@
         // 추출한 텍스트를 모달창의 검색창에 입력
         $("#gs_keyword").val(title);
         $("#panel").hide();
+    }
+
+    function keywordCheck() {
+        if ($('#gs_keyword').val().length < 2) {
+            alert("2글자 이상 입력해주세요");
+            return false;
+        } else {
+            return true;
+        }
     }
 
 </script>

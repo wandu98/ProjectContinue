@@ -1,5 +1,6 @@
 package com.cafe24.nonchrono.controller;
 
+import com.cafe24.nonchrono.dao.MemDAO;
 import com.cafe24.nonchrono.dao.RecruitDAO;
 import com.cafe24.nonchrono.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class RecruitController {
     @Autowired
     private RecruitDAO recruitDAO;
 
+    @Autowired
+    private MemDAO memDAO;
 
     public RecruitController() {
         System.out.println("-----RecruitController() 객체 생성됨");
@@ -41,7 +44,7 @@ public class RecruitController {
         if (order == null || order.equals("")) {
             order = order2;
         }
-        System.out.println("order : " + order);
+        // System.out.println("order : " + order);
         List<RecruitDTO> list = recruitDAO.list(order);
         List<String> gameList = new ArrayList<>();
         List<String> attendMembers = new ArrayList<>();
@@ -75,14 +78,23 @@ public class RecruitController {
     // ajax로 정렬 기준 바꿀 때
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
-    public List<MoreDTO> recruitListAjax(HttpSession session, String order) {
+    public List<MoreDTO> recruitListAjax(HttpSession session, String order, String keyword) {
+        List<MoreDTO> list = new ArrayList<>();
 
         String order2 = "rcrbrd_num";
         if (order == null || order.equals("")) {
             order = order2;
         }
-        System.out.println("order : " + order);
-        List<MoreDTO> list = recruitDAO.listAjax(order);
+        System.out.println("keyword : " + keyword);
+        // System.out.println("order : " + order);
+        if (keyword.equals("null") || keyword.equals("")) {
+            System.out.println("keyword null");
+            list = recruitDAO.listAjax(order);
+        } else {
+            System.out.println("keyword not null");
+            list = recruitDAO.listAjax2(order, keyword);
+        }
+        // System.out.println(list);
         List<MoreDTO> list2 = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
@@ -97,7 +109,7 @@ public class RecruitController {
 
             list2.add(i, moreDTO);
         }
-        System.out.println(list2);
+        // System.out.println(list2);
         return list2;
     } // recruitList() end
 
@@ -331,6 +343,7 @@ public class RecruitController {
             mav.addObject("mem_id", mem_id);
             mav.addObject("memPic", recruitDAO.memPic(rcrbrd_num)); // 자리당 프로필 사진 조회 // 아직 참가 안 한 자리는 ''로 표현
             mav.addObject("memSeat", recruitDAO.memSeat(rcrbrd_num)); // 자리당 좌석 번호 조회 // 아직 참가 안 한 자리는 ''로 표현
+            mav.addObject("memTemp", memDAO.temp(recruitDAO.memDetail(rcrbrd_num).getMem_id())); // 모집장의 온도 가져오기
         /*
         List<RoleSeatDTO> rname = recruitDAO.roleName(rcrbrd_num);
 
@@ -356,7 +369,6 @@ public class RecruitController {
 
         // 역할 추가 수만큼 반복하여 역할 내용 insert
         for (int i = 1; i <= Integer.parseInt(req.getParameter("hiddenCount")); i++) {
-            // System.out.println(req.getParameter("rl_role"+i+"")); // null null null
 
             roleDTO.setRl_name(req.getParameter("rl_role" + i));
             roleDTO.setRcrbrd_num(num);
@@ -379,7 +391,6 @@ public class RecruitController {
     public void roleConfirm(@ModelAttribute RoleSeatDTO roleSeatDTO, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html; charset=UTF-8");
         PrintWriter out = resp.getWriter();
-        // System.out.println(roleSeatDTO.toString());
         int cnt = recruitDAO.roleConfirm(roleSeatDTO);
         if (cnt == 0) {
             out.println("<script>alert('해당 역할은 모집이 마감되었습니다.'); history.go(-1);</script>");
@@ -421,10 +432,10 @@ public class RecruitController {
 
     @RequestMapping("/getMoreContents")
     @ResponseBody
-    public List<MoreDTO> getMoreContents(int startCount, int endCount, String order) {
+    public List<MoreDTO> getMoreContents(int startCount, int endCount, String order, String keyword) {
         List<MoreDTO> list = new ArrayList<>();
         List<MoreDTO> list2 = new ArrayList<>();
-        list = recruitDAO.getMoreContents(startCount, endCount, order);
+        list = recruitDAO.getMoreContents(startCount, endCount, order, keyword);
 
         for (int i = 0; i < list.size(); i++) {
             MoreDTO moreDTO = new MoreDTO();
@@ -446,8 +457,6 @@ public class RecruitController {
 
             list2.add(i, moreDTO);
         }
-
-        System.out.println(list2);
         return list2;
     } // getMoreContents() end
 
@@ -547,9 +556,50 @@ public class RecruitController {
     public int comment(@ModelAttribute CommentDTO commentDTO, HttpSession session) {
         String mem_id = (String) session.getAttribute("mem_id");
         commentDTO.setMem_id(mem_id);
-        System.out.println(commentDTO);
+        // System.out.println(commentDTO);
         int cnt = recruitDAO.comment(commentDTO);
         return cnt;
+    }
+
+    @RequestMapping("/searchWord")
+    public ModelAndView searchWord(HttpSession session, String order, @RequestParam String gs_keyword) {
+        RecruitDTO dto = new RecruitDTO();
+        ModelAndView mav = new ModelAndView();
+        String order2 = "rcrbrd_num";
+        if (order == null || order.equals("")) {
+            order = order2;
+        }
+        // System.out.println("order : " + order);
+        // System.out.println("gs_keyword : " + gs_keyword);
+        List<RecruitDTO> list = recruitDAO.list2(order, gs_keyword);
+        // System.out.println("list : " + list);
+        List<String> gameList = new ArrayList<>();
+        List<String> attendMembers = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            dto = list.get(i);
+            int num = dto.getRcrbrd_num();
+            // 게임 이름 가져오기
+            gameList.add(recruitDAO.game(num));
+            // 참여한 모집원들 수
+            attendMembers.add(String.valueOf(recruitDAO.attendMembers(num).size()));
+
+            //System.out.println("num : " + num);
+            //System.out.println("게임 이름 : "+gameList.get(i));
+        }
+
+        String mem_id = (String) session.getAttribute("mem_id");
+        if (mem_id != null && !mem_id.equals("guest")) {
+            mav.addObject("list", list);
+            mav.addObject("game", gameList);
+            mav.addObject("attendCount", attendMembers);
+            mav.addObject("rcrKing", recruitDAO.rcrKing());
+            // System.out.println(recruitDAO.rcrKing());
+            mav.setViewName("/recruit/recruit");
+        } else {
+            mav.setViewName("/mem/loginForm");
+        }
+        return mav;
     }
 
 

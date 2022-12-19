@@ -187,11 +187,14 @@ public class RecruitDAO {
         return sqlSession.selectList("recruit.rcrKing");
     } // rcrKing() end
 
-    public List<MoreDTO> getMoreContents(int startCount, int endCount, String order) {
+    public List<MoreDTO> getMoreContents(int startCount, int endCount, String order, String keyword) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("startCount", startCount);
         map.put("endCount", endCount);
         map.put("order", order);
+        if (keyword != null) {
+            map.put("keyword", keyword);
+        }
         return sqlSession.selectList("recruit.more", map);
     }
 
@@ -265,5 +268,20 @@ public class RecruitDAO {
 
     public int comment(CommentDTO commentDTO) {
         return sqlSession.insert("recruit.comment", commentDTO);
+    }
+
+    public List<RecruitDTO> list2(String order, String keyword) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("order", order);
+        map.put("keyword", keyword);
+        sqlSession.insert("recruit.searchInsert", keyword);
+        return sqlSession.selectList("recruit.list2", map);
+    }
+
+    public List<MoreDTO> listAjax2(String order, String keyword) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("order", order);
+        map.put("keyword", keyword);
+        return sqlSession.selectList("recruit.listAjax2", map);
     }
 } // class end
