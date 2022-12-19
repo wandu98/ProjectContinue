@@ -196,7 +196,7 @@
                                             <div class="checkout__order__products">
                                                 <ul>
                                                     <li style="color: black; font-weight: bold">마일리지 사용
-                                                        <input type="text" id="umileage" name="umileage" value="${um}"
+                                                        <input type="text" id="umileage" name="umileage" value="${umileage}"
                                                                style="float: right" readonly>
                                                     </li>
                                                 </ul>
@@ -204,32 +204,20 @@
                                             <hr>
                                             <div class="checkout__order__products">
                                                 <ul>
-                                                    <li style="color: black; font-weight: bold">쿠폰
-                                                        <input type="text" id="couponDiscount" name="umileage" value="0"
+                                                    <li style="color: black; font-weight: bold">${dt_coupon.cp_name}
+                                                        <input type="text" id="couponDiscount" name="umileage" value="${dt_coupon.cp_percent}%"
                                                                style="float: right" readonly>
                                                     </li>
                                                 </ul>
                                                 <hr>
-                                                <div class="checkout__order__products">할인 금액
-                                                    <span id="discount">
-                                <c:choose>
-                                    <c:when test="${dt_total > 100000}">
-                                        ${max_fee}
-                                    </c:when>
-                                    <c:otherwise>
-                                        0
-                                    </c:otherwise>
-                                </c:choose>
-                            </span>
-                                                </div>
                                                 <div class="checkout__order__subtotal">배송비<span>
-                                <c:set var="bk_total" value="${bk_total}"/>
+                                <c:set var="bk_total" value="${total}"/>
                             <c:choose>
-                                <c:when test="${bk_total>=100000}">
+                                <c:when test="${total>=100000}">
                                     <a style="font-size: 13px; font-weight: bold">10만원 이상 구매 시 배송비 무료!</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a>${max_fee}<a>
+                                    <a>${maxdt_fee}<a>
                                 </c:otherwise>
                             </c:choose>
                             </span>
@@ -237,7 +225,7 @@
                                                 <div class="checkout__order__total">Total
                                                     <span id="payment" name="payment"><fmt:formatNumber
                                                         type="currency"
-                                                        value=""
+                                                        value="${total}"
                                                         groupingUsed="true"/>
                                                     </span>
                                                 </div>
