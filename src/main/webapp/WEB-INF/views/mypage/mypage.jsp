@@ -68,13 +68,14 @@
 
                         <br><br>
 
-
-                        <div class="checkout__input">
-                            <p>온도</p>
-                            <div class="progress">
-                                <div class="progress-bar" style="width:70%">70%</div>
+                        <section class="contact spad">
+                            <div class="checkout__input">
+                                <h4>온도</h4>
+                                <div class="progress" style="width: 50%; height:30px; margin-left: 25%">
+                                    <div class="progress-bar" style="width:${temp}%;height:30px; background-color: red">${temp}&deg;C</div>
+                                </div>
                             </div>
-                        </div>
+                        </section>
 
                         <!-- 주문처리현황 Section Begin -->
                         <section class="contact spad">

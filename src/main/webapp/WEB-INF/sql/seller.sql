@@ -457,9 +457,34 @@ where sl_id = 'digj1908';
 
 -- 판매자 페이지 전체 주문 조회 (검색, 페이징)
 
--- 진행상태만
+-- 검색 안할 시
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908'
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5
 
-select *
+
+-- 진행상태만
+select od_num, ss_name, od_date, dt_prog, FORMAT(r,0) as rnum
 from (
         select *, @rno := @rno + 1 as r
         from (
@@ -476,7 +501,7 @@ from (
                         from tb_order od join tb_detail dt
                                            on od.od_num = dt.od_num join tb_sales ts
                                                                          on dt.ss_num = ts.ss_num
-                        where sl_id = 'digj1908' and dt_prog = 'J02'
+                        where sl_id = 'digj1908'  and dt_prog = 'J08'
                  ) AA, (select @rno := 0) BB
                 order by od_date desc
         ) CC
@@ -531,7 +556,7 @@ group by sl_id;
 -- 판매일자만
 
 -- 시작일만
-select *
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -564,7 +589,7 @@ where sl_id = 'digj1908' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT
 group by sl_id;
 
 -- 종료일만
-select *
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -600,7 +625,7 @@ group by sl_id;
 
 
 -- 시작일, 종료일 둘다
-select *
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -640,7 +665,7 @@ group by sl_id;
 
 -- 조건 검색만
 
-select *
+select od_num, ss_name, od_date, dt_prog, format(r,0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -657,7 +682,7 @@ from (
                            from tb_order od join tb_detail dt
                                                  on od.od_num = dt.od_num join tb_sales ts
                                                                                on dt.ss_num = ts.ss_num
-                           where sl_id = 'digj1908' and ${od.od_num} like '%903%'
+                           where sl_id = 'digj1908' and od.od_num like '%903%'
                        ) AA, (select @rno := 0) BB
                   order by od_date desc
               ) CC
@@ -676,7 +701,7 @@ group by sl_id;
 -- 진행상태 & 판매일
 
 -- 시작일만
-select *
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -711,7 +736,7 @@ group by sl_id;
 
 
 -- 종료일만
-select *
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -746,7 +771,7 @@ group by sl_id;
 
 
 -- 시작일, 종료일 다
-select *
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -783,7 +808,7 @@ group by sl_id;
 
 -- 진행상태 & 조건 검색
 
-select *
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -800,7 +825,7 @@ from (
                            from tb_order od join tb_detail dt
                                                  on od.od_num = dt.od_num join tb_sales ts
                                                                                on dt.ss_num = ts.ss_num
-                           where sl_id = 'digj1908' and dt_prog = 'J05' and ${ss_name} like concat('%') '%네%'
+                           where sl_id = 'digj1908' and dt_prog = 'J05' and ss_name like '%네%'
                        ) AA, (select @rno := 0) BB
                   order by od_date desc
               ) CC
@@ -819,7 +844,7 @@ group by sl_id;
 -- 판매일 & 조건 검색
 
 -- 시작일만
-select *
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -853,7 +878,7 @@ where sl_id = 'digj1908' and ss_name like '%네%' and (DATE_FORMAT(ss_speriod, '
 group by sl_id;
 
 -- 종료일만
-select *
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
 from (
          select *, @rno := @rno + 1 as r
          from (
@@ -1022,4 +1047,31 @@ from tb_order od join tb_detail dt
                                                     on dt.ss_num = ts.ss_num
 where sl_id = 'digj1908' and dt_prog = 'J05' and ss_name like '%네%' and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT('20221201', '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT('20221231', '%Y-%m-%d'))
 group by sl_id;
+
+
+
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = 'digj1908'
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= 1 and r <= 5;
+
 
