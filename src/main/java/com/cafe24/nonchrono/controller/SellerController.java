@@ -261,7 +261,7 @@ public class SellerController {
         return "seller/sellerSignup";
     }
 
-    @RequestMapping("checkIDselproc.do")
+    @RequestMapping("checkIDselproc")
     @ResponseBody
     public String checkIDselproc(HttpServletRequest req) {
         String sl_id = req.getParameter("sl_id").trim();

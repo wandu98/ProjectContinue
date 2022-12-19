@@ -12,145 +12,149 @@
 <%@ include file="../seller/sellerheader.jsp" %>
 
 
-    <div class="container">
-            <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+<div class="container">
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
 
-                    <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-                            <div class="d-flex justify-content-center py-4">
-                                <a href="/seller" class="logo d-flex align-items-center w-auto">
-                                    <img src="/admin_assets/img/logo.png" alt="">
-                                    <span class="d-none d-lg-block">Seller</span>
-                                </a>
-                            </div><!-- End Logo -->
+                <div class="d-flex justify-content-center py-4">
+                    <a href="/seller" class="logo d-flex align-items-center w-auto">
+                        <img src="/admin_assets/img/logo.png" alt="">
+                        <span class="d-none d-lg-block">Seller</span>
+                    </a>
+                </div><!-- End Logo -->
 
-                            <div class="card mb-3">
+                <div class="card mb-3">
 
-                                <div class="card-body">
+                    <div class="card-body" onsubmit="return sellerCheck()">
 
-                                    <div class="pt-4 pb-2">
-                                        <h5 class="card-title text-center pb-0 fs-4">회원가입</h5>
-                                    </div>
+                        <div class="pt-4 pb-2">
+                            <h5 class="card-title text-center pb-0 fs-4">회원가입</h5>
+                        </div>
 
-                                    <form class="row g-3 needs-validation" novalidate name="selSignupfrm" id="selSignupfrm" action="/seller/signup" method="post" onsubmit="return sendsel()">
-                                        <div class="col-12">
-                                            <label for="sl_id" class="form-label">아이디</label>
-                                            <input type="text" name="sl_id" class="form-control" id="sl_id" required>
-                                            <div class="invalid-feedback">아이디를 입력 해주세요.</div>
-                                            <div id="panel"></div>
-                                            <input type="button" value="중복확인" id="idchecksel">
-                                        </div>
+                        <form class="row g-3 needs-validation" novalidate name="selSignupfrm" id="selSignupfrm"
+                              action="/seller/signup" method="post" onsubmit="return checkIDsel()">
+                            <div class="col-12">
+                                <label for="sl_id" class="form-label">아이디</label>
+                                <input type="text" name="sl_id" class="form-control" id="sl_id" required>
+                                <div class="invalid-feedback">아이디를 입력 해주세요.</div>
+                                <div id="panel"></div>
+                                <input type="button" value="중복확인" id="idchecksel">
+                            </div>
 
-                                        <div class="col-12">
-                                            <label for="sl_pw" class="form-label">비밀번호</label>
-                                            <input type="password" name="sl_pw" class="form-control" id="sl_pw" required>
-                                            <div class="invalid-feedback">비밀번호를 입력 해주세요.</div>
-                                        </div>
+                            <div class="col-12">
+                                <label for="sl_pw" class="form-label">비밀번호</label>
+                                <input type="password" name="sl_pw" class="form-control" id="sl_pw" required>
+                                <div class="invalid-feedback">비밀번호를 입력 해주세요.</div>
+                            </div>
 
-                                        <div class="col-12">
-                                            <label for="sl_repw" class="form-label">비밀번호 확인</label>
-                                            <div class="input-group has-validation">
-                                                <input type="password" name="sl_repw" class="form-control" id="sl_repw" required>
-                                                <div class="invalid-feedback">비밀번호가 일치하지 않습니다.</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="sl_name" class="form-label">사업자명</label>
-                                            <input type="text" name="sl_name" class="form-control"
-                                                   id="sl_name" required>
-                                            <div class="invalid-feedback">사업자명을 입력 해주세요.</div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <p>주소<span>*</span></p>
-                                            <input type="text" name="sl_zip" class="form-control" id="sl_zip" style="margin-left: auto; width: 50%" readonly>
-                                            <button type="button" onclick="DaumPostcode()" class="btn btn-danger">우편번호</button>
-                                            <div class="invalid-feedback">우편번호 입력 필수 입니다.</div>
-                                        </div>
-
-                                        <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
-                                            <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnFoldWrap"
-                                                 style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1"
-                                                 onclick="foldDaumPostcode()" alt="접기 버튼">
-                                        </div>
-
-                                        <div class="col-12" id="sl_adr" >
-                                            <input type="text" id="sl_adr1" name="sl_adr1" readonly>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="sl_adr2" class="form-label">상세주소</label>
-                                            <input type="text" name="sl_adr2" class="form-control"
-                                                   id="sl_adr2" required>
-                                            <div class="invalid-feedback">사업자주소를 입력 해주세요.</div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="sl_phone" class="form-label">휴대폰번호</label>
-                                            <input type="text" name="sl_phone" class="form-control"
-                                                   id="sl_phone" required>
-                                            <div class="invalid-feedback">번호를 입력 해주세요.</div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="sl_birth" class="form-label">생년월일</label>
-                                            <input type="text" name="sl_birth" class="form-control"
-                                                   id="sl_birth" required>
-                                            <div class="invalid-feedback">생년월일 입력 해주세요.</div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="sl_number" class="form-label">사업자번호</label>
-                                            <input type="text" name="sl_number" class="form-control"
-                                                   id="sl_number" required>
-                                            <div class="invalid-feedback">사업자 번호 입력 해주세요.</div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="sl_bank" class="form-label">계좌번호</label>
-                                            <input type="text" name="sl_bank" class="form-control"
-                                                   id="sl_bank" required>
-                                            <div class="invalid-feedback">계좌 번호 입력 해주세요.</div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <label for="sl_bankcode" class="form-label">은행코드</label>
-                                            <input type="text" name="sl_bankcode" class="form-control"
-                                                   id="sl_bankcode" required>
-                                            <div class="invalid-feedback">은행코드 입력 해주세요.</div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="form-check">
-                                                <input class="form-check-input" name="terms" type="checkbox" value=""
-                                                       id="acceptTerms" required>
-                                                <label class="form-check-label" for="acceptTerms">I agree and accept the
-                                                    <a href="#">terms and conditions</a></label>
-                                                <div class="invalid-feedback">You must agree before submitting.</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <button class="btn btn-primary w-100" type="submit">회원가입 완료</button>
-                                        </div>
-                                        <div class="col-12">
-                                            <p class="small mb-0">Already have an account? <a href="loginForm.jsp">Log
-                                                in</a></p>
-                                        </div>
-                                    </form>
-
+                            <div class="col-12">
+                                <label for="sl_repw" class="form-label">비밀번호 확인</label>
+                                <div class="input-group has-validation">
+                                    <input type="password" name="sl_repw" class="form-control" id="sl_repw" required>
+                                    <div class="invalid-feedback">비밀번호가 일치하지 않습니다.</div>
                                 </div>
                             </div>
 
+                            <div class="col-12">
+                                <label for="sl_name" class="form-label">사업자명</label>
+                                <input type="text" name="sl_name" class="form-control"
+                                       id="sl_name" required>
+                                <div class="invalid-feedback">사업자명을 입력 해주세요.</div>
+                            </div>
 
-                        </div>
+                            <div class="col-12">
+                                <p>주소<span>*</span></p>
+                                <input type="text" name="sl_zip" class="form-control" id="sl_zip"
+                                       style="margin-left: auto; width: 50%" readonly>
+                                <button type="button" onclick="DaumPostcode()" class="btn btn-danger">우편번호</button>
+                                <div class="invalid-feedback">우편번호 입력 필수 입니다.</div>
+                            </div>
+
+                            <div id="wrap"
+                                 style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
+                                <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png"
+                                     id="btnFoldWrap"
+                                     style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1"
+                                     onclick="foldDaumPostcode()" alt="접기 버튼">
+                            </div>
+
+                            <div class="col-12" id="sl_adr">
+                                <input type="text" id="sl_adr1" name="sl_adr1" readonly>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="sl_adr2" class="form-label">상세주소</label>
+                                <input type="text" name="sl_adr2" class="form-control"
+                                       id="sl_adr2" required>
+                                <div class="invalid-feedback">사업자주소를 입력 해주세요.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="sl_phone" class="form-label">휴대폰번호</label>
+                                <input type="text" name="sl_phone" class="form-control"
+                                       id="sl_phone" required>
+                                <div class="invalid-feedback">번호를 입력 해주세요.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="sl_birth" class="form-label">생년월일</label>
+                                <input type="text" name="sl_birth" class="form-control"
+                                       id="sl_birth" required>
+                                <div class="invalid-feedback">생년월일 입력 해주세요.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="sl_number" class="form-label">사업자번호</label>
+                                <input type="text" name="sl_number" class="form-control"
+                                       id="sl_number" required>
+                                <div class="invalid-feedback">사업자 번호 입력 해주세요.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="sl_bank" class="form-label">계좌번호</label>
+                                <input type="text" name="sl_bank" class="form-control"
+                                       id="sl_bank" required>
+                                <div class="invalid-feedback">계좌 번호 입력 해주세요.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="sl_bankcode" class="form-label">은행코드</label>
+                                <input type="text" name="sl_bankcode" class="form-control"
+                                       id="sl_bankcode" required>
+                                <div class="invalid-feedback">은행코드 입력 해주세요.</div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" name="terms" type="checkbox" value=""
+                                           id="acceptTerms" required>
+                                    <label class="form-check-label" for="acceptTerms">I agree and accept the
+                                        <a href="#">terms and conditions</a></label>
+                                    <div class="invalid-feedback">You must agree before submitting.</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" type="submit">회원가입 완료</button>
+                            </div>
+                            <div class="col-12">
+                                <p class="small mb-0">Already have an account? <a href="loginForm.jsp">Log
+                                    in</a></p>
+                            </div>
+                        </form>
+
                     </div>
+                </div>
 
 
-            </section>
+            </div>
+        </div>
 
-    </div>
+
+    </section>
+
+</div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
@@ -161,7 +165,7 @@
 
     $('#idchecksel').click(function () {
         let params = "sl_id=" + $('#sl_id').val().trim();
-        $.post("checkIDselproc.do", params, checkIDsel, "json")
+        $.post("checkIDselproc", params, checkIDsel, "json")
     })
 
     function checkIDsel(result) {
@@ -251,6 +255,72 @@
     <!-- ----- DAUM 우편번호 API 종료 ----- -->
 
 
+    function sellerCheck() { //회원가입 유효성 검사
+        //1)아이디 5~10글자 인지?
+        let sl_id = document.getElementById("sl_id").value;
+        sl_id = sl_id.trim();
+        if (!(sl_id.length >= 5 && sl_id.length <= 10)) {
+            alert("아아디 5~20글자이내 입력해 주세요");
+            document.getElementById("sl_id").focus();
+            return false;
+        }//if end
+
+        //2)비밀번호 5~10글자 인지?
+        let sl_pw = document.getElementById("sl_pw").value;
+        sl_pw = sl_pw.trim();
+        if (!(sl_pw.length >= 5 && sl_pw.length <= 10)) {
+            alert("비밀번호 5~10글자이내 입력해 주세요");
+            document.getElementById("sl_pw").focus();
+            return false;
+        }//if end
+
+        //3)비밀번호와 비밀번호확인이 서로 일치하는지?
+        let sl_repw = document.getElementById("sl_repw").value;
+        sl_repw = sl_repw.trim();
+        if (sl_pw != sl_repw) {
+            alert("비밀번호가 일치하지 않습니다.");
+            document.getElementById("sl_repw").focus();
+            return false;
+        }//if end
+
+        //4)이름 두글자 이상 인지?
+        let sl_name = document.getElementById("sl_name").value;
+        sl_name = sl_name.trim();
+        if (sl_name.length <= 1) {
+            alert("사업자명 두글자 이상 입력해 주세요");
+            document.getElementById("sl_name").focus();
+            return false;
+        }//if end
+
+        //5)사업자 번호 10글자 이상 인지?
+        let sl_number = document.getElementById("sl_number").value;
+        sl_number = sl_number.trim();
+        if (sl_number.length < 10) {
+            alert("사업자 번호 10글자 이상 입력 해주세요");
+            document.getElementById("sl_number").focus();
+            return false;
+        }//if end
+
+        //6)핸드폰 번호 11글자 이상
+        let sl_bank = document.getElementById("sl_bank").value;
+        sl_bank = sl_bank.trim();
+        if (sl_bank.length < 11) {
+            alert("계좌번호 10 글자 이상 입력해 주세요");
+            document.getElementById("sl_bank").focus();
+            return false;
+        }//if end
+
+        //7)생년월일 8글자 이상
+        let sl_birth = document.getElementById("sl_birth").value;
+        sl_birth = sl_birth.trim();
+        if (sl_birth.length < 8) {
+            alert("생년월일 8글자 이상 입력해 주세요");
+            document.getElementById("sl_birth").focus();
+            return false;
+        }//if end
+
+        return true;//서버로 전송
+    }
 
 
 </script>
