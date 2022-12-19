@@ -50,34 +50,10 @@
 
 </div>
 
-<%--
-<!-- checkbox All Select -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        //전체박스 클릭
-        $("#checkAll").click(function () {
-            if ($("#checkAll").prop("checked")) {
-                $(".form-check-input").prop("checked", true);
-            } else {
-                $(".form-check-input").prop("checked", false);
-            }
-        });
-        //전체 체크박스 선택중 체크박스 하나를 풀었을때 "전체" 체크해제
-        $(".form-check-input").click(function () {
-            if ($("input[name='check']:checked").length == 5) {
-                $("#checkAll").prop("checked", true);
-            } else {
-                $("#checkAll").prop("checked", false);
-            }
-        });
-    });
 
+<script>
 
 </script>
-<!-- checkbox All Select end -->
---%>
-
 
 
 <%@ include file="../footer.jsp" %>

@@ -37,11 +37,13 @@
             </td>
             </tbody>
         </table>
+        <c:if test="${admin_id eq 'admin'}">
         <form class="modal-footer" method="post">
             <input type="hidden" id="evt_num" name="evt_num" value="${evtdetail.evt_num}">
             <button type="button" class="btn btn-info" onclick="ntUpdateConfirm(this.form)">수정</button>
             <button type="button" class="btn btn-danger" onclick="ntDeleteConfirm(this.form)">삭제</button>
         </form>
+        </c:if>    
     </div>
 </div>
 

@@ -21,6 +21,7 @@
 //
 // }//loginCheck() end
 
+/*
 function memberCheck(){ //회원가입 유효성 검사
     //1)아이디 5~10글자 인지?
     let mem_id=document.getElementById("mem_id").value;
@@ -58,22 +59,22 @@ function memberCheck(){ //회원가입 유효성 검사
         return false;
     }//if end
 
-    // //5)이메일 5글자 인지?
-    // let email=document.getElementById("email").value;
-    // email=email.trim();
-    // if(email.length<5){
-    //     alert("이메일 5글자 이상 입력해 주세요");
-    //     document.getElementById("email").focus();
-    //     return false;
-    // }//if end
-    //
-    // //6)직업을 선택했는지?
-    // let job=document.getElementById("job").value;
-    // if(job=="0"){
-    //     alert("직업 선택해 주세요");
-    //     return false;
-    // }//if end
-    //
-    // return true;//서버로 전송
+    //5)이메일 5글자 인지?
+    let email=document.getElementById("email").value;
+    email=email.trim();
+    if(email.length<5){
+        alert("이메일 5글자 이상 입력해 주세요");
+        document.getElementById("email").focus();
+        return false;
+    }//if end
 
-}//memberCheck() end
+    //6)직업을 선택했는지?
+    let job=document.getElementById("job").value;
+    if(job=="0"){
+        alert("직업 선택해 주세요");
+        return false;
+    }//if end
+
+    return true;//서버로 전송
+
+}//memberCheck() end*/

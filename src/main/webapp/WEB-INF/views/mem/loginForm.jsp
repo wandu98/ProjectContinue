@@ -86,7 +86,6 @@
                 <div class="checkout__input">
                     <label for="mem_id">아이디</label>
                     <br>
-                    <%--<input type="text" id="mem_id" value="<%=c_id%>" name="mem_id">--%>
                     <input type="text" id="mem_id" name="mem_id" class="col-lg-10 col-md-10" style="letter-spacing: 10px">
                 </div>
                 <br>
