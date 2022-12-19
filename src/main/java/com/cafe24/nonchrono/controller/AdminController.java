@@ -46,6 +46,8 @@ public class AdminController {
     public ModelAndView AdminIndex() {
         ModelAndView mav = new ModelAndView();
         mav.addObject("sales", adminDAO.sales_day());
+        mav.addObject("revenue", adminDAO.revenue_day());
+        mav.addObject("customer", adminDAO.customer_day());
         mav.setViewName("/admin/admin_index");
         return mav;
     }
@@ -59,7 +61,7 @@ public class AdminController {
     public String loginProc(HttpSession session) {
         session.setAttribute("admin_id", "admin");
         session.setAttribute("admin_pw", "admin");
-        return "/admin/admin_index";
+        return "redirect:/admin";
     }
 
     @RequestMapping(value = "/noticeWrite", method = RequestMethod.GET) // 이동만
@@ -182,6 +184,42 @@ public class AdminController {
         List<GameDTO> list = new ArrayList<>();
         list = adminDAO.gameList(type);
         return list;
+    }
+
+    @RequestMapping("/revenue_day")
+    @ResponseBody
+    public int revenue_day() {
+        return adminDAO.revenue_day();
+    }
+
+    @RequestMapping("/revenue_month")
+    @ResponseBody
+    public int revenue_month() {
+        return adminDAO.revenue_month();
+    }
+
+    @RequestMapping("/revenue_year")
+    @ResponseBody
+    public int revenue_year() {
+        return adminDAO.revenue_year();
+    }
+
+    @RequestMapping("/customer_day")
+    @ResponseBody
+    public int customer_day() {
+        return adminDAO.customer_day();
+    }
+
+    @RequestMapping("/customer_month")
+    @ResponseBody
+    public int customer_month() {
+        return adminDAO.customer_month();
+    }
+
+    @RequestMapping("/customer_year")
+    @ResponseBody
+    public int customer_year() {
+        return adminDAO.customer_year();
     }
 
 }

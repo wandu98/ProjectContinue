@@ -252,8 +252,8 @@
                                         <label for="gm_img">이미지 선택</label>
                                         <input type="file" id="gm_img" name="gm_img" style="display: none">
                                         <div id="imgView" class="set-bg product__item__pic"><img id="pic_view"
-                                                                                                 src="/images/thumb/${mem.mem_id}/${mem.mem_pic}"
-                                                                                                 style="height: 100%; overflow: hidden">
+                                                                                                 src=""
+                                                                                                 style="max-width: 20%;">
                                         </div>
                                     </div>
                                 </div>
@@ -315,6 +315,19 @@
         $("#gm_code").val(value);
         // alert($("#gm_code").val());
     }
+
+    <%-- 올린 이미지 미리보기 --%>
+    $("#gm_img").change(function (event) {
+        // console.log("테스트");
+        let file = event.target.files[0];
+        // console.log(file);    //[object File]
+        let reader = new FileReader();
+            reader.onload = function (e) {
+                // console.log("t");
+                $("#pic_view").attr('src', e.target.result);
+            }
+        reader.readAsDataURL(file);
+    });
 
 </script>
 <%@ include file="admin_footer.jsp" %>
