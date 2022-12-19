@@ -369,7 +369,7 @@
         // alert(data)
 
         if (data.length > 0) {
-            let result = data.split("|"); // | 기호를 기준으로 문자열 분리
+            let result = data.split("^^^"); // | 기호를 기준으로 문자열 분리
             // alert(result[0]); // 검색 결과 수
             // alert(result[1]); // 검색 결과 내용
 

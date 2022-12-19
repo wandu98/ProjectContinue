@@ -329,12 +329,14 @@
                     </c:forEach>
                 </div>
                 <hr>
-                <form>
+                <form action="/recruit/comment" onsubmit="return commentCheck()" method="post">
+                    <input type="hidden" id="com_rcrnum" name="rcrbrd_num" value=${detail.rcrbrd_num}>
+                    <input type="hidden" id="com_memid" name="mem_id" value="${mem_id}">
                     <br>
                     <h3 style="text-align: center; font-weight: bold">댓글 작성</h3>
                     <br>
                     <div class="text-center">
-                        <textarea placeholder="댓글 작성란..."
+                        <textarea id="comment" placeholder="댓글 작성란..."
                                   style="width: 100%; height: 150px; font-size: 16px; color: #6f6f6f; padding-left: 20px; margin-bottom: 24px; border: 1px solid #ebebeb; border-radius: 4px; padding-top: 12px; resize: none;"></textarea>
                     </div>
                     <button type="submit" class="site-btn" style="float: right">댓글 작성</button>
@@ -607,6 +609,16 @@
             alert("최대 255자까지 입력 가능합니다.");
         }
     });
+
+    function commentCheck() {
+        let size = $('#comment').val();
+        if (size.length < 2) {
+            alert("두글자 이상 입력해주세요!");
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 </script>
 
