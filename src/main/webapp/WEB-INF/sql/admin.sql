@@ -55,5 +55,10 @@ from (
     ) AA;
 
 
+select mem_id, mem_nick, mem_name, mem_phone, mem_joindate
+from tb_mem
+where date_format(mem_joindate, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d')
+order by mem_joindate desc;
+
 select *
-from tb_seller;
+from tb_mem;

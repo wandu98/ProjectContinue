@@ -97,7 +97,7 @@ public class HomeController {
         String result = "";
         result += "<ol>";
         for (int i=0; i<list.size(); i++) {
-            result += " <li>" + list.get(i).getGm_name() + "</li>";
+            result += " <li>" + (i+1) + ". " + list.get(i).getGm_name() + "</li>";
 
         }
         result += "</ol>";
@@ -111,7 +111,7 @@ public class HomeController {
         String result = "";
         result += "<ol>";
         for (int i=0; i<list.size(); i++) {
-            result += " <li>" + list.get(i).getGm_name() + "</li>";
+            result += " <li>" + (i+1) + ". " + list.get(i).getGm_name() + "</li>";
 
         }
         result += "</ol>";
