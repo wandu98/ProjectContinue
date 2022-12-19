@@ -192,7 +192,7 @@
                     <div class="col-lg-4 detail_profile">
                         <c:choose>
                             <c:when test="${memDetail.mem_pic != 'ProfilePicture.png'}">
-                                <img alt="" id="profile0" src="/images/profile/${memDetail.mem_id}/thumb.jpg"
+                                <img alt="" id="profile0" src="/images/profile/${memDetail.mem_id}/${memDetail.mem_pic}"
                                      class="img-thumbnail img-fluid"
                                      style="height: 100%; overflow: hidden"/>
                             </c:when>
@@ -253,7 +253,7 @@
                                 <div id="profile${vs.count}" class="product__item__pic set-bg"
                                      data-setbg="/images/profile/ProfilePicture.png">
                                     <c:if test="${memPic[vs.index-1] != '' and memPic[vs.index-1] != 'ProfilePicture.png' and memSeat[vs.index-1] != ''}">
-                                        <img src="/images/profile/${memSeat[vs.index-1]}/thumb.jpg"
+                                        <img src="/images/profile/${memSeat[vs.index-1]}/${memPic[vs.index-1]}"
                                              style="height: 100%; overflow: hidden">
                                     </c:if>
                                     <input type="hidden" id="recruitseat${vs.count}" name="recruitseat${vs.count}"

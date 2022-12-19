@@ -70,6 +70,8 @@ create table tb_review
     ,
     ss_num      int         not null                  -- 판매 상품 번호
     ,
+    rv_date     datetime  not null default CURRENT_TIMESTAMP
+    ,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)   -- 회원
     ,
     FOREIGN KEY (ss_num) REFERENCES tb_sales (ss_num) -- 상품
@@ -146,6 +148,7 @@ CREATE table tb_detail
     dt_prog   varchar(10) not null,                            -- 진행상태
     dt_odstts varchar(10) not null,                            -- 주문상태
     dt_refund char(1)     not null,                            -- 환불가능여부
+    dt_amount int         not null,                            -- 주문수량
     ss_num    int         not null,                            -- 판매상품번호
     dt_paymnt varchar(50) not null,                            -- 결제수단
     dt_msg    varchar(255),                                    -- 배송메세지
@@ -153,6 +156,7 @@ CREATE table tb_detail
     FOREIGN KEY (dv_num) REFERENCES tb_delivery (dv_num),      -- 배송 FK
     FOREIGN KEY (ss_num) REFERENCES tb_sales (ss_num)          -- 판매상품 FK
 );
+
 
 
 -- 교환반품

@@ -21,7 +21,8 @@
                 FROM tb_recruitinfo
                 where rcrbrd_num = rb.rcrbrd_num) as cnt
         FROM tb_rcrboard rb
-        WHERE rcrbrd_status = '진행중' AND rcrbrd_edate >= now()
+        WHERE rcrbrd_status = '진행중'
+          AND rcrbrd_edate >= now()
         ORDER BY ${order} DESC
         Limit 9
     </select>
@@ -36,9 +37,11 @@
                (SELECT count(mem_id)
                 FROM tb_recruitinfo
                 WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
-        FROM tb_rcrboard rb join tb_game gm
-        ON rb.gm_code = gm.gm_code
-        WHERE rcrbrd_status = '진행중' AND rcrbrd_edate >= now()
+        FROM tb_rcrboard rb
+                 join tb_game gm
+                      ON rb.gm_code = gm.gm_code
+        WHERE rcrbrd_status = '진행중'
+          AND rcrbrd_edate >= now()
         ORDER BY ${order} DESC
         Limit 9
     </select>
@@ -109,7 +112,8 @@
                mm.apoint,
                mm.mem_receive,
                mm.good,
-               mm.buyer_bad
+               mm.buyer_bad,
+               mm.mem_pic
         from tb_mem as mm
                  join tb_rcrboard as rb
                       on rb.mem_id = mm.mem_id
@@ -293,7 +297,8 @@
         from tb_rcrboard as rb
                  join tb_game as gm
                       on rb.gm_code = gm.gm_code
-        WHERE rcrbrd_status = '진행중' AND rcrbrd_edate >= now()
+        WHERE rcrbrd_status = '진행중'
+          AND rcrbrd_edate >= now()
         ORDER BY ${order} DESC
         Limit #{endCount} OFFSET #{startCount}
     </select>
@@ -363,7 +368,8 @@
         SELECT count(*)
         FROM tb_rating
         WHERE rcrbrd_num = #{rcrbrd_num}
-          AND give_id = #{give_id} AND receive_id = #{receive_id}
+          AND give_id = #{give_id}
+          AND receive_id = #{receive_id}
     </select>
 
     <insert id="heart" parameterType="com.cafe24.nonchrono.dto.RatingDTO">
@@ -375,7 +381,8 @@
         DELETE
         FROM tb_rating
         WHERE rcrbrd_num = #{rcrbrd_num}
-          AND give_id = #{give_id} AND receive_id = #{receive_id}
+          AND give_id = #{give_id}
+          AND receive_id = #{receive_id}
     </delete>
 
 </mapper>
