@@ -291,4 +291,16 @@ public class RecruitDAO {
     public List<String> searchRank() {
         return sqlSession.selectList("recruit.searchRank");
     }
+
+    public int useMileage(String mem_id, int mileage) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("mem_id", mem_id);
+        map.put("mileage", mileage);
+        return sqlSession.update("recruit.useMileage", map);
+    }
+
+    public int mileageCheck(String mem_id) {
+        return sqlSession.selectOne("recruit.mileageCheck", mem_id);
+    }
+
 } // class end

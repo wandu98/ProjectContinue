@@ -361,7 +361,17 @@ public class RecruitController {
 
     // 모집 정보 작성
     @RequestMapping("/insert")
-    public String recruitInsert(@ModelAttribute RecruitDTO recruitDTO, @ModelAttribute RoleDTO roleDTO, HttpServletRequest req) {
+    public String recruitInsert(@ModelAttribute RecruitDTO recruitDTO, @ModelAttribute RoleDTO roleDTO, @RequestParam int useMileage, HttpServletRequest req, HttpSession session) {
+
+        String mem_id = (String) session.getAttribute("mem_id");
+
+        int mileage = recruitDAO.mileageCheck(mem_id);
+        // 마일리지 사용
+        if (mileage >= useMileage) {
+            recruitDAO.useMileage(mem_id, useMileage);
+        } else {
+            return "redirect:/recruit/form";
+        }
 
         // 모집 내용 insert
         recruitDAO.insert(recruitDTO);
@@ -602,6 +612,13 @@ public class RecruitController {
             mav.setViewName("/mem/loginForm");
         }
         return mav;
+    }
+
+    // 모집 완료 후 보너스 100 포인트
+    @RequestMapping("/bonus")
+    @ResponseBody
+    public int bonus(String mem_id) {
+        return recruitDAO.useMileage(mem_id, -100);
     }
 
 

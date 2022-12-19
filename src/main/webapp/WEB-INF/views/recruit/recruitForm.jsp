@@ -166,10 +166,12 @@
                                 <li>모집 장소 <span id="rcrbrd_adr2">-</span></li>
                                 <li>종료일 <span id="rcrbrd_edate2">-</span></li>
                             </ul>
-                            <div class="checkout__order__subtotal">사용 마일리지 <span style="color: red">-100</span></div>
+                            <div class="checkout__order__subtotal">소모 마일리지 <span style="color: red" id="useMileage1">0</span></div>
+                            <input type="hidden" id="useMileage" name="useMileage">
                             <div class="checkout__input__checkbox">
                                 <label for="acc-or">
-                                    위에 적힌 정보가 맞나요?
+                                    위에 적힌 정보가 맞나요?<br>
+                                    하루당 100 마일리지가 소모됩니다
                                     <input type="checkbox" id="acc-or">
                                     <span class="checkmark"></span>
                                 </label>
@@ -395,10 +397,41 @@
         if ($('#zipcode').val().length < 1) {
             alert("주소를 선택해주세요");
             DaumPostcode();
-            return false
+            return false;
+        }
+        if (dateDiff() == false) {
+            alert("모집 마감일은 오늘 이후로 설정해주세요");
+            return false;
         }
         return true;
     }
+
+    // 현재 날짜와 선택한 날짜의 차이 구하기
+    function dateDiff() {
+        let date = $('#rcrbrd_edate').val().split('T');
+        let today = new Date();
+        let selectDate = new Date(date[0] + ' ' + date[1]);
+        let diff = selectDate.getTime() - today.getTime();
+        // alert(diff); // 261257
+        let diffDate = Math.ceil(diff / (1000 * 3600 * 24));
+        // alert(diffDate); // 1
+        if (diffDate <= 1) {
+            $('#rcrbrd_edate').val('');
+            return false;
+        }
+        return true;
+    }
+
+    $('#rcrbrd_edate').change(function () {
+        let date = $('#rcrbrd_edate').val().split('T');
+        let today = new Date();
+        let selectDate = new Date(date[0] + ' ' + date[1]);
+        let diff = selectDate.getTime() - today.getTime();
+        let diffDate = Math.ceil(diff / (1000 * 3600 * 24));
+
+       $('#useMileage1').text((diffDate - 1) * 100);
+       $('#useMileage').val((diffDate - 1) * 100);
+    });
 
 
 </script>

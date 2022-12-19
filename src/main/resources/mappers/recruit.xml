@@ -318,7 +318,8 @@
                  join tb_game as gm
                       on rb.gm_code = gm.gm_code
         WHERE rcrbrd_status = '진행중'
-          AND rcrbrd_edate >= now() AND gm.gm_name like concat('%', #{keyword}, '%')
+          AND rcrbrd_edate >= now()
+          AND gm.gm_name like concat('%', #{keyword}, '%')
         ORDER BY ${order} DESC
         Limit #{endCount} OFFSET #{startCount}
     </select>
@@ -445,10 +446,12 @@
                (SELECT count(mem_id)
                 FROM tb_recruitinfo
                 where rcrbrd_num = rb.rcrbrd_num) as cnt
-        FROM tb_rcrboard rb JOIN tb_game gm
-        ON rb.gm_code = gm.gm_code
+        FROM tb_rcrboard rb
+                 JOIN tb_game gm
+                      ON rb.gm_code = gm.gm_code
         WHERE rcrbrd_status = '진행중'
-          AND rcrbrd_edate >= now() AND gm.gm_name LIKE CONCAT('%', #{keyword}, '%')
+          AND rcrbrd_edate >= now()
+          AND gm.gm_name LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY ${order} DESC
         Limit 9
     </select>
@@ -468,7 +471,8 @@
                  join tb_game gm
                       ON rb.gm_code = gm.gm_code
         WHERE rcrbrd_status = '진행중'
-          AND rcrbrd_edate >= now() AND gm.gm_name LIKE CONCAT('%', #{keyword}, '%')
+          AND rcrbrd_edate >= now()
+          AND gm.gm_name LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY ${order} DESC
         Limit 9
     </select>
@@ -487,6 +491,20 @@
         GROUP BY sc_word
         ORDER BY count(sc_word) DESC
         LIMIT 5
+    </select>
+
+    <!-- 등록시 마일리지 소모 -->
+    <update id="useMileage" parameterType="java.util.Map">
+        UPDATE tb_mem
+        SET upoint = upoint - #{mileage}
+        WHERE mem_id = #{mem_id}
+    </update>
+
+    <!-- 가용 마일리지 검색 -->
+    <select id="mileageCheck" parameterType="String" resultType="int">
+        SELECT upoint
+        FROM tb_mem
+        WHERE mem_id = #{mem_id}
     </select>
 
 </mapper>
