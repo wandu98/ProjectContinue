@@ -9,168 +9,236 @@
   To change this template use File | Settings | File Templates.
 --%>
 <style>
-    .checkout__input2 {
-        position: relative;
-        margin: 10px 0;
-    }
 
-    .checkout__input2 > input {
-        background: transparent;
-        border: none;
-        border-bottom: solid 1px #ccc;
-        padding: 20px 0px 5px 0px;
-        font-size: 14pt;
-        width: 100%;
-    }
 </style>
 
 <!-- 본문 시작 signupForm.jsp-->
-<div class="container">
-    <br><br>
-    <h4 style="font-weight: bold; margin-left: 5%">회원가입</h4>
-    <hr>
-    <form name="Signupfrm" id="Signupfrm" action="/mem/signup" method="post" onsubmit="return send()">
-        <div class="col-lg-8 col-md-8">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                </div>
-                <div class="col-lg-12 col-md-12">
-                    <br>
-                    <div class="checkout__input2">
-                        <label for="mem_id">아이디<span>*</span></label>
-                        <br>
-                        <input type="text" name="mem_id" id="mem_id" class="col-lg-9 col-md-9"
-                               style="letter-spacing: 10px" required>
-                    </div>
-                    <div id="panel"></div>
-                    <input type="button" value="중복확인" id="idcheck">
-                </div>
-                <br>
+    <div class="container">
+        <div class="row">
+        </div>
+        <div class="checkout__form">
+            <br><br>
+            <h4 style="font-weight: bold; margin-left: auto">회원가입</h4>
 
-                <div class="checkout__input2">
-                    <label for="mem_name">이름<span>*</span></label>
-                    <br>
-                    <input type="text" name="mem_name" id="mem_name" class="col-lg-9 col-md-9" style="letter-spacing: 15px"
-                           required>
-                </div>
-                <br>
-
-                <div class="checkout__input2">
-                    <label for="mem_nick">닉네임<span>*</span></label>
-                    <br>
-                    <input type="text" name="mem_nick" id="mem_nick" class="col-lg-9 col-md-9" style="letter-spacing: 15px" required>
-                </div>
-                <br>
-
-                <div class="checkout__input2">
-                    <label for="mem_pw">비밀번호<span>*</span></label>
-                    <br>
-                    <input type="password" name="mem_pw" id="mem_pw" class="col-lg-9 col-md-9" style="letter-spacing: 15px" required>
-                </div>
-                <br>
-
-                <div class="checkout__input2">
-                    <label for="repw">비밀번호 확인<span>*</span></label>
-                    <br>
-                    <input type="password" name="repw" id="repw" class="col-lg-9 col-md-9" style="letter-spacing: 15px" required>
-                </div>
-                <br>
-
-            <div class="col-lg-8 col-md-6">
+            <form name="Signupfrm" id="Signupfrm" action="/mem/signup" method="post" onsubmit="return send()">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="checkout__input">
-                            <p>우편번호<span>*</span></p>
-                            <input type="text" name="mem_zip" id="mem_zip" required>
+                    <div class="col-lg-8 col-md-6">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>이름<span>*</span></p>
+                                    <input type="text" name="mem_name" id="mem_name" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>닉네임<span>*</span></p>
+                                    <input type="text" name="mem_nick" id="mem_nick" required>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
+
+                        <div class="checkout__input">
+                            <p>아이디 <span>*</span></p>
+                            <input type="text" name="mem_id" id="mem_id" required>
+                        </div>
+                        <div id="panel"></div>
+                        <input type="button" value="중복확인" id="idcheck"
+                               style="color : #FFFFFF; background-color: #FF0000;">
+                        <br><br>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>비밀번호<span>*</span></p>
+                                    <input type="password" name="mem_pw" id="mem_pw" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>비밀번호 확인<span>*</span></p>
+                                    <input type="password" name="mem_repw" id="mem_repw" required>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="checkout__input">
                             <p>주소<span>*</span></p>
-                            <input type="text" placeholder="기본주소" name="mem_adr1" id="mem_adr1" required>
+                            <input type="text" name="mem_zip" class="checkout__input__add" id="mem_zip" readonly>
+                            <button type="button" onclick="DaumPostcode()" class="btn btn-danger">우편번호</button>
+                            <div class="invalid-feedback">우편번호 입력 필수 입니다.</div>
+
+                            <div id="wrap"
+                                 style="display:none;border:1px solid;width:500px;height:300px;margin:5px 110px;position:relative">
+                                <img src="//i1.daumcdn.net/localimg/localimages/07/postcode/320/close.png"
+                                     id="btnFoldWrap"
+                                     style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1"
+                                     onclick="foldDaumPostcode()" alt="접기 버튼">
+                            </div>
                         </div>
+
+                        <div class="checkout__input" id="mem_adr">
+                            <input type="text" placeholder="우편번호를 입력 해주세요" name="mem_adr1" id="mem_adr1" required>
+                        </div>
+                        <div class="checkout__input">
+                            <input type="text" placeholder="상세 주소(선택 입력 가능)" class="checkout__input__add"
+                                   name="mem_adr2"
+                                   id="mem_adr2">
+                        </div>
+
+                        <div class="checkout__input">
+                            <p>이메일<span>*</span></p>
+                            <input type="text" placeholder="이메일 작성" class="checkout__input__add" name="mem_email"
+                                   id="mem_email" required>
+                        </div>
+
+                        <div class="checkout__input">
+                            <p>생년월일<span>*</span></p>
+                            <input type="text" name="mem_birth" id="mem_birth" required>
+                        </div>
+
+                        <div class="checkout__input">
+                            <p>휴대전화<span>*</span></p>
+                            <input type="text" name="mem_phone" id="mem_phone" required>
+                        </div>
+
+                        <div class="checkout__input__checkbox">
+                            <p>수신여부(선택)</p>
+                            e-mail 수신동의
+                            <input type="hidden" id="mem_receive" name="mem_receive" value="N">
+                            <input type="checkbox" name="receive" id="receive">
+                            <span class="checkmark"></span>
+                        </div>
+                        <br>
+                        <button type="submit" class="site-btn">회원 가입하기</button>
                     </div>
                 </div>
-            </div>
-            <div class="checkout__input">
-                <p>상세주소입력<span>*</span></p>
-                <input type="text" placeholder="나머지 주소(선택 입력 가능)" class="checkout__input__add" name="mem_adr2"
-                       id="mem_adr2">
-            </div>
-            <div class="checkout__input">
-                <p>이메일<span>*</span></p>
-                <input type="text" placeholder="이메일 작성" class="checkout__input__add" name="mem_email"
-                       id="mem_email" required>
-            </div>
-            <div class="checkout__input">
-                <p>생년월일<span>*</span></p>
-                <input type="text" name="mem_birth" id="mem_birth" required>
-            </div>
-            <div class="checkout__input">
-                <p>휴대전화<span>*</span></p>
-                <input type="text" name="mem_phone" id="mem_phone" required>
-            </div>
-            <div class="checkout__input__checkbox">
-                <p>수신여부(선택)</p>
-                e-mail 수신동의
-                <input type="hidden" id="mem_receive" name="mem_receive" value="N">
-                <input type="checkbox" name="receive" id="receive">
-                <span class="checkmark"></span>
-            </div>
-            <%--<div class="checkout__input__checkbox">
-                <label for="recieve2">
-                    SMS 수신동의
-                    <input type="checkbox" name="recieve2" id="recieve2">
-                    <span class="checkmark"></span>
-                </label>
-            </div>--%>
-            <button type="submit" class="site-btn">회원 가입하기</button>
+            </form>
         </div>
-        </div>
-</form>
-</div>
+    </div>
 
-<script>
-    $('#receive').click(function () {
-        if ($('#receive').is(':checked')) {
-            $('#mem_receive').val('Y');
-        } else {
-            $('#mem_receive').val('N');
+
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+
+                /*DAUM 우편번호 API 시작*/
+            // 우편번호 찾기 화면을 넣을 element
+
+            let element_wrap = document.getElementById('wrap');
+
+        function foldDaumPostcode() {
+            // iframe을 넣은 element를 안보이게 한다.
+            element_wrap.style.display = 'none';
         }
-    });
 
-    $(function () {
-        $.removeCookie("checkID");
-    });
+        function DaumPostcode() {
+            // 현재 scroll 위치를 저장해놓는다.
+            let currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-    $('#idcheck').click(function () {
-        let params = "mem_id=" + $('#mem_id').val().trim();
-        $.post("idcheckcookieproc.do", params, checkID, "json");
-    });
+                    // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var fullAddr = data.address; // 최종 주소 변수
+                    var extraAddr = ''; // 조합형 주소 변수
 
-    function checkID(result) {
-        let count = eval(result.count);
-        if (count == 0) { //1 중복 0 사용가능
-            alert("사용가능한 아이디 입니다");
-            $.cookie("checkID", "PASS"); //중복확인을 했다는 증거
-        } else {
-            alert("중복된 아이디 입니다");
-            $("#mem_id").focus;
-        }//if end
-    }//checkID() end
+                    // 기본 주소가 도로명 타입일때 조합한다.
+                    if (data.addressType === 'R') {
+                        //법정동명이 있을 경우 추가한다.
+                        if (data.bname !== '') {
+                            extraAddr += data.bname;
+                        }
+                        // 건물명이 있을 경우 추가한다.
+                        if (data.buildingName !== '') {
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+                        // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                        fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')' : '');
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('mem_zip').value = data.zonecode; //5자리 새우편번호 사용
+                    document.getElementById('mem_adr1').value = fullAddr;
+                    //$('#rcrbrd_adr2').text(fullAddr);
+
+                    // iframe을 넣은 element를 안보이게 한다.
+                    // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+                    element_wrap.style.display = 'none';
+
+                    // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
+                    document.body.scrollTop = currentScroll;
 
 
-    function send() {
-        let checkID = $.cookie("checkID");
-        if (checkID == "PASS") {
-            return true;
-        } else {
-            alert("아이디 중복확인 해주세요");
-            $("#mem_id").focus;
-        }//if() end
-    }//send() end
+                    $('#mem_adr').show();
+                },
+                // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
+                onresize: function (size) {
+                    element_wrap.style.height = size.height + 'px';
+                },
+                width: '100%',
+                height: '100%'
+            }).embed(element_wrap);
+
+            // iframe을 넣은 element를 보이게 한다.
+            element_wrap.style.display = 'block';
+        }
+
+        <!-- ----- DAUM 우편번호 API 종료 ----- -->
+
+        $('#receive').click(function () {
+            if ($('#receive').is(':checked')) {
+                $('#mem_receive').val('Y');
+            } else {
+                $('#mem_receive').val('N');
+            }
+        });
+
+        $(function () {
+            $.removeCookie("checkID");
+        });
+
+        $('#idcheck').click(function () {
+            let params = "mem_id=" + $('#mem_id').val().trim();
+            $.post("idcheckcookieproc", params, checkID, "json");
+        });
+
+        function checkID(result) {
+            let count = eval(result.count);
+            if (count == 0) { //1 중복 0 사용가능
+                alert("사용가능한 아이디 입니다");
+                $.cookie("checkID", "PASS"); //중복확인을 했다는 증거
+            } else {
+                alert("중복된 아이디 입니다");
+                $("#mem_id").focus;
+            }//if end
+
+            let checkID = $.cookie("checkID");
+            if (checkID == "PASS") {
+                return true;
+            } else {
+                alert("아이디 중복확인 해주세요");
+                $("#mem_id").focus;
+            }//if() end
 
 
-</script>
+        }//checkID() end
 
-<%@ include file="../footer.jsp" %>
+
+        function send() {
+            let checkID = $.cookie("checkID");
+            if (checkID == "PASS") {
+                return true;
+            } else {
+                alert("아이디 중복확인 해주세요");
+                $("#mem_id").focus;
+            }//if() end
+        }//send() end
+
+
+    </script>
+
+    <%@ include file="../footer.jsp" %>
