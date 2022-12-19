@@ -390,4 +390,16 @@
         VALUES (#{rcrbrd_num}, #{mem_id}, #{com_content}, now(), #{com_grpno}, #{com_indent}, #{com_ansnum})
     </insert>
 
+    <update id="good" parameterType="String">
+        UPDATE tb_mem
+        SET good = good + 1
+        WHERE mem_id = #{mem_id}
+    </update>
+
+    <update id="buyer_bad" parameterType="String">
+        UPDATE tb_mem
+        SET buyer_bad = buyer_bad + 1
+        WHERE mem_id = #{mem_id}
+    </update>
+
 </mapper>

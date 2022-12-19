@@ -245,8 +245,10 @@ public class RecruitDAO {
 
     public String heart(RatingDTO ratingDTO) {
         int cnt = sqlSession.selectOne("recruit.heartCheck", ratingDTO);
+        String mem_id = ratingDTO.getReceive_id();
         if (cnt == 0) {
             sqlSession.insert("recruit.heart", ratingDTO);
+            sqlSession.update("recruit.good", mem_id);
             return "님께 하트를 보냈습니다";
         } else {
             sqlSession.delete("recruit.heartDelete", ratingDTO);
@@ -256,6 +258,8 @@ public class RecruitDAO {
 
     public String declare(RatingDTO ratingDTO) {
         sqlSession.insert("recruit.heart", ratingDTO);
+        String mem_id = ratingDTO.getReceive_id();
+        sqlSession.update("recruit.buyer_bad", mem_id);
         return "님을 신고했습니다";
     }
 
