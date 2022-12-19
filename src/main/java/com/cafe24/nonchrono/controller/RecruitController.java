@@ -85,13 +85,13 @@ public class RecruitController {
         if (order == null || order.equals("")) {
             order = order2;
         }
-        System.out.println("keyword : " + keyword);
+        // System.out.println("keyword : " + keyword);
         // System.out.println("order : " + order);
         if (keyword.equals("null") || keyword.equals("")) {
-            System.out.println("keyword null");
+            // System.out.println("keyword null");
             list = recruitDAO.listAjax(order);
         } else {
-            System.out.println("keyword not null");
+            // System.out.println("keyword not null");
             list = recruitDAO.listAjax2(order, keyword);
         }
         // System.out.println(list);

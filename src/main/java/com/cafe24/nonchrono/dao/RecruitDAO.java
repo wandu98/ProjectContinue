@@ -192,10 +192,13 @@ public class RecruitDAO {
         map.put("startCount", startCount);
         map.put("endCount", endCount);
         map.put("order", order);
-        if (keyword != null) {
+        if (keyword.equals("null")) {
+            return sqlSession.selectList("recruit.more", map);
+        } else {
             map.put("keyword", keyword);
+            return sqlSession.selectList("recruit.more2", map);
         }
-        return sqlSession.selectList("recruit.more", map);
+
     }
 
     public int delete(int rcrbrd_num) {
