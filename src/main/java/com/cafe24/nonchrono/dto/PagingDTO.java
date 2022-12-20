@@ -20,5 +20,5 @@ public class PagingDTO {
     private String ss_eperiod;
     private String inputState;
     private String keyword;
-
+    private String order;
 }

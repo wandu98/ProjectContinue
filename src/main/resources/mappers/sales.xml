@@ -114,7 +114,7 @@
               from (
                     select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category
                     from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
-                    ) AA, (select @rno := 0) BB     order by ss_num desc
+                    ) AA, (select @rno := 0) BB     order by #{order} DESC
               ) CC
         where r >= #{startRow} and r <= #{endRow}
 
@@ -340,5 +340,29 @@
         from tb_sales ss
                  join tb_game gm on gm.gm_code = ss.gm_code
         order by ss_price desc
+    </select>
+
+    <insert id="search" parameterType="com.cafe24.nonchrono.dto.SearchDTO">
+        insert into tb_search(sc_word, sc_date, sc_where)
+        values (#{sc_word}, now(), #{sc_where})
+    </insert>
+
+    <select id="last_search" resultType="com.cafe24.nonchrono.dto.SearchDTO">
+        select distinct sc_word
+        from tb_search
+        order by sc_num desc;
+    </select>
+
+    <select id="top_keyword" resultType="com.cafe24.nonchrono.dto.SearchDTO">
+        select *
+                 from (
+                        select count(*) as count, sc_word
+                        from(
+                                select sc_word
+                                from tb_search
+                                where sc_word = '사무라이 메이든'
+                            ) aa
+                        ) bb
+        where  count
     </select>
 </mapper>

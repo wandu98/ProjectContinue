@@ -10,6 +10,21 @@
 
 <%@include file="../header.jsp" %>
 
+<style>
+    #sidebar {
+        position: sticky;
+        top: 0;
+    }
+
+    #sort > a {
+        text-decoration: none;
+        color: darkgray;
+
+    }
+
+
+</style>
+
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="/images/samurai.jpeg">
     <div class="container">
@@ -33,20 +48,22 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-5">
-                <div class="sidebar">
+                <div class="sidebar" id="sidebar">
                     <div class="sidebar__item">
                         <h4>최근 검색어</h4>
                         <ul>
-                            <li><a href="#">스위치1</a></li>
-                            <li><a href="#">스위치2</a></li>
-                            <li><a href="#">스위치3</a></li>
-                            <li><a href="#">스위치 OLED</a></li>
-                            <li><a href="#">스위치4</a></li>
-                            <li><a href="#">동물의숲</a></li>
-                            <li><a href="#">슈퍼마리오</a></li>
-                            <li><a href="#">별의커비</a></li>
-                            <li><a href="#">강화필름</a></li>
-                            <li><a href="#">제곧내</a></li>
+                            <c:forEach var="row" items="${last_search}" end="6">
+                                <li><a href="#">${row.sc_word}</a></li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar__item">
+                        <h4>인기 검색어</h4>
+                        <ul>
+                            <c:forEach var="row" items="${top_keyword}" end="2">
+                                <li><a href='javascript:void(0)'>${row.sc_word}</a></li>
+                            </c:forEach>
                         </ul>
                     </div>
 
@@ -136,13 +153,9 @@
                 <div class="filter__item">
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
-                            <div class="filter__sort">
-                                <span>정렬</span>
-                                <select>
-                                    <option  id="new">최신순</option>
-                                    <option  id="top_price">가격높은순</option>
-                                    <option  id="row_price">가격낮은순</option>
-                                </select>
+                            <div class="filter__sort" id="sort">
+                                    <span><a href='javascript:void(0)' onclick='listAgain("ss_num")'>최신순</a>
+                                    <a href='javascript:void(0)'  onclick='listAgain("ss_price")'>높은가격</a></span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -152,19 +165,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-
+                <div class="row" id="board">
                     <c:forEach var="row" items="${list3}" varStatus="vs">
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic">
-                                    <a href="/sales/detail/${row.ss_num}"><img
-                                            src="/images/product/sales_main/${row.ss_img}"></a>
+                                    <a href="/sales/detail/${row.ss_num}">
+                                        <img src="/images/product/sales_main/${row.ss_img}">
+                                    </a>
                                     <ul class="product__item__pic__hover">
-                                        <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i
-                                                class="fa fa-heart"></i></a></li>
-                                        <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i
-                                                class="fa fa-shopping-cart"></i></a></li>
+                                        <li>
+                                            <a class="wishlistModal" onclick="wishlistModal(${row.ss_num})">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="basketModal" onclick="basketModal(${row.ss_num})">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
 
@@ -286,9 +305,7 @@
 </div>
 
 
-
 <script>
-
 
 
     function wishlistModal(ss_num) {
@@ -328,6 +345,68 @@
         location.replace("/mypage/cart");
     }
 
+
+    function listAgain(order) {
+
+        $.ajax({
+            type: "post",
+            url: "/sales/",
+            data: {
+                "order": order
+            },
+            success: function (result) {
+                //alert(result
+                alert(order);
+                let message = "";
+
+                $.each(result, function (index, value) {
+                    // alert(index);
+                    // alert(value);
+                    let price = value.ss_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+
+                    message += "<div class='col-lg-4 col-md-6 col-sm-6'>";
+                    message += "<div class='product__item'>";
+                    message += "<div class='product__item__pic'>";
+                    message += "<a href='/sales/detail/" + value.ss_num + "'>";
+                    message += "<img src='/images/product/sales_main/" + value.ss_img + "'>";
+                    message += "</a>";
+                    message += "<ul class='product__item__pic__hover'>";
+                    message += "<li>";
+                    message += "<a class='wishlistModal' onclick='wishlistModal(" + value.ss_num + ")'>";
+                    message += "<i class='fa fa-heart'></i>";
+                    message += "</a>";
+                    message += "</li>";
+                    message += "<li>";
+                    message += "<a class='basketModal' onclick='basketModal(" + value.ss_num + "'>";
+                    message += "<i class='fa fa-shopping-cart'></i>";
+                    message += "</a>";
+                    message += "</li>";
+                    message += "</ul>";
+                    message += "</div>";
+                    message += "<div class='product__discount__item__text'>";
+                    message += "<span>" + value.gm_category + "</span>";
+                    message += "<h6><a href='/sales/detail/" + value.ss_num + "'>" + value.ss_name + "</a></h6>";
+                    message += "<h5><a href='/sales/detail/" + value.ss_num + "'>" + "₩" + price + "</a></h5>";
+                    message += "</div>";
+                    message += "</div>";
+                    message += "</div>";
+
+                    if ((index % 3) == 0) {
+                        message += "<br>"
+                    }
+                });
+
+                $('#board').html(message);
+
+
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
+    }
+
 </script>
+
 
 <%@ include file="../footer.jsp" %>

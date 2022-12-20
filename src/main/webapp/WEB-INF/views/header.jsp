@@ -204,6 +204,7 @@
                                 <option value="JC">조이콘</option>
                                 <option value="AC">주변 기기</option>
                             </select>
+                            <input type="hidden" id="sc_where" name="sc_where" value="sales">
                             <input class="search_keyword" type="text" id="keyword" name="keyword">
                             <button type="submit" class="site-btn-search">검색</button>
                         </form>
