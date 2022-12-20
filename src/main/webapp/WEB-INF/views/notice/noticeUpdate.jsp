@@ -35,7 +35,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">제목</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="nt_title" name="nt_title" value="${ntdetail.nt_title}" >
+                                    <input type="text" class="form-control" id="nt_title" name="nt_title" value="${ntdetail.nt_title}" required >
                                 </div>
                             </div>
 
@@ -56,7 +56,7 @@
                             <div class="checkout__input__checkbox" style="text-align: center">
                                 <label for="acc">
                                     공지를 등록 하시겠습니까?
-                                    <input type="checkbox" id="acc">
+                                    <input type="checkbox" id="acc" required>
                                     <span class="checkmark"></span>
                                 </label>
                             </div>

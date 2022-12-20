@@ -22,4 +22,5 @@ public class RecruitDTO {
     private String rcrbrd_status; // 모집 진행상태
     private String rcrbrd_adr; // 모집 지역
     private int rcrbrd_max; // 모집 인원
+    private int com_count; // 댓글 갯수
 }

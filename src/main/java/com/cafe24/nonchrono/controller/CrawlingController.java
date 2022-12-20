@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -30,13 +31,13 @@ public class CrawlingController {
     } // CrawlingController() end
 
     @RequestMapping(value = "/crawling")
-    public String autoCrawling() {
+    public String autoCrawling(@RequestParam int start) {
 
         CrawlingDTO crawlingDTO = null;
         int cnt = 0;
 
         // 전체 소프트웨어의 링크를 얻기 위한 1차 주소
-        String AllURL = "https://store.nintendo.co.kr/games/all-released-games";
+        String AllURL = "https://store.nintendo.co.kr/games?product_list_order=release_date_asc";
 
         try {
 
@@ -59,10 +60,10 @@ public class CrawlingController {
             }
 
             // 리스트의 사이즈를 출력
-            System.out.println(list.size());
+            System.out.println("전체 게임 수 : " + list.size() + "개");
 
             // for ( Element element : elements ) { // for (개별 : 덩어리)
-            for (int i = 0; i <= list.size(); i++) {
+            for (int i = start; i <= list.size(); i++) {
 
                 System.out.println(i + "번째 데이터 수집 중...");
 
@@ -179,6 +180,8 @@ public class CrawlingController {
                     fos.close();
 
                     System.out.println(crawlingDTO.getGm_code() + " :: 이미지 저장 완료");
+
+                    Thread.sleep(3000);
 
                 } catch (Exception e) {
                     System.out.println("크롤링 오류 : " + e);

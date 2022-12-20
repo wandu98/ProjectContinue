@@ -309,4 +309,15 @@ public class RecruitDAO {
         return sqlSession.selectOne("recruit.mileageCheck", mem_id);
     }
 
+    public List<Map<String, Object>> commentList(int rcrbrd_num) {
+        return sqlSession.selectList("recruit.commentList", rcrbrd_num);
+    }
+
+    public int commentDelete(int com_num) {
+        return sqlSession.delete("recruit.commentDelete", com_num);
+    }
+
+    public int commentUpdate(CommentDTO commentDTO) {
+        return sqlSession.update("recruit.commentUpdate", commentDTO);
+    }
 } // class end
