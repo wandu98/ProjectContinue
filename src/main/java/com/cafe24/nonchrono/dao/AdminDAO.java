@@ -2,6 +2,7 @@ package com.cafe24.nonchrono.dao;
 
 import com.cafe24.nonchrono.dto.GameDTO;
 import com.cafe24.nonchrono.dto.MemDTO;
+import com.cafe24.nonchrono.dto.PagingDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -103,5 +104,17 @@ public class AdminDAO {
 
     public List<Integer> salesreportLastYear() {
         return sqlSession.selectList("admin.budgetreportLastYear");
+    }
+
+    public List<MemDTO> memberList(PagingDTO pagingDTO) {
+        return sqlSession.selectList("admin.memberList", pagingDTO);
+    }
+
+    public int gradeModify(MemDTO memDTO) {
+        return sqlSession.update("admin.gradeModify", memDTO);
+    }
+
+    public int totalRowCount() {
+        return sqlSession.selectOne("admin.totalRowCount");
     }
 }

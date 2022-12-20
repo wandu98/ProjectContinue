@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/mypage")
@@ -81,12 +82,23 @@ public class MypageController {
 
         double temp = memDAO.temp(mem_id);
 
+        List<Map<String,?>> list = recruitDAO.rcrbrdlist(mem_id);
+        int rcrbrd_num = 0;
+
+        List<Integer> list2 = new ArrayList<>();
+        for (int i=0; i<list.size(); i++) {
+            rcrbrd_num = (int) list.get(i).get("rcrbrd_num");
+            list2.add(recruitDAO.rcrbrdlistCount(rcrbrd_num));
+        }
+
+
         if (mem_id != null) {
             mav.addObject("meminfo", memDAO.myList(mem_id));
             mav.addObject("temp", temp);
             mav.addObject("qslist", questionDAO.count(mem_id));
             mav.addObject("revlist", reviewDAO.count(mem_id));
             mav.addObject("recruitlist", recruitDAO.rcrbrdlist(mem_id));
+            mav.addObject("rcrbrdlistCount", list2);
             mav.addObject("detailcount", detailDAO.detailCount(mem_id));
             mav.setViewName("mypage/mypage");
         } else {

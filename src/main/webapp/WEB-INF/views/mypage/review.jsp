@@ -10,23 +10,21 @@
 
 <jsp:include page="../header.jsp"></jsp:include>
 
-<!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="/images/002.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Review</h2>
+                    <h2>상품 후기</h2>
                     <div class="breadcrumb__option">
                         <a href="/">Home</a>
-                        <span>Review</span>
+                        <span>My Page</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Breadcrumb Section End -->
 
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
@@ -47,7 +45,7 @@
                         <c:forEach var="row" items="${rvlist}" varStatus="vs">
                             <tr>
                                 <td class="shoping__cart__price">
-                                    ${vs.index+1}
+                                    ${row.rnum}
                                 </td>
                                 <td class="shoping__cart__item">
                                     <div onclick="rvList(${row.rv_num})">
@@ -109,7 +107,7 @@
                 </c:if>
                 <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
                     <c:choose>
-                        <c:when test="${pageNum==i}"><span style="font-weight: bold">${i}</span></c:when>
+                        <c:when test="${pageNum==i}"><a style="font-weight: bold; background: #e03e2d; color: white">${i}</a></c:when>
                         <c:when test="${pageNum!=i}"><a href="/mypage/review?pageNum=${i}">${i}</a></c:when>
                     </c:choose>
                 </c:forEach>

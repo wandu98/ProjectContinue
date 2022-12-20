@@ -5,8 +5,7 @@
     <div class="col-lg-6 col-md-6" style="font-weight: bold">
         <table style="width: 100%">
             <tr>
-                <td style="text-align: left; border-right: solid 1px #bfbab9"><span
-                        style="cursor: pointer; color: #979392" onclick="memBtn()">회원 로그인</span></td>
+                <td style="text-align: left; border-right: solid 1px #bfbab9"><span style="cursor: pointer; color: #979392" onclick="memBtn()">회원 로그인</span></td>
                 <td style="text-align: center"><span style="cursor: pointer">판매자 로그인</span></td>
             </tr>
         </table>

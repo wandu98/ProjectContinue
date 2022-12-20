@@ -31,13 +31,17 @@
     </select>
     
     <select id="rcrbrdlist" resultType="java.util.Map">
-        select rb.rcrbrd_num, rcrbrd_subject, rb.gm_code, gm_name, rcrbrd_edate, count(*) as cnt
-        from tb_rcrboard rb join tb_recruitinfo tr
-                                 on rb.rcrbrd_num = tr.rcrbrd_num join tb_game tg
-                                                                       on rb.gm_code = tg.gm_code
-        where rb.mem_id = #{mem_id}
-        group by rb.rcrbrd_num
+        select rcrbrd_num, rcrbrd_subject, rb.gm_code, rcrbrd_edate, gm_name
+        from tb_rcrboard rb join tb_game ga
+                                 on rb.gm_code = ga.gm_code
+        where mem_id = #{mem_id}
         order by rcrbrd_num
+    </select>
+
+    <select id="rcrbrdlistCount" resultType="int">
+        select count(*) as cnt
+        from tb_recruitinfo
+        where rcrbrd_num = #{rcrbrd_num}
     </select>
 
 </mapper>

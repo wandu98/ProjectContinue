@@ -10,6 +10,22 @@
 
 <jsp:include page="../header.jsp"></jsp:include>
 
+<section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>배송 주소록</h2>
+                    <div class="breadcrumb__option">
+                        <a href="/">Home</a>
+                        <span>My Page</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
     <div class="container">

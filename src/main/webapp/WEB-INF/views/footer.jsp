@@ -31,8 +31,7 @@
             <li><a href="/sales/sales">오픈 마켓</a></li>
             <li><a href="/recruit">모집 게시판</a></li>
             <li><a href="/notice/noticeList">공지사항</a></li>
-            <li><a href="#">이벤트</a></li>
-            <li><a href="#">1:1문의</a></li>
+            <li><a href="/event/event">이벤트</a></li>
           </ul>
         </div>
       </div>

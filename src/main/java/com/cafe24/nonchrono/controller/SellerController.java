@@ -227,6 +227,13 @@ public class SellerController {
         return mav;
     }//loginForm() end
 
+    @RequestMapping("/reloginForm")
+    public ModelAndView reloginForm() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("seller/reloginForm");
+        return mav;
+    }
+
     @RequestMapping("/login")
     public ModelAndView loginProc(@ModelAttribute SellerDTO dto, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
         String id = dto.getSl_id();

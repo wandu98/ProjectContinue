@@ -128,3 +128,32 @@ from (
                                 select 'ac' gc from dual
                             ) tbb
 ) tbc on tba.gc = tbc.gc;
+
+
+select mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_email, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate
+from tb_mem mem, (select @rno := 0) AA;
+
+
+select *, @rno := @rno + 1 as r
+from (
+    select mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_email, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate
+    from tb_mem mem, (select @rno := 0) AA
+    ) BB;
+
+select *
+from (
+        select *, @rno := @rno + 1 as r
+        from (
+                select mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_email, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate
+                from tb_mem mem, (select @rno := 0) AA
+            ) BB
+    ) CC
+where r >=1 and r<=5;
+
+select ifnull(count(*), 0) as cnt
+from tb_mem;
+
+
+update tb_mem
+set mem_grade = ''
+where mem_id = '';

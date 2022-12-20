@@ -20,7 +20,7 @@
                     <h2>회원 정보 수정</h2>
                     <div class="breadcrumb__option">
                         <a href="/">Home</a>
-                        <span>회원 정보 수정</span>
+                        <span>My Page</span>
                     </div>
                 </div>
             </div>
