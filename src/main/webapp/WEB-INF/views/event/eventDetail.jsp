@@ -9,10 +9,15 @@
 <%@ include file="../header.jsp" %>
 
 <div class="container">
-    <h4>이벤트</h4>
-    <p>Event</p>
-    <br>
-    <div name="evtDetail" id="evtDetail">
+    <div class="col-lg-12" style="background: #ff2222; text-align: center">
+        <br>
+        <h2 style="color: #FFFFFF; font-weight: bold">이벤트</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="container">
+    <div name="evtDetail" id="evtDetail" style="padding: 3%">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -20,7 +25,8 @@
             </tr>
 
             <tr>
-                <td>이벤트 기간&nbsp;&nbsp;&nbsp;&nbsp;${evtdetail.evt_start}&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;${evtdetail.evt_end}</td>
+                <td>
+                    기간&nbsp;&nbsp;&nbsp;&nbsp;${evtdetail.evt_start}&nbsp;&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;&nbsp;${evtdetail.evt_end}</td>
             </tr>
 
             <tr>
@@ -38,12 +44,12 @@
             </tbody>
         </table>
         <c:if test="${admin_id eq 'admin'}">
-        <form class="modal-footer" method="post">
-            <input type="hidden" id="evt_num" name="evt_num" value="${evtdetail.evt_num}">
-            <button type="button" class="btn btn-info" onclick="ntUpdateConfirm(this.form)">수정</button>
-            <button type="button" class="btn btn-danger" onclick="ntDeleteConfirm(this.form)">삭제</button>
-        </form>
-        </c:if>    
+            <form class="modal-footer" method="post">
+                <input type="hidden" id="evt_num" name="evt_num" value="${evtdetail.evt_num}">
+                <button type="button" class="btn btn-info" onclick="ntUpdateConfirm(this.form)">수정</button>
+                <button type="button" class="btn btn-danger" onclick="ntDeleteConfirm(this.form)">삭제</button>
+            </form>
+        </c:if>
     </div>
 </div>
 

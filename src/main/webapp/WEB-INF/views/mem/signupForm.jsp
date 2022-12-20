@@ -21,8 +21,8 @@
         <h4 style="font-weight: bold; margin-left: auto">회원가입</h4>
 
         <form name="Signupfrm" id="Signupfrm" action="/mem/signup" method="post" onsubmit="return memberCheck()">
-            <div class="row">
-                <div class="col-lg-8 col-md-6">
+            <div class="row" style="padding: 5%">
+                <div class="col-lg-12 col-md-6">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="checkout__input">
