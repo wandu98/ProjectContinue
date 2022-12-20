@@ -80,4 +80,28 @@ public class AdminDAO {
     public List<MemDTO> mem_year() {
         return sqlSession.selectList("admin.mem_year");
     }
+
+    public List<Integer> salesreportDay() {
+        return sqlSession.selectList("admin.budgetreportDay");
+    }
+
+    public List<Integer> salesreportYesterday() {
+        return sqlSession.selectList("admin.budgetreportYesterday");
+    }
+
+    public List<Integer> salesreportMonth() {
+        return sqlSession.selectList("admin.budgetreportMonth");
+    }
+
+    public List<Integer> salesreportLastMonth() {
+        return sqlSession.selectList("admin.budgetreportLastMonth");
+    }
+
+    public List<Integer> salesreportYear() {
+        return sqlSession.selectList("admin.budgetreportYear");
+    }
+
+    public List<Integer> salesreportLastYear() {
+        return sqlSession.selectList("admin.budgetreportLastYear");
+    }
 }

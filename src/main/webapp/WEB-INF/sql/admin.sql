@@ -62,3 +62,69 @@ order by mem_joindate desc;
 
 select *
 from tb_mem;
+
+
+select *
+from tb_order;
+
+-- 오늘 매출
+select ifnull(sum(total), 0) as sum
+from tb_order
+where date_format(od_date, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d');
+
+-- 어제 매출
+select ifnull(sum(total), 0) as sum
+from tb_order
+where date_format(od_date, '%Y-%m-%d') = date_format(subdate(now(), interval 1 day), '%Y-%m-%d');
+
+
+-- 타이틀별 판매액
+select tbc.gc, ifnull(sale, 0) as sales
+from (
+         select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+         from tb_order od join tb_detail dt
+                               on od.od_num = dt.od_num join tb_sales ts
+                                                             on dt.ss_num = ts.ss_num
+         where DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+         group by gc
+     ) tba right join (select *
+                       from (
+                                select 'mn' gc from dual union all
+                                select 'pt' gc from dual union all
+                                select 'dt' gc from dual union all
+                                select 'dl' gc from dual union all
+                                select 'ol' gc from dual union all
+                                select 'pn' gc from dual union all
+                                select 'fc' gc from dual union all
+                                select 'am' gc from dual union all
+                                select 'pc' gc from dual union all
+                                select 'jc' gc from dual union all
+                                select 'ac' gc from dual
+                            ) tbb
+) tbc on tba.gc = tbc.gc;
+
+
+-- 전일 타이틀별 판매액
+select tbc.gc, ifnull(sale, 0) as sales
+from (
+         select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+         from tb_order od join tb_detail dt
+                               on od.od_num = dt.od_num join tb_sales ts
+                                                             on dt.ss_num = ts.ss_num
+         where DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(subdate(now(), interval 1 day), '%Y-%m-%d')
+         group by gc
+     ) tba right join (select *
+                       from (
+                                select 'mn' gc from dual union all
+                                select 'pt' gc from dual union all
+                                select 'dt' gc from dual union all
+                                select 'dl' gc from dual union all
+                                select 'ol' gc from dual union all
+                                select 'pn' gc from dual union all
+                                select 'fc' gc from dual union all
+                                select 'am' gc from dual union all
+                                select 'pc' gc from dual union all
+                                select 'jc' gc from dual union all
+                                select 'ac' gc from dual
+                            ) tbb
+) tbc on tba.gc = tbc.gc;
