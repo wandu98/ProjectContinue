@@ -98,6 +98,7 @@
         </div>
         <c:if test="${requestScope.count>0}">
             <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
+            <c:set var="startPage" value="${requestScope.startPage}"></c:set>
             <c:set var="endPage" value="${requestScope.endPage}"></c:set>
             <div class="product__pagination" style="text-align: center">
                 <c:if test="${endPage>pageCount}">
@@ -108,7 +109,7 @@
                 </c:if>
                 <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
                     <c:choose>
-                        <c:when test="${pageNum==i}"><a>${i}</a></c:when>
+                        <c:when test="${pageNum==i}"><span style="font-weight: bold">${i}</span></c:when>
                         <c:when test="${pageNum!=i}"><a href="/mypage/review?pageNum=${i}">${i}</a></c:when>
                     </c:choose>
                 </c:forEach>

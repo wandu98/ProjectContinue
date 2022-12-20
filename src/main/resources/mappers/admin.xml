@@ -114,5 +114,161 @@
         where date_format(mem_joindate, '%Y') = date_format(now(), '%Y')
         order by mem_joindate desc
     </select>
+    
+    <select id="budgetreportDay" resultType="int">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="budgetreportYesterday" resultType="int">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where DATE_FORMAT(od_date, '%Y-%m-%d') = DATE_FORMAT(subdate(now(), interval 1 day), '%Y-%m-%d')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="budgetreportMonth" resultType="int">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(now(), '%Y-%m')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="budgetreportLastMonth" resultType="int">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where DATE_FORMAT(od_date, '%Y-%m') = DATE_FORMAT(subdate(now(), interval 1 month), '%Y-%m')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="budgetreportYear" resultType="int">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where DATE_FORMAT(od_date, '%Y') = DATE_FORMAT(now(), '%Y')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
+
+    <select id="budgetreportLastYear" resultType="int">
+        select ifnull(sale, 0) as sales
+        from (
+                 select substr(gm_code,1,2) as gc, dt_amount*ss_price as sale
+                 from tb_order od join tb_detail dt
+                                       on od.od_num = dt.od_num join tb_sales ts
+                                                                     on dt.ss_num = ts.ss_num
+                 where DATE_FORMAT(od_date, '%Y') = DATE_FORMAT(subdate(now(), interval 1 year), '%Y')
+                 group by gc
+             ) tba right join (select *
+                               from (
+                                        select 'mn' gc from dual union all
+                                        select 'pt' gc from dual union all
+                                        select 'dt' gc from dual union all
+                                        select 'dl' gc from dual union all
+                                        select 'ol' gc from dual union all
+                                        select 'pn' gc from dual union all
+                                        select 'fc' gc from dual union all
+                                        select 'am' gc from dual union all
+                                        select 'pc' gc from dual union all
+                                        select 'jc' gc from dual union all
+                                        select 'ac' gc from dual
+                                    ) tbb
+        ) tbc on tba.gc = tbc.gc
+    </select>
 
 </mapper>

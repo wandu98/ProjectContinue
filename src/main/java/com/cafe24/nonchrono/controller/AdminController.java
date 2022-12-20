@@ -24,7 +24,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
@@ -48,6 +50,9 @@ public class AdminController {
         mav.addObject("sales", adminDAO.sales_day());
         mav.addObject("revenue", adminDAO.revenue_day());
         mav.addObject("customer", adminDAO.customer_day());
+        mav.addObject("mem", adminDAO.mem_day());
+        mav.addObject("report", adminDAO.salesreportDay());
+        mav.addObject("report2", adminDAO.salesreportYesterday());
         mav.setViewName("/admin/admin_index");
         return mav;
     }
@@ -224,17 +229,17 @@ public class AdminController {
 
     @RequestMapping("/mem_day")
     @ResponseBody
-    public String seller_day() {
+    public String mem_day() {
         MemDTO memDTO = new MemDTO();
         List<MemDTO> list = adminDAO.mem_day();
         String result = "";
         for (int i=0; i< list.size(); i++) {
             result += "<tr>\n" +
                     "                                        <th scope=\"row\">"+list.get(i).getMem_id()+"</th>\n" +
+                    "                                        <td>"+list.get(i).getMem_name()+"</td>\n" +
                     "                                        <td>"+list.get(i).getMem_nick()+"</td>\n" +
-                    "                                        <td><a class=\"text-primary\">"+list.get(i).getMem_name()+"</a></td>\n" +
                     "                                        <td>"+list.get(i).getMem_phone()+"</td>\n" +
-                    "                                        <td><span class=\"badge bg-success\">"+list.get(i).getMem_joindate()+"</span></td>\n" +
+                    "                                        <td><span>"+list.get(i).getMem_joindate()+"</span></td>\n" +
                     "                                    </tr>";
         }
         return result;
@@ -242,17 +247,17 @@ public class AdminController {
 
     @RequestMapping("/mem_month")
     @ResponseBody
-    public String seller_month() {
+    public String mem_month() {
         MemDTO memDTO = new MemDTO();
         List<MemDTO> list = adminDAO.mem_month();
         String result = "";
         for (int i=0; i< list.size(); i++) {
             result += "<tr>\n" +
                     "                                        <th scope=\"row\">"+list.get(i).getMem_id()+"</th>\n" +
+                    "                                        <td>"+list.get(i).getMem_name()+"</td>\n" +
                     "                                        <td>"+list.get(i).getMem_nick()+"</td>\n" +
-                    "                                        <td><a class=\"text-primary\">"+list.get(i).getMem_name()+"</a></td>\n" +
                     "                                        <td>"+list.get(i).getMem_phone()+"</td>\n" +
-                    "                                        <td><span class=\"badge bg-success\">"+list.get(i).getMem_joindate()+"</span></td>\n" +
+                    "                                        <td><span>"+list.get(i).getMem_joindate()+"</span></td>\n" +
                     "                                    </tr>";
         }
         return result;
@@ -260,20 +265,53 @@ public class AdminController {
 
     @RequestMapping("/mem_year")
     @ResponseBody
-    public String seller_year() {
+    public String mem_year() {
         MemDTO memDTO = new MemDTO();
         List<MemDTO> list = adminDAO.mem_year();
         String result = "";
         for (int i=0; i< list.size(); i++) {
             result += "<tr>\n" +
                     "                                        <th scope=\"row\">"+list.get(i).getMem_id()+"</th>\n" +
+                    "                                        <td>"+list.get(i).getMem_name()+"</td>\n" +
                     "                                        <td>"+list.get(i).getMem_nick()+"</td>\n" +
-                    "                                        <td><a class=\"text-primary\">"+list.get(i).getMem_name()+"</a></td>\n" +
                     "                                        <td>"+list.get(i).getMem_phone()+"</td>\n" +
-                    "                                        <td><span class=\"badge bg-success\">"+list.get(i).getMem_joindate()+"</span></td>\n" +
+                    "                                        <td><span>"+list.get(i).getMem_joindate()+"</span></td>\n" +
                     "                                    </tr>";
         }
         return result;
+    }
+
+    @RequestMapping("/budgetreport_day")
+    @ResponseBody
+    public Map<String, Object> budgetreport_Today() {
+        List<Integer> list = adminDAO.salesreportDay();
+        List<Integer> list1 = adminDAO.salesreportYesterday();
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+        map.put("list1", list1);
+        return map;
+    }
+
+    @RequestMapping("/budgetreport_month")
+    @ResponseBody
+    public Map<String, Object> budgetreport_Month() {
+        List<Integer> list = adminDAO.salesreportMonth();
+        List<Integer> list1 = adminDAO.salesreportLastMonth();
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+        map.put("list1", list1);
+        return map;
+    }
+
+    @RequestMapping("/budgetreport_year")
+    @ResponseBody
+    public Map<String, Object> budgetreport_Year() {
+        List<Integer> list = adminDAO.salesreportYear();
+        List<Integer> list1 = adminDAO.salesreportLastYear();
+        Map<String, Object> map = new HashMap<>();
+        map.put("list", list);
+        map.put("list1", list1);
+        return map;
     }
 
 }

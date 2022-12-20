@@ -85,6 +85,35 @@
                 </div>
             </div>
         </div>
+        <div class="product__pagination" style="text-align: center">
+            <!-- 페이지 리스트 -->
+            <c:if test="${requestScope.count>0}">
+                <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
+                <c:set var="startPage" value="${requestScope.startPage}"></c:set>
+                <c:set var="endPage" value="${requestScope.endPage}"></c:set>
+
+                    <c:if test="${endPage>pageCount}">
+                        <c:set var="endPage" value="${pageCount+1}"></c:set>
+                    </c:if>
+
+                    <c:if test="${startPage>0}"> <!-- 첫번째 페이지 묶음이 아니라면 -->
+                        <a href="/mypage/wishlist?pageNum=${startPage}"><i class="fa fa-long-arrow-left"></i></a>
+                    </c:if>
+
+                    <!-- 페이지 표시 -->
+                    <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
+                        <c:choose>
+                            <c:when test="${pageNum==i}"><span style="font-weight: bold">${i}</span></c:when>
+                            <c:when test="${pageNum!=i}"><a href="/mypage/wishlist?pageNum=${i}">${i}</a></c:when>
+                        </c:choose>
+                    </c:forEach>
+
+                    <!-- 현재 페이지 묶음의 마지막 페이지보다 페이지가 더 존재하면 -->
+                    <c:if test="${endPage<=pageCount}">
+                        <a href="/mypage/wishlist?pageNum=${startPage+11}"><i class="fa fa-long-arrow-right"></i></a>
+                    </c:if>
+            </c:if>
+        </div>
     </div>
 </section>
 <!-- shoping Cart Section End -->
@@ -96,43 +125,7 @@
             <div class="col-lg-8 col-md-7">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="product__pagination blog__pagination wishlist__pagination">
-                            <!-- 페이지 리스트 -->
-                            <c:if test="${requestScope.count>0}">
-                                <!-- 전체 페이지 수 -->
-                                <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
 
-                                <!-- 현재 보고 있는 페이지의 페이지 묶음 시작 페이지 -->
-                                <c:set var="startPage" value="${requestScope.startPage}"></c:set>
-                                <!-- 현재 보고 있는 페이지의 페이지 묶음 마지막 페이지 -->
-                                <c:set var="endPage" value="${requestScope.endPage}"></c:set>
-
-                                <div class="content">
-                                    <!-- endPage조정 -->
-                                    <!-- 전체 페이지가 22라면 세번째 페이지 묶음은 21, 22만 나오면 됨. -->
-                                    <c:if test="${endPage>pageCount}">
-                                        <c:set var="endPage" value="${pageCount+1}"></c:set>
-                                    </c:if>
-
-                                    <c:if test="${startPage>0}"> <!-- 첫번째 페이지 묶음이 아니라면 -->
-                                        <a href="/mypage/wishlist?pageNum=${startPage}">[이전]</a>
-                                    </c:if>
-
-                                    <!-- 페이지 표시 -->
-                                    <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
-                                        <c:choose>
-                                            <c:when test="${pageNum==i}"><span style="font-weight: bold">${i}</span></c:when>
-                                            <c:when test="${pageNum!=i}"><a href="/mypage/wishlist?pageNum=${i}">[${i}]</a></c:when>
-                                        </c:choose>
-                                    </c:forEach>
-
-                                    <!-- 현재 페이지 묶음의 마지막 페이지보다 페이지가 더 존재하면 -->
-                                    <c:if test="${endPage<=pageCount}">
-                                        <a href="/mypage/wishlist?pageNum=${startPage+11}">[다음]</a>
-                                    </c:if>
-                                </div>
-                            </c:if>
-                        </div>
                     </div>
                 </div>
             </div>
