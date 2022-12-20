@@ -11,12 +11,29 @@
 <jsp:include page="../header.jsp"></jsp:include>
 
 
+<section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>쿠폰 및 적립금</h2>
+                    <div class="breadcrumb__option">
+                        <a href="/">Home</a>
+                        <span>My Page</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- 쿠폰 관리 Section Begin -->
 <section class="shoping-cart spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="shoping__cart__table">
+                <div class="shoping__cart__table checkout__form">
+                    <h4>쿠폰</h4>
                     <table>
                         <thead>
                         <tr>
@@ -30,13 +47,13 @@
                         <tbody>
                         <c:forEach var="row" items="${couponlist}" varStatus="vs">
                         <tr>
-                            <td>
+                            <td style="width: 8%">
                                 ${vs.index+1}
                             </td>
-                            <td class="shoping__cart__product">
+                            <td class="shoping__cart__product" style="width: 30%">
                                 <h5>${row.cp_name}</h5>
                             </td>
-                            <td colspan="2" class="shoping__cart__price" style="font-weight: 400">
+                            <td colspan="2" class="shoping__cart__price" style="font-weight: 400;">
                                 ${row.cp_speriod} ~ ${row.cp_eperiod}
                             </td>
                             <td class="shoping__cart__total" style="font-weight: 400">
@@ -50,23 +67,18 @@
             </div>
         </div>
 
-
-
-        <br><br><br><br><br><br><br>
-
-        <div class="blog__sidebar__item">
-            <h4>적립금</h4>
-        </div>
-
-        <%--    적립금    --%>
-        <div class="shoping__checkout">
-            <ul>
-                <li>누적 적립금 <span>${point.apoint}</span></li>
-                <li>가용 적립금 <span>${point.upoint}</span></li>
-            </ul>
-        </div>
-
-        <br><br><br>
+        <section class="shoping-cart spad">
+            <div class="checkout__form">
+                <h4>적립금</h4>
+            </div>
+            <%--    적립금    --%>
+            <div class="shoping__checkout" style="width: 70%; margin: auto">
+                <ul>
+                    <li>누적 적립금 <span>${point.apoint}</span></li>
+                    <li>가용 적립금 <span>${point.upoint}</span></li>
+                </ul>
+            </div>
+        </section>
 
         <section class="checkout spad">
             <div class="container">
@@ -110,7 +122,6 @@
             </div>
         </section>
     </div>
-
 </section>
 <!-- 쿠폰 관리 Section End -->
 

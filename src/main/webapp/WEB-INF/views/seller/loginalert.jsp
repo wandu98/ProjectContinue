@@ -19,7 +19,8 @@
 <script type="text/javascript">
     let message = "${msg}";
     alert(message);
-    location.href = "/seller/loginForm";
+    // location.href = "/seller/loginForm";
+    location.href = "/seller/reloginForm"
 </script>
 
 </body>

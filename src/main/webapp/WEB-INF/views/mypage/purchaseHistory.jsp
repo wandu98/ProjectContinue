@@ -10,8 +10,7 @@
 
 <jsp:include page="../header.jsp"></jsp:include>
 
-<!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="/images/002.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -19,14 +18,13 @@
                     <h2>구매 내역</h2>
                     <div class="breadcrumb__option">
                         <a href="/">Home</a>
-                        <span>구매 내역</span>
+                        <span>My Page</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Breadcrumb Section End -->
 
 <!-- shoping Cart Section Begin -->
 <section class="shoping-cart spad">

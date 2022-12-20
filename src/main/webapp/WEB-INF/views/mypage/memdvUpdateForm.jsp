@@ -9,11 +9,26 @@
 
 <jsp:include page="../header.jsp"></jsp:include>
 
+<section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>배송 주소록 수정</h2>
+                    <div class="breadcrumb__option">
+                        <a href="/">Home</a>
+                        <span>My Page</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">
-            <h4>배송지 등록</h4>
             <form action="/mypage/memdvForm/update">
                 <input type="hidden" id="mem_dvnum" name="mem_dvnum" value="${listDetail.mem_dvnum}">
                 <div class="row">
@@ -34,11 +49,15 @@
                         </div>
                         <div class="checkout__input">
                             <p>주소<span>*</span></p>
-                            <input type="text" id="mem_dvzip" name="mem_dvzip" placeholder="우편번호", value="${listDetail.mem_dvzip}" readonly>
-                            <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                            <input type="text" id="mem_dvadr1" name="mem_dvadr1" placeholder="도로명주소" value="${listDetail.mem_dvadr1}" readonly>
-                            <span id="guide" style="color:#999;display:none"></span>
-                            <input type="text" id="mem_dvadr2" name="mem_dvadr2" placeholder="상세주소" value="${listDetail.mem_dvadr2}" readonly>
+                            <div class="checkout__input" style="width: 60%">
+                                <input type="text" id="mem_dvzip" name="mem_dvzip" value="${listDetail.mem_dvzip}" style="width: 30%" readonly>
+                                <button class="site-btn" type="button" onclick="sample4_execDaumPostcode()" style="float: right">주소 찾기</button>
+                            </div>
+                            <div class="checkout__input" style="width: 60%">
+                                <input type="text" id="mem_dvadr1" name="mem_dvadr1" value="${listDetail.mem_dvadr1}" readonly>
+                                <span id="guide" style="color:#999;display:none"></span>
+                                <input type="text" id="mem_dvadr2" name="mem_dvadr2" value="${listDetail.mem_dvadr2}" readonly>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -52,9 +71,8 @@
                     <div class="col-lg-4 col-md-6">
                     </div>
                 </div>
-                <div class="checkout__order">
-                    <button type="submit" class="site-btn">수정</button>
-                </div>
+                <br>
+                <button type="submit" class="site-btn">수정</button>
             </form>
         </div>
     </div>

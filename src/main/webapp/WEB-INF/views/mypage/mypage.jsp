@@ -51,7 +51,7 @@
 <section class="checkout spad">
     <div class="container">
         <div class="checkout__form">
-            <h4>Profile</h4>
+            <h4>프로필</h4>
             <form action="#">
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
@@ -195,7 +195,7 @@
                                                                 ${row.gm_name}
                                                             </td>
                                                             <td class="shoping__cart__quantity people_cnt" onclick="recruitDetail(${row.rcrbrd_num})">
-                                                                <h5 style="font-weight: 700">${row.cnt}</h5>
+                                                                <h5 style="font-weight: 700">${rcrbrdlistCount[vs.index]}</h5>
                                                             </td>
                                                             <td class="shoping__cart__total">
                                                                 ${row.rcrbrd_edate}

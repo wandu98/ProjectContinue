@@ -76,3 +76,14 @@ begin
     end if;
 end; //
 delimiter ;
+
+
+select rcrbrd_num, rcrbrd_subject, rb.gm_code, rcrbrd_edate, gm_name
+from tb_rcrboard rb join tb_game ga
+on rb.gm_code = ga.gm_code
+where mem_id = 'fjhdmj555'
+order by rcrbrd_num;
+
+select count(*) as cnt
+from tb_recruitinfo
+where rcrbrd_num = 4;

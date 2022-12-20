@@ -148,12 +148,14 @@ public class RecruitDAO {
 
     public List<String> memNick(int rcrbrd_num) {
         int count = (int) sqlSession.selectOne("recruit.rcrbrdMax", rcrbrd_num);
+        System.out.println(count);
         List<String> list = new ArrayList<>();
         RecruitInfoDTO recruitInfoDTO = new RecruitInfoDTO();
         recruitInfoDTO.setRcrbrd_num(rcrbrd_num);
         for (int i = 1; i <= count; i++) {
             recruitInfoDTO.setRi_seat(i);
             String nick = sqlSession.selectOne("recruit.memNick", recruitInfoDTO);
+            System.out.println(nick);
             if (nick != null) {
                 //System.out.println(nick.trim());
                 list.add(nick);
@@ -220,6 +222,10 @@ public class RecruitDAO {
 
     public List<Map<String, ?>> rcrbrdlist(String mem_id) {
         return sqlSession.selectList("mypage.rcrbrdlist", mem_id);
+    }
+
+    public int rcrbrdlistCount(int rcrbrd_num) {
+        return sqlSession.selectOne("mypage.rcrbrdlistCount", rcrbrd_num);
     }
 
     public int attendCheck(int rcrbrd_num, String mem_id) {
