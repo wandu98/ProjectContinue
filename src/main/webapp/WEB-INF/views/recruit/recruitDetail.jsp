@@ -553,9 +553,26 @@
                 },
                 success: function (data) {
                     $('#rcr_status').attr('disabled', true).niceSelect('update');
-                    alert("모집이 완료되었습니다");
+
+                    $.ajax({
+                        url: "/recruit/bonus",
+                        type: "post",
+                        data: {
+                            "mem_id": '${detail.mem_id}'
+                        },
+                        success: function (data) {
+                            if (data == 1) {
+                                alert("모집 완료 보너스로 100 포인트가 지급되었습니다.");
+                            }
+                        },
+                        error: function (request, status, error) {
+                            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                        }
+                    })
                 }
             })
+
+
         }
     }
 

@@ -67,6 +67,7 @@ public class RecruitController {
             mav.addObject("game", gameList);
             mav.addObject("attendCount", attendMembers);
             mav.addObject("rcrKing", recruitDAO.rcrKing());
+            mav.addObject("searchRank", recruitDAO.searchRank());
             // System.out.println(recruitDAO.rcrKing());
             mav.setViewName("/recruit/recruit");
         } else {
@@ -85,13 +86,13 @@ public class RecruitController {
         if (order == null || order.equals("")) {
             order = order2;
         }
-        System.out.println("keyword : " + keyword);
+        // System.out.println("keyword : " + keyword);
         // System.out.println("order : " + order);
         if (keyword.equals("null") || keyword.equals("")) {
-            System.out.println("keyword null");
+            // System.out.println("keyword null");
             list = recruitDAO.listAjax(order);
         } else {
-            System.out.println("keyword not null");
+            // System.out.println("keyword not null");
             list = recruitDAO.listAjax2(order, keyword);
         }
         // System.out.println(list);
@@ -360,7 +361,17 @@ public class RecruitController {
 
     // 모집 정보 작성
     @RequestMapping("/insert")
-    public String recruitInsert(@ModelAttribute RecruitDTO recruitDTO, @ModelAttribute RoleDTO roleDTO, HttpServletRequest req) {
+    public String recruitInsert(@ModelAttribute RecruitDTO recruitDTO, @ModelAttribute RoleDTO roleDTO, @RequestParam int useMileage, HttpServletRequest req, HttpSession session) {
+
+        String mem_id = (String) session.getAttribute("mem_id");
+
+        int mileage = recruitDAO.mileageCheck(mem_id);
+        // 마일리지 사용
+        if (mileage >= useMileage) {
+            recruitDAO.useMileage(mem_id, useMileage);
+        } else {
+            return "redirect:/recruit/form";
+        }
 
         // 모집 내용 insert
         recruitDAO.insert(recruitDTO);
@@ -594,12 +605,20 @@ public class RecruitController {
             mav.addObject("game", gameList);
             mav.addObject("attendCount", attendMembers);
             mav.addObject("rcrKing", recruitDAO.rcrKing());
+            mav.addObject("searchRank", recruitDAO.searchRank());
             // System.out.println(recruitDAO.rcrKing());
             mav.setViewName("/recruit/recruit");
         } else {
             mav.setViewName("/mem/loginForm");
         }
         return mav;
+    }
+
+    // 모집 완료 후 보너스 100 포인트
+    @RequestMapping("/bonus")
+    @ResponseBody
+    public int bonus(String mem_id) {
+        return recruitDAO.useMileage(mem_id, -100);
     }
 
 

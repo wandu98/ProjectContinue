@@ -192,10 +192,13 @@ public class RecruitDAO {
         map.put("startCount", startCount);
         map.put("endCount", endCount);
         map.put("order", order);
-        if (keyword != null) {
+        if (keyword.equals("null")) {
+            return sqlSession.selectList("recruit.more", map);
+        } else {
             map.put("keyword", keyword);
+            return sqlSession.selectList("recruit.more2", map);
         }
-        return sqlSession.selectList("recruit.more", map);
+
     }
 
     public int delete(int rcrbrd_num) {
@@ -284,4 +287,20 @@ public class RecruitDAO {
         map.put("keyword", keyword);
         return sqlSession.selectList("recruit.listAjax2", map);
     }
+
+    public List<String> searchRank() {
+        return sqlSession.selectList("recruit.searchRank");
+    }
+
+    public int useMileage(String mem_id, int mileage) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("mem_id", mem_id);
+        map.put("mileage", mileage);
+        return sqlSession.update("recruit.useMileage", map);
+    }
+
+    public int mileageCheck(String mem_id) {
+        return sqlSession.selectOne("recruit.mileageCheck", mem_id);
+    }
+
 } // class end

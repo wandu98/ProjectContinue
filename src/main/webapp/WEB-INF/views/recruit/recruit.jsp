@@ -80,9 +80,12 @@
                         <h4>정렬</h4>
                         <ul>
                             <% String keyword3 = request.getParameter("gs_keyword");%>
-                            <li><a href='javascript:void(0)' onclick='listAgain("rcrbrd_num", "<%=keyword3%>")'>최신순</a></li>
-                            <li><a href='javascript:void(0)' onclick='listAgain("rcrbrd_views", "<%=keyword3%>")'>인기순</a></li>
-                            <li><a href='javascript:void(0)' onclick='listAgain("cnt", "<%=keyword3%>")'>참가인원 많은 순</a></li>
+                            <li><a href='javascript:void(0)' onclick='listAgain("rcrbrd_num", "<%=keyword3%>")'>최신순</a>
+                            </li>
+                            <li><a href='javascript:void(0)'
+                                   onclick='listAgain("rcrbrd_views", "<%=keyword3%>")'>인기순</a></li>
+                            <li><a href='javascript:void(0)' onclick='listAgain("cnt", "<%=keyword3%>")'>참가인원 많은 순</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="blog__sidebar__item">
@@ -101,14 +104,11 @@
                         </div>
                     </div>
                     <div class="blog__sidebar__item">
-                        <h4>최근 검색어</h4>
+                        <h4>인기 검색어</h4>
                         <div class="blog__sidebar__item__tags">
-                            <a href="#">포켓몬</a>
-                            <a href="#">스플래툰</a>
-                            <a href="#">1+1은귀요미</a>
-                            <a href="#">짱구</a>
-                            <a href="#">동물의숲</a>
-                            <a href="#">김tothe홍tothe승</a>
+                            <c:forEach var="sr" items="${searchRank}" varStatus="vs3">
+                                <a href="#">${sr}</a>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -153,7 +153,8 @@
                 <input type="hidden" id="more_order" name="more_order" value="rcrbrd_num">
                 <% String keyword2 = request.getParameter("gs_keyword");%>
                 <button type="button" id="more" class="btn btn-outline-danger"
-                        onclick="more($('#startCount').val(), $('#endCount').val(), $('#more_order').val(), '<%=keyword2%>')">더보기 (more)
+                        onclick="more($('#startCount').val(), $('#endCount').val(), $('#more_order').val(), '<%=keyword2%>')">
+                    더보기 (more)
                 </button>
             </div>
         </div>

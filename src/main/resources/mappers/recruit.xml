@@ -298,7 +298,28 @@
                  join tb_game as gm
                       on rb.gm_code = gm.gm_code
         WHERE rcrbrd_status = '진행중'
-          AND rcrbrd_edate >= now() AND gm.gm_name like concat('%', #{keyword}, '%')
+          AND rcrbrd_edate >= now()
+        ORDER BY ${order} DESC
+        Limit #{endCount} OFFSET #{startCount}
+    </select>
+
+    <!-- 키워드가 있을 경우 더보기 기능 -->
+    <select id="more2" parameterType="java.util.Map" resultType="com.cafe24.nonchrono.dto.MoreDTO">
+        select gm.gm_name,
+               rb.rcrbrd_num,
+               rb.rcrbrd_subject,
+               rb.rcrbrd_edate,
+               rb.gm_code,
+               rb.rcrbrd_max,
+               (SELECT count(mem_id)
+                FROM tb_recruitinfo
+                WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
+        from tb_rcrboard as rb
+                 join tb_game as gm
+                      on rb.gm_code = gm.gm_code
+        WHERE rcrbrd_status = '진행중'
+          AND rcrbrd_edate >= now()
+          AND gm.gm_name like concat('%', #{keyword}, '%')
         ORDER BY ${order} DESC
         Limit #{endCount} OFFSET #{startCount}
     </select>
@@ -372,11 +393,13 @@
           AND receive_id = #{receive_id}
     </select>
 
+    <!-- 좋아요 -->
     <insert id="heart" parameterType="com.cafe24.nonchrono.dto.RatingDTO">
         INSERT INTO tb_rating (rcrbrd_num, give_id, receive_id, rt_content, rt_goodbad)
         VALUES (#{rcrbrd_num}, #{give_id}, #{receive_id}, #{rt_content}, #{rt_goodbad})
     </insert>
 
+    <!-- 좋아요 취소 -->
     <delete id="heartDelete" parameterType="com.cafe24.nonchrono.dto.RatingDTO">
         DELETE
         FROM tb_rating
@@ -385,23 +408,27 @@
           AND receive_id = #{receive_id}
     </delete>
 
+    <!-- 댓글 작성 -->
     <insert id="comment" parameterType="com.cafe24.nonchrono.dto.CommentDTO">
         INSERT INTO tb_comment (rcrbrd_num, mem_id, com_content, com_date, com_grpno, com_indent, com_ansnum)
         VALUES (#{rcrbrd_num}, #{mem_id}, #{com_content}, now(), #{com_grpno}, #{com_indent}, #{com_ansnum})
     </insert>
 
+    <!-- 좋아요 누를시 good + 1 -->
     <update id="good" parameterType="String">
         UPDATE tb_mem
         SET good = good + 1
         WHERE mem_id = #{mem_id}
     </update>
 
+    <!-- 신고시 buyer_bad + 1 -->
     <update id="buyer_bad" parameterType="String">
         UPDATE tb_mem
         SET buyer_bad = buyer_bad + 1
         WHERE mem_id = #{mem_id}
     </update>
 
+    <!-- 키워드가 있을시 목록 출력 -->
     <select id="list2" parameterType="java.util.Map" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
         SELECT rcrbrd_num,
                mem_id,
@@ -419,14 +446,17 @@
                (SELECT count(mem_id)
                 FROM tb_recruitinfo
                 where rcrbrd_num = rb.rcrbrd_num) as cnt
-        FROM tb_rcrboard rb JOIN tb_game gm
-        ON rb.gm_code = gm.gm_code
+        FROM tb_rcrboard rb
+                 JOIN tb_game gm
+                      ON rb.gm_code = gm.gm_code
         WHERE rcrbrd_status = '진행중'
-          AND rcrbrd_edate >= now() AND gm.gm_name LIKE CONCAT('%', #{keyword}, '%')
+          AND rcrbrd_edate >= now()
+          AND gm.gm_name LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY ${order} DESC
         Limit 9
     </select>
 
+    <!-- 키워드가 있을시 정렬하여 목록 보기 -->
     <select id="listAjax2" resultType="com.cafe24.nonchrono.dto.MoreDTO">
         SELECT gm.gm_name,
                rb.rcrbrd_num,
@@ -441,14 +471,40 @@
                  join tb_game gm
                       ON rb.gm_code = gm.gm_code
         WHERE rcrbrd_status = '진행중'
-          AND rcrbrd_edate >= now() AND gm.gm_name LIKE CONCAT('%', #{keyword}, '%')
+          AND rcrbrd_edate >= now()
+          AND gm.gm_name LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY ${order} DESC
         Limit 9
     </select>
 
+    <!-- 검색시 검색 테이블에 기록 -->
     <insert id="searchInsert" parameterType="String">
         INSERT INTO tb_search (sc_word, sc_date, sc_where)
         VALUES (#{keyword}, now(), '모집')
     </insert>
+
+    <!-- 검색어 랭킹 -->
+    <select id="searchRank" resultType="String">
+        SELECT sc_word
+        FROM tb_search
+        WHERE sc_where = '모집'
+        GROUP BY sc_word
+        ORDER BY count(sc_word) DESC
+        LIMIT 5
+    </select>
+
+    <!-- 등록시 마일리지 소모 -->
+    <update id="useMileage" parameterType="java.util.Map">
+        UPDATE tb_mem
+        SET upoint = upoint - #{mileage}
+        WHERE mem_id = #{mem_id}
+    </update>
+
+    <!-- 가용 마일리지 검색 -->
+    <select id="mileageCheck" parameterType="String" resultType="int">
+        SELECT upoint
+        FROM tb_mem
+        WHERE mem_id = #{mem_id}
+    </select>
 
 </mapper>
