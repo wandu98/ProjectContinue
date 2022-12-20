@@ -263,7 +263,7 @@
                     </a>
                 </li>
                 <li>
-                    <a onclick="location.href='/crawling'">
+                    <a onclick="gameCrawling()">
                         <i class="bi bi-circle"></i><span>품목 자동 등록</span>
                     </a>
                 </li>
@@ -280,3 +280,30 @@
 
 
 </aside><!-- End Sidebar-->
+
+<script>
+    function gameCrawling() {
+        let num = prompt('게임 자동 등록', '게임 시작 번호를 입력해주세요');
+        let start = 1;
+        if (isNaN(num.trim()) == false && num.trim() != null && num.trim() != "") {
+            start = parseInt(num.trim());
+        } else {
+            alert('숫자를 입력해주세요');
+            return;
+        }
+
+        $.ajax({
+            url: "/crawling",
+            type: "POST",
+            data: {
+                "start" : start
+            },
+            success: function (data) {
+                alert("게임 자동 등록에 성공했습니다!");
+            }
+            ,error : function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
+</script>
