@@ -350,7 +350,7 @@
 
         $.ajax({
             type: "post",
-            url: "/sales/",
+            url: "/sales",
             data: {
                 "order": order
             },

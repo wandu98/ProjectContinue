@@ -51,6 +51,12 @@ public class SalesController {
         int numPerPage = 6; //한 페이지당 레코드 갯수
         int pagePerBlock = 12; //페이지 리스트
 
+        if (order == null || order.equals("null") || order.equals("")) {
+            String order2 = "ss_num";
+            order = order2;
+            System.out.println("order : "+order);
+        }
+
         //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
         //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
         String pageNum = req.getParameter("pageNum");
@@ -86,6 +92,7 @@ public class SalesController {
         int endPage = startPage + pagePerBlock + 1; //0+10+1 = 11
         pagingDTO.setStartRow(startRow);
         pagingDTO.setEndRow(endRow);
+        pagingDTO.setOrder(order);
 
         List list = null;
         if (totalRowCount > 0) {
@@ -443,9 +450,9 @@ public class SalesController {
         if (order == null || order.equals("null") || order.equals("")) {
             String order2 = "ss_num";
             order = order2;
-            pagingDTO.setOrder(order);
-           //System.out.println(order);
+           System.out.println("order : "+order);
         }
+
             int totalRowCount = salesDAO.totalRowCount(); //총 글갯수  6 |  52개
             //System.out.println(totalRowCount);
             //페이징
@@ -467,8 +474,6 @@ public class SalesController {
             //1~5 = (0*5+1)~(1*5), 6~10 = (1*5+1)~(2*5), 11~15 = (2*5+1)~(3*5) 와 같은 규칙이 있음.
             int startRow = (currentPage - 1) * numPerPage + 1; //1  | 1
             int endRow = currentPage * numPerPage; //5
-            pagingDTO.setStartRow(startRow);
-            pagingDTO.setEndRow(endRow);
 
             //페이지 수
             //행을 페이지마다 5개씩 보여주므로 전체 행을 5로 나눔
@@ -488,13 +493,14 @@ public class SalesController {
             pagingDTO.setStartRow(startRow);
             pagingDTO.setEndRow(endRow);
             pagingDTO.setOrder(order);
-            //System.out.println(pagingDTO);
-            //System.out.println(pagingDTO);
+            System.out.println("pagingDTO : " + pagingDTO);
             List list = null;
             if (totalRowCount > 0) {
                 list = salesDAO.list3(pagingDTO); // 1, 5
+                System.out.println("list : " + list);
             } else {
                 list = Collections.EMPTY_LIST;
+                System.out.println("list2 : " + list);
             }//if end
 
         return list;
