@@ -15,7 +15,7 @@
 	<name>continue</name>
 	<description>continue</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>1.8.0</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -129,7 +129,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>3.0.0</version>
 				<configuration>
 					<excludes>
 						<exclude>

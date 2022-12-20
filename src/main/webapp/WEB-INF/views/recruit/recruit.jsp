@@ -128,7 +128,7 @@
                                     <div class="blog__item__text">
                                         <ul>
                                             <li><i class="fa fa-calendar-o"></i> ${row.rcrbrd_edate}</li>
-                                            <li><i class="fa fa-comment-o"></i> 댓글 수</li>
+                                            <br><li><i class="fa fa-comment-o"></i> ${row.com_count}</li>
                                         </ul>
                                         <h5>${row.rcrbrd_subject}</h5>
                                         <p>${game[vs.index]}</p>
@@ -200,7 +200,7 @@
                     message += "<div class='blog__item__text'>";
                     message += "<ul>";
                     message += "<li><i class='fa fa-calendar-o'></i> " + value.rcrbrd_edate + "</li>";
-                    message += "<li><i class='fa fa-comment-o'></i> 댓글 수</li>";
+                    message += "<br><li><i class='fa fa-comment-o'></i> " + value.com_count + "</li>";
                     message += "</ul>";
                     message += "<h5>" + value.rcrbrd_subject + "</h5>";
                     message += "<p>" + value.gm_name + "</p>";
@@ -320,7 +320,7 @@
                     message += "<div class='blog__item__text'>";
                     message += "<ul>";
                     message += "<li><i class='fa fa-calendar-o'></i> " + value.rcrbrd_edate + "</li>";
-                    message += "<li><i class='fa fa-comment-o'></i> 댓글 수</li>";
+                    message += "<br><li><i class='fa fa-comment-o'></i> " + value.com_count + "</li>";
                     message += "</ul>";
                     message += "<h5>" + value.rcrbrd_subject + "</h5>";
                     message += "<p>" + value.gm_name + "</p>";

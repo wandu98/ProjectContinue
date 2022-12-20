@@ -16,5 +16,6 @@ public class MoreDTO {
     private String gm_name;
     private int count;
     private int rcrbrd_max;
+    private int com_count;
 
 }

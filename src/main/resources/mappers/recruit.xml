@@ -17,9 +17,10 @@
                rcrbrd_status,
                rcrbrd_adr,
                rcrbrd_max,
+               (SELECT count(*) FROM tb_comment where rcrbrd_num = rb.rcrbrd_num) as com_count,
                (SELECT count(mem_id)
                 FROM tb_recruitinfo
-                where rcrbrd_num = rb.rcrbrd_num) as cnt
+                where rcrbrd_num = rb.rcrbrd_num)                                 as cnt
         FROM tb_rcrboard rb
         WHERE rcrbrd_status = '진행중'
           AND rcrbrd_edate >= now()
@@ -34,9 +35,10 @@
                rb.rcrbrd_edate,
                rb.gm_code,
                rb.rcrbrd_max,
+               (SELECT count(*) FROM tb_comment where rcrbrd_num = rb.rcrbrd_num) as com_count,
                (SELECT count(mem_id)
                 FROM tb_recruitinfo
-                WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
+                WHERE rcrbrd_num = rb.rcrbrd_num)                                 as cnt
         FROM tb_rcrboard rb
                  join tb_game gm
                       ON rb.gm_code = gm.gm_code
@@ -291,9 +293,10 @@
                rb.rcrbrd_edate,
                rb.gm_code,
                rb.rcrbrd_max,
+               (SELECT count(*) FROM tb_comment where rcrbrd_num = rb.rcrbrd_num) as com_count,
                (SELECT count(mem_id)
                 FROM tb_recruitinfo
-                WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
+                WHERE rcrbrd_num = rb.rcrbrd_num)                                 as cnt
         from tb_rcrboard as rb
                  join tb_game as gm
                       on rb.gm_code = gm.gm_code
@@ -311,9 +314,10 @@
                rb.rcrbrd_edate,
                rb.gm_code,
                rb.rcrbrd_max,
+               (SELECT count(*) FROM tb_comment where rcrbrd_num = rb.rcrbrd_num) as com_count,
                (SELECT count(mem_id)
                 FROM tb_recruitinfo
-                WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
+                WHERE rcrbrd_num = rb.rcrbrd_num)                                 as cnt
         from tb_rcrboard as rb
                  join tb_game as gm
                       on rb.gm_code = gm.gm_code
@@ -443,9 +447,10 @@
                rcrbrd_status,
                rcrbrd_adr,
                rcrbrd_max,
+               (SELECT count(*) FROM tb_comment where rcrbrd_num = rb.rcrbrd_num) as com_count,
                (SELECT count(mem_id)
                 FROM tb_recruitinfo
-                where rcrbrd_num = rb.rcrbrd_num) as cnt
+                where rcrbrd_num = rb.rcrbrd_num)                                 as cnt
         FROM tb_rcrboard rb
                  JOIN tb_game gm
                       ON rb.gm_code = gm.gm_code
@@ -464,9 +469,10 @@
                rb.rcrbrd_edate,
                rb.gm_code,
                rb.rcrbrd_max,
+               (SELECT count(*) FROM tb_comment where rcrbrd_num = rb.rcrbrd_num) as com_count,
                (SELECT count(mem_id)
                 FROM tb_recruitinfo
-                WHERE rcrbrd_num = rb.rcrbrd_num) as cnt
+                WHERE rcrbrd_num = rb.rcrbrd_num)                                 as cnt
         FROM tb_rcrboard rb
                  join tb_game gm
                       ON rb.gm_code = gm.gm_code
@@ -506,5 +512,35 @@
         FROM tb_mem
         WHERE mem_id = #{mem_id}
     </select>
+
+    <!-- 댓글 목록 검색 -->
+    <select id="commentList" parameterType="int" resultType="java.util.Map">
+        SELECT mm.mem_pic,
+               mm.mem_nick,
+               com_num,
+               rcrbrd_num,
+               ct.mem_id,
+               com_content,
+               date_format(com_date, '%Y-%m-%d %H:%i:%s') as comdate,
+               com_grpno,
+               com_indent,
+               com_ansnum
+        FROM tb_comment ct
+                 JOIN tb_mem mm
+                      ON ct.mem_id = mm.mem_id
+        WHERE rcrbrd_num = #{rcrbrd_num}
+    </select>
+
+    <delete id="commentDelete" parameterType="int">
+        DELETE
+        FROM tb_comment
+        WHERE com_num = #{com_num}
+    </delete>
+
+    <update id="commentUpdate" parameterType="com.cafe24.nonchrono.dto.CommentDTO">
+        UPDATE tb_comment
+        SET com_content = #{com_content}
+        WHERE com_num = #{com_num}
+    </update>
 
 </mapper>
