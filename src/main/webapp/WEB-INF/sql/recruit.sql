@@ -384,3 +384,6 @@ WHERE sc_where = '모집'
 GROUP BY sc_word
 ORDER BY count(sc_word) DESC
 LIMIT 5;
+
+SELECT rcrbrd_num
+FROM tb_rcrboard;

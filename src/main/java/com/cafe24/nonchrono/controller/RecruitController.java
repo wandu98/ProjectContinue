@@ -345,6 +345,7 @@ public class RecruitController {
             mav.addObject("memPic", recruitDAO.memPic(rcrbrd_num)); // 자리당 프로필 사진 조회 // 아직 참가 안 한 자리는 ''로 표현
             mav.addObject("memSeat", recruitDAO.memSeat(rcrbrd_num)); // 자리당 좌석 번호 조회 // 아직 참가 안 한 자리는 ''로 표현
             mav.addObject("memTemp", memDAO.temp(recruitDAO.memDetail(rcrbrd_num).getMem_id())); // 모집장의 온도 가져오기
+            mav.addObject("commentList", recruitDAO.commentList(rcrbrd_num)); // 댓글 목록 불러오기
         /*
         List<RoleSeatDTO> rname = recruitDAO.roleName(rcrbrd_num);
 
@@ -572,6 +573,13 @@ public class RecruitController {
         return cnt;
     }
 
+    @RequestMapping("/commentList")
+    @ResponseBody
+    public List<Map<String, Object>> commentList(int rcrbrd_num) {
+        List<Map<String, Object>> list = recruitDAO.commentList(rcrbrd_num);
+        return list;
+    }
+
     @RequestMapping("/searchWord")
     public ModelAndView searchWord(HttpSession session, String order, @RequestParam String gs_keyword) {
         RecruitDTO dto = new RecruitDTO();
@@ -621,6 +629,20 @@ public class RecruitController {
         return recruitDAO.useMileage(mem_id, -100);
     }
 
+    @RequestMapping("/commentDelete/{com_num}")
+    @ResponseBody
+    public int commentDelete(@PathVariable int com_num) throws Exception {
+        return recruitDAO.commentDelete(com_num);
+    }
+
+    @RequestMapping("/commentUpdate")
+    @ResponseBody
+    public int commentUpdate(@RequestParam String com_content,@RequestParam int com_num) throws Exception {
+        CommentDTO commentDTO = new CommentDTO();
+        commentDTO.setCom_content(com_content);
+        commentDTO.setCom_num(com_num);
+         return recruitDAO.commentUpdate(commentDTO);
+    }
 
     // 삭제 후 이메일 발송
 

@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../header.jsp" %>
 
+<script src="/js/jquery.nicescroll.min.js"></script>
+
 <style>
 
     .portfolio-item {
@@ -137,7 +139,7 @@
         border: none;
     }
 
-    #declare_content {
+    .whiteLabel {
         width: 100%;
         height: 150px;
         font-size: 13px;
@@ -223,8 +225,11 @@
                         <p>${memDetail.mem_nick} &nbsp;|&nbsp; ${memDetail.mem_grade}</p>
                         <p>
                         <div class="progress" style="width: 50%; height:30px">
-                            <div class="progress-bar" style="width:${memTemp}%;height:30px; background-color: red">${memTemp}&deg;C</div>
-                        </div></p>
+                            <div class="progress-bar" style="width:${memTemp}%;height:30px; background-color: red">
+                                ${memTemp}&deg;C
+                            </div>
+                        </div>
+                        </p>
                     </div>
                     <div class="col-lg-1"></div>
                 </div>
@@ -349,9 +354,30 @@
                     <br><br><br>
                     <hr>
                 </form>
-                <hr>
-                <div id="commentList">
-
+                <div>
+                    <div class="row" id="commentList">
+                        <c:forEach var="list" items="${commentList}" varStatus="vs5">
+                            <div class="col-lg-8" style="padding-left: 5%; padding-top: 2%">
+                                <div class="header">
+                                    <img src="/images/profile/${list.mem_id}/${list.mem_pic}"
+                                         style="max-height: 20px; max-width: 20px">&nbsp;&nbsp;${list.mem_nick}&nbsp;&nbsp;
+                                    <span>${list.comdate}</span>
+                                    <c:if test="${list.mem_id == sessionScope.mem_id}">
+                                    <span style="float: right; cursor: pointer"
+                                          onclick="commentDelete(${list.com_num})">삭제</span>
+                                    <span style="float: right; padding-right: 1%; cursor: pointer"
+                                          onclick="commentUpdate(${list.com_num}, $('#comment${list.com_num}').text().trim())">수정</span>
+                                    </c:if>
+                                </div>
+                                <div class="card-body comment_content" id="content${list.com_num}">
+                                    <div class="whiteLabel"
+                                         style="background-color: #f7f7e3; max-height: 80px; font-size: 13px"
+                                         id="comment${list.com_num}">${list.com_content}
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>
@@ -373,7 +399,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <textarea id="declare_content"></textarea>
+                    <textarea id="declare_content" class="whiteLabel"></textarea>
                 </div>
 
                 <!-- Modal footer -->
@@ -669,33 +695,76 @@
             data: {
                 "rcrbrd_num": ${detail.rcrbrd_num}
             },
-            success: function (data) {
+            success: function (result) {
                 let str = "";
-                for (let i = 0; i < data.length; i++) {
-                    str += "<div class='comment'>";
-                    str += "<div class='comment-header'>";
-                    str += "<div class='comment-header-left'>";
-                    str += "<img src='/images/profile/" + data[i].mem_id + "' alt=''>";
-                    str += "<div class='comment-header-left-info'>";
-                    str += "<span class='comment-header-left-info-nickname'>" + 닉네임 + "</span>";
-                    str += "<span class='comment-header-left-info-date'>" + data[i].com_date + "</span>";
+                $.each(result, function (index, value) {
+                    str += "<div class='col-lg-8' style='padding-left: 5%; padding-top: 2%'>";
+                    str += "<div class='header'>";
+                    str += "<img src='/images/profile/" + value.mem_id + "/" + value.mem_pic + "' style='max-height: 20px; max-width: 20px'>&nbsp;&nbsp;" + value.mem_nick + "&nbsp;&nbsp;";
+                    str += "<span>" + value.comdate + "</span>";
+                    if (value.mem_id == '${mem_id}') {
+                        str += "<span style='float: right; cursor: pointer' onclick='commentDelete(" + value.com_num + ")'>삭제</span>";
+                        str += "<span style='float: right; padding-right: 1%; cursor: pointer' onclick='commentUpdate(" + value.com_num + ",\"" + value.com_content + "\")'>수정</span>";
+                    }
+                    str += "</div>";
+                    str += "<div class='card-body comment_content' id='content" + value.com_num + "'>";
+                    str += "<div class='whiteLabel' style='background-color: #f7f7e3; max-height: 80px; font-size: 13px'  id='comment" + value.com_num + "'>" + value.com_content + "</div>";
                     str += "</div>";
                     str += "</div>";
-                    str += "<div class='comment-header-right'>";
-                    str += "<button class='comment-header-right-btn' onclick='commentDelete(" + data[i].com_num + ")'>삭제</button>";
-                    str += "</div>";
-                    str += "</div>";
-                    str += "<div class='comment-content'>";
-                    str += "<span>" + data[i].com_content + "</span>";
-                    str += "</div>";
-                    str += "</div>";
-                }
+                });
                 $('#commentList').html(str);
+                $('#com_content').text();
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
             }
         })
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        $('.comment_content').niceScroll();
+    });
+
+    function commentDelete(com_num) {
+        $.ajax({
+            url: '/recruit/commentDelete/' + com_num,
+            type: 'post',
+            success: function (result) {
+                if (result == 1) {
+                    commentList(); // 댓글 삭제 후 목록 출력
+                }
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
+    }
+
+    function commentUpdate(com_num, com_content) {
+        let str = "";
+        str = "<textarea class='whiteLabel' style='width: 100%' id='comUpdate" + com_num + "'>" + com_content + "</textarea>";
+        str += "<div style='text-align: right' id='comButton" + com_num + "'><button type='button' class='btn btn-warning' onclick='commentUpdateProc(" + com_num + ")' style='margin-top: 2%'>수정 확인</button><div>";
+        $('#content' + com_num + '').html(str);
+    }
+
+    function commentUpdateProc(com_num) {
+        $.ajax({
+            url: '/recruit/commentUpdate',
+            type: 'post',
+            data: {
+                'com_content': $('#comUpdate'+com_num).val(),
+                'com_num': com_num
+            },
+            success: function (result) {
+                if (result == 1) {
+                    commentList();
+                }
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+
     }
 
 </script>
