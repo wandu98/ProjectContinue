@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class SalesDAO {
@@ -88,7 +90,11 @@ public class SalesDAO {
 
     //상품메인 페이징
     public List<SalesDTO> list3(PagingDTO pagingDTO) {
-        return sqlSession.selectList("sales.list3", pagingDTO);
+        Map<String, Object> map = new HashMap<>();
+        map.put("startRow", pagingDTO.getStartRow());
+        map.put("endRow", pagingDTO.getEndRow());
+        map.put("order", pagingDTO.getOrder());
+        return sqlSession.selectList("sales.list3", map);
 
     }
 

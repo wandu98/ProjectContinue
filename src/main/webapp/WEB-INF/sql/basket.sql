@@ -37,3 +37,22 @@ VALUES ((select receiptNo
                             (select od_num as cnt from tb_order order by cnt desc limit 1) as rowCount
                      from dual) d) c),
         now(), 'koochunwoo', 1, 'A0000', 0, 0, 149000);
+
+
+select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, r
+from (
+         select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, @rno := @rno + 1 as r
+         from (
+                  select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category
+                  from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
+              ) AA, (select @rno := 0) BB     order by ss_price DESC
+     ) CC
+where r >=1  and r <= 6;
+
+select *
+from (
+         select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category
+         from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
+     ) AA
+order by ss_price DESC
+limit 6 offset 1;
