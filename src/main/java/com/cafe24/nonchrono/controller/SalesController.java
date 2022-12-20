@@ -40,9 +40,10 @@ public class SalesController {
 
     //상품 메인
     @RequestMapping("/sales")
-    public ModelAndView list(HttpServletRequest req, PagingDTO pagingDTO) {
+    public ModelAndView list(HttpServletRequest req, PagingDTO pagingDTO, String order) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("sales/sales");
+
 
         int totalRowCount = salesDAO.totalRowCount(); //총 글갯수  6 |  52개
         //System.out.println(totalRowCount);
@@ -101,7 +102,8 @@ public class SalesController {
         mav.addObject("list", salesDAO.list());
         mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
         mav.addObject("sold_out", salesDAO.sold_out());
-        mav.addObject("top_price_list", salesDAO.top_price_list());
+        mav.addObject("last_search", salesDAO.last_seach());
+        mav.addObject("top_keyword", salesDAO.top_keyword());
         return mav;
     } // sales() end
 
@@ -122,14 +124,18 @@ public class SalesController {
     }// detail() end
 
     @RequestMapping("/search")
-    public ModelAndView search(HttpServletRequest request, PagingDTO pagingDTO, SalesDTO salesDTO) {
+    public ModelAndView search(HttpServletRequest request, PagingDTO pagingDTO, SalesDTO salesDTO, SearchDTO searchDTO) {
         ModelAndView mav = new ModelAndView();
         String ctg = request.getParameter("ctg");
         String keyword = request.getParameter("keyword");
+        String where = request.getParameter("sc_where");
 //        System.out.println(ctg);
 //        System.out.println(keyword);
         salesDTO.setGm_code(ctg);
         salesDTO.setSs_name(keyword);
+        searchDTO.setSc_word(keyword);
+        searchDTO.setSc_where(where);
+        salesDAO.search(searchDTO);
         pagingDTO.setGm_code(ctg);
         pagingDTO.setSs_name(keyword);
 
@@ -312,10 +318,9 @@ public class SalesController {
 
         // 쿠폰명 변수화
         String cp_name = orderDTO.getCp_code();
-        
+
         // 사용한 마일리지 변수화
         int umileage = orderDTO.getUmileage();
-
 
 
         // 주문서 추가
@@ -402,13 +407,13 @@ public class SalesController {
             }
         }
         int mem_dvnum = orderDTO.getMem_dvnum();
-        return "redirect:/sales/salesorder/" + od_num + "&"+ mem_dvnum;
+        return "redirect:/sales/salesorder/" + od_num + "&" + mem_dvnum;
     }
 
     //주문서 상세
     @RequestMapping("/salesorder/{od_num}&{mem_dvnum}")
     public ModelAndView salesorder(@PathVariable String od_num, @PathVariable int mem_dvnum, HttpSession session) {
-        ModelAndView mav =new ModelAndView();
+        ModelAndView mav = new ModelAndView();
         String mem_id = session.getAttribute("mem_id").toString();
         if (mem_id != null && !mem_id.equals("guest")) {
             mav.addObject("orderlist", salesDAO.orderlist(od_num));
@@ -429,13 +434,71 @@ public class SalesController {
     }
 
 
-    /*@RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
-    public List<SalesDTO> top_price_list() {
-
-    }*/
+    public List<SalesDTO> top_price_list(PagingDTO pagingDTO, HttpServletRequest req, @RequestParam String order) {
 
 
+        System.out.println(order);
+        if (order == null || order.equals("null") || order.equals("")) {
+            String order2 = "ss_num";
+            order = order2;
+            pagingDTO.setOrder(order);
+           //System.out.println(order);
+        }
+            int totalRowCount = salesDAO.totalRowCount(); //총 글갯수  6 |  52개
+            //System.out.println(totalRowCount);
+            //페이징
+            int numPerPage = 6; //한 페이지당 레코드 갯수
+            int pagePerBlock = 12; //페이지 리스트
 
+            //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
+            //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
+            String pageNum = req.getParameter("pageNum");
+            if (pageNum == null) {
+                pageNum = "1";
+            }//if end
+
+            //현재 보고 있는 페이지
+            int currentPage = Integer.parseInt(pageNum); //1  | 1
+
+            //한페이지에 보여지는 행 갯수는 5
+            //따라서 1페이지 : rnum 1~5, 2페이지 : 6~10, 3페이지 : 11~15
+            //1~5 = (0*5+1)~(1*5), 6~10 = (1*5+1)~(2*5), 11~15 = (2*5+1)~(3*5) 와 같은 규칙이 있음.
+            int startRow = (currentPage - 1) * numPerPage + 1; //1  | 1
+            int endRow = currentPage * numPerPage; //5
+            pagingDTO.setStartRow(startRow);
+            pagingDTO.setEndRow(endRow);
+
+            //페이지 수
+            //행을 페이지마다 5개씩 보여주므로 전체 행을 5로 나눔
+            double totcnt = (double) totalRowCount / numPerPage; // 6/5 ->1.2 | 52/5 = 10.4
+            //나누어 떨어지지 않으면 한페이지를 더 늘려야 모든 행이 나오므로 totcnt를 올림
+            //전체 페이지 수
+            int totalPage = (int) Math.ceil(totcnt); //2 | 11
+
+
+            double d_page = (double) currentPage / pagePerBlock; // 1/10 -> 0.1
+            //페이지 묶음 번호
+            int Pages = (int) Math.ceil(d_page) - 1; //0  1~10페이지 : 0, 11~20 : 1
+            //페이지 묶음의 시작 페이지 번호
+            int startPage = Pages * pagePerBlock; //0*10 -> 0
+            //페이지 묶음의 마지막 페이지 번호
+            int endPage = startPage + pagePerBlock + 1; //0+10+1 = 11
+            pagingDTO.setStartRow(startRow);
+            pagingDTO.setEndRow(endRow);
+            pagingDTO.setOrder(order);
+            //System.out.println(pagingDTO);
+            //System.out.println(pagingDTO);
+            List list = null;
+            if (totalRowCount > 0) {
+                list = salesDAO.list3(pagingDTO); // 1, 5
+            } else {
+                list = Collections.EMPTY_LIST;
+            }//if end
+
+        return list;
+
+    }
 
 }//class end

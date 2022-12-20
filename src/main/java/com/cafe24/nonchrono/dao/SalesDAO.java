@@ -89,6 +89,7 @@ public class SalesDAO {
     //상품메인 페이징
     public List<SalesDTO> list3(PagingDTO pagingDTO) {
         return sqlSession.selectList("sales.list3", pagingDTO);
+
     }
 
 //    public List<SalesDTO> searchAll(String keyword) {
@@ -174,5 +175,12 @@ public class SalesDAO {
     public List<SalesDTO> sold_out() {return sqlSession.selectList("sales.sold_out");
     } // sold_out() end
 
-    public List<SalesDTO> top_price_list() {return sqlSession.selectList("sales.top_price_list");}
+    public List<SalesDTO> top_price_list(PagingDTO pagingDTO) {return sqlSession.selectList("sales.top_price_list", pagingDTO);}
+
+    public int search(SearchDTO searchDTO) {return sqlSession.insert("sales.search", searchDTO);}
+
+    public List<SearchDTO> last_seach() {return sqlSession.selectList("sales.last_search");}
+
+    public List<SearchDTO> top_keyword() {return sqlSession.selectList("sales.top_keyword");}
+
 }//class end
