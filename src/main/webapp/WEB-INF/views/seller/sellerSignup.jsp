@@ -67,9 +67,11 @@
                             <div class="col-12">
                                 <p>주소<span>*</span></p>
                                 <input type="text" name="sl_zip" class="form-control" id="sl_zip"
-                                       style="margin-left: auto; width: 50%" readonly>
-                                <button type="button" onclick="DaumPostcode()" class="btn btn-danger">우편번호</button>
+                                       readonly>
+                            </div>
+                            <div>
                                 <div class="invalid-feedback">우편번호 입력 필수 입니다.</div>
+                                <button type="button" onclick="DaumPostcode()" class="btn btn-danger">우편번호</button>
                             </div>
 
                             <div id="wrap"
@@ -81,7 +83,7 @@
                             </div>
 
                             <div class="col-12" id="sl_adr">
-                                <input type="text" id="sl_adr1" name="sl_adr1" readonly>
+                                <input type="text" id="sl_adr1" class="form-control" name="sl_adr1" readonly>
                             </div>
 
                             <div class="col-12">
@@ -139,7 +141,7 @@
                                 <button class="btn btn-primary w-100" type="submit">회원가입 완료</button>
                             </div>
                             <div class="col-12">
-                                <p class="small mb-0">Already have an account? <a href="loginForm.jsp">Log
+                                <p class="small mb-0">이미 가입된 회원 입니까? <a href="mem/loginForm">Log
                                     in</a></p>
                             </div>
                         </form>
@@ -179,7 +181,7 @@
         }//if end
     }//checkIDsel() end
 
-    function sendsel() {
+    /*function sendsel() {
         let checkIDsel = $.cookie("checkIDsel");
         if (checkIDsel == "PASS") {
             return true;
@@ -187,7 +189,7 @@
             alert("아이디 중복확인 해주세요");
             $("#sl_id").focus;
         }//if end
-    }//sendsel() end
+    }//sendsel() end*/
 
     <!-- ----- DAUM 우편번호 API 시작 ----- -->
     // 우편번호 찾기 화면을 넣을 element
@@ -321,6 +323,7 @@
 
         return true;//서버로 전송
     }
+
 
 
 </script>

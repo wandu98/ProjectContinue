@@ -35,7 +35,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">제목</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="nt_title" name="nt_title" required="">
+                                    <input type="text" class="form-control" id="nt_title" name="nt_title" required>
                                 </div>
                             </div>
 
