@@ -191,12 +191,12 @@
                         </c:if>
                     </div>
                     <div class="col-lg-1"></div>
-                    <div class="col-lg-4 detail_profile">
+                    <div class="col-lg-4 detail_profile" style="text-align: center">
                         <c:choose>
                             <c:when test="${memDetail.mem_pic != 'ProfilePicture.png'}">
                                 <img alt="" id="profile0" src="/images/profile/${memDetail.mem_id}/${memDetail.mem_pic}"
                                      class="img-thumbnail img-fluid"
-                                     style="height: 100%; overflow: hidden; text-align: center"/>
+                                     style="height: 100%; overflow: hidden"/>
                             </c:when>
                             <c:otherwise>
                                 <img alt="" id="profile0" src="/images/profile/ProfilePicture.png"
@@ -260,13 +260,13 @@
                         <div class="product__item">
                             <c:choose>
                             <c:when test="${memPic[vs.index-1] != '' and memPic[vs.index-1] != 'ProfilePicture.png' and memSeat[vs.index-1] != ''}">
-                            <div id="profile${vs.count}" class="product__item__pic set-bg"
-                                 data-setbg="/images/profile/${memSeat[vs.index-1]}/${memPic[vs.index-1]}"
-                                 style="height: 100%; overflow: hidden; text-align: center">
+                            <div id="profile${vs.count}" class="product__item__pic set-bg" style="text-align: center;">
+                                <img src="/images/profile/${memSeat[vs.index-1]}/${memPic[vs.index-1]}"
+                                     style="height: 100%; overflow: hidden;">
                                 </c:when>
                                 <c:otherwise>
                                 <div id="profile${vs.count}" class="product__item__pic set-bg"
-                                     data-setbg="/images/profile/ProfilePicture.png">
+                                     data-setbg="/images/profile/ProfilePicture.png" style="text-align: center">
                                     </c:otherwise>
                                     </c:choose>
                                     <input type="hidden" id="recruitseat${vs.count}" name="recruitseat${vs.count}"
