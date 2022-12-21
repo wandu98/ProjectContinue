@@ -3,18 +3,25 @@
 
 <mapper namespace="notice">
     <insert id="ntinsert" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
-        INSERT INTO tb_nt(nt_title, nt_cmt, nt_views)
-        VALUES (#{nt_title}, #{nt_cmt}, #{nt_views})
+        INSERT INTO tb_nt(rownum, nt_title, nt_cmt, nt_views)
+        VALUES (#{rownum}, #{nt_title}, #{nt_cmt}, #{nt_views})
     </insert>
 
     <select id="noticelist" resultType="com.cafe24.nonchrono.dto.NoticeDTO">
-        select nt_num, nt_title, nt_cmt, nt_regdate, nt_views
-        from tb_nt
-        ORDER BY nt_num DESC
+        select @ROWNUM := @ROWNUM + 1 AS ROWNUM
+             , rownum
+             , nt_num
+             , nt_title
+             , nt_cmt
+             , nt_regdate
+             , nt_views
+        FROM tb_nt
+        WHERE (SELECT @ROWNUM := 0) = 0
+        order by rownum DESC
     </select>
 
-    <select id="ntdetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.NoticeDTO" >
-        select nt_num, nt_title, nt_cmt, nt_regdate, nt_views
+    <select id="ntdetail" parameterType="int" resultType="com.cafe24.nonchrono.dto.NoticeDTO">
+        select rownum, nt_num, nt_title, nt_cmt, nt_regdate, nt_views
         from tb_nt
         where nt_num = #{nt_num}
     </select>
@@ -24,18 +31,31 @@
         SET nt_views = nt_views + 1
         WHERE nt_num = #{nt_num}
     </select>
-    
+
     <!--게시물 삭제-->
     <delete id="ntDelete" parameterType="int">
-        DELETE FROM tb_nt
+        DELETE
+        FROM tb_nt
         WHERE nt_num = #{nt_num}
     </delete>
 
     <!--게시물 수정-->
     <update id="Update" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
         UPDATE tb_nt
-        SET nt_title = #{nt_title}, nt_cmt = #{nt_cmt}
+        SET nt_title = #{nt_title},
+            nt_cmt   = #{nt_cmt}
         WHERE nt_num = #{nt_num}
     </update>
+
+    <!--<select id="rownum" parameterType="com.cafe24.nonchrono.dto.NoticeDTO">
+        select @ROWNUM := @ROWNUM + 1 AS ROWNUM
+             , nt_num
+             , nt_title
+             , nt_cmt
+             , nt_regdate
+             , nt_views
+        FROM tb_nt
+        WHERE (SELECT @ROWNUM := 0) = 0;
+    </select>-->
 
 </mapper>

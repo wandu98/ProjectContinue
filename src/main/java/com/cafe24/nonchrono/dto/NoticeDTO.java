@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class NoticeDTO {
+    private int rownum;
     private int nt_num; //공지사항일련번호
     private String nt_title; //제목
     private String nt_cmt; //내용
