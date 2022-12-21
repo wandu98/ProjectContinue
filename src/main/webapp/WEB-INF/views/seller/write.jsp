@@ -171,12 +171,74 @@
                                 </div>
                             </div>
 
+
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">배송정책</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="dv_num" id="dv_num" placeholder="판매자 아이디의 배송정책 리스트 보여주기" required>
+                                    <input type="text" class="form-control" id="dv_num" name="dv_num"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#ExtralargeModal" readonly placeholder="Click...">
+
+                                    <%-- 모달창 --%>
+                                    <div class="modal fade" id="ExtralargeModal" tabindex="-1">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+
+                                                <%-- 모달창 헤더 --%>
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">배송정책</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+
+                                                <%--모달창 본문--%>
+                                                <div class="card">
+                                                    <div class="card-body" style="box-sizing: initial">
+                                                        <h5 class="card-title">배송정책을 선택해주세요</h5>
+                                                    </div>
+                                                    <div class="modal-body" id="gs_main2">
+                                                        <table class="table" id="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th scope="col">NO.</th>
+                                                                <th scope="col">택배사</th>
+                                                                <th scope="col">배송방법</th>
+                                                                <th scope="col">기본배송비용</th>
+                                                                <th scope="col">반품비용</th>
+                                                                <th scope="col">교환비용</th>
+                                                                <th scope="col">섬/도서산간지역</th>
+                                                                <th scope="col">출고지역</th>
+                                                                <th scope="col">반품지역</th>
+
+                                                            </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                            <c:forEach var="row" items="${dv_list}">
+                                                                <tr onclick="panelClick2()">
+                                                                        <td>${row.dv_num}</td>
+                                                                        <td>${row.dv_courier}</td>
+                                                                        <td>${row.dv_how}</td>
+                                                                        <td>${row.dv_fee}</td>
+                                                                        <td>${row.dv_rffee}</td>
+                                                                        <td>${row.dv_exfee}</td>
+                                                                        <td>${row.dv_extrafee}</td>
+                                                                        <td>${row.dv_adr1}</td>
+                                                                        <td>${row.dv_exadr1}</td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                            </tbody>
+                                                        </table>
+                                                        <div id="panel2" style="display: none"></div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">대표 이미지</label>
                                 <div class="col-lg-3">
@@ -222,6 +284,13 @@
             $("#gs_keyword").val("");
             // 모달창 보이기
             $("#gs_modal").modal({backdrop: 'static', keyboard: false});
+        });
+    });
+
+    /* 클릭하면 모달창 보이기 */
+    $(document).ready(function () {
+        $("#ExtralargeModal").click(function () {
+
         });
     });
 
@@ -284,6 +353,16 @@
 
     }
 
+
+    // 모달창에서 타이틀 제목이 선택되면 본문과 요약 창에도 반영
+    function panelClick2() {
+        // 타겟의 내부 텍스트 추출
+        let title = event.target.innerText;
+
+        $("#dv_num").val(title);
+        $("#scrollingModal").modal("hide");
+
+    }
 
     // 가격 숫자와 콤마(,) 이외의 문자는 입력할 수 없는 기능
     /*$(document).on("keyup", "input:text[numberOnlyMinComma]", function () {
@@ -351,8 +430,6 @@
     });
 
 </script>
-
-
 
 
 <%@ include file="sellerfooter.jsp" %>

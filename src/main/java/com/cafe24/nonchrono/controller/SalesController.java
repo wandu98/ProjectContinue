@@ -443,12 +443,12 @@ public class SalesController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
-    public List<SalesDTO> top_price_list(PagingDTO pagingDTO, HttpServletRequest req, @RequestParam String order) {
+    public List<SalesDTO> ajax_list(PagingDTO pagingDTO, HttpServletRequest req, @RequestParam String order) {
 
 
         System.out.println(order);
+        String order2 = "ss_num";
         if (order == null || order.equals("null") || order.equals("")) {
-            String order2 = "ss_num";
             order = order2;
            System.out.println("order : "+order);
         }
@@ -493,14 +493,16 @@ public class SalesController {
             pagingDTO.setStartRow(startRow);
             pagingDTO.setEndRow(endRow);
             pagingDTO.setOrder(order);
+            System.out.println(startRow);
+            System.out.println(endRow);
             System.out.println("pagingDTO : " + pagingDTO);
             List list = null;
             if (totalRowCount > 0) {
                 list = salesDAO.list3(pagingDTO); // 1, 5
-                System.out.println("list : " + list);
+
             } else {
                 list = Collections.EMPTY_LIST;
-                System.out.println("list2 : " + list);
+
             }//if end
 
         return list;

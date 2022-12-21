@@ -154,8 +154,8 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort" id="sort">
-                                    <span><a href='javascript:void(0)' onclick='listAgain("ss_num")'>최신순</a>
-                                    <a href='javascript:void(0)'  onclick='listAgain("ss_price")'>높은가격</a></span>
+                                    <span><a href='javascript:void(0)' onclick='listAgain("ss_num", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>최신순</a>
+                                    <a href='javascript:void(0)'  onclick='listAgain("ss_price", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>높은가격</a></span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -207,12 +207,10 @@
                     <c:if test="${requestScope.count>0}">
                         <!-- 전체 페이지 수 -->
                         <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
-
                         <!-- 현재 보고 있는 페이지의 페이지 묶음 시작 페이지 -->
                         <c:set var="startPage" value="${requestScope.startPage}"></c:set>
                         <!-- 현재 보고 있는 페이지의 페이지 묶음 마지막 페이지 -->
                         <c:set var="endPage" value="${requestScope.endPage}"></c:set>
-
                             <!-- endPage조정 -->
                             <!-- 전체 페이지가 22라면 세번째 페이지 묶음은 21, 22만 나오면 됨. -->
                             <c:if test="${endPage>pageCount}">
@@ -220,7 +218,7 @@
                             </c:if>
 
                             <c:if test="${startPage>0}"> <!-- 첫번째 페이지 묶음이 아니라면 -->
-                                <a href="/sales/sales?pageNum=${startPage}"><i class="fa fa-long-arrow-left"></a>
+                                <a href="/sales/sales?pageNum=${startPage}"><i class="fa fa-long-arrow-left"></i></a>
                             </c:if>
 
                             <!-- 페이지 표시 -->
@@ -233,7 +231,7 @@
 
                             <!-- 현재 페이지 묶음의 마지막 페이지보다 페이지가 더 존재하면 -->
                             <c:if test="${endPage<=pageCount}">
-                                <a href="/sales/sales?pageNum=${startPage+11}"><i class="fa fa-long-arrow-right"></a>
+                                <a href="/sales/sales?pageNum=${startPage+11}"><i class="fa fa-long-arrow-right"></i></a>
                             </c:if>
                     </c:if>
                 </div>
@@ -346,18 +344,29 @@
     }
 
 
-    function listAgain(order) {
+    function listAgain(order, pageCount, startPage, endPage, count, pageNum) {
 
         $.ajax({
             type: "post",
             url: "/sales",
             data: {
-                "order": order
+                "order": order,
+                "pageCount" : pageCount,
+                "startpage" : startPage,
+                "endPage"   : endPage,
+                "count"     : count,
+                "pageNum"   : pageNum
             },
             success: function (result) {
-                //alert(result
-                alert(order);
+                //alert(result)
+                // alert(order);
+                // alert(pageCount);
+                // alert(startPage);
+                // alert(endPage);
+                // alert(count);
+                //alert(pageNum);
                 let message = "";
+
 
                 $.each(result, function (index, value) {
                     // alert(index);
@@ -392,10 +401,31 @@
                     message += "</div>";
 
                     if ((index % 3) == 0) {
-                        message += "<br>"
+                    message += "<br>"
                     }
                 });
 
+                    message += "<div class='product__pagination blog__pagination' style='text-align: center'>"
+                    if(count>0) {
+                        if (endPage > pageCount) {
+                            endPage = pageCount + 1
+                        }
+                        if (startPage > 0) {
+                            message += "<a href='/sales/sales?pageNum=" + startPage + "'><i class='fa fa-long-arrow-left'></i></a>"
+                        }
+                        for (let j = startPage; j <= endPage; j++) {
+                            if (pageNum == j) {
+                                message += "<a style='font-weight: bold; background: #e03e2d; color: white'>" + j + "</a>"
+                            } else if (pageNum != j) {
+                                message += "<a href='/sales/sales?pageNum=" + j + "'>" + j + "</a>"
+                            }
+                        }
+
+
+                        if (endPage <= pageCount) {
+                            message += "<a href='/sales/sales?pageNum=" + startPage + 11 + "'><i class='fa fa-long-arrow-right'></i></a>"
+                        }
+                    }
                 $('#board').html(message);
 
 
