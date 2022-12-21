@@ -375,7 +375,7 @@ public class RecruitController {
         }
 
         // 모집 내용 insert
-        recruitDAO.insert(recruitDTO);
+        recruitDAO.insert(recruitDTO, Integer.parseInt(req.getParameter("hiddenCount")));
         // 위에서 insert한 게시글 번호 가져오기
         int num = recruitDAO.numSearch();
 
@@ -388,7 +388,7 @@ public class RecruitController {
             recruitDAO.roleInsert(roleDTO);
         }
 
-        return "redirect:/recruit";
+        return "redirect:/recruit/detail/" + num;
     } // recruitWrite() end
 
     // 모집 좌석 예약
@@ -642,6 +642,12 @@ public class RecruitController {
         commentDTO.setCom_content(com_content);
         commentDTO.setCom_num(com_num);
          return recruitDAO.commentUpdate(commentDTO);
+    }
+
+    @RequestMapping("/open/{rcrbrd_num}")
+    public String open(@PathVariable int rcrbrd_num) throws Exception {
+        int cnt = recruitDAO.open(rcrbrd_num);
+        return "redirect:/recruit";
     }
 
     // 삭제 후 이메일 발송

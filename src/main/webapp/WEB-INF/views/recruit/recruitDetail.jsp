@@ -238,9 +238,19 @@
                     <form style="text-align: right; padding-right: 7%" method="post">
                         <input type="hidden" id="rcrbrd_num" name="rcrbrd_num" value="${detail.rcrbrd_num}">
                             <%--<button type="submit" class="btn btn-outline-warning" onclick="updateConfirm(this.form)">글 수정</button>--%>
+                        <c:if test="${roleList.size() != 0}">
+                            <button type="button" class="btn btn-outline-info"
+                                    onclick="location.href='/recruit/open/' + ${detail.rcrbrd_num}">글 공개
+                            </button>
+                        </c:if>
                         <button type="button" class="btn btn-outline-danger" onclick="deleteConfirm(this.form)">글 삭제
                         </button>
                     </form>
+                    <div style="text-align: right; padding-right: 7%; font-weight: bold">
+                        <br>
+                        <span>역할을 추가하셨다면 역할 선택 완료 후 공개 버튼을 눌러주세요<br></span>
+                        <span style="font-weight: lighter">(비공개 상태의 모집글은 마이페이지에서 확인이 가능합니다)</span>
+                    </div>
                 </c:if>
                 <br>
                 <hr>
@@ -318,7 +328,7 @@
                                             </select>
                                             <button type="button" id="roleBtn${vs.count}"
                                                     onclick="roleConfirm(${fn:length(roleList)}, $(this).attr('id'))"
-                                                    class="btn btn-warning">확정
+                                                    class="btn btn-warning" style="float: left; margin-left: 2px">확정
                                             </button>
                                         </c:when>
                                     </c:choose>

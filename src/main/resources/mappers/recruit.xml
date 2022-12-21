@@ -144,7 +144,7 @@
         INSERT INTO tb_rcrboard (mem_id, rcrbrd_subject, rcrbrd_content, rcrbrd_pw, rcrbrd_views, rcrbrd_date,
                                  rcrbrd_edate, rcrbrd_ip, gm_code, rcrbrd_status, rcrbrd_adr, rcrbrd_max)
         VALUES (#{mem_id}, #{rcrbrd_subject}, #{rcrbrd_content}, #{rcrbrd_pw}, #{rcrbrd_views}, now(), #{rcrbrd_edate},
-                #{rcrbrd_ip}, #{gm_code}, '진행중', #{rcrbrd_adr}, #{rcrbrd_max})
+                #{rcrbrd_ip}, #{gm_code}, #{rcrbrd_status}, #{rcrbrd_adr}, #{rcrbrd_max})
     </insert>
 
     <!-- 모집 상세에서 참가 신청 -->
@@ -541,6 +541,12 @@
         UPDATE tb_comment
         SET com_content = #{com_content}
         WHERE com_num = #{com_num}
+    </update>
+
+    <update id="open" parameterType="int">
+        UPDATE tb_rcrboard
+        SET rcrbrd_status = '진행중'
+        WHERE rcrbrd_num = #{rcrbrd_num}
     </update>
 
 </mapper>
