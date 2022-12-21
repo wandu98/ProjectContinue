@@ -485,7 +485,8 @@ To change this template use File | Settings | File Templates.
         });
         //전체 체크박스 선택중 체크박스 하나를 풀었을때 "전체" 체크해제
         $(".form-check-input").click(function () {
-            if ($("input[name='check']:checked").length == 5) {
+            let num = $("input:checkbox[name=check]").length;
+            if ($("input[name='check']:checked").length == num) {
                 $("#checkAll").prop("checked", true);
             } else {
                 $("#checkAll").prop("checked", false);

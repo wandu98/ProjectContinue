@@ -243,6 +243,7 @@ public class SalesController {
         mav.addObject("dv_mem_info", salesDAO.dv_mem_info(mem_id));
         mav.addObject("dvmem_info", salesDAO.dvmem_info(mem_id));
         mav.addObject("couponList", couponlistDAO.list(mem_id));
+        mav.addObject("basket_cnt",basketDAO.count(mem_id));
         mav.addObject("mileage", salesDAO.mileage(mem_id));
         mav.setViewName("sales/checkout");
         return mav;
