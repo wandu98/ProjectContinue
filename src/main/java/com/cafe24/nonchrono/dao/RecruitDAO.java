@@ -62,7 +62,12 @@ public class RecruitDAO {
         return sqlSession.selectOne("recruit.nickname", mem_id);
     } // nickname() end
 
-    public int insert(RecruitDTO recruitDTO) {
+    public int insert(RecruitDTO recruitDTO, int hiddenCount) {
+        if (hiddenCount != 0) {
+            recruitDTO.setRcrbrd_status("대기");
+        } else {
+            recruitDTO.setRcrbrd_status("진행중");
+        }
         return sqlSession.insert("recruit.insert", recruitDTO);
     } // insert() end
 
@@ -148,14 +153,14 @@ public class RecruitDAO {
 
     public List<String> memNick(int rcrbrd_num) {
         int count = (int) sqlSession.selectOne("recruit.rcrbrdMax", rcrbrd_num);
-        System.out.println(count);
+        // System.out.println(count);
         List<String> list = new ArrayList<>();
         RecruitInfoDTO recruitInfoDTO = new RecruitInfoDTO();
         recruitInfoDTO.setRcrbrd_num(rcrbrd_num);
         for (int i = 1; i <= count; i++) {
             recruitInfoDTO.setRi_seat(i);
             String nick = sqlSession.selectOne("recruit.memNick", recruitInfoDTO);
-            System.out.println(nick);
+            // System.out.println(nick);
             if (nick != null) {
                 //System.out.println(nick.trim());
                 list.add(nick);
@@ -319,5 +324,9 @@ public class RecruitDAO {
 
     public int commentUpdate(CommentDTO commentDTO) {
         return sqlSession.update("recruit.commentUpdate", commentDTO);
+    }
+
+    public int open(int rcrbrd_num) {
+        return sqlSession.update("recruit.open", rcrbrd_num);
     }
 } // class end

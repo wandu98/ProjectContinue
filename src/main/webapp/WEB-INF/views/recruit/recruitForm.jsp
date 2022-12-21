@@ -406,9 +406,11 @@
 
         for (let i = 1; i <= parseInt($('#hiddenCount').val()); i++) {
             for (let j = 1; j <= i; j++) {
-                if ($('#rl_role'+i).val().trim() == $('#rl_role'+j).val().trim()) {
-                    alert("동일한 역할은 추가할 수 없습니다");
-                    return false;
+                if (i != j) {
+                    if ($('#rl_role'+i).val().trim() == $('#rl_role'+j).val().trim()) {
+                        alert("동일한 역할은 추가할 수 없습니다");
+                        return false;
+                    }
                 }
             }
         }
