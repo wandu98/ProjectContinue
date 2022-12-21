@@ -390,7 +390,6 @@
                                 </form>
                                 <c:forEach var="row" items="${reviewDetail}">
                                     ${row.mem_nick} | ${row.rv_date} |
-
                                     <c:set var="star" value="${row.rv_star}"/>
 
                                     <c:choose>
@@ -647,8 +646,8 @@
             let tot2 = (parseInt(count) *${detail.ss_price});
 
             if (count < ${detail.ss_stock}) {
-                $('input[name=inputCount]').attr('value', count + '개')
-                $('input[name=inputValue]').attr('value', tot2 + '원')
+                $('input[name=inputCount]').attr('value', count)
+                $('input[name=inputValue]').attr('value', tot2)
 
             } else {
                 alert("재고가 부족합니다")
@@ -659,7 +658,7 @@
 
 
     // Get the modal
-    var modal = document.getElementById("myModal");
+    var modal = document.getElementById("myModal2");
 
     function cartModal(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
