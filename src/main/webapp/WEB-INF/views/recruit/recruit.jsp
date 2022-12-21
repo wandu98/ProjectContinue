@@ -163,9 +163,33 @@
 <!-- Blog Section End -->
 
 <script>
+
+    const gameName = [];
+    const gameCode = [];
+
     document.addEventListener("DOMContentLoaded", () => {
         $('#panel').niceScroll();
     });
+
+    $(document).ready(function() {
+
+        $.ajax({
+            url: "/recruit/gameList",
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+
+                $.each(data, function (index, value) {
+                    gameName.push(value.gm_name);
+                    gameCode.push(value.gm_code);
+                });
+            },
+            error: function (request, status, error) {
+                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+
+    })
 
     // 더보기 기능
     function more(startCount, endCount, order, keyword) {
@@ -356,16 +380,18 @@
         } // if end
 
         // 모달창의 검색창에 검색어 추출
-        let params = $("#gs_keyword").serialize();
+        let params = $("#gs_keyword").val();
 
         // ajax로 searchProc 실행
-        $.post("/recruit/searchProc", params, responseProc);
+        // $.post("/recruit/searchProc", params, responseProc);
+
+        responseProc(params);
     }); // keyup() end
 
     function responseProc(data) {
         // alert(data)
 
-        if (data.length > 0) {
+        /*if (data.length > 0) {
             let result = data.split("^^^"); // | 기호를 기준으로 문자열 분리
             // alert(result[0]); // 검색 결과 수
             // alert(result[1]); // 검색 결과 내용
@@ -393,8 +419,27 @@
 
         } else {
             $("#panel").hide();
-        } // if end
+        } // if end*/
 
+        if (data.length > 0) {
+            let str = "";
+            $.each(gameName, function (index, key) {
+
+                if (key.indexOf(data) != -1) {
+                    str += "<div style='margin: 2%'>"
+                    str += "<hr>";
+                    str += "<img src='/images/thumb/" + gameCode[index] + "/thumb.jpg' style='width: 10%'>&nbsp;"
+                    str += "<span id='title_key' style='cursor: pointer' onclick='panelClick(\"" + gameCode[index] + "\")'>" + key + "</span>";
+                    str += "<hr>";
+                    str += "</div>";
+                }
+            });
+
+            $("#panel").html(str);
+            $("#panel").show();
+        } else {
+            $("#panel").hide();
+        }
 
     } // responseProc() end
 

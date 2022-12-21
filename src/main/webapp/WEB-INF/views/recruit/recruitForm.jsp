@@ -270,19 +270,23 @@
             $("#panel").hide();
         } // if end*/
 
-        let str = "";
-        $.each(gameName, function (index, key) {
+        if (data.length > 0) {
+            let str = "";
+            $.each(gameName, function (index, key) {
 
-            if (key.indexOf(data) != -1) {
-                str += "<hr>";
-                str += "<img src='/images/thumb/" + gameCode[index] + "/thumb.jpg' style='width: 10%'>&nbsp;"
-                str += "<span id='title_key' style='cursor: pointer' onclick='panelClick(\"" + gameCode[index] + "\")'>" + key + "</span>";
-                str += "<hr>";
-            }
-        });
+                if (key.indexOf(data) != -1) {
+                    str += "<hr>";
+                    str += "<img src='/images/thumb/" + gameCode[index] + "/thumb.jpg' style='width: 10%'>&nbsp;"
+                    str += "<span id='title_key' style='cursor: pointer' onclick='panelClick(\"" + gameCode[index] + "\")'>" + key + "</span>";
+                    str += "<hr>";
+                }
+            });
 
-        $("#panel").html(str);
-        $("#panel").show();
+            $("#panel").html(str);
+            $("#panel").show();
+        } else {
+            $("#panel").hide();
+        }
 
     } // responseProc() end
 
