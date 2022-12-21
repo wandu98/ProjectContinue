@@ -136,13 +136,16 @@ public class SalesController {
         String ctg = request.getParameter("ctg");
         String keyword = request.getParameter("keyword");
         String where = request.getParameter("sc_where");
+        String pageNum = request.getParameter("pageNum");
 //        System.out.println(ctg);
 //        System.out.println(keyword);
         salesDTO.setGm_code(ctg);
         salesDTO.setSs_name(keyword);
         searchDTO.setSc_word(keyword);
         searchDTO.setSc_where(where);
-        salesDAO.search(searchDTO);
+        if (pageNum==null) {
+            salesDAO.search(searchDTO);
+        }
         pagingDTO.setGm_code(ctg);
         pagingDTO.setSs_name(keyword);
 
@@ -161,7 +164,7 @@ public class SalesController {
 
         //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
         //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
-        String pageNum = request.getParameter("pageNum");
+
         if (pageNum == null) {
             pageNum = "1";
         }//if end
@@ -195,8 +198,8 @@ public class SalesController {
         pagingDTO.setStartRow(startRow);
         pagingDTO.setEndRow(endRow);
 //        System.out.println(pagingDTO);
-        System.out.println(totalRowCount);
-        System.out.println(ctg);
+//        System.out.println(totalRowCount);
+//        System.out.println(ctg);
         List list = null;
         if (totalRowCount > 0) {
             if (ctg.equals("ALL")) {

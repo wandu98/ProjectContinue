@@ -10,6 +10,8 @@ public class DeliveryDAO {
     @Autowired
     SqlSession sqlSession;
 
+    public DeliveryDAO() {};
+
     public void delete(int dv_num) {
         sqlSession.delete("delivery.delete", dv_num);
     }

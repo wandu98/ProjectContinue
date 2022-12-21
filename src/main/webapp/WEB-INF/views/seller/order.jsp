@@ -32,7 +32,7 @@
                         <h5 class="card-title">주문조회</h5>
 
                         <!-- General Form Elements -->
-                        <form id="form1" name="form1" method="post" action="/seller/search">
+                        <form id="form1" name="form1" method="post" action="/seller/orderSearch">
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">진행상태</label>
                                 <div class="col-sm-10">
@@ -81,7 +81,7 @@
                                 </div>
 
                                 <div class="col-sm-10" style="width: 10%">
-                                    <button class="btn btn-outline-info">검색</button>
+                                    <button type="button" class="btn btn-outline-info" onclick="search()">검색</button>
                                 </div>
                             </div>
 
@@ -109,40 +109,46 @@
                                 </tbody>
                             </table>
                             <!-- End Active Table -->
+
+
+
+                            <c:if test="${requestScope.count>0}">
+                                <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
+                                <c:set var="endPage" value="${requestScope.endPage}"></c:set>
+                                <nav class="pagination justify-content-center">
+                                    <input type="hidden" id="pageNum1" value="${pageNum}">
+                                    <c:if test="${endPage>pageCount}">
+                                        <c:set var="endPage" value="${pageCount+1}"></c:set>
+                                    </c:if>
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                        <c:if test="${startPage>0}">
+                                            <a class="page-link" href="/seller/order?pageNum=${startPage}}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </c:if>
+                                        </li>
+                                        <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
+                                            <c:choose>
+                                                <c:when test="${pageNum==i}"><li class="page-item"><a class="page-link">${i}</a></li></c:when>
+                                                <c:when test="${pageNum!=i}"><li class="page-item"><a class="page-link" href="/seller/order?pageNum=${i}">${i}<input type="hidden" id="pageNum" name="pageNum" value="${i}"></a></li></c:when>
+<%--                                                <c:when test="${pageNum!=i}"><li class="page-item"><a class="page-link" onclick="next()">${i}<input type="hidden" id="pageNum" name="pageNum" value="${i}"></a></li></c:when>--%>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <c:if test="${endpage<=pageCount}">
+                                        <li class="page-item">
+                                            <a class="page-link" onclick="nextPage(${startPage+11})" href="/seller/order?pageNum=${startPage+11}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+<%--                                            </a>--%>
+<%--                                            <a class="page-link" href="/seller/order?pageNum=${startPage+11}" aria-label="Next">--%>
+<%--                                                <span aria-hidden="true">&raquo;</span>--%>
+<%--                                            </a>--%>
+                                        </li>
+                                        </c:if>
+                                    </ul>
+                                </nav>
+                            </c:if>
                         </form><!-- End General Form Elements -->
-
-
-                        <c:if test="${requestScope.count>0}">
-                            <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
-                            <c:set var="endPage" value="${requestScope.endPage}"></c:set>
-                            <nav class="pagination justify-content-center">
-                                <c:if test="${endPage>pageCount}">
-                                    <c:set var="endPage" value="${pageCount+1}"></c:set>
-                                </c:if>
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                    <c:if test="${startPage>0}">
-                                        <a class="page-link" href="/seller/order?pageNum=${startPage}}" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </c:if>
-                                    </li>
-                                    <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
-                                        <c:choose>
-                                            <c:when test="${pageNum==i}"><li class="page-item"><a class="page-link">${i}</a></li></c:when>
-                                            <c:when test="${pageNum!=i}"><li class="page-item"><a class="page-link" href="/seller/order?pageNum=${i}">${i}</a></li></c:when>
-                                        </c:choose>
-                                    </c:forEach>
-                                    <c:if test="${endpage<=pageCount}">
-                                    <li class="page-item">
-                                        <a class="page-link" href="/seller/order?pageNum=${startPage+11}" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                    </c:if>
-                                </ul>
-                            </nav>
-                        </c:if>
                     </div>
                 </div>
 
@@ -153,6 +159,24 @@
 </main>
 <!-- End #main -->
 
+<script>
+    function search() {
+        // let query = window.location.search;
+        // let param = new URLSearchParams(query);
+        let pageNum = $("#pageNum1").val();
+        $("#pageNum").val(pageNum);
+        $("#form1").submit();
+    }
+
+    function next() {
+        $("#form1").submit();
+    }
+
+    function nextPage(pageNum) {
+        $("#pageNum").val(pageNum);
+        $("#form1").submit();
+    }
+</script>
 
 
 <jsp:include page="sellerfooter.jsp"></jsp:include>
