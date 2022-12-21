@@ -234,8 +234,9 @@
 <section class="hero">
     <div class="container">
         <div class="hero__item set-bg" data-setbg="/images/banner.png" style="">
-            <div class="hero__text" style="text-align: center; left: 40%; position: absolute">
-                <h2 style="color: #f3f37b; font-size: 55px; text-shadow: -5px 0px black, 0px 5px black, 5px 0px black, 0px -5px black;">월간 <br/>타이틀 순위</h2>
+            <div class="hero__text" style="text-align: center; position: absolute">
+<%--                <h2 style="color: #f3f37b; font-size: 55px; text-shadow: -5px 0px black, 0px 5px black, 5px 0px black, 0px -5px black;">월간 <br/>타이틀 순위</h2>--%>
+                <img src="/images/title_ranking.png" style="width: 40%">
                 <br><br>
                 <button type="button" class="btn btn-danger" onclick="rankingSales()">판매순</button>
                 <button type="button" class="btn btn-primary" onclick="rankingRecruit()">모집순</button>
@@ -259,7 +260,7 @@
                 <c:forEach var="row" items="${idxRankingSales}" varStatus="vs">
                     <div class="col-lg-3">
                         <div class="categories__item set-bg product__discount__item__pic" data-setbg="/images/thumb/${row.gm_code}/thumb.jpg">
-                            <div class="product__discount__percent">${vs.index+1}</div>
+                            <div class="product__discount__percent">${vs.index+1}위</div>
                         </div>
                     </div>
                 </c:forEach>

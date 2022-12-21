@@ -44,4 +44,14 @@
         where rcrbrd_num = #{rcrbrd_num}
     </select>
 
+    <select id="couponCount" resultType="int">
+        select ifnull(max(cnt), 0) as count
+        from (
+                select count(*) as cnt
+                from tb_couponlist
+                where mem_id = #{mem_id}
+                group by mem_id
+            ) AA
+    </select>
+
 </mapper>

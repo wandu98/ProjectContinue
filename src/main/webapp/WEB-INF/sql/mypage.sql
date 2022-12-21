@@ -87,3 +87,17 @@ order by rcrbrd_num;
 select count(*) as cnt
 from tb_recruitinfo
 where rcrbrd_num = 4;
+
+select count(*) as cnt
+from tb_couponlist
+where mem_id = '555'
+group by mem_id;
+
+
+select ifnull(max(cnt), 0) as count
+from (
+        select count(*) as cnt
+        from tb_couponlist
+        where mem_id = '555'
+        group by mem_id
+    ) AA;

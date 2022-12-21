@@ -70,6 +70,14 @@
                                         <td>${meminfo.mem_grade}</td>
                                     </tr>
                                     <tr>
+                                        <th>가용적립금</th>
+                                        <td>${meminfo.upoint}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>쿠폰</th>
+                                        <td>${couponcnt}</td>
+                                    </tr>
+                                    <tr>
                                         <th>가입일</th>
                                         <td>${meminfo.mem_joindate}</td>
                                     </tr>
