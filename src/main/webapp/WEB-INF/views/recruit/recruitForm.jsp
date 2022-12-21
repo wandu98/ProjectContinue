@@ -403,6 +403,15 @@
             alert("모집 마감일은 오늘 이후로 설정해주세요");
             return false;
         }
+
+        for (let i = 1; i <= parseInt($('#hiddenCount').val()); i++) {
+            for (let j = 1; j <= i; j++) {
+                if ($('#rl_role'+i).val().trim() == $('#rl_role'+j).val().trim()) {
+                    alert("동일한 역할은 추가할 수 없습니다");
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
