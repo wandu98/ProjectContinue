@@ -226,7 +226,7 @@
                             <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
                                 <c:choose>
                                     <c:when test="${pageNum==i}"><a style="font-weight: bold; background: #e03e2d; color: white">${i}</a></c:when>
-                                    <c:when test="${pageNum!=i}"><a href="/sales/sales?pageNum=${i}">${i}</a></c:when>
+                                    <c:when test="${pageNum!=i}"><a href="/sales/sales?pageNum=${i}&order3=${order}">${i}</a></c:when>
                                 </c:choose>
                             </c:forEach>
 
