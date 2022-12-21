@@ -91,11 +91,11 @@ public class SalesDAO {
     //상품메인 페이징
     public List<SalesDTO> list3(PagingDTO pagingDTO) {
         Map<String, Object> map = new HashMap<>();
-        map.put("startRow", pagingDTO.getStartRow());
+        map.put("startRow", (pagingDTO.getStartRow()-1));
         map.put("endRow", pagingDTO.getEndRow());
         map.put("order", pagingDTO.getOrder());
-//        System.out.println(pagingDTO.getStartRow());
-//        System.out.println(pagingDTO.getEndRow());
+
+        System.out.println("list3 : " + sqlSession.selectList("sales.list3", map).toString());
         return sqlSession.selectList("sales.list3", map);
 
     }
