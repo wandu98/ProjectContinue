@@ -490,7 +490,7 @@
     <%-- 결제 API  --%>
 
     function requestPay() {
-
+        let total = ${bk_total + max_fee};
         alert("결제 성공");
         IMP.init('imp62827174')
         //IMP.reqeust_pay(param, callback) 결제창 호출
@@ -498,8 +498,8 @@
             pg: "kakaopay.TC0ONETIME",     //"html5_inicis.INIpayTest",
             pay_method: "card",
             merchant_uid: "merchant_continue_id" + new Date().getTime(),
-            name: "포켓몬스터 골드",
-            amount: 1000,
+            name:"",
+            amount: total,
             buyer_email: "",
             buyer_name: "",
             buyer_tel: "",

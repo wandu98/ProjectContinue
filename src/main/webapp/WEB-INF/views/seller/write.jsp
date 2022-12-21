@@ -177,7 +177,7 @@
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="dv_num" name="dv_num"
                                            data-bs-toggle="modal"
-                                           data-bs-target="#ExtralargeModal" readonly placeholder="Click...">
+                                           data-bs-target="#ExtralargeModal" required readonly placeholder="Click...">
 
                                     <%-- 모달창 --%>
                                     <div class="modal fade" id="ExtralargeModal" tabindex="-1">
@@ -194,7 +194,7 @@
                                                 <%--모달창 본문--%>
                                                 <div class="card">
                                                     <div class="card-body" style="box-sizing: initial">
-                                                        <h5 class="card-title">배송정책을 선택해주세요</h5>
+                                                        <h5 class="card-title">배송정책 번호를 선택해주세요</h5>
                                                     </div>
                                                     <div class="modal-body" id="gs_main2">
                                                         <table class="table" id="table">
@@ -215,8 +215,8 @@
 
                                                             <tbody>
                                                             <c:forEach var="row" items="${dv_list}">
-                                                                <tr onclick="panelClick2()">
-                                                                        <td>${row.dv_num}</td>
+                                                                <tr>
+                                                                        <td onclick="panelClick2()">${row.dv_num}</td>
                                                                         <td>${row.dv_courier}</td>
                                                                         <td>${row.dv_how}</td>
                                                                         <td>${row.dv_fee}</td>
@@ -360,7 +360,7 @@
         let title = event.target.innerText;
 
         $("#dv_num").val(title);
-        $("#scrollingModal").modal("hide");
+        $("#ExtralargeModal").modal("hide");
 
     }
 
@@ -428,6 +428,7 @@
             $('#site-btn').attr("disabled", true);
         }
     });
+
 
 </script>
 

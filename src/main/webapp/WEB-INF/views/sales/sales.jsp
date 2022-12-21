@@ -154,8 +154,10 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort" id="sort">
-                                    <span><a href='javascript:void(0)' onclick='listAgain("ss_num", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>최신순</a>
-                                    <a href='javascript:void(0)'  onclick='listAgain("ss_price", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>높은가격</a></span>
+                                    <span><a href='javascript:void(0)'
+                                             onclick='listAgain("ss_num", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>최신순</a>
+                                    <a href='javascript:void(0)'
+                                       onclick='listAgain("ss_price", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>높은가격</a></span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -166,52 +168,52 @@
                     </div>
                 </div>
                 <div id="board">
-                <div class="row">
-                    <c:forEach var="row" items="${list3}" varStatus="vs">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic">
-                                    <a href="/sales/detail/${row.ss_num}">
-                                        <img src="/images/product/sales_main/${row.ss_img}">
-                                    </a>
-                                    <ul class="product__item__pic__hover">
-                                        <li>
-                                            <a class="wishlistModal" onclick="wishlistModal(${row.ss_num})">
-                                                <i class="fa fa-heart"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="basketModal" onclick="basketModal(${row.ss_num})">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                    <div class="row">
+                        <c:forEach var="row" items="${list3}" varStatus="vs">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic">
+                                        <a href="/sales/detail/${row.ss_num}">
+                                            <img src="/images/product/sales_main/${row.ss_img}">
+                                        </a>
+                                        <ul class="product__item__pic__hover">
+                                            <li>
+                                                <a class="wishlistModal" onclick="wishlistModal(${row.ss_num})">
+                                                    <i class="fa fa-heart"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="basketModal" onclick="basketModal(${row.ss_num})">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                <div class="product__discount__item__text">
-                                    <span>${row.gm_category}</span>
-                                    <h6><a href="/sales/detail/${row.ss_num}">${row.ss_name}</a></h6>
-                                    <h5><a href="/sales/detail/${row.ss_num}"><fmt:formatNumber
-                                            value="${row.ss_price}" type="currency"/></a></h5>
+                                    <div class="product__discount__item__text">
+                                        <span>${row.gm_category}</span>
+                                        <h6><a href="/sales/detail/${row.ss_num}">${row.ss_name}</a></h6>
+                                        <h5><a href="/sales/detail/${row.ss_num}"><fmt:formatNumber
+                                                value="${row.ss_price}" type="currency"/></a></h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <%-- 한줄에 3칸씩 --%>
-                        <c:if test="${vs.count mod 3==0}">
-                            <br>
-                        </c:if>
-                    </c:forEach>
-                </div>
-                <div class="product__pagination blog__pagination" style="text-align: center">
-                    <!-- 페이지 리스트 -->
-                    <c:if test="${requestScope.count>0}">
-                        <!-- 전체 페이지 수 -->
-                        <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
-                        <!-- 현재 보고 있는 페이지의 페이지 묶음 시작 페이지 -->
-                        <c:set var="startPage" value="${requestScope.startPage}"></c:set>
-                        <!-- 현재 보고 있는 페이지의 페이지 묶음 마지막 페이지 -->
-                        <c:set var="endPage" value="${requestScope.endPage}"></c:set>
+                            <%-- 한줄에 3칸씩 --%>
+                            <c:if test="${vs.count mod 3==0}">
+                                <br>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                    <div class="product__pagination blog__pagination" style="text-align: center">
+                        <!-- 페이지 리스트 -->
+                        <c:if test="${requestScope.count>0}">
+                            <!-- 전체 페이지 수 -->
+                            <c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
+                            <!-- 현재 보고 있는 페이지의 페이지 묶음 시작 페이지 -->
+                            <c:set var="startPage" value="${requestScope.startPage}"></c:set>
+                            <!-- 현재 보고 있는 페이지의 페이지 묶음 마지막 페이지 -->
+                            <c:set var="endPage" value="${requestScope.endPage}"></c:set>
                             <!-- endPage조정 -->
                             <!-- 전체 페이지가 22라면 세번째 페이지 묶음은 21, 22만 나오면 됨. -->
                             <c:if test="${endPage>pageCount}">
@@ -225,17 +227,20 @@
                             <!-- 페이지 표시 -->
                             <c:forEach var="i" begin="${startPage+1}" end="${endPage-1}">
                                 <c:choose>
-                                    <c:when test="${pageNum==i}"><a style="font-weight: bold; background: #e03e2d; color: white">${i}</a></c:when>
-                                    <c:when test="${pageNum!=i}"><a href="/sales/sales?pageNum=${i}&order3=${order}">${i}</a></c:when>
+                                    <c:when test="${pageNum==i}"><a
+                                            style="font-weight: bold; background: #e03e2d; color: white">${i}</a></c:when>
+                                    <c:when test="${pageNum!=i}"><a
+                                            href="/sales/sales?pageNum=${i}&order3=${order}">${i}</a></c:when>
                                 </c:choose>
                             </c:forEach>
 
                             <!-- 현재 페이지 묶음의 마지막 페이지보다 페이지가 더 존재하면 -->
                             <c:if test="${endPage<=pageCount}">
-                                <a href="/sales/sales?pageNum=${startPage+11}"><i class="fa fa-long-arrow-right"></i></a>
+                                <a href="/sales/sales?pageNum=${startPage+11}"><i
+                                        class="fa fa-long-arrow-right"></i></a>
                             </c:if>
-                    </c:if>
-                </div>
+                        </c:if>
+                    </div>
                 </div>
             </div>
         </div>
@@ -353,11 +358,11 @@
             url: "/sales",
             data: {
                 "order": order,
-                "pageCount" : pageCount,
-                "startpage" : startPage,
-                "endPage"   : endPage,
-                "count"     : count,
-                "pageNum"   : pageNum
+                "pageCount": pageCount,
+                "startpage": startPage,
+                "endPage": endPage,
+                "count": count,
+                "pageNum": pageNum
             },
             success: function (result) {
                 //alert(result)
@@ -369,12 +374,10 @@
                 //alert(pageNum);
                 let message = "";
                 message += "<div class='row'>";
-
                 $.each(result, function (index, value) {
                     // alert(index);
                     // alert(value);
                     let price = value.ss_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
-
                     message += "<div class='col-lg-4 col-md-6 col-sm-6'>";
                     message += "<div class='product__item'>";
                     message += "<div class='product__item__pic'>";
@@ -403,31 +406,32 @@
                     message += "</div>";
 
                     if ((index % 3) == 0) {
-                    message += "<br>"
+                        message += "<br>"
                     }
+
                 });
-
-                    message += "<div class='product__pagination blog__pagination' style='text-align: center'>"
-                    if(count>0) {
-                        if (endPage > pageCount) {
-                            endPage = pageCount + 1
-                        }
-                        if (startPage > 0) {
-                            message += "<a href='/sales/sales?pageNum=" + startPage + "&order3=" + order + "'><i class='fa fa-long-arrow-left'></i></a>"
-                        }
-                        for (let j = startPage+1; j <= endPage-1; j++) {
-                            if (pageNum == j) {
-                                message += "<a style='font-weight: bold; background: #e03e2d; color: white'>" + j + "</a>"
-                            } else if (pageNum != j) {
-                                message += "<a href='/sales/sales?pageNum=" + j + "&order3=" + order + "'>" + j + "</a>"
-                            }
-                        }
-
-
-                        if (endPage <= pageCount) {
-                            message += "<a href='/sales/sales?pageNum=" + startPage + 11 + "&order3=" + order + "'><i class='fa fa-long-arrow-right'></i></a>"
+                message += "</div>"
+                message += "<div class='product__pagination blog__pagination' style='text-align: center'>"
+                if (count > 0) {
+                    if (endPage > pageCount) {
+                        endPage = pageCount + 1
+                    }
+                    if (startPage > 0) {
+                        message += "<a href='/sales/sales?pageNum=" + startPage + "&order3=" + order + "'><i class='fa fa-long-arrow-left'></i></a>"
+                    }
+                    for (let j = startPage + 1; j <= endPage - 1; j++) {
+                        if (pageNum == j) {
+                            message += "<a style='font-weight: bold; background: #e03e2d; color: white'>" + j + "</a>"
+                        } else if (pageNum != j) {
+                            message += "<a href='/sales/sales?pageNum=" + j + "&order3=" + order + "'>" + j + "</a>"
                         }
                     }
+
+
+                    if (endPage <= pageCount) {
+                        message += "<a href='/sales/sales?pageNum=" + startPage + 11 + "&order3=" + order + "'><i class='fa fa-long-arrow-right'></i></a>"
+                    }
+                }
                 message += "</div>";
                 $('#board').html(message);
 

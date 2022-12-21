@@ -128,8 +128,9 @@
                     <ul>
                         <li>Total <span><fmt:formatNumber type="currency" value="${bk_total + max_fee}" groupingUsed="true"/></span></li>
                     </ul>
-
-                    <a href="/sales/checkout" class="primary-btn" style="background-color: red">주문하기</a>
+                    <button onclick="location.href='/sales/checkout'" id="button" class="primary-btn"
+                            style="background-color: red; border: none; width: 100%" >주문하기
+                    </button>
                 </div>
             </div>
         </div>
@@ -151,6 +152,29 @@
         //$('input[name=mileage]').attr('value', mileage)
     });
 */
+$(document).ready(function (){
+    let cnt = ${basket_cnt}
+
+    if(cnt != 0){
+        $("#button").attr("disabled", false);
+    } else {
+        $("#button").attr("disabled", true);
+    }
+
+
+    $('#cacc-or').click(function () {
+        if ($('#cacc-or').is(':checked')) {
+            $('#csite-btn').css('background-color', 'red');
+            $('#csite-btn').attr("disabled", false);
+        } else {
+            $('#csite-btn').css('background-color', 'skyblue');
+            $('#csite-btn').attr("disabled", true);
+        }
+    });
+
+})
+
+
 
 
 </script>

@@ -107,22 +107,35 @@
 
     <select id="list3" parameterType="java.util.Map" resultType="com.cafe24.nonchrono.dto.SalesDTO">
     <![CDATA[
-         /*select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, r
-         from (
-               select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, r
-               from (
-                     select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, @rno := @rno + 1 as r
-                     from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
-                     order by ${order} DESC
-                     ) AA, (select @rno := 0) BB
-             ) CC
-         where r >= #{startRow} and r <= #{endRow}*/
+        /*select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, r
+        from (
+              select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, r
+              from (
+                    select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, @rno := @rno + 1 as r
+                    from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
+                    order by ${order} DESC
+                    ) AA, (select @rno := 0) BB
+            ) CC
+        where r >= #{startRow} and r <= #{endRow}*/
 
-        select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category
-        from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
-        order by ${order} DESC
-        limit 6 OFFSET #{startRow}
-    ]]>
+        select ss_num,
+               gm.gm_code,
+               sl_id,
+               ss_name,
+               ss_price,
+               ss_speriod,
+               ss_eperiod,
+               ss_stock,
+               ss_img,
+               ss_status,
+               ss_description,
+               dv_num,
+               gm_category
+        from tb_sales ss
+                 join tb_game gm on gm.gm_code = ss.gm_code
+        order by ${order} DESC limit 6
+        OFFSET #{startRow}
+        ]]>
     </select>
 
     <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">
@@ -358,15 +371,18 @@
     </select>
 
     <select id="top_keyword" resultType="com.cafe24.nonchrono.dto.SearchDTO">
-        select *
-                 from (
-                        select count(*) as count, sc_word
-                        from(
-                                select sc_word
-                                from tb_search
-                                where sc_word = '사무라이 메이든'
-                            ) aa
-                        ) bb
-        where  count
+        <![CDATA[
+        select sc_word, count(sc_word) as cnt
+        from tb_search
+        group by sc_word
+        having count(sc_word) > 5 limit 3;
+        ]]>
+    </select>
+
+    <select id="ss_name" resultType="com.cafe24.nonchrono.dto.SalesDTO">
+        select ss_name
+        from tb_sales ss
+                 join tb_basket tb on ss.ss_num = tb.ss_num
+        where mem_id = #{mem_id} limit 1
     </select>
 </mapper>
