@@ -9,9 +9,14 @@
 <%@ include file="../header.jsp" %>
 
 <div class="container">
-    <h4>공지사항</h4>
-    <p>notice</p>
-    <br>
+    <div class="col-lg-12" style="background: #ff2222; text-align: center;">
+        <br>
+        <h2 style="color: #FFFFFF; font-weight: bold">공지사항</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="container">
     <div name="NTDetail" id="NTDetail">
         <table class="table table-striped">
             <thead>

@@ -19,7 +19,7 @@
 </div>
 
 <div class="container">
-    <div class="blog__sidebar__search" >
+    <%--<div class="blog__sidebar__search" >
         <form action="#" style="text-align: center; height: 50px">
             <select name="col">
                 <option value="subject_content">제목+내용</option>
@@ -30,7 +30,7 @@
             <input type="text" name="word" id="word" placeholder="Search...">
             <button type="submit"><span class="icon_search"></span></button>
         </form>
-    </div>
+    </div>--%>
 
     <div name="ntlist" id="ntlist">
         <table class="table table-hover">
@@ -45,8 +45,8 @@
             <tbody>
             <c:forEach var="notice" items="${noticelist}">
                 <tr style="cursor: pointer" onclick="location.href='/notice/Detail/${notice.nt_num}'">
-                    <td style="text-align: center">${notice.nt_num}</td>
-                    <td>${notice.nt_title}</td>
+                    <td style="text-align: center">${notice.rownum}</td>
+                    <td style="text-align: center">${notice.nt_title}</td>
                     <td style="text-align: center">${notice.nt_regdate}</td>
                     <td style="text-align: center">${notice.nt_views}</td>
                 </tr>
