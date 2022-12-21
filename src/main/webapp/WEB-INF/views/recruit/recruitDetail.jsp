@@ -196,7 +196,7 @@
                             <c:when test="${memDetail.mem_pic != 'ProfilePicture.png'}">
                                 <img alt="" id="profile0" src="/images/profile/${memDetail.mem_id}/${memDetail.mem_pic}"
                                      class="img-thumbnail img-fluid"
-                                     style="height: 100%; overflow: hidden"/>
+                                     style="height: 100%; overflow: hidden; text-align: center"/>
                             </c:when>
                             <c:otherwise>
                                 <img alt="" id="profile0" src="/images/profile/ProfilePicture.png"
@@ -256,14 +256,19 @@
                         <hr>
                     </div>
                     <c:forEach var="row" begin="1" end="${detail.rcrbrd_max}" step="1" varStatus="vs">
-                        <div class="col-lg-3 col-md-4 col-sm-4">
-                            <div class="product__item">
+                    <div class="col-lg-3 col-md-4 col-sm-4">
+                        <div class="product__item">
+                            <c:choose>
+                            <c:when test="${memPic[vs.index-1] != '' and memPic[vs.index-1] != 'ProfilePicture.png' and memSeat[vs.index-1] != ''}">
+                            <div id="profile${vs.count}" class="product__item__pic set-bg"
+                                 data-setbg="/images/profile/${memSeat[vs.index-1]}/${memPic[vs.index-1]}"
+                                 style="height: 100%; overflow: hidden; text-align: center">
+                                </c:when>
+                                <c:otherwise>
                                 <div id="profile${vs.count}" class="product__item__pic set-bg"
                                      data-setbg="/images/profile/ProfilePicture.png">
-                                    <c:if test="${memPic[vs.index-1] != '' and memPic[vs.index-1] != 'ProfilePicture.png' and memSeat[vs.index-1] != ''}">
-                                        <img src="/images/profile/${memSeat[vs.index-1]}/${memPic[vs.index-1]}"
-                                             style="height: 100%; overflow: hidden">
-                                    </c:if>
+                                    </c:otherwise>
+                                    </c:choose>
                                     <input type="hidden" id="recruitseat${vs.count}" name="recruitseat${vs.count}"
                                            value="${vs.count}">
                                     <ul class="product__item__pic__hover">
@@ -337,51 +342,51 @@
                                 </div>
                             </div>
                         </div>
-                    </c:forEach>
-                </div>
-                <hr>
-                <form id="commentForm" onsubmit="return commentCheck()" method="post">
-                    <input type="hidden" id="com_rcrnum" name="rcrbrd_num" value=${detail.rcrbrd_num}>
-                    <input type="hidden" id="com_memid" name="mem_id" value="${mem_id}">
-                    <br>
-                    <h3 style="text-align: center; font-weight: bold">댓글 작성</h3>
-                    <br>
-                    <div class="text-center">
+                        </c:forEach>
+                    </div>
+                    <hr>
+                    <form id="commentForm" onsubmit="return commentCheck()" method="post">
+                        <input type="hidden" id="com_rcrnum" name="rcrbrd_num" value=${detail.rcrbrd_num}>
+                        <input type="hidden" id="com_memid" name="mem_id" value="${mem_id}">
+                        <br>
+                        <h3 style="text-align: center; font-weight: bold">댓글 작성</h3>
+                        <br>
+                        <div class="text-center">
                         <textarea id="com_content" name="com_content" placeholder="댓글 작성란..."
                                   style="width: 100%; height: 150px; font-size: 16px; color: #6f6f6f; padding-left: 20px; margin-bottom: 24px; border: 1px solid #ebebeb; border-radius: 4px; padding-top: 12px; resize: none;"></textarea>
-                    </div>
-                    <button type="button" onclick="comment()" class="site-btn" style="float: right">댓글 작성</button>
-                    <br><br><br>
-                    <hr>
-                </form>
-                <div>
-                    <div class="row" id="commentList">
-                        <c:forEach var="list" items="${commentList}" varStatus="vs5">
-                            <div class="col-lg-8" style="padding-left: 5%; padding-top: 2%">
-                                <div class="header">
-                                    <img src="/images/profile/${list.mem_id}/${list.mem_pic}"
-                                         style="max-height: 20px; max-width: 20px">&nbsp;&nbsp;${list.mem_nick}&nbsp;&nbsp;
-                                    <span>${list.comdate}</span>
-                                    <c:if test="${list.mem_id == sessionScope.mem_id}">
+                        </div>
+                        <button type="button" onclick="comment()" class="site-btn" style="float: right">댓글 작성</button>
+                        <br><br><br>
+                        <hr>
+                    </form>
+                    <div>
+                        <div class="row" id="commentList">
+                            <c:forEach var="list" items="${commentList}" varStatus="vs5">
+                                <div class="col-lg-8" style="padding-left: 5%; padding-top: 2%">
+                                    <div class="header">
+                                        <img src="/images/profile/${list.mem_id}/${list.mem_pic}"
+                                             style="max-height: 20px; max-width: 20px">&nbsp;&nbsp;${list.mem_nick}&nbsp;&nbsp;
+                                        <span>${list.comdate}</span>
+                                        <c:if test="${list.mem_id == sessionScope.mem_id}">
                                     <span style="float: right; cursor: pointer"
                                           onclick="commentDelete(${list.com_num})">삭제</span>
-                                    <span style="float: right; padding-right: 1%; cursor: pointer"
-                                          onclick="commentUpdate(${list.com_num}, $('#comment${list.com_num}').text().trim())">수정</span>
-                                    </c:if>
-                                </div>
-                                <div class="card-body comment_content" id="content${list.com_num}">
-                                    <div class="whiteLabel"
-                                         style="background-color: #f7f7e3; max-height: 80px; font-size: 13px"
-                                         id="comment${list.com_num}">${list.com_content}
+                                            <span style="float: right; padding-right: 1%; cursor: pointer"
+                                                  onclick="commentUpdate(${list.com_num}, $('#comment${list.com_num}').text().trim())">수정</span>
+                                        </c:if>
+                                    </div>
+                                    <div class="card-body comment_content" id="content${list.com_num}">
+                                        <div class="whiteLabel"
+                                             style="background-color: #f7f7e3; max-height: 80px; font-size: 13px"
+                                             id="comment${list.com_num}">${list.com_content}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 <div class="container">
@@ -752,7 +757,7 @@
             url: '/recruit/commentUpdate',
             type: 'post',
             data: {
-                'com_content': $('#comUpdate'+com_num).val(),
+                'com_content': $('#comUpdate' + com_num).val(),
                 'com_num': com_num
             },
             success: function (result) {
