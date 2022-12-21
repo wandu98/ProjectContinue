@@ -646,8 +646,8 @@
             let tot2 = (parseInt(count) *${detail.ss_price});
 
             if (count < ${detail.ss_stock}) {
-                $('input[name=inputCount]').attr('value', count)
-                $('input[name=inputValue]').attr('value', tot2)
+                $('input[name=inputCount]').attr('value', count+"개")
+                $('input[name=inputValue]').attr('value', tot2+"원")
 
             } else {
                 alert("재고가 부족합니다")
@@ -662,7 +662,8 @@
 
     function cartModal(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
-        let bk_amount = $("#inputCount").val();
+        let bk_amount2 = $("#inputCount").val();
+        let bk_amount  = bk_amount2.substr(0,1);
         console.log(mem_id);
         console.log(bk_amount);
         if (mem_id != 'null' && bk_amount > 0) {
