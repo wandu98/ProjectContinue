@@ -160,12 +160,13 @@
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>${fn:length(list3)}</span> Products</h6>
+                                <h6><span>${totalRowCount}</span> Products</h6>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row" id="board">
+                <div id="board">
+                <div class="row">
                     <c:forEach var="row" items="${list3}" varStatus="vs">
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
@@ -234,6 +235,7 @@
                                 <a href="/sales/sales?pageNum=${startPage+11}"><i class="fa fa-long-arrow-right"></i></a>
                             </c:if>
                     </c:if>
+                </div>
                 </div>
             </div>
         </div>
@@ -366,7 +368,7 @@
                 // alert(count);
                 //alert(pageNum);
                 let message = "";
-
+                message += "<div class='row'>";
 
                 $.each(result, function (index, value) {
                     // alert(index);
@@ -411,21 +413,22 @@
                             endPage = pageCount + 1
                         }
                         if (startPage > 0) {
-                            message += "<a href='/sales/sales?pageNum=" + startPage + "'><i class='fa fa-long-arrow-left'></i></a>"
+                            message += "<a href='/sales/sales?pageNum=" + startPage + "&order3=" + order + "'><i class='fa fa-long-arrow-left'></i></a>"
                         }
-                        for (let j = startPage; j <= endPage; j++) {
+                        for (let j = startPage+1; j <= endPage-1; j++) {
                             if (pageNum == j) {
                                 message += "<a style='font-weight: bold; background: #e03e2d; color: white'>" + j + "</a>"
                             } else if (pageNum != j) {
-                                message += "<a href='/sales/sales?pageNum=" + j + "'>" + j + "</a>"
+                                message += "<a href='/sales/sales?pageNum=" + j + "&order3=" + order + "'>" + j + "</a>"
                             }
                         }
 
 
                         if (endPage <= pageCount) {
-                            message += "<a href='/sales/sales?pageNum=" + startPage + 11 + "'><i class='fa fa-long-arrow-right'></i></a>"
+                            message += "<a href='/sales/sales?pageNum=" + startPage + 11 + "&order3=" + order + "'><i class='fa fa-long-arrow-right'></i></a>"
                         }
                     }
+                message += "</div>";
                 $('#board').html(message);
 
 
