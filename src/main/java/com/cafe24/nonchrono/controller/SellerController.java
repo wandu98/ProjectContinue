@@ -712,31 +712,74 @@ public class SellerController {
         return map;
     }
 
-    @RequestMapping("/search")
+    @RequestMapping("/orderSearch")
     public ModelAndView orderSearch(@RequestParam String dt_prog, @RequestParam String ss_speriod, @RequestParam String ss_eperiod,
-                                    @RequestParam String inputState, @RequestParam String keyword, HttpServletRequest request,
+                                    @RequestParam String inputState, @RequestParam String keyword, @RequestParam String pageNum,
                                     PagingDTO pagingDTO, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         String sl_id = (String) session.getAttribute("sl_id");
-        dt_prog = request.getParameter("dt_prog");
-        ss_speriod = request.getParameter("ss_speriod");
-        ss_eperiod = request.getParameter("ss_eperiod");
-        inputState = request.getParameter("inputState");
-        keyword = request.getParameter("keyword");
         String result = "";
 
+        System.out.println("dt_prog : " + dt_prog);
+        System.out.println("ss_speriod : " + ss_speriod);
+        System.out.println("ss_eperiod : " + ss_eperiod);
+        System.out.println("inputState : " + inputState);
+        System.out.println("keyword : " + keyword);
 
-        if (inputState.equals("주문번호")) {
+        if (Objects.equals(inputState, "주문번호")) {
             inputState = "od.od_num";
-        } else if (inputState.equals("상품명")) {
+        } else if (Objects.equals(inputState,"상품명")) {
             inputState = "ss_name";
-        } else if (inputState.equals("상품가격")) {
+        } else if (Objects.equals(inputState, "상품가격")) {
             inputState = "ss_price";
-        } else if (inputState.equals("회원ID")) {
+        } else if (Objects.equals(inputState, "회원ID")) {
             inputState = "mem_id";
         } else {
             inputState = "";
         }
+
+        if (dt_prog==null) {
+            System.out.println("a");
+        } else if (dt_prog=="null") {
+            System.out.println("b");
+        } else if (dt_prog == "") {
+            System.out.println("c");
+        } else {
+            System.out.println("d");
+        }
+
+        if (ss_speriod==null) {
+            System.out.println("a");
+        } else if (ss_speriod=="null") {
+            System.out.println("b");
+        } else if (ss_speriod == "") {
+            System.out.println("c");
+        } else {
+            System.out.println("d");
+        }
+
+        if (inputState==null) {
+            System.out.println("a");
+        } else if (inputState=="null") {
+            System.out.println("b");
+        } else if (inputState == "") {
+            System.out.println("c");
+        } else {
+            System.out.println("d");
+        }
+
+
+
+
+        System.out.println("if 후----------");
+        System.out.println("dt_prog : " + dt_prog);
+        System.out.println("ss_speriod : " + ss_speriod);
+        System.out.println("ss_eperiod : " + ss_eperiod);
+        System.out.println("inputState : " + inputState);
+        System.out.println("keyword : " + keyword);
+        System.out.println("pageNum : " + pageNum);
+
+
         pagingDTO.setSl_id(sl_id);
         pagingDTO.setDt_prog(dt_prog);
         pagingDTO.setSs_speriod(ss_speriod);
@@ -745,55 +788,56 @@ public class SellerController {
         pagingDTO.setKeyword(keyword);
         int totalRowCount = 0;
 
-        if (!dt_prog.equals("") && ss_speriod.equals("") && ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //진행상태
+        if (dt_prog!="" && ss_speriod=="" && ss_eperiod=="" && inputState=="" && keyword=="") { //진행상태
             totalRowCount = sellerDAO.progTotalRowCount(pagingDTO);
-//            System.out.println("progTotalRowCount");
-        } else if (dt_prog.equals("") && !ss_speriod.equals("") && ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //시작일
+            System.out.println("progTotalRowCount");
+        } else if (dt_prog=="" && ss_speriod!="" && ss_eperiod=="" && inputState=="" && keyword=="") { //시작일
             totalRowCount = sellerDAO.speriodTotalRowCount(pagingDTO);
-//            System.out.println("speriodTotalRowCount");
-        } else if (dt_prog.equals("") && ss_speriod.equals("") && !ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //종료일
+            System.out.println("speriodTotalRowCount");
+        } else if (dt_prog=="" && ss_speriod=="" && ss_eperiod!="" && inputState=="" && keyword=="") { //종료일
             totalRowCount = sellerDAO.eperiodTotalRowCount(pagingDTO);
-//            System.out.println("eperiodTotalRowCount");
-        } else if (dt_prog.equals("") && !ss_speriod.equals("") && !ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //시작&종료일
+            System.out.println("eperiodTotalRowCount");
+        } else if (dt_prog=="" && ss_speriod!="" && ss_eperiod!="" && inputState=="" && keyword=="") { //시작&종료일
             totalRowCount = sellerDAO.spepTotalRowCount(pagingDTO);
-//            System.out.println("spepTotalRowCount");
-        } else if (dt_prog.equals("") && ss_speriod.equals("") && ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //조건
+            System.out.println("spepTotalRowCount");
+        } else if (dt_prog=="" && ss_speriod=="" && ss_eperiod=="" && inputState!="" && keyword!="") { //조건
             totalRowCount = sellerDAO.ikTotalRowCount(pagingDTO);
-//            System.out.println("ikTotalRowCount");
-        } else if (!dt_prog.equals("") && !ss_speriod.equals("") && ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //진행상태, 시작일
+            System.out.println("ikTotalRowCount");
+        } else if (dt_prog!="" && ss_speriod!="" && ss_eperiod=="" && inputState=="" && keyword=="") { //진행상태, 시작일
             totalRowCount = sellerDAO.psTotalRowCount(pagingDTO);
-//            System.out.println("psTotalRowCount");
-        } else if (!dt_prog.equals("") && ss_speriod.equals("") && !ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //진행상태, 종료일
+            System.out.println("psTotalRowCount");
+        } else if (dt_prog!="" && ss_speriod=="" && ss_eperiod!="" && inputState=="" && keyword=="") { //진행상태, 종료일
             totalRowCount = sellerDAO.peTotalRowCount(pagingDTO);
-//            System.out.println("peTotalRowCount");
-        } else if (!dt_prog.equals("") && !ss_speriod.equals("") && !ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //진행상태, 시작&종료
+            System.out.println("peTotalRowCount");
+        } else if (dt_prog!="" && ss_speriod!="" && ss_eperiod!="" && inputState=="" && keyword=="") { //진행상태, 시작&종료
             totalRowCount = sellerDAO.pseTotalRowCount(pagingDTO);
-//            System.out.println("pseTotalRowCount");
-        } else if (!dt_prog.equals("") && ss_speriod.equals("") && ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //진행상태, 조건
+            System.out.println("pseTotalRowCount");
+        } else if (dt_prog!="" && ss_speriod=="" && ss_eperiod=="" && inputState!="" && keyword!="") { //진행상태, 조건
             totalRowCount = sellerDAO.pikTotalRowCount(pagingDTO);
 //            System.out.println("pikTotalRowCount");
-        } else if (dt_prog.equals("") && !ss_speriod.equals("") && ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //시작일, 조건
+        } else if (dt_prog=="" && ss_speriod!="" && ss_eperiod=="" && inputState!="" && keyword!="") { //시작일, 조건
             totalRowCount = sellerDAO.sikTotalRowCount(pagingDTO);
-//            System.out.println("sikTotalRowCount");
-        } else if (dt_prog.equals("") && ss_speriod.equals("") && !ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //죵료일, 조건
+            System.out.println("sikTotalRowCount");
+        } else if (dt_prog=="" && ss_speriod=="" && ss_eperiod!="" && inputState!="" && keyword!="") { //죵료일, 조건
             totalRowCount = sellerDAO.eikTotalRowCount(pagingDTO);
-//            System.out.println("eikTotalRowCount");
-        } else if (dt_prog.equals("") && !ss_speriod.equals("") && !ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //시작&종료일 조건
+            System.out.println("eikTotalRowCount");
+        } else if (dt_prog=="" && ss_speriod!="" && ss_eperiod!="" && inputState!="" && keyword!="") { //시작&종료일 조건
             totalRowCount = sellerDAO.seikTotalRowCount(pagingDTO);
-//            System.out.println("seikTotalRowCount");
-        } else if (!dt_prog.equals("") && !ss_speriod.equals("") && ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //진행상태, 시작일, 조건
+            System.out.println("seikTotalRowCount");
+        } else if (dt_prog!="" && ss_speriod!="" && ss_eperiod=="" && inputState!="" && keyword!="") { //진행상태, 시작일, 조건
             totalRowCount = sellerDAO.psikTotalRowCount(pagingDTO);
-//            System.out.println("psikTotalRowCount");
-        } else if (!dt_prog.equals("") && ss_speriod.equals("") && !ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //진행상태, 종료일, 조건
+            System.out.println("psikTotalRowCount");
+        } else if (dt_prog!="" && ss_speriod=="" && ss_eperiod!="" && inputState!="" && keyword!="") { //진행상태, 종료일, 조건
             totalRowCount = sellerDAO.peikTotalRowCount(pagingDTO);
-//            System.out.println("peikTotalRowCount");
-        } else if (!dt_prog.equals("") && !ss_speriod.equals("") && !ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //진행상태, 시작&종료일, 조건
+            System.out.println("peikTotalRowCount");
+        } else if (dt_prog!="" && ss_speriod!="" && ss_eperiod!="" && inputState!="" && keyword!="") { //진행상태, 시작&종료일, 조건
             totalRowCount = sellerDAO.pseikTotalRowCount(pagingDTO);
-//            System.out.println("pseikTotalRowCount");
+            System.out.println("pseikTotalRowCount");
         } else { //전체
             totalRowCount = sellerDAO.fullTotalRowCount(pagingDTO);
-//            System.out.println("fullTotalRowCount");
+            System.out.println("fullTotalRowCount");
         }
+        System.out.println("totalRowCount : " + totalRowCount);
 
         //페이징
         int numPerPage = 5; //한 페이지당 레코드 갯수
@@ -801,10 +845,12 @@ public class SellerController {
 
         //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
         //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
-        String pageNum = request.getParameter("pageNum");
-        if(pageNum==null) {
+//        String pageNum = request.getParameter("pageNum");
+        if(pageNum=="") {
             pageNum = "1";
         }//if end
+        System.out.println(pageNum);
+
 
         //현재 보고 있는 페이지
         int currentPage = Integer.parseInt(pageNum);
@@ -829,42 +875,45 @@ public class SellerController {
         List<Map<String,?>> progSearch = new ArrayList<>();
 
         if (totalRowCount>0) {
-            if (!dt_prog.equals("") && ss_speriod.equals("") && ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //진행상태
+            if (dt_prog!="" && ss_speriod=="" && ss_eperiod=="" && inputState=="" && keyword=="") { //진행상태
                 progSearch = sellerDAO.progList(pagingDTO);
-            } else if (dt_prog.equals("") && !ss_speriod.equals("") && ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //시작일
+            } else if (dt_prog=="" && ss_speriod!="" && ss_eperiod=="" && inputState=="" && keyword=="") { //시작일
                 progSearch = sellerDAO.speriodList(pagingDTO);
-            } else if (dt_prog.equals("") && ss_speriod.equals("") && !ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //종료일
+            } else if (dt_prog=="" && ss_speriod=="" && ss_eperiod!="" && inputState=="" && keyword=="") { //종료일
                 progSearch = sellerDAO.eperiodList(pagingDTO);
-            } else if (dt_prog.equals("") && !ss_speriod.equals("") && !ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //시작&종료일
+            } else if (dt_prog=="" && ss_speriod!="" && ss_eperiod!="" && inputState=="" && keyword=="") { //시작&종료일
                 progSearch = sellerDAO.spepList(pagingDTO);
-            } else if (dt_prog.equals("") && ss_speriod.equals("") && ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //조건
+            } else if (dt_prog=="" && ss_speriod=="" && ss_eperiod=="" && inputState!="" && keyword!="") { //조건
                 progSearch = sellerDAO.ikList(pagingDTO);
-            } else if (!dt_prog.equals("") && !ss_speriod.equals("") && ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //진행상태, 시작일
+            } else if (dt_prog!="" && ss_speriod!="" && ss_eperiod=="" && inputState=="" && keyword=="") { //진행상태, 시작일
                 progSearch = sellerDAO.psList(pagingDTO);
-            } else if (!dt_prog.equals("") && ss_speriod.equals("") && !ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //진행상태, 종료일
+            } else if (dt_prog!="" && ss_speriod=="" && ss_eperiod!="" && inputState=="" && keyword=="") { //진행상태, 종료일
                 progSearch = sellerDAO.peLIst(pagingDTO);
-            } else if (!dt_prog.equals("") && !ss_speriod.equals("") && !ss_eperiod.equals("") && inputState.equals("") && keyword.equals("")) { //진행상태, 시작&종료
+            } else if (dt_prog!="" && ss_speriod!="" && ss_eperiod!="" && inputState=="" && keyword=="") { //진행상태, 시작&종료
                 progSearch = sellerDAO.pseList(pagingDTO);
-            } else if (!dt_prog.equals("") && ss_speriod.equals("") && ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //진행상태, 조건
+            } else if (dt_prog!="" && ss_speriod=="" && ss_eperiod=="" && inputState!="" && keyword!="") { //진행상태, 조건
                 progSearch = sellerDAO.pikList(pagingDTO);
-            } else if (dt_prog.equals("") && !ss_speriod.equals("") && ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //시작일, 조건
+            } else if (dt_prog=="" && ss_speriod!="" && ss_eperiod=="" && inputState!="" && keyword!="") { //시작일, 조건
                 progSearch = sellerDAO.sikListList(pagingDTO);
-            } else if (dt_prog.equals("") && ss_speriod.equals("") && !ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //죵료일, 조건
+            } else if (dt_prog=="" && ss_speriod=="" && ss_eperiod!="" && inputState!="" && keyword!="") { //죵료일, 조건
                 progSearch = sellerDAO.eikList(pagingDTO);
-            } else if (dt_prog.equals("") && !ss_speriod.equals("") && !ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //시작&종료일 조건
+            } else if (dt_prog=="" && ss_speriod!="" && ss_eperiod!="" && inputState!="" && keyword!="") { //시작&종료일 조건
                 progSearch = sellerDAO.seikList(pagingDTO);
-            } else if (!dt_prog.equals("") && !ss_speriod.equals("") && ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //진행상태, 시작일, 조건
+            } else if (dt_prog!="" && ss_speriod!="" && ss_eperiod=="" && inputState!="" && keyword!="") { //진행상태, 시작일, 조건
                 progSearch = sellerDAO.psikList(pagingDTO);
-            } else if (!dt_prog.equals("") && ss_speriod.equals("") && !ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //진행상태, 종료일, 조건
+            } else if (dt_prog!="" && ss_speriod=="" && ss_eperiod!="" && inputState!="" && keyword!="") { //진행상태, 종료일, 조건
                 progSearch = sellerDAO.peikList(pagingDTO);
-            } else if (!dt_prog.equals("") && !ss_speriod.equals("") && !ss_eperiod.equals("") && !inputState.equals("") && !keyword.equals("")) { //진행상태, 시작&종료일, 조건
+            } else if (dt_prog!="" && ss_speriod!="" && ss_eperiod!="" && inputState!="" && keyword!="") { //진행상태, 시작&종료일, 조건
                 progSearch = sellerDAO.pseikList(pagingDTO);
             } else { //전체
                 progSearch = sellerDAO.fullList(pagingDTO);
+                System.out.println("fullList");
             }
         } else {
             progSearch = Collections.EMPTY_LIST;
         }
+
+        System.out.println("progSearchsize : " + progSearch.size());
 
         mav.addObject("pageNum", currentPage);
         mav.addObject("count", totalRowCount);

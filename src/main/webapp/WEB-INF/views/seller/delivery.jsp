@@ -424,7 +424,7 @@ To change this template use File | Settings | File Templates.
                             <c:forEach var="row" items="${dv_list}" varStatus="vs">
                                 <tr>
                                     <th scope="col">
-                                        <input class="form-check-input" name="check" type="checkbox">
+                                        <input class="form-check-input" id="dv_num" name="dv_num" type="checkbox" value="${row.dv_num}">
                                     </th>
                                     <th scope="row">${row.dv_num}</th>
                                     <td>${row.dv_courier}</td>
@@ -440,26 +440,8 @@ To change this template use File | Settings | File Templates.
                             </tbody>
                         </table>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-info">수정</button>
-                            <button type="button" class="btn btn-danger">삭제</button>
+                            <button type="button" class="btn btn-danger" onclick="dvdelete()">삭제</button>
                         </div>
-                        <nav class="pagination justify-content-center">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -492,6 +474,28 @@ To change this template use File | Settings | File Templates.
             }
         });
     });
+
+    function dvdelete() {
+        let dv_num = [];
+        $("input[name=dv_num]:checked").each(function (index) {
+            console.log($(this).val());
+            dv_num[index] = $(this).val();
+        })
+        console.log(dv_num);
+        $.ajax({
+            url : "/delivery/delete"
+            ,type : "post"
+            ,data : "dv_num=" + dv_num
+            ,success : function () {
+                console.log("삭제 성공");
+                location.href="/seller/delivery"
+            }
+            ,error : function (request, status, error) {
+                alert("기존에 사용된 배송정책이므로 삭제할 수 없습니다.");
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+    }
 </script>
 <!-- checkbox All Select end -->
 <%@ include file="sellerfooter.jsp"%>
