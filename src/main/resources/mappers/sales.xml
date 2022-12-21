@@ -121,7 +121,7 @@
         select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category
         from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
         order by ${order} DESC
-        limit #{startRow}, #{endRow}
+        limit 6 OFFSET #{startRow}
     ]]>
     </select>
 

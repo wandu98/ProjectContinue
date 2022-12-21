@@ -111,6 +111,7 @@ public class SalesController {
         mav.addObject("startPage", startPage);
         mav.addObject("endPage", endPage);
         mav.addObject("list", salesDAO.list());
+        mav.addObject("order", order);
         mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
         mav.addObject("sold_out", salesDAO.sold_out());
         mav.addObject("last_search", salesDAO.last_seach());
