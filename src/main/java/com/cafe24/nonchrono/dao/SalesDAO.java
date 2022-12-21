@@ -94,6 +94,8 @@ public class SalesDAO {
         map.put("startRow", pagingDTO.getStartRow());
         map.put("endRow", pagingDTO.getEndRow());
         map.put("order", pagingDTO.getOrder());
+//        System.out.println(pagingDTO.getStartRow());
+//        System.out.println(pagingDTO.getEndRow());
         return sqlSession.selectList("sales.list3", map);
 
     }

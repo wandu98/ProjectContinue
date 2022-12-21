@@ -107,15 +107,21 @@
 
     <select id="list3" parameterType="java.util.Map" resultType="com.cafe24.nonchrono.dto.SalesDTO">
     <![CDATA[
-        select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, r
-        from (
-              select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, @rno := @rno + 1 as r
-              from (
-                    select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category
-                    from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
-                    ) AA, (select @rno := 0) BB     order by ${order} DESC
-              ) CC
-        where r >= #{startRow} and r <= #{endRow}
+--         select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, r
+--         from (
+--               select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, @rno := @rno + 1 as r
+--               from (
+--                     select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category
+--                     from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
+--                     ) AA, (select @rno := 0) BB         order by ${order} DESC
+--
+--              ) CC
+--         where r >= #{startRow} and r <= #{endRow}
+
+        select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category
+        from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
+        order by ${order} DESC
+        limit #{endRow} offset #{startRow}
 
         ]]>
     </select>

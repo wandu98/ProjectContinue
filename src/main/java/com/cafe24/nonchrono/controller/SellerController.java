@@ -115,9 +115,17 @@ public class SellerController {
 
     //상품등록
     @RequestMapping("/write")
-    public ModelAndView write() {
+    public ModelAndView write(HttpSession session) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("seller/write");
+        String sl_id = (String) session.getAttribute("sl_id");
+        if (sl_id != null && !sl_id.equals("guest")) {
+            mav.setViewName("/seller/write");
+            mav.addObject("dv_list", sellerDAO.dv_list(sl_id));
+        } else {
+            mav.setViewName("/mem/loginForm");
+        }
+
+
         return mav;
     }// write() end
 
