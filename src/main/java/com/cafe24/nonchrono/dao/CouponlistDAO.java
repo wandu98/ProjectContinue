@@ -21,4 +21,8 @@ public class CouponlistDAO {
     public List<Map<String,?>> mileageList(String mem_id) {
         return sqlSession.selectList("couponlist.mileageList", mem_id);
     }
+
+    public int couponCount(String mem_id) {
+        return sqlSession.selectOne("mypage.couponCount", mem_id);
+    }
 }

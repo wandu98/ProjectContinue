@@ -100,6 +100,7 @@ public class MypageController {
             mav.addObject("recruitlist", recruitDAO.rcrbrdlist(mem_id));
             mav.addObject("rcrbrdlistCount", list2);
             mav.addObject("detailcount", detailDAO.detailCount(mem_id));
+            mav.addObject("couponcnt", couponlistDAO.couponCount(mem_id));
             mav.setViewName("mypage/mypage");
         } else {
             mav.setViewName("mem/loginForm");
