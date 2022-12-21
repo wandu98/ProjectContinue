@@ -190,6 +190,8 @@
 
 <script>
 
+    const gameName = [];
+    const gameCode = [];
 
     /* 클릭하면 모달창 보이기 */
     $(document).ready(function () {
@@ -199,6 +201,23 @@
             // 모달창 보이기
             $("#gs_modal").modal({backdrop: 'static', keyboard: false});
         });
+
+        $.ajax({
+            url: "/recruit/gameList",
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+
+                $.each(data, function (index, value) {
+                    gameName.push(value.gm_name);
+                    gameCode.push(value.gm_code);
+                });
+            },
+            error: function (request, status, error) {
+                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        });
+
     });
 
     $("#gs_keyword").keyup(function () {
@@ -209,18 +228,20 @@
         } // if end
 
         // 모달창의 검색창에 검색어 추출
-        let params = $("#gs_keyword").serialize();
+        let params = $("#gs_keyword").val();
 
         // alert(params);
 
         // ajax로 searchProc 실행
-        $.post("searchProc", params, responseProc);
+        // $.post("searchProc", params, responseProc);
+
+        responseProc(params);
     }); // keyup() end
 
     function responseProc(data) {
         // alert(data)
 
-        if (data.length > 0) {
+        /*if (data.length > 0) {
             let result = data.split("^^^"); // | 기호를 기준으로 문자열 분리
             // alert(result[0]); // 검색 결과 수
             // alert(result[1]); // 검색 결과 내용
@@ -247,8 +268,21 @@
 
         } else {
             $("#panel").hide();
-        } // if end
+        } // if end*/
 
+        let str = "";
+        $.each(gameName, function (index, key) {
+
+            if (key.indexOf(data) != -1) {
+                str += "<hr>";
+                str += "<img src='/images/thumb/" + gameCode[index] + "/thumb.jpg' style='width: 10%'>&nbsp;"
+                str += "<span id='title_key' style='cursor: pointer' onclick='panelClick(\"" + gameCode[index] + "\")'>" + key + "</span>";
+                str += "<hr>";
+            }
+        });
+
+        $("#panel").html(str);
+        $("#panel").show();
 
     } // responseProc() end
 

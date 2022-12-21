@@ -650,6 +650,13 @@ public class RecruitController {
         return "redirect:/recruit";
     }
 
+    @RequestMapping("/gameList")
+    @ResponseBody
+    public List<GameDTO> gameList() {
+        List<GameDTO> list = recruitDAO.gm_list();
+        return list;
+    }
+
     // 삭제 후 이메일 발송
 
 } // class end
