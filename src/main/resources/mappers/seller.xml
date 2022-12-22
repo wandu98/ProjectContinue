@@ -427,9 +427,7 @@
                     from (
                             select *
                             from (
-                                    select ss_num, ss_name, ss_price,  ss_speriod, case ss_status when 'S1' then '판매중'
-                                    when 'S2' then '판매중지'
-                                    when 'S3' then '품절' end as ss_status
+                                    select ss_num, ss_name, ss_price,  ss_speriod, ss_status
                                     from tb_sales
                                     where sl_id = #{sl_id}
 
