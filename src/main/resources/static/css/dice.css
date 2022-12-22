@@ -1,3 +1,18 @@
+#diceModal {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+.modal-body {
+    background: linear-gradient(#545454, #454545, #676767);
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+}
+
 .dice {
     align-items: center;
     display: grid;
@@ -18,10 +33,10 @@
     width: 6rem;
 }
 .even-roll {
-    transition: transform 3.5s ease-out;
+    transition: transform 5s ease-out;
 }
 .odd-roll {
-    transition: transform 2.5s ease-out;
+    transition: transform 4.5s ease-out;
 }
 .die-item {
     background-color: #fefefe;
