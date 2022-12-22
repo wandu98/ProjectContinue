@@ -267,6 +267,18 @@ public class SellerDAO {
         return sqlSession.selectList("seller.pseikList", pagingDTO);
     }
 
+    public List<ReviewDTO> reviewList(String sl_id) {
+        return sqlSession.selectList("seller.reviewList", sl_id);
+    }
+
+    public SalesDTO productInfo(int ss_num) {
+        return sqlSession.selectOne("seller.productInfo", ss_num);
+    }
+
+    public int pdtUpdate(SalesDTO salesDTO) {
+        return sqlSession.update("seller.pdtUpdate", salesDTO);
+    }
+
 
 
 //판매자 페이지 전부 유효성 검사

@@ -184,3 +184,10 @@ from (
     ) AA
 order by cnt desc, sales desc
 limit 5;
+
+
+update tb_sales
+set gm_code = , sl_id = , ss_price = , ss_speriod = , ss_eperiod = , ss_stock = , ss_img = , ss_status = ,
+    ss_description = , dv_num = , ss_name =
+where ss_num =
+
