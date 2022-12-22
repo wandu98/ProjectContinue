@@ -133,9 +133,12 @@
                gm_category
         from tb_sales ss
                  join tb_game gm on gm.gm_code = ss.gm_code
-        order by ${order} DESC limit 6
-        OFFSET #{startRow}
+        order by ${order} DESC
         ]]>
+        <if test='keyword != null'>
+            where ss_name like concat('%', #{keyword}, '%')
+        </if>
+        limit 6 OFFSET #{startRow}
     </select>
 
     <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">

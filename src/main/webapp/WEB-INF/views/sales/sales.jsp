@@ -154,10 +154,16 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort" id="sort">
+                                <% String keyword = request.getParameter("keyword");%>
+                                <% String totalPage = request.getParameter("totalPage");%>
+                                <% String startPage = request.getParameter("startPage");%>
+                                <% String endPage = request.getParameter("endPage");%>
+                                <% String count = request.getParameter("count");%>
+                                <% String pageNum = request.getParameter("pageNum");%>
                                     <span><a href='javascript:void(0)'
-                                             onclick='listAgain("ss_num", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>최신순</a>
+                                             onclick='listAgain("ss_num", <%=totalPage%>, <%=startPage%>, <%=endPage%>, <%=count%>, <%=pageNum%>, "<%=keyword%>")'>최신순</a>
                                     <a href='javascript:void(0)'
-                                       onclick='listAgain("ss_price", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>높은가격</a></span>
+                                       onclick='listAgain("ss_price", <%=totalPage%>, <%=startPage%>, <%=endPage%>, <%=count%>, <%=pageNum%>, "<%=keyword%>")'>높은가격</a></span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -258,7 +264,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">위시리스트</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -288,7 +294,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">장바구니</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -351,7 +357,7 @@
     }
 
 
-    function listAgain(order, pageCount, startPage, endPage, count, pageNum) {
+    function listAgain(order, pageCount, startPage, endPage, count, pageNum, keyword) {
 
         $.ajax({
             type: "post",
@@ -362,11 +368,12 @@
                 "startpage": startPage,
                 "endPage": endPage,
                 "count": count,
-                "pageNum": pageNum
+                "pageNum": pageNum,
+                "keyword": keyword
             },
             success: function (result) {
                 //alert(result)
-                // alert(order);
+                alert(order);
                 // alert(pageCount);
                 // alert(startPage);
                 // alert(endPage);

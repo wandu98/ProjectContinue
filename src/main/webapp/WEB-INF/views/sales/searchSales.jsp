@@ -155,10 +155,16 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort" id="sort">
+                                <% String keyword = request.getParameter("keyword");%>
+                                <% String totalPage = request.getParameter("totalPage");%>
+                                <% String startPage = request.getParameter("startPage");%>
+                                <% String endPage = request.getParameter("endPage");%>
+                                <% String count = request.getParameter("count");%>
+                                <% String pageNum = request.getParameter("pageNum");%>
                                     <span><a href='javascript:void(0)'
-                                             onclick='listAgain("ss_num", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>최신순</a>
+                                             onclick='listAgain("ss_num", <%=totalPage%>, <%=startPage%>, <%=endPage%>, <%=count%>, <%=pageNum%>, "<%=keyword%>")'>최신순</a>
                                     <a href='javascript:void(0)'
-                                       onclick='listAgain("ss_price", ${requestScope.totalPage}, ${requestScope.startPage}, ${requestScope.endPage}, ${requestScope.count}, ${requestScope.pageNum})'>높은가격</a></span>
+                                       onclick='listAgain("ss_price", <%=totalPage%>, <%=startPage%>, <%=endPage%>, <%=count%>, <%=pageNum%>, "<%=keyword%>")'>높은가격</a></span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -359,7 +365,7 @@
 
         $.ajax({
             type: "post",
-            url: "/sales/s",
+            url: "/sales",
             data: {
                 "order": order,
                 "pageCount": pageCount,
