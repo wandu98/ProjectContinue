@@ -303,7 +303,7 @@
         WHERE rcrbrd_status = '진행중'
           AND rcrbrd_edate >= now()
         ORDER BY ${order} DESC
-        Limit #{endCount} OFFSET #{startCount}
+        Limit 9 OFFSET #{startCount}
     </select>
 
     <!-- 키워드가 있을 경우 더보기 기능 -->
