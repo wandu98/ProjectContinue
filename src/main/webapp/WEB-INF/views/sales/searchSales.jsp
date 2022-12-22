@@ -355,7 +355,7 @@
 
 
     function listAgain(order, totalPage, startPage, endPage, count, pageNum, keyword) {
-        alert(keyword);
+        //alert(keyword);
 
         // alert(pageNum);
         $.ajax({
@@ -371,19 +371,21 @@
                 "keyword": keyword
             },
             success: function (result) {
-                //alert(result)
+                // alert(result);
                 // alert(order);
                 // alert(pageCount);
                 // alert(startPage);
                 // alert(endPage);
                 // alert(count);
                 // alert(pageNum);
-                // console.log(pageNum)
                 let message = "";
+                let pageCount = ${requestScope.totalPage};
+                let ctg = '${ctg}';
+
                 message += "<div class='row'>";
                 $.each(result, function (index, value) {
                     // alert(index);
-                    // alert(value);
+                    console.log(value);
                     let price = value.ss_price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
                     message += "<div class='col-lg-4 col-md-6 col-sm-6'>";
                     message += "<div class='product__item'>";

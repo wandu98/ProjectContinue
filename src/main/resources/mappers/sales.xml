@@ -44,7 +44,8 @@
     <select id="idxFeaturedProduct" resultType="com.cafe24.nonchrono.dto.SalesDTO">
         select ss_num, ss_name, ss_price, ss_img
         from tb_sales
-        order by ss_eperiod limit 8
+        order by ss_eperiod
+        limit 8
     </select>
 
     <select id="idxRankingSales" resultType="com.cafe24.nonchrono.dto.GameDTO">
@@ -55,7 +56,8 @@
                  join tb_game ga
                       on sa.gm_code = ga.gm_code
         group by ga.gm_code
-        order by count(*) desc limit 10
+        order by count(*) desc
+        limit 10
     </select>
 
     <!-- 목록 출력-->
@@ -106,18 +108,7 @@
     </select>
 
     <select id="list3" parameterType="java.util.Map" resultType="com.cafe24.nonchrono.dto.SalesDTO">
-    <![CDATA[
-        /*select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, r
-        from (
-              select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, r
-              from (
-                    select ss_num, gm.gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num, gm_category, @rno := @rno + 1 as r
-                    from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
-                    order by ${order} DESC
-                    ) AA, (select @rno := 0) BB
-            ) CC
-        where r >= #{startRow} and r <= #{endRow}*/
-
+        <![CDATA[
         select ss_num,
                gm.gm_code,
                sl_id,
@@ -133,12 +124,14 @@
                gm_category
         from tb_sales ss
                  join tb_game gm on gm.gm_code = ss.gm_code
-        order by ${order} DESC
-        where ss_name like CONCAT('%', #{keyword}, '%')
-        limit 6 OFFSET #{startRow}
         ]]>
-
-
+        <if test="keyword != null and !keyword.equals('')">
+            <![CDATA[
+            where ss_name like concat('%', #{keyword}, '%')
+            ]]>
+        </if>
+        order by ${order} DESC
+        limit 6 OFFSET #{startRow}
     </select>
 
     <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">
@@ -274,18 +267,29 @@
     <select id="searchAllList" parameterType="java.util.Map"
             resultType="com.cafe24.nonchrono.dto.SalesDTO">
     <![CDATA[
-/*
-        select *
-        from (select *, @rno := @rno + 1 as r
-              from (select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
-                  from tb_sales
-                  where ss_name like CONCAT('%', #{ss_name}, '%')) AA, (select @rno := 0) BB) CC
-        where r >= #{startRow}
-          and r <= #{endRow}
-*/
-         select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
-         from tb_sales
-         where ss_name like CONCAT('%', #{ss_name}, '%')
+        /*
+                select *
+                from (select *, @rno := @rno + 1 as r
+                      from (select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+                          from tb_sales
+                          where ss_name like CONCAT('%', #{ss_name}, '%')) AA, (select @rno := 0) BB) CC
+                where r >= #{startRow}
+                  and r <= #{endRow}
+        */
+        select ss_num,
+               gm_code,
+               sl_id,
+               ss_name,
+               ss_price,
+               ss_speriod,
+               ss_eperiod,
+               ss_stock,
+               ss_img,
+               ss_status,
+               ss_description,
+               dv_num
+        from tb_sales
+        where ss_name like CONCAT('%', #{ss_name}, '%')
         order by ${order} DESC
         limit 6 OFFSET #{startRow}
         ]]>
@@ -297,10 +301,22 @@
     <![CDATA[
         select *
         from (select *, @rno := @rno + 1 as r
-              from (select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
-                  from tb_sales
-                  where ss_name like CONCAT('%', #{ss_name}, '%')
-                  and gm_code like CONCAT('%', #{gm_code}, '%')) AA, (select @rno := 0) BB) CC
+              from (select ss_num,
+                           gm_code,
+                           sl_id,
+                           ss_name,
+                           ss_price,
+                           ss_speriod,
+                           ss_eperiod,
+                           ss_stock,
+                           ss_img,
+                           ss_status,
+                           ss_description,
+                           dv_num
+                    from tb_sales
+                    where ss_name like CONCAT('%', #{ss_name}, '%')
+                      and gm_code like CONCAT('%', #{gm_code}, '%')) AA,
+                   (select @rno := 0) BB) CC
         where r >= #{startRow}
           and r <= #{endRow}
         ]]>
@@ -358,7 +374,8 @@
                  join tb_game gm on gm.gm_code = sa.gm_code
                  join tb_detail td on sa.ss_num = td.ss_num
         where sa.ss_num
-        order by dt_num desc limit 9
+        order by dt_num desc
+        limit 9
     </select>
 
     <!-- 상품가격 비싼순으로 정렬-->
@@ -383,12 +400,11 @@
     <select id="top_keyword" resultType="com.cafe24.nonchrono.dto.SearchDTO">
         <![CDATA[
         select *
-        from(
-                select sc_word, count(sc_word) as cnt
-                from tb_search
-                group by sc_word
-                having count(sc_word) > 5 limit 3
-            ) aa
+        from (select sc_word, count(sc_word) as cnt
+              from tb_search
+              group by sc_word
+              having count(sc_word) > 5
+              limit 3) aa
         order by cnt desc
         ]]>
     </select>
@@ -397,6 +413,7 @@
         select ss_name
         from tb_sales ss
                  join tb_basket tb on ss.ss_num = tb.ss_num
-        where mem_id = #{mem_id} limit 1
+        where mem_id = #{mem_id}
+        limit 1
     </select>
 </mapper>
