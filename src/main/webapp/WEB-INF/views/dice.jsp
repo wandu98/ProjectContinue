@@ -274,6 +274,8 @@
 
     let result = [];
     let savepoint = [];
+    let userpoint = [];
+    let botpoint = [];
 
     function rollDice() {
         const dice = [...document.querySelectorAll(".die-list")];
@@ -387,7 +389,36 @@
     function savePoint(point) {
         savepoint.push(point)
         console.log(savepoint);
+        if (savepoint.length==6) {
+            for (let i=0; i<3; i++) {
+                userpoint.push(savepoint[i]);
+            }
+            for (let j=3; j<6; j++) {
+                botpoint.push(savepoint[j]);
+            }
+            console.log(userpoint);
+            console.log(botpoint);
+            let userMax = Math.max(...userpoint);
+            let botMax = Math.max(...botpoint);
+            console.log(userMax);
+            console.log(botMax);
+            if (userMax > botMax) {
+                $.ajax({
+                    url : "/minigame"
+                    ,type : "get"
+                    ,success : function () {
+                        alert("출석완료!! 100포인트 획득");
+                    }
+                    ,error : function (request, status, error) {
+                        console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    }
+                });
+            } else {
+                alert("꽝!!! 내일 다시 도전해주세요");
+            }
+        }
     }
+
 
 
 // AI 주사위 턴

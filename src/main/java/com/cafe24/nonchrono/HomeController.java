@@ -1,10 +1,8 @@
 package com.cafe24.nonchrono;
 
-import com.cafe24.nonchrono.dao.BasketDAO;
-import com.cafe24.nonchrono.dao.RecruitDAO;
-import com.cafe24.nonchrono.dao.SalesDAO;
-import com.cafe24.nonchrono.dao.WishDAO;
+import com.cafe24.nonchrono.dao.*;
 import com.cafe24.nonchrono.dto.GameDTO;
+import com.cafe24.nonchrono.dto.MemDTO;
 import com.cafe24.nonchrono.dto.RecruitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,6 +37,12 @@ public class HomeController {
 
     @Autowired
     private BasketDAO basketDAO;
+
+    @Autowired
+    private MinigameDAO minigameDAO;
+
+    @Autowired
+    private MemDAO memDAO;
 
     @RequestMapping("/") // 메인
     public ModelAndView Index(HttpSession session) {
@@ -137,6 +142,27 @@ public class HomeController {
         list.add(wishcnt);
         list.add(basketcnt);
         return list;
+    }
+
+    @RequestMapping("/minigame")
+    @ResponseBody
+    public void minigame(HttpSession session, ServletContext context) {
+        String mem_id = (String) session.getAttribute("mem_id");
+        MemDTO memDTO = memDAO.myList(mem_id);
+        int upoint = memDTO.getUpoint();
+        int apoint = memDTO.getApoint();
+        upoint += 100;
+        apoint += 100;
+        memDTO.setUpoint(upoint);
+        memDTO.setApoint(apoint);
+        memDTO.setMem_id(mem_id);
+
+        int cnt = minigameDAO.getPoint(memDTO);
+        if (cnt==0) {
+            System.out.println("미니게임 포인트 추가 실패");
+        } else {
+            System.out.println("미니게임 포인트 추가 성공");
+        }
     }
 
 } // class end
