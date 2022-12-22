@@ -714,7 +714,7 @@
     }
 
     function miniGame() {
-        $("#dice").modal("show");
+        $("#dice").modal({backdrop: 'static', keyboard: false});
     }
 </script>
 <jsp:include page="dice.jsp"></jsp:include>

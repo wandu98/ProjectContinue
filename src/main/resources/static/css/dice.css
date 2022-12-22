@@ -54,6 +54,7 @@
     height: 100%;
     padding: 1rem;
     width: 100%;
+    box-sizing: content-box;
 }
 .dot {
     align-self: center;
@@ -201,4 +202,15 @@ button:hover {
     .dice {
         perspective: 1300px;
     }
+}
+
+.whiteLabel {
+    width: 20%;
+    font-size: 16px;
+    color: #6f6f6f;
+    padding-left: 20px;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    resize: none;
+    text-align: left;
 }
