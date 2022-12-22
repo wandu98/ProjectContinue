@@ -229,6 +229,7 @@
 
         // 모달창의 검색창에 검색어 추출
         let params = $("#gs_keyword").val();
+        // let params = $("#gs_keyword").serialize();
 
         // alert(params);
 

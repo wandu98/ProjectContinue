@@ -39,3 +39,11 @@ FROM tb_nt;
 
 SELECT @ROWNUM:=@ROWNUM+1 AS rownum
 FROM tb_nt, (SELECT @ROWNUM:=0) AS R
+
+
+    rownum nt_title nt_cmt
+
+((select max(rownum) from tb_nt) + 1), "안녕", "하세요"
+
+
+

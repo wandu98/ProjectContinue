@@ -70,8 +70,7 @@ create table tb_review
     ,
     ss_num      int         not null                  -- 판매 상품 번호
     ,
-    rv_date     datetime  not null default CURRENT_TIMESTAMP
-    ,
+    rv_date     datetime    not null default CURRENT_TIMESTAMP,
     FOREIGN KEY (mem_id) REFERENCES tb_mem (mem_id)   -- 회원
     ,
     FOREIGN KEY (ss_num) REFERENCES tb_sales (ss_num) -- 상품
@@ -156,7 +155,6 @@ CREATE table tb_detail
     FOREIGN KEY (dv_num) REFERENCES tb_delivery (dv_num),      -- 배송 FK
     FOREIGN KEY (ss_num) REFERENCES tb_sales (ss_num)          -- 판매상품 FK
 );
-
 
 
 -- 교환반품
@@ -358,7 +356,8 @@ CREATE TABLE tb_nt
     nt_title   varchar(255) NOT NULL,
     nt_cmt     text(5000)   NOT NULL,
     nt_regdate datetime     NOT NULL default now(),
-    nt_views   int          NOT NULL
+    nt_views   int          NOT NULL,
+    rownum     int          not null
 );
 
 
@@ -507,8 +506,8 @@ create table tb_rating
     rt_num     int AUTO_INCREMENT primary key, -- 평점 일련번호
     rt_goodbad varchar(255) not null,          -- 좋아요/싫어요
     rt_content varchar(255) not null,          -- 평점 내용
-    give_id     varchar(20)  not null,          -- 추천한 회원 아이디
-    receive_id  varchar(20)  not null,          -- 추천 받은 회원 아이디
+    give_id    varchar(20)  not null,          -- 추천한 회원 아이디
+    receive_id varchar(20)  not null,          -- 추천 받은 회원 아이디
     rcrbrd_num int          not null,          -- 추천한 모집 게시판 글 번호
     FOREIGN KEY (rcrbrd_num) REFERENCES tb_rcrboard (rcrbrd_num)
 );
