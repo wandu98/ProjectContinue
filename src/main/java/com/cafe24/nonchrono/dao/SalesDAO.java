@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,10 +96,14 @@ public class SalesDAO {
         map.put("startRow", (pagingDTO.getStartRow()-1));
         map.put("endRow", pagingDTO.getEndRow());
         map.put("order", pagingDTO.getOrder());
-
-        //System.out.println("list3 : " + sqlSession.selectList("sales.list3", map).toString());
+        map.put("keyword",pagingDTO.getKeyword());
+        System.out.println(pagingDTO.getStartRow());
+        System.out.println(pagingDTO.getKeyword());
+//        System.out.println("list3 : " + sqlSession.selectList("sales.list3", map).toString());
         return sqlSession.selectList("sales.list3", map);
-
+//        System.out.println(pagingDTO.getKeyword());
+//        List<SalesDTO> list = new ArrayList();
+//        return list;
     }
 
 //    public List<SalesDTO> searchAll(String keyword) {

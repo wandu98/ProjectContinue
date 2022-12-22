@@ -155,16 +155,10 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort" id="sort">
-                                <% String keyword = request.getParameter("keyword");%>
-                                <% String totalPage = request.getParameter("totalPage");%>
-                                <% String startPage = request.getParameter("startPage");%>
-                                <% String endPage = request.getParameter("endPage");%>
-                                <% String count = request.getParameter("count");%>
-                                <% String pageNum = request.getParameter("pageNum");%>
                                     <span><a href='javascript:void(0)'
-                                             onclick='listAgain("ss_num", <%=totalPage%>, <%=startPage%>, <%=endPage%>, <%=count%>, <%=pageNum%>, "<%=keyword%>")'>최신순</a>
+                                             onclick='listAgain("ss_num", ${totalPage}, ${startPage}, ${endPage}, ${count}, ${pageNum}, "${keyword}")'>최신순</a>
                                     <a href='javascript:void(0)'
-                                       onclick='listAgain("ss_price", <%=totalPage%>, <%=startPage%>, <%=endPage%>, <%=count%>, <%=pageNum%>, "<%=keyword%>")'>높은가격</a></span>
+                                       onclick="listAgain('ss_price', ${totalPage}, ${startPage}, ${endPage}, ${count}, ${pageNum}, '${keyword}')">높은가격</a></span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
@@ -360,20 +354,20 @@
     }
 
 
-    function listAgain(order, pageCount, startPage, endPage, count, pageNum, ctg, keyword) {
+    function listAgain(order, totalPage, startPage, endPage, count, pageNum, keyword) {
+        alert(keyword);
 
-
+        // alert(pageNum);
         $.ajax({
             type: "post",
             url: "/sales",
             data: {
                 "order": order,
-                "pageCount": pageCount,
+                "totalPage" : totalPage,
                 "startPage": startPage,
                 "endPage": endPage,
                 "count": count,
                 "pageNum": pageNum,
-                 "ctg"    : ctg,
                 "keyword": keyword
             },
             success: function (result) {
@@ -383,7 +377,8 @@
                 // alert(startPage);
                 // alert(endPage);
                 // alert(count);
-                //alert(pageNum);
+                // alert(pageNum);
+                // console.log(pageNum)
                 let message = "";
                 message += "<div class='row'>";
                 $.each(result, function (index, value) {
