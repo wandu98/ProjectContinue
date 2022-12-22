@@ -475,11 +475,11 @@ public class SalesController {
     public List<SalesDTO> ajax_list(PagingDTO pagingDTO, HttpServletRequest req, @RequestParam String order) {
 
 
-        System.out.println(order);
+        // System.out.println(order);
         String order2 = "ss_num";
         if (order == null || order.equals("null") || order.equals("")) {
             order = order2;
-            System.out.println("order : " + order);
+            // System.out.println("order : " + order);
         }
 
         int totalRowCount = salesDAO.totalRowCount(); //총 글갯수  6 |  52개
@@ -522,20 +522,17 @@ public class SalesController {
         pagingDTO.setStartRow(startRow);
         pagingDTO.setEndRow(endRow);
         pagingDTO.setOrder(order);
-        System.out.println(startRow);
-        System.out.println(endRow);
-        System.out.println("pagingDTO : " + pagingDTO);
+        // System.out.println(startRow);
+        // System.out.println(endRow);
+        // System.out.println("pagingDTO : " + pagingDTO);
         List list = null;
         if (totalRowCount > 0) {
-            list = salesDAO.list3(pagingDTO); // 1, 5
-
-
-
+            list = salesDAO.list3(pagingDTO); // 1, 6
+            System.out.println("list : " + list);
         } else {
             list = Collections.EMPTY_LIST;
-
+            System.out.println("list 없음");
         }//if end
-
 
         return list;
 
