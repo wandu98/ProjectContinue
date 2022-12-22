@@ -54,7 +54,9 @@
                         <h4>최근 검색어</h4>
                         <ul>
                             <c:forEach var="row" items="${last_search}" end="6">
-                                <li><a href="javascript:void(0)">${row.sc_word}</a></li>
+                                <li>
+                                    <a href="/sales/search?&ctg=ALL&sc_where=sales&keyword=${row.sc_word}">${row.sc_word}</a>
+                                </li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -63,7 +65,9 @@
                         <h4>인기 검색어</h4>
                         <ul>
                             <c:forEach var="row" items="${top_keyword}" end="2">
-                                <li><a href='javascript:void(0)'>${row.sc_word}</a></li>
+                                <li>
+                                    <a href="/sales/search?&ctg=ALL&sc_where=sales&keyword=${row.sc_word}">${row.sc_word}</a>
+                                </li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -129,8 +133,10 @@
                             <c:forEach var="row" items="${idxTopProduct}" varStatus="vs" begin="0" end="5">
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                             data-setbg="/images/product/sales_main/${row.ss_img}">
+                                        <div class="product__discount__item__pic">
+                                            <a href="/sales/detail/${row.ss_num}">
+                                                <img src="/images/product/sales_main/${row.ss_img}" style="height:100%">
+                                            </a>
                                             <div class="product__discount__percent">${vs.count}위</div>
                                             <ul class="product__item__pic__hover">
                                                 <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i
@@ -190,10 +196,11 @@
                                         </ul>
                                     </div>
 
-                                    <div class="product__item__text">
+                                    <div class="product__discount__item__text">
+                                        <span>${row.gm_category}</span>
                                         <h6><a href="/sales/detail/${row.ss_num}">${row.ss_name}</a></h6>
                                         <h5><a href="/sales/detail/${row.ss_num}"><fmt:formatNumber
-                                                value="${row.ss_price}"/></a></h5>
+                                                value="${row.ss_price}" type="currency"/></a></h5>
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +258,7 @@
 </section>
 <!-- Product Section End -->
 
-
+a
 <%-- 위시리스트 모달 --%>
 <div class="container">
     <!-- The Modal -->
@@ -363,7 +370,7 @@
             url: "/sales",
             data: {
                 "order": order,
-                "totalPage" : totalPage,
+                "totalPage": totalPage,
                 "startPage": startPage,
                 "endPage": endPage,
                 "count": count,
@@ -391,7 +398,7 @@
                     message += "<div class='product__item'>";
                     message += "<div class='product__item__pic'>";
                     message += "<a href='/sales/detail/" + value.ss_num + "'>";
-                    message += "<img src='/images/product/sales_main/" + value.ss_img + "'>";
+                    message += "<img src='/images/product/sales_main/" + value.ss_img + "' style='height:100%''>";
                     message += "</a>";
                     message += "<ul class='product__item__pic__hover'>";
                     message += "<li>";

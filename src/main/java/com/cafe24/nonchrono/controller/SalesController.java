@@ -224,7 +224,7 @@ public class SalesController {
         List list = null;
         if (totalRowCount > 0) {
             if (ctg.equals("ALL")) {
-                list = salesDAO.searchAlllist(pagingDTO); // 1, 5
+                list = salesDAO.searchAllList(pagingDTO); // 1, 5
             } else {
                 list = salesDAO.searchCategorylist(pagingDTO);
             }
