@@ -53,7 +53,7 @@
                         <h4>최근 검색어</h4>
                         <ul>
                             <c:forEach var="row" items="${last_search}" end="6">
-                                <li><a href="#">${row.sc_word}</a></li>
+                                <li><a href="javascript:void(0)">${row.sc_word}</a></li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -174,7 +174,7 @@
                                 <div class="product__item">
                                     <div class="product__item__pic">
                                         <a href="/sales/detail/${row.ss_num}">
-                                            <img src="/images/product/sales_main/${row.ss_img}">
+                                            <img src="/images/product/sales_main/${row.ss_img}" style="height:100%">
                                         </a>
                                         <ul class="product__item__pic__hover">
                                             <li>
@@ -382,7 +382,7 @@
                     message += "<div class='product__item'>";
                     message += "<div class='product__item__pic'>";
                     message += "<a href='/sales/detail/" + value.ss_num + "'>";
-                    message += "<img src='/images/product/sales_main/" + value.ss_img + "'>";
+                    message += "<img src='/images/product/sales_main/" + value.ss_img + "' style='height:100%''>";
                     message += "</a>";
                     message += "<ul class='product__item__pic__hover'>";
                     message += "<li>";

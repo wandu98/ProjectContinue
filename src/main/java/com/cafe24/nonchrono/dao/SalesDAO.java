@@ -2,6 +2,7 @@ package com.cafe24.nonchrono.dao;
 
 
 import com.cafe24.nonchrono.dto.*;
+import org.apache.ibatis.javassist.compiler.ast.Keyword;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -95,7 +96,7 @@ public class SalesDAO {
         map.put("endRow", pagingDTO.getEndRow());
         map.put("order", pagingDTO.getOrder());
 
-        System.out.println("list3 : " + sqlSession.selectList("sales.list3", map).toString());
+        //System.out.println("list3 : " + sqlSession.selectList("sales.list3", map).toString());
         return sqlSession.selectList("sales.list3", map);
 
     }
@@ -109,11 +110,16 @@ public class SalesDAO {
 //    }
 
     public List<SalesDTO> searchAlllist(PagingDTO pagingDTO) {
-        return sqlSession.selectList("sales.searchAllList", pagingDTO);
+        Map<String, Object> map = new HashMap<>();
+        map.put("startRow", (pagingDTO.getStartRow()-1));
+        map.put("endRow", pagingDTO.getEndRow());
+        map.put("order", pagingDTO.getOrder());
+        map.put("ss_name", pagingDTO.getSs_name());
+        //System.out.println("list : " + sqlSession.selectList("sales.searchAllList", map).toString());
+        return sqlSession.selectList("sales.searchAllList", map);
     }
 
-    public List<SalesDTO> searchCategorylist(PagingDTO pagingDTO) {
-        return sqlSession.selectList("sales.searchCategorylist", pagingDTO);
+    public List<SalesDTO> searchCategorylist(PagingDTO pagingDTO) {return sqlSession.selectList("sales.searchCategorylist", pagingDTO);
     }
 
     public SalesDTO detail(int ss_num) {

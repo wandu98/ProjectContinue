@@ -63,9 +63,9 @@ public class BasketController {
         String mem_id = (String) session.getAttribute("mem_id");
         int ss_num = Integer.parseInt(request.getParameter("ss_num"));
         int bk_amount = Integer.parseInt(request.getParameter("bk_amount"));
-//        System.out.println(mem_id);
-//        System.out.println(ss_num);
-//        System.out.println(bk_amount);
+        System.out.println(mem_id);
+        System.out.println(ss_num);
+        System.out.println(bk_amount);
         BasketDTO basketDTO = new BasketDTO();
         basketDTO.setMem_id(mem_id);
         basketDTO.setBk_amount(bk_amount);

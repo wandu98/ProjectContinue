@@ -268,9 +268,10 @@
     </select>
 
     <!-- 검색시(모든카테고리) 페이징 된 리스트-->
-    <select id="searchAllList" parameterType="com.cafe24.nonchrono.dto.PagingDTO"
+    <select id="searchAllList" parameterType="java.util.Map"
             resultType="com.cafe24.nonchrono.dto.SalesDTO">
     <![CDATA[
+/*
         select *
         from (select *, @rno := @rno + 1 as r
               from (select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
@@ -278,6 +279,12 @@
                   where ss_name like CONCAT('%', #{ss_name}, '%')) AA, (select @rno := 0) BB) CC
         where r >= #{startRow}
           and r <= #{endRow}
+*/
+         select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+         from tb_sales
+         where ss_name like CONCAT('%', #{ss_name}, '%')
+        order by ${order} DESC
+        limit 6 OFFSET #{startRow}
         ]]>
     </select>
 
