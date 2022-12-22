@@ -1074,4 +1074,13 @@ from (
      ) DD
 where r >= 1 and r <= 5;
 
+select rv_num, mem_id, rv_star, rv.ss_num, rv_date, rv_content, rv_filename
+from tb_review rv join tb_sales sl
+on rv.ss_num = sl.ss_num
+where sl_id = 'digj1908';
+
+select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_stock, ss_img, ss_status, ss_description, dv_num
+from tb_sales
+where ss_num = '22';
+
 

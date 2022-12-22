@@ -191,4 +191,6 @@ public class SalesDAO {
 
     public List<SearchDTO> top_keyword() {return sqlSession.selectList("sales.top_keyword");}
 
+
+
 }//class end

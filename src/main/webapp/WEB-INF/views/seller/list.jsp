@@ -37,6 +37,7 @@
                                         <th scope="col">판매가격</th>
                                         <th scope="col">판매상태</th>
                                         <th scope="col">등록날짜</th>
+                                        <th scope="col">수정</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -45,9 +46,10 @@
 
                                             <th scope="row">${row.ss_num}</th>
                                             <td>${row.ss_name}</td>
-                                            <td>${row.ss_price}원</td>
+                                            <td><fmt:formatNumber value="${row.ss_price}" groupingUsed="true"></fmt:formatNumber>원</td>
                                             <td>${row.ss_status}</td>
                                             <td>${row.ss_speriod}</td>
+                                            <td><button class="btn btn-outline-info" type="button" onclick="modify(${row.ss_num})">수정</button></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -147,6 +149,12 @@
 
 </main>
 <!-- End #main -->
+
+<script>
+    function modify(ss_num) {
+        location.href = "/seller/modify/" + ss_num;
+    }
+</script>
 
 <%@include file="sellerfooter.jsp" %>
 

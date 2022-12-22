@@ -213,8 +213,10 @@ public class SellerController {
 
     ///후기관리
     @RequestMapping("/review")
-    public ModelAndView review() {
+    public ModelAndView review(HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        String sl_id = (String) session.getAttribute("sl_id");
+        mav.addObject("list", sellerDAO.reviewList(sl_id));
         mav.setViewName("seller/review");
         return mav;
     }//review() end
@@ -879,6 +881,53 @@ public class SellerController {
         mav.setViewName("seller/orderSearch");
         return mav;
     }
+
+    @RequestMapping("/modify/{ss_num}")
+    public ModelAndView modify(@PathVariable int ss_num, HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        String sl_id = (String) session.getAttribute("sl_id");
+        mav.addObject("dv_list", sellerDAO.dv_list(sl_id));
+        mav.addObject("info", sellerDAO.productInfo(ss_num));
+        mav.setViewName("seller/modify");
+        return mav;
+    }
+
+    @RequestMapping("/update")
+    public String selaseUpdate(@RequestParam int ss_num, @RequestParam String gm_code, @RequestParam String ss_name, @RequestParam int ss_price, @RequestParam String ss_speriod, @RequestParam String ss_eperiod, @RequestParam int ss_stock, @RequestParam MultipartFile ss_img, @RequestParam String ss_status, @RequestParam String ss_description, @RequestParam int dv_num, HttpSession session) {
+        String sl_id = (String) session.getAttribute("sl_id");
+        String profile = "";
+        SalesDTO salesDTO = new SalesDTO();
+        if (ss_img != null && !ss_img.isEmpty()) {
+            profile = ss_img.getOriginalFilename();
+
+            try {
+                String path = ResourceUtils.getURL("classpath:static/images/product/sales_main").getPath();
+                ss_img.transferTo(new File(path + "/" + profile));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        salesDTO.setSl_id(sl_id);
+        salesDTO.setSs_num(ss_num);
+        salesDTO.setGm_code(gm_code);
+        salesDTO.setSs_name(ss_name);
+        salesDTO.setSs_price(ss_price);
+        salesDTO.setSs_speriod(ss_speriod);
+        salesDTO.setSs_eperiod(ss_eperiod);
+        salesDTO.setSs_stock(ss_stock);
+        salesDTO.setSs_img(profile);
+        salesDTO.setSs_status(ss_status);
+        salesDTO.setSs_description(ss_description);
+        salesDTO.setDv_num(dv_num);
+        int cnt = sellerDAO.pdtUpdate(salesDTO);
+        if (cnt==0) {
+            System.out.println("상품 정보 수정 실패");
+        } else {
+            System.out.println("상품 정보 수정 성공");
+        }
+        return "redirect:/seller/list";
+    } // insert() end
 
 
 }//class end
