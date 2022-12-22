@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -6,10 +5,8 @@
 <%@ include file="auth.jsp" %>
 <%@ include file="dice.jsp"%>
 
-
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -43,7 +40,7 @@
     <script src="/js/jquery.cookie.js"></script>
     <script>
         function miniGame() {
-            $("#dice").modal("show");
+            $("#dice").modal({backdrop: 'static', keyboard: false});
         }
     </script>
 

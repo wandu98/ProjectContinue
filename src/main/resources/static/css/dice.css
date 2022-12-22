@@ -4,7 +4,7 @@
     vertical-align: baseline;
 }
 
-.modal-body {
+.modal-bodys {
     background: linear-gradient(#545454, #454545, #676767);
     display: grid;
     grid-template-columns: 1fr;
@@ -24,6 +24,16 @@
     perspective: 600px;
 }
 .die-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    height: 6rem;
+    list-style-type: none;
+    transform-style: preserve-3d;
+    width: 6rem;
+}
+
+.aidie-list {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
@@ -184,7 +194,7 @@
     grid-area: nine;
 }
 
-button {
+.buttons {
     align-self: center;
     background-color: #efefef;
     border: none;
@@ -194,7 +204,7 @@ button {
     justify-self: center;
     padding: 0.5rem 1rem;
 }
-button:hover {
+.buttons:hover {
     cursor: pointer;
 }
 
