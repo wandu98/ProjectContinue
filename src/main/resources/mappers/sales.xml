@@ -134,11 +134,11 @@
         from tb_sales ss
                  join tb_game gm on gm.gm_code = ss.gm_code
         order by ${order} DESC
-        ]]>
-        <if test='keyword != null'>
-            where ss_name like concat('%', #{keyword}, '%')
-        </if>
+        where ss_name like CONCAT('%', #{keyword}, '%')
         limit 6 OFFSET #{startRow}
+        ]]>
+
+
     </select>
 
     <select id="searchAll" parameterType="String" resultType="com.cafe24.nonchrono.dto.SalesDTO">
@@ -375,17 +375,21 @@
     </insert>
 
     <select id="last_search" resultType="com.cafe24.nonchrono.dto.SearchDTO">
-        select distinct sc_word
+        select sc_word
         from tb_search
-        order by sc_num desc;
+        order by sc_num desc
     </select>
 
     <select id="top_keyword" resultType="com.cafe24.nonchrono.dto.SearchDTO">
         <![CDATA[
-        select sc_word, count(sc_word) as cnt
-        from tb_search
-        group by sc_word
-        having count(sc_word) > 5 limit 3;
+        select *
+        from(
+                select sc_word, count(sc_word) as cnt
+                from tb_search
+                group by sc_word
+                having count(sc_word) > 5 limit 3
+            ) aa
+        order by cnt desc
         ]]>
     </select>
 

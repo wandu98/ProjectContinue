@@ -345,41 +345,40 @@
                                 <div class="container">
                                     <h6 class="card-title">리뷰</h6>
                                     <form id="commentInsertForm" name="commentInsertForm" method="post"
-                                          enctype="multipart/form-data" action="/review/rv_insert">
-                                        <div>
+                                          enctype="multipart/form-data" action="/review/rv_insert" onsubmit="return review()">
+                                        <div class="text-center">
                                             <input type="hidden" name="ss_num" id="ss_num"
                                                    value="${detail.ss_num}"><!-- 부모글 번호 -->
                                             <input type="hidden" id="rv_date" name="rv_date" readonly>
-                                            <span>
-                                            <label for="rv_filename" class="col-sm-2 col-form-label"><img
-                                                    src="/images/pic.jpeg" style="height: 50px;
+                                            <div class="text-center">
+                                                <select name="rv_star">
+                                                    <option>별점을 선택해주세요</option>
+                                                    <option class="star_5 fa" value="10"><span>★★★★★</span></option>
+                                                    <option class="star_4" value="8"><span>★★★★</span></option>
+                                                    <option class="star_3" value="6"><span>★★★</span></option>
+                                                    <option class="star_2" value="4"><span>★★</span></option>
+                                                    <option class="star_1" value="2"><span>★</span></option>
+                                                </select>
+                                                <label for="rv_filename" class="col-sm-2 col-form-label" style="float: left"><img
+                                                        src="/images/pic.jpeg" style="height: 50px;
                                                                            padding-bottom: 20px;">
-                                            </label>
-                                            <select name="rv_star">
-                                                <option>별점을 선택해주세요</option>
-                                                <option class="star_5 fa" value="10"><span>★★★★★</span></option>
-                                                <option class="star_4" value="8"><span>★★★★</span></option>
-                                                <option class="star_3" value="6"><span>★★★</span></option>
-                                                <option class="star_2" value="4"><span>★★</span></option>
-                                                <option class="star_1" value="2"><span>★</span></option>
-                                            </select>
-                                            </span>
-                                            <div>
-                                            <button type="submit" name="commentInsertBtn" id="commentInsertBtn"
-                                                    class="btn btn-outline-primary">등록
-                                            </button>
-                                            </div>
-                                            <div style="padding-top: 2%">
-                                                    <textarea class="form-control" name="rv_content" id="rv_content"
-                                                              style="height: 100px">
-                                                    </textarea>
-                                                <br>
-                                                <img id="pic_view" src="" alt="" style="width:30%">
-                                                <div class="col-sm-10">
-                                                    <input class="form-control" type="file" id="rv_filename"
-                                                           name="rv_filename" style="display: none">
+                                                </label>
+                                                <br><br>
+                                                <textarea id="rv_content" name="rv_content" placeholder="리뷰 작성란..."
+                                                          style="width: 100%; height: 150px; font-size: 16px;
+                                                           color: #6f6f6f; padding-left: 20px;
+                                                           margin-bottom: 24px; border: 1px solid #ebebeb;
+                                                           border-radius: 4px; padding-top: 12px; resize: none;">
+                                                </textarea>
+                                                <div>
+                                                    <img id="pic_view" src="" alt="" style="width:20%">
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control" type="file" id="rv_filename"
+                                                               name="rv_filename" style="display: none; float: left">
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <button type="button"  class="site-btn" style="float: right">리뷰 작성</button>
                                         </div>
                                         <hr>
                                         <div class="container">
@@ -736,6 +735,27 @@
         }
         reader.readAsDataURL(file);
     });
+
+    function review(){
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
+
+        if (mem_id == 'null') {
+            alert("로그인 후 이용해주세요")
+            location.href="/mem/login"
+            return false;
+        }
+
+        let size = $('#rv_content').val();
+        if (size.length < 2){
+            alert("두글자 이상 입력해주세요");
+            return false;
+        }
+
+
+        return true
+    }
+
+
 
 </script>
 
