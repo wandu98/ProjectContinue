@@ -107,7 +107,7 @@
                         <h4>인기 검색어</h4>
                         <div class="blog__sidebar__item__tags">
                             <c:forEach var="sr" items="${searchRank}" varStatus="vs3">
-                                <a href="#">${sr}</a>
+                                <a href="/recruit/searchWord?gs_keyword=${sr}">${sr}</a>
                             </c:forEach>
                         </div>
                     </div>
