@@ -26,6 +26,11 @@
     #close {
         width: 50px;
     }
+    #rcttable thead tr th {
+        position: sticky;
+        top: 0;
+        background: white;
+    }
 </style>
 
 
@@ -176,10 +181,10 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="shoping__cart__table">
-                                            <table>
+                                        <div class="shoping__cart__table" style="overflow: auto; height: 600px">
+                                            <table id="rcttable">
                                                 <thead>
-                                                <tr>
+                                                <tr style="position: sticky">
                                                     <th class="shoping__product">방 제목</th>
                                                     <th>게임명</th>
                                                     <th>참여인원수</th>
@@ -187,7 +192,7 @@
                                                     <th></th>
                                                 </tr>
                                                 </thead>
-                                                <tbody id="rcrbrdlist">
+                                                <tbody id="rcrbrdlist" style="overflow: scroll;">
                                                 <c:choose>
                                                     <c:when test="${recruitlist.size()==0}">
                                                         <tr><td colspan="5"><h5><c:out value="없음"></c:out></h5></td></tr>

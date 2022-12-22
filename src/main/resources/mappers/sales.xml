@@ -17,7 +17,7 @@
                ss_description,
                dv_num
         from tb_sales
-        where ss_status = 'S1'
+        where ss_status = '판매중'
         order by ss_speriod desc
     </select>
 

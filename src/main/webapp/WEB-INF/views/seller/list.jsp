@@ -77,7 +77,7 @@
                                             </c:forEach>
                                             <c:if test="${endPage<=pageCount}">
                                             <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
+                                                <a class="page-link" href="/seller/list?pageNum=${startPage+11}" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
