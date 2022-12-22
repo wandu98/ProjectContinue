@@ -482,7 +482,7 @@ public class SalesController {
             order = order2;
 //             System.out.println("order : " + order);
         }
-        System.out.println("ajax order : " + order);
+        // System.out.println("ajax order : " + order);
         int totalRowCount = salesDAO.totalRowCount(); //총 글갯수  6 |  52개
         //System.out.println(totalRowCount);
         //페이징
@@ -527,14 +527,14 @@ public class SalesController {
         pagingDTO.setOrder(order);
 //        System.out.println(order);
         pagingDTO.setKeyword(keyword);
-        System.out.println(keyword);
+        // System.out.println(keyword);
         // System.out.println(startRow);
         // System.out.println(endRow);
         // System.out.println("pagingDTO : " + pagingDTO);
         List list = null;
         if (totalRowCount > 0) {
             list = salesDAO.list3(pagingDTO); // 1, 6
-//            System.out.println("list : " + list);
+            System.out.println("list : " + list);
         } else {
             list = Collections.EMPTY_LIST;
             System.out.println("list 없음");
