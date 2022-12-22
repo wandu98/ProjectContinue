@@ -166,7 +166,7 @@
                                 </thead>
                                 <tbody class="product__details__text">
                                 <tr>
-                                    <td>${gameDetail.gm_name}</td>
+                                    <td>${detail.ss_name}</td>
                                     <td>
                                         <span class="quantity_price"><fmt:formatNumber value="${detail.ss_price}"
                                                                                         type="currency"/></span>

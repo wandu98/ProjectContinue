@@ -281,16 +281,20 @@
         <div class="row featured__filter">
             <c:forEach var="row" items="${idxFeaturedProduct}" varStatus="vs">
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="/images/product/sales_main/${row.ss_img}">
-                        <ul class="featured__item__pic__hover">
+                <div class="product__item">
+                    <div class="product__item__pic">
+                        <a href="/sales/detail/${row.ss_num}">
+                            <img src="/images/product/sales_main/${row.ss_img}" style="height:100%" >
+                        </a>
+                        <ul class="product__item__pic__hover">
                             <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i class="fa fa-heart"></i></a></li>
                             <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
+
                     <div class="featured__item__text">
                         <h6><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}">${row.ss_name}</a></h6>
-                        <h5>${row.ss_price}</h5>
+                        <h5><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}">${row.ss_price}</a></h5>
                     </div>
                 </div>
             </div>
@@ -650,7 +654,7 @@
     function responseSales(result) {
         $("#ranking").html(result);
     }
-    
+
     // 모집순 랭킹
     function rankingRecruit() {
         $.get("rankingRecruit.do", responseRecruit);
@@ -673,7 +677,7 @@
             }
         }
     }
-    
+
     function basketModal(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
         let params = "ss_num=" + ss_num;
