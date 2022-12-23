@@ -131,7 +131,7 @@
                     </div>
 
                     <!-- Modal body AI-->
-                    <div class="dice" id="aiModalBody" style="display: none">
+                    <div class="dice" id="aiModalBody" style="display: none; position: relative">
                         <ol class="aidie-list even-roll" data-roll="1" id="aidie-1">
                             <li class="die-item" data-side="1">
                                 <span class="dot"></span>
@@ -237,12 +237,18 @@
                                 <span class="dot"></span>
                             </li>
                         </ol>
-                        <div style="position: absolute" id="imghere">
+                        <%--                        <div style="position: absolute" id="imghere">--%>
+                        <%--                            <img class="" id="mario" src="/images/mariodice.png" style="display: table-cell; vertical-align: middle">--%>
+                        <%--                        </div>--%>
+                    </div>
+
+                    <div style="text-align: center; display: flex; flex-wrap: wrap; justify-content: center; position: relative">
+                        <button class="buttons" type="button" id="roll-button" style="position: relative">주사위 굴리기 (<span id="diceCount2"></span>)</button>
+                        <div style="position: absolute; display: none" id="imghere">
                             <img class="" id="mario" src="/images/mariodice.png" style="display: table-cell; vertical-align: middle">
                         </div>
                     </div>
 
-                    <button class="buttons" type="button" id="roll-button">주사위 굴리기 (<span id="diceCount2">3</span>)</button>
                     <div style="background-color: whitesmoke; text-align: center">
                         <p style="margin: 2%">[ 주사위 결과 ]</p>
                         <div>
@@ -277,7 +283,33 @@
     let userpoint = [];
     let botpoint = [];
 
+    $(document).ready(function () {
+
+        // 주사위 굴리는 횟수 가져오기
+        $.ajax({
+            url: "/rollCount",
+            type: "GET",
+            data: {"mem_id": '<%=session.getAttribute("mem_id")%>'},
+            success: function (result) {
+                $('#diceCount2').text(3 - result.length);
+
+                if ((3 - result.length) == 0) {
+                    $('#roll-button').attr('disabled', true);
+                    $('#roll-button').css('background-color', 'gray');
+                    $('#roll-button').css('pointer-events', 'none');
+                }
+
+                $.each(result, function (index, value) {
+                    $('#diceResult'+(index+1)).val(value);
+                });
+            }
+        });
+    })
+
+
+    // 주사위 굴리기
     function rollDice() {
+
         const dice = [...document.querySelectorAll(".die-list")];
         dice.forEach(die => {
             toggleClasses(die);
@@ -290,7 +322,19 @@
         $('#roll-button').css('cursor', 'default');
         let timer2 = setTimeout(cal, 4000, result[0], result[1], result[2]);
 
+        $.ajax({
+            url: "/rollDice",
+            type: "POST",
+            data: {
+                "mem_id": '<%=session.getAttribute("mem_id")%>',
+                "dice1": result[0],
+                "dice2": result[1],
+                "dice3": result[2]
+            },
+            success: function (data) {
 
+            }
+        });
     }
 
     function open(result) {
@@ -425,6 +469,7 @@
     function showAiModal() {
         $("#userModalBody").attr("style", "display:none");
         $("#aiModalBody").attr("style", "display:grid");
+        $("#imghere").attr("style", "display:");
         $("#diceCount2").text('3');
         $("#mario").attr("class", "animate__animated animate__fadeInBottomRight");
         setTimeout(imgout, 3000);

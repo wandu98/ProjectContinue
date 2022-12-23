@@ -8,4 +8,15 @@
         where mem_id = #{mem_id}
     </update>
 
+    <insert id="rollDice" parameterType="java.util.Map">
+        insert into tb_minigame (mem_id, mg_dice, mg_date)
+        values (#{mem_id}, #{dice}, now())
+    </insert>
+
+    <select id="rollCount" parameterType="String" resultType="String">
+        select mg_dice
+        from tb_minigame
+        where mem_id = #{mem_id} and date_format(mg_date, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d')
+    </select>
+
 </mapper>
