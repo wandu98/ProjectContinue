@@ -28,9 +28,9 @@
     </select>
 
 <select id="orderadr" resultType="com.cafe24.nonchrono.dto.MemdvDTO">
-    select mdv.mem_dvnum, mdv.mem_id ,mdv.mem_dvinfo ,mdv.mem_dvzip ,mdv.mem_dvadr1 ,mdv.mem_dvadr2 ,mdv.mem_dvphone, mdv.mem_dvnick
+    select distinct mdv.mem_dvnum, mdv.mem_id ,mdv.mem_dvinfo ,mdv.mem_dvzip ,mdv.mem_dvadr1 ,mdv.mem_dvadr2 ,mdv.mem_dvphone, mdv.mem_dvnick
     from tb_order od join tb_memdv mdv on mdv.mem_dvnum = od.mem_dvnum
-    where od.mem_dvnum = #{mem_dvnum}
+    where mdv.mem_dvnum = #{mem_dvnum}
 </select>
 
 <select id="dvmsg" resultType="String">

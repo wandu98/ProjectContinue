@@ -30,7 +30,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">상품입력</h5>
-                        <form action="/seller/insert" method="post" enctype="multipart/form-data">
+                        <form action="/seller/insert" method="post" enctype="multipart/form-data"
+                              onsubmit="return writeCheck()">
                             <input type="hidden" id="mem_id" name="mem_id" value="${sessionScope.mem_id}">
                             <input type="hidden" id="gm_code" name="gm_code" value="">
 
@@ -111,7 +112,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">판매시작</label>
                                 <div class="col-sm-10">
-                                    <input type="Date" class="form-control" id="ss_speriod" name="ss_speriod" readonly>
+                                    <input type="date" class="form-control" id="ss_speriod" name="ss_speriod" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -216,15 +217,15 @@
                                                             <tbody>
                                                             <c:forEach var="row" items="${dv_list}">
                                                                 <tr>
-                                                                        <td onclick="panelClick2()">${row.dv_num}</td>
-                                                                        <td>${row.dv_courier}</td>
-                                                                        <td>${row.dv_how}</td>
-                                                                        <td>${row.dv_fee}</td>
-                                                                        <td>${row.dv_rffee}</td>
-                                                                        <td>${row.dv_exfee}</td>
-                                                                        <td>${row.dv_extrafee}</td>
-                                                                        <td>${row.dv_adr1}</td>
-                                                                        <td>${row.dv_exadr1}</td>
+                                                                    <td onclick="panelClick2()">${row.dv_num}</td>
+                                                                    <td>${row.dv_courier}</td>
+                                                                    <td>${row.dv_how}</td>
+                                                                    <td>${row.dv_fee}</td>
+                                                                    <td>${row.dv_rffee}</td>
+                                                                    <td>${row.dv_exfee}</td>
+                                                                    <td>${row.dv_extrafee}</td>
+                                                                    <td>${row.dv_adr1}</td>
+                                                                    <td>${row.dv_exadr1}</td>
                                                                 </tr>
                                                             </c:forEach>
                                                             </tbody>
@@ -429,6 +430,37 @@
         }
     });
 
+    function writeCheck() {
+        if ($('#category').val().length < 1) {
+            alert("판매할 상품을 선택해주세요");
+            $('#gs_modal').modal('show');
+            return false;
+        }
+
+        if ($('#ss_eperiod').val().length != 10) {
+            alert("판매종료 기간을 설정해주세요")
+            return false;
+        }
+
+        if ($('#ss_description').val().length == 0) {
+            alert("상품 내용을 입력해주세요")
+            return false;
+        }
+
+        if ($('#dv_num').val().length == 0 ){
+            alert("배송정책을 선택해주세요")
+            return false;
+        }
+
+
+        if ($("#ss_img").val() == "") {
+            alert("첨부파일은 필수");
+            return false;
+        }
+
+
+        return true;
+    }
 
 </script>
 

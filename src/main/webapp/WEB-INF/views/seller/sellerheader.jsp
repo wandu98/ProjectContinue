@@ -88,34 +88,6 @@
                     <img src="/images/001.jpg" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">회원ID</span>
                 </a><!-- End Profile Iamge Icon -->
-
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                    <li class="dropdown-header">
-                        <h6>회원닉네임</h6>
-                        <span>회원ID</span>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="/mypage/mypage">
-                            <i class="bi bi-person"></i>
-                            <span>마이페이지</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>로그아웃</span>
-                        </a>
-                    </li>
-
-                </ul><!-- End Profile Dropdown Items -->
             </li><!-- End Profile Nav -->
 
         </ul>

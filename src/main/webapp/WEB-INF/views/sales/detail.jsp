@@ -23,8 +23,9 @@
         text-align: left;
         line-height: 1.5;
         border-top: 1px solid #ccc;
-        margin : 20px 10px;
+        margin: 20px 10px;
     }
+
     table.type04 th {
         width: 150px;
         padding: 10px;
@@ -32,6 +33,7 @@
         vertical-align: top;
         border-bottom: 1px solid #ccc;
     }
+
     table.type04 td {
         width: 350px;
         padding: 10px;
@@ -99,16 +101,19 @@
         position: relative;
         text-align: center;
         background: #f5f5f5;
-        margin-bottom: 5px;}
+        margin-bottom: 5px;
+    }
+
     .count-wrap > button {
         width: 35px;
         font-size: 16px;
         color: #6f6f6f;
         cursor: pointer;
         display: inline-block;
-        border : none;}
+        border: none;
+    }
 
-    .count-wrap  .inp {
+    .count-wrap .inp {
         height: 100%;
         width: 100%;
         font-size: 16px;
@@ -116,7 +121,8 @@
         width: 50px;
         border: none;
         background: #f5f5f5;
-        text-align: center;}
+        text-align: center;
+    }
 
 </style>
 
@@ -196,10 +202,11 @@
                                     <td>${detail.ss_name}</td>
                                     <td>
                                         <span class="quantity_price"><fmt:formatNumber value="${detail.ss_price}"
-                                                                                        type="currency"/></span>
+                                                                                       type="currency"/></span>
                                         <span class="mileage ">&nbsp;&nbsp;&nbsp;
                                         <img src="//img.echosting.cafe24.com/design/skin/admin/ko_KR/ico_product_point.gif"/>
-                                        <span class="mileage_price">(<fmt:formatNumber value="${detail.ss_price * 0.01}" pattern="#,###"/>원)</span></span>
+                                        <span class="mileage_price">(<fmt:formatNumber value="${detail.ss_price * 0.01}"
+                                                                                       pattern="#,###"/>원)</span></span>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -218,7 +225,8 @@
                         <strong>총 상품금액</strong>(수량) :
                         <span class="total" id="il">
                             <strong>
-                               <input type="text" value="${detail.ss_price}원" name="inputValue" style="border: none; text-align: center"
+                               <input type="text" value="${detail.ss_price}원" name="inputValue"
+                                      style="border: none; text-align: center"
                                       readonly/>
                                 <input type="text" value="1" id="inputCount" name="inputCount"
                                        style="border: none; text-align: left" readonly/>
@@ -229,7 +237,7 @@
 
                     <div class="count-wrap _count">
                         <button type="button" class="minus">-</button>
-                        <input type="text" class="inp" value="1" />
+                        <input type="text" class="inp" value="1"/>
                         <button type="button" class="plus">+</button>
                     </div>
                     <a onclick="purchase(${detail.ss_num})" class="primary-btn btn-outline-danger">바로구매</a>
@@ -371,7 +379,8 @@
                                 <div class="container">
                                     <h6 class="card-title">리뷰</h6>
                                     <form id="commentInsertForm" name="commentInsertForm" method="post"
-                                          enctype="multipart/form-data" action="/review/rv_insert" onsubmit="return review()">
+                                          enctype="multipart/form-data" action="/review/rv_insert"
+                                          onsubmit="return review()">
                                         <div class="text-center">
                                             <input type="hidden" name="ss_num" id="ss_num"
                                                    value="${detail.ss_num}"><!-- 부모글 번호 -->
@@ -385,84 +394,86 @@
                                                     <option class="star_2" value="4"><span>★★</span></option>
                                                     <option class="star_1" value="2"><span>★</span></option>
                                                 </select>
-                                                <label for="rv_filename" class="col-sm-2 col-form-label" style="float: left"><img
+                                                <label for="rv_filename" class="col-sm-2 col-form-label"
+                                                       style="float: left"><img
                                                         src="/images/pic.jpeg" style="height: 50px;
-                                                                           padding-bottom: 20px;">
+                                                                           padding-bottom: 20px;float: inherit ">
                                                 </label>
-                                                <br><br>
                                                 <textarea id="rv_content" name="rv_content" placeholder="리뷰 작성란..."
                                                           style="width: 100%; height: 150px; font-size: 16px;
                                                            color: #6f6f6f; padding-left: 20px;
                                                            margin-bottom: 24px; border: 1px solid #ebebeb;
-                                                           border-radius: 4px; padding-top: 12px; resize: none;">
-                                                </textarea>
+                                                           border-radius: 4px; padding-top: 12px; resize: none;"></textarea>
+                                                <button type="submit" class="site-btn" style="float: right">리뷰 작성
+                                                </button>
                                                 <div>
-                                                    <img id="pic_view" src="" alt="" style="width:20%">
+                                                    <p align="left"/><img id="pic_view" style="width:20%">
                                                     <div class="col-sm-10">
                                                         <input class="form-control" type="file" id="rv_filename"
                                                                name="rv_filename" style="display: none; float: left">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button"  class="site-btn" style="float: right">리뷰 작성</button>
-                                        </div>
-                                        <hr>
-                                        <div class="container">
-                                            <div class="commentList"></div>
                                         </div>
                                     </form>
+                                    <br><br><br>
+                                    <hr>
                                 </div>
                                 </form>
-                                <c:forEach var="row" items="${reviewDetail}">
-                                    ${row.mem_nick} | ${row.rv_date} |
-                                    <c:set var="star" value="${row.rv_star}"/>
-
-                                    <c:choose>
-                                        <c:when test="${star le 2}">
-                                            <i class="fa fa-star"></i>
-                                        </c:when>
-                                        <c:when test="${star le 4}">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </c:when>
-                                        <c:when test="${star le 6}">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </c:when>
-                                        <c:when test="${star le 8}">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <br>
-                                    <!-- 댓글 본문 -->
-                                    <div class="card mb-3">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
-                                                <img src="/images/review/${row.rv_filename}"
-                                                     class="img-fluid rounded-start" alt="..."
-                                                     style="width:250px; height:auto">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"></h5>
-                                                    <p class="card-text">${row.rv_content}</p>
+                                <div class="row" id="board">
+                                    <c:forEach var="row" items="${reviewDetail}">
+                                        <!-- 댓글 본문 -->
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <div class="blog__item"
+                                                 style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
+                                                <div class="blog__item__pic">
+                                                    <img src="/images/review/${row.rv_filename}">
+                                                </div>
+                                                <div class="blog__item__text">
+                                                    <ul>
+                                                        <li><i class="fa fa-calendar-o"></i> ${row.rv_date}</li>
+                                                        <br>
+                                                        <li><c:set var="star" value="${row.rv_star}"/>
+                                                            <c:choose>
+                                                                <c:when test="${star le 2}">
+                                                                    <i class="fa fa-star"></i>
+                                                                </c:when>
+                                                                <c:when test="${star le 4}">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </c:when>
+                                                                <c:when test="${star le 6}">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </c:when>
+                                                                <c:when test="${star le 8}">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </c:otherwise>
+                                                            </c:choose></li>
+                                                    </ul>
+                                                    <h5>${row.mem_nick}</h5>
+                                                    <h5>${row.rv_content}</h5>
                                                 </div>
                                             </div>
+                                            </a>
                                         </div>
-                                    </div>
-                                    <hr>
-                                </c:forEach>
+                                        <%-- 한줄에 3칸씩 --%>
+                                        <c:if test="${vs.count mod 3==0}">
+                                            <br>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -488,59 +499,71 @@
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="/images/product/sales_main/${idxTopProduct[0].ss_img}">
+                    <div class="product__item__pic set-bg"
+                         data-setbg="/images/product/sales_main/${idxTopProduct[0].ss_img}">
                         <ul class="product__item__pic__hover">
-                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[0].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[0].ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[0].ss_num})"><i
+                                    class="fa fa-heart"></i></a></li>
+                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[0].ss_num})"><i
+                                    class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
                         <h6><a href="#">${idxTopProduct[0].ss_name}</a></h6>
-                        <h5><fmt:formatNumber value="${idxTopProduct[0].ss_price}" type="currency"/> </h5>
+                        <h5><fmt:formatNumber value="${idxTopProduct[0].ss_price}" type="currency"/></h5>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="/images/product/sales_main/${idxTopProduct[1].ss_img}">
+                    <div class="product__item__pic set-bg"
+                         data-setbg="/images/product/sales_main/${idxTopProduct[1].ss_img}">
                         <ul class="product__item__pic__hover">
-                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[1].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[1].ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[1].ss_num})"><i
+                                    class="fa fa-heart"></i></a></li>
+                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[1].ss_num})"><i
+                                    class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
                         <h6><a href="#">${idxTopProduct[1].ss_name}</a></h6>
-                        <h5><fmt:formatNumber value="${idxTopProduct[1].ss_price}" type="currency"/> </h5>
+                        <h5><fmt:formatNumber value="${idxTopProduct[1].ss_price}" type="currency"/></h5>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="/images/product/sales_main/${idxTopProduct[2].ss_img}">
+                    <div class="product__item__pic set-bg"
+                         data-setbg="/images/product/sales_main/${idxTopProduct[2].ss_img}">
                         <ul class="product__item__pic__hover">
-                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[2].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[2].ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[2].ss_num})"><i
+                                    class="fa fa-heart"></i></a></li>
+                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[2].ss_num})"><i
+                                    class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
                         <h6><a href="#">${idxTopProduct[2].ss_name}</a></h6>
-                        <h5><fmt:formatNumber value="${idxTopProduct[2].ss_price}" type="currency"/> </h5>
+                        <h5><fmt:formatNumber value="${idxTopProduct[2].ss_price}" type="currency"/></h5>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                     <div class="product__item__pic set-bg" data-setbg="/images/product/sales_main/${idxTopProduct[3].ss_img}">
+                    <div class="product__item__pic set-bg"
+                         data-setbg="/images/product/sales_main/${idxTopProduct[3].ss_img}">
                         <ul class="product__item__pic__hover">
-                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[3].ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[3].ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a class="wishlistModal" onclick="wishlistModal(${idxTopProduct[3].ss_num})"><i
+                                    class="fa fa-heart"></i></a></li>
+                            <li><a class="basketModal" onclick="basketModal(${idxTopProduct[3].ss_num})"><i
+                                    class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="product__item__text">
                         <h6><a href="#">${idxTopProduct[3].ss_name}</a></h6>
-                        <h5><fmt:formatNumber value="${idxTopProduct[3].ss_price}" type="currency"/> </h5>
+                        <h5><fmt:formatNumber value="${idxTopProduct[3].ss_price}" type="currency"/></h5>
                     </div>
                 </div>
             </div>
@@ -584,7 +607,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기
+                    </button>
                     <button type="button" class="btn btn-success" onclick="goWishlist()">위시리스트 확인</button>
                 </div>
 
@@ -613,7 +637,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기
+                    </button>
                     <button type="button" class="btn btn-success" onclick="goBasket()">장바구니 확인</button>
                 </div>
 
@@ -638,6 +663,7 @@
             }
         }
     }
+
     //상품이미지에서 카트(장바구니) 클릭했을 때
     function basketModal(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
@@ -684,50 +710,45 @@
     <%--});--%>
 
     $('._count :button').on({
-        'click' : function(e){
+        'click': function (e) {
             e.preventDefault();
             let $count = $(this).parent('._count').find('.inp');
             let now = parseInt($count.val());
             let min = 1;
             let max = ${detail.ss_stock};
             let num = now;
-            let tot2 = ((num+1) * ${detail.ss_price});
-            let tot3 = ((num-1) * ${detail.ss_price});
+            let tot2 = ((num + 1) * ${detail.ss_price});
+            let tot3 = ((num - 1) * ${detail.ss_price});
             let m_price = tot3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             let p_price = tot2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             // alert(num)
             // alert(p_price)
-            if($(this).hasClass('minus')){
+            if ($(this).hasClass('minus')) {
                 var type = 'm';
-            }else{
+            } else {
                 var type = 'p';
             }
-            if(type=='m'){
-                if(now>min){
+            if (type == 'm') {
+                if (now > min) {
                     num = now - 1;
-                    $('input[name=inputCount]').attr('value', num+"개");
-                    $('input[name=inputValue]').attr('value', m_price+"원");
+                    $('input[name=inputCount]').attr('value', num + "개");
+                    $('input[name=inputValue]').attr('value', m_price + "원");
 
                 }
-            }else{
-                if(now<max){
+            } else {
+                if (now < max) {
                     num = now + 1;
-                    $('input[name=inputCount]').attr('value', num+"개");
-                    $('input[name=inputValue]').attr('value', p_price+"원");
+                    $('input[name=inputCount]').attr('value', num + "개");
+                    $('input[name=inputValue]').attr('value', p_price + "원");
                 } else {
                     alert("수량을 확인해주세요");
                 }
             }
-            if(num != now){
+            if (num != now) {
                 $count.val(num);
             }
         }
     });
-
-
-
-
-
 
 
     // Get the modal
@@ -736,7 +757,7 @@
     function cartModal(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
         let bk_amount2 = $("#inputCount").val();
-        let bk_amount  = bk_amount2.substr(0,1);
+        let bk_amount = bk_amount2.substr(0, 1);
         console.log(mem_id);
         console.log(bk_amount);
         if (mem_id != 'null' && bk_amount > 0) {
@@ -758,7 +779,7 @@
     function purchase(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
         let bk_amount2 = $("#inputCount").val();
-        let bk_amount  = bk_amount2.substr(0,1);
+        let bk_amount = bk_amount2.substr(0, 1);
         console.log(mem_id);
         console.log(bk_amount);
         if (mem_id != 'null' && bk_amount > 0) {
@@ -773,8 +794,6 @@
         } else {
             alert("로그인 후 이용해주세요")
         }
-
-
 
 
     }
@@ -827,17 +846,17 @@
         reader.readAsDataURL(file);
     });
 
-    function review(){
+    function review() {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
 
         if (mem_id == 'null') {
             alert("로그인 후 이용해주세요")
-            location.href="/mem/login"
+            location.href = "/mem/login"
             return false;
         }
 
         let size = $('#rv_content').val();
-        if (size.length < 2){
+        if (size.length < 2) {
             alert("두글자 이상 입력해주세요");
             return false;
         }
@@ -845,7 +864,6 @@
 
         return true
     }
-
 
 
 </script>
