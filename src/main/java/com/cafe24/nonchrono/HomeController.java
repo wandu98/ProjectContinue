@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -65,7 +64,7 @@ public class HomeController {
 
         List<RecruitDTO> list = recruitDAO.idxrcrbrd();
         List list2 = new ArrayList<>();
-        for (int i=0; i< list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             int rcrbrd_num = list.get(i).getRcrbrd_num();
             list2.add(recruitDAO.idxrcrbrdCount(rcrbrd_num));
         }
@@ -82,16 +81,24 @@ public class HomeController {
     }
 
     @RequestMapping("/mypage") // 마이페이지
-    public String Mypage() { return "mypage/mypage"; }
+    public String Mypage() {
+        return "mypage/mypage";
+    }
 
     @RequestMapping("/seller") // 판매자 페이지
-    public String Seller() { return "seller/seller"; }
+    public String Seller() {
+        return "seller/seller";
+    }
 
     @RequestMapping("/sales") // 상품 페이지
-    public String Sales() { return "sales/sales"; }
+    public String Sales() {
+        return "sales/sales";
+    }
 
     @RequestMapping("/recruit") // 모집페이지
-    public String Recruit() { return "recruit/recruit"; }
+    public String Recruit() {
+        return "recruit/recruit";
+    }
 
 
     @ResponseBody
@@ -101,8 +108,8 @@ public class HomeController {
 //        System.out.println(list.get(0).getGm_name());
         String result = "";
         result += "<ol>";
-        for (int i=0; i<list.size(); i++) {
-            result += " <li>" + (i+1) + ". " + list.get(i).getGm_name() + "</li>";
+        for (int i = 0; i < list.size(); i++) {
+            result += " <li>" + (i + 1) + ". " + list.get(i).getGm_name() + "</li>";
 
         }
         result += "</ol>";
@@ -115,8 +122,8 @@ public class HomeController {
         List<GameDTO> list = recruitDAO.idxRankingRecruit();
         String result = "";
         result += "<ol>";
-        for (int i=0; i<list.size(); i++) {
-            result += " <li>" + (i+1) + ". " + list.get(i).getGm_name() + "</li>";
+        for (int i = 0; i < list.size(); i++) {
+            result += " <li>" + (i + 1) + ". " + list.get(i).getGm_name() + "</li>";
 
         }
         result += "</ol>";
@@ -146,7 +153,7 @@ public class HomeController {
 
     @RequestMapping("/minigame")
     @ResponseBody
-    public void minigame(HttpSession session, ServletContext context) {
+    public void minigame(HttpSession session) {
         String mem_id = (String) session.getAttribute("mem_id");
         MemDTO memDTO = memDAO.myList(mem_id);
         int upoint = memDTO.getUpoint();
@@ -158,11 +165,24 @@ public class HomeController {
         memDTO.setMem_id(mem_id);
 
         int cnt = minigameDAO.getPoint(memDTO);
-        if (cnt==0) {
+        if (cnt == 0) {
             System.out.println("미니게임 포인트 추가 실패");
         } else {
             System.out.println("미니게임 포인트 추가 성공");
         }
+    }
+
+    @RequestMapping("/rollDice")
+    @ResponseBody
+    public int rollDice(String mem_id, int dice1, int dice2, int dice3) {
+        String dice = dice1 + "," + dice2 + "," + dice3;
+        return minigameDAO.rollDice(mem_id, dice);
+    }
+
+    @RequestMapping("/rollCount")
+    @ResponseBody
+    public List<String> rollCount(String mem_id) {
+        return minigameDAO.rollCount(mem_id);
     }
 
 } // class end
