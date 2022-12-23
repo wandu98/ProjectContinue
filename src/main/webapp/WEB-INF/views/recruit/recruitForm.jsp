@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="checkout__input col-lg-6">
-                                <p>모집 인원 (본인 포함)<span>*</span></p>
+                                <p>모집 인원 (본인 제외)<span>*</span></p>
                                 <select id="rcrbrd_max" name="rcrbrd_max">
                                     <option value="1">1</option>
                                     <option value="2">2</option>

@@ -540,44 +540,44 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="blog__item">
-                    <div class="blog__item__pic">
+                    <div class="blog__item__pic"><a href="/recruit/detail/${idxrcrbrd[0].rcrbrd_num}">
                         <img src="/images/thumb/${idxrcrbrd[0].gm_code}/thumb.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
+                    </a></div>
+                    <div class="blog__item__text"><a href="/recruit/detail/${idxrcrbrd[0].rcrbrd_num}">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[0].rcrbrd_edate}</li>
                             <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[0]}</li>
                         </ul>
-                        <h5><a href="/recruit/detail/${idxrcrbrd[0].rcrbrd_num}">${idxrcrbrd[0].rcrbrd_subject}</a></h5>
-                    </div>
+                        <h5>${idxrcrbrd[0].rcrbrd_subject}</h5>
+                    </a></div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="blog__item">
-                    <div class="blog__item__pic">
+                    <div class="blog__item__pic"><a href="/recruit/detail/${idxrcrbrd[1].rcrbrd_num}">
                         <img src="/images/thumb/${idxrcrbrd[1].gm_code}/thumb.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
+                    </a></div>
+                    <div class="blog__item__text"><a href="/recruit/detail/${idxrcrbrd[1].rcrbrd_num}">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[1].rcrbrd_edate}</li>
                             <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[1]}</li>
                         </ul>
-                        <h5><a href="/recruit/detail/${idxrcrbrd[1].rcrbrd_num}">${idxrcrbrd[1].rcrbrd_subject}</a></h5>
-                    </div>
+                        <h5>${idxrcrbrd[1].rcrbrd_subject}</h5>
+                    </a></div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="blog__item">
-                    <div class="blog__item__pic">
+                    <div class="blog__item__pic"><a href="/recruit/detail/${idxrcrbrd[2].rcrbrd_num}">
                         <img src="images/thumb/${idxrcrbrd[2].gm_code}/thumb.jpg" alt="">
-                    </div>
-                    <div class="blog__item__text">
+                    </a></div>
+                    <div class="blog__item__text"><a href="/recruit/detail/${idxrcrbrd[2].rcrbrd_num}">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[2].rcrbrd_edate}</li>
                             <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[2]}</li>
                         </ul>
-                        <h5><a href="/recruit/detail/${idxrcrbrd[2].rcrbrd_num}">${idxrcrbrd[2].rcrbrd_subject}</a></h5>
-                    </div>
+                        <h5>${idxrcrbrd[2].rcrbrd_subject}</h5>
+                    </a></div>
                 </div>
             </div>
         </div>
@@ -595,7 +595,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">위시리스트</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -624,7 +624,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">장바구니</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 

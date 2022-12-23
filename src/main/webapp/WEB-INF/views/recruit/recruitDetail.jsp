@@ -178,7 +178,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-12" style="text-align: center">
-                        <span style="font-size: 30px; font-weight: bold">파티장</span>
+                        <span style="font-size: 30px; font-weight: bold">모집장</span>
                         <br>
                         <br>
                         <c:if test="${detail.mem_id eq mem_id}">
