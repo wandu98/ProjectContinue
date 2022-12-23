@@ -191,3 +191,7 @@ set gm_code = , sl_id = , ss_price = , ss_speriod = , ss_eperiod = , ss_stock = 
     ss_description = , dv_num = , ss_name =
 where ss_num =
 
+update tb_mem
+set upoint = #{upoint}, apoint = #{apoint}
+where mem_id = #{mem_id}
+
