@@ -181,17 +181,17 @@
                         <span>카테고리</span>
                     </div>
                     <ul>
-                        <li><a href="#">본체</a></li>
-                        <li><a href="#">타이틀 (패키지)</a></li>
-                        <li><a href="#">타이틀 (다운로드)</a></li>
-                        <li><a href="#">다운로드 추가 컨텐츠 (DLC)</a></li>
-                        <li><a href="#">온라인 이용권</a></li>
-                        <li><a href="#">선불 번호</a></li>
-                        <li><a href="#">무료 컨텐츠</a></li>
-                        <li><a href="#">아미보</a></li>
-                        <li><a href="#">프로컨트롤러</a></li>
-                        <li><a href="#">조이콘</a></li>
-                        <li><a href="#">주변 기기</a></li>
+                        <li><a href="/sales/search?ctg=MN&sc_where=sales&keyword=">본체</a></li>
+                        <li><a href="/sales/search?ctg=PT&sc_where=sales&keyword=">타이틀 (패키지)</a></li>
+                        <li><a href="/sales/search?ctg=DT&sc_where=sales&keyword=">타이틀 (다운로드)</a></li>
+                        <li><a href="/sales/search?ctg=DL&sc_where=sales&keyword=">다운로드 추가 컨텐츠 (DLC)</a></li>
+                        <li><a href="/sales/search?ctg=OL&sc_where=sales&keyword=">온라인 이용권</a></li>
+                        <li><a href="/sales/search?ctg=PN&sc_where=sales&keyword=">선불 번호</a></li>
+                        <li><a href="/sales/search?ctg=FC&sc_where=sales&keyword=">무료 컨텐츠</a></li>
+                        <li><a href="/sales/search?ctg=AM&sc_where=sales&keyword=">아미보</a></li>
+                        <li><a href="/sales/search?ctg=PC&sc_where=sales&keyword=">프로컨트롤러</a></li>
+                        <li><a href="/sales/search?ctg=JC&sc_where=sales&keyword=">조이콘</a></li>
+                        <li><a href="/sales/search?ctg=AC&sc_where=sales&keyword=">주변 기기</a></li>
                     </ul>
                 </div>
             </div>

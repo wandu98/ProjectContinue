@@ -112,7 +112,7 @@ public class SalesDAO {
 //        return sqlSession.selectList("sales.searchCategory", salesDTO);
 //    }
 
-    public List<SalesDTO> searchAlllist(PagingDTO pagingDTO) {
+    public List<SalesDTO> searchAllList(PagingDTO pagingDTO) {
         Map<String, Object> map = new HashMap<>();
         map.put("startRow", (pagingDTO.getStartRow()-1));
         map.put("endRow", pagingDTO.getEndRow());

@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="auth.jsp" %>
 <!DOCTYPE html>
@@ -49,6 +51,10 @@
             overflow:hidden;
             text-overflow:ellipsis;
             white-space:nowrap;
+        }
+        .product__item__pic__hover li:hover a {
+            background: #fd1c1c;
+            border-color: #fd1c1c;
         }
     </style>
 
@@ -286,15 +292,17 @@
                         <a href="/sales/detail/${row.ss_num}">
                             <img src="/images/product/sales_main/${row.ss_img}" style="height:100%" >
                         </a>
-                        <ul class="product__item__pic__hover">
-                            <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                        <ul class="product__item__pic__hover" >
+                            <li><a style="padding-top: 0%;" class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i class="fa fa-heart"></i></a></li>
+                            <li><a style="padding-top: 0%;" class="basketModal" onclick="basketModal(${row.ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
 
-                    <div class="featured__item__text">
+                    <div class="product__discount__item__text">
+                        <span>${row.gm_category}</span>
                         <h6><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}">${row.ss_name}</a></h6>
-                        <h5><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}">${row.ss_price}</a></h5>
+                        <h5><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}"><fmt:formatNumber
+                                value="${row.ss_price}" type="currency"/></a></h5>
                     </div>
                 </div>
             </div>

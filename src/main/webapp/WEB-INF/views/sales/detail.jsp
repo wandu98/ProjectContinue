@@ -91,6 +91,33 @@
     /*    cursor: pointer;*/
     /*}*/
 
+
+    .count-wrap {
+        width: 140px;
+        height: 50px;
+        display: inline-block;
+        position: relative;
+        text-align: center;
+        background: #f5f5f5;
+        margin-bottom: 5px;}
+    .count-wrap > button {
+        width: 35px;
+        font-size: 16px;
+        color: #6f6f6f;
+        cursor: pointer;
+        display: inline-block;
+        border : none;}
+
+    .count-wrap  .inp {
+        height: 100%;
+        width: 100%;
+        font-size: 16px;
+        color: #6f6f6f;
+        width: 50px;
+        border: none;
+        background: #f5f5f5;
+        text-align: center;}
+
 </style>
 
 <!-- Breadcrumb Section Begin -->
@@ -191,24 +218,23 @@
                         <strong>총 상품금액</strong>(수량) :
                         <span class="total" id="il">
                             <strong>
-                               <input type="text" value="0원" name="inputValue" style="border: none; text-align: center"
+                               <input type="text" value="${detail.ss_price}원" name="inputValue" style="border: none; text-align: center"
                                       readonly/>
-                                <input type="text" value="0개" id="inputCount" name="inputCount"
+                                <input type="text" value="1" id="inputCount" name="inputCount"
                                        style="border: none; text-align: left" readonly/>
                             </strong>
                         </span>
                     </div>
                     <br>
-                    <div class="product__details__quantity">
-                        <div class="quantity">
-                            <div class="pro-qty" id="count2">
-                                <input type="text" id="count" value=0>
-                            </div>
-                        </div>
+
+                    <div class="count-wrap _count">
+                        <button type="button" class="minus">-</button>
+                        <input type="text" class="inp" value="1" />
+                        <button type="button" class="plus">+</button>
                     </div>
                     <a onclick="purchase(${detail.ss_num})" class="primary-btn btn-outline-danger">바로구매</a>
                     <a onclick="cartModal(${detail.ss_num})" class="primary-btn btn-outline-danger">장바구니 추가</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    <a onclick="wishheart(${detail.ss_num})" class="heart-icon"><span class="icon_heart_alt"></span></a>
                 </div>
 
             </div>
@@ -547,7 +573,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">위시리스트</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -576,7 +602,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">장바구니</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -639,21 +665,69 @@
     }
 
 
-    $(document).ready(function () {
-        $('#count2 span').on('click', function () {
-            let count = $('#count').val();
-            let tot2 = (parseInt(count) *${detail.ss_price});
+    <%--$(document).ready(function () {--%>
+    <%--    $('#count2 span').on('click', function () {--%>
+    <%--        let count = $('#count').val();--%>
+    <%--        let tot2 = (parseInt(count) *${detail.ss_price});--%>
+    <%--        let price = tot2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');--%>
 
-            if (count < ${detail.ss_stock}) {
-                $('input[name=inputCount]').attr('value', count+"개")
-                $('input[name=inputValue]').attr('value', tot2+"원")
+    <%--        if (count <= ${detail.ss_stock}) {--%>
+    <%--            $('input[name=inputCount]').attr('value', count+"개")--%>
+    <%--            $('input[name=inputValue]').attr('value', price+"원")--%>
 
-            } else {
-                alert("재고가 부족합니다")
+    <%--        } else {--%>
+    <%--            alert("재고가 부족합니다")--%>
+    <%--            return false;--%>
+    <%--        }--%>
+    <%--        ;--%>
+    <%--    });--%>
+    <%--});--%>
+
+    $('._count :button').on({
+        'click' : function(e){
+            e.preventDefault();
+            let $count = $(this).parent('._count').find('.inp');
+            let now = parseInt($count.val());
+            let min = 1;
+            let max = ${detail.ss_stock};
+            let num = now;
+            let tot2 = ((num+1) * ${detail.ss_price});
+            let tot3 = ((num-1) * ${detail.ss_price});
+            let m_price = tot3.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            let p_price = tot2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            // alert(num)
+            // alert(p_price)
+            if($(this).hasClass('minus')){
+                var type = 'm';
+            }else{
+                var type = 'p';
             }
-            ;
-        });
+            if(type=='m'){
+                if(now>min){
+                    num = now - 1;
+                    $('input[name=inputCount]').attr('value', num+"개");
+                    $('input[name=inputValue]').attr('value', m_price+"원");
+
+                }
+            }else{
+                if(now<max){
+                    num = now + 1;
+                    $('input[name=inputCount]').attr('value', num+"개");
+                    $('input[name=inputValue]').attr('value', p_price+"원");
+                } else {
+                    alert("수량을 확인해주세요");
+                }
+            }
+            if(num != now){
+                $count.val(num);
+            }
+        }
     });
+
+
+
+
+
 
 
     // Get the modal
@@ -683,7 +757,8 @@
 
     function purchase(ss_num) {
         let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
-        let bk_amount = $("#inputCount").val();
+        let bk_amount2 = $("#inputCount").val();
+        let bk_amount  = bk_amount2.substr(0,1);
         console.log(mem_id);
         console.log(bk_amount);
         if (mem_id != 'null' && bk_amount > 0) {
@@ -703,6 +778,22 @@
 
 
     }
+
+    function wishheart(ss_num) {
+        let mem_id = '<%=(String) session.getAttribute("mem_id")%>';
+        let params = "ss_num=" + ss_num;
+        if (mem_id == 'null') {
+            alert("로그인 후 이용해주세요");
+        } else {
+            $("#myModal1").modal('show');
+            if ($("#myModal1").on("DOMSubtreeModified")) {  // #myModal1의 변화 감지. 여기서는 변화가 3번이라 3번 insert가 되어 1번만 insert 시키기 위해 if의 조건으로 주었다.
+                $.get("/wishlist/insert", params);
+
+
+            }
+        }
+    }
+
 
     function modalClose() {
         modal.style.display = "none";

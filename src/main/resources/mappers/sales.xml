@@ -42,8 +42,8 @@
     </select>
 
     <select id="idxFeaturedProduct" resultType="com.cafe24.nonchrono.dto.SalesDTO">
-        select ss_num, ss_name, ss_price, ss_img
-        from tb_sales
+        select ss_num, ss_name, ss_price, ss_img, gm_category
+        from tb_sales ss join tb_game gm on gm.gm_code = ss.gm_code
         order by ss_eperiod
         limit 8
     </select>
@@ -277,7 +277,7 @@
                   and r <= #{endRow}
         */
         select ss_num,
-               gm_code,
+               gm.gm_code,
                sl_id,
                ss_name,
                ss_price,
@@ -287,8 +287,10 @@
                ss_img,
                ss_status,
                ss_description,
-               dv_num
-        from tb_sales
+               dv_num,
+               gm_category
+        from tb_sales ss
+                 join tb_game gm on gm.gm_code = ss.gm_code
         where ss_name like CONCAT('%', #{ss_name}, '%')
         order by ${order} DESC
         limit 6 OFFSET #{startRow}
