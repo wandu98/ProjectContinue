@@ -40,7 +40,12 @@
     <script src="/js/jquery.cookie.js"></script>
     <script>
         function miniGame() {
-            $("#dice").modal({backdrop: 'static', keyboard: false});
+            if ('${mem_id}'!="") {
+                $("#dice").modal({backdrop: 'static', keyboard: false});
+            } else {
+                alert("로그인 후 이용해주세요");
+            }
+
         }
     </script>
 
