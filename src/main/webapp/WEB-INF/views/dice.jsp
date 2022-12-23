@@ -128,6 +128,9 @@
                                 <span class="dot"></span>
                             </li>
                         </ol>
+                        <div class="item2">
+                            <button class="buttons" type="button" id="roll-button" style="position: relative">주사위 굴리기 (<span id="diceCount2"></span>)</button>
+                        </div>
                     </div>
 
                     <!-- Modal body AI-->
@@ -237,14 +240,10 @@
                                 <span class="dot"></span>
                             </li>
                         </ol>
-                        <%--                        <div style="position: absolute" id="imghere">--%>
-                        <%--                            <img class="" id="mario" src="/images/mariodice.png" style="display: table-cell; vertical-align: middle">--%>
-                        <%--                        </div>--%>
-                    </div>
-
-                    <div style="text-align: center; display: flex; flex-wrap: wrap; justify-content: center; position: relative">
-                        <button class="buttons" type="button" id="roll-button" style="position: relative">주사위 굴리기 (<span id="diceCount2"></span>)</button>
-                        <div style="position: absolute; display: none" id="imghere">
+                        <div class="item2">
+                            <button class="buttons" type="button" id="roll-button2" style="position: relative; background-color: grey" disabled>주사위 굴리기 (<span id="diceCount3">3</span>)</button>
+                        </div>
+                        <div style="position: absolute" id="imghere">
                             <img class="" id="mario" src="/images/mariodice.png" style="display: table-cell; vertical-align: middle">
                         </div>
                     </div>
@@ -252,15 +251,21 @@
                     <div style="background-color: whitesmoke; text-align: center">
                         <p style="margin: 2%">[ 주사위 결과 ]</p>
                         <div>
-                            <input type="text" id="diceResult1" class="whiteLabel" readonly style="margin: 2%">
-                            <input type="text" id="diceResult2" class="whiteLabel" readonly style="margin: 2%">
-                            <input type="text" id="diceResult3" class="whiteLabel" readonly style="margin: 2%">
+                            <input type="text" id="diceResult1" name="diceResult" class="whiteLabel" readonly style="margin: 2%">
+                            <input type="text" id="diceResult2" name="diceResult" class="whiteLabel" readonly style="margin: 2%">
+                            <input type="text" id="diceResult3" name="diceResult" class="whiteLabel" readonly style="margin: 2%"><br>
+                            <input type="text" id="pointValue1" class="whiteLabel" readonly style="margin-right: 2%; margin-left: 2%; margin-bottom: 2%; background-color: whitesmoke; border: none; cursor: default">
+                            <input type="text" id="pointValue2" class="whiteLabel" readonly style="margin-right: 2%; margin-left: 2%; margin-bottom: 2%; background-color: whitesmoke; border: none; cursor: default">
+                            <input type="text" id="pointValue3" class="whiteLabel" readonly style="margin-right: 2%; margin-left: 2%; margin-bottom: 2%; background-color: whitesmoke; border: none; cursor: default">
                         </div>
                         <div id="aiDiceResult">
                             <p style="margin: 2%">[ Continue? 주사위 결과 ]</p>
-                            <input type="text" id="aidiceResult1" class="whiteLabel" readonly style="margin: 2%">
-                            <input type="text" id="aidiceResult2" class="whiteLabel" readonly style="margin: 2%">
-                            <input type="text" id="aidiceResult3" class="whiteLabel" readonly style="margin: 2%">
+                            <input type="text" id="aidiceResult1" name="diceResult" class="whiteLabel" readonly style="margin: 2%">
+                            <input type="text" id="aidiceResult2" name="diceResult" class="whiteLabel" readonly style="margin: 2%">
+                            <input type="text" id="aidiceResult3" name="diceResult" class="whiteLabel" readonly style="margin: 2%"><br>
+                            <input type="text" id="aipointValue1" class="whiteLabel" readonly style="margin-right: 2%;margin-left: 2%;margin-bottom: 2%;background-color: whitesmoke;border: none;cursor: default">
+                            <input type="text" id="aipointValue2" class="whiteLabel" readonly style="margin-right: 2%;margin-left: 2%;margin-bottom: 2%;background-color: whitesmoke;border: none;cursor: default">
+                            <input type="text" id="aipointValue3" class="whiteLabel" readonly style="margin-right: 2%;margin-left: 2%;margin-bottom: 2%;background-color: whitesmoke;border: none;cursor: default">
                         </div>
                     </div>
                 </div>
@@ -282,6 +287,7 @@
     let savepoint = [];
     let userpoint = [];
     let botpoint = [];
+    let aiCount = 0;
 
     $(document).ready(function () {
 
@@ -304,8 +310,79 @@
                 });
             }
         });
+
+        // ai 주사위 굴릴 횟수 가져오기
+        $.ajax({
+            url: "/rollCount",
+            type: "GET",
+            data: {"mem_id": 'ai_' + '<%=session.getAttribute("mem_id")%>'},
+            success: function (result) {
+                aiCount = 0;
+
+                $.each(result, function (index, value) {
+                    $('#aidiceResult'+(index+1)).val(value);
+                    aiCount += 1;
+                });
+            }
+        });
+
     })
 
+    function count() {
+
+        let arrDiceResult1 = [];
+        let arrDiceResult2 = [];
+        let arrDiceResult3 = [];
+
+        let diceResult1 = $("#diceResult1").val();
+        arrDiceResult1 = diceResult1.split(",");
+
+        if ($("#diceResult2").val() != "" && $("#diceResult2").val() != null) {
+            let diceResult2 = $("#diceResult2").val();
+            arrDiceResult2 = diceResult2.split(",");
+
+            if ($("#diceResult3").val() != "" && $("#diceResult3").val() != null) {
+                let diceResult3 = $("#diceResult3").val();
+                arrDiceResult3 = diceResult3.split(",");
+            }
+        }
+
+        cal(arrDiceResult1[0], arrDiceResult1[1], arrDiceResult1[2]);
+
+        if (arrDiceResult2[0] != "" && arrDiceResult2[0] != null) {
+            cal(arrDiceResult2[0], arrDiceResult2[1], arrDiceResult2[2]);
+
+            if (arrDiceResult3[0] != "" && arrDiceResult3[0] != null) {
+                cal(arrDiceResult3[0], arrDiceResult3[1], arrDiceResult3[2]);
+            }
+        }
+
+    }
+
+    // 모달을 켰을 때
+    $('#dice').on('show.bs.modal', function (e) {
+
+        // 유저가 돌린 기록에 따라서 족보를 계산
+        if ($("#diceCount2").text() == '2' && $("#pointValue1").val() == "") {
+            count();
+        } else if ($("#diceCount2").text() == '1' && $("#pointValue2").val() == "") {
+            count();
+        } else if ($("#diceCount2").text() == '0') {
+            count();
+        }
+
+        // 돌릴 횟수가 남아있지 않을 때 ai 턴으로 넘어간다
+        if ($("#diceCount2").text() == '0') {
+            setTimeout(showAiModal, 4000);
+
+            let size = $("input[name=diceResult]").length;
+            let arr = new Array(size);
+            for (let i = 0; i < size; i++) {
+                arr[i] = $("input[name=diceResult]").eq(i).val();
+
+            }
+        }
+    });
 
     // 주사위 굴리기
     function rollDice() {
@@ -380,10 +457,11 @@
 
     function cal(x, y, z) {
         let point = 0;
-
+        let result = "";
 
         if (x == y && y == z) {
             // alert(x + '트리플');
+            result = x + "트리플";
             if (x != 1) {
                 point += 300 * (x-1);
             } else {
@@ -391,6 +469,7 @@
             }
         } else if (x == y || z == x) {
             // alert(x + '원페어');
+            result = x + "원페어";
             if (x != 1) {
                 point += 100 * (x-1);
             } else {
@@ -399,6 +478,7 @@
 
         } else if (y == z) {
             // alert(y + '원페어');
+            result = y + "원페어";
             if (y != 1) {
                 point += 100 * (y-1);
             } else {
@@ -406,34 +486,68 @@
             }
         }
 
-
-
         if (x + 1 == y && y + 1 == z) {
             // alert(x.toString() + y.toString() + z.toString() + '스트레이트');
             point += 500 * z;
+            result = x.toString() + y.toString() + z.toString() + '스트레이트';
         } else if (y + 1 == z && z + 1 == x) {
             // alert(y.toString() + z.toString() + x.toString() + '스트레이트');
             point += 500 * x
+            result = y.toString() + z.toString() + x.toString() + '스트레이트';
         } else if (z + 1 == x && x + 1 == y) {
             // alert(z.toString() + x.toString() + y.toString() + '스트레이트');
             point += 500 * y;
+            result = z.toString() + x.toString() + y.toString() + '스트레이트';
         } else if (x + 1 == z && z + 1 == y) {
             // alert(x.toString() + z.toString() + y.toString() + '스트레이트');
+            result = x.toString() + z.toString() + y.toString() + '스트레이트';
             point += 500 * y;
         } else if (y + 1 == x && x + 1 == z) {
             // alert(y.toString() + x.toString() + z.toString() + '스트레이트');
             point += 500 * z;
+            result = y.toString() + x.toString() + z.toString() + '스트레이트';
         } else if (z + 1 == y && y + 1 == x) {
             // alert(z.toString() + y.toString() + x.toString() + '스트레이트');
             point += 500 * x;
+            result = z.toString() + y.toString() + x.toString() + '스트레이트';
         }
+
+        if (result == "") {
+            result = "꽝";
+        }
+
         savePoint(point);
+
+        if ($('#pointValue1').val() == "") {
+            $('#pointValue1').val(result);
+        } else if ($('#pointValue2').val() == "") {
+            $('#pointValue2').val(result);
+        } else if ($('#pointValue3').val() == "") {
+            $('#pointValue3').val(result);
+        }
+
+        /*if ($('#diceCount2').text() == '2' && $('#pointValue1').val() == "") {
+            $('#pointValue1').val(result);
+        } else if ($('#diceCount2').text() == '1' && $('#pointValue1').val() != "" && $('#pointValue2').val() == "") {
+            $('#pointValue2').val(result);
+        } else if ($('#diceCount2').text() == '1' && $('#pointValue1').val() == "") {
+            $('#pointValue1').val(result);
+        } else if ($('#diceCount2').text() == '0' && $('#pointValue1').val() != "" && $('#pointValue2').val() != "" && $('#pointValue3').val() == "") {
+            $('#pointValue3').val(result);
+        } else if ($('#diceCount2').text() == '0' && $('#pointValue1').val() == "" &&  $('#pointValue2').val() == "") {
+            $('#pointValue1').val(result);
+        } else if ($('#diceCount2').text() == '0' && $('#pointValue1').val() != "" && $('#pointValue2').val() == "") {
+            $('#pointValue2').val(result);
+        } else if ($('#diceCount3').text() == '0' && $('#pointValue1').val() != "" && $('#pointValue2').val() != "" && $('#pointValue3').val() == "") {
+            $('#pointValue3').val(result);
+        }*/
     }
 
     function savePoint(point) {
         savepoint.push(point)
         console.log(savepoint);
-        if (savepoint.length==6) {
+
+        if (savepoint.length == 6) {
             for (let i=0; i<3; i++) {
                 userpoint.push(savepoint[i]);
             }
@@ -450,8 +564,9 @@
                 $.ajax({
                     url : "/minigame"
                     ,type : "get"
+                    ,data : "userMax=" + userMax
                     ,success : function () {
-                        alert("출석완료!! 100포인트 획득");
+                        alert("출석완료!! " + userMax + "포인트 획득");
                     }
                     ,error : function (request, status, error) {
                         console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -460,20 +575,24 @@
             } else {
                 alert("꽝!!! 내일 다시 도전해주세요");
             }
+
         }
     }
 
 
 
-// AI 주사위 턴
+    // AI 주사위 턴
     function showAiModal() {
         $("#userModalBody").attr("style", "display:none");
-        $("#aiModalBody").attr("style", "display:grid");
-        $("#imghere").attr("style", "display:");
+        $("#aiModalBody").attr("style", "display:");
+        // $("#imghere").attr("style", "display:");
         $("#diceCount2").text('3');
         $("#mario").attr("class", "animate__animated animate__fadeInBottomRight");
         setTimeout(imgout, 3000);
-        setTimeout(aiRollDice, 5000);
+        alert(aiCount);
+        if (aiCount != 3) {
+            setTimeout(aiRollDice, 5000);
+        }
     }
 
     function imgout() {
@@ -491,23 +610,40 @@
         setTimeout(showAiResult, 4000, result);
         setTimeout(cal, 4000, result[0], result[1], result[2]);
 
+        $.ajax({
+            url: "/rollDice",
+            type: "POST",
+            data: {
+                "mem_id": 'ai_' + '<%=session.getAttribute("mem_id")%>',
+                "dice1": result[0],
+                "dice2": result[1],
+                "dice3": result[2]
+            },
+            success: function (data) {
+
+            },
+            error: function (error) {
+                console.log("에러 : " + error)
+            }
+        });
+
     }
 
     function showAiResult(result) {
         // 남은 횟수 3
-        if ($('#diceCount2').text() == '3') {
+        if (aiCount == 0) {
             $('#aidiceResult1').val(result);
             setTimeout(aiRollDice, 3000);
             // 남은 횟수 2
-        } else if ($('#diceCount2').text() == '2') {
+        } else if (aiCount == 1) {
             $('#aidiceResult2').val(result);
             setTimeout(aiRollDice, 3000);
             // 남은 횟수 1
-        } else if ($('#diceCount2').text() == '1') {
+        } else if (aiCount == 2) {
             $('#aidiceResult3').val(result);
         }
-        if (parseInt($('#diceCount2').text()) != 0) {
-            $('#diceCount2').text(parseInt($('#diceCount2').text()) - 1);
+        if (parseInt($('#diceCount3').text()) != 0) {
+            $('#diceCount3').text(parseInt($('#diceCount3').text()) - 1);
         }
     }
 

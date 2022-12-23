@@ -387,3 +387,13 @@ LIMIT 5;
 
 SELECT rcrbrd_num
 FROM tb_rcrboard;
+
+
+select *
+from tb_rcrboard rb
+         join tb_game ga
+              on rb.gm_code = ga.gm_code
+where date_format(rcrbrd_date, '%Y-%m')
+group by ga.gm_code
+order by count(*) desc
+    limit 10;

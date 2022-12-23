@@ -153,13 +153,14 @@ public class HomeController {
 
     @RequestMapping("/minigame")
     @ResponseBody
-    public void minigame(HttpSession session) {
+    public void minigame(HttpSession session, HttpServletRequest request) {
         String mem_id = (String) session.getAttribute("mem_id");
+        int userMax = Integer.parseInt(request.getParameter("userMax"));
         MemDTO memDTO = memDAO.myList(mem_id);
         int upoint = memDTO.getUpoint();
         int apoint = memDTO.getApoint();
-        upoint += 100;
-        apoint += 100;
+        upoint += userMax;
+        apoint += userMax;
         memDTO.setUpoint(upoint);
         memDTO.setApoint(apoint);
         memDTO.setMem_id(mem_id);
@@ -176,6 +177,8 @@ public class HomeController {
     @ResponseBody
     public int rollDice(String mem_id, int dice1, int dice2, int dice3) {
         String dice = dice1 + "," + dice2 + "," + dice3;
+        System.out.println("mem_id : " + mem_id);
+        System.out.println("dice : " + dice);
         return minigameDAO.rollDice(mem_id, dice);
     }
 
