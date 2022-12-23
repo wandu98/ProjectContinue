@@ -52,6 +52,10 @@
             text-overflow:ellipsis;
             white-space:nowrap;
         }
+        .product__item__pic__hover li:hover a {
+            background: #fd1c1c;
+            border-color: #fd1c1c;
+        }
     </style>
 
 </head>
@@ -288,9 +292,9 @@
                         <a href="/sales/detail/${row.ss_num}">
                             <img src="/images/product/sales_main/${row.ss_img}" style="height:100%" >
                         </a>
-                        <ul class="product__item__pic__hover">
-                            <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i class="fa fa-heart"></i></a></li>
-                            <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                        <ul class="product__item__pic__hover" >
+                            <li><a style="padding-top: 0%;" class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i class="fa fa-heart"></i></a></li>
+                            <li><a style="padding-top: 0%;" class="basketModal" onclick="basketModal(${row.ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
 

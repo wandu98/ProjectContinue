@@ -19,7 +19,11 @@
     #sort > a {
         text-decoration: none;
         color: darkgray;
+    }
 
+    .product__item__pic__hover li:hover a {
+        background: #fd1c1c;
+        border-color: #fd1c1c;
     }
 
 
@@ -53,7 +57,9 @@
                         <h4>최근 검색어</h4>
                         <ul>
                             <c:forEach var="row" items="${last_search}" end="6">
-                                <li><a href="/sales/search?&ctg=ALL&sc_where=sales&keyword=${row.sc_word}">${row.sc_word}</a></li>
+                                <li>
+                                    <a href="/sales/search?&ctg=ALL&sc_where=sales&keyword=${row.sc_word}">${row.sc_word}</a>
+                                </li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -62,7 +68,9 @@
                         <h4>인기 검색어</h4>
                         <ul>
                             <c:forEach var="row" items="${top_keyword}" end="2">
-                                <li><a href="/sales/search?&ctg=ALL&sc_where=sales&keyword=${row.sc_word}">${row.sc_word}</a></li>
+                                <li>
+                                    <a href="/sales/search?&ctg=ALL&sc_where=sales&keyword=${row.sc_word}">${row.sc_word}</a>
+                                </li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -177,15 +185,15 @@
                                 <div class="product__item">
                                     <div class="product__item__pic">
                                         <a href="/sales/detail/${row.ss_num}">
-                                            <img src="/images/product/sales_main/${row.ss_img}" style="height:100%" >
+                                            <img src="/images/product/sales_main/${row.ss_img}" style="height:100%">
                                         </a>
                                         <ul class="product__item__pic__hover">
-                                            <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i class="fa fa-heart"></i></a></li>
-                                            <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i
+                                                    class="fa fa-heart"></i></a></li>
+                                            <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i
+                                                    class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
-
-
                                     <div class="product__discount__item__text">
                                         <span>${row.gm_category}</span>
                                         <h6><a href="/sales/detail/${row.ss_num}">${row.ss_name}</a></h6>

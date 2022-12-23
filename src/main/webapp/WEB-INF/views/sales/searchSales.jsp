@@ -20,9 +20,12 @@
     #sort > a {
         text-decoration: none;
         color: darkgray;
-
     }
 
+    .product__item__pic__hover li:hover a {
+        background: #fd1c1c;
+        border-color: #fd1c1c;
+    }
 
 </style>
 
@@ -268,7 +271,7 @@ a
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">위시리스트</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -298,7 +301,7 @@ a
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">장바구니</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
