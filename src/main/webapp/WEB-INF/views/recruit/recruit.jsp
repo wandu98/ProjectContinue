@@ -135,7 +135,6 @@
                                         <span id="list${vs.count}"
                                               name="list${vs.count}"
                                               style="color: #7796dc">(${attendCount.get(vs.index)} / ${row.rcrbrd_max})</span>
-
                                     </div>
                                 </div>
                             </a>
