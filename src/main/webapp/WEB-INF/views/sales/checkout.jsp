@@ -491,7 +491,7 @@
 
     function requestPay() {
         let total = ${bk_total + max_fee};
-        alert("결제 성공");
+        // alert("결제 성공");
         IMP.init('imp62827174')
         //IMP.reqeust_pay(param, callback) 결제창 호출
         IMP.request_pay({

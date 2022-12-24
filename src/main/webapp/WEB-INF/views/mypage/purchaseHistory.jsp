@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -52,7 +53,7 @@
                                         ${historyproduct[vs.index]}
                                 </td>
                                 <td class="shoping__cart__price">
-                                        ${row.total}원
+                                        <fmt:formatNumber type="currency" value="${row.total}" groupingUsed="true"></fmt:formatNumber>
                                 </td>
                                 <td class="shoping__cart__total">
                                         ${row.od_date}

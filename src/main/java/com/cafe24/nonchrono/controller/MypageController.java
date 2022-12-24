@@ -326,6 +326,7 @@ public class MypageController {
         String mem_id = (String) session.getAttribute("mem_id");
         List<OrderDTO> list = orderDAO.purchaseHistoryList(mem_id);
         List list1 = new ArrayList<>();
+        System.out.println(list.size());
         for (int i=0; i< list.size(); i++) {
             String od_num = list.get(i).getOd_num();
             list1.add(orderDAO.purchaseHistoryProduct(od_num));

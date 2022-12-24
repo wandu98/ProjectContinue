@@ -95,9 +95,9 @@ public class SalesController {
         int endPage = startPage + pagePerBlock + 1; //0+10+1 = 11
 
 
-        System.out.println("시작 row : " + pagingDTO.getStartRow());
-        System.out.println("끝 row : " + pagingDTO.getEndRow());
-        System.out.println("순서 정렬 : " + pagingDTO.getOrder());
+//        System.out.println("시작 row : " + pagingDTO.getStartRow());
+//        System.out.println("끝 row : " + pagingDTO.getEndRow());
+//        System.out.println("순서 정렬 : " + pagingDTO.getOrder());
 
         List list = new ArrayList();
         if (totalRowCount > 0) {

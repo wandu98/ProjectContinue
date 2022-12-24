@@ -9,6 +9,7 @@
                               on od.od_num = dt.od_num
         where mem_id = #{mem_id}
         group by dt.od_num
+        order by od_date desc
     </select>
 
     <select id="historyproduct" resultType="String">
