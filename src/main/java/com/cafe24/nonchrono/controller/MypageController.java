@@ -79,7 +79,7 @@ public class MypageController {
 
         double temp = memDAO.temp(mem_id);
 
-        List<Map<String,?>> list = recruitDAO.rcrbrdlist(mem_id);
+        List<Map<String,Object>> list = recruitDAO.rcrbrdlist(mem_id);
         int rcrbrd_num = 0;
 
         List<Integer> list2 = new ArrayList<>();
