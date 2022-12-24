@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class WishDAO {
@@ -51,6 +52,10 @@ public class WishDAO {
         } else {
             return sqlSession.selectOne("wishlist.idxWishCount", mem_id);
         }
+    }
+
+    public List<Map<String,Object>> noPagingList(String mem_id) {
+        return sqlSession.selectList("wishlist.noPagingList", mem_id);
     }
 
 }

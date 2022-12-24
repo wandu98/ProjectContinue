@@ -1,10 +1,7 @@
 package com.cafe24.nonchrono.controller;
 
 import com.cafe24.nonchrono.dao.*;
-import com.cafe24.nonchrono.dto.MemDTO;
-import com.cafe24.nonchrono.dto.OrderDTO;
-import com.cafe24.nonchrono.dto.PagingDTO;
-import com.cafe24.nonchrono.dto.SalesDTO;
+import com.cafe24.nonchrono.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -355,6 +352,46 @@ public class MypageController {
             mav.setViewName("mem/loginForm");
         }
         return mav;
+    }
+
+    @RequestMapping("/wishToBasket")
+    public String wishToBasket(HttpSession session) {
+        String mem_id = (String) session.getAttribute("mem_id");
+        List<Map<String,Object>> wishList = wishDAO.noPagingList(mem_id);
+        List<Map<String,Object>> basketList = basketDAO.mylist(mem_id);
+
+        for (int i=0; i<basketList.size(); i++) {
+            for (int j=0; j<wishList.size(); j++) {
+                if (wishList.get(j).get("ss_num")==basketList.get(i).get("ss_num")) {
+                    wishList.remove(j);
+                }
+            }
+        }
+//        System.out.println(wishList);
+
+        BasketDTO basketDTO = new BasketDTO();
+        basketDTO.setMem_id(mem_id);
+        basketDTO.setBk_amount(1);
+        for (int i=0; i<wishList.size(); i++) {
+            basketDTO.setSs_num((Integer) wishList.get(i).get("ss_num"));
+            basketDAO.insert(basketDTO);
+        }
+
+        wishDAO.allRemove(mem_id);
+
+        int wishcnt = 0;
+        int basketcnt = 0;
+        if (mem_id != null) {
+            wishcnt = wishDAO.idxWishCount(mem_id);
+            basketcnt = basketDAO.count(mem_id);
+            session.setAttribute("idxWishCount", wishcnt);
+            session.setAttribute("idxBasketCount", basketcnt);
+        } else {
+            session.setAttribute("idxWishCount", wishcnt);
+            session.setAttribute("idxBasketCount", basketcnt);
+        }
+
+        return "redirect:/sales/checkout";
     }
 
 }

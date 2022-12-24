@@ -79,7 +79,7 @@
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
                     <a href="/wishlist/allRemove" class="primary-btn cart-btn cart-btn-right">위시리스트 비우기</a>
-                    <a href="#" class="primary-btn cart-btn cart-btn-right" style="margin-right: 1%">전체상품주문</a>
+                    <a href="/mypage/wishToBasket" class="primary-btn cart-btn cart-btn-right" style="margin-right: 1%">전체상품주문</a>
                 </div>
             </div>
         </div>

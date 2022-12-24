@@ -695,7 +695,7 @@
                     </div>
 
                     <div class="card-body pb-0">
-                        <h5 class="card-title">매출 현황 <span id="TMY">| This Month</span></h5>
+                        <h5 class="card-title">매출 현황 <span id="TMY">| day</span></h5>
 
                         <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
 
@@ -989,7 +989,7 @@
                         }]
                     });
                 } else if (time == "Month") {
-                    $("#TMY4").text("| " + time);
+                    $("#TMY").text("| " + time);
                     var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
                         legend: {
                             data: ['지난달', '이번달']
@@ -1057,7 +1057,7 @@
                         }]
                     });
                 } else {
-                    $("#TMY4").text("| " + time);
+                    $("#TMY").text("| " + time);
                     var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
                         legend: {
                             data: ['작년', '금년']
