@@ -517,7 +517,7 @@ public class RecruitController {
         int rcrbrd_num = Integer.parseInt(request.getParameter("rcrbrd_num"));
         int cnt = recruitDAO.delete(rcrbrd_num);
         String result = "";
-        List<Map<String,?>> list = new ArrayList<>();
+        List<Map<String,Object>> list = new ArrayList<>();
         if (cnt == 0) {
             System.out.println("삭제에 실패하였습니다!");
         } else {

@@ -609,7 +609,7 @@
                     , error: function (request, status, error) {
                         console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
                     }
-                });
+                })
             } else {
                 alert("꽝!!! 내일 다시 도전해주세요");
                 $('#closeBtn').attr('disabled', false);

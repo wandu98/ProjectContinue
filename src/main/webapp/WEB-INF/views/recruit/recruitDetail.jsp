@@ -689,18 +689,20 @@
 
     function comment() {
         let comment = $('#commentForm').serialize();
-        $.ajax({
-            url: "/recruit/comment",
-            type: "post",
-            data: comment,
-            success: function (data) {
-                commentList();
-                $('#com_content').val('');
-            },
-            error: function (request, status, error) {
-                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-            }
-        })
+        if (commentCheck() == true) {
+            $.ajax({
+                url: "/recruit/comment",
+                type: "post",
+                data: comment,
+                success: function (data) {
+                    commentList();
+                    $('#com_content').val('');
+                },
+                error: function (request, status, error) {
+                    console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                }
+            })
+        }
     }
 
     function commentList() {
