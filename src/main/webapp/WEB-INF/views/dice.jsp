@@ -21,8 +21,8 @@
                 </div>
 
                 <!-- Modal body user -->
-                <div class="modal-bodys">
-                    <div class="dice" id="userModalBody" style="position: relative">
+                <div class="modal-bodys" style="height: 100%; width: auto">
+                    <div class="dice" id="userModalBody" style="position: relative; height: 500px">
                         <ol class="die-list even-roll" data-roll="1" id="die-1">
                             <li class="die-item" data-side="1">
                                 <span class="dot"></span>
@@ -129,12 +129,14 @@
                             </li>
                         </ol>
                         <div class="item2">
-                            <button class="buttons" type="button" id="roll-button" style="position: relative">주사위 굴리기 (<span id="diceCount2"></span>)</button>
+                            <button class="buttons" type="button" id="roll-button" style="position: relative">주사위 굴리기
+                                (<span id="diceCount2"></span>)
+                            </button>
                         </div>
                     </div>
 
                     <!-- Modal body AI-->
-                    <div class="dice" id="aiModalBody" style="display: none; position: relative">
+                    <div class="dice" id="aiModalBody" style="display: none; position: relative; height: 500px">
                         <ol class="aidie-list even-roll" data-roll="1" id="aidie-1">
                             <li class="die-item" data-side="1">
                                 <span class="dot"></span>
@@ -241,38 +243,54 @@
                             </li>
                         </ol>
                         <div class="item2">
-                            <button class="buttons" type="button" id="roll-button2" style="position: relative; background-color: grey" disabled>주사위 굴리기 (<span id="diceCount3">3</span>)</button>
+                            <button class="buttons" type="button" id="roll-button2"
+                                    style="position: relative; background-color: grey" disabled>주사위 굴리기 (<span
+                                    id="diceCount3"></span>)
+                            </button>
                         </div>
                         <div style="position: absolute" id="imghere">
-                            <img class="" id="mario" src="/images/mariodice.png" style="display: table-cell; vertical-align: middle">
+                            <img class="" id="mario" src="/images/mariodice.png"
+                                 style="display: table-cell; vertical-align: middle">
                         </div>
                     </div>
 
                     <div style="background-color: whitesmoke; text-align: center">
                         <p style="margin: 2%">[ 주사위 결과 ]</p>
                         <div>
-                            <input type="text" id="diceResult1" name="diceResult" class="whiteLabel" readonly style="margin: 2%">
-                            <input type="text" id="diceResult2" name="diceResult" class="whiteLabel" readonly style="margin: 2%">
-                            <input type="text" id="diceResult3" name="diceResult" class="whiteLabel" readonly style="margin: 2%"><br>
-                            <input type="text" id="pointValue1" class="whiteLabel" readonly style="margin-right: 2%; margin-left: 2%; margin-bottom: 2%; background-color: whitesmoke; border: none; cursor: default">
-                            <input type="text" id="pointValue2" class="whiteLabel" readonly style="margin-right: 2%; margin-left: 2%; margin-bottom: 2%; background-color: whitesmoke; border: none; cursor: default">
-                            <input type="text" id="pointValue3" class="whiteLabel" readonly style="margin-right: 2%; margin-left: 2%; margin-bottom: 2%; background-color: whitesmoke; border: none; cursor: default">
+                            <input type="text" id="diceResult1" name="diceResult" class="whiteLabel" readonly
+                                   style="margin: 2%">
+                            <input type="text" id="diceResult2" name="diceResult" class="whiteLabel" readonly
+                                   style="margin: 2%">
+                            <input type="text" id="diceResult3" name="diceResult" class="whiteLabel" readonly
+                                   style="margin: 2%"><br>
+                            <input type="text" id="pointValue1" class="whiteLabel" readonly
+                                   style="margin-right: 2%; margin-left: 2%; margin-bottom: 2%; background-color: whitesmoke; border: none; cursor: default">
+                            <input type="text" id="pointValue2" class="whiteLabel" readonly
+                                   style="margin-right: 2%; margin-left: 2%; margin-bottom: 2%; background-color: whitesmoke; border: none; cursor: default">
+                            <input type="text" id="pointValue3" class="whiteLabel" readonly
+                                   style="margin-right: 2%; margin-left: 2%; margin-bottom: 2%; background-color: whitesmoke; border: none; cursor: default">
                         </div>
                         <div id="aiDiceResult">
                             <p style="margin: 2%">[ Continue? 주사위 결과 ]</p>
-                            <input type="text" id="aidiceResult1" name="diceResult" class="whiteLabel" readonly style="margin: 2%">
-                            <input type="text" id="aidiceResult2" name="diceResult" class="whiteLabel" readonly style="margin: 2%">
-                            <input type="text" id="aidiceResult3" name="diceResult" class="whiteLabel" readonly style="margin: 2%"><br>
-                            <input type="text" id="aipointValue1" class="whiteLabel" readonly style="margin-right: 2%;margin-left: 2%;margin-bottom: 2%;background-color: whitesmoke;border: none;cursor: default">
-                            <input type="text" id="aipointValue2" class="whiteLabel" readonly style="margin-right: 2%;margin-left: 2%;margin-bottom: 2%;background-color: whitesmoke;border: none;cursor: default">
-                            <input type="text" id="aipointValue3" class="whiteLabel" readonly style="margin-right: 2%;margin-left: 2%;margin-bottom: 2%;background-color: whitesmoke;border: none;cursor: default">
+                            <input type="text" id="aidiceResult1" name="diceResult" class="whiteLabel" readonly
+                                   style="margin: 2%">
+                            <input type="text" id="aidiceResult2" name="diceResult" class="whiteLabel" readonly
+                                   style="margin: 2%">
+                            <input type="text" id="aidiceResult3" name="diceResult" class="whiteLabel" readonly
+                                   style="margin: 2%"><br>
+                            <input type="text" id="aipointValue1" class="whiteLabel" readonly
+                                   style="margin-right: 2%;margin-left: 2%;margin-bottom: 2%;background-color: whitesmoke;border: none;cursor: default">
+                            <input type="text" id="aipointValue2" class="whiteLabel" readonly
+                                   style="margin-right: 2%;margin-left: 2%;margin-bottom: 2%;background-color: whitesmoke;border: none;cursor: default">
+                            <input type="text" id="aipointValue3" class="whiteLabel" readonly
+                                   style="margin-right: 2%;margin-left: 2%;margin-bottom: 2%;background-color: whitesmoke;border: none;cursor: default">
                         </div>
                     </div>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button class="buttons" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button class="buttons" id="closeBtn" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
 
             </div>
@@ -287,7 +305,7 @@
     let savepoint = [];
     let userpoint = [];
     let botpoint = [];
-    let aiCount = 0;
+    let aiCount = 3;
 
     $(document).ready(function () {
 
@@ -299,14 +317,16 @@
             success: function (result) {
                 $('#diceCount2').text(3 - result.length);
 
+                // 유저 주사위 횟수가 0이면 버튼 막기
                 if ((3 - result.length) == 0) {
                     $('#roll-button').attr('disabled', true);
                     $('#roll-button').css('background-color', 'gray');
                     $('#roll-button').css('pointer-events', 'none');
                 }
 
+                // 유저 결과창에 주사위 결과 넣기
                 $.each(result, function (index, value) {
-                    $('#diceResult'+(index+1)).val(value);
+                    $('#diceResult' + (index + 1)).val(value);
                 });
             }
         });
@@ -317,17 +337,22 @@
             type: "GET",
             data: {"mem_id": 'ai_' + '<%=session.getAttribute("mem_id")%>'},
             success: function (result) {
-                aiCount = 0;
+                aiCount = 3 - result.length;
+                $('#diceCount3').text(aiCount);
+
+                if (aiCount == 0) {
+                    $('#roll-button').text("오늘 횟수를 모두 사용하셨습니다.");
+                }
 
                 $.each(result, function (index, value) {
-                    $('#aidiceResult'+(index+1)).val(value);
-                    aiCount += 1;
+                    $('#aidiceResult' + (index + 1)).val(value);
                 });
             }
         });
 
     })
 
+    // 유저와 ai의 주사위 결과 분석해서 포인트와 족보를 결과창에 넣기
     function count() {
 
         let arrDiceResult1 = [];
@@ -357,22 +382,44 @@
             }
         }
 
+        let aiarrDiceResult1 = [];
+        let aiarrDiceResult2 = [];
+        let aiarrDiceResult3 = [];
+
+        if ($("#aidiceResult1").val() != "" && $("#aidiceResult1").val() != null) {
+            let aidiceResult1 = $("#aidiceResult1").val();
+            aiarrDiceResult1 = aidiceResult1.split(",");
+
+            if ($("#aidiceResult2").val() != "" && $("#aidiceResult2").val() != null) {
+                let aidiceResult2 = $("#aidiceResult2").val();
+                aiarrDiceResult2 = aidiceResult2.split(",");
+
+                if ($("#aidiceResult3").val() != "" && $("#aidiceResult3").val() != null) {
+                    let aidiceResult3 = $("#aidiceResult3").val();
+                    aiarrDiceResult3 = aidiceResult3.split(",");
+                }
+            }
+
+            cal(aiarrDiceResult1[0], aiarrDiceResult1[1], aiarrDiceResult1[2]);
+
+            if (aiarrDiceResult2[0] != "" && aiarrDiceResult2[0] != null) {
+                cal(aiarrDiceResult2[0], aiarrDiceResult2[1], aiarrDiceResult2[2]);
+
+                if (aiarrDiceResult3[0] != "" && aiarrDiceResult3[0] != null) {
+                    cal(aiarrDiceResult3[0], aiarrDiceResult3[1], aiarrDiceResult3[2]);
+                }
+            }
+        }
     }
 
     // 모달을 켰을 때
     $('#dice').on('show.bs.modal', function (e) {
 
         // 유저가 돌린 기록에 따라서 족보를 계산
-        if ($("#diceCount2").text() == '2' && $("#pointValue1").val() == "") {
-            count();
-        } else if ($("#diceCount2").text() == '1' && $("#pointValue2").val() == "") {
-            count();
-        } else if ($("#diceCount2").text() == '0') {
-            count();
-        }
+        count();
 
         // 돌릴 횟수가 남아있지 않을 때 ai 턴으로 넘어간다
-        if ($("#diceCount2").text() == '0') {
+        if ($("#diceCount2").text() == '0' && aiCount != 0) {
             setTimeout(showAiModal, 4000);
 
             let size = $("input[name=diceResult]").length;
@@ -419,10 +466,10 @@
         // 남은 횟수 3
         if ($('#diceCount2').text() == '3') {
             $('#diceResult1').val(result);
-        // 남은 횟수 2
+            // 남은 횟수 2
         } else if ($('#diceCount2').text() == '2') {
             $('#diceResult2').val(result);
-        // 남은 횟수 1
+            // 남은 횟수 1
         } else if ($('#diceCount2').text() == '1') {
             $('#diceResult3').val(result);
             $('#roll-button').attr('disabled', true);
@@ -437,7 +484,7 @@
         if (parseInt($('#diceCount2').text()) != 0) {
             $('#diceCount2').text(parseInt($('#diceCount2').text()) - 1);
         }
-        if ($('#diceCount2').text() == '0') {
+        if ($('#diceCount2').text() == '0' && aiCount != 0) {
             setTimeout(showAiModal, 2000);
         }
     }
@@ -463,7 +510,7 @@
             // alert(x + '트리플');
             result = x + "트리플";
             if (x != 1) {
-                point += 300 * (x-1);
+                point += 300 * (x - 1);
             } else {
                 point += 1800;
             }
@@ -471,7 +518,7 @@
             // alert(x + '원페어');
             result = x + "원페어";
             if (x != 1) {
-                point += 100 * (x-1);
+                point += 100 * (x - 1);
             } else {
                 point += 600;
             }
@@ -480,7 +527,7 @@
             // alert(y + '원페어');
             result = y + "원페어";
             if (y != 1) {
-                point += 100 * (y-1);
+                point += 100 * (y - 1);
             } else {
                 point += 600;
             }
@@ -516,82 +563,75 @@
             result = "꽝";
         }
 
-        savePoint(point);
-
         if ($('#pointValue1').val() == "") {
             $('#pointValue1').val(result);
         } else if ($('#pointValue2').val() == "") {
             $('#pointValue2').val(result);
         } else if ($('#pointValue3').val() == "") {
             $('#pointValue3').val(result);
+        } else if ($('#aipointValue1').val() == "") {
+            $('#aipointValue1').val(result);
+        } else if ($('#aipointValue2').val() == "") {
+            $('#aipointValue2').val(result);
+        } else if ($('#aipointValue3').val() == "") {
+            $('#aipointValue3').val(result);
         }
-
-        /*if ($('#diceCount2').text() == '2' && $('#pointValue1').val() == "") {
-            $('#pointValue1').val(result);
-        } else if ($('#diceCount2').text() == '1' && $('#pointValue1').val() != "" && $('#pointValue2').val() == "") {
-            $('#pointValue2').val(result);
-        } else if ($('#diceCount2').text() == '1' && $('#pointValue1').val() == "") {
-            $('#pointValue1').val(result);
-        } else if ($('#diceCount2').text() == '0' && $('#pointValue1').val() != "" && $('#pointValue2').val() != "" && $('#pointValue3').val() == "") {
-            $('#pointValue3').val(result);
-        } else if ($('#diceCount2').text() == '0' && $('#pointValue1').val() == "" &&  $('#pointValue2').val() == "") {
-            $('#pointValue1').val(result);
-        } else if ($('#diceCount2').text() == '0' && $('#pointValue1').val() != "" && $('#pointValue2').val() == "") {
-            $('#pointValue2').val(result);
-        } else if ($('#diceCount3').text() == '0' && $('#pointValue1').val() != "" && $('#pointValue2').val() != "" && $('#pointValue3').val() == "") {
-            $('#pointValue3').val(result);
-        }*/
+        savePoint(point);
     }
 
     function savePoint(point) {
         savepoint.push(point)
-        console.log(savepoint);
+        console.log("savepoint : " + savepoint);
 
         if (savepoint.length == 6) {
-            for (let i=0; i<3; i++) {
+            for (let i = 0; i < 3; i++) {
                 userpoint.push(savepoint[i]);
             }
-            for (let j=3; j<6; j++) {
+            for (let j = 3; j < 6; j++) {
                 botpoint.push(savepoint[j]);
             }
-            console.log(userpoint);
-            console.log(botpoint);
+            console.log("userpoint" + userpoint);
+            console.log("botpoint" + botpoint);
             let userMax = Math.max(...userpoint);
             let botMax = Math.max(...botpoint);
-            console.log(userMax);
-            console.log(botMax);
+            console.log("usermax : " + userMax);
+            console.log("botmax : " + botMax);
             if (userMax > botMax) {
                 $.ajax({
-                    url : "/minigame"
-                    ,type : "get"
-                    ,data : "userMax=" + userMax
-                    ,success : function () {
+                    url: "/minigame"
+                    , type: "get"
+                    , data: "userMax=" + userMax
+                    , success: function () {
+                        // 클로즈 버튼 disable 해제
                         alert("출석완료!! " + userMax + "포인트 획득");
+                        $('#closeBtn').attr('disabled', false);
                     }
-                    ,error : function (request, status, error) {
+                    , error: function (request, status, error) {
                         console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
                     }
                 });
             } else {
                 alert("꽝!!! 내일 다시 도전해주세요");
+                $('#closeBtn').attr('disabled', false);
             }
 
         }
     }
 
 
-
     // AI 주사위 턴
     function showAiModal() {
-        $("#userModalBody").attr("style", "display:none");
-        $("#aiModalBody").attr("style", "display:");
+        $("#userModalBody").hide();
+        $("#aiModalBody").show();
         // $("#imghere").attr("style", "display:");
-        $("#diceCount2").text('3');
-        $("#mario").attr("class", "animate__animated animate__fadeInBottomRight");
-        setTimeout(imgout, 3000);
-        alert(aiCount);
-        if (aiCount != 3) {
+
+        if (aiCount != 0) {
+            // $("#mario").attr("class", "animate__animated animate__fadeInBottomRight");
+            setTimeout(imgout, 3000);
             setTimeout(aiRollDice, 5000);
+
+            // close 버튼 못 누르게 처리
+            $("#closeBtn").attr("disabled", true);
         }
     }
 
@@ -620,7 +660,7 @@
                 "dice3": result[2]
             },
             success: function (data) {
-
+                aiCount -= 1;
             },
             error: function (error) {
                 console.log("에러 : " + error)
@@ -630,23 +670,26 @@
     }
 
     function showAiResult(result) {
+
         // 남은 횟수 3
-        if (aiCount == 0) {
+        if (aiCount == 2 && $('#aipointValue1').val() == "") {
             $('#aidiceResult1').val(result);
             setTimeout(aiRollDice, 3000);
+
             // 남은 횟수 2
-        } else if (aiCount == 1) {
+        } else if (aiCount == 1 && $('#aipointValue2').val() == "") {
             $('#aidiceResult2').val(result);
             setTimeout(aiRollDice, 3000);
+
             // 남은 횟수 1
-        } else if (aiCount == 2) {
+        } else if (aiCount == 0 && $('#aipointValue3').val() == "") {
             $('#aidiceResult3').val(result);
+            $('#roll-button').text("오늘 횟수를 모두 사용하셨습니다.");
         }
         if (parseInt($('#diceCount3').text()) != 0) {
             $('#diceCount3').text(parseInt($('#diceCount3').text()) - 1);
         }
     }
-
 
 
 </script>
