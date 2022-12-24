@@ -189,9 +189,25 @@ limit 5;
 update tb_sales
 set gm_code = , sl_id = , ss_price = , ss_speriod = , ss_eperiod = , ss_stock = , ss_img = , ss_status = ,
     ss_description = , dv_num = , ss_name =
-where ss_num =
+where ss_num =;
 
 update tb_mem
 set upoint = #{upoint}, apoint = #{apoint}
-where mem_id = #{mem_id}
+where mem_id = #{mem_id};
+
+
+
+select ga.gm_name, ga.gm_code
+from tb_detail dt
+         join tb_sales sa
+              on dt.ss_num = sa.ss_num
+         join tb_game ga
+              on sa.gm_code = ga.gm_code join tb_order t on dt.od_num = t.od_num
+where date_format(od_date, '%Y-%m') = date_format(now(), '%Y-%m')
+group by ga.gm_code
+order by count(*) desc
+    limit 10;
+
+select *
+from tb_order od join tb_detail dt on od.od_num = dt.od_num;
 

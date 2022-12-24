@@ -87,7 +87,7 @@
         <ul>
             <li><a href="/sales/sales">마켓 플레이스</a></li>
             <li><a href="/recruit">모집 게시판</a></li>
-            <li><a class="active" onclick="miniGame()">미니 게임</a></li>
+            <li><a class="active" onclick="miniGame()">미니게임</a></li>
             <li><a href="#">고객센터</a>
                 <ul class="header__menu__dropdown">
                     <li><a href="/notice/noticeList">공지사항</a></li>
@@ -148,7 +148,7 @@
                     <ul>
                         <li><a href="/sales/sales">마켓 플레이스</a></li>
                         <li><a href="/recruit">모집 게시판</a></li>
-                        <li class="active"><a onclick="miniGame()">미니게임</a></li>
+                        <li class="active" style="cursor: pointer"><a onclick="miniGame()">미니게임</a></li>
                         <li><a href="#">고객센터</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="/notice/noticeList">공지사항</a></li>
@@ -733,6 +733,7 @@
         }
 
     }
+
 </script>
 <jsp:include page="dice.jsp"></jsp:include>
 <jsp:include page="footer.jsp"></jsp:include>
