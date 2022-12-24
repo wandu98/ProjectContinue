@@ -391,6 +391,7 @@ public class MypageController {
             session.setAttribute("idxBasketCount", basketcnt);
         }
 
+
         return "redirect:/sales/checkout";
     }
 
