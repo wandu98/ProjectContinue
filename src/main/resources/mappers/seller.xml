@@ -50,14 +50,14 @@
                  group by dt_prog
              ) tba right join (select *
                                from (
-                                        select 'J01' dt_prog from dual union all
-                                        select 'J02' dt_prog from dual union all
-                                        select 'J03' dt_prog from dual union all
-                                        select 'J04' dt_prog from dual union all
-                                        select 'J05' dt_prog from dual union all
-                                        select 'J06' dt_prog from dual union all
-                                        select 'J07' dt_prog from dual union all
-                                        select 'J08' dt_prog from dual
+                                        select '결제완료' dt_prog from dual union all
+                                        select '출고준비중' dt_prog from dual union all
+                                        select '출고완료' dt_prog from dual union all
+                                        select '배송중' dt_prog from dual union all
+                                        select '배송완료' dt_prog from dual union all
+                                        select '구매확정' dt_prog from dual union all
+                                        select '교환' dt_prog from dual union all
+                                        select '반품' dt_prog from dual
                                     ) tbb
         ) tbc on tba.dt_prog = tbc.dt_prog
     </select>
@@ -74,14 +74,14 @@
                  order by dt_prog
              ) tba right join (select *
                                from (
-                                        select 'J01' dt_prog from dual union all
-                                        select 'J02' dt_prog from dual union all
-                                        select 'J03' dt_prog from dual union all
-                                        select 'J04' dt_prog from dual union all
-                                        select 'J05' dt_prog from dual union all
-                                        select 'J06' dt_prog from dual union all
-                                        select 'J07' dt_prog from dual union all
-                                        select 'J08' dt_prog from dual
+                                        select '결제완료' dt_prog from dual union all
+                                        select '출고준비중' dt_prog from dual union all
+                                        select '출고완료' dt_prog from dual union all
+                                        select '배송중' dt_prog from dual union all
+                                        select '배송완료' dt_prog from dual union all
+                                        select '구매확정' dt_prog from dual union all
+                                        select '교환' dt_prog from dual union all
+                                        select '반품' dt_prog from dual
                                     ) tbb
         ) tbc on tba.dt_prog = tbc.dt_prog
     </select>
@@ -204,14 +204,7 @@
     </select>
 
     <select id="recentsalesDay" resultType="java.util.Map">
-        select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, case dt_prog when 'J01' then '결제완료'
-                                                                                               when 'J02' then '출고준비중'
-                                                                                               when 'J03' then '출고완료'
-                                                                                               when 'J04' then '배송중'
-                                                                                               when 'J05' then '배송완료'
-                                                                                               when 'J06' then '구매확정'
-                                                                                               when 'J07' then '교환'
-                                                                                               when 'J08' then '반품' end as dt_prog
+        select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, dt_prog
         from tb_order od join tb_detail dt
                               on od.od_num = dt.od_num join tb_mem mem
                                                             on od.mem_id = mem.mem_id join tb_sales ts
@@ -222,14 +215,7 @@
     </select>
 
     <select id="recentsalesMonth" resultType="java.util.Map">
-        select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, case dt_prog when 'J01' then '결제완료'
-                                                                                               when 'J02' then '출고준비중'
-                                                                                               when 'J03' then '출고완료'
-                                                                                               when 'J04' then '배송중'
-                                                                                               when 'J05' then '배송완료'
-                                                                                               when 'J06' then '구매확정'
-                                                                                               when 'J07' then '교환'
-                                                                                               when 'J08' then '반품' end as dt_prog
+        select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, dt_prog
         from tb_order od join tb_detail dt
                               on od.od_num = dt.od_num join tb_mem mem
                                                             on od.mem_id = mem.mem_id join tb_sales ts
@@ -240,14 +226,7 @@
     </select>
 
     <select id="recentsalesYear" resultType="java.util.Map">
-        select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, case dt_prog when 'J01' then '결제완료'
-                                                                                               when 'J02' then '출고준비중'
-                                                                                               when 'J03' then '출고완료'
-                                                                                               when 'J04' then '배송중'
-                                                                                               when 'J05' then '배송완료'
-                                                                                               when 'J06' then '구매확정'
-                                                                                               when 'J07' then '교환'
-                                                                                               when 'J08' then '반품' end as dt_prog
+        select od.od_num, od_date, ts.ss_num, mem_name, ss_price, sl_id, ss_name, dt_prog
         from tb_order od join tb_detail dt
                               on od.od_num = dt.od_num join tb_mem mem
                                                             on od.mem_id = mem.mem_id join tb_sales ts
@@ -447,14 +426,7 @@
                 from (
                         select *
                         from (
-                                select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                when 'J02' then '출고준비중'
-                                                                                when 'J03' then '출고완료'
-                                                                                when 'J04' then '배송중'
-                                                                                when 'J05' then '배송완료'
-                                                                                when 'J06' then '구매확정'
-                                                                                when 'J07' then '교환'
-                                                                                when 'J08' then '반품' end as dt_prog
+                                select od.od_num, ss_name, od_date, dt_prog
                                 from tb_order od join tb_detail dt
                                 on od.od_num = dt.od_num join tb_sales ts
                                 on dt.ss_num = ts.ss_num
@@ -477,14 +449,7 @@
                 from (
                         select *
                         from (
-                                select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                when 'J02' then '출고준비중'
-                                                                                when 'J03' then '출고완료'
-                                                                                when 'J04' then '배송중'
-                                                                                when 'J05' then '배송완료'
-                                                                                when 'J06' then '구매확정'
-                                                                                when 'J07' then '교환'
-                                                                                when 'J08' then '반품' end as dt_prog
+                                select od.od_num, ss_name, od_date, dt_prog
                                 from tb_order od join tb_detail dt
                                 on od.od_num = dt.od_num join tb_sales ts
                                 on dt.ss_num = ts.ss_num
@@ -518,14 +483,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -559,14 +517,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -600,14 +551,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -644,14 +588,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -687,14 +624,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -728,14 +658,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -771,14 +694,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -815,14 +731,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -858,14 +767,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -899,14 +801,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -942,14 +837,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -985,14 +873,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -1028,14 +909,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -1071,14 +945,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
@@ -1114,14 +981,7 @@
                  from (
                          select *
                          from (
-                                 select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
-                                                                                 when 'J02' then '출고준비중'
-                                                                                 when 'J03' then '출고완료'
-                                                                                 when 'J04' then '배송중'
-                                                                                 when 'J05' then '배송완료'
-                                                                                 when 'J06' then '구매확정'
-                                                                                 when 'J07' then '교환'
-                                                                                 when 'J08' then '반품' end as dt_prog
+                                 select od.od_num, ss_name, od_date, dt_prog
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num

@@ -6,7 +6,7 @@
     <select id="list" resultType="com.cafe24.nonchrono.dto.QuestionDTO">
         select qs_num, mem_id, qs_content, qs_date, qs_category
         from tb_question
-        where mem_id = 'oejdf9090'
+        where mem_id = #{mem_id}
     </select>
 
     <select id="count" resultType="int">
