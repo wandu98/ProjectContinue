@@ -198,18 +198,18 @@
                     <div class="search_form">
                         <form id="searchform" action="/sales/search">
                             <select id="ctg" name="ctg">
-                                <option value="ALL" selected>모든 카테고리</option>
-                                <option value="MN">본체</option>
-                                <option value="PT">타이틀(패키지)</option>
-                                <option value="DT">타이틀(다운로드)</option>
-                                <option value="DL">다운로드 추가 컨텐츠 (DLC)</option>
-                                <option value="OL">온라인 이용권</option>
-                                <option value="PN">선불 번호</option>
-                                <option value="FC">무료 컨텐츠</option>
-                                <option value="AM">아미보</option>
-                                <option value="PC">프로컨트롤러</option>
-                                <option value="JC">조이콘</option>
-                                <option value="AC">주변 기기</option>
+                                <option value="all" selected>모든 카테고리</option>
+                                <option value="mn">본체</option>
+                                <option value="pt">타이틀(패키지)</option>
+                                <option value="dt">타이틀(다운로드)</option>
+                                <option value="dl">다운로드 추가 컨텐츠 (DLC)</option>
+                                <option value="ol">온라인 이용권</option>
+                                <option value="pn">선불 번호</option>
+                                <option value="fc">무료 컨텐츠</option>
+                                <option value="am">아미보</option>
+                                <option value="pc">프로컨트롤러</option>
+                                <option value="jc">조이콘</option>
+                                <option value="ac">주변 기기</option>
                             </select>
                             <input type="hidden" id="sc_where" name="sc_where" value="sales">
                             <input class="search_keyword" type="text" id="keyword" name="keyword">

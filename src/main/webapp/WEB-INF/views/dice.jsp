@@ -563,22 +563,36 @@
             result = "꽝";
         }
 
-        if ($('#pointValue1').val() == "") {
+        // 주사위를 1번 굴렸지만 족보창이 비어있을 때
+        if ($('#pointValue1').val() == "" && $('#diceResult1').val() != "") {
             $('#pointValue1').val(result);
-        } else if ($('#pointValue2').val() == "") {
+
+        // 주사위를 2번 굴렸지만 2번째 족보창이 비어있을 때
+        } else if ($('#pointValue2').val() == "" && $('#diceResult2').val() != "") {
             $('#pointValue2').val(result);
-        } else if ($('#pointValue3').val() == "") {
+
+        // 주사위를 3번 굴렸지만 3번째 족보창이 비어있을 때
+        } else if ($('#pointValue3').val() == "" && $('#diceResult3').val() != "") {
             $('#pointValue3').val(result);
-        } else if ($('#aipointValue1').val() == "") {
+
+        // ai가 주사위를 1번 굴렸지만 ai의 족보창이 비어있을 때
+        } else if ($('#aipointValue1').val() == "" && $('#aidiceResult1').val() != "") {
             $('#aipointValue1').val(result);
-        } else if ($('#aipointValue2').val() == "") {
+
+        // ai가 주사위를 2번 굴렸지만 ai의 2번째 족보창이 비어있을 때
+        } else if ($('#aipointValue2').val() == "" && $('#aidiceResult2').val() != "") {
             $('#aipointValue2').val(result);
-        } else if ($('#aipointValue3').val() == "") {
+
+        // ai가 주사위를 3번 굴렸지만 ai의 3번째 족보창이 비어있을 때
+        } else if ($('#aipointValue3').val() == "" && $('#aidiceResult3').val() != "") {
             $('#aipointValue3').val(result);
         }
+
+        // 실제 마일리지를 플레이어에게 지급
         savePoint(point);
     }
 
+    // 마일리지 지급
     function savePoint(point) {
         savepoint.push(point)
         console.log("savepoint : " + savepoint);
@@ -635,10 +649,12 @@
         }
     }
 
+    // 애니메이션 추가
     function imgout() {
         $("#mario").attr("class", "animate__animated animate__fadeOutTopRight");
     }
 
+    // ai 주사위 굴리기
     function aiRollDice() {
         // $("#aiDiceResult").attr("style", "display:");
         const dice = [...document.querySelectorAll(".aidie-list")];
