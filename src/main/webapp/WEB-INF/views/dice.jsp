@@ -290,7 +290,9 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button class="buttons" id="closeBtn" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button class="buttons" id="closeBtn" type="button" class="btn btn-danger" data-dismiss="modal">
+                        Close
+                    </button>
                 </div>
 
             </div>
@@ -306,6 +308,7 @@
     let userpoint = [];
     let botpoint = [];
     let aiCount = 3;
+    let attendenceCheck = 0;
 
     $(document).ready(function () {
 
@@ -349,6 +352,17 @@
                 });
             }
         });
+
+        $.ajax({
+            url: "/attendenceCheck",
+            type: "post",
+            data: {"mem_id": '<%=session.getAttribute("mem_id")%>'},
+            success: function (result) {
+                if (result != 0) {
+                    attendenceCheck = 1;
+                }
+            }
+        })
 
     })
 
@@ -567,23 +581,23 @@
         if ($('#pointValue1').val() == "" && $('#diceResult1').val() != "") {
             $('#pointValue1').val(result);
 
-        // 주사위를 2번 굴렸지만 2번째 족보창이 비어있을 때
+            // 주사위를 2번 굴렸지만 2번째 족보창이 비어있을 때
         } else if ($('#pointValue2').val() == "" && $('#diceResult2').val() != "") {
             $('#pointValue2').val(result);
 
-        // 주사위를 3번 굴렸지만 3번째 족보창이 비어있을 때
+            // 주사위를 3번 굴렸지만 3번째 족보창이 비어있을 때
         } else if ($('#pointValue3').val() == "" && $('#diceResult3').val() != "") {
             $('#pointValue3').val(result);
 
-        // ai가 주사위를 1번 굴렸지만 ai의 족보창이 비어있을 때
+            // ai가 주사위를 1번 굴렸지만 ai의 족보창이 비어있을 때
         } else if ($('#aipointValue1').val() == "" && $('#aidiceResult1').val() != "") {
             $('#aipointValue1').val(result);
 
-        // ai가 주사위를 2번 굴렸지만 ai의 2번째 족보창이 비어있을 때
+            // ai가 주사위를 2번 굴렸지만 ai의 2번째 족보창이 비어있을 때
         } else if ($('#aipointValue2').val() == "" && $('#aidiceResult2').val() != "") {
             $('#aipointValue2').val(result);
 
-        // ai가 주사위를 3번 굴렸지만 ai의 3번째 족보창이 비어있을 때
+            // ai가 주사위를 3번 굴렸지만 ai의 3번째 족보창이 비어있을 때
         } else if ($('#aipointValue3').val() == "" && $('#aidiceResult3').val() != "") {
             $('#aipointValue3').val(result);
         }
@@ -591,6 +605,7 @@
         // 실제 마일리지를 플레이어에게 지급
         savePoint(point);
     }
+
 
     // 마일리지 지급
     function savePoint(point) {
@@ -610,26 +625,44 @@
             let botMax = Math.max(...botpoint);
             console.log("usermax : " + userMax);
             console.log("botmax : " + botMax);
-            if (userMax > botMax) {
+            attendence(userMax, botMax);
+            if (attendenceCheck == 0) {
                 $.ajax({
                     url: "/minigame"
                     , type: "get"
                     , data: "userMax=" + userMax
                     , success: function () {
-                        // 클로즈 버튼 disable 해제
-                        alert("출석완료!! " + userMax + "포인트 획득");
-                        $('#closeBtn').attr('disabled', false);
+                        attendenceCheck = 1;
                     }
                     , error: function (request, status, error) {
                         console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
                     }
                 })
-            } else {
-                alert("꽝!!! 내일 다시 도전해주세요");
-                $('#closeBtn').attr('disabled', false);
             }
-
         }
+    }
+
+    function attendence(userMax, botMax) {
+        $('#closeBtn').attr('disabled', false);
+        $.ajax({
+            url: "/attendence",
+            type: "post",
+            data: {
+                "mem_id": '<%=session.getAttribute("mem_id")%>'
+            },
+            success: function () {
+                if (userMax > botMax) {
+                    alert("출석완료!! " + userMax + "포인트 획득");
+                } else if (userMax <= botMax) {
+                    alert("꽝!!! 내일 다시 도전해주세요");
+                } else {
+                    alert("이미 참가하셨습니다");
+                }
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+            }
+        })
     }
 
 

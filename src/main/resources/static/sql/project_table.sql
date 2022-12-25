@@ -516,8 +516,16 @@ create table tb_minigame
 (
     mg_num  int AUTO_INCREMENT primary key,  -- 미니게임 일련번호
     mem_id  varchar(20)            not null, -- 회원 아이디
-    mg_dice varchar(30) not null,                 -- 주사위 눈
-    mg_date datetime default now() not null -- 미니게임 날짜
+    mg_dice varchar(30)            not null, -- 주사위 눈
+    mg_date datetime default now() not null  -- 미니게임 날짜
+);
+
+create table tb_attendence
+(
+    at_num  int AUTO_INCREMENT primary key, -- 출석 일련번호
+    mem_id  varchar(20) not null,           -- 회원 아이디
+    at_date date        not null,           -- 출석 날짜
+    foreign key (mem_id) references tb_mem (mem_id)
 );
 
 select *
@@ -555,6 +563,7 @@ drop table tb_rcrboard;
 drop table tb_search;
 drop table tb_rating;
 drop table tb_minigame;
+drop table tb_attendence;
 
 SET foreign_key_checks = 0; -- 외래키 해제
 SET foreign_key_checks = 1; -- 외래키 설정
