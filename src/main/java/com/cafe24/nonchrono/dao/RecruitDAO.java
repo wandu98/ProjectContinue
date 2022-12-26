@@ -225,7 +225,7 @@ public class RecruitDAO {
         return sqlSession.update("recruit.views", rcrbrd_num);
     } // views() end
 
-    public List<Map<String, ?>> rcrbrdlist(String mem_id) {
+    public List<Map<String, Object>> rcrbrdlist(String mem_id) {
         return sqlSession.selectList("mypage.rcrbrdlist", mem_id);
     }
 

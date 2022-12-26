@@ -189,4 +189,16 @@ public class HomeController {
         return minigameDAO.rollCount(mem_id);
     }
 
+    @RequestMapping("/attendenceCheck")
+    @ResponseBody
+    public int attendenceCheck(String mem_id) {
+        return minigameDAO.attendenceCheck(mem_id);
+    }
+
+    @RequestMapping("/attendence")
+    @ResponseBody
+    public int attendence(String mem_id) {
+        return minigameDAO.attendence(mem_id);
+    }
+
 } // class end
