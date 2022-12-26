@@ -144,9 +144,9 @@
                                             </a>
                                             <div class="product__discount__percent">${vs.count}위</div>
                                             <ul class="product__item__pic__hover">
-                                                <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i
+                                                <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})" style="padding-top: 0%"><i
                                                         class="fa fa-heart"></i></a></li>
-                                                <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i
+                                                <li><a class="basketModal" onclick="basketModal(${row.ss_num})" style="padding-top: 0%"><i
                                                         class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -189,9 +189,9 @@
                                             <img src="/images/product/sales_main/${row.ss_img}" style="height:100%">
                                         </a>
                                         <ul class="product__item__pic__hover">
-                                            <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})"><i
+                                            <li><a class="wishlistModal" onclick="wishlistModal(${row.ss_num})" style="padding-top: 0%"><i
                                                     class="fa fa-heart"></i></a></li>
-                                            <li><a class="basketModal" onclick="basketModal(${row.ss_num})"><i
+                                            <li><a class="basketModal" onclick="basketModal(${row.ss_num})" style="padding-top: 0%"><i
                                                     class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
@@ -392,12 +392,12 @@
                     message += "</a>";
                     message += "<ul class='product__item__pic__hover'>";
                     message += "<li>";
-                    message += "<a class='wishlistModal' onclick='wishlistModal(" + value.ss_num + ")'>";
+                    message += "<a class='wishlistModal' onclick='wishlistModal(" + value.ss_num + ")' style='padding-top: 0%'>";
                     message += "<i class='fa fa-heart'></i>";
                     message += "</a>";
                     message += "</li>";
                     message += "<li>";
-                    message += "<a class='basketModal' onclick='basketModal(" + value.ss_num + "'>";
+                    message += "<a class='basketModal' onclick='basketModal(" + value.ss_num + "' style='padding-top: 0%'>";
                     message += "<i class='fa fa-shopping-cart'></i>";
                     message += "</a>";
                     message += "</li>";
