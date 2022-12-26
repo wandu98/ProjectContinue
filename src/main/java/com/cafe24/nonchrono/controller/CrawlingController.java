@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -31,6 +32,7 @@ public class CrawlingController {
     } // CrawlingController() end
 
     @RequestMapping(value = "/crawling")
+    @ResponseBody
     public String autoCrawling(@RequestParam int start) {
 
         CrawlingDTO crawlingDTO = null;
@@ -193,13 +195,17 @@ public class CrawlingController {
             e.printStackTrace();
         }
 
+        String message = "";
+
         if (cnt == 0) {
             System.out.println("-----크롤링 실패");
+            message = "더이상 자동 등록할 데이터가 없습니다";
         } else {
             System.out.println("-----크롤링 성공");
+            message = "자동 등록이 완료되었습니다";
         } // if end
 
-        return "redirect:/admin";
+        return message;
     } // autoCrawling() end
 
 
