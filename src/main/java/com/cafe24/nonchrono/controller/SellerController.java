@@ -265,6 +265,13 @@ public class SellerController {
         return mav;
     }//loginProc() end
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.removeAttribute("sl_id");
+        session.removeAttribute("sl_pw");
+        return "redirect:/";
+    }
+
     //회원가입
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signProc(@ModelAttribute SellerDTO dto) {
@@ -716,7 +723,7 @@ public class SellerController {
 
     @RequestMapping("/orderSearch")
     public ModelAndView orderSearch(@RequestParam String dt_prog, @RequestParam String ss_speriod, @RequestParam String ss_eperiod,
-                                    @RequestParam String inputState, @RequestParam String keyword, @RequestParam String pageNum,
+                                    @RequestParam String inputState, @RequestParam String keyword, @RequestParam(required = false) String pageNum,
                                     PagingDTO pagingDTO, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         String sl_id = (String) session.getAttribute("sl_id");
@@ -739,6 +746,7 @@ public class SellerController {
         } else {
             inputState = "";
         }
+//        System.out.println("if 후 inputState : " + inputState);
 
         pagingDTO.setSl_id(sl_id);
         pagingDTO.setDt_prog(dt_prog);
@@ -806,7 +814,7 @@ public class SellerController {
         //처음 list로 이동 시 pageNum은 null이다. 따라서 if문에 의해 pageNum이 1이 된다.
         //페이지 이동할때 list.do?pageNum= 로 pageNum값을 넘겨줌
 //        String pageNum = request.getParameter("pageNum");
-        if(pageNum=="") {
+        if(pageNum==null) {
             pageNum = "1";
         }//if end
 //        System.out.println(pageNum);

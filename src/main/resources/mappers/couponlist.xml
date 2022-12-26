@@ -15,7 +15,7 @@
         from tb_order od join tb_detail dt
                               on od.od_num = dt.od_num join tb_sales ts
                                                             on dt.ss_num = ts.ss_num
-        where dt_prog = 'J06' and mem_id = #{mem_id}
+        where dt_prog = '구매확정' and mem_id = #{mem_id}
     </select>
 
 </mapper>

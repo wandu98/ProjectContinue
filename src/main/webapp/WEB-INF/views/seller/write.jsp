@@ -442,10 +442,10 @@
             return false;
         }
 
-        if ($('#ss_description').val().length == 0) {
-            alert("상품 내용을 입력해주세요")
-            return false;
-        }
+        // if ($('#ss_description').val().length == 0) {
+        //     alert("상품 내용을 입력해주세요")
+        //     return false;
+        // }
 
         if ($('#dv_num').val().length == 0 ){
             alert("배송정책을 선택해주세요")

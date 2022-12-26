@@ -37,6 +37,7 @@
                         <tr>
                             <th></th>
                             <th class="shoping__product" style="padding-left: 5%">내용</th>
+                            <th>상품번호</th>
                             <th>별점</th>
                             <th style="width: 10%">삭제</th>
                         </tr>
@@ -52,6 +53,9 @@
                                         <img src="/images/review/${row.rv_filename}" style="max-width: 20%">
                                         <h5>${row.rv_content}</h5>
                                     </div>
+                                </td>
+                                <td class="shoping__cart__price" onclick="">
+                                        ${row.ss_num}
                                 </td>
                                 <td class="shoping__cart__price">
                                     <div class="quantity">

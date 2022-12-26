@@ -14,6 +14,7 @@
     #sidebar {
         position: sticky;
         top: 0;
+        padding-top: 10%;
     }
 
     #sort > a {

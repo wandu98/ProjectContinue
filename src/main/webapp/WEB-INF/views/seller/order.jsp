@@ -38,14 +38,14 @@
                                 <div class="col-sm-10">
                                     <select class="form-select" aria-label="Default select example" id="dt_prog" name="dt_prog">
                                         <option value="" selected>전체</option>
-                                        <option value="J01">결제완료</option>
-                                        <option value="J02">출고준비중</option>
-                                        <option value="J03">출고완료</option>
-                                        <option value="J04">배송중</option>
-                                        <option value="J05">배송완료</option>
-                                        <option value="J06">구매확정</option>
-                                        <option value="J07">교환</option>
-                                        <option value="J08">반품</option>
+                                        <option value="결제완료">결제완료</option>
+                                        <option value="출고준비중">출고준비중</option>
+                                        <option value="출고완료">출고완료</option>
+                                        <option value="배송중">배송중</option>
+                                        <option value="배송완료">배송완료</option>
+                                        <option value="구매확정">구매확정</option>
+                                        <option value="교환">교환</option>
+                                        <option value="반품">반품</option>
                                     </select>
                                 </div>
                             </div>
