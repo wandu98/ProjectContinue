@@ -218,7 +218,7 @@
                         </form>
                     </div>
                     <div class="hero__search__phone">
-                        <div class="hero__search__phone__icon">
+                        <div class="hero__search__phone__icon" style="padding-top: 5%">
                             <img src="/images/coupon.png">
                         </div>
                         <div class="hero__search__phone__text">

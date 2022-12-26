@@ -293,12 +293,8 @@
                                                 <c:if test="${memNick[vs.index - 1] != ''}">
                                                     <%-- 본인을 제외하고 신고와 하트를 출력 --%>
                                                     <c:if test="${attendCheck != vs.index}">
-                                                        <li><span
-                                                                onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"><i
-                                                                class="fa fa-heart"></i></span></li>
-                                                        <li><span
-                                                                onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')">신고</span>
-                                                        </li>
+                                                        <li><a onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')" style="padding-top: 30%; cursor: pointer"><i class="fa fa-heart"></i></a></li>
+                                                        <li><a onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')" style="padding-top: 0%; cursor: pointer">신고</a></li>
                                                     </c:if>
                                                 </c:if>
                                             </c:when>
@@ -309,12 +305,8 @@
                                                     </li>
                                                 </c:if>
                                                 <c:if test="${memNick[vs.index - 1] != ''}">
-                                                    <li><span
-                                                            onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"><iclass="fa fa-heart"></i></span>
-                                                    </li>
-                                                    <li><span
-                                                            onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')">신고</span>
-                                                    </li>
+                                                    <li><a onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')" style="padding-top: 30%; cursor: pointer"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')" style="padding-top: 0%; cursor: pointer">신고</a></li>
                                                 </c:if>
 
                                             </c:otherwise>
@@ -401,6 +393,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 <div class="container">
