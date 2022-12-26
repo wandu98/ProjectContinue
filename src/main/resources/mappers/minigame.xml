@@ -22,7 +22,7 @@
     <select id="attendenceCheck" parameterType="String" resultType="int">
         SELECT count(*)
         FROM tb_attendence
-        WHERE mem_id = #{mem_id} and at_date = now()
+        WHERE mem_id = #{mem_id} and at_date = date_format(now(), '%Y-%m-%d')
     </select>
 
     <insert id="attendence" parameterType="String">

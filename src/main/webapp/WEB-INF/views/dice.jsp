@@ -358,6 +358,8 @@
             type: "post",
             data: {"mem_id": '<%=session.getAttribute("mem_id")%>'},
             success: function (result) {
+                console.log("result : " + result);
+
                 if (result != 0) {
                     attendenceCheck = 1;
                 }
@@ -625,8 +627,11 @@
             let botMax = Math.max(...botpoint);
             console.log("usermax : " + userMax);
             console.log("botmax : " + botMax);
-            attendence(userMax, botMax);
             if (attendenceCheck == 0) {
+
+                // attendence 테이블에 오늘 참가한 이력이 있나 체크
+                attendence(userMax, botMax);
+
                 $.ajax({
                     url: "/minigame"
                     , type: "get"
