@@ -107,6 +107,7 @@ public class RecruitController {
             moreDTO.setRcrbrd_edate(list.get(i).getRcrbrd_edate());
             moreDTO.setRcrbrd_max(list.get(i).getRcrbrd_max());
             moreDTO.setCount(recruitDAO.attendMembers(list.get(i).getRcrbrd_num()).size());
+            moreDTO.setCom_count(list.get(i).getCom_count());
 
             list2.add(i, moreDTO);
         }
