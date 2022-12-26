@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="auth.jsp" %>
-<%@ include file="dice.jsp"%>
 
 <!DOCTYPE html>
 <html lang="ko">
