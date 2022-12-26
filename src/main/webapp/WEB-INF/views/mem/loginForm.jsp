@@ -54,10 +54,10 @@
         -o-transition: all 0.2s ease;
     }
 
-    input:focus, input:not(:placeholder-shown) {
-        border-bottom: solid 1px #8aa1a1;
-        outline: none;
-    }
+    /*input:focus, input:not(:placeholder-shown) {*/
+    /*    border-bottom: solid 1px #8aa1a1;*/
+    /*    outline: none;*/
+    /*}*/
 </style>
 
 

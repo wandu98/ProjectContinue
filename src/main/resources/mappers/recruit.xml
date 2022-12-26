@@ -173,13 +173,12 @@
 
     <!-- 인덱스 페이지 월간 타이틀 순위 모집순 -->
     <select id="idxRankingRecruit" resultType="com.cafe24.nonchrono.dto.GameDTO">
-        select ga.gm_code, ga.gm_name, count(*)
-        from tb_rcrboard rb
-                 join tb_game ga
-                      on rb.gm_code = ga.gm_code
-        where date_format(rcrbrd_date, '%Y-%m')
-        group by ga.gm_code
-        order by count(*) desc
+        select tg.gm_code, tg.gm_name, count(*) as cnt
+        from tb_rcrboard rb join tb_recruitinfo ri
+                                 on rb.rcrbrd_num = ri.rcrbrd_num join tb_game tg on rb.gm_code = tg.gm_code
+        where date_format(rcrbrd_date, '%Y-%m') = date_format(now(), '%Y-%m')
+        group by tg.gm_name
+        order by cnt desc
         limit 10
     </select>
 
@@ -187,6 +186,7 @@
     <select id="idxrcrbrdlist" resultType="com.cafe24.nonchrono.dto.RecruitDTO">
         select rcrbrd_num, rcrbrd_subject, rcrbrd_edate, gm_code
         from tb_rcrboard
+        where rcrbrd_status not in ('모집완료')
         order by rcrbrd_edate
     </select>
 

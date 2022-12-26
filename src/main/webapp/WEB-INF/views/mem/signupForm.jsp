@@ -36,7 +36,10 @@
                                 <p>닉네임<span>*</span></p>
                                 <input type="text" name="mem_nick" id="mem_nick" required>
                             </div>
+                            <input type="button" value="중복확인" id="nickcheck"
+                                   style="color : #FFFFFF; background-color: #FF0000;">
                         </div>
+
                     </div>
 
                     <div class="checkout__input" onsubmit="return checkID()">
@@ -198,6 +201,7 @@
 
     $(function () {
         $.removeCookie("checkID");
+        $.removeCookie("checkNick");
     });
 
     $('#idcheck').click(function () {
@@ -215,16 +219,32 @@
             $("#mem_id").focus;
         }//if end
 
-        let checkID = $.cookie("checkID");
-        if (checkID == "PASS") {
-            return true;
-        } else {
-            alert("아이디 중복확인 해주세요");
-            $("#mem_id").focus;
-        }//if() end
+
 
 
     }//checkID() end
+
+
+
+    //닉네임 중복 체크
+    $('#nickcheck').click(function () {
+        let params = "mem_nick=" + $('#mem_nick').val().trim();
+        $.post("/mem/nickcheckproc", params, checkNick, "json");
+    });
+
+    function checkNick(result) {
+        let count = eval(result.count);
+        if (count == 0) { //1 중복 0 사용가능
+            alert("사용가능한 닉네임 입니다");
+            $.cookie("checkNick", "PASS"); //중복확인을 했다는 증거
+        } else {
+            alert("중복된 닉네임 입니다");
+            $("#mem_nick").focus;
+        }//if end
+
+
+    }
+
 
 
     function memberCheck() { //회원가입 유효성 검사
@@ -236,6 +256,29 @@
             document.getElementById("mem_id").focus();
             return false;
         }//if end
+
+        let checkID = $.cookie("checkID");
+        if (checkID != "PASS") {
+            alert("아이디 중복확인 해주세요");
+            $("#mem_id").focus;
+            return false;
+        }
+
+        //닉네임 입력했는지
+        let mem_nick = document.getElementById("mem_nick").value;
+        mem_nick = mem_nick.trim();
+        if (!(mem_nick.length >= 1)) {
+            alert("닉네임을 입력해 주세요");
+            document.getElementById("mem_nick").focus();
+            return false;
+        }//if end
+
+        let checkNick = $.cookie("checkNick");
+        if (checkNick != "PASS") {
+            alert("닉네임 중복확인 해주세요");
+            $("#mem_nick").focus;
+            return false;
+        }
 
         //2)비밀번호 5~10글자 인지?
         let mem_pw = document.getElementById("mem_pw").value;

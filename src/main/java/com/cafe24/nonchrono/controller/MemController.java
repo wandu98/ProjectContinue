@@ -89,6 +89,26 @@ public class MemController {
         json.put("count", cnt);
         return json.toString();
     }
+
+    @RequestMapping("/nickcheckproc") // 경로
+    @ResponseBody
+    public String nickcheckproc(HttpServletRequest req) {
+        String mem_nick = req.getParameter("mem_nick").trim();
+
+        List<MemDTO> check = memDAO.nickcheck();
+        String cnt = "0";
+        for (int i=0; i< check.size(); i++) {
+            if(mem_nick.equals(check.get(i).getMem_nick())) {
+                //getMem_id() 넣어줘서 행에서 id만 불러오기
+                cnt = "1";
+                break;
+            }
+        }
+
+        JSONObject json = new JSONObject();
+        json.put("count", cnt);
+        return json.toString();
+    }
      
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session) {

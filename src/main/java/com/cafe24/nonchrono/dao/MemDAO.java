@@ -33,6 +33,10 @@ public class MemDAO { //Data Access Object
         return sqlSession.selectList("login.check");
     }//idkcheck() end
 
+    public List<MemDTO> nickcheck() {
+        return sqlSession.selectList("login.nickcheck");
+    }
+
     public MemDTO modify_list(String mem_id) {
         return sqlSession.selectOne("memmodify.list", mem_id);
     }

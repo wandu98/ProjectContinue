@@ -337,6 +337,7 @@
                             </c:choose>
                             </span>
                             </div>
+                            <input type="hidden" id="totalPay" name="totalPay" value="">
                             <div class="checkout__order__total">Total <span id="payment"
                                                                             name="payment"><fmt:formatNumber
                                     type="currency"
@@ -491,6 +492,7 @@
 
     function requestPay() {
         let total = $('#payment').text();
+        $("#totalPay").val(total);
         // alert("결제 성공");
         IMP.init('imp62827174')
         //IMP.reqeust_pay(param, callback) 결제창 호출
