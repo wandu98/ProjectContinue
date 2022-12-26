@@ -721,7 +721,11 @@
                 $.each(result, function (index, value) {
                     str += "<div class='col-lg-8' style='padding-left: 5%; padding-top: 2%'>";
                     str += "<div class='header'>";
-                    str += "<img src='/images/profile/" + value.mem_id + "/" + value.mem_pic + "' style='max-height: 20px; max-width: 20px'>&nbsp;&nbsp;" + value.mem_nick + "&nbsp;&nbsp;";
+                    if (value.mem_pic != 'ProfilePicture.png') {
+                        str += "<img src='/images/profile/" + value.mem_id + "/" + value.mem_pic + "' style='max-height: 20px; max-width: 20px'>&nbsp;&nbsp;" + value.mem_nick + "&nbsp;&nbsp;";
+                    } else {
+                        str += "<img src='/images/profile/ProfilePicture.png' style='max-height: 20px; max-width: 20px'>&nbsp;&nbsp;" + value.mem_nick + "&nbsp;&nbsp;"
+                    }
                     str += "<span>" + value.comdate + "</span>";
                     if (value.mem_id == '${mem_id}') {
                         str += "<span style='float: right; cursor: pointer' onclick='commentDelete(" + value.com_num + ")'>삭제</span>";
