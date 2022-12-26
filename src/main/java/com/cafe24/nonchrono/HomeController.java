@@ -68,7 +68,7 @@ public class HomeController {
             int rcrbrd_num = list.get(i).getRcrbrd_num();
             list2.add(recruitDAO.idxrcrbrdCount(rcrbrd_num));
         }
-        System.out.println(list2);
+        // System.out.println(list2);
 
         mav.addObject("idxLatestProduct", salesDAO.idxLatestProduct());
         mav.addObject("idxTopProduct", salesDAO.idxTopProduct());
