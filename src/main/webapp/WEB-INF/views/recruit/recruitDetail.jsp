@@ -310,8 +310,8 @@
                                                 </c:if>
                                                 <c:if test="${memNick[vs.index - 1] != ''}">
                                                     <li><span
-                                                            onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')" style="vertical-align: bottom"><i
-                                                            class="fa fa-heart" style="padding: 5px"></i></span></li>
+                                                            onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"><iclass="fa fa-heart"></i></span>
+                                                    </li>
                                                     <li><span
                                                             onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')">신고</span>
                                                     </li>
