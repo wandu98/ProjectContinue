@@ -19,4 +19,15 @@
         where mem_id = #{mem_id} and date_format(mg_date, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d')
     </select>
 
+    <select id="attendenceCheck" parameterType="String" resultType="int">
+        SELECT count(*)
+        FROM tb_attendence
+        WHERE mem_id = #{mem_id} and at_date = date_format(now(), '%Y-%m-%d')
+    </select>
+
+    <insert id="attendence" parameterType="String">
+        insert into tb_attendence (mem_id, at_date)
+        values (#{mem_id}, now())
+    </insert>
+
 </mapper>
