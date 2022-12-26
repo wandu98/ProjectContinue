@@ -264,7 +264,7 @@
                 "start" : start
             },
             success: function (data) {
-                alert("게임 자동 등록에 성공했습니다!");
+                alert(data);
             }
             ,error : function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
