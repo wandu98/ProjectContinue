@@ -253,3 +253,9 @@ VALUES ('oejdf9090', '1234', '장지동십만우', '구천우', '34567', '서울
 
 INSERT INTO tb_mem (mem_id, mem_pw, mem_nick, mem_name, mem_zip, mem_adr1, mem_adr2, mem_phone, mem_email, mem_birth, mem_grade, upoint, apoint, mem_receive, good, buyer_bad, mem_pic, mem_joindate)
 VALUES ('fjhdmj555', '1234', '정릉동핵주먹', '최다은', '12345', '서울특별시 서대문구 통일로', '97', '010-4893-7777', 'kimjoowan@naver.com', '19880520', 'SILVER', 3000, 3000, 'Y', 0, 0,  'pic3.jpg', now());
+
+
+
+
+insert into tb_couponlist(cp_code, mem_id)
+values ('A0002', 'ewok777');

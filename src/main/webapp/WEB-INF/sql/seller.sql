@@ -1083,4 +1083,26 @@ select ss_num, gm_code, sl_id, ss_name, ss_price, ss_speriod, ss_eperiod, ss_sto
 from tb_sales
 where ss_num = '22';
 
-
+select od_num, ss_name, od_date, dt_prog, format(r, 0) as rnum
+from (
+         select *, @rno := @rno + 1 as r
+         from (
+                  select *
+                  from (
+                           select od.od_num, ss_name, od_date, case dt_prog when 'J01' then '결제완료'
+                                                                            when 'J02' then '출고준비중'
+                                                                            when 'J03' then '출고완료'
+                                                                            when 'J04' then '배송중'
+                                                                            when 'J05' then '배송완료'
+                                                                            when 'J06' then '구매확정'
+                                                                            when 'J07' then '교환'
+                                                                            when 'J08' then '반품' end as dt_prog
+                           from tb_order od join tb_detail dt
+                                                 on od.od_num = dt.od_num join tb_sales ts
+                                                                               on dt.ss_num = ts.ss_num
+                           where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+                       ) AA, (select @rno := 0) BB
+                  order by od_date desc
+              ) CC
+     ) DD
+where r >= #{startRow} and r <= #{endRow};

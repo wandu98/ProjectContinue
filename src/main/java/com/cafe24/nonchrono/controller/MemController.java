@@ -92,7 +92,8 @@ public class MemController {
      
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session) {
-        session.invalidate();
+        session.removeAttribute("mem_id");
+        session.removeAttribute("mem_pw");
         return "redirect:/";
     }
 

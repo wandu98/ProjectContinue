@@ -25,6 +25,8 @@ from tb_wish wi join tb_sales sa
 where mem_id = 'fjhdmj555';
 
 
+
+
 -- 아이디가 fjhdmj555인 사람의 위시리스트에서 rno 적용
 select ws_num, ss_price, ss_img, ss_name, dv_fee, total, @rno := @rno + 1
 from (

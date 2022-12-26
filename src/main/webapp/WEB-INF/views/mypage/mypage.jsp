@@ -181,7 +181,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="shoping__cart__table" style="overflow: auto; height: 600px">
+                                        <div class="shoping__cart__table" style="overflow: auto; height: 400px">
                                             <table id="rcttable">
                                                 <thead>
                                                 <tr style="position: sticky">

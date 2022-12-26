@@ -123,8 +123,9 @@
                             <a href="/admin">관리자 모드</a>
                             <% } %>
                             <c:choose>
-                                <c:when test="${mem_id == null}"><a href="/mem/login">로그인</a></c:when>
-                                <c:otherwise><a href="/mem/logout">로그아웃</a></c:otherwise>
+                                <c:when test="${mem_id == null and sl_id == null}"><a href="/mem/login">로그인</a></c:when>
+                                <c:when test="${mem_id != null and sl_id == null}"><a href="/mem/logout">로그아웃</a></c:when>
+                                <c:when test="${mem_id == null and sl_id != null}"><a href="/seller/logout">로그아웃</a></c:when>
                             </c:choose>
                             <a href="/mem/signup">회원가입</a>
                         </div>
@@ -185,17 +186,17 @@
                         <span>카테고리</span>
                     </div>
                     <ul>
-                        <li><a href="#">본체</a></li>
-                        <li><a href="#">타이틀 (패키지)</a></li>
-                        <li><a href="#">타이틀 (다운로드)</a></li>
-                        <li><a href="#">다운로드 추가 컨텐츠 (DLC)</a></li>
-                        <li><a href="#">온라인 이용권</a></li>
-                        <li><a href="#">선불 번호</a></li>
-                        <li><a href="#">무료 컨텐츠</a></li>
-                        <li><a href="#">아미보</a></li>
-                        <li><a href="#">프로컨트롤러</a></li>
-                        <li><a href="#">조이콘</a></li>
-                        <li><a href="#">주변 기기</a></li>
+                        <li><a href="/sales/search?ctg=mn&sc_where=sales&keyword=">본체</a></li>
+                        <li><a href="/sales/search?ctg=pt&sc_where=sales&keyword=">타이틀 (패키지)</a></li>
+                        <li><a href="/sales/search?ctg=dt&sc_where=sales&keyword=">타이틀 (다운로드)</a></li>
+                        <li><a href="/sales/search?ctg=dl&sc_where=sales&keyword=">다운로드 추가 컨텐츠 (DLC)</a></li>
+                        <li><a href="/sales/search?ctg=ol&sc_where=sales&keyword=">온라인 이용권</a></li>
+                        <li><a href="/sales/search?ctg=pn&sc_where=sales&keyword=">선불 번호</a></li>
+                        <li><a href="/sales/search?ctg=fc&sc_where=sales&keyword=">무료 컨텐츠</a></li>
+                        <li><a href="/sales/search?ctg=am&sc_where=sales&keyword=">아미보</a></li>
+                        <li><a href="/sales/search?ctg=pc&sc_where=sales&keyword=">프로컨트롤러</a></li>
+                        <li><a href="/sales/search?ctg=jc&sc_where=sales&keyword=">조이콘</a></li>
+                        <li><a href="/sales/search?ctg=ac&sc_where=sales&keyword=">주변 기기</a></li>
                     </ul>
                 </div>
             </div>
@@ -205,17 +206,17 @@
                         <form action="/sales/search">
                             <select id="ctg" name="ctg">
                                 <option value="ALL" selected>모든 카테고리</option>
-                                <option value="MN">본체</option>
-                                <option value="PT">타이틀(패키지)</option>
-                                <option value="DT">타이틀(다운로드)</option>
-                                <option value="DL">다운로드 추가 컨텐츠 (DLC)</option>
-                                <option value="OL">온라인 이용권</option>
-                                <option value="PN">선불 번호</option>
-                                <option value="FC">무료 컨텐츠</option>
-                                <option value="AM">아미보</option>
-                                <option value="PC">프로컨트롤러</option>
-                                <option value="JC">조이콘</option>
-                                <option value="AC">주변 기기</option>
+                                <option value="mn">본체</option>
+                                <option value="pt">타이틀(패키지)</option>
+                                <option value="dt">타이틀(다운로드)</option>
+                                <option value="dl">다운로드 추가 컨텐츠 (DLC)</option>
+                                <option value="ol">온라인 이용권</option>
+                                <option value="pn">선불 번호</option>
+                                <option value="fc">무료 컨텐츠</option>
+                                <option value="am">아미보</option>
+                                <option value="pc">프로컨트롤러</option>
+                                <option value="jc">조이콘</option>
+                                <option value="ac">주변 기기</option>
                             </select>
                             <input class="search_keyword" type="text" id="keyword" name="keyword">
                             <button type="submit" class="site-btn-search">검색</button>
@@ -554,7 +555,7 @@
                     <div class="blog__item__text"><a href="/recruit/detail/${idxrcrbrd[0].rcrbrd_num}">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[0].rcrbrd_edate}</li>
-                            <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[0]}</li>
+                            <li><i class="fa fa-user"></i> ${idxrcrbrdCount[0]}</li>
                         </ul>
                         <h5>${idxrcrbrd[0].rcrbrd_subject}</h5>
                     </a></div>
@@ -568,7 +569,7 @@
                     <div class="blog__item__text"><a href="/recruit/detail/${idxrcrbrd[1].rcrbrd_num}">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[1].rcrbrd_edate}</li>
-                            <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[1]}</li>
+                            <li><i class="fa fa-user"></i> ${idxrcrbrdCount[1]}</li>
                         </ul>
                         <h5>${idxrcrbrd[1].rcrbrd_subject}</h5>
                     </a></div>
@@ -582,7 +583,7 @@
                     <div class="blog__item__text"><a href="/recruit/detail/${idxrcrbrd[2].rcrbrd_num}">
                         <ul>
                             <li><i class="fa fa-calendar-o"></i> ${idxrcrbrd[2].rcrbrd_edate}</li>
-                            <li><i class="fa fa-comment-o"></i> ${idxrcrbrdCount[2]}</li>
+                            <li><i class="fa fa-user"></i> ${idxrcrbrdCount[2]}</li>
                         </ul>
                         <h5>${idxrcrbrd[2].rcrbrd_subject}</h5>
                     </a></div>

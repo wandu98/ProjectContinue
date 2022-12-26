@@ -10,7 +10,7 @@
     border: solid 1px black;
 }
 
-#ord {
+#ord {.product__item__pic__hover
     padding: 5px;
 }
 

@@ -71,6 +71,14 @@ public class BasketController {
         basketDTO.setBk_amount(bk_amount);
         basketDTO.setSs_num(ss_num);
         basketDAO.insert(basketDTO);
+
+        int basketcnt = 0;
+        if (mem_id != null) {
+            basketcnt = basketDAO.count(mem_id);
+            session.setAttribute("idxBasketCount", basketcnt);
+        } else {
+            session.setAttribute("idxBasketCount", basketcnt);
+        }
     }
 
     @RequestMapping("/idxinsert")

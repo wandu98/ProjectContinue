@@ -396,7 +396,7 @@
                                                 </select>
                                                 <label for="rv_filename" class="col-sm-2 col-form-label"
                                                        style="float: left"><img
-                                                        src="/images/pic.jpeg" style="height: 50px;
+                                                        src="/images/pic.jpg" style="height: 50px;
                                                                            padding-bottom: 20px;float: inherit ">
                                                 </label>
                                                 <textarea id="rv_content" name="rv_content" placeholder="리뷰 작성란..."

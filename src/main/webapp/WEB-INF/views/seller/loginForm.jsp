@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <br><br>
 <div class="row">
@@ -33,9 +34,6 @@
                 <input type="password" id="sl_pw" name="sl_pw" class="col-lg-9 col-md-9" style="letter-spacing: 15px">
             </div>
             <br>
-            <input type="checkbox" class="checkout__input__checkbox">
-            <%-- <input type="checkbox" name="c_id" value="SAVE" <%if(!c_id.isEmpty()){out.print("checked");}%>>--%>
-            로그인 유지
             <span class="checkmark"></span>
             <div>
                 <br>
@@ -46,7 +44,8 @@
                     <button type="button" onclick="location.href='/seller/signup'" class="site-btn">회원 가입하기</button>
                 </div>
                 <div class="checkout__input float-left" id="logout" style="padding-left: 3%">
-                    <button type="button" class="site-btn" onclick="location.href='/seller/logout'">로그아웃</button>
+                    <c:if test="${sl_id}!=null"><button type="button" class="site-btn" onclick="location.href='/seller/logout'">로그아웃</button></c:if>
+<%--                    <button type="button" class="site-btn" onclick="location.href='/seller/logout'">로그아웃</button>--%>
                 </div>
             </div>
         </div>
