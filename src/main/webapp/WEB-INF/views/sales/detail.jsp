@@ -386,8 +386,8 @@
                                                    value="${detail.ss_num}"><!-- 부모글 번호 -->
                                             <input type="hidden" id="rv_date" name="rv_date" readonly>
                                             <div class="text-center">
-                                                <select name="rv_star">
-                                                    <option>별점을 선택해주세요</option>
+                                                <select id="rv_star" name="rv_star">
+                                                    <option value="null">별점을 선택해주세요</option>
                                                     <option class="star_5 fa" value="10"><span>★★★★★</span></option>
                                                     <option class="star_4" value="8"><span>★★★★</span></option>
                                                     <option class="star_3" value="6"><span>★★★</span></option>
@@ -427,7 +427,7 @@
                                             <div class="blog__item"
                                                  style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
                                                 <div class="blog__item__pic">
-                                                    <img src="/images/review/${row.rv_filename}">
+                                                    <c:if test="${row.rv_filename!=''}"><img src="/images/review/${row.rv_filename}"></c:if>
                                                 </div>
                                                 <div class="blog__item__text">
                                                     <ul>
@@ -861,8 +861,13 @@
             return false;
         }
 
+        let star = $("#rv_star").val();
+        if (star=="null") {
+            alert("별점을 입력해주세요");
+            return false;
+        }
 
-        return true
+        return true;
     }
 
 

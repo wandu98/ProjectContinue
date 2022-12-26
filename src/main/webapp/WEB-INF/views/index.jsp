@@ -218,6 +218,7 @@
                                 <option value="jc">조이콘</option>
                                 <option value="ac">주변 기기</option>
                             </select>
+                            <input type="hidden" id="sc_where" name="sc_where" value="sales">
                             <input class="search_keyword" type="text" id="keyword" name="keyword">
                             <button type="submit" class="site-btn-search">검색</button>
                         </form>
@@ -343,7 +344,7 @@
                         <div class="latest-prdouct__slider__item">
                             <a href="/sales/detail/${idxLatestProduct[0].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxLatestProduct[0].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxLatestProduct[0].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[0].ss_name}</h6>
@@ -352,7 +353,7 @@
                             </a>
                             <a href="/sales/detail/${idxLatestProduct[1].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxLatestProduct[1].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxLatestProduct[1].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[1].ss_name}</h6>
@@ -361,7 +362,7 @@
                             </a>
                             <a href="/sales/detail/${idxLatestProduct[2].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxLatestProduct[2].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxLatestProduct[2].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[2].ss_name}</h6>
@@ -372,7 +373,7 @@
                         <div class="latest-prdouct__slider__item">
                             <a href="/sales/detail/${idxLatestProduct[3].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxLatestProduct[3].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxLatestProduct[3].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[3].ss_name}</h6>
@@ -381,7 +382,7 @@
                             </a>
                             <a href="/sales/detail/${idxLatestProduct[4].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxLatestProduct[4].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxLatestProduct[4].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[4].ss_name}</h6>
@@ -390,7 +391,7 @@
                             </a>
                             <a href="/sales/detail/${idxLatestProduct[5].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxLatestProduct[5].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxLatestProduct[5].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[5].ss_name}</h6>
@@ -408,7 +409,7 @@
                         <div class="latest-prdouct__slider__item">
                             <a href="/sales/detail/${idxTopProduct[0].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxTopProduct[0].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxTopProduct[0].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[0].ss_name}</h6>
@@ -417,7 +418,7 @@
                             </a>
                             <a href="/sales/detail/${idxTopProduct[1].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxTopProduct[1].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxTopProduct[1].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[1].ss_name}</h6>
@@ -426,7 +427,7 @@
                             </a>
                             <a href="/sales/detail/${idxTopProduct[2].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxTopProduct[2].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxTopProduct[2].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[2].ss_name}</h6>
@@ -437,7 +438,7 @@
                         <div class="latest-prdouct__slider__item">
                             <a href="/sales/detail/${idxTopProduct[3].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxTopProduct[3].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxTopProduct[3].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[3].ss_name}</h6>
@@ -446,7 +447,7 @@
                             </a>
                             <a href="/sales/detail/${idxTopProduct[4].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxTopProduct[4].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxTopProduct[4].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[4].ss_name}</h6>
@@ -455,7 +456,7 @@
                             </a>
                             <a href="/sales/detail/${idxTopProduct[5].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxTopProduct[5].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxTopProduct[5].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[5].ss_name}</h6>
@@ -473,7 +474,7 @@
                         <div class="latest-prdouct__slider__item">
                             <a href="/sales/detail/${idxReviewProduct[0].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxReviewProduct[0].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxReviewProduct[0].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[0].ss_name}</h6>
@@ -482,7 +483,7 @@
                             </a>
                             <a href="/sales/detail/${idxReviewProduct[1].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxReviewProduct[1].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxReviewProduct[1].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[1].ss_name}</h6>
@@ -491,7 +492,7 @@
                             </a>
                             <a href="/sales/detail/${idxReviewProduct[2].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxReviewProduct[2].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxReviewProduct[2].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[2].ss_name}</h6>
@@ -502,7 +503,7 @@
                         <div class="latest-prdouct__slider__item">
                             <a href="/sales/detail/${idxReviewProduct[3].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxReviewProduct[3].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxReviewProduct[3].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[3].ss_name}</h6>
@@ -511,7 +512,7 @@
                             </a>
                             <a href="/sales/detail/${idxReviewProduct[4].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxReviewProduct[4].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxReviewProduct[4].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[4].ss_name}</h6>
@@ -520,7 +521,7 @@
                             </a>
                             <a href="/sales/detail/${idxReviewProduct[5].ss_num}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="/images/product/${idxReviewProduct[5].ss_img}" alt="">
+                                    <img src="/images/product/sales_main/${idxReviewProduct[5].ss_img}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[5].ss_name}</h6>

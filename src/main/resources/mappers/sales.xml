@@ -57,7 +57,7 @@
                       on sa.gm_code = ga.gm_code join tb_order t on dt.od_num = t.od_num
         where date_format(od_date, '%Y-%m') = date_format(now(), '%Y-%m')
         group by ga.gm_code
-        order by count(*) desc
+        order by count(*) desc, ss_name
             limit 10
     </select>
 
