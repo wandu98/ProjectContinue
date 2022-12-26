@@ -215,7 +215,7 @@
                     </a>
                 </li>
                 <li>
-                    <a onclick="gameCrawling()">
+                    <a onclick="gameCrawling()" style="cursor: pointer">
                         <i class="bi bi-circle"></i><span>품목 자동 등록</span>
                     </a>
                 </li>
