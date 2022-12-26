@@ -37,7 +37,7 @@
                         <tr>
                             <th></th>
                             <th class="shoping__product" style="padding-left: 5%">내용</th>
-                            <th>상품번호</th>
+                            <th>상품명</th>
                             <th>별점</th>
                             <th style="width: 10%">삭제</th>
                         </tr>
@@ -48,14 +48,14 @@
                                 <td class="shoping__cart__price">
                                     ${row.rnum}
                                 </td>
-                                <td class="shoping__cart__item">
+                                <td class="shoping__cart__item" style="padding-left: 5%">
                                     <div onclick="rvList(${row.rv_num})">
-                                        <img src="/images/review/${row.rv_filename}" style="max-width: 20%">
+                                        <c:if test="${row.rv_filename!=''}"><img src="/images/review/${row.rv_filename}" style="max-width: 20%"></c:if>
                                         <h5>${row.rv_content}</h5>
                                     </div>
                                 </td>
-                                <td class="shoping__cart__price" onclick="">
-                                        ${row.ss_num}
+                                <td class="shoping__cart__price" onclick="location.href='/sales/detail/${row.ss_num}'" style="width: 20%">
+                                        ${row.ss_name}
                                 </td>
                                 <td class="shoping__cart__price">
                                     <div class="quantity">

@@ -30,5 +30,10 @@
         WHERE mem_id = #{mem_id}
     </select>
 
+    <select id="nickcheck" resultType="com.cafe24.nonchrono.dto.MemDTO">
+        SELECT mem_nick
+        FROM tb_mem
+    </select>
+
 
 </mapper>

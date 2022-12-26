@@ -9,8 +9,9 @@
             from (
                     select *, @rno := @rno + 1 as rnum
                     from (
-                            select rv_num, mem_id, rv_content, rv_star, rv_filename, ss_num
-                            from tb_review
+                            select rv_num, mem_id, rv_content, rv_star, rv_filename, rv.ss_num, ss_name
+                            from tb_review rv join tb_sales sl
+                            on rv.ss_num = sl.ss_num
                             where mem_id = #{mem_id}
                     ) AA, (select @rno := 0) BB
             ) CC
