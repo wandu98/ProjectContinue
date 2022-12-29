@@ -312,7 +312,7 @@
                                                 <c:if test="${memNick[vs.index - 1] != ''}">
                                                     <li>
                                                         <a onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"
-                                                           style="cursor: pointer"><i
+                                                           style="cursor: pointer; padding-top: 0%"><i
                                                                 class="fa fa-heart"></i></a></li>
                                                     <li>
                                                         <a onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"

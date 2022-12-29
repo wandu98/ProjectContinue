@@ -120,6 +120,7 @@
                                 <c:when test="${mem_id == null and sl_id == null}"><a href="/mem/login">로그인</a></c:when>
                                 <c:when test="${mem_id != null and sl_id == null}"><a href="/mem/logout">로그아웃</a></c:when>
                                 <c:when test="${mem_id == null and sl_id != null}"><a href="/seller/logout">로그아웃</a></c:when>
+                                <c:when test="${mem_id != null and sl_id != null}"><a href="/seller/masterLogout">로그아웃</a></c:when>
                             </c:choose>
                             <a href="/mem/signup">회원가입</a>
                         </div>

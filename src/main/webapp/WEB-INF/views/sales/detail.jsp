@@ -134,7 +134,7 @@
                 <div class="breadcrumb__text">
                     <h2>마켓 상세보기</h2>
                     <div class="breadcrumb__option">
-                        <a href="/l">Home</a>
+                        <a href="/">Home</a>
                         <a href="/sales">Sales</a>
                     </div>
                 </div>
@@ -427,7 +427,7 @@
                                             <div class="blog__item"
                                                  style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
                                                 <div class="blog__item__pic">
-                                                    <c:if test="${row.rv_filename!=''}"><img src="/images/review/${row.rv_filename}"></c:if>
+                                                    <c:if test="${row.rv_filename!=''}"><img src="/images/review/${row.rv_filename}" onerror="this.style.display='none';">></c:if>
                                                 </div>
                                                 <div class="blog__item__text">
                                                     <ul>
@@ -571,20 +571,34 @@
     </div>
 </section>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+<%-- 장바구니 모달 --%>
+<%--<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal2">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close" onclick="modalClose()">&times;</span>
-        <p>선택하신 상품을 장바구니에 담았습니다.<br>지금 장바구니를 확인하시겠습니까?</p>
-        <div>
-            <a onclick="modalClose()" style="margin: 8px;">쇼핑 계속하기</a><a onclick="goCart()">장바구니 확인</a>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">장바구니</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="modalClose()">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    선택하신 상품을 장바구니에 담았습니다.<br>지금 장바구니를 확인하시겠습니까?
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="modalClose()">쇼핑 계속하기</button>
+                    <button type="button" class="btn btn-success" onclick="goBasket()">장바구니 확인</button>
+                </div>
+
+            </div>
         </div>
-
     </div>
-
-</div>
+</div>--%>
 
 
 <%-- 위시리스트 모달 --%>
@@ -627,7 +641,7 @@
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">장바구니</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" onclick="modalClose()">&times;</button>
                 </div>
 
                 <!-- Modal body -->
@@ -637,7 +651,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="renewal()">쇼핑 계속하기
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="modalClose()">쇼핑 계속하기
                     </button>
                     <button type="button" class="btn btn-success" onclick="goBasket()">장바구니 확인</button>
                 </div>

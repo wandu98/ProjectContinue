@@ -43,7 +43,7 @@
 
 
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="/images/002.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -58,7 +58,6 @@
         </div>
     </div>
 </section>
-<!-- Breadcrumb Section End -->
 
 <!-- shoping Cart Section Begin -->
 <section class="shoping-cart spad">

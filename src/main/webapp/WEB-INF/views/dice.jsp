@@ -518,9 +518,12 @@
 
     document.getElementById("roll-button").addEventListener("click", rollDice);
 
-    function cal(x, y, z) {
+    function cal(x2, y2, z2) {
         let point = 0;
         let result = "";
+        x = parseInt(x2);
+        y = parseInt(y2);
+        z = parseInt(z2);
 
         if (x == y && y == z) {
             // alert(x + '트리플');
@@ -582,30 +585,39 @@
         // 주사위를 1번 굴렸지만 족보창이 비어있을 때
         if ($('#pointValue1').val() == "" && $('#diceResult1').val() != "") {
             $('#pointValue1').val(result);
+            // 실제 마일리지를 플레이어에게 지급
+            savePoint(point);
 
             // 주사위를 2번 굴렸지만 2번째 족보창이 비어있을 때
         } else if ($('#pointValue2').val() == "" && $('#diceResult2').val() != "") {
             $('#pointValue2').val(result);
+            // 실제 마일리지를 플레이어에게 지급
+            savePoint(point);
 
             // 주사위를 3번 굴렸지만 3번째 족보창이 비어있을 때
         } else if ($('#pointValue3').val() == "" && $('#diceResult3').val() != "") {
             $('#pointValue3').val(result);
+            // 실제 마일리지를 플레이어에게 지급
+            savePoint(point);
 
             // ai가 주사위를 1번 굴렸지만 ai의 족보창이 비어있을 때
         } else if ($('#aipointValue1').val() == "" && $('#aidiceResult1').val() != "") {
             $('#aipointValue1').val(result);
+            // 실제 마일리지를 플레이어에게 지급
+            savePoint(point);
 
             // ai가 주사위를 2번 굴렸지만 ai의 2번째 족보창이 비어있을 때
         } else if ($('#aipointValue2').val() == "" && $('#aidiceResult2').val() != "") {
             $('#aipointValue2').val(result);
+            // 실제 마일리지를 플레이어에게 지급
+            savePoint(point);
 
             // ai가 주사위를 3번 굴렸지만 ai의 3번째 족보창이 비어있을 때
         } else if ($('#aipointValue3').val() == "" && $('#aidiceResult3').val() != "") {
             $('#aipointValue3').val(result);
+            // 실제 마일리지를 플레이어에게 지급
+            savePoint(point);
         }
-
-        // 실제 마일리지를 플레이어에게 지급
-        savePoint(point);
     }
 
 
@@ -627,6 +639,7 @@
             let botMax = Math.max(...botpoint);
             console.log("usermax : " + userMax);
             console.log("botmax : " + botMax);
+            console.log("attendenceCheck : " + attendenceCheck);
             if (attendenceCheck == 0) {
 
                 // attendence 테이블에 오늘 참가한 이력이 있나 체크
