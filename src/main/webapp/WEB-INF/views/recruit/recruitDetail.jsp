@@ -293,8 +293,13 @@
                                                 <c:if test="${memNick[vs.index - 1] != ''}">
                                                     <%-- 본인을 제외하고 신고와 하트를 출력 --%>
                                                     <c:if test="${attendCheck != vs.index}">
-                                                        <li><a onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')" style="padding-top: 30%; cursor: pointer"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')" style="padding-top: 0%; cursor: pointer">신고</a></li>
+                                                        <li>
+                                                            <a onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"
+                                                               style="cursor: pointer; padding-top: 0%"><i
+                                                                    class="fa fa-heart"></i></a></li>
+                                                        <li>
+                                                            <a onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"
+                                                               style="cursor: pointer; padding-top: 0%">신고</a></li>
                                                     </c:if>
                                                 </c:if>
                                             </c:when>
@@ -305,8 +310,13 @@
                                                     </li>
                                                 </c:if>
                                                 <c:if test="${memNick[vs.index - 1] != ''}">
-                                                    <li><a onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')" style="padding-top: 30%; cursor: pointer"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')" style="padding-top: 0%; cursor: pointer">신고</a></li>
+                                                    <li>
+                                                        <a onclick="heart('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"
+                                                           style="cursor: pointer; padding-top: 0%"><i
+                                                                class="fa fa-heart"></i></a></li>
+                                                    <li>
+                                                        <a onclick="declare('${memSeat[vs.index-1]}', '${memNick[vs.index-1]}')"
+                                                           style="cursor: pointer">신고</a></li>
                                                 </c:if>
 
                                             </c:otherwise>
@@ -370,8 +380,16 @@
                             <c:forEach var="list" items="${commentList}" varStatus="vs5">
                                 <div class="col-lg-8" style="padding-left: 5%; padding-top: 2%">
                                     <div class="header">
-                                        <img src="/images/profile/${list.mem_id}/${list.mem_pic}"
-                                             style="max-height: 20px; max-width: 20px">&nbsp;&nbsp;${list.mem_nick}&nbsp;&nbsp;
+                                        <c:choose>
+                                            <c:when test="${list.mem_pic != 'ProfilePicture.png'}">
+                                                <img src="/images/profile/${list.mem_id}/${list.mem_pic}"
+                                                     style="max-height: 20px; max-width: 20px">&nbsp;&nbsp;${list.mem_nick}&nbsp;&nbsp;
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img src="/images/profile/ProfilePicture.png"
+                                                     style="max-height: 20px; max-width: 20px">&nbsp;&nbsp;${list.mem_nick}&nbsp;&nbsp;
+                                            </c:otherwise>
+                                        </c:choose>
                                         <span>${list.comdate}</span>
                                         <c:if test="${list.mem_id == sessionScope.mem_id}">
                                     <span style="float: right; cursor: pointer"

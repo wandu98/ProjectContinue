@@ -112,7 +112,7 @@
                     <div class="header__top__right">
                         <div class="header__top__right__social">
                             <% if (session.getAttribute("sl_id") != null) { %>
-                            <a href="/seller">판매자 모드</a>
+                            <a href="/seller/seller">판매자 모드</a>
                             <% } else if (session.getAttribute("admin_id") != null) { %>
                             <a href="/admin">관리자 모드</a>
                             <% } %>
@@ -120,6 +120,7 @@
                                 <c:when test="${mem_id == null and sl_id == null}"><a href="/mem/login">로그인</a></c:when>
                                 <c:when test="${mem_id != null and sl_id == null}"><a href="/mem/logout">로그아웃</a></c:when>
                                 <c:when test="${mem_id == null and sl_id != null}"><a href="/seller/logout">로그아웃</a></c:when>
+                                <c:when test="${mem_id != null and sl_id != null}"><a href="/seller/masterLogout">로그아웃</a></c:when>
                             </c:choose>
                             <a href="/mem/signup">회원가입</a>
                         </div>
@@ -217,7 +218,7 @@
                         </form>
                     </div>
                     <div class="hero__search__phone">
-                        <div class="hero__search__phone__icon" style="padding-top: 5%">
+                        <div class="hero__search__phone__icon">
                             <img src="/images/coupon.png">
                         </div>
                         <div class="hero__search__phone__text">

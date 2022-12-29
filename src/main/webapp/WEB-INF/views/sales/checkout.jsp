@@ -53,22 +53,21 @@
 
 
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="/images/002.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="/images/recruit_banner.png">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>장바구니</h2>
+                    <h2>주문서</h2>
                     <div class="breadcrumb__option">
                         <a href="/">Home</a>
-                        <span>장바구니</span>
+                        <span>주문서</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Breadcrumb Section End -->
 
 <form action="/sales/pay" id="checkout" method="post">
     <input type="hidden" id="mem_id" name="mem_id" value="<%=session.getAttribute("mem_id")%>">

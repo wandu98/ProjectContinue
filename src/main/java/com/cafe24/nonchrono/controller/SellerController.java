@@ -272,6 +272,12 @@ public class SellerController {
         return "redirect:/";
     }
 
+    @RequestMapping("/masterLogout")
+    public String masterLogout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
     //회원가입
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signProc(@ModelAttribute SellerDTO dto) {

@@ -238,6 +238,7 @@ public class MypageController {
         mav.addObject("startPage", startPage);
         mav.addObject("endPage", endPage);
         mav.addObject("rvlist", list);
+        System.out.println(list);
         mav.setViewName("mypage/review");
         return mav;
     }

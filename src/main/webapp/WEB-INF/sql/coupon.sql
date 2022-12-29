@@ -35,3 +35,6 @@ from tb_order od join tb_detail dt
     on od.od_num = dt.od_num join tb_sales ts
     on dt.ss_num = ts.ss_num
 where dt_prog = 'J06' and mem_id = 'fjhdmj555';
+
+insert into tb_couponlist (cp_code, mem_id)
+values ('A0001', '12345');
