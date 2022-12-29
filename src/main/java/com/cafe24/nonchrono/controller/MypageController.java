@@ -183,6 +183,7 @@ public class MypageController {
         mav.addObject("couponlist", couponlistDAO.list(mem_id));
         mav.addObject("point", memDAO.myList(mem_id));
         mav.addObject("mileagelist", couponlistDAO.mileageList(mem_id));
+        System.out.println(couponlistDAO.mileageList(mem_id));
         mav.setViewName("mypage/coupon");
         return mav;
     }

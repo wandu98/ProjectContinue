@@ -771,7 +771,7 @@
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
-                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%')
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and ${inputState} like CONCAT('%', #{keyword}, '%')
                          ) AA, (select @rno := 0) BB
                          order by od_date desc
                      ) CC
@@ -787,7 +787,7 @@
                 from tb_order od join tb_detail dt
                                       on od.od_num = dt.od_num join tb_sales ts
                                                                     on dt.ss_num = ts.ss_num
-                where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%')
+                where sl_id = #{sl_id} and dt_prog = #{dt_prog} and ${inputState} like CONCAT('%', #{keyword}, '%')
                 group by sl_id
         ) AA
     </select>
@@ -805,7 +805,7 @@
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
-                                 where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+                                 where sl_id = #{sl_id} and ${inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
                          ) AA, (select @rno := 0) BB
                          order by od_date desc
                      ) CC
@@ -822,7 +822,7 @@
                 from tb_order od join tb_detail dt
                                       on od.od_num = dt.od_num join tb_sales ts
                                                                     on dt.ss_num = ts.ss_num
-                where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+                where sl_id = #{sl_id} and ${inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
                 group by sl_id
         ) AA
         ]]>
@@ -841,7 +841,7 @@
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
-                                 where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_epeirod}, '%Y-%m-%d')
+                                 where sl_id = #{sl_id} and ${inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_epeirod}, '%Y-%m-%d')
                          ) AA, (select @rno := 0) BB
                          order by od_date desc
                      ) CC
@@ -858,7 +858,7 @@
                 from tb_order od join tb_detail dt
                 on od.od_num = dt.od_num join tb_sales ts
                 on dt.ss_num = ts.ss_num
-                where sl_id = #{sl_id} and  #{inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+                where sl_id = #{sl_id} and  ${inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
                 group by sl_id
         ) AA
         ]]>
@@ -877,7 +877,7 @@
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
-                                 where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+                                 where sl_id = #{sl_id} and ${inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
                          ) AA, (select @rno := 0) BB
                          order by od_date desc
                      ) CC
@@ -894,7 +894,7 @@
                 from tb_order od join tb_detail dt
                 on od.od_num = dt.od_num join tb_sales ts
                 on dt.ss_num = ts.ss_num
-                where sl_id = #{sl_id} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+                where sl_id = #{sl_id} and ${inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
                 group by sl_id
         ) AA
         ]]>
@@ -913,7 +913,7 @@
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
-                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and ${inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
                          ) AA, (select @rno := 0) BB
                          order by od_date desc
                      ) CC
@@ -930,7 +930,7 @@
                 from tb_order od join tb_detail dt
                                       on od.od_num = dt.od_num join tb_sales ts
                                                                     on dt.ss_num = ts.ss_num
-                where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
+                where sl_id = #{sl_id} and dt_prog = #{dt_prog} and ${inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d'))
                 group by sl_id
         ) AA
         ]]>
@@ -949,7 +949,7 @@
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
-                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and ${inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
                          ) AA, (select @rno := 0) BB
                          order by od_date desc
                      ) CC
@@ -966,7 +966,7 @@
                 from tb_order od join tb_detail dt
                 on od.od_num = dt.od_num join tb_sales ts
                 on dt.ss_num = ts.ss_num
-                where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
+                where sl_id = #{sl_id} and dt_prog = #{dt_prog} and ${inputState} like CONCAT('%', #{keyword}, '%') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d')
                 group by sl_id
         ) AA
         ]]>
@@ -985,7 +985,7 @@
                                  from tb_order od join tb_detail dt
                                  on od.od_num = dt.od_num join tb_sales ts
                                  on dt.ss_num = ts.ss_num
-                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+                                 where sl_id = #{sl_id} and dt_prog = #{dt_prog} and ${inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
                          ) AA, (select @rno := 0) BB
                          order by od_date desc
                      ) CC
@@ -1002,7 +1002,7 @@
                 from tb_order od join tb_detail dt
                 on od.od_num = dt.od_num join tb_sales ts
                 on dt.ss_num = ts.ss_num
-                where sl_id = #{sl_id} and dt_prog = #{dt_prog} and #{inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
+                where sl_id = #{sl_id} and dt_prog = #{dt_prog} and ${inputState} like CONCAT('%', #{keyword}, '%') and (DATE_FORMAT(ss_speriod, '%Y-%m-%d') >= DATE_FORMAT(#{ss_speriod}, '%Y-%m-%d') and DATE_FORMAT(ss_eperiod, '%Y-%m-%d') <= DATE_FORMAT(#{ss_eperiod}, '%Y-%m-%d'))
                 group by sl_id
         ) AA
         ]]>

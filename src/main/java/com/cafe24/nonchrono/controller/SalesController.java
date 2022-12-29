@@ -40,8 +40,9 @@ public class SalesController {
 
     //상품 메인
     @RequestMapping("/sales")
-    public ModelAndView list(HttpServletRequest req, PagingDTO pagingDTO, String order) {
+    public ModelAndView list(HttpServletRequest req, PagingDTO pagingDTO, String order, HttpSession session) {
         ModelAndView mav = new ModelAndView();
+        String mem_id = (String) session.getAttribute("mem_id");
         mav.setViewName("sales/sales");
 
         int totalRowCount = salesDAO.totalRowCount(); //총 글갯수  6 |  52개

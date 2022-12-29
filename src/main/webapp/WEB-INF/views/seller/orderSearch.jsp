@@ -37,15 +37,15 @@
                                 <label class="col-sm-2 col-form-label">진행상태</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" aria-label="Default select example" id="dt_prog" name="dt_prog">
-                                        <option value="" selected>전체</option>
-                                        <option value="결제완료">결제완료</option>
-                                        <option value="출고준비중">출고준비중</option>
-                                        <option value="출고완료">출고완료</option>
-                                        <option value="배송중">배송중</option>
-                                        <option value="배송완료">배송완료</option>
-                                        <option value="구매확정">구매확정</option>
-                                        <option value="교환">교환</option>
-                                        <option value="반품">반품</option>
+                                        <option value="" <c:if test="${dt_prog==''}">selected</c:if> >전체</option>
+                                        <option value="결제완료" <c:if test="${dt_prog=='결제완료'}">selected</c:if> >결제완료</option>
+                                        <option value="출고준비중" <c:if test="${dt_prog=='출고준비중'}">selected</c:if> >출고준비중</option>
+                                        <option value="출고완료" <c:if test="${dt_prog=='출고완료'}">selected</c:if> >출고완료</option>
+                                        <option value="배송중" <c:if test="${dt_prog=='배송중'}">selected</c:if> >배송중</option>
+                                        <option value="배송완료" <c:if test="${dt_prog=='배송완료'}">selected</c:if> >배송완료</option>
+                                        <option value="구매확정" <c:if test="${dt_prog=='구매확정'}">selected</c:if> > 구매확정</option>
+                                        <option value="교환" <c:if test="${dt_prog=='교환'}">selected</c:if> >교환</option>
+                                        <option value="반품" <c:if test="${dt_prog=='반품'}">selected</c:if> >반품</option>
                                     </select>
                                 </div>
                             </div>
@@ -53,13 +53,13 @@
                             <div class="row mb-3">
                                 <label for="ss_speriod" class="col-sm-2 col-form-label">판매시작일</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" id="ss_speriod" name="ss_speriod">
+                                    <input type="date" class="form-control" id="ss_speriod" name="ss_speriod" value="${ss_speriod}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="ss_eperiod" class="col-sm-2 col-form-label">판매종료일</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" id="ss_eperiod" name="ss_eperiod">
+                                    <input type="date" class="form-control" id="ss_eperiod" name="ss_eperiod" value="${ss_eperiod}">
                                 </div>
                             </div>
 
@@ -68,16 +68,16 @@
                                 <label  class="col-sm-2 col-form-label">조건검색</label>
                                 <div class="col-md-4" style="width: 10%">
                                     <select id="inputState" name="inputState" class="form-select">
-                                        <option selected>--------</option>
-                                        <option>주문번호</option>
-                                        <option>상품명</option>
-                                        <option>상품가격</option>
-                                        <option>회원ID</option>
+                                        <option  <c:if test="${dt_prog==''}">selected</c:if> >--------</option>
+                                        <option <c:if test="${inputState=='od.od_num'}">selected</c:if> >주문번호</option>
+                                        <option <c:if test="${inputState=='ss_name'}">selected</c:if> >상품명</option>
+                                        <option <c:if test="${inputState=='ss_price'}">selected</c:if> >상품가격</option>
+                                        <option <c:if test="${inputState=='mem_id'}">selected</c:if> >회원ID</option>
                                     </select>
                                 </div>
 
                                 <div class="col-sm-10" style="width: 10%;">
-                                    <input type="text" class="form-control" id="keyword" name="keyword">
+                                    <input type="text" class="form-control" id="keyword" name="keyword" value="<c:if test="${keyword!=''}">${keyword}</c:if>">
                                 </div>
 
                                 <div class="col-sm-10" style="width: 10%">
