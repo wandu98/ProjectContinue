@@ -305,7 +305,7 @@
                                     <tbody id="topselling">
                                     <c:forEach var="row" items="${tsd}" varStatus="vs">
                                         <tr>
-                                            <th scope="row"><a href="#"><img src="/imagese/product/sales_main/${row.ss_img}"></a></th>
+                                            <th scope="row"><a href="#"><img src="/images/product/sales_main/${row.ss_img}"></a></th>
                                             <td><a href="#" class="text-primary fw-bold">${row.ss_name}</a></td>
                                             <td>${row.ss_price}</td>
                                             <td class="fw-bold">${row.cnt}</td>
@@ -356,47 +356,47 @@
                                         // shape: 'circle',
                                         indicator: [{
                                             name: '본체',
-                                            max: 1000000
+                                            max: 30000
                                         },
                                             {
                                                 name: '타이틀(패키지)',
-                                                max: 1000000
+                                                max: 30000
                                             },
                                             {
                                                 name: '타이틀(다운로드)',
-                                                max: 1000000
+                                                max: 30000
                                             },
                                             {
                                                 name: '다운로드 추가 컨텐츠',
-                                                max: 1000000
+                                                max: 30000
                                             },
                                             {
                                                 name: '온라인 이용권',
-                                                max: 1000000
+                                                max: 30000
                                             },
                                             {
                                                 name: '선불번호',
-                                                max: 1000000
+                                                max: 30000
                                             },
                                             {
                                                 name: '무료컨텐츠',
-                                                max: 1000000
+                                                max: 30000
                                             },
                                             {
                                                 name: '아미보',
-                                                max: 1000000
+                                                max: 30000
                                             },
                                             {
                                                 name: '프로컨트롤러',
-                                                max: 1000000
+                                                max: 30000
                                             },
                                             {
                                                 name: '조이콘',
-                                                max: 1000000
+                                                max: 30000
                                             },
                                             {
                                                 name: '주변기기',
-                                                max: 1000000
+                                                max: 30000
                                             }
                                         ]
                                     },
@@ -666,47 +666,47 @@
                             // shape: 'circle',
                             indicator: [{
                                 name: '본체',
-                                max: 1000000
+                                max: 30000
                             },
                                 {
                                     name: '타이틀(패키지)',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '타이틀(다운로드)',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '다운로드 추가 컨텐츠',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '온라인 이용권',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '선불번호',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '무료컨텐츠',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '아미보',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '프로컨트롤러',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '조이콘',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '주변기기',
-                                    max: 1000000
+                                    max: 30000
                                 }
                             ]
                         },
@@ -734,47 +734,47 @@
                             // shape: 'circle',
                             indicator: [{
                                 name: '본체',
-                                max: 1000000
+                                max: 30000
                             },
                                 {
                                     name: '타이틀(패키지)',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '타이틀(다운로드)',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '다운로드 추가 컨텐츠',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '온라인 이용권',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '선불번호',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '무료컨텐츠',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '아미보',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '프로컨트롤러',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '조이콘',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '주변기기',
-                                    max: 1000000
+                                    max: 30000
                                 }
                             ]
                         },
@@ -802,47 +802,47 @@
                             // shape: 'circle',
                             indicator: [{
                                 name: '본체',
-                                max: 1000000
+                                max: 30000
                             },
                                 {
                                     name: '타이틀(패키지)',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '타이틀(다운로드)',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '다운로드 추가 컨텐츠',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '온라인 이용권',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '선불번호',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '무료컨텐츠',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '아미보',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '프로컨트롤러',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '조이콘',
-                                    max: 1000000
+                                    max: 30000
                                 },
                                 {
                                     name: '주변기기',
-                                    max: 1000000
+                                    max: 30000
                                 }
                             ]
                         },
