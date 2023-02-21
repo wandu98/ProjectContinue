@@ -516,6 +516,7 @@ create table tb_minigame
 (
     mg_num  int AUTO_INCREMENT primary key,  -- 미니게임 일련번호
     mem_id  varchar(20)            not null, -- 회원 아이디
+    mem_id  varchar(20)            not null, -- 회원 아이디
     mg_dice varchar(30)            not null, -- 주사위 눈
     mg_date datetime default now() not null  -- 미니게임 날짜
 );

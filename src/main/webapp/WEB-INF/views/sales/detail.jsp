@@ -396,7 +396,7 @@
                                                 </select>
                                                 <label for="rv_filename" class="col-sm-2 col-form-label"
                                                        style="float: left"><img
-                                                        src="/images/pic.jpg" style="height: 50px;
+                                                        src="/images/pic.jpeg" style="height: 50px;
                                                                            padding-bottom: 20px;float: inherit ">
                                                 </label>
                                                 <textarea id="rv_content" name="rv_content" placeholder="리뷰 작성란..."
@@ -427,7 +427,7 @@
                                             <div class="blog__item"
                                                  style="box-shadow: 1px 1px 1px 1px #a69bae; padding: 7px; border-radius: 1%">
                                                 <div class="blog__item__pic">
-                                                    <c:if test="${row.rv_filename!=''}"><img src="/images/review/${row.rv_filename}" onerror="this.style.display='none';">></c:if>
+                                                    <c:if test="${row.rv_filename!=''}"><img src="/images/review/${row.rv_filename}" onerror="this.style.display='none';"></c:if>
                                                 </div>
                                                 <div class="blog__item__text">
                                                     <ul>

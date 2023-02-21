@@ -12,8 +12,8 @@
           <ul>
             <li>서울특별시 강남구 테헤란로1길 16</li>
             <li>삼원빌딩</li>
-            <li>Phone : +82 010-8814-8233</li>
-            <li>Email : koochunwoo@gmail.com</li>
+            <li>Phone : +82 010-4513-4761</li>
+            <li>Email : rlawndhks914@gmail.com</li>
           </ul>
         </div>
       </div>
@@ -39,7 +39,7 @@
         <div class="footer__widget">
           <div id="map" style="width:100%;height:300px;"></div>
 
-          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb4067645ade38179f4d97dbebf1b6b0"></script>
+          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=144798bad24d7732eac232e66bd7ffbd"></script>
           <script>
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div
                     mapOption = {

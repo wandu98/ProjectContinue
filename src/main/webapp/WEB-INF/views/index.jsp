@@ -307,8 +307,8 @@
 
                     <div class="product__discount__item__text">
                         <span>${row.gm_category}</span>
-                        <h6><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}">${row.ss_name}</a></h6>
-                        <h5><a href="/sales/detail/${idxFeaturedProduct[0].ss_num}"><fmt:formatNumber
+                        <h6><a href="/sales/detail/${idxFeaturedProduct[vs.index].ss_num}">${row.ss_name}</a></h6>
+                        <h5><a href="/sales/detail/${idxFeaturedProduct[vs.index].ss_num}"><fmt:formatNumber
                                 value="${row.ss_price}" type="currency"/></a></h5>
                     </div>
                 </div>
@@ -353,7 +353,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[0].ss_name}</h6>
-                                    <span>${idxLatestProduct[0].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxLatestProduct[0].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxLatestProduct[1].ss_num}" class="latest-product__item">
@@ -362,7 +362,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[1].ss_name}</h6>
-                                    <span>${idxLatestProduct[1].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxLatestProduct[1].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxLatestProduct[2].ss_num}" class="latest-product__item">
@@ -371,7 +371,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[2].ss_name}</h6>
-                                    <span>${idxLatestProduct[2].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxLatestProduct[2].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                         </div>
@@ -382,7 +382,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[3].ss_name}</h6>
-                                    <span>${idxLatestProduct[3].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxLatestProduct[3].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxLatestProduct[4].ss_num}" class="latest-product__item">
@@ -391,7 +391,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[4].ss_name}</h6>
-                                    <span>${idxLatestProduct[4].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxLatestProduct[4].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxLatestProduct[5].ss_num}" class="latest-product__item">
@@ -400,7 +400,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxLatestProduct[5].ss_name}</h6>
-                                    <span>${idxLatestProduct[5].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxLatestProduct[5].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                         </div>
@@ -418,7 +418,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[0].ss_name}</h6>
-                                    <span>${idxTopProduct[0].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxTopProduct[0].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxTopProduct[1].ss_num}" class="latest-product__item">
@@ -427,7 +427,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[1].ss_name}</h6>
-                                    <span>${idxTopProduct[1].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxTopProduct[1].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxTopProduct[2].ss_num}" class="latest-product__item">
@@ -436,7 +436,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[2].ss_name}</h6>
-                                    <span>${idxTopProduct[2].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxTopProduct[2].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                         </div>
@@ -447,7 +447,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[3].ss_name}</h6>
-                                    <span>${idxTopProduct[3].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxTopProduct[3].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxTopProduct[4].ss_num}" class="latest-product__item">
@@ -456,7 +456,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[4].ss_name}</h6>
-                                    <span>${idxTopProduct[4].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxTopProduct[4].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxTopProduct[5].ss_num}" class="latest-product__item">
@@ -465,7 +465,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxTopProduct[5].ss_name}</h6>
-                                    <span>${idxTopProduct[5].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxTopProduct[5].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                         </div>
@@ -483,7 +483,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[0].ss_name}</h6>
-                                    <span>${idxReviewProduct[0].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxReviewProduct[0].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxReviewProduct[1].ss_num}" class="latest-product__item">
@@ -492,7 +492,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[1].ss_name}</h6>
-                                    <span>${idxReviewProduct[1].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxReviewProduct[1].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxReviewProduct[2].ss_num}" class="latest-product__item">
@@ -501,7 +501,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[2].ss_name}</h6>
-                                    <span>${idxReviewProduct[2].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxReviewProduct[2].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                         </div>
@@ -512,7 +512,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[3].ss_name}</h6>
-                                    <span>${idxReviewProduct[3].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxReviewProduct[3].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxReviewProduct[4].ss_num}" class="latest-product__item">
@@ -521,7 +521,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[4].ss_name}</h6>
-                                    <span>${idxReviewProduct[4].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxReviewProduct[4].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                             <a href="/sales/detail/${idxReviewProduct[5].ss_num}" class="latest-product__item">
@@ -530,7 +530,7 @@
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>${idxReviewProduct[5].ss_name}</h6>
-                                    <span>${idxReviewProduct[5].ss_price}</span>
+                                    <span><fmt:formatNumber value="${idxReviewProduct[5].ss_price}" type="currency"/></span>
                                 </div>
                             </a>
                         </div>
